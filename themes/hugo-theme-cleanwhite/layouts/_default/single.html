@@ -43,31 +43,8 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <!--{{ if and (gt .WordCount 400 ) (ne .Params.toc "false") }}-->
-                <!--<aside class="toc">-->
-                    <!--<header>-->
-                        <!--<h2>Contents</h2>-->
-                    <!--</header>-->
-                    <!--{{.TableOfContents}}-->
-                <!--</aside>-->
-                <!--{{ end }}-->
-
 		        {{ .Content }}
 
-                <hr>
-
-                <ul class="pager">
-                    {{ if .Prev }}
-                    <li class="previous">
-                        <a href="{{ .Prev.URL }}" data-toggle="tooltip" data-placement="top" title="{{ .Prev.Title}}">&larr; Previous Post</a>
-                    </li>
-                    {{ end }}
-                    {{ if .Next }}
-                    <li class="next">
-                        <a href="{{ .Next.URL }}" data-toggle="tooltip" data-placement="top" title="{{ .Next.Title}}">Next Post &rarr;</a>
-                    </li>
-                    {{ end }}
-                </ul>
 
             {{ partial "comments.html" . }}
 
@@ -83,7 +60,7 @@
                     <hr class="hidden-sm hidden-xs">
                     <h5><a href="/tags/">FEATURED TAGS</a></h5>
                     <div class="tags">
-                    {{ $featured_condition_size := .Site.Params.featured_condition_size }} 
+                    {{ $featured_condition_size := .Site.Params.featured_condition_size }}
                     {{ range $name, $taxonomy := .Site.Taxonomies.tags }}
                        {{ if gt (len $taxonomy.Pages) $featured_condition_size }} 
                             <a href="{{ "/tags/" | relLangURL }}{{ $name | urlize }}" title="{{ $name }}">
