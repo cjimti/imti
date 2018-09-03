@@ -1,4 +1,4 @@
-baseurl = ""
+baseurl = "https://cjimti.github.io/mk2/"
 title = "IMTI"
 theme = "hugo-theme-cleanwhite"
 languageCode = "en-us"
