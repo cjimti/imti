@@ -2,75 +2,75 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on IMTI</title>
-    <link>https://cjimti.github.io/mk2/tags/</link>
+    <link>/tags/</link>
     <description>Recent content in Tags on IMTI</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sat, 11 Aug 2018 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://cjimti.github.io/mk2/tags/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Coding</title>
-      <link>https://cjimti.github.io/mk2/tags/coding/</link>
+      <link>/tags/coding/</link>
       <pubDate>Sat, 11 Aug 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://cjimti.github.io/mk2/tags/coding/</guid>
+      <guid>/tags/coding/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Data</title>
-      <link>https://cjimti.github.io/mk2/tags/data/</link>
+      <link>/tags/data/</link>
       <pubDate>Thu, 26 Jul 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://cjimti.github.io/mk2/tags/data/</guid>
+      <guid>/tags/data/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Development</title>
-      <link>https://cjimti.github.io/mk2/tags/development/</link>
+      <link>/tags/development/</link>
       <pubDate>Sat, 11 Aug 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://cjimti.github.io/mk2/tags/development/</guid>
+      <guid>/tags/development/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Elasticsearch</title>
-      <link>https://cjimti.github.io/mk2/tags/elasticsearch/</link>
+      <link>/tags/elasticsearch/</link>
       <pubDate>Sat, 28 Jul 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://cjimti.github.io/mk2/tags/elasticsearch/</guid>
+      <guid>/tags/elasticsearch/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Kubernetes</title>
-      <link>https://cjimti.github.io/mk2/tags/kubernetes/</link>
+      <link>/tags/kubernetes/</link>
       <pubDate>Sat, 11 Aug 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://cjimti.github.io/mk2/tags/kubernetes/</guid>
+      <guid>/tags/kubernetes/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Python</title>
-      <link>https://cjimti.github.io/mk2/tags/python/</link>
+      <link>/tags/python/</link>
       <pubDate>Sat, 28 Jul 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://cjimti.github.io/mk2/tags/python/</guid>
+      <guid>/tags/python/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Serverless</title>
-      <link>https://cjimti.github.io/mk2/tags/serverless/</link>
+      <link>/tags/serverless/</link>
       <pubDate>Sat, 28 Jul 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://cjimti.github.io/mk2/tags/serverless/</guid>
+      <guid>/tags/serverless/</guid>
       <description></description>
     </item>
     
