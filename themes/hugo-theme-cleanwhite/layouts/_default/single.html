@@ -11,9 +11,9 @@
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                 <div class="post-heading">
                     <div class="tags">
-                       {{ range .Params.tags }}
-                       <a class="tag" href="{{ "/tags/" | relLangURL }}{{ . | urlize }}" title="{{ . }}">
-                           {{ . }}
+                        {{ range .Params.tags }}
+                        <a class="tag" href="{{ "/tags/" | relLangURL }}{{ . | urlize }}" title="{{ . }}">
+                        {{ . }}
                         </a>
                         {{ end }}
                     </div>
@@ -43,10 +43,9 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-		        {{ .Content }}
+                {{ .Content }}
 
-
-            {{ partial "comments.html" . }}
+                {{ partial "comments.html" . }}
 
             </div>
             <!-- Sidebar Container -->
@@ -60,30 +59,29 @@
                     <hr class="hidden-sm hidden-xs">
                     <h5><a href="/tags/">FEATURED TAGS</a></h5>
                     <div class="tags">
-                    {{ $featured_condition_size := .Site.Params.featured_condition_size }}
-                    {{ range $name, $taxonomy := .Site.Taxonomies.tags }}
-                       {{ if gt (len $taxonomy.Pages) $featured_condition_size }} 
-                            <a href="{{ "/tags/" | relLangURL }}{{ $name | urlize }}" title="{{ $name }}">
-                                {{ $name }}
-                            </a>
-                       {{ end }} 
-                    {{ end }}
+                        {{ $featured_condition_size := .Site.Params.featured_condition_size }}
+                        {{ range $name, $taxonomy := .Site.Taxonomies.tags }}
+                        {{ if gt (len $taxonomy.Pages) $featured_condition_size }}
+                        <a href="{{ "/tags/" | relLangURL }}{{ $name | urlize }}" title="{{ $name }}">
+                        {{ $name }}
+                        </a>
+                        {{ end }}
+                        {{ end }}
                     </div>
                 </section>
 
                 <!-- Friends Blog -->
-                <!--<hr>-->
-                <!--<h5>FRIENDS</h5>-->
-                <!--<ul class="list-inline">-->
-                    <!--{{ range .Site.Params.friend_link }}-->
-                        <!--<li><a target="_blank" href="{{.href}}">{{.title}}</a></li>-->
-                    <!--{{ end }}-->
-                <!--</ul>-->
+                <hr>
+                <h5>RELATED</h5>
+                <ul class="list-inline">
+                    {{ range .Site.Params.friend_link }}
+                    <li><a target="_blank" href="{{.href}}">{{.title}}</a></li>
+                    {{ end }}
+                </ul>
             </div>
         </div>
     </div>
 </article>
 
 {{ end }}
-
 

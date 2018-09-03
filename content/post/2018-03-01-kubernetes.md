@@ -1,18 +1,26 @@
 ---
-published: true
-layout: post
-title: Kubernetes
-tags: kubernetes microservices kubectl minikube docker
-featured: kubernetes
-mast: kubernetes
+layout:     post
+title:      "Kubernetes Overview"
+subtitle:   "Container Orchestration & Microservices"
+date:       2018-03-01
+author:     "Craig Johnston"
+URL:        "kubernetes/"
+image:      "/img/post/containers.jpg"
+twitter_image: "/img/post/containers_876_438.jpg"
+tags:
+- Kubernetes
+- Microservices
+- Docker
+series:
+- Kubernetes
 ---
+
 Getting started with Kubernetes for local development. I develop on a Mac however much of this is easily translated to windows. 
 
 The following is primarily a getting started guide wrapped around my personal development notes. This set of notes are specifically for my co-workers in helping them get up to speed quickly. If you see an error feel free to make a pull request or just add an issue.
 
-Table of Contents
-=================
-
+Contents
+========
 
 * [Deeper Reading and Resources](#deeper-reading-and-resources)
 	* [Free Courses](#free-courses)
