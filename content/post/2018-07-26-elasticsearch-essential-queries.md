@@ -6,6 +6,7 @@ date:       2018-07-26
 author:     "Craig Johnston"
 URL:        "elasticsearch-essential-queries/"
 image:      "/img/post/net.jpg"
+twitter_image: "/img/post/net_876_438.jpg"
 tags:
 - Elasticsearch
 - Data

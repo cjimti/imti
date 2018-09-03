@@ -6,9 +6,7 @@ date:       2018-08-11
 author:     "Craig Johnston"
 URL: "kubernetes-port-forwarding/"
 image:      "/img/post/patchbay.jpg"
-params:
-  description: "kubefwd was developed as a command line utility to forward Kubernetes Services as they appear from within a Namespace."
-  twitter_image: "/img/post/patchbay_876_438.jpg?card"
+twitter_image: "/img/post/patchbay_876_438.jpg?card"
 tags:
 - Development
 - Kubernetes
@@ -42,7 +40,7 @@ Access the Service through `http://localhost:8081/` and `http://localhost:8080/`
 
 [kubefwd] was developed as a command line utility to forward Kubernetes [Service]s as they appear from within a [Namespace]. Running [kubefwd] allows you to access any [Service] from your local workstation just as you would from within another [Pod] in the same Namespace on the cluster.
 
-![kubefwd - Kubernetes port forwarding](/img/post/kubefwd-net.png)
+![kubefwd - Kubernetes port forwarding](/images/content/kubefwd-net.png)
 
 In the following example I forward services from `the-project` namespace:
 

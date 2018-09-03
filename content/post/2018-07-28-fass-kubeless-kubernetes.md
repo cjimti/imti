@@ -6,6 +6,7 @@ date:       2018-07-28
 author:     "Craig Johnston"
 URL:        "fass-kubeless-kubernetes/"
 image:      "/img/post/balloon.jpg"
+twitter_image: "/img/post/balloon_876_438.jpg"
 tags:
 - Elasticsearch
 - Python
