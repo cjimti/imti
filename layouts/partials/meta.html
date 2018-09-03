@@ -4,7 +4,7 @@
 <meta name="twitter:description" content="{{ .Summary }}" />
 <meta name="twitter:title" content="{{ .Title }}" />
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:image" content="{{ .Params.image | absURL }}" />
+<meta name="twitter:image" content="{{ .Params.params.twitter_image | absURL }}" />
 {{ else }}
 <meta name="twitter:title" content="{{ .Site.Title }}" />
 <meta name="twitter:description" content="{{ .Description }}" />
