@@ -1,4 +1,4 @@
-baseurl = ""
+baseurl = "https://mk2.imti.co/"
 title = "IMTI"
 theme = "hugo-theme-cleanwhite"
 languageCode = "en-us"
