@@ -1,0 +1,48 @@
+body {
+    background-color: white;
+}
+
+.post-content-preview {
+    font-style: normal;
+    color: #1A1A1A;
+    padding-bottom: 10px;
+    font-size: 1.1em;
+}
+
+.post-preview>.post-meta {
+    font-style: normal;
+    font-family: "Helvetica Neue",Arial,sans-serif;
+}
+
+.intro-header .post-heading .meta {
+    font-style: normal;
+    font-family: "Helvetica Neue",Arial,sans-serif;
+    font-size: .9em;
+}
+
+header.container {
+    background-color: rgba(0,0,0,.6);
+}
+
+.toc {
+    margin-left: 0px;
+    padding-left: 0px;
+}
+
+#TableOfContents>ul {
+    list-style-type: none;
+    margin-left: 0px;
+    padding-left: 0px;
+}
+
+#TableOfContents>ul>li>ul {
+    list-style-type: none;
+    margin-left: 0px;
+    padding-left: 0px;
+}
+
+.bookmarks {
+    list-style-type: none;
+    margin-left: 0px;
+    padding-left: 0px;
+}
