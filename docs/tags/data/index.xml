@@ -22,5 +22,15 @@ Explore the Elasticsearch official documentation: Search in Depth.
  Contents     Motivation Following Along with Elasticsearch and Kubernetes Vocabulary Basic CRUD API  Delete an Index Create an Index Create or Update a Document (Upsert) Get a Document  Mappings, Types and Metadata  Get Mapping Create a Mapping  Searching Range Filtering Aggregations  Counts Averages, Minimums and Maximums Percentile Percent by Rank Percent by Rank Interval  Resources     Motivation My team and I work with a lot of SQL-based data, from MySQL, SQLite and even our large Cassandra cluster, however, our reporting systems are built on Elasticsearch.</description>
     </item>
     
+    <item>
+      <title>Don&#39;t Install cqlsh</title>
+      <link>https://mk2.imti.co/dont-install-cqlsh/</link>
+      <pubDate>Thu, 01 Mar 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://mk2.imti.co/dont-install-cqlsh/</guid>
+      <description>We live in a world of process isolation and tools that make utilizing it extremely simple, with apps like Docker we can perform dependency management with dependency isolation. As I am slowly becoming a fanboy of containerization, I look forward to the day when typing ps on my local workstation or remote server is nearly synonymous with commands like docker ps or kubectl get services.
+Case: Cassandra development and your local workstation.</description>
+    </item>
+    
   </channel>
 </rss>

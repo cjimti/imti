@@ -18,6 +18,27 @@
   </url>
   
   <url>
+    <loc>https://mk2.imti.co/dont-install-emacs/</loc>
+    <lastmod>2018-03-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://mk2.imti.co/dont-install-cqlsh/</loc>
+    <lastmod>2018-03-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://mk2.imti.co/kubernetes/</loc>
+    <lastmod>2018-03-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://mk2.imti.co/tags/cassandra/</loc>
+    <lastmod>2018-03-01T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://mk2.imti.co/categories/</loc>
     <priority>0</priority>
   </url>
@@ -41,8 +62,20 @@
   </url>
   
   <url>
+    <loc>https://mk2.imti.co/tags/docker/</loc>
+    <lastmod>2018-03-01T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://mk2.imti.co/tags/elasticsearch/</loc>
     <lastmod>2018-07-28T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://mk2.imti.co/tags/emacs/</loc>
+    <lastmod>2018-03-01T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -55,6 +88,12 @@
   <url>
     <loc>https://mk2.imti.co/tags/kubernetes/</loc>
     <lastmod>2018-08-11T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://mk2.imti.co/tags/microservices/</loc>
+    <lastmod>2018-03-01T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -78,7 +117,7 @@
   
   <url>
     <loc>https://mk2.imti.co/tags/</loc>
-    <lastmod>2018-08-11T00:00:00+00:00</lastmod>
+    <lastmod>2018-03-01T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   

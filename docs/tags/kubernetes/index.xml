@@ -30,5 +30,15 @@ Developing services in a Microservices architecture presents local development c
       <description>FaaS or Function as a Service also known as Serverless computing implementations are gaining popularity. Discussed often are the cost savings and each implementations relationship to the physical and network architecture of a specific platform or vendor. While many of the cost and infrastructure advantages of FaaS are compelling, its only one of many advantages. Below, I hope to demonstrate how easy it is to develop and deploy FaaS components into a custom Kubernetes cluster.</description>
     </item>
     
+    <item>
+      <title>Kubernetes Overview</title>
+      <link>https://mk2.imti.co/kubernetes/</link>
+      <pubDate>Thu, 01 Mar 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://mk2.imti.co/kubernetes/</guid>
+      <description>Getting started with Kubernetes for local development. I develop on a Mac however much of this is easily translated to windows.
+The following is primarily a getting started guide wrapped around my personal development notes. This set of notes are specifically for my co-workers in helping them get up to speed quickly. If you see an error feel free to make a pull request or just add an issue.</description>
+    </item>
+    
   </channel>
 </rss>
