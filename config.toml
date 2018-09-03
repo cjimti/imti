@@ -1,4 +1,4 @@
-baseurl = "/"
+baseurl = ""
 title = "IMTI"
 theme = "hugo-theme-cleanwhite"
 languageCode = "en-us"
