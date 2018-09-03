@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Data on IMTI</title>
+    <link>/tags/data/</link>
+    <description>Recent content in Data on IMTI</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 26 Jul 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/data/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Elasticsearch Essential Queries</title>
+      <link>/elasticsearch-essential-queries/</link>
+      <pubDate>Thu, 26 Jul 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/elasticsearch-essential-queries/</guid>
+      <description>The following is an overview for querying Elasticsearch. Over the years I have tried to assemble developer notes for myself and my team on a variety of platforms, languages and frameworks, a type of cheat-sheet but with context, not a comprehensive how-to, but a decent 15-minute overview of the features we are most likely to implement in a given iteration.
+Explore the Elasticsearch official documentation: Search in Depth.
+ Contents     Motivation Following Along with Elasticsearch and Kubernetes Vocabulary Basic CRUD API  Delete an Index Create an Index Create or Update a Document (Upsert) Get a Document  Mappings, Types and Metadata  Get Mapping Create a Mapping  Searching Range Filtering Aggregations  Counts Averages, Minimums and Maximums Percentile Percent by Rank Percent by Rank Interval  Resources     Motivation My team and I work with a lot of SQL-based data, from MySQL, SQLite and even our large Cassandra cluster, however, our reporting systems are built on Elasticsearch.</description>
+    </item>
+    
+  </channel>
+</rss>

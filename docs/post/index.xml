@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on IMTI</title>
+    <link>/post/</link>
+    <description>Recent content in Posts on IMTI</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 11 Aug 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Kubernetes Port Forwarding for Local Development</title>
+      <link>/kubernetes-port-forwarding/</link>
+      <pubDate>Sat, 11 Aug 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/kubernetes-port-forwarding/</guid>
+      <description>kubefwd helps to enable a seamless and efficient way to develop applications and services on a local workstation. Locally develop applications that intend to interact with other services in a Kubernetes cluster. kubefwd allows applications with connection strings like http://elasticsearch:9200/ or tcp://db:3306 to communicate into the remote cluster. kubefwd can be used to reduce or eliminate the need for local environment specific connection configurations.
+Developing services in a Microservices architecture presents local development challenges, especially when the service you are developing needs to interact with a mixture of other services.</description>
+    </item>
+    
+    <item>
+      <title>FaaS on Kubernetes</title>
+      <link>/fass-kubeless-kubernetes/</link>
+      <pubDate>Sat, 28 Jul 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/fass-kubeless-kubernetes/</guid>
+      <description>FaaS or Function as a Service also known as Serverless computing implementations are gaining popularity. Discussed often are the cost savings and each implementations relationship to the physical and network architecture of a specific platform or vendor. While many of the cost and infrastructure advantages of FaaS are compelling, its only one of many advantages. Below, I hope to demonstrate how easy it is to develop and deploy FaaS components into a custom Kubernetes cluster.</description>
+    </item>
+    
+    <item>
+      <title>Elasticsearch Essential Queries</title>
+      <link>/elasticsearch-essential-queries/</link>
+      <pubDate>Thu, 26 Jul 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/elasticsearch-essential-queries/</guid>
+      <description>The following is an overview for querying Elasticsearch. Over the years I have tried to assemble developer notes for myself and my team on a variety of platforms, languages and frameworks, a type of cheat-sheet but with context, not a comprehensive how-to, but a decent 15-minute overview of the features we are most likely to implement in a given iteration.
+Explore the Elasticsearch official documentation: Search in Depth.
+ Contents     Motivation Following Along with Elasticsearch and Kubernetes Vocabulary Basic CRUD API  Delete an Index Create an Index Create or Update a Document (Upsert) Get a Document  Mappings, Types and Metadata  Get Mapping Create a Mapping  Searching Range Filtering Aggregations  Counts Averages, Minimums and Maximums Percentile Percent by Rank Percent by Rank Interval  Resources     Motivation My team and I work with a lot of SQL-based data, from MySQL, SQLite and even our large Cassandra cluster, however, our reporting systems are built on Elasticsearch.</description>
+    </item>
+    
+  </channel>
+</rss>
