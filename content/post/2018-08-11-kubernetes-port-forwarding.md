@@ -8,7 +8,7 @@ URL: "kubernetes-port-forwarding/"
 image:      "/img/post/patchbay.jpg"
 params:
   description: "kubefwd was developed as a command line utility to forward Kubernetes Services as they appear from within a Namespace."
-  twitter_image: "/img/post/patchbay_876_438.jpg"
+  twitter_image: "/img/post/patchbay_876_438.jpg?card"
 tags:
 - Development
 - Kubernetes
