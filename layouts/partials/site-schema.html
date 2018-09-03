@@ -1,0 +1,31 @@
+{{ if .IsPage }}
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Article",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "{{ .Permalink }}"
+  },
+  "headline": "{{ .Title }}",
+  "image": [
+    "{{ .Params.image | absURL }}",
+   ],
+  "datePublished": "{{ .PublishDate.Format "2006-01-02T15:04:05" }}",
+  "dateModified": "{{ .PublishDate.Format  "2006-01-02T15:04:05" }}",
+  "author": {
+    "@type": "Person",
+    "name": "Craig Johnston"
+  },
+   "publisher": {
+    "@type": "Organization",
+    "name": 'imti.co",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "{{ .Site.Params.sidebar_avatar  | absURL }}"
+    }
+  },
+  "description": "{{ .Summary }}"
+}
+</script>
+{{ end }}

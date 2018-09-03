@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html lang="en-us">
 <head><head>
-    <meta name="google-site-verification" content="9vIieCe-Qpd78QOmBl63rGtIVbhY6sYyuxX3j8XWBA4" />
-    <meta name="baidu-site-verification" content="LRrmH41lz7" />
+    <meta name="google-site-verification" content="" />
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
     <meta name="description" content="I lead a talented team of software development and creative engineers, covering many industries looking to collect, analyze, move, buffer, queue, process and present data in significant ways. My expertise and that of my team revolve around microservices, artificial intelligence, algorithms, machine learning and blockchain technologies.">
@@ -13,7 +12,7 @@
     <meta name="keyword"  content="Go, Kubernetes, Elasticsearch, Python, Docker, Big Data, Artificial Intelligence, Machine Learning, Blockchain">
     <link rel="shortcut icon" href="https://mk2.imti.co/img/favicon.ico">
 
-    <title>Elasticsearch Essential Queries-IMTI | Greenfield Projects</title>
+    <title>Elasticsearch Essential Queries-IMTI | Craig Johnston</title>
 
     <link rel="canonical" href="https://mk2.imti.co/elasticsearch-essential-queries/">
 
@@ -32,6 +31,9 @@
     <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     
     
+    <link rel="stylesheet" href="/css/imti.css">
+
+    
     <script src="https://mk2.imti.co/js/jquery.min.js"></script>
     
     
@@ -40,8 +42,49 @@
     
     <script src="https://mk2.imti.co/js/hux-blog.min.js"></script>
 
+    <meta name="twitter:site" content="@cjimti">
+<meta name="twitter:creator" content="@cjimti">
+
+<meta name="twitter:description" content="The following is an overview for querying Elasticsearch. Over the years I have tried to assemble developer notes for myself and my team on a variety of platforms, languages and frameworks, a type of cheat-sheet but with context, not a comprehensive how-to, but a decent 15-minute overview of the features we are most likely to implement in a given iteration.
+Explore the Elasticsearch official documentation: Search in Depth.
+ Contents     Motivation Following Along with Elasticsearch and Kubernetes Vocabulary Basic CRUD API  Delete an Index Create an Index Create or Update a Document (Upsert) Get a Document  Mappings, Types and Metadata  Get Mapping Create a Mapping  Searching Range Filtering Aggregations  Counts Averages, Minimums and Maximums Percentile Percent by Rank Percent by Rank Interval  Resources     Motivation My team and I work with a lot of SQL-based data, from MySQL, SQLite and even our large Cassandra cluster, however, our reporting systems are built on Elasticsearch." />
+<meta name="twitter:title" content="Elasticsearch Essential Queries" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://mk2.imti.co/img/post/net.jpg" />
+
+
     
-    <link rel="stylesheet" href="/css/imti.css">
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Article",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://mk2.imti.co/elasticsearch-essential-queries/"
+  },
+  "headline": "Elasticsearch Essential Queries",
+  "image": [
+    "https://mk2.imti.co/img/post/net.jpg",
+   ],
+  "datePublished": "2018-07-26T00:00:00",
+  "dateModified": "2018-07-26T00:00:00",
+  "author": {
+    "@type": "Person",
+    "name": "Craig Johnston"
+  },
+   "publisher": {
+    "@type": "Organization",
+    "name": 'imti.co",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://mk2.imti.co/img/craig_johnston_cjimti.jpg"
+    }
+  },
+  "description": "The following is an overview for querying Elasticsearch. Over the years I have tried to assemble developer notes for myself and my team on a variety of platforms, languages and frameworks, a type of cheat-sheet but with context, not a comprehensive how-to, but a decent 15-minute overview of the features we are most likely to implement in a given iteration.
+Explore the Elasticsearch official documentation: Search in Depth.
+ Contents     Motivation Following Along with Elasticsearch and Kubernetes Vocabulary Basic CRUD API  Delete an Index Create an Index Create or Update a Document (Upsert) Get a Document  Mappings, Types and Metadata  Get Mapping Create a Mapping  Searching Range Filtering Aggregations  Counts Averages, Minimums and Maximums Percentile Percent by Rank Percent by Rank Interval  Resources     Motivation My team and I work with a lot of SQL-based data, from MySQL, SQLite and even our large Cassandra cluster, however, our reporting systems are built on Elasticsearch."
+}
+</script>
 
 </head></head>
 
