@@ -33,6 +33,9 @@
     <!--
     <script src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
     -->
+    <!-- imti Custom Theme -->
+    <link rel="stylesheet" href="{{ "/css/imti.css"}}">
+
     <!-- jQuery -->
     <script src="{{ "js/jquery.min.js" | absURL }}"></script>
     
@@ -42,7 +45,5 @@
     <!-- Custom Theme JavaScript -->
     <script src="{{ "js/hux-blog.min.js" | absURL }}"></script>
 
-    <!-- imti Custom Theme -->
-    <link rel="stylesheet" href="{{ "/css/imti.css"}}">
-
+    {{ partial "meta" . }}
 </head>
