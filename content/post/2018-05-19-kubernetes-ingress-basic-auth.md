@@ -1,10 +1,18 @@
 ---
-published: true
-layout: post
-title: Basic Auth on Kubernetes Ingress
-tags: kubernetes kubectl ingress security phc.txn2.net
-featured: kubernetes
-mast: lock
+layout:     post
+title:      "Basic Auth on Kubernetes Ingress"
+subtitle:   "Basic Auth is supported by nearly every major web client, library, and utility."
+date:       2018-05-19
+author:     "Craig Johnston"
+URL:        "kubernetes-ingress-basic-auth/"
+image:      "/img/post/lock.jpg"
+twitter_image: "/img/post/lock_876_438.jpg"
+tags:
+- Kubernetes
+- Security
+- Ingress
+series:
+- Kubernetes
 ---
 
 [Basic Auth] is one of the oldest and easiest ways to secure a web page or API endpoint. [Basic Auth] does not have many features and lacks the sophistication of more modern access controls (see [Ingress Nginx Auth Examples]). However, [Basic Auth] is supported by nearly every major web client, library, and utility. [Basic Auth] is secure, stable and perfect for quick security on Kubernetes projects. [Basic Auth]  can easily we swapped out later as requirements demand or provide a foundation for implementations such as [OAuth 2] and [JWT].

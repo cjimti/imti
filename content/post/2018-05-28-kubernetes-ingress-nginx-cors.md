@@ -1,10 +1,18 @@
 ---
-published: true
-layout: post
-title: CORS on Kubernetes Ingress Nginx
-tags: kubernetes nginx annotations
-featured: kubernetes
-mast: fence
+layout:     post
+title:      "CORS on Kubernetes Ingress Nginx"
+subtitle:   "Painless CORS header configuration in Kubernetes"
+date:       2018-05-28
+author:     "Craig Johnston"
+URL:        "kubernetes-ingress-nginx-cors/"
+image:      "/img/post/bwire.jpg"
+twitter_image: "/img/post/bwire_876_438.jpg"
+tags:
+- Kubernetes
+- Security
+- Ingress
+series:
+- Kubernetes
 ---
 
 Using [ingress]-nginx on [Kubernetes] makes adding [CORS] headers painless. Kubernetes [ingress]-nginx uses [annotations] as a quick way to allow you to specify the automatic generation of an extensive list of common [nginx] configuration options.
