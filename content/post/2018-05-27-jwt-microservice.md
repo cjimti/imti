@@ -1,10 +1,20 @@
 ---
-published: true
-layout: post
-title: JWT Microservice, Tokenize Remote APIs
-tags: jwt go security docker kubernetes golang
-featured: docker kubernetes golang
-mast: jwt
+layout:     post
+title:      "JWT Microservice, Tokenize Remote APIs"
+subtitle:   "Using txToken to create JWT Tokens from JSON POST data."
+date:       2018-05-18
+author:     "Craig Johnston"
+URL:        "jwt-microservice/"
+image:      "/img/post/tokenvend.jpg"
+twitter_image: "/img/post/tokenvend_876_438.jpg"
+tags:
+- Kubernetes
+- Security
+- Ingress
+- Docker
+- Golang
+series:
+- Kubernetes
 ---
 
 [txToken] is a small high performance [microservice] utility container. [txToken] is used for adding [JSON Web Token][JWT] based security to existing or new API development. [txToken] is specifically for systems that communicate in JSON over HTTP. [txToken] is called from a client with a JSON post body and passes received JSON to a remote endpoint. JSON retrieved from a remote endpoint is used to create a [JWT] token with an [HS256] symmetrically encrypted signature.

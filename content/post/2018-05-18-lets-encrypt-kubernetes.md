@@ -1,10 +1,18 @@
 ---
-published: true
-layout: post
-title: Let's Encrypt, Kubernetes
-tags: kubernetes kubectl helm cli tls ingress security phc.txn2.net
-featured: kubernetes cli
-mast: letsenc
+layout:     post
+title:      "Let's Encrypt, Kubernetes"
+subtitle:   "Automated, secure and free 443/https with signed x509 certificates for Ingress."
+date:       2018-05-18
+author:     "Craig Johnston"
+URL:        "lets-encrypt-kubernetes/"
+image:      "/img/post/seal.jpg"
+twitter_image: "/img/post/seal_876_438.jpg"
+tags:
+- Kubernetes
+- Security
+- Ingress
+series:
+- Kubernetes
 ---
 
 Use [cert-manager] to get port 443/https running with signed x509 certificates for [Ingress] on your Kubernetes [Production Hobby Cluster]. [cert-manager] is the successor to **kube-lego** and the preferred way to "[automatically obtain browser-trusted certificates, without any human intervention.](https://letsencrypt.org/how-it-works/)" using [Let's Encrypt].
