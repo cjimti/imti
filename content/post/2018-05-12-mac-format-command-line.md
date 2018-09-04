@@ -1,10 +1,15 @@
 ---
-published: true
-layout: post
-title: Formatting Drives on MacOS
-tags: cli bash
-featured: bash
-mast: drive
+layout:     post
+title:      "Formatting Drives on MacOS"
+subtitle:   "A stack of old drives, a terminal and diskutil."
+date:       2018-05-12
+author:     "Craig Johnston"
+URL:        "mac-format-command-line/"
+image:      "/img/post/drives.jpg"
+twitter_image: "/img/post/drives_876_438.jpg"
+tags:
+- MacOs
+- Utils
 ---
 
 I have had this collection of old external drives hanging around for years. There was a time I was having terrible luck with hard drives. It turned out I managed to amass a collection of about eight drives from one terabyte to four terabytes.

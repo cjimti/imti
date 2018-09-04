@@ -1,10 +1,18 @@
 ---
-published: true
-layout: post
-title: Kubectl x509 Unable to Connect 
-tags: kubernetes kubectl cli
-featured: kubernetes cli
-mast: broken
+layout:     post
+title:      "Kubectl x509 Unable to Connect"
+subtitle:   "Kubernetes remote access and TLS certs."
+date:       2018-05-10
+author:     "Craig Johnston"
+URL:        "kubectl-remote-x509-valid/"
+image:      "/img/post/keys.jpg"
+twitter_image: "/img/post/keys_876_438.jpg"
+tags:
+- Kubernetes
+- kubectl
+- security
+series:
+- Kubernetes
 ---
 
 Just set up a brand new cluster? Changed the domain or IP of your admin node? Then you may have encountered the error

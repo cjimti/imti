@@ -1,20 +1,23 @@
 ---
-published: true
-layout: post
-title: Production Hobby Cluster
-tags: kubernetes kubectl cli phc.txn2.net
-featured: kubernetes cli
-mast: cluster
+layout:     post
+title:      "Production Hobby Cluster"
+subtitle:   "Production-grade cluster on a hobby budget."
+date:       2018-05-09
+author:     "Craig Johnston"
+URL:        "hobby-cluster/"
+image:      "/img/post/armor.jpg"
+twitter_image: "/img/post/armor_876_438.jpg"
+tags:
+- Kubernetes
+series:
+- Kubernetes
 ---
 
 Setting up a production-grade Kubernetes cluster can be done on a hobby budget, and if this is true why mess around with a lesser grade. If you are investing time to learn distributed cloud computing or microservices, is the distance between $0 and **15 dollars a month** worth the time in translating best practices? Kubernetes is designed to host production applications. My personal web applications may only be hobbies, but they might as well be production grade hobbies. 
 
 [![k8s performance hobby clusters](/images/content/k8s-tshirt-banner.jpg)](https://amzn.to/2IOe8Yu)
 
-**Quick Reference:**
-
-* Do not remove this line (for toc on a rendered blog)
-{:toc}
+{{< toc >}}
 
 ## Motivation
 

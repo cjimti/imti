@@ -1,10 +1,17 @@
 ---
-published: true
-layout: post
-title: Kubernetes Custom Upstream DNS
-tags: kubernetes kubectl helm cli dns phc.txn2.net
-featured: kubernetes cli
-mast: cardindex
+layout:     post
+title:      "Kubernetes Custom Upstream DNS"
+subtitle:   "Customize upstream DNS resolution."
+date:       2018-05-17
+author:     "Craig Johnston"
+URL:        "kubernetes-custom-dns/"
+image:      "/img/post/cardindex.jpg"
+twitter_image: "/img/post/cardindex_876_438.jpg"
+tags:
+- Kubernetes
+- DNS
+series:
+- Kubernetes
 ---
 
 Customize the [Upstream Nameservers] used by [kube-dns] by [Pods] when looking up external hostnames from within a Kubernetes cluster. I found that adding custom [Upstream Nameservers] to my [kube-dns] solved many issues encountered in in the past with external hostname resolution on individual [Pods].

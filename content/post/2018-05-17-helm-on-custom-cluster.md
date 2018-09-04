@@ -1,10 +1,17 @@
 ---
-published: true
-layout: post
-title: Helm on Custom Kubernetes
-tags: kubernetes kubectl helm cli phc.txn2.net
-featured: kubernetes cli
-mast: helm
+layout:     post
+title:      "Helm on Custom Kubernetes"
+subtitle:   "Kubernetes package management."
+date:       2018-05-17
+author:     "Craig Johnston"
+URL:        "helm-on-custom-cluster/"
+image:      "/img/post/helm.jpg"
+twitter_image: "/img/post/helm_876_438.jpg"
+tags:
+- Kubernetes
+- helm
+series:
+- Kubernetes
 ---
 
 [Helm] is the official package manager for [Kubernetes]. If you are looking to start using [Helm] or want to test its capabilities, I suggest you set up a [Production Hobby Cluster]. This article is a continuation of the [Production Hobby Cluster] configuration but should be entirely useful on its own.

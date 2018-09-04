@@ -1,11 +1,18 @@
 ---
-published: true
-layout: post
-title: SQL Foundations
-tags: database sql
-featured: sql database
-mast: buckets
+layout:     post
+title:      "SQL Foundations"
+subtitle:   "Selects, joins and aliases."
+date:       2018-04-02
+author:     "Craig Johnston"
+URL:        "sql-select-joins-aliases/"
+image:      "/img/post/buckets.jpg"
+twitter_image: "/img/post/buckets_876_438.jpg"
+tags:
+- SQL
+- Data
+- Database
 ---
+
 
 The following is an attempt at explaining the basics of an SQL query, and more importantly how I believe you can best think through them. All queries can be broken down into the basics of this declarative language.
 

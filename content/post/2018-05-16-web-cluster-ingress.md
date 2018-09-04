@@ -1,10 +1,18 @@
 ---
-published: true
-layout: post
-title: Ingress on Custom Kubernetes
-tags: kubernetes kubectl cli ingress phc.txn2.net
-featured: kubernetes cli
-mast: webcluster
+layout:     post
+title:      "Ingress on Custom Kubernetes"
+subtitle:   "Setting up ingress-nginx on a custom cluster."
+date:       2018-05-15
+author:     "Craig Johnston"
+URL:        "web-cluster-ingress/"
+image:      "/img/post/hoses.jpg"
+twitter_image: "/img/post/hoses_876_438.jpg"
+tags:
+- Kubernetes
+- ingress
+- nginx
+series:
+- Kubernetes
 ---
 
 There are more than a handful of ways to set up port **80** and **443** web [ingress] on a custom [Kubernetes] cluster. Specifically a bare metal cluster. If you are looking to experiment or learn on a non-production cluster, but something more true to production than [minikube], I suggest you check out my previous article [Production Hobby Cluster], a step-by-step guide for setting up a custom production capable Kubernetes cluster.

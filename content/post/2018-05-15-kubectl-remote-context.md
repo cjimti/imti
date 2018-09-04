@@ -1,10 +1,17 @@
 ---
-published: true
-layout: post
-title: kubectl Context Multiple Clusters
-tags: kubernetes kubectl minikube cli
-featured: kubernetes cli
-mast: remotec
+layout:     post
+title:      "kubectl Context Multiple Clusters"
+subtitle:   "Managing multiple clusters with kubectl."
+date:       2018-05-15
+author:     "Craig Johnston"
+URL:        "kubectl-remote-context/"
+image:      "/img/post/containerships.jpg"
+twitter_image: "/img/post/containerships_876_438.jpg"
+tags:
+- Kubernetes
+- kubectl
+series:
+- Kubernetes
 ---
 
 I use a few Kubernetes clusters on a daily basis, and I use [kubectl] to access and configure them from my workstation. There are dozens of ways to configure [kubectl] however I find the following method the easiest for me to manage and not make a mess.
