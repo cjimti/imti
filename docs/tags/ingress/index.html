@@ -145,46 +145,46 @@
             
 
 <div class="post-preview">
-    <a href="https://mk2.imti.co/jwt-microservice/">
+    <a href="https://mk2.imti.co/web-cluster-ingress/">
         <h2 class="post-title">
-            JWT Microservice, Tokenize Remote APIs
+            Ingress on Custom Kubernetes
         </h2>
 	
         <h3 class="post-subtitle">
-            Using txToken to create JWT Tokens from JSON POST data.
+            Setting up ingress-nginx on a custom cluster.
         </h3>
 	
         <div class="post-content-preview">
 	
-            txToken is a small high performance microservice utility container. txToken is used for adding JSON Web Token based security to existing or new API development. txToken is specifically for systems that communicate in JSON over HTTP. txToken is called from a client with a JSON post body and passes received JSON to a remote endpoint. JSON retrieved from a remote endpoint is used to create a JWT token with an HS256 symmetrically encrypted signature.
+            There are more than a handful of ways to set up port 80 and 443 web ingress on a custom Kubernetes cluster. Specifically a bare metal cluster. If you are looking to experiment or learn on a non-production cluster, but something more true to production than minikube, I suggest you check out my previous article Production Hobby Cluster, a step-by-step guide for setting up a custom production capable Kubernetes cluster.
        
         </div>
     </a>
     <p class="post-meta">
-    Posted by Craig Johnston Friday, May 18, 2018
+    Posted by Craig Johnston Tuesday, May 15, 2018
     </p>
 </div>
 <hr>
 
 <div class="post-preview">
-    <a href="https://mk2.imti.co/lets-encrypt-kubernetes/">
+    <a href="https://mk2.imti.co/413-request-entity-too-large/">
         <h2 class="post-title">
-            Let&#39;s Encrypt, Kubernetes
+            Kubernetes - 413 Request Entity Too Large
         </h2>
 	
         <h3 class="post-subtitle">
-            Automated, secure and free 443/https with signed x509 certificates for Ingress.
+            Configuring the NGINX Ingress Controller
         </h3>
 	
         <div class="post-content-preview">
 	
-            Use cert-manager to get port 443/https running with signed x509 certificates for Ingress on your Kubernetes Production Hobby Cluster. cert-manager is the successor to kube-lego and the preferred way to &ldquo;automatically obtain browser-trusted certificates, without any human intervention.&rdquo; using Let&rsquo;s Encrypt.
-You need to install Helm first if you do not already have it. Otherwise, check out my article Helm on Custom Kubernetes, especially if you are following along with my Production Hobby Cluster guides.
+            When setting up nginx ingress on Kubernetes for a private Docker Registry, I ran into an error when trying to push an image to it.
+Error parsing HTTP response: invalid character '&lt;' looking for beginning of value: &quot;&lt;html&gt;\r\n&lt;head&gt;&lt;title&gt;413 Request Entity Too Large&lt;/title&gt;&lt;/head&gt;\r\n&lt;body bgcolor=\&quot;white\&quot;&gt;\r\n&lt;center&gt;&lt;h1&gt;413 Request Entity Too Large&lt;/h1&gt;&lt;/center&gt;\r\n&lt;hr&gt;&lt;center&gt;nginx/1.9.14&lt;/center&gt;\r\n&lt;/body&gt;\r\n&lt;/html&gt;\r\n&quot;  The &ldquo;413 Request Entity Too Large&rdquo; error is something many accustomed to running nginx as a standard web server/proxy. nginx is configured to restrict the size of files it will allow over a post.
        
         </div>
     </a>
     <p class="post-meta">
-    Posted by Craig Johnston Friday, May 18, 2018
+    Posted by Craig Johnston Saturday, March 24, 2018
     </p>
 </div>
 <hr>
@@ -241,6 +241,10 @@ You need to install Helm first if you do not already have it. Otherwise, check o
                 
             
                 
+                    <a href="/tags/ingress" title="Ingress">
+                        Ingress
+                    </a>
+                
             
                 
                     <a href="/tags/kubernetes" title="Kubernetes">
@@ -260,6 +264,10 @@ You need to install Helm first if you do not already have it. Otherwise, check o
             
                 
             
+                
+                    <a href="/tags/security" title="Security">
+                        Security
+                    </a>
                 
             
                 

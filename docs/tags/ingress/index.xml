@@ -6,28 +6,28 @@
     <description>Recent content in Ingress on IMTI</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 18 May 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 15 May 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://mk2.imti.co/tags/ingress/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>JWT Microservice, Tokenize Remote APIs</title>
-      <link>https://mk2.imti.co/jwt-microservice/</link>
-      <pubDate>Fri, 18 May 2018 00:00:00 +0000</pubDate>
+      <title>Ingress on Custom Kubernetes</title>
+      <link>https://mk2.imti.co/web-cluster-ingress/</link>
+      <pubDate>Tue, 15 May 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://mk2.imti.co/jwt-microservice/</guid>
-      <description>txToken is a small high performance microservice utility container. txToken is used for adding JSON Web Token based security to existing or new API development. txToken is specifically for systems that communicate in JSON over HTTP. txToken is called from a client with a JSON post body and passes received JSON to a remote endpoint. JSON retrieved from a remote endpoint is used to create a JWT token with an HS256 symmetrically encrypted signature.</description>
+      <guid>https://mk2.imti.co/web-cluster-ingress/</guid>
+      <description>There are more than a handful of ways to set up port 80 and 443 web ingress on a custom Kubernetes cluster. Specifically a bare metal cluster. If you are looking to experiment or learn on a non-production cluster, but something more true to production than minikube, I suggest you check out my previous article Production Hobby Cluster, a step-by-step guide for setting up a custom production capable Kubernetes cluster.</description>
     </item>
     
     <item>
-      <title>Let&#39;s Encrypt, Kubernetes</title>
-      <link>https://mk2.imti.co/lets-encrypt-kubernetes/</link>
-      <pubDate>Fri, 18 May 2018 00:00:00 +0000</pubDate>
+      <title>Kubernetes - 413 Request Entity Too Large</title>
+      <link>https://mk2.imti.co/413-request-entity-too-large/</link>
+      <pubDate>Sat, 24 Mar 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://mk2.imti.co/lets-encrypt-kubernetes/</guid>
-      <description>Use cert-manager to get port 443/https running with signed x509 certificates for Ingress on your Kubernetes Production Hobby Cluster. cert-manager is the successor to kube-lego and the preferred way to &amp;ldquo;automatically obtain browser-trusted certificates, without any human intervention.&amp;rdquo; using Let&amp;rsquo;s Encrypt.
-You need to install Helm first if you do not already have it. Otherwise, check out my article Helm on Custom Kubernetes, especially if you are following along with my Production Hobby Cluster guides.</description>
+      <guid>https://mk2.imti.co/413-request-entity-too-large/</guid>
+      <description>When setting up nginx ingress on Kubernetes for a private Docker Registry, I ran into an error when trying to push an image to it.
+Error parsing HTTP response: invalid character &#39;&amp;lt;&#39; looking for beginning of value: &amp;quot;&amp;lt;html&amp;gt;\r\n&amp;lt;head&amp;gt;&amp;lt;title&amp;gt;413 Request Entity Too Large&amp;lt;/title&amp;gt;&amp;lt;/head&amp;gt;\r\n&amp;lt;body bgcolor=\&amp;quot;white\&amp;quot;&amp;gt;\r\n&amp;lt;center&amp;gt;&amp;lt;h1&amp;gt;413 Request Entity Too Large&amp;lt;/h1&amp;gt;&amp;lt;/center&amp;gt;\r\n&amp;lt;hr&amp;gt;&amp;lt;center&amp;gt;nginx/1.9.14&amp;lt;/center&amp;gt;\r\n&amp;lt;/body&amp;gt;\r\n&amp;lt;/html&amp;gt;\r\n&amp;quot;  The &amp;ldquo;413 Request Entity Too Large&amp;rdquo; error is something many accustomed to running nginx as a standard web server/proxy. nginx is configured to restrict the size of files it will allow over a post.</description>
     </item>
     
   </channel>

@@ -12,9 +12,9 @@
     <meta name="keyword"  content="Go, Kubernetes, Elasticsearch, Python, Docker, Big Data, Artificial Intelligence, Machine Learning, Blockchain">
     <link rel="shortcut icon" href="https://mk2.imti.co/img/favicon.ico">
 
-    <title>Kubernetes Remote Control-IMTI | Craig Johnston</title>
+    <title>CORS on Kubernetes Ingress Nginx-IMTI | Craig Johnston</title>
 
-    <link rel="canonical" href="https://mk2.imti.co/kubectl-remote/">
+    <link rel="canonical" href="https://mk2.imti.co/kubernetes-ingress-nginx-cors/">
 
     <link rel="stylesheet" href="https://mk2.imti.co/css/iDisqus.min.css"/>
 	
@@ -45,13 +45,13 @@
     <meta name="twitter:site" content="@cjimti">
 <meta name="twitter:creator" content="@cjimti">
 
-<meta name="twitter:description" content="I use Minikube to run a local Kubernetes single node cluster (cluster?). However, I also work with a custom production cluster for work. This cluster consists of development and production nodes. I often need to switch between working on my local Minikube and the online Kubernetes cluster.
-TIP: Visit the kubectl Cheat Sheet often.
-The default configuration kubectl is stored in ~/.kube/config and if you have Minikube installed, it added the context minikube to your config." />
-<meta name="twitter:title" content="Kubernetes Remote Control" />
+<meta name="twitter:description" content="Using ingress-nginx on Kubernetes makes adding CORS headers painless. Kubernetes ingress-nginx uses annotations as a quick way to allow you to specify the automatic generation of an extensive list of common nginx configuration options.
+Example ingress configuration enabling CORS:
+apiVersion: extensions/v1beta1 kind: Ingress metadata: name: api namespace: fuse labels: app: api annotations: nginx.ingress.kubernetes.io/enable-cors: &quot;true&quot; nginx.ingress.kubernetes.io/cors-allow-methods: &quot;PUT, GET, POST, OPTIONS&quot; nginx.ingress.kubernetes.io/cors-allow-origin: &quot;https://admin.example.com&quot; nginx.ingress.kubernetes.io/cors-allow-credentials: &quot;true&quot; spec: rules: - host: api.example.com http: paths: - backend: serviceName: api-example servicePort: 80 path: /api tls: - hosts: - api." />
+<meta name="twitter:title" content="CORS on Kubernetes Ingress Nginx" />
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:image" content="https://mk2.imti.co/img/post/containercrain_876_438.jpg" />
-<meta property="og:image" content="https://mk2.imti.co/img/post/containercrain_876_438.jpg" />
+<meta name="twitter:image" content="https://mk2.imti.co/img/post/bwire_876_438.jpg" />
+<meta property="og:image" content="https://mk2.imti.co/img/post/bwire_876_438.jpg" />
 
 
 
@@ -62,14 +62,14 @@ The default configuration kubectl is stored in ~/.kube/config and if you have Mi
   "@type": "Article",
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://mk2.imti.co/kubectl-remote/"
+    "@id": "https://mk2.imti.co/kubernetes-ingress-nginx-cors/"
   },
-  "headline": "Kubernetes Remote Control",
+  "headline": "CORS on Kubernetes Ingress Nginx",
   "image": [
-    "https://mk2.imti.co/img/post/containercrain_876_438.jpg"
+    "https://mk2.imti.co/img/post/bwire_876_438.jpg"
    ],
-  "datePublished": "2018-03-24T00:00:00",
-  "dateModified": "2018-03-24T00:00:00",
+  "datePublished": "2018-05-28T00:00:00",
+  "dateModified": "2018-05-28T00:00:00",
   "author": {
     "@type": "Person",
     "name": "Craig Johnston"
@@ -82,9 +82,9 @@ The default configuration kubectl is stored in ~/.kube/config and if you have Mi
       "url": "https://mk2.imti.co/img/craig_johnston_cjimti.jpg"
     }
   },
-  "description": "I use Minikube to run a local Kubernetes single node cluster (cluster?). However, I also work with a custom production cluster for work. This cluster consists of development and production nodes. I often need to switch between working on my local Minikube and the online Kubernetes cluster.
-TIP: Visit the kubectl Cheat Sheet often.
-The default configuration kubectl is stored in ~/.kube/config and if you have Minikube installed, it added the context minikube to your config."
+  "description": "Using ingress-nginx on Kubernetes makes adding CORS headers painless. Kubernetes ingress-nginx uses annotations as a quick way to allow you to specify the automatic generation of an extensive list of common nginx configuration options.
+Example ingress configuration enabling CORS:
+apiVersion: extensions/v1beta1 kind: Ingress metadata: name: api namespace: fuse labels: app: api annotations: nginx.ingress.kubernetes.io/enable-cors: &quot;true&quot; nginx.ingress.kubernetes.io/cors-allow-methods: &quot;PUT, GET, POST, OPTIONS&quot; nginx.ingress.kubernetes.io/cors-allow-origin: &quot;https://admin.example.com&quot; nginx.ingress.kubernetes.io/cors-allow-credentials: &quot;true&quot; spec: rules: - host: api.example.com http: paths: - backend: serviceName: api-example servicePort: 80 path: /api tls: - hosts: - api."
 }
 </script>
 
@@ -155,7 +155,7 @@ The default configuration kubectl is stored in ~/.kube/config and if you have Mi
 
 <style type="text/css">
     header.intro-header{
-        background-image: url('https://mk2.imti.co/img/post/containercrain.jpg')
+        background-image: url('https://mk2.imti.co/img/post/bwire.jpg')
     }
 </style>
 <header class="intro-header" >
@@ -169,14 +169,18 @@ The default configuration kubectl is stored in ~/.kube/config and if you have Mi
                         Kubernetes
                         </a>
                         
-                        <a class="tag" href="/tags/kubectl" title="kubectl">
-                        kubectl
+                        <a class="tag" href="/tags/security" title="Security">
+                        Security
+                        </a>
+                        
+                        <a class="tag" href="/tags/ingress" title="Ingress">
+                        Ingress
                         </a>
                         
                     </div>
-                    <h1>Kubernetes Remote Control</h1>
-                    <h2 class="subheading">Using kubectl to Control a Remote Kubernetes Cluster</h2>
-                    <span  class="meta">Posted by Craig Johnston on Saturday, March 24, 2018
+                    <h1>CORS on Kubernetes Ingress Nginx</h1>
+                    <h2 class="subheading">Painless CORS header configuration in Kubernetes</h2>
+                    <span  class="meta">Posted by Craig Johnston on Monday, May 28, 2018
                         
                     </span>
                 </div>
@@ -200,98 +204,77 @@ The default configuration kubectl is stored in ~/.kube/config and if you have Mi
 
                 
 
-<p>I use <a href="https://kubernetes.io/docs/getting-started-guides/minikube/">Minikube</a> to run a local <a href="https://kubernetes.io/">Kubernetes</a> single node cluster (cluster?). However, I also work with a custom production cluster for work. This cluster consists of development and production nodes. I often need to switch between working on my local <a href="https://kubernetes.io/docs/getting-started-guides/minikube/">Minikube</a> and the online <a href="https://kubernetes.io/">Kubernetes</a> cluster.</p>
+<p>Using <a href="https://mk.imti.co/web-cluster-ingress/">ingress</a>-nginx on <a href="https://kubernetes.io/">Kubernetes</a> makes adding <a href="https://en.wikipedia.org/wiki/Cross-origin_resource_sharing">CORS</a> headers painless. Kubernetes <a href="https://mk.imti.co/web-cluster-ingress/">ingress</a>-nginx uses <a href="https://github.com/kubernetes/ingress-nginx/blob/master/docs/user-guide/nginx-configuration/annotations.md">annotations</a> as a quick way to allow you to specify the automatic generation of an extensive list of common <a href="http://nginx.org/en/docs/beginners_guide.html">nginx</a> configuration options.</p>
 
-<p>TIP: Visit the <a href="https://kubernetes.io/docs/reference/kubectl/cheatsheet/">kubectl Cheat Sheet</a> often.</p>
+<p>Example <a href="https://mk.imti.co/web-cluster-ingress/">ingress</a> configuration enabling <a href="https://en.wikipedia.org/wiki/Cross-origin_resource_sharing">CORS</a>:</p>
 
-<p>The default configuration <code>kubectl</code> is stored in <code>~/.kube/config</code> and
-if you have <a href="https://kubernetes.io/docs/getting-started-guides/minikube/">Minikube</a> installed, it added the context <strong>minikube</strong> to your config.</p>
-
-<p>With <code>kubectl</code> you can specify a config to use with the command flag <code>--kubeconfig</code>.</p>
-
-<p>Below I am just pointing to default config. However, you can replace that with a different config to test.</p>
-
-<pre><code class="language-bash">kubectl --kubeconfig=/Users/enochroot/.kube/config config view
+<pre><code class="language-yaml">apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: api
+  namespace: fuse
+  labels:
+    app: api
+  annotations:
+    nginx.ingress.kubernetes.io/enable-cors: &quot;true&quot;
+    nginx.ingress.kubernetes.io/cors-allow-methods: &quot;PUT, GET, POST, OPTIONS&quot;
+    nginx.ingress.kubernetes.io/cors-allow-origin: &quot;https://admin.example.com&quot;
+    nginx.ingress.kubernetes.io/cors-allow-credentials: &quot;true&quot;
+spec:
+  rules:
+  - host: api.example.com
+    http:
+      paths:
+      - backend:
+          serviceName: api-example
+          servicePort: 80
+        path: /api
+  tls:
+  - hosts:
+    - api.example.com
+    secretName: example-tls
 </code></pre>
 
-<p>In addition to specifying a configuration file to use, <code>kubectl</code> configs also contain <strong>contexts</strong>. Each configuration file can have multiple contexts.</p>
+<p>You can check the nginx configuration file generated by Kubernetes <a href="https://mk.imti.co/web-cluster-ingress/">ingress</a>-nginx on any of the ingress controller pods.</p>
 
-<h2 id="current-context">Current Context</h2>
+<p>If you set up the standard Kubernetes <a href="https://mk.imti.co/web-cluster-ingress/">ingress</a>-nginx on your cluster, you should have one or more controller pods running in the ingress-nginx namespace.</p>
 
-<p>A context is a combination of <strong>cluster</strong>, <strong>namespace</strong> and <strong>user</strong>.</p>
+<pre><code class="language-bash">kubectl get pods -n ingress-nginx
 
-<p>View the current context:</p>
-
-<pre><code class="language-bash">kubectl config view
+NAME                                      READY     STATUS    RESTARTS   AGE
+default-http-backend-5c6d95c48-xvs55      1/1       Running   0          26d
+nginx-ingress-controller-f5676dc7-5ks6q   1/1       Running   0          26d
+nginx-ingress-controller-f5676dc7-cjl6l   1/1       Running   0          26d
+nginx-ingress-controller-f5676dc7-kthxn   1/1       Running   0          26d
+nginx-ingress-controller-f5676dc7-rvhbv   1/1       Running   0          26d
 </code></pre>
 
-<p>You should now see the output the default configuration file.</p>
+<p>Pick a controller and <code>cat</code> the nginx configuration:</p>
 
-<script src="https://gist.github.com/cjimti/907264f486f2f4118b33969ce184e20d.js"></script>
-
-<p>You can see we have only one context by default on a workstation that just installed <a href="https://kubernetes.io/docs/getting-started-guides/minikube/">Minikube</a>. You can also see the key <code>current-context:</code> is set to  <code>minikube</code>.</p>
-
-<p>Check the current config context:</p>
-
-<pre><code class="language-bash">kubectl config current-context
+<pre><code class="language-bash"># pipe the config to less or your favorite text reader
+kubectl exec -n ingress-nginx \
+    nginx-ingress-controller-f5676dc7-kthxn \
+    cat /etc/nginx/nginx.conf | less
 </code></pre>
 
-<p>Output:</p>
+<p>You can see that <a href="https://mk.imti.co/web-cluster-ingress/">ingress</a>-nginx created some header directives for nginx:</p>
 
-<pre><code class="language-bash">minikube
+<pre><code class="language-plain">...
+more_set_headers 'Access-Control-Allow-Credentials: true';
+...
 </code></pre>
 
-<h2 id="add-a-cluster">Add a Cluster</h2>
+<h3 id="about-cors">About <a href="https://en.wikipedia.org/wiki/Cross-origin_resource_sharing">CORS</a></h3>
 
-<p>Get the public certificate from your cluster or use <code>--insecure-skip-tls-verify</code>:</p>
-
-<pre><code class="language-bash">kubectl config set-cluster example --server https://example.com:6443 --certificate-authority=example.ca
-</code></pre>
-
-<p>Output</p>
-
-<pre><code class="language-bash">Cluster &quot;example&quot; set.
-</code></pre>
-
-<h2 id="add-a-user">Add a User</h2>
-
-<p>Users in the configuration can use a path to a certificate <code>--client-certificate</code> or use the certificate data directly <code>--client-certificate-data</code></p>
-
-<pre><code class="language-bash">kubectl config set-credentials example \
-    --client-certificate=/some/path/example.crt \
-    --client-key=/some/path/example.key
-</code></pre>
-
-<h2 id="add-a-context">Add a Context</h2>
-
-<p>Add a context to tie a user and cluster together.</p>
-
-<pre><code class="language-bash">kubectl config set-context deasil --cluster=example \
-    --namespace=default --user=example-admin
-</code></pre>
-
-<h2 id="change-current-context">Change Current Context</h2>
-
-<p>At this point you can change your current context from <code>minikube</code> to example:</p>
-
-<pre><code class="language-bash">kubectl config use-context example
-</code></pre>
-
-<p>Output:</p>
-
-<pre><code class="language-bash">example
-</code></pre>
-
-<p>Of course, <code>kubectl config use-context minikube</code> will put you back
-to managing your local <a href="https://kubernetes.io/docs/getting-started-guides/minikube/">Minikube</a>.</p>
+<p><a href="https://en.wikipedia.org/wiki/Cross-origin_resource_sharing">CORS</a>, or <a href="https://en.wikipedia.org/wiki/Cross-origin_resource_sharing">Cross-origin resource sharing</a> consists of a few HTTP response headers intended to let a web browser know if it&rsquo;s ok to POST data to a specific endpoint. Before a web browser lets Javascript issue a POST to a URL, then performs a &ldquo;preflight&rdquo; request. A preflight request is merely a request to the server with the same URL using the method OPTIONS rather than POST. The web browser checks the HTTP headers for <a href="https://en.wikipedia.org/wiki/Cross-origin_resource_sharing">CORS</a> related headers to determine if POSTing data on behalf of the user is ok.</p>
 
 <h2 id="resources">Resources</h2>
 
-<ul>
-<li><a href="https://kubernetes.io/docs/tasks/access-application-cluster/configure-access-multiple-clusters/">Configure Access to Multiple Clusters</a></li>
-<li><a href="https://stackoverflow.com/questions/36306904/configure-kubectl-command-to-access-remote-kubernetes-cluster-on-azure">stackoverflow</a></li>
-<li><a href="https://kubernetes.io/docs/reference/kubectl/cheatsheet/">kubectl Cheat Sheet</a></li>
-</ul>
+<p>If you found this article useful, you may want to check out <a href="http://localhost:4000/tag/phc.txn2.net/">all my articles on Kubernetes</a>, used to build on the <a href="https://mk.imti.co/hobby-cluster/">Production Hobby Cluster</a>. <a href="https://mk.imti.co/hobby-cluster/">PHC</a> an excellent environment for developing and testing cloud-native microservices like <a href="https://github.com/txn2/txtoken">txToken</a>. While using Minikube or similar environments for testing and developing cloud-native <a href="http://microservices.io/">microservice</a>s, I find it a much better experience to use a more true-to-production cluster like <a href="https://mk.imti.co/hobby-cluster/">PHC</a>.</p>
+
+<p>If in a few days you find yourself setting up a <a href="https://mk.imti.co/hobby-cluster/">Production Hobby Cluster</a> in Japan or Germany on <a href="https://www.linode.com/?r=848a6b0b21dc8edd33124f05ec8f99207ccddfde">Linode</a>, and another two in Australia and France on <a href="https://www.vultr.com/?ref=7418713">vultr</a>, then you may have just joined the PHC (Performance <a href="https://mk.imti.co/hobby-cluster/">Hobby Cluster</a>s) club. Some people tinker late at night on their truck, we benchmark and test the resilience of node failures on our overseas, budget kubernetes clusters. It&rsquo;s all about going big, on the cheap.</p>
+
+<p><a href="https://amzn.to/2IOe8Yu"><img src="https://github.com/cjimti/mk/raw/master/images/content/k8s-tshirt-banner.jpg" alt="k8s performance hobby clusters" /></a></p>
 
 
                 

@@ -12,9 +12,9 @@
     <meta name="keyword"  content="Go, Kubernetes, Elasticsearch, Python, Docker, Big Data, Artificial Intelligence, Machine Learning, Blockchain">
     <link rel="shortcut icon" href="https://mk2.imti.co/img/favicon.ico">
 
-    <title>Helm on Custom Kubernetes-IMTI | Craig Johnston</title>
+    <title>Basic Auth on Kubernetes Ingress-IMTI | Craig Johnston</title>
 
-    <link rel="canonical" href="https://mk2.imti.co/helm-on-custom-cluster/">
+    <link rel="canonical" href="https://mk2.imti.co/kubernetes-ingress-basic-auth/">
 
     <link rel="stylesheet" href="https://mk2.imti.co/css/iDisqus.min.css"/>
 	
@@ -45,12 +45,11 @@
     <meta name="twitter:site" content="@cjimti">
 <meta name="twitter:creator" content="@cjimti">
 
-<meta name="twitter:description" content="Helm is the official package manager for Kubernetes. If you are looking to start using Helm or want to test its capabilities, I suggest you set up a Production Hobby Cluster. This article is a continuation of the Production Hobby Cluster configuration but should be entirely useful on its own.
- From https://github.com/kubernetes/helm - Helm has two parts: a client (helm) and a server (tiller) - Tiller runs inside of your Kubernetes cluster and manages releases (installations) of your charts." />
-<meta name="twitter:title" content="Helm on Custom Kubernetes" />
+<meta name="twitter:description" content="Basic Auth is one of the oldest and easiest ways to secure a web page or API endpoint. Basic Auth does not have many features and lacks the sophistication of more modern access controls (see Ingress Nginx Auth Examples). However, Basic Auth is supported by nearly every major web client, library, and utility. Basic Auth is secure, stable and perfect for quick security on Kubernetes projects. Basic Auth can easily we swapped out later as requirements demand or provide a foundation for implementations such as OAuth 2 and JWT." />
+<meta name="twitter:title" content="Basic Auth on Kubernetes Ingress" />
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:image" content="https://mk2.imti.co/img/post/helm_876_438.jpg" />
-<meta property="og:image" content="https://mk2.imti.co/img/post/helm_876_438.jpg" />
+<meta name="twitter:image" content="https://mk2.imti.co/img/post/lock_876_438.jpg" />
+<meta property="og:image" content="https://mk2.imti.co/img/post/lock_876_438.jpg" />
 
 
 
@@ -61,14 +60,14 @@
   "@type": "Article",
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://mk2.imti.co/helm-on-custom-cluster/"
+    "@id": "https://mk2.imti.co/kubernetes-ingress-basic-auth/"
   },
-  "headline": "Helm on Custom Kubernetes",
+  "headline": "Basic Auth on Kubernetes Ingress",
   "image": [
-    "https://mk2.imti.co/img/post/helm_876_438.jpg"
+    "https://mk2.imti.co/img/post/lock_876_438.jpg"
    ],
-  "datePublished": "2018-05-17T00:00:00",
-  "dateModified": "2018-05-17T00:00:00",
+  "datePublished": "2018-05-19T00:00:00",
+  "dateModified": "2018-05-19T00:00:00",
   "author": {
     "@type": "Person",
     "name": "Craig Johnston"
@@ -81,8 +80,7 @@
       "url": "https://mk2.imti.co/img/craig_johnston_cjimti.jpg"
     }
   },
-  "description": "Helm is the official package manager for Kubernetes. If you are looking to start using Helm or want to test its capabilities, I suggest you set up a Production Hobby Cluster. This article is a continuation of the Production Hobby Cluster configuration but should be entirely useful on its own.
- From https://github.com/kubernetes/helm - Helm has two parts: a client (helm) and a server (tiller) - Tiller runs inside of your Kubernetes cluster and manages releases (installations) of your charts."
+  "description": "Basic Auth is one of the oldest and easiest ways to secure a web page or API endpoint. Basic Auth does not have many features and lacks the sophistication of more modern access controls (see Ingress Nginx Auth Examples). However, Basic Auth is supported by nearly every major web client, library, and utility. Basic Auth is secure, stable and perfect for quick security on Kubernetes projects. Basic Auth can easily we swapped out later as requirements demand or provide a foundation for implementations such as OAuth 2 and JWT."
 }
 </script>
 
@@ -153,7 +151,7 @@
 
 <style type="text/css">
     header.intro-header{
-        background-image: url('https://mk2.imti.co/img/post/helm.jpg')
+        background-image: url('https://mk2.imti.co/img/post/lock.jpg')
     }
 </style>
 <header class="intro-header" >
@@ -167,14 +165,18 @@
                         Kubernetes
                         </a>
                         
-                        <a class="tag" href="/tags/helm" title="helm">
-                        helm
+                        <a class="tag" href="/tags/security" title="Security">
+                        Security
+                        </a>
+                        
+                        <a class="tag" href="/tags/ingress" title="Ingress">
+                        Ingress
                         </a>
                         
                     </div>
-                    <h1>Helm on Custom Kubernetes</h1>
-                    <h2 class="subheading">Kubernetes package management.</h2>
-                    <span  class="meta">Posted by Craig Johnston on Thursday, May 17, 2018
+                    <h1>Basic Auth on Kubernetes Ingress</h1>
+                    <h2 class="subheading">Basic Auth is supported by nearly every major web client, library, and utility.</h2>
+                    <span  class="meta">Posted by Craig Johnston on Saturday, May 19, 2018
                         
                     </span>
                 </div>
@@ -198,64 +200,109 @@
 
                 
 
-<p><a href="https://helm.sh/">Helm</a> is the official package manager for <a href="https://kubernetes.io/">Kubernetes</a>. If you are looking to start using <a href="https://helm.sh/">Helm</a> or want to test its capabilities, I suggest you set up a <a href="https://mk.imti.co/hobby-cluster/">Production Hobby Cluster</a>. This article is a continuation of the <a href="https://mk.imti.co/hobby-cluster/">Production Hobby Cluster</a> configuration but should be entirely useful on its own.</p>
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Authentication">Basic Auth</a> is one of the oldest and easiest ways to secure a web page or API endpoint. <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Authentication">Basic Auth</a> does not have many features and lacks the sophistication of more modern access controls (see <a href="https://github.com/kubernetes/ingress-nginx/tree/master/docs/examples/auth">Ingress Nginx Auth Examples</a>). However, <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Authentication">Basic Auth</a> is supported by nearly every major web client, library, and utility. <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Authentication">Basic Auth</a> is secure, stable and perfect for quick security on Kubernetes projects. <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Authentication">Basic Auth</a>  can easily we swapped out later as requirements demand or provide a foundation for implementations such as <a href="https://oauth.net/2/">OAuth 2</a> and <a href="https://jwt.io/">JWT</a>.</p>
 
-<blockquote>
-<p>From <a href="https://github.com/kubernetes/helm">https://github.com/kubernetes/helm</a>
-- Helm has two parts: a client (helm) and a server (tiller)
-- Tiller runs inside of your Kubernetes cluster and manages releases (installations) of your charts.
- - Helm runs on your laptop, CI/CD, or wherever you want it to run.
- - Charts are Helm packages that contain at least two things:
- - A description of the package (Chart.yaml)
- - One or more templates, which contain Kubernetes manifest files
- - Charts can be stored on disk, or fetched from remote chart repositories (like Debian or RedHat packages)</p>
-</blockquote>
+<p>First, you need an <a href="https://mk.imti.co/web-cluster-ingress/">Ingress</a> controller on your Kubernetes cluster and at least one ingress rule that we can apply <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Authentication">Basic Auth</a>. If you are following along with my articles on building a <a href="https://mk.imti.co/hobby-cluster/">Production Hobby Cluster</a> Kubernetes and do not yet have <a href="https://mk.imti.co/web-cluster-ingress/">Ingress</a> installed, you should read <a href="https://mk.imti.co/web-cluster-ingress/">Ingress on Custom Kubernetes</a> before getting started.</p>
 
-<p>Start with installing <a href="https://helm.sh/">Helm</a> on your local workstation. Read the <a href="https://github.com/kubernetes/helm/blob/master/docs/install.md">Helm installation instructions</a> or merely follow along below.</p>
+<h4 id="security">Security</h4>
 
-<pre><code class="language-bash"># on MacOS using homebrew (http://brew.sh)
-brew install kubernetes-helm
+<p>The <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Authentication">Basic Auth</a> process sends credentials to the server in the clear, although encrypted and <a href="https://en.wikipedia.org/wiki/Base64">base64</a>&rsquo;d, they can be quickly reversed back into a human-readable string. Because of this, it is essential we are issuing calls over <a href="https://letsencrypt.org/">SSL</a>. However, if the information or service being password protected should be hidden, then <a href="https://letsencrypt.org/">SSL</a> encrypted communication would already be required.</p>
 
-# on windows using https://chocolatey.org/
-choco install kubernetes-helm
+<p>For the <a href="https://mk.imti.co/hobby-cluster/">Production Hobby Cluster</a> we use <a href="https://letsencrypt.org/">Let&rsquo;s Encrypt</a>, so if you have not done so already you can check out my article on setting up <a href="https://letsencrypt.org/">Let&rsquo;s Encrypt</a> for your custom cluster read: <a href="https://mk.imti.co/lets-encrypt-kubernetes/">Let&rsquo;s Encrypt, Kubernetes</a>.</p>
+
+<h3 id="create-a-user-and-password">Create a User and Password</h3>
+
+<p>Start by creating an <a href="https://httpd.apache.org/docs/current/programs/htpasswd.html">htpasswd</a> file that contains the <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Authentication">Basic Auth</a> credentials. The following creates a user called <strong>sysop</strong>, choose whatever username you like.</p>
+
+<pre><code class="language-bash">htpasswd -c ./auth sysop
 </code></pre>
 
-<p>Since our <a href="https://mk.imti.co/hobby-cluster/">Production Hobby Cluster</a> uses <a href="https://kubernetes.io/docs/admin/authorization/rbac/">RBAC</a> Roles, we start by adding a <a href="https://kubernetes.io/docs/admin/service-accounts-admin/">ServiceAccount</a> called <strong>tiller</strong>. Tiller is Kubernetes service that manages <a href="https://helm.sh/">Helm</a> installs on the cluster.</p>
+<p>It is important to name the file <strong>auth</strong>. The filename is used as the key in the key-value pair under the <code>data</code> section of secret.</p>
 
-<p>The following configuration creates a <a href="https://kubernetes.io/docs/admin/service-accounts-admin/">ServiceAccount</a> named <strong>tiller</strong> and a <a href="https://kubernetes.io/docs/admin/authorization/rbac/#rolebinding-and-clusterrolebinding">ClusterRoleBinding</a> between the new <strong>tiller</strong> account and the <strong>cluster-admin</strong> role. Of course, you can define your own <a href="https://kubernetes.io/docs/admin/authorization/rbac/#role-and-clusterrole">Role</a> and permissions, however, the <strong>cluster-admin</strong> role has admin access, and that is what we want for a <a href="https://mk.imti.co/hobby-cluster/">Production Hobby Cluster</a>. Permissions can always become more restrictive in the future should our hobby become more sophisticated.</p>
+<p>After entering a password for the new user twice, you end up with the file <code>auth</code>.</p>
 
-<script src="https://gist.github.com/cjimti/9fab60c0b21a97cbe15688f5e28d940f.js"></script>
+<h3 id="create-a-secret">Create a <a href="https://kubernetes.io/docs/concepts/configuration/secret/">Secret</a></h3>
 
-<p>You can apply the configuration with the following command:</p>
+<p>Kubernetes can create a <strong><a href="https://kubernetes-v1-4.github.io/docs/user-guide/kubectl/kubectl_create_secret_generic/">generic</a></strong> <a href="https://kubernetes.io/docs/concepts/configuration/secret/">Secret</a> from the generated <code>auth</code> file, or from any file, however, the format of the htpasswd generated file is necessary for use with <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Authentication">Basic Auth</a>. The file name is used as the key in Basic Auth secret, therefore its best to name it <strong>auth</strong> and avoid having to edit the secret.  <a href="https://mk.imti.co/web-cluster-ingress/">Ingress</a> uses the new <a href="https://kubernetes.io/docs/concepts/configuration/secret/">Secret</a> in it&rsquo;s annotation section to provide <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Authentication">Basic Auth</a>.</p>
 
-<pre><code class="language-bash">kubectl create -f https://gist.githubusercontent.com/cjimti/9fab60c0b21a97cbe15688f5e28d940f/raw/29cbeff70bc528e5212ebc3f63e08fb5a24d5ecd/00-tiller-rbac.yml
+<p>The <a href="https://kubernetes-v1-4.github.io/docs/user-guide/kubectl/kubectl_create_secret/">kubectl create secret</a> command can create a secret from a local file, directory or literal value using the <strong><a href="https://kubernetes-v1-4.github.io/docs/user-guide/kubectl/kubectl_create_secret_generic/">generic</a></strong> directive. In the example below I call the new secret <strong>sysop</strong>, named after the single set of credentials stored in it. However, if you are grouping many credentials, it would be better to give it a more generic name.</p>
+
+<p>Create the <a href="https://kubernetes.io/docs/concepts/configuration/secret/">Secret</a>:</p>
+
+<pre><code class="language-bash">kubectl create secret generic sysop --from-file auth
 </code></pre>
 
-<p>Next initialize <a href="https://helm.sh/">Helm</a> while specifying the <a href="https://kubernetes.io/docs/admin/service-accounts-admin/">ServiceAccount</a> to use. Use the new <strong>tiller</strong>  <a href="https://kubernetes.io/docs/admin/service-accounts-admin/">ServiceAccount</a> we setup above.</p>
+<p>Ensure the <a href="https://kubernetes.io/docs/concepts/configuration/secret/">Secret</a> was created successfully by viewing the details:</p>
 
-<pre><code class="language-bash">helm init --service-account tiller
+<pre><code class="language-bash">kubectl get secret sysop -o yaml
 </code></pre>
 
-<p>To see what <a href="https://helm.sh/">Helm</a> just installed on your cluster run:</p>
+<p>You should have a secret similar to the following:</p>
 
-<pre><code class="language-bash">kubectl get all -l app=helm -n kube-system
+<pre><code class="language-yaml">apiVersion: v1
+data:
+  auth: c3avb2A2GGFwcjEkMmo5SwoucC4kcWtDR3NTVUxSDXJmTVkwNUwxUlZYLbo=
+kind: Secret
+metadata:
+  creationTimestamp: 2018-05-18T06:55:51Z
+  name: sysop
+  namespace: default
+  resourceVersion: &quot;265674&quot;
+  selfLink: /api/v1/namespaces/default/secrets/sysop
+  uid: 2bfb399c-58d6-11e8-b11e-5600017e897a
+type: Opaque
 </code></pre>
 
-<p>As this point you can see a <a href="https://kubernetes.io/docs/concepts/workloads/controllers/deployment/">Deployment</a>, a <a href="https://kubernetes.io/docs/concepts/workloads/controllers/replicaset/">ReplicaSet</a>, a <a href="https://kubernetes.io/docs/concepts/workloads/pods/pod/">Pod</a> and a <a href="https://kubernetes.io/docs/concepts/services-networking/service/">Service</a> named <strong>tiller-deploy</strong> in the <strong>kube-system</strong> namespace.</p>
+<p>Of course, you should avoid publishing your new <a href="https://kubernetes.io/docs/concepts/configuration/secret/">Secret</a> like I just did, since the <code>auth:</code> value under <code>data:</code> is only a <a href="https://en.wikipedia.org/wiki/Base64">base64</a> encoded version of the username and encoded password pair. The password may be reversed quickly with a dictionary attack or other password cracking utilities.</p>
+
+<h3 id="protect-ingress">Protect <a href="https://mk.imti.co/web-cluster-ingress/">Ingress</a></h3>
+
+<p>The following is an example <a href="https://mk.imti.co/web-cluster-ingress/">Ingress</a> configuration for a test application called <a href="https://github.com/txn2/ok">ok</a> running on the <a href="http://localhost:4000/tag/phc.txn2.net/">phc.txn2.net</a> test cluster.</p>
+
+<pre><code class="language-yaml"> apiVersion: extensions/v1beta1
+ kind: Ingress
+ metadata:
+   name: ok-auth
+   labels:
+     app: ok-auth
+     system: test
+   annotations:
+     nginx.ingress.kubernetes.io/auth-type: basic
+     nginx.ingress.kubernetes.io/auth-secret: sysop
+     nginx.ingress.kubernetes.io/auth-realm: &quot;Authentication Required - ok&quot;
+ spec:
+   rules:
+   - host: ok-auth.la.txn2.net
+     http:
+       paths:
+       - backend:
+           serviceName: &quot;ok&quot;
+           servicePort: 5001
+         path: /
+   tls:
+   - hosts:
+     - ok-auth.la.txn2.net
+     secretName: la-txn2-net-tls
+</code></pre>
+
+<p>All that is needed are three <a href="https://mk.imti.co/web-cluster-ingress/">Ingress</a> annotations:
+- nginx.ingress.kubernetes.io/auth-type: basic
+- nginx.ingress.kubernetes.io/auth-secret: sysop
+- nginx.ingress.kubernetes.io/auth-realm: &ldquo;Authentication Required - ok.&rdquo;</p>
+
+<p>The <a href="https://mk.imti.co/web-cluster-ingress/">Ingress</a> for <a href="https://ok-auth.la.txn2.net">ok-auth.la.txn2.net</a> is now <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Authentication">Basic Auth</a> protected using credentials in a <a href="https://kubernetes.io/docs/concepts/configuration/secret/">Secret</a> called <strong>sysop</strong>.</p>
+
+<h2 id="resources">Resources</h2>
+
+<p>If you found this article useful, you may want to check out all the articles used to build on the <a href="https://mk.imti.co/hobby-cluster/">Production Hobby Cluster</a> tagged with <a href="http://localhost:4000/tag/phc.txn2.net/">phc.txn2.net</a>.</p>
+
+<p>Additional examples of <a href="https://mk.imti.co/web-cluster-ingress/">Ingress</a> authentication can be found at the official <a href="https://github.com/kubernetes/ingress-nginx/tree/master/docs/examples/auth">Ingress Nginx Auth Examples</a> repository.</p>
 
 <hr />
 
 <p>If in a few days you find yourself setting up a cluster in Japan or Germany on <a href="https://www.linode.com/?r=848a6b0b21dc8edd33124f05ec8f99207ccddfde">Linode</a>, and another two in Australia and France on <a href="https://www.vultr.com/?ref=7418713">vultr</a>, then you may have just joined the PHC (Performance <a href="https://mk.imti.co/hobby-cluster/">Hobby Cluster</a>s) club. Some people tinker late at night on their truck, we benchmark and test the resilience of node failures on our overseas, budget kubernetes clusters. It&rsquo;s all about going big, on the cheap.</p>
 
 <p><a href="https://amzn.to/2IOe8Yu"><img src="https://github.com/cjimti/mk/raw/master/images/content/k8s-tshirt-banner.jpg" alt="k8s performance hobby clusters" /></a></p>
-
-<h2 id="resources">Resources</h2>
-
-<ul>
-<li><a href="https://www.linode.com/?r=848a6b0b21dc8edd33124f05ec8f99207ccddfde">Linode</a> hosting.</li>
-<li><a href="https://m.do.co/c/97b733e7eba4">Digital Ocean</a> hosting.</li>
-<li><a href="https://www.vultr.com/?ref=7418713">Vultr</a> hosting.</li>
-</ul>
 
 
                 

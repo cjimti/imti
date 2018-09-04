@@ -215,46 +215,47 @@ Explore the Elasticsearch official documentation: Search in Depth.
 <hr>
 
 <div class="post-preview">
-    <a href="https://mk2.imti.co/jwt-microservice/">
+    <a href="https://mk2.imti.co/kubernetes-ingress-nginx-cors/">
         <h2 class="post-title">
-            JWT Microservice, Tokenize Remote APIs
+            CORS on Kubernetes Ingress Nginx
         </h2>
 	
         <h3 class="post-subtitle">
-            Using txToken to create JWT Tokens from JSON POST data.
+            Painless CORS header configuration in Kubernetes
         </h3>
 	
         <div class="post-content-preview">
 	
-            txToken is a small high performance microservice utility container. txToken is used for adding JSON Web Token based security to existing or new API development. txToken is specifically for systems that communicate in JSON over HTTP. txToken is called from a client with a JSON post body and passes received JSON to a remote endpoint. JSON retrieved from a remote endpoint is used to create a JWT token with an HS256 symmetrically encrypted signature.
+            Using ingress-nginx on Kubernetes makes adding CORS headers painless. Kubernetes ingress-nginx uses annotations as a quick way to allow you to specify the automatic generation of an extensive list of common nginx configuration options.
+Example ingress configuration enabling CORS:
+apiVersion: extensions/v1beta1 kind: Ingress metadata: name: api namespace: fuse labels: app: api annotations: nginx.ingress.kubernetes.io/enable-cors: &quot;true&quot; nginx.ingress.kubernetes.io/cors-allow-methods: &quot;PUT, GET, POST, OPTIONS&quot; nginx.ingress.kubernetes.io/cors-allow-origin: &quot;https://admin.example.com&quot; nginx.ingress.kubernetes.io/cors-allow-credentials: &quot;true&quot; spec: rules: - host: api.example.com http: paths: - backend: serviceName: api-example servicePort: 80 path: /api tls: - hosts: - api.
        
         </div>
     </a>
     <p class="post-meta">
-    Posted by Craig Johnston Friday, May 18, 2018
+    Posted by Craig Johnston Monday, May 28, 2018
     </p>
 </div>
 <hr>
 
 <div class="post-preview">
-    <a href="https://mk2.imti.co/lets-encrypt-kubernetes/">
+    <a href="https://mk2.imti.co/kubernetes-ingress-basic-auth/">
         <h2 class="post-title">
-            Let&#39;s Encrypt, Kubernetes
+            Basic Auth on Kubernetes Ingress
         </h2>
 	
         <h3 class="post-subtitle">
-            Automated, secure and free 443/https with signed x509 certificates for Ingress.
+            Basic Auth is supported by nearly every major web client, library, and utility.
         </h3>
 	
         <div class="post-content-preview">
 	
-            Use cert-manager to get port 443/https running with signed x509 certificates for Ingress on your Kubernetes Production Hobby Cluster. cert-manager is the successor to kube-lego and the preferred way to &ldquo;automatically obtain browser-trusted certificates, without any human intervention.&rdquo; using Let&rsquo;s Encrypt.
-You need to install Helm first if you do not already have it. Otherwise, check out my article Helm on Custom Kubernetes, especially if you are following along with my Production Hobby Cluster guides.
+            Basic Auth is one of the oldest and easiest ways to secure a web page or API endpoint. Basic Auth does not have many features and lacks the sophistication of more modern access controls (see Ingress Nginx Auth Examples). However, Basic Auth is supported by nearly every major web client, library, and utility. Basic Auth is secure, stable and perfect for quick security on Kubernetes projects. Basic Auth can easily we swapped out later as requirements demand or provide a foundation for implementations such as OAuth 2 and JWT.
        
         </div>
     </a>
     <p class="post-meta">
-    Posted by Craig Johnston Friday, May 18, 2018
+    Posted by Craig Johnston Saturday, May 19, 2018
     </p>
 </div>
 <hr>
@@ -320,6 +321,10 @@ You need to install Helm first if you do not already have it. Otherwise, check o
                 
             
                 
+                    <a href="/tags/ingress" title="Ingress">
+                        Ingress
+                    </a>
+                
             
                 
                     <a href="/tags/kubernetes" title="Kubernetes">
@@ -339,6 +344,10 @@ You need to install Helm first if you do not already have it. Otherwise, check o
             
                 
             
+                
+                    <a href="/tags/security" title="Security">
+                        Security
+                    </a>
                 
             
                 
