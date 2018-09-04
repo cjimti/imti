@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Raspberry Pi on IMTI</title>
+    <link>https://mk2.imti.co/tags/raspberry-pi/</link>
+    <description>Recent content in Raspberry Pi on IMTI</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 02 Apr 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://mk2.imti.co/tags/raspberry-pi/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>rSync Files on Interval</title>
+      <link>https://mk2.imti.co/raspberry-pi-rsync-interval/</link>
+      <pubDate>Mon, 02 Apr 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://mk2.imti.co/raspberry-pi-rsync-interval/</guid>
+      <description>A recurring requirement for my IOT projects involves keeping a set of files synced with a central server. Many of these projects include media players, kiosk systems, or applications that need frequently updated configuration files, all while entirely unattended, and in most cases unreachable through firewalls. I have one project that alone has 2000+ devices pulling media continuously from an rsync server. Many of these devices are on doggy wifi networks.</description>
+    </item>
+    
+  </channel>
+</rss>

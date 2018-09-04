@@ -1,11 +1,15 @@
 ---
-published: true
-layout: post
-title: rSync Files on Interval
-description: irsync is an Open Source IOT DevOps utility to keep files synchronized from a remote server.
-tags: rsync docker pi armbian cli
-featured: docker pi armbian cli
-mast: gears
+layout:     post
+title:      "rSync Files on Interval"
+subtitle:   "Sync media to Raspberry Pi or any ARM SoC."
+date:       2018-04-02
+author:     "Craig Johnston"
+URL:        "raspberry-pi-rsync-interval/"
+image:      "/img/post/blocks.jpg"
+twitter_image: "/img/post/blocks_876_438.jpg"
+tags:
+- Raspberry Pi
+- Utils
 ---
 
 A recurring requirement for my [IOT] projects involves keeping a set of files synced with a central server. Many of these projects include media players, kiosk systems, or applications that need frequently updated configuration files, all while entirely unattended, and in most cases unreachable through firewalls. I have one project that alone has 2000+ devices pulling media continuously from an [rsync] server. Many of these devices are on doggy wifi networks.

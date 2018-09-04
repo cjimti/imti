@@ -190,24 +190,71 @@ Developing services in a Microservices architecture presents local development c
 <hr>
 
 <div class="post-preview">
-    <a href="https://mk2.imti.co/kubernetes/">
+    <a href="https://mk2.imti.co/413-request-entity-too-large/">
         <h2 class="post-title">
-            Kubernetes Overview
+            Kubernetes - 413 Request Entity Too Large
         </h2>
 	
         <h3 class="post-subtitle">
-            Container Orchestration &amp; Microservices
+            Configuring the NGINX Ingress Controller
         </h3>
 	
         <div class="post-content-preview">
 	
-            Getting started with Kubernetes for local development. I develop on a Mac however much of this is easily translated to windows.
-The following is primarily a getting started guide wrapped around my personal development notes. This set of notes are specifically for my co-workers in helping them get up to speed quickly. If you see an error feel free to make a pull request or just add an issue.
+            When setting up nginx ingress on Kubernetes for a private Docker Registry, I ran into an error when trying to push an image to it.
+Error parsing HTTP response: invalid character '&lt;' looking for beginning of value: &quot;&lt;html&gt;\r\n&lt;head&gt;&lt;title&gt;413 Request Entity Too Large&lt;/title&gt;&lt;/head&gt;\r\n&lt;body bgcolor=\&quot;white\&quot;&gt;\r\n&lt;center&gt;&lt;h1&gt;413 Request Entity Too Large&lt;/h1&gt;&lt;/center&gt;\r\n&lt;hr&gt;&lt;center&gt;nginx/1.9.14&lt;/center&gt;\r\n&lt;/body&gt;\r\n&lt;/html&gt;\r\n&quot;  The &ldquo;413 Request Entity Too Large&rdquo; error is something many accustomed to running nginx as a standard web server/proxy. nginx is configured to restrict the size of files it will allow over a post.
        
         </div>
     </a>
     <p class="post-meta">
-    Posted by Craig Johnston Thursday, March 1, 2018
+    Posted by Craig Johnston Saturday, March 24, 2018
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="https://mk2.imti.co/kubectl-remote/">
+        <h2 class="post-title">
+            Kubernetes Remote Control
+        </h2>
+	
+        <h3 class="post-subtitle">
+            Using kubectl to Control a Remote Kubernetes Cluster
+        </h3>
+	
+        <div class="post-content-preview">
+	
+            I use Minikube to run a local Kubernetes single node cluster (cluster?). However, I also work with a custom production cluster for work. This cluster consists of development and production nodes. I often need to switch between working on my local Minikube and the online Kubernetes cluster.
+TIP: Visit the kubectl Cheat Sheet often.
+The default configuration kubectl is stored in ~/.kube/config and if you have Minikube installed, it added the context minikube to your config.
+       
+        </div>
+    </a>
+    <p class="post-meta">
+    Posted by Craig Johnston Saturday, March 24, 2018
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="https://mk2.imti.co/microservices/">
+        <h2 class="post-title">
+            Microservices &amp; Kubernetes
+        </h2>
+	
+        <h3 class="post-subtitle">
+            Overview
+        </h3>
+	
+        <div class="post-content-preview">
+	
+            The following is a collection of articles, videos, and notes on Microservices. The Microservices architecture is a variant of the service-oriented architecture, a collection of loosely coupled services.
+Articles  Background concept - &ldquo;Open Data: Small Pieces Loosely Joined&rdquo;, Tim O’Reilly Modern software design problems and solutions - &ldquo;12-Fractured Apps&rdquo;, Kelsey Hightower (SysAdmin @ Google) 12-Factor Defined - &ldquo;The 12-Factor App&rdquo;, Adam Wiggins Pros and Cons of Microservices - &ldquo;Microservices&rdquo; and Microservice Trade-Offs, Martin Fowler &ldquo;What are containers and why do you need them?
+       
+        </div>
+    </a>
+    <p class="post-meta">
+    Posted by Craig Johnston Saturday, March 24, 2018
     </p>
 </div>
 <hr>
@@ -215,6 +262,15 @@ The following is primarily a getting started guide wrapped around my personal de
 
             
 
+
+<ul class="pager">
+    
+    
+    <li class="next">
+        <a href="/tags/kubernetes/page/2/">Older Posts &rarr;</a>
+    </li>
+    
+</ul>
 
 
        	</div>
@@ -257,6 +313,18 @@ The following is primarily a getting started guide wrapped around my personal de
                     <a href="/tags/kubernetes" title="Kubernetes">
                         Kubernetes
                     </a>
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
                 
             
                 

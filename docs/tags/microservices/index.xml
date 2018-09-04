@@ -6,10 +6,20 @@
     <description>Recent content in Microservices on IMTI</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 01 Mar 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 24 Mar 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://mk2.imti.co/tags/microservices/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Microservices &amp; Kubernetes</title>
+      <link>https://mk2.imti.co/microservices/</link>
+      <pubDate>Sat, 24 Mar 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://mk2.imti.co/microservices/</guid>
+      <description>The following is a collection of articles, videos, and notes on Microservices. The Microservices architecture is a variant of the service-oriented architecture, a collection of loosely coupled services.
+Articles  Background concept - &amp;ldquo;Open Data: Small Pieces Loosely Joined&amp;rdquo;, Tim O’Reilly Modern software design problems and solutions - &amp;ldquo;12-Fractured Apps&amp;rdquo;, Kelsey Hightower (SysAdmin @ Google) 12-Factor Defined - &amp;ldquo;The 12-Factor App&amp;rdquo;, Adam Wiggins Pros and Cons of Microservices - &amp;ldquo;Microservices&amp;rdquo; and Microservice Trade-Offs, Martin Fowler &amp;ldquo;What are containers and why do you need them?</description>
+    </item>
     
     <item>
       <title>Kubernetes Overview</title>

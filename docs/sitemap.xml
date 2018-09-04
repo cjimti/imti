@@ -18,6 +18,31 @@
   </url>
   
   <url>
+    <loc>https://mk2.imti.co/raspberry-pi-rsync-interval/</loc>
+    <lastmod>2018-04-02T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://mk2.imti.co/mac-cli-burn-images/</loc>
+    <lastmod>2018-04-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://mk2.imti.co/413-request-entity-too-large/</loc>
+    <lastmod>2018-03-24T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://mk2.imti.co/kubectl-remote/</loc>
+    <lastmod>2018-03-24T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://mk2.imti.co/microservices/</loc>
+    <lastmod>2018-03-24T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://mk2.imti.co/dont-install-emacs/</loc>
     <lastmod>2018-03-01T00:00:00+00:00</lastmod>
   </url>
@@ -86,14 +111,38 @@
   </url>
   
   <url>
+    <loc>https://mk2.imti.co/tags/ingress/</loc>
+    <lastmod>2018-03-24T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://mk2.imti.co/tags/kubectl/</loc>
+    <lastmod>2018-03-24T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://mk2.imti.co/tags/kubernetes/</loc>
     <lastmod>2018-08-11T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
+    <loc>https://mk2.imti.co/tags/macos/</loc>
+    <lastmod>2018-04-01T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://mk2.imti.co/tags/microservices/</loc>
-    <lastmod>2018-03-01T00:00:00+00:00</lastmod>
+    <lastmod>2018-03-24T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://mk2.imti.co/tags/nginx/</loc>
+    <lastmod>2018-03-24T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -110,6 +159,12 @@
   </url>
   
   <url>
+    <loc>https://mk2.imti.co/tags/raspberry-pi/</loc>
+    <lastmod>2018-04-02T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://mk2.imti.co/tags/serverless/</loc>
     <lastmod>2018-07-28T00:00:00+00:00</lastmod>
     <priority>0</priority>
@@ -118,6 +173,12 @@
   <url>
     <loc>https://mk2.imti.co/tags/</loc>
     <lastmod>2018-03-01T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://mk2.imti.co/tags/utils/</loc>
+    <lastmod>2018-04-02T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   

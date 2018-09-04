@@ -31,6 +31,37 @@ Developing services in a Microservices architecture presents local development c
     </item>
     
     <item>
+      <title>Kubernetes - 413 Request Entity Too Large</title>
+      <link>https://mk2.imti.co/413-request-entity-too-large/</link>
+      <pubDate>Sat, 24 Mar 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://mk2.imti.co/413-request-entity-too-large/</guid>
+      <description>When setting up nginx ingress on Kubernetes for a private Docker Registry, I ran into an error when trying to push an image to it.
+Error parsing HTTP response: invalid character &#39;&amp;lt;&#39; looking for beginning of value: &amp;quot;&amp;lt;html&amp;gt;\r\n&amp;lt;head&amp;gt;&amp;lt;title&amp;gt;413 Request Entity Too Large&amp;lt;/title&amp;gt;&amp;lt;/head&amp;gt;\r\n&amp;lt;body bgcolor=\&amp;quot;white\&amp;quot;&amp;gt;\r\n&amp;lt;center&amp;gt;&amp;lt;h1&amp;gt;413 Request Entity Too Large&amp;lt;/h1&amp;gt;&amp;lt;/center&amp;gt;\r\n&amp;lt;hr&amp;gt;&amp;lt;center&amp;gt;nginx/1.9.14&amp;lt;/center&amp;gt;\r\n&amp;lt;/body&amp;gt;\r\n&amp;lt;/html&amp;gt;\r\n&amp;quot;  The &amp;ldquo;413 Request Entity Too Large&amp;rdquo; error is something many accustomed to running nginx as a standard web server/proxy. nginx is configured to restrict the size of files it will allow over a post.</description>
+    </item>
+    
+    <item>
+      <title>Kubernetes Remote Control</title>
+      <link>https://mk2.imti.co/kubectl-remote/</link>
+      <pubDate>Sat, 24 Mar 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://mk2.imti.co/kubectl-remote/</guid>
+      <description>I use Minikube to run a local Kubernetes single node cluster (cluster?). However, I also work with a custom production cluster for work. This cluster consists of development and production nodes. I often need to switch between working on my local Minikube and the online Kubernetes cluster.
+TIP: Visit the kubectl Cheat Sheet often.
+The default configuration kubectl is stored in ~/.kube/config and if you have Minikube installed, it added the context minikube to your config.</description>
+    </item>
+    
+    <item>
+      <title>Microservices &amp; Kubernetes</title>
+      <link>https://mk2.imti.co/microservices/</link>
+      <pubDate>Sat, 24 Mar 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://mk2.imti.co/microservices/</guid>
+      <description>The following is a collection of articles, videos, and notes on Microservices. The Microservices architecture is a variant of the service-oriented architecture, a collection of loosely coupled services.
+Articles  Background concept - &amp;ldquo;Open Data: Small Pieces Loosely Joined&amp;rdquo;, Tim O’Reilly Modern software design problems and solutions - &amp;ldquo;12-Fractured Apps&amp;rdquo;, Kelsey Hightower (SysAdmin @ Google) 12-Factor Defined - &amp;ldquo;The 12-Factor App&amp;rdquo;, Adam Wiggins Pros and Cons of Microservices - &amp;ldquo;Microservices&amp;rdquo; and Microservice Trade-Offs, Martin Fowler &amp;ldquo;What are containers and why do you need them?</description>
+    </item>
+    
+    <item>
       <title>Kubernetes Overview</title>
       <link>https://mk2.imti.co/kubernetes/</link>
       <pubDate>Thu, 01 Mar 2018 00:00:00 +0000</pubDate>

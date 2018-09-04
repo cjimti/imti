@@ -1,11 +1,15 @@
 ---
-published: true
-layout: post
-title: Burn SD Images on MacOs
-description: Use the command line to burn SD cards, easy and fast.
-tags: dd cli pi armbian bash
-featured: bash pi armbian
-mast: smelt
+layout:     post
+title:      "Burn SD Images on MacOs"
+subtitle:   "Use the command line to burn SD cards, easy and fast."
+date:       2018-04-01
+author:     "Craig Johnston"
+URL:        "mac-cli-burn-images/"
+image:      "/img/post/foundry.jpg"
+twitter_image: "/img/post/foundry_876_438.jpg"
+tags:
+- MacOS
+- Utils
 ---
 
 Use your terminal to burn images fast and easy with **[dd]**. I do a lot of professional and hobby development for projects using devices such as [Raspberry Pi], [Orange Pi], [Libre Computer], [Tinker Board], etc. I run across a lot of tutorials with people downloading and using big GUI apps with clunky drag and drop interfaces to burn images.

@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head><head>
+    <meta name="google-site-verification" content="" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <meta name="description" content="I lead a talented team of software development and creative engineers, covering many industries looking to collect, analyze, move, buffer, queue, process and present data in significant ways. My expertise and that of my team revolve around microservices, artificial intelligence, algorithms, machine learning and blockchain technologies.">
+    
+    <meta name="keyword"  content="Go, Kubernetes, Elasticsearch, Python, Docker, Big Data, Artificial Intelligence, Machine Learning, Blockchain">
+    <link rel="shortcut icon" href="https://mk2.imti.co/img/favicon.ico">
+
+    <title>Kubernetes - 413 Request Entity Too Large-IMTI | Craig Johnston</title>
+
+    <link rel="canonical" href="https://mk2.imti.co/413-request-entity-too-large/">
+
+    <link rel="stylesheet" href="https://mk2.imti.co/css/iDisqus.min.css"/>
+	
+    
+    <link rel="stylesheet" href="https://mk2.imti.co/css/bootstrap.min.css">
+
+    
+    <link rel="stylesheet" href="https://mk2.imti.co/css/hux-blog.min.css">
+
+    
+    <link rel="stylesheet" href="https://mk2.imti.co/css/syntax.css">
+
+    
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    
+    
+    <link rel="stylesheet" href="/css/imti.css">
+
+    
+    <script src="https://mk2.imti.co/js/jquery.min.js"></script>
+    
+    
+    <script src="https://mk2.imti.co/js/bootstrap.min.js"></script>
+    
+    
+    <script src="https://mk2.imti.co/js/hux-blog.min.js"></script>
+
+    <meta name="twitter:site" content="@cjimti">
+<meta name="twitter:creator" content="@cjimti">
+
+<meta name="twitter:description" content="When setting up nginx ingress on Kubernetes for a private Docker Registry, I ran into an error when trying to push an image to it.
+Error parsing HTTP response: invalid character &#39;&lt;&#39; looking for beginning of value: &quot;&lt;html&gt;\r\n&lt;head&gt;&lt;title&gt;413 Request Entity Too Large&lt;/title&gt;&lt;/head&gt;\r\n&lt;body bgcolor=\&quot;white\&quot;&gt;\r\n&lt;center&gt;&lt;h1&gt;413 Request Entity Too Large&lt;/h1&gt;&lt;/center&gt;\r\n&lt;hr&gt;&lt;center&gt;nginx/1.9.14&lt;/center&gt;\r\n&lt;/body&gt;\r\n&lt;/html&gt;\r\n&quot;  The &ldquo;413 Request Entity Too Large&rdquo; error is something many accustomed to running nginx as a standard web server/proxy. nginx is configured to restrict the size of files it will allow over a post." />
+<meta name="twitter:title" content="Kubernetes - 413 Request Entity Too Large" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://mk2.imti.co/img/post/tooth_876_438.jpg" />
+<meta property="og:image" content="https://mk2.imti.co/img/post/tooth_876_438.jpg" />
+
+
+
+    
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Article",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://mk2.imti.co/413-request-entity-too-large/"
+  },
+  "headline": "Kubernetes - 413 Request Entity Too Large",
+  "image": [
+    "https://mk2.imti.co/img/post/tooth_876_438.jpg"
+   ],
+  "datePublished": "2018-03-24T00:00:00",
+  "dateModified": "2018-03-24T00:00:00",
+  "author": {
+    "@type": "Person",
+    "name": "Craig Johnston"
+  },
+   "publisher": {
+    "@type": "Organization",
+    "name": 'imti.co",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://mk2.imti.co/img/craig_johnston_cjimti.jpg"
+    }
+  },
+  "description": "When setting up nginx ingress on Kubernetes for a private Docker Registry, I ran into an error when trying to push an image to it.
+Error parsing HTTP response: invalid character '&lt;' looking for beginning of value: &quot;&lt;html&gt;\r\n&lt;head&gt;&lt;title&gt;413 Request Entity Too Large&lt;/title&gt;&lt;/head&gt;\r\n&lt;body bgcolor=\&quot;white\&quot;&gt;\r\n&lt;center&gt;&lt;h1&gt;413 Request Entity Too Large&lt;/h1&gt;&lt;/center&gt;\r\n&lt;hr&gt;&lt;center&gt;nginx/1.9.14&lt;/center&gt;\r\n&lt;/body&gt;\r\n&lt;/html&gt;\r\n&quot;  The &ldquo;413 Request Entity Too Large&rdquo; error is something many accustomed to running nginx as a standard web server/proxy. nginx is configured to restrict the size of files it will allow over a post."
+}
+</script>
+
+</head></head>
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="https://mk2.imti.co/">IMTI</a>
+        </div>
+
+        
+        
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="https://mk2.imti.co/">Home</a>
+                    </li>
+                    
+
+                    
+                </ul>
+            </div>
+        </div>
+        
+    </div>
+    
+</nav>
+<script>
+    
+    
+    
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        
+            $navbar.className = " ";
+            
+            setTimeout(function(){
+                
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+
+
+<style type="text/css">
+    header.intro-header{
+        background-image: url('https://mk2.imti.co/img/post/tooth.jpg')
+    }
+</style>
+<header class="intro-header" >
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/kubernetes" title="Kubernetes">
+                        Kubernetes
+                        </a>
+                        
+                        <a class="tag" href="/tags/ingress" title="ingress">
+                        ingress
+                        </a>
+                        
+                        <a class="tag" href="/tags/nginx" title="nginx">
+                        nginx
+                        </a>
+                        
+                    </div>
+                    <h1>Kubernetes - 413 Request Entity Too Large</h1>
+                    <h2 class="subheading">Configuring the NGINX Ingress Controller</h2>
+                    <span  class="meta">Posted by Craig Johnston on Saturday, March 24, 2018
+                        
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+<article>
+    <div class="container">
+        <div class="row">
+
+            
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                
+
+<p>When setting up <a href="https://github.com/kubernetes/ingress-nginx">nginx ingress</a> on <a href="https://kubernetes.io/">Kubernetes</a> for a private <a href="https://hub.docker.com/_/registry/">Docker Registry</a>, I ran into an error when trying to push an image to it.</p>
+
+<pre><code>Error parsing HTTP response: invalid character '&lt;' looking for beginning of value: &quot;&lt;html&gt;\r\n&lt;head&gt;&lt;title&gt;413 Request Entity Too Large&lt;/title&gt;&lt;/head&gt;\r\n&lt;body bgcolor=\&quot;white\&quot;&gt;\r\n&lt;center&gt;&lt;h1&gt;413 Request Entity Too Large&lt;/h1&gt;&lt;/center&gt;\r\n&lt;hr&gt;&lt;center&gt;nginx/1.9.14&lt;/center&gt;\r\n&lt;/body&gt;\r\n&lt;/html&gt;\r\n&quot;
+</code></pre>
+
+<p>The &ldquo;413 Request Entity Too Large&rdquo; error is something many accustomed to running <a href="https://www.nginx.com/">nginx</a> as a standard web server/proxy. <a href="https://www.nginx.com/">nginx</a> is configured to restrict the size of files it will allow over a post. This restriction helps avoid some DoS attacks. The default values are easy to adjust in the Nginx configuration. However, in the <a href="https://kubernetes.io/">Kubernetes</a> world things are a bit different. I prefer to do things the <a href="https://kubernetes.io/">Kubernetes</a> way; however, there is still a lack of established configuration idioms, since part of its appeal is flexibility. One thousand different ways of doing something means ten thousand variations of remedies to every potential problem. Googling errors in the <a href="https://kubernetes.io/">Kubernetes</a> world leads to a mess of solutions not always explicitly tied to an implementation. I am hoping that as <a href="https://kubernetes.io/">Kubernetes</a> continues to gain popularity more care will be taken to provide context for solutions to common problems.</p>
+
+<h3 id="context">Context</h3>
+
+<p>I now use the official <a href="https://github.com/kubernetes/ingress-nginx">NGINX Ingress Controller</a>, there are quite a few options out there, so this solution only applies to the official <a href="https://github.com/kubernetes/ingress-nginx">NGINX Ingress Controller</a>. If you don&rsquo;t already have it, you can follow the easy <a href="https://github.com/kubernetes/ingress-nginx/tree/master/deploy">ingress controller deployment</a> instructions.</p>
+
+<p>I found this solution in the <a href="https://github.com/kubernetes/ingress-nginx/tree/master/docs/examples">Ingress examples</a> folder in the <a href="https://github.com/kubernetes/ingress-nginx">Github repository</a>. I probably should have started there on my journey to set up a private <a href="https://hub.docker.com/_/registry/">Docker registry</a> on my <a href="https://kubernetes.io/">Kubernetes</a> cluster.</p>
+
+<script src="https://gist.github.com/cjimti/4cd7fdb93787fa5aca84b4d386b757aa.js"></script>
+
+<p>Using <strong>annotations</strong> you can customize various configuration settings. In the case of nginx upload limits, use the annotation below:</p>
+
+<pre><code> nginx.ingress.kubernetes.io/proxy-body-size: &quot;0&quot;
+</code></pre>
+
+<p>The annotation (see its context in the gist: <a href="https://gist.github.com/cjimti/4cd7fdb93787fa5aca84b4d386b757aa">Registry Ingress Example</a> above) removes any restriction on upload size. Of course, you can set this to a size appropriate to your situation.</p>
+
+<h3 id="still-not-working">Still Not Working?</h3>
+
+<p>Maybe you installed the <a href="https://github.com/kubernetes/ingress-nginx">NGINX Ingress Controller</a> wrong as I did. I was rushing to get a project done at 3 am, cutting and pasting commands like a wild monkey. I installed the non-RBAC based configuration; however, my cluster uses RBAC. To make things worse, everything else was working fine for some reason (at least it seemed to) until this configuration issue came up and the annotations were not working. Double check your <a href="https://github.com/kubernetes/ingress-nginx/tree/master/deploy">install steps</a>.</p>
+
+<h3 id="not-the-ingress-controller-you-are-using">Not the Ingress Controller you are using?</h3>
+
+<p>Here are some solutions for alternative implementations:</p>
+
+<ul>
+<li><a href="https://github.com/nginxinc/kubernetes-ingress/issues/21">413 Request Entity Too Large</a> NGINX Ingress Controller <strong>by nginx</strong></li>
+<li><a href="http://blog.pragtechnologies.com/file-upload-limit-in-kubernetes/">File upload limit in Kubernetes &amp; Nginx</a></li>
+</ul>
+
+
+                
+<div id="disqus-comment"></div>
+
+
+
+            </div>
+            
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                
+                <section>
+                    <hr class="hidden-sm hidden-xs">
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/docker" title="Docker">
+                        Docker
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/kubernetes" title="Kubernetes">
+                        Kubernetes
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                    </div>
+                </section>
+
+                
+                <hr>
+                <h5>RELATED</h5>
+                <ul class="list-inline">
+                    
+                </ul>
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                   
+                   <li>
+                       <a href="" rel="alternate" type="application/rss+xml" title="IMTI" >
+                           <span class="fa-stack fa-lg">
+                               <i class="fa fa-circle fa-stack-2x"></i>
+                               <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+                           </span>
+                       </a>
+                   </li>
+                   
+                    
+                    <li>
+                        <a href="mailto:cjimti@gmail.com">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                    
+                    
+                    <li>
+                        <a href="https://twitter.com/cjimti">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    
+
+                    
+
+		    
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/cjimti">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                    
+                    <li>
+                        <a target="_blank" href="https://www.linkedin.com/in/cjimti/">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                </ul>
+		<p class="copyright text-muted">
+            Copyright &copy; <a href="">Craig Johnston</a> , 2018
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+
+
+
+
+<script>
+    
+    if($('#tag_cloud').length !== 0){
+        async("/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+
+
+    
+        
+        
+    
+
+
+
+
+
+</body>
+</html>

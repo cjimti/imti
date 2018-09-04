@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head><head>
+    <meta name="google-site-verification" content="" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <meta name="description" content="I lead a talented team of software development and creative engineers, covering many industries looking to collect, analyze, move, buffer, queue, process and present data in significant ways. My expertise and that of my team revolve around microservices, artificial intelligence, algorithms, machine learning and blockchain technologies.">
+    
+    <meta name="keyword"  content="Go, Kubernetes, Elasticsearch, Python, Docker, Big Data, Artificial Intelligence, Machine Learning, Blockchain">
+    <link rel="shortcut icon" href="https://mk2.imti.co/img/favicon.ico">
+
+    <title>Microservices &amp; Kubernetes-IMTI | Craig Johnston</title>
+
+    <link rel="canonical" href="https://mk2.imti.co/microservices/">
+
+    <link rel="stylesheet" href="https://mk2.imti.co/css/iDisqus.min.css"/>
+	
+    
+    <link rel="stylesheet" href="https://mk2.imti.co/css/bootstrap.min.css">
+
+    
+    <link rel="stylesheet" href="https://mk2.imti.co/css/hux-blog.min.css">
+
+    
+    <link rel="stylesheet" href="https://mk2.imti.co/css/syntax.css">
+
+    
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    
+    
+    <link rel="stylesheet" href="/css/imti.css">
+
+    
+    <script src="https://mk2.imti.co/js/jquery.min.js"></script>
+    
+    
+    <script src="https://mk2.imti.co/js/bootstrap.min.js"></script>
+    
+    
+    <script src="https://mk2.imti.co/js/hux-blog.min.js"></script>
+
+    <meta name="twitter:site" content="@cjimti">
+<meta name="twitter:creator" content="@cjimti">
+
+<meta name="twitter:description" content="The following is a collection of articles, videos, and notes on Microservices. The Microservices architecture is a variant of the service-oriented architecture, a collection of loosely coupled services.
+Articles  Background concept - &ldquo;Open Data: Small Pieces Loosely Joined&rdquo;, Tim O’Reilly Modern software design problems and solutions - &ldquo;12-Fractured Apps&rdquo;, Kelsey Hightower (SysAdmin @ Google) 12-Factor Defined - &ldquo;The 12-Factor App&rdquo;, Adam Wiggins Pros and Cons of Microservices - &ldquo;Microservices&rdquo; and Microservice Trade-Offs, Martin Fowler &ldquo;What are containers and why do you need them?" />
+<meta name="twitter:title" content="Microservices &amp; Kubernetes" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://mk2.imti.co/img/post/cars_876_438.jpg" />
+<meta property="og:image" content="https://mk2.imti.co/img/post/cars_876_438.jpg" />
+
+
+
+    
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Article",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://mk2.imti.co/microservices/"
+  },
+  "headline": "Microservices &amp; Kubernetes",
+  "image": [
+    "https://mk2.imti.co/img/post/cars_876_438.jpg"
+   ],
+  "datePublished": "2018-03-24T00:00:00",
+  "dateModified": "2018-03-24T00:00:00",
+  "author": {
+    "@type": "Person",
+    "name": "Craig Johnston"
+  },
+   "publisher": {
+    "@type": "Organization",
+    "name": 'imti.co",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://mk2.imti.co/img/craig_johnston_cjimti.jpg"
+    }
+  },
+  "description": "The following is a collection of articles, videos, and notes on Microservices. The Microservices architecture is a variant of the service-oriented architecture, a collection of loosely coupled services.
+Articles  Background concept - &ldquo;Open Data: Small Pieces Loosely Joined&rdquo;, Tim O’Reilly Modern software design problems and solutions - &ldquo;12-Fractured Apps&rdquo;, Kelsey Hightower (SysAdmin @ Google) 12-Factor Defined - &ldquo;The 12-Factor App&rdquo;, Adam Wiggins Pros and Cons of Microservices - &ldquo;Microservices&rdquo; and Microservice Trade-Offs, Martin Fowler &ldquo;What are containers and why do you need them?"
+}
+</script>
+
+</head></head>
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="https://mk2.imti.co/">IMTI</a>
+        </div>
+
+        
+        
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="https://mk2.imti.co/">Home</a>
+                    </li>
+                    
+
+                    
+                </ul>
+            </div>
+        </div>
+        
+    </div>
+    
+</nav>
+<script>
+    
+    
+    
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        
+            $navbar.className = " ";
+            
+            setTimeout(function(){
+                
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+
+
+<style type="text/css">
+    header.intro-header{
+        background-image: url('https://mk2.imti.co/img/post/cars.jpg')
+    }
+</style>
+<header class="intro-header" >
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/kubernetes" title="Kubernetes">
+                        Kubernetes
+                        </a>
+                        
+                        <a class="tag" href="/tags/microservices" title="Microservices">
+                        Microservices
+                        </a>
+                        
+                    </div>
+                    <h1>Microservices &amp; Kubernetes</h1>
+                    <h2 class="subheading">Overview</h2>
+                    <span  class="meta">Posted by Craig Johnston on Saturday, March 24, 2018
+                        
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+<article>
+    <div class="container">
+        <div class="row">
+
+            
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                
+
+<p>The following is a collection of articles, videos, and notes on <a href="https://en.wikipedia.org/wiki/Microservices">Microservices</a>. The <a href="https://en.wikipedia.org/wiki/Microservices">Microservices</a> architecture is a variant of the <a href="SOA">service-oriented architecture</a>, a collection of loosely coupled services.</p>
+
+<h2 id="articles">Articles</h2>
+
+<ul>
+<li>Background concept - <a href="http://radar.oreilly.com/2006/09/open-data-small-pieces-loosely.html">&ldquo;Open Data: Small Pieces Loosely Joined&rdquo;</a>, Tim O’Reilly</li>
+<li>Modern software design problems and solutions - <a href="https://medium.com/@kelseyhightower/12-fractured-apps-1080c73d481c">&ldquo;12-Fractured Apps&rdquo;</a>, Kelsey Hightower (SysAdmin @ Google)</li>
+<li>12-Factor Defined - <a href="https://12factor.net/">&ldquo;The 12-Factor App&rdquo;</a>, Adam Wiggins</li>
+<li>Pros and Cons of Microservices - <a href="https://martinfowler.com/articles/microservices.html">&ldquo;Microservices&rdquo;</a> and <a href="https://martinfowler.com/articles/microservice-trade-offs.html">Microservice Trade-Offs</a>, Martin Fowler</li>
+<li><a href="https://www.cio.com/article/2924995/software/what-are-containers-and-why-do-you-need-them.html">&ldquo;What are containers and why do you need them?&rdquo;</a> - CIO</li>
+<li><a href="http://www.itworld.com/article/2698646/virtualization/containers-bring-a-skinny-new-world-of-virtualization-to-linux.html">&ldquo;Containers bring a skinny new world of virtualization to Linux&rdquo;</a> - ITWorld</li>
+</ul>
+
+<h2 id="videos">Videos</h2>
+
+<ul>
+<li><a href="https://www.youtube.com/watch?v=wgdBVIX9ifA">&ldquo;Microservices&rdquo;</a>, Martin Fowler</li>
+<li><a href="http://www.ustream.tv/recorded/86151804">&ldquo;The Evolution of Microservices&rdquo;</a>, Martin Fowler</li>
+<li><a href="https://www.youtube.com/watch?v=pwpxq9-uw_0">&ldquo;The State of the Art in Microservices&rdquo;</a> with Docker, Adrian Cockroft</li>
+</ul>
+
+<h2 id="notes">Notes</h2>
+
+<h4 id="key-goals-of-microservices">Key Goals of Microservices</h4>
+
+<ul>
+<li>Rapid development</li>
+<li>Continuous deployment</li>
+</ul>
+
+<h4 id="best-practices">Best Practices</h4>
+
+<ul>
+<li><a href="https://12factor.net/codebase">Version Control</a> - All code and <strong>configuration</strong> should be versioned.</li>
+<li><a href="https://12factor.net/logs">Log to Standard Out</a> - This unifies the log collection process.</li>
+<li><a href="https://12factor.net/dependencies">Package Dependencies</a> - Ensure the stability of the build process.</li>
+</ul>
+
+<h4 id="twelve-factor-principles">Twelve-Factor Principles</h4>
+
+<ul>
+<li>Portable - Service (container) should be able to be run anywhere.</li>
+<li>Continually Deployable - Able to deploy any time without disruption.</li>
+<li>Scalable - Multiple copies should be able to run concurrently (stateless)</li>
+</ul>
+
+<h4 id="json-web-tokens-jwt-client-server-trust">JSON Web Tokens (JWT) - Client -&gt; Server trust.</h4>
+
+<ul>
+<li>Compact, self-contained method for transferring secure data as a JSON object.</li>
+<li>Use for Authentication and Information Exchange</li>
+<li>See <a href="https://jwt.io/">https://jwt.io/</a></li>
+<li>A server creates a token, and the client uses token to make requests.</li>
+</ul>
+
+<h4 id="containers-docker">Containers - Docker</h4>
+
+<ul>
+<li>Docker is simply an API on top of existing process isolation technology.</li>
+<li>Independent packages</li>
+<li>Namespace Isolation</li>
+</ul>
+
+<h4 id="alpine-linux">Alpine Linux</h4>
+
+<p><a href="https://alpinelinux.org/">Alpine Linux</a> <strong>Small. Simple. Secure.</strong> Alpine Linux is a security-oriented, lightweight Linux distribution based on musl libc and busybox.
+- <a href="https://hub.docker.com/_/alpine/">Alpine container image</a>
+- <a href="http://siliconangle.com/blog/2016/02/09/docker-gets-minimalist-with-plan-to-migrate-images-to-alpine-linux/">Docker gets minimalist with plan to migrate images to Alpine Linux</a>
+- <a href="https://news.ycombinator.com/item?id=11000827">Solomon Hykes, founder and CTO of Docker (on the move to Alpine)</a></p>
+
+<p>We can demonstrate using an Alpine Linux container by executing the <code>echo</code> command included with Alpine: <code>docker run --rm alpine echo &quot;hello&quot;</code>. This command pulls the Alpine container if you don&rsquo;t already have it. Since the <code>echo</code> command completes after echoing its message, there is nothing else to do and the container ceases execution and remains in a stopped state. However, the <code>--rm</code> flag removes the container after it runs, this means you won&rsquo;t end up with a bunch of useless stopped containers after running it multiple times.</p>
+
+<h2 id="kubernetes">Kubernetes</h2>
+
+<p>I use <a href="https://kubernetes.io/docs/getting-started-guides/minikube/">Minikube</a> to play with and test helm on my mac laptop. <a href="https://kubernetes.io/docs/getting-started-guides/minikube/">Minikube</a> is a great way to learn and experiment with <a href="https://kubernetes.io/">Kubernetes</a> without disrupting a production cluster, or having to setup a custom cluster in your datacenter or in the cloud.</p>
+
+<h3 id="minikube">Minikube</h3>
+
+<p>In order to follow the examples below you will need to <a href="https://kubernetes.io/docs/tasks/tools/install-minikube/">Install Minikube</a> and it&rsquo;s dependencies. The command <a href="https://kubernetes.io/docs/reference/kubectl/cheatsheet/">kubectl</a> is used to interact with the <a href="https://kubernetes.io/">kubernetes</a> cluster.</p>
+
+<ul>
+<li>Version: <code>minikube version</code></li>
+</ul>
+
+<pre><code>minikube version: v0.25.2
+</code></pre>
+
+<ul>
+<li>Status: <code>minikube status</code></li>
+</ul>
+
+<pre><code>minikube: Stopped
+cluster:
+kubectl:
+</code></pre>
+
+<ul>
+<li>Start: <code>minikube start</code></li>
+</ul>
+
+<pre><code class="language-bash">Starting local Kubernetes v1.9.4 cluster...
+Starting VM...
+Getting VM IP address...
+Moving files into cluster...
+Downloading localkube binary
+ 163.02 MB / 163.02 MB [============================================] 100.00% 0s
+ 0 B / 65 B [----------------------------------------------------------]   0.00%
+ 65 B / 65 B [======================================================] 100.00% 0sSetting up certs...
+Connecting to cluster...
+Setting up kubeconfig...
+Starting cluster components...
+Kubectl is now configured to use the cluster.
+Loading cached images from config file.
+</code></pre>
+
+<ul>
+<li>Addons: <code>minikube addons list</code></li>
+<li>Enable Heapster: <code>minikube addons enable heapster</code> to provide CPU and memory usage in the dashboard.</li>
+</ul>
+
+<pre><code class="language-plain">heapster was successfully enabled
+</code></pre>
+
+<ul>
+<li>Dashboard: <code>minikube dashboard</code></li>
+<li>Kubernetes cluster status: <code>kubectl cluster-info</code></li>
+<li>Kubernetes nodes in the cluster: <code>kubectl get nodes</code></li>
+</ul>
+
+<h3 id="kubernetes-using-kubernetes">Kubernetes: Using Kubernetes</h3>
+
+<p>Deployments keep containers running in Pods, even when nodes fail. Create a simple deployment, in this case using the cjimti/go-ok container:</p>
+
+<pre><code class="language-bash">kubectl run go-ok --image=cjimti/go-ok
+</code></pre>
+
+<p>The <code>kubectl run</code> command gave us a <strong>Deployment</strong>, <strong>Pod</strong> and <strong>Replica Set</strong> to support our go-ok container.</p>
+
+<p>In the <a href="https://kubernetes.io/docs/tasks/access-application-cluster/web-ui-dashboard/">Dashboard</a> you can see the running deployment, pod and replica set. Run <code>minikube dashboard</code> to bring it up in a web browser.</p>
+
+<p><img src="/images/k8s-dashboard.jpg" alt="k8s dashboard go-ok" /></p>
+
+<h4 id="deployments"><a href="https://kubernetes.io/docs/concepts/workloads/controllers/deployment/">Deployments</a></h4>
+
+<p>List the <a href="https://kubernetes.io/docs/concepts/workloads/controllers/deployment/">deployments</a> in the cluster (default namespace):</p>
+
+<pre><code>kubectl get deployments
+</code></pre>
+
+<pre><code class="language-plain">NAME      DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
+go-ok     1         1         1            1           2m
+</code></pre>
+
+<p>Get the yaml configuration of the deployment</p>
+
+<pre><code class="language-bash">kubectl get deployment -o yaml
+</code></pre>
+
+<script src="https://gist.github.com/cjimti/ee9de951e0efececa14432a3b82d8315.js"></script>
+
+<h4 id="pods"><a href="https://kubernetes.io/docs/concepts/workloads/pods/pod/">Pods</a></h4>
+
+<p>List all pods on the cluster (default namespace):</p>
+
+<pre><code class="language-bash">kubectl get pods
+</code></pre>
+
+<pre><code class="language-plain">NAME                     READY     STATUS    RESTARTS   AGE
+go-ok-5bc6b8bf6c-sltjk   1/1       Running   0          12m
+</code></pre>
+
+<p>Get the yaml configuration of the Pod:</p>
+
+<pre><code class="language-bash">kubectl get pod go-ok-5bc6b8bf6c-sltjk -o yaml
+</code></pre>
+
+<script src="https://gist.github.com/cjimti/530022b6b9cd57db86dff67419f13044.js"></script>
+
+<h4 id="replica-sets"><a href="https://kubernetes.io/docs/concepts/workloads/controllers/replicaset/">Replica Sets</a></h4>
+
+<blockquote>
+<p>While <a href="https://kubernetes.io/docs/concepts/workloads/controllers/replicaset/">ReplicaSets</a> can be used independently, today it’s mainly used by <a href="https://kubernetes.io/docs/concepts/workloads/controllers/deployment/">Deployments</a> as a mechanism to orchestrate pod creation, deletion and updates. When you use <a href="https://kubernetes.io/docs/concepts/workloads/controllers/deployment/">Deployments</a> you don’t have to worry about managing the <a href="https://kubernetes.io/docs/concepts/workloads/controllers/replicaset/">ReplicaSets</a> that they create. Deployments own and manage their <a href="https://kubernetes.io/docs/concepts/workloads/controllers/replicaset/">ReplicaSets</a>.</p>
+</blockquote>
+
+<p>List all <a href="https://kubernetes.io/docs/concepts/workloads/controllers/replicaset/">Replica Sets</a> in the cluster (default namespace):</p>
+
+<pre><code class="language-bash">kubectl get rs
+</code></pre>
+
+<pre><code class="language-plain">NAME               DESIRED   CURRENT   READY     AGE
+go-ok-5bc6b8bf6c   1         1         1         20m
+</code></pre>
+
+<p>Get the yaml configuration of the Replica Set:</p>
+
+<pre><code>kubectl get rs go-ok-5bc6b8bf6c -o yaml
+</code></pre>
+
+<script src="https://gist.github.com/cjimti/97e22b3b779764e8f199d22f565f6a17.js"></script>
+
+<h4 id="expose-a-container-services">Expose A Container <a href="https://kubernetes.io/docs/concepts/services-networking/service/">Services</a></h4>
+
+<p>We expose the container with the following:</p>
+
+<pre><code class="language-bash">kubectl expose deployments go-ok --port 8080 --type NodePort
+</code></pre>
+
+<pre><code class="language-plain">kubectl get services
+</code></pre>
+
+<p>Use the type NodePort with Minikube. Since we are not on a cloud provider and so unable to use the LoadBalancer type.</p>
+
+<blockquote>
+<p>If you set the type field to &ldquo;NodePort&rdquo;, the Kubernetes master will allocate a port from a flag-configured range (default: 30000-32767), and each Node will proxy that port (the same port number on every  Node) into your Service.</p>
+</blockquote>
+
+<p>The <code>go-ok</code> container listens on it&rsquo;s own port 8080. We ask kubernetes to assign a random port number that will route to a running <code>go-ok</code> container to it&rsquo;s port 8080.</p>
+
+<p>List all the services on the cluster (default namespace):</p>
+
+<pre><code class="language-bash">kubectl get services
+</code></pre>
+
+<pre><code class="language-plain">NAME         TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)          AGE
+go-ok        NodePort    10.110.158.111   &lt;none&gt;        8080:32414/TCP   3m
+kubernetes   ClusterIP   10.96.0.1        &lt;none&gt;        443/TCP          24d
+</code></pre>
+
+<p>The go-ok services is now running on port 32414 as is seen in the PORT(S) column: <code>8080:32414/TCP</code></p>
+
+<p>Get the yaml configuration of the service:</p>
+
+<pre><code class="language-bash">kubectl get service go-ok -o yaml
+</code></pre>
+
+<script src="https://gist.github.com/cjimti/bfb8cc086f9ff122910f1a9411d0be3f.js"></script>
+
+<p>The service is now viewable in the <a href="https://kubernetes.io/docs/tasks/access-application-cluster/web-ui-dashboard/">Dashboard</a>:
+<img src="/images/k8s-kubernetes-dashboard-services.jpg" alt="k8s services dashboard go-ok" /></p>
+
+<h4 id="architecture-overview-deployments">Architecture Overview: Deployments</h4>
+
+<p><a href="https://kubernetes.io/docs/concepts/workloads/controllers/deployment/">Deployments</a> contain <a href="https://kubernetes.io/docs/concepts/workloads/controllers/replicaset/">ReplicaSets</a> which contain <a href="https://kubernetes.io/docs/concepts/workloads/pods/pod/">Pods</a> and <a href="https://kubernetes.io/docs/concepts/services-networking/service/">Services</a>. A good visual illustration of this is in the <a href="https://kubernetes.io/docs/tasks/access-application-cluster/web-ui-dashboard/">Dashboard</a>:</p>
+
+<p><strong>Deployment Details</strong>
+<img src="/images/k8s-deploument-details.jpg" alt="k8s dashboard deployment details" /></p>
+
+<p><strong>Replica Set Details</strong>
+<img src="images/k8s-dashboard-replicaset-details.jpg" alt="k8s dashboard replica set details" /></p>
+
+<h2 id="more-on-pods">More on <a href="https://kubernetes.io/docs/concepts/workloads/pods/pod/">Pods</a></h2>
+
+<p>A <a href="https://kubernetes.io/docs/concepts/workloads/pods/pod/">Pod</a> represent a Logical Application. An example application would be some API service or backend webserver and an nginx container, these would run together on a <a href="https://kubernetes.io/docs/concepts/workloads/pods/pod/">Pod</a>.</p>
+
+<p>Pods:
+- One ore more containers and volumes
+- Shared namespaces
+- One IP per pod</p>
+
+<p>Manually port forward to a container (on the local network interface):
+<code>kubectl port-forward go-ok-5bc6b8bf6c-sltjk 10080:8080</code></p>
+
+<h2 id="secrets-config-maps"><a href="http://kubernetes.io/docs/user-guide/secrets/">Secrets</a> &amp; <a href="http://kubernetes.io/docs/user-guide/configmap/">Config Maps</a></h2>
+
+<p>Creating a <a href="http://kubernetes.io/docs/user-guide/secrets/">Secret</a>.</p>
+
+<pre><code class="language-bash">kubectl create secret generic tls-certs --from-file=tls
+</code></pre>
+
+<pre><code class="language-bash">kubectl describe secrets tls-certs
+</code></pre>
+
+<p>Creating a <a href="https://kubernetes.io/docs/tasks/configure-pod-container/configure-pod-configmap/">Config Map</a>.</p>
+
+<pre><code class="language-bash">kubctl create configmap nginx-proxy-conf --from-file nginx/proxy.conf
+</code></pre>
+
+<pre><code class="language-bash">kubectp describe configmap nginx-proxy-conf
+</code></pre>
+
+<h2 id="declare-a-pod">Declare a <a href="https://kubernetes.io/docs/concepts/workloads/pods/pod/">Pod</a></h2>
+
+<p>Create a <code>pod.yml</code>:</p>
+
+<pre><code class="language-yaml">apiVersion: v1
+kind: Pod
+metadata:
+  name: go-ok
+  labels:
+    app: go-ok-app
+    purpose: example
+spec:
+  containers:
+    - name: go-ok
+      image: cjimti/go-ok:v1
+      imagePullPolicy: Always
+      env:
+        - name: PORT
+          value: &quot;80&quot;
+        - name: GIN_MODE
+          value: &quot;release&quot;
+      ports:
+        - name: http
+          containerPort: 80
+</code></pre>
+
+<p>Create the <a href="https://kubernetes.io/docs/concepts/workloads/pods/pod/">Pod</a>:</p>
+
+<pre><code class="language-bash">kubectl create -f ./pod.yml
+</code></pre>
+
+<p>Get a list of <a href="https://kubernetes.io/docs/concepts/workloads/pods/pod/">Pods</a> using a label selectors:</p>
+
+<pre><code class="language-bash">kubectl get pods -l app=go-ok-app
+</code></pre>
+
+<p>or</p>
+
+<pre><code class="language-bash">kubectl get pods -l app=go-ok-app,purpose=example
+</code></pre>
+
+<p>``plain
+NAME      READY     STATUS    RESTARTS   AGE
+go-ok     <sup>1</sup>&frasl;<sub>1</sub>       Running   0          3m</p>
+
+<pre><code>
+Add a label to a running [Pod]:
+```bash
+kubectl label pods go-ok owner=cjimti
+</code></pre>
+
+<p>Delete the pod created from <code>pod.yaml</code> as easily as creating it with:</p>
+
+<pre><code class="language-bash">kubectl delete -f pod.yml
+</code></pre>
+
+<p>Re-create the <a href="https://kubernetes.io/docs/concepts/workloads/pods/pod/">Pod</a> if you are following along.</p>
+
+<h2 id="services"><a href="https://kubernetes.io/docs/concepts/services-networking/service/">Services</a></h2>
+
+<p><a href="https://kubernetes.io/docs/concepts/services-networking/service/">Services</a> are persisten endpoints for <a href="https://kubernetes.io/docs/concepts/workloads/pods/pod/">Pods</a>.
+- Use <a href="https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/#label-selectors">Labels</a> to select <a href="https://kubernetes.io/docs/concepts/workloads/pods/pod/">Pods</a>
+- Internal or External IPs</p>
+
+<p>Create a <a href="https://kubernetes.io/docs/concepts/services-networking/service/">Service</a> using a <a href="https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/#label-selectors">Selector</a>:</p>
+
+<p><code>service.yml</code>:</p>
+
+<pre><code class="language-yaml">apiVersion: v1
+kind: Service
+metadata:
+  name: &quot;go-ok&quot;
+spec:
+  selector:
+    app: &quot;go-ok&quot;
+    purpose: &quot;example&quot;
+  ports:
+    - protocol: &quot;TCP&quot;
+      port: 80
+      targetPort: 80
+      nodePort: 31000 //port exposed on the node (cluster)
+  type: NodePort
+</code></pre>
+
+<p>List the service created with the config:</p>
+
+<pre><code class="language-bash">kubectl get -f service.yml
+</code></pre>
+
+<h2 id="ingress-controller"><a href="https://kubernetes.io/docs/concepts/services-networking/ingress/">Ingress</a> Controller</h2>
+
+<p>Exposing external traffic to our service is done through an <a href="https://kubernetes.io/docs/concepts/services-networking/ingress/">Ingress</a> controller. Check out <a href="https://hackernoon.com/setting-up-nginx-ingress-on-kubernetes-2b733d8d2f45">Setting up Nginx Ingress on Kubernetes</a> for a detailed how-to and also a good write up on <a href="https://kubernetes.io/docs/concepts/services-networking/ingress/">Ingress</a> itself on Medium: <a href="https://medium.com/@cashisclay/kubernetes-ingress-82aa960f658e">Kubernetes Ingress</a></p>
+
+<blockquote>
+<p>Traditionally, you would create a LoadBalancer service for each public system you want to expose. This can get rather expensive. Ingress gives you a way to route requests to services based on the request host or path, centralizing a number of services into a single entrypoint. &ndash;<a href="https://medium.com/@cashisclay/kubernetes-ingress-82aa960f658e">Kubernetes Ingress</a></p>
+</blockquote>
+
+<p>Since I am using <a href="https://kubernetes.io/docs/getting-started-guides/minikube/">Minikube</a> on my local workstation I am going to add the domain <code>local.imti.cloud</code> to my <code>/etc/hosts</code> file and resolve it to the Minikube IP.</p>
+
+<p>Get the Minikube IP:</p>
+
+<pre><code class="language-bash">minikube status
+</code></pre>
+
+<pre><code class="language-plain">minikube: Running
+cluster: Running
+kubectl: Correctly Configured: pointing to minikube-vm at 192.168.99.100
+</code></pre>
+
+<p>My <code>/etc/hosts' entry should be</code>192.168.99.100  local.imti.cloud`. Browsing to <a href="http://local.imti.cloud:30000/">http://local.imti.cloud:30000/</a> will now give me the <a href="https://kubernetes.io/docs/tasks/access-application-cluster/web-ui-dashboard/">dashboard</a> for my <a href="https://kubernetes.io/docs/getting-started-guides/minikube/">Minikube</a> cluster.</p>
+
+<h3 id="ingress-resources">Ingress Resources</h3>
+
+<ul>
+<li>Official <a href="https://medium.com/@cashisclay/kubernetes-ingress-82aa960f658e">Kubernetes Ingress</a> Documentation</li>
+<li><a href="https://hackernoon.com/setting-up-nginx-ingress-on-kubernetes-2b733d8d2f45">Setting up Nginx Ingress on Kubernetes</a></li>
+<li><a href="http://danielfm.me/posts/painless-nginx-ingress.html">Pain(less) NGINX Ingress</a></li>
+<li><a href="https://daemonza.github.io/2017/02/13/kubernetes-nginx-ingress-controller/">Kubernetes nginx-ingress-controller</a></li>
+</ul>
+
+<hr />
+
+
+                
+<div id="disqus-comment"></div>
+
+
+
+            </div>
+            
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                
+                <section>
+                    <hr class="hidden-sm hidden-xs">
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/docker" title="Docker">
+                        Docker
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/kubernetes" title="Kubernetes">
+                        Kubernetes
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                    </div>
+                </section>
+
+                
+                <hr>
+                <h5>RELATED</h5>
+                <ul class="list-inline">
+                    
+                </ul>
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                   
+                   <li>
+                       <a href="" rel="alternate" type="application/rss+xml" title="IMTI" >
+                           <span class="fa-stack fa-lg">
+                               <i class="fa fa-circle fa-stack-2x"></i>
+                               <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+                           </span>
+                       </a>
+                   </li>
+                   
+                    
+                    <li>
+                        <a href="mailto:cjimti@gmail.com">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                    
+                    
+                    <li>
+                        <a href="https://twitter.com/cjimti">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    
+
+                    
+
+		    
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/cjimti">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                    
+                    <li>
+                        <a target="_blank" href="https://www.linkedin.com/in/cjimti/">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                </ul>
+		<p class="copyright text-muted">
+            Copyright &copy; <a href="">Craig Johnston</a> , 2018
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+
+
+
+
+<script>
+    
+    if($('#tag_cloud').length !== 0){
+        async("/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+
+
+    
+        
+        
+    
+
+
+
+
+
+</body>
+</html>

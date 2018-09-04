@@ -1,15 +1,23 @@
 ---
-published: true
-layout: post
-title: Using kubectl to Control a Remote Kubernetes Cluster
-tags: kubernetes kubectl minikube cli
-featured: kubernetes cli
-mast: container
+layout:     post
+title:      "Kubernetes Remote Control"
+subtitle:   "Using kubectl to Control a Remote Kubernetes Cluster"
+date:       2018-03-24
+author:     "Craig Johnston"
+URL:        "kubectl-remote/"
+image:      "/img/post/containercrain.jpg"
+twitter_image: "/img/post/containercrain_876_438.jpg"
+tags:
+- Kubernetes
+- kubectl
+series:
+- Kubernetes
+- kubectl
 ---
 
 I use [Minikube] to run a local [Kubernetes] single node cluster (cluster?). However, I also work with a custom production cluster for work. This cluster consists of development and production nodes. I often need to switch between working on my local [Minikube] and the online [Kubernetes] cluster.
 
-Due to my poor memory, I visit the [kubectl Cheat Sheet]() often.
+TIP: Visit the [kubectl Cheat Sheet] often.
 
 The default configuration `kubectl` is stored in `~/.kube/config` and
 if you have [Minikube] installed, it added the context **minikube** to your config.

@@ -1,13 +1,18 @@
 ---
-published: true
-layout: post
-title: Microservices & Kubernetes
-description: 'An overview of Microservices, best practices and resources related to them.'
-tags: kubernetes microservices docker containers 12factor
-featured: kubernetes docker
-mast: containers
+layout:     post
+title:      "Microservices & Kubernetes"
+subtitle:   "Overview"
+date:       2018-03-24
+author:     "Craig Johnston"
+URL:        "microservices/"
+image:      "/img/post/cars.jpg"
+twitter_image: "/img/post/cars_876_438.jpg"
+tags:
+- Kubernetes
+- Microservices
+series:
+- Kubernetes
 ---
-
 
 The following is a collection of articles, videos, and notes on [Microservices]. The [Microservices] architecture is a variant of the [service-oriented architecture] (SOA), a collection of loosely coupled services.
 
@@ -68,17 +73,20 @@ I use [Minikube] to play with and test helm on my mac laptop. [Minikube] is a gr
 In order to follow the examples below you will need to [Install Minikube] and it's dependencies. The command [kubectl] is used to interact with the [kubernetes] cluster.
 
 - Version: `minikube version`
+
 ```
 minikube version: v0.25.2
 ```
 - Status: `minikube status`
+
 ```
 minikube: Stopped
 cluster:
 kubectl:
 ```
 - Start: `minikube start`
-```
+
+```bash
 Starting local Kubernetes v1.9.4 cluster...
 Starting VM...
 Getting VM IP address...
@@ -95,6 +103,7 @@ Loading cached images from config file.
 ```
 - Addons: `minikube addons list`
 - Enable Heapster: `minikube addons enable heapster` to provide CPU and memory usage in the dashboard.
+
 ```plain
 heapster was successfully enabled
 ```
@@ -104,7 +113,8 @@ heapster was successfully enabled
 
 ### Kubernetes: Using Kubernetes
 
-Deployments keep containers running in Pods, even when nodes fail. Create a simple deployment, in this case using the cjimti/go-ok container: 
+Deployments keep containers running in Pods, even when nodes fail. Create a simple deployment, in this case using the cjimti/go-ok container:
+
 ```bash
 kubectl run go-ok --image=cjimti/go-ok
 ```

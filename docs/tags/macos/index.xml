@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>MacOS on IMTI</title>
+    <link>https://mk2.imti.co/tags/macos/</link>
+    <description>Recent content in MacOS on IMTI</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 01 Apr 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://mk2.imti.co/tags/macos/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Burn SD Images on MacOs</title>
+      <link>https://mk2.imti.co/mac-cli-burn-images/</link>
+      <pubDate>Sun, 01 Apr 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://mk2.imti.co/mac-cli-burn-images/</guid>
+      <description>Use your terminal to burn images fast and easy with dd. I do a lot of professional and hobby development for projects using devices such as Raspberry Pi, Orange Pi, Libre Computer, Tinker Board, etc. I run across a lot of tutorials with people downloading and using big GUI apps with clunky drag and drop interfaces to burn images.
+It&amp;rsquo;s one command in your terminal. Technically, it&amp;rsquo;s three, but I don&amp;rsquo;t count listing and unmounting as the final act of burning.</description>
+    </item>
+    
+  </channel>
+</rss>
