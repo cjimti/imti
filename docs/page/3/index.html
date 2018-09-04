@@ -146,6 +146,74 @@
             
 
 <div class="post-preview">
+    <a href="https://mk2.imti.co/helm-on-custom-cluster/">
+        <h2 class="post-title">
+            Helm on Custom Kubernetes
+        </h2>
+	
+        <h3 class="post-subtitle">
+            Kubernetes package management.
+        </h3>
+	
+        <div class="post-content-preview">
+	
+            Helm is the official package manager for Kubernetes. If you are looking to start using Helm or want to test its capabilities, I suggest you set up a Production Hobby Cluster. This article is a continuation of the Production Hobby Cluster configuration but should be entirely useful on its own.
+ From https://github.com/kubernetes/helm - Helm has two parts: a client (helm) and a server (tiller) - Tiller runs inside of your Kubernetes cluster and manages releases (installations) of your charts.
+       
+        </div>
+    </a>
+    <p class="post-meta">
+    Posted by Craig Johnston Thursday, May 17, 2018
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="https://mk2.imti.co/kubernetes-custom-dns/">
+        <h2 class="post-title">
+            Kubernetes Custom Upstream DNS
+        </h2>
+	
+        <h3 class="post-subtitle">
+            Customize upstream DNS resolution.
+        </h3>
+	
+        <div class="post-content-preview">
+	
+            Customize the Upstream Nameservers used by kube-dns by Pods when looking up external hostnames from within a Kubernetes cluster. I found that adding custom Upstream Nameservers to my kube-dns solved many issues encountered in in the past with external hostname resolution on individual Pods.
+If you want to experiment on a production-like cluster, I suggest reading my article &ldquo;Production Hobby Cluster&rdquo; for a guide on setting up a fun, cheap-yet-robust experimental cluster.
+       
+        </div>
+    </a>
+    <p class="post-meta">
+    Posted by Craig Johnston Thursday, May 17, 2018
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="https://mk2.imti.co/web-cluster-ingress/">
+        <h2 class="post-title">
+            Ingress on Custom Kubernetes
+        </h2>
+	
+        <h3 class="post-subtitle">
+            Setting up ingress-nginx on a custom cluster.
+        </h3>
+	
+        <div class="post-content-preview">
+	
+            There are more than a handful of ways to set up port 80 and 443 web ingress on a custom Kubernetes cluster. Specifically a bare metal cluster. If you are looking to experiment or learn on a non-production cluster, but something more true to production than minikube, I suggest you check out my previous article Production Hobby Cluster, a step-by-step guide for setting up a custom production capable Kubernetes cluster.
+       
+        </div>
+    </a>
+    <p class="post-meta">
+    Posted by Craig Johnston Tuesday, May 15, 2018
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
     <a href="https://mk2.imti.co/kubectl-remote-context/">
         <h2 class="post-title">
             kubectl Context Multiple Clusters
@@ -187,74 +255,6 @@ Fortunately, I keep copies of nearly all my files on cloud drives, split between
     </a>
     <p class="post-meta">
     Posted by Craig Johnston Saturday, May 12, 2018
-    </p>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="https://mk2.imti.co/kubectl-remote-x509-valid/">
-        <h2 class="post-title">
-            Kubectl x509 Unable to Connect
-        </h2>
-	
-        <h3 class="post-subtitle">
-            Kubernetes remote access and TLS certs.
-        </h3>
-	
-        <div class="post-content-preview">
-	
-            Just set up a brand new cluster? Changed the domain or IP of your admin node? Then you may have encountered the error Unable to connect to the server: x509: certificate is valid for &hellip;. The following is a fix for this common issue. However, there are often other reasons to rebuild your cluster cert, and it&rsquo;s relatively easy.
-TL;DR: &ldquo;I don&rsquo;t care about the fix I need to remote control my cluster.
-       
-        </div>
-    </a>
-    <p class="post-meta">
-    Posted by Craig Johnston Thursday, May 10, 2018
-    </p>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="https://mk2.imti.co/hobby-cluster/">
-        <h2 class="post-title">
-            Production Hobby Cluster
-        </h2>
-	
-        <h3 class="post-subtitle">
-            Production-grade cluster on a hobby budget.
-        </h3>
-	
-        <div class="post-content-preview">
-	
-            Setting up a production-grade Kubernetes cluster can be done on a hobby budget, and if this is true why mess around with a lesser grade. If you are investing time to learn distributed cloud computing or microservices, is the distance between $0 and 15 dollars a month worth the time in translating best practices? Kubernetes is designed to host production applications. My personal web applications may only be hobbies, but they might as well be production grade hobbies.
-       
-        </div>
-    </a>
-    <p class="post-meta">
-    Posted by Craig Johnston Wednesday, May 9, 2018
-    </p>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="https://mk2.imti.co/sql-select-joins-aliases/">
-        <h2 class="post-title">
-            SQL Foundations
-        </h2>
-	
-        <h3 class="post-subtitle">
-            Selects, joins and aliases.
-        </h3>
-	
-        <div class="post-content-preview">
-	
-            The following is an attempt at explaining the basics of an SQL query, and more importantly how I believe you can best think through them. All queries can be broken down into the basics of this declarative language.
-I recently helped a co-worker read through a large SQL query with a few dozen joins and left joins, alias, and recursions. He is mostly a front-end integrator and although he has been tinkering with SQL for years, he never really understood the basics.
-       
-        </div>
-    </a>
-    <p class="post-meta">
-    Posted by Craig Johnston Monday, April 2, 2018
     </p>
 </div>
 <hr>
@@ -312,6 +312,8 @@ I recently helped a co-worker read through a large SQL query with a few dozen jo
                 
             
                 
+            
+                
                     <a href="/tags/docker" title="Docker">
                         Docker
                     </a>
@@ -322,11 +324,17 @@ I recently helped a co-worker read through a large SQL query with a few dozen jo
                 
             
                 
+                    <a href="/tags/golang" title="Golang">
+                        Golang
+                    </a>
+                
             
                 
                     <a href="/tags/ingress" title="Ingress">
                         Ingress
                     </a>
+                
+            
                 
             
                 

@@ -6,10 +6,19 @@
     <description>Recent content in Security on IMTI</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 28 May 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 15 Jun 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://mk2.imti.co/tags/security/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Reverse Proxy in Golang</title>
+      <link>https://mk2.imti.co/golang-reverse-proxy/</link>
+      <pubDate>Fri, 15 Jun 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://mk2.imti.co/golang-reverse-proxy/</guid>
+      <description>Reverse proxies are standard components in many web architectures, from Nginx in front of php-fpm serving Drupal or Wordpress, to endless mixtures of load balancers, security appliances, and popular firewall applications. Reverse proxies differ from forward proxies in little but their intended implementation, be it service-side or client side. The following information is useful in either context. However, I focus on a service-side architecture. Further down this article, I&amp;rsquo;ll be going over the reasonably simple go code needed to develop a basic, yet production quality proxy, but first I&amp;rsquo;ll give you my take on why they solve so many problems and offer up my little workhorse, n2proxy.</description>
+    </item>
     
     <item>
       <title>CORS on Kubernetes Ingress Nginx</title>

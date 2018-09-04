@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head><head>
+    <meta name="google-site-verification" content="" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <meta name="description" content="I lead a talented team of software development and creative engineers, covering many industries looking to collect, analyze, move, buffer, queue, process and present data in significant ways. My expertise and that of my team revolve around microservices, artificial intelligence, algorithms, machine learning and blockchain technologies.">
+    
+    <meta name="keyword"  content="Go, Kubernetes, Elasticsearch, Python, Docker, Big Data, Artificial Intelligence, Machine Learning, Blockchain">
+    <link rel="shortcut icon" href="https://mk2.imti.co/img/favicon.ico">
+
+    <title>Essential Python 3-IMTI | Craig Johnston</title>
+
+    <link rel="canonical" href="https://mk2.imti.co/essential-python3/">
+
+    <link rel="stylesheet" href="https://mk2.imti.co/css/iDisqus.min.css"/>
+	
+    
+    <link rel="stylesheet" href="https://mk2.imti.co/css/bootstrap.min.css">
+
+    
+    <link rel="stylesheet" href="https://mk2.imti.co/css/hux-blog.min.css">
+
+    
+    <link rel="stylesheet" href="https://mk2.imti.co/css/syntax.css">
+
+    
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    
+    
+    <link rel="stylesheet" href="/css/imti.css">
+
+    
+    <script src="https://mk2.imti.co/js/jquery.min.js"></script>
+    
+    
+    <script src="https://mk2.imti.co/js/bootstrap.min.js"></script>
+    
+    
+    <script src="https://mk2.imti.co/js/hux-blog.min.js"></script>
+
+    <meta name="twitter:site" content="@cjimti">
+<meta name="twitter:creator" content="@cjimti">
+
+<meta name="twitter:description" content="This article is a quick tour of basic Python 3 syntax, components and structure. I intend to balance a cheat sheet format with hello world style boilerplate. If you are already a software developer and need a quick refresh on Python then I hope you benefit from my notes below.
+I am a professional software developer for a software development company, and for that reason, I work with a lot of languages, expert in some, and ok in others." />
+<meta name="twitter:title" content="Essential Python 3" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://mk2.imti.co/img/post/watchgears_876_438.jpg" />
+<meta property="og:image" content="https://mk2.imti.co/img/post/watchgears_876_438.jpg" />
+
+
+
+    
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Article",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://mk2.imti.co/essential-python3/"
+  },
+  "headline": "Essential Python 3",
+  "image": [
+    "https://mk2.imti.co/img/post/watchgears_876_438.jpg"
+   ],
+  "datePublished": "2018-05-31T00:00:00",
+  "dateModified": "2018-05-31T00:00:00",
+  "author": {
+    "@type": "Person",
+    "name": "Craig Johnston"
+  },
+   "publisher": {
+    "@type": "Organization",
+    "name": 'imti.co",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://mk2.imti.co/img/craig_johnston_cjimti.jpg"
+    }
+  },
+  "description": "This article is a quick tour of basic Python 3 syntax, components and structure. I intend to balance a cheat sheet format with hello world style boilerplate. If you are already a software developer and need a quick refresh on Python then I hope you benefit from my notes below.
+I am a professional software developer for a software development company, and for that reason, I work with a lot of languages, expert in some, and ok in others."
+}
+</script>
+
+</head></head>
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="https://mk2.imti.co/">IMTI</a>
+        </div>
+
+        
+        
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="https://mk2.imti.co/">Home</a>
+                    </li>
+                    
+
+                    
+                </ul>
+            </div>
+        </div>
+        
+    </div>
+    
+</nav>
+<script>
+    
+    
+    
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        
+            $navbar.className = " ";
+            
+            setTimeout(function(){
+                
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+
+
+<style type="text/css">
+    header.intro-header{
+        background-image: url('https://mk2.imti.co/img/post/watchgears.jpg')
+    }
+</style>
+<header class="intro-header" >
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/python" title="Python">
+                        Python
+                        </a>
+                        
+                    </div>
+                    <h1>Essential Python 3</h1>
+                    <h2 class="subheading">Programming in Python</h2>
+                    <span  class="meta">Posted by Craig Johnston on Thursday, May 31, 2018
+                        
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+<article>
+    <div class="container">
+        <div class="row">
+
+            
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                
+
+<p>This article is a quick tour of basic <a href="https://www.python.org/">Python</a> 3 syntax, components and structure. I intend to balance a cheat sheet format with hello world style boilerplate. If you are already a software developer and need a quick refresh on <a href="https://www.python.org/">Python</a> then I hope you benefit from my notes below.</p>
+
+<p>I am a professional software developer for a software development company, and for that reason, I work with a lot of languages, expert in some, and ok in others.  I context switch often, and sometimes months in between languages. I  often find myself just needing a quick overview to prime the pump so to say, and rather than keep my notes to myself I thought I would clean them up a bit and publish for anyone needing a quick tour, starting with <a href="https://www.python.org/">Python</a> and more languages as time and interest permits.</p>
+
+<p>Each of the following code blocks are executable.</p>
+
+<aside class="toc">
+    <header>
+        <h2>Contents</h2>
+    </header>
+    <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#script-execution">Script Execution</a></li>
+<li><a href="#script-boilerplate">Script Boilerplate</a></li>
+<li><a href="#types">Types</a></li>
+<li><a href="#conditional-control-flow">Conditional &amp; Control Flow</a></li>
+<li><a href="#loops">Loops</a></li>
+<li><a href="#classes">Classes</a></li>
+<li><a href="#python-books-on-amazon">Python Books on Amazon</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+</aside>
+
+<h3 id="script-execution">Script Execution</h3>
+
+<p>Scripts should execute with the environment available python3.</p>
+
+<pre><code class="language-python">#!/usr/bin/env python3
+</code></pre>
+
+<h3 id="script-boilerplate">Script Boilerplate</h3>
+
+<p>See <a href="https://www.python-boilerplate.com/py3+executable">python-boilerplate.com</a> for more boilerplate examples. However, this is a good start for most Python 3 scripts. Read more on <a href="https://www.python.org/dev/peps/pep-0257/">PEP 257 &ndash; Docstring Conventions</a>.</p>
+
+<pre><code class="language-python">#!/usr/bin/env python3
+&quot;&quot;&quot;
+Docstring
+&quot;&quot;&quot;
+__author__ = &quot;Craig Johnston&quot;
+__version__ = &quot;0.0.1&quot;
+__license__ = &quot;MIT&quot;
+
+
+def main():
+    &quot;&quot;&quot;
+        Main Function
+    &quot;&quot;&quot;
+    print(&quot;Python 3&quot;)
+
+
+if __name__ == '__main__': main()
+&quot;&quot;&quot;
+ Ensures main() only gets executed if the script is
+ executed directly and not as an include.
+&quot;&quot;&quot;
+
+</code></pre>
+
+<h3 id="types">Types</h3>
+
+<p>Read the official documentation on <a href="https://docs.python.org/3/library/stdtypes.html">Python3 Built-in Types</a>.</p>
+
+<pre><code class="language-python">#!/usr/bin/env python3
+&quot;&quot;&quot;
+Types
+&quot;&quot;&quot;
+__author__ = &quot;Craig Johnston&quot;
+__version__ = &quot;0.0.1&quot;
+__license__ = &quot;MIT&quot;
+
+
+def main():
+    &quot;&quot;&quot;
+        Main Function
+    &quot;&quot;&quot;
+    print(&quot;Some Python 3 Types&quot;)
+
+    # list of various type
+    some_types = [
+        ['a','list'],
+        ('a','tuple'),
+        dict(a='im a dictionary', b='type of map'),
+        {&quot;a&quot;: &quot;another dictionary&quot;, &quot;b&quot;: &quot;json flavor&quot;},
+        1,
+        1.1,
+        1 + 1.1,
+        'a string',
+        &quot;another&quot; ' string',
+    ]
+
+    for i, v in enumerate(some_types):
+        print(f'Idx: {i:&gt;03} is a {type(v)} with value: {v}')
+
+
+if __name__ == '__main__': main()
+&quot;&quot;&quot;
+ Ensures main() only gets executed if the script is
+ executed directly and not as an include.
+&quot;&quot;&quot;
+
+</code></pre>
+
+<h3 id="conditional-control-flow">Conditional &amp; Control Flow</h3>
+
+<p>Read the official documentation for Python3 <a href="https://docs.python.org/3/tutorial/controlflow.html">Control Flow</a>.</p>
+
+<pre><code class="language-python">#!/usr/bin/env python3
+&quot;&quot;&quot;
+Conditionals
+&quot;&quot;&quot;
+__author__ = &quot;Craig Johnston&quot;
+__version__ = &quot;0.0.1&quot;
+__license__ = &quot;MIT&quot;
+
+
+def main():
+    &quot;&quot;&quot;
+        The main function is demonstrating conditionals.
+    &quot;&quot;&quot;
+    print(&quot;Python 3: Conditionals&quot;)
+
+    x = True
+    y = x
+
+    if x:
+        print(f'x has the value: {repr(x)} and the id: {id(x)}')  # eg 4361511296
+        print(f'x has the value: {repr(y)} and the id: {id(y)}')  # eg 4361511296
+
+    if x == y:
+        print('Simple comparison')
+    elif not y:
+        print('Not my thing really')
+    else:
+        print('We should probably refactor...')
+
+    y = False  # no longer the same as y
+    if not y:
+        print(f'y has the value: {repr(y)} and the id: {id(y)}')  # eg 4532404640
+
+    if (x and not y) or (not x and y):
+        print('XOR')
+
+    a = [1,2,3]
+    if 2 in a:
+        print(f'found 2 in {a}')
+
+    salad = &quot;spinach with cucumber and carrots&quot;
+    if 'cucumber' in salad:
+        print(f'found a cucumber in {repr(salad)}')
+
+    if 'bug' not in salad:
+        print(f'good. no bug in {repr(salad)}')
+
+
+if __name__ == '__main__': main()
+&quot;&quot;&quot;
+ Ensures main() only gets executed if the script is
+ executed directly and not as an include.
+&quot;&quot;&quot;
+
+</code></pre>
+
+<h3 id="loops">Loops</h3>
+
+<p>Check out a few <a href="https://www.learnpython.org/en/Loops">loop examples at learnpython.org</a>.</p>
+
+<pre><code class="language-python">#!/usr/bin/env python3
+&quot;&quot;&quot;
+Some example Loops
+&quot;&quot;&quot;
+__author__ = &quot;Craig Johnston&quot;
+__version__ = &quot;0.0.1&quot;
+__license__ = &quot;MIT&quot;
+
+
+def main():
+    &quot;&quot;&quot;
+        Loops
+    &quot;&quot;&quot;
+    print(&quot;Python 3: Loops&quot;)
+
+    words = example_while_loops(words=[&quot;one&quot;, &quot;two&quot;, &quot;three&quot;, &quot;four&quot;])
+    print(f'words: {words}')
+
+    example_for_loops(words)
+
+    # for i in words:
+    #     print(i)
+
+
+def example_for_loops(words):
+    &quot;&quot;&quot;
+    Example for loops
+    :param words:
+    :return set:
+    &quot;&quot;&quot;
+    
+    for w in words:
+        print(f'Word {w} in words has a lengh of {len(w)}.')
+
+    for i in range(len(words)):
+        print(f'Word at index {i} is {words[i]}')
+
+    return words
+
+
+def example_while_loops(words):
+    &quot;&quot;&quot;
+    Example while loops
+    :param words:
+    :return set:
+    &quot;&quot;&quot;
+    n = 0
+    while n &lt; len(words):
+        print(f'{words[n]} is index {n} in {words}')
+        n = n + 1
+
+    print(&quot;Pop out two.&quot;)
+    n = 0
+    while True:
+        if n &gt; len(words) - 1:
+            break
+        if words[n] == 'two':
+            words.pop(n)
+            continue
+        n = n + 1
+
+    return words
+
+
+if __name__ == '__main__': main()
+&quot;&quot;&quot;
+ Ensures main() only gets executed if the script is
+ executed directly and not as an include.
+&quot;&quot;&quot;
+</code></pre>
+
+<h3 id="classes">Classes</h3>
+
+<p>Check out <a href="http://learnpython.org/en/Classes_and_Objects">class and object examples at learnpython.org</a>.</p>
+
+<pre><code class="language-python">#!/usr/bin/env python3
+&quot;&quot;&quot;
+Example Classes
+&quot;&quot;&quot;
+__author__ = &quot;Craig Johnston&quot;
+__version__ = &quot;0.0.1&quot;
+__license__ = &quot;MIT&quot;
+
+
+class Animal:
+    &quot;&quot;&quot;
+    Animal
+
+    __init__ is the constructor
+    &quot;&quot;&quot;
+    def __init__(self, type, sound):
+        &quot;&quot;&quot;
+        Constructor documentation.
+
+        The underscore is a convention for private
+        :param type: string, type of animal
+        :param sound: string, sound the animal makes
+        &quot;&quot;&quot;
+        self._type = type
+        self._sound = sound
+
+    def type(self, t=None):
+        &quot;&quot;&quot;
+        Animal.type
+
+        Example getter / setter. If t is defined then we
+        set. We always return.
+        :param t: string, type of animal
+        :return: string, type of animal
+        &quot;&quot;&quot;
+        if t:
+            self._type = t
+        return self._type
+
+    def sound(self, s=None):
+        &quot;&quot;&quot;
+        Animal.sound
+
+        Example getter/setter. If s is defined, then we set. We always return.
+        :param s: string, sound the animal makes
+        :return: string, sound the animal makes
+        &quot;&quot;&quot;
+        if s:
+            self._sound = s
+        return self._sound
+
+    def __str__(self):
+        &quot;&quot;&quot;
+        String representation.
+        :return: string representation of an animal
+        &quot;&quot;&quot;
+        return f'The {self.type()} goes {self.sound()}.'
+
+
+class Snake(Animal):
+    &quot;&quot;&quot;
+    Snake is a Subclass of Animal
+    &quot;&quot;&quot;
+
+    def __init__(self):
+        super().__init__('Snake', 'sssss')
+
+    @staticmethod
+    def eat(*animals):
+        for a in animals:
+            if isinstance(a, Snake):
+                print(f'The Snake eats itself!')
+                return
+            if isinstance(a, Animal):
+                print(f'The Snake eats the {a.type()} as it goes {a.sound()}.')
+
+
+
+def main():
+    &quot;&quot;&quot;
+        Example Classes
+    &quot;&quot;&quot;
+    print(&quot;Python 3&quot;)
+
+    animals = [
+        Animal(&quot;Owl&quot;, &quot;whoo&quot;),
+        Animal(&quot;Pig&quot;, &quot;oink&quot;),
+        Animal(&quot;Dog&quot;, &quot;woof&quot;),
+        Animal(&quot;Cat&quot;, &quot;meow&quot;),
+        Snake(),
+        &quot;This is a rock.&quot;
+    ]
+
+    for a in animals:
+        print(a)
+
+    # find the snake
+    snake = [a for a in animals if isinstance(a, Snake)]
+
+    # free the owl
+    owl = animals.pop(0)
+    print(f'Freeing the {owl.type()} as it goes {owl.sound()}')
+
+    # feed the snake
+    if len(snake):
+        snake[0].eat(*animals)
+
+
+if __name__ == '__main__': main()
+&quot;&quot;&quot;
+ Ensures main() only gets executed if the script is
+ executed directly and not as an include.
+&quot;&quot;&quot;
+</code></pre>
+
+<h3 id="python-books-on-amazon">Python Books on Amazon</h3>
+
+<ul>
+<li><a href="https://amzn.to/2LYUpYb">Python Crash Course: A Hands-On, Project-Based Introduction to Programming</a></li>
+<li><a href="https://amzn.to/2JvTno8">Learning Python, 5th Edition</a></li>
+<li><a href="https://amzn.to/2sGvSht">Automate the Boring Stuff with Python: Practical Programming for Total Beginners</a></li>
+</ul>
+
+
+                
+<div id="disqus-comment"></div>
+
+
+
+            </div>
+            
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                
+                <section>
+                    <hr class="hidden-sm hidden-xs">
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/data" title="Data">
+                        Data
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/docker" title="Docker">
+                        Docker
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/golang" title="Golang">
+                        Golang
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/ingress" title="Ingress">
+                        Ingress
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/kubernetes" title="Kubernetes">
+                        Kubernetes
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/security" title="Security">
+                        Security
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/utils" title="Utils">
+                        Utils
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/kubectl" title="kubectl">
+                        kubectl
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                    </div>
+                </section>
+
+                
+                <hr>
+                <h5>RELATED</h5>
+                <ul class="list-inline">
+                    
+                </ul>
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                   
+                   <li>
+                       <a href="" rel="alternate" type="application/rss+xml" title="IMTI" >
+                           <span class="fa-stack fa-lg">
+                               <i class="fa fa-circle fa-stack-2x"></i>
+                               <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+                           </span>
+                       </a>
+                   </li>
+                   
+                    
+                    <li>
+                        <a href="mailto:cjimti@gmail.com">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                    
+                    
+                    <li>
+                        <a href="https://twitter.com/cjimti">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    
+
+                    
+
+		    
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/cjimti">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                    
+                    <li>
+                        <a target="_blank" href="https://www.linkedin.com/in/cjimti/">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                </ul>
+		<p class="copyright text-muted">
+            Copyright &copy; <a href="">Craig Johnston</a> , 2018
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+
+
+
+
+<script>
+    
+    if($('#tag_cloud').length !== 0){
+        async("/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+
+
+    
+        
+        
+    
+
+
+
+
+
+</body>
+</html>

@@ -146,6 +146,74 @@
             
 
 <div class="post-preview">
+    <a href="https://mk2.imti.co/kubectl-remote-x509-valid/">
+        <h2 class="post-title">
+            Kubectl x509 Unable to Connect
+        </h2>
+	
+        <h3 class="post-subtitle">
+            Kubernetes remote access and TLS certs.
+        </h3>
+	
+        <div class="post-content-preview">
+	
+            Just set up a brand new cluster? Changed the domain or IP of your admin node? Then you may have encountered the error Unable to connect to the server: x509: certificate is valid for &hellip;. The following is a fix for this common issue. However, there are often other reasons to rebuild your cluster cert, and it&rsquo;s relatively easy.
+TL;DR: &ldquo;I don&rsquo;t care about the fix I need to remote control my cluster.
+       
+        </div>
+    </a>
+    <p class="post-meta">
+    Posted by Craig Johnston Thursday, May 10, 2018
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="https://mk2.imti.co/hobby-cluster/">
+        <h2 class="post-title">
+            Production Hobby Cluster
+        </h2>
+	
+        <h3 class="post-subtitle">
+            Production-grade cluster on a hobby budget.
+        </h3>
+	
+        <div class="post-content-preview">
+	
+            Setting up a production-grade Kubernetes cluster can be done on a hobby budget, and if this is true why mess around with a lesser grade. If you are investing time to learn distributed cloud computing or microservices, is the distance between $0 and 15 dollars a month worth the time in translating best practices? Kubernetes is designed to host production applications. My personal web applications may only be hobbies, but they might as well be production grade hobbies.
+       
+        </div>
+    </a>
+    <p class="post-meta">
+    Posted by Craig Johnston Wednesday, May 9, 2018
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="https://mk2.imti.co/sql-select-joins-aliases/">
+        <h2 class="post-title">
+            SQL Foundations
+        </h2>
+	
+        <h3 class="post-subtitle">
+            Selects, joins and aliases.
+        </h3>
+	
+        <div class="post-content-preview">
+	
+            The following is an attempt at explaining the basics of an SQL query, and more importantly how I believe you can best think through them. All queries can be broken down into the basics of this declarative language.
+I recently helped a co-worker read through a large SQL query with a few dozen joins and left joins, alias, and recursions. He is mostly a front-end integrator and although he has been tinkering with SQL for years, he never really understood the basics.
+       
+        </div>
+    </a>
+    <p class="post-meta">
+    Posted by Craig Johnston Monday, April 2, 2018
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
     <a href="https://mk2.imti.co/raspberry-pi-rsync-interval/">
         <h2 class="post-title">
             rSync Files on Interval
@@ -186,76 +254,6 @@ It&rsquo;s one command in your terminal. Technically, it&rsquo;s three, but I do
     </a>
     <p class="post-meta">
     Posted by Craig Johnston Sunday, April 1, 2018
-    </p>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="https://mk2.imti.co/413-request-entity-too-large/">
-        <h2 class="post-title">
-            Kubernetes - 413 Request Entity Too Large
-        </h2>
-	
-        <h3 class="post-subtitle">
-            Configuring the NGINX Ingress Controller
-        </h3>
-	
-        <div class="post-content-preview">
-	
-            When setting up nginx ingress on Kubernetes for a private Docker Registry, I ran into an error when trying to push an image to it.
-Error parsing HTTP response: invalid character '&lt;' looking for beginning of value: &quot;&lt;html&gt;\r\n&lt;head&gt;&lt;title&gt;413 Request Entity Too Large&lt;/title&gt;&lt;/head&gt;\r\n&lt;body bgcolor=\&quot;white\&quot;&gt;\r\n&lt;center&gt;&lt;h1&gt;413 Request Entity Too Large&lt;/h1&gt;&lt;/center&gt;\r\n&lt;hr&gt;&lt;center&gt;nginx/1.9.14&lt;/center&gt;\r\n&lt;/body&gt;\r\n&lt;/html&gt;\r\n&quot;  The &ldquo;413 Request Entity Too Large&rdquo; error is something many accustomed to running nginx as a standard web server/proxy. nginx is configured to restrict the size of files it will allow over a post.
-       
-        </div>
-    </a>
-    <p class="post-meta">
-    Posted by Craig Johnston Saturday, March 24, 2018
-    </p>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="https://mk2.imti.co/kubectl-remote/">
-        <h2 class="post-title">
-            Kubernetes Remote Control
-        </h2>
-	
-        <h3 class="post-subtitle">
-            Using kubectl to Control a Remote Kubernetes Cluster
-        </h3>
-	
-        <div class="post-content-preview">
-	
-            I use Minikube to run a local Kubernetes single node cluster (cluster?). However, I also work with a custom production cluster for work. This cluster consists of development and production nodes. I often need to switch between working on my local Minikube and the online Kubernetes cluster.
-TIP: Visit the kubectl Cheat Sheet often.
-The default configuration kubectl is stored in ~/.kube/config and if you have Minikube installed, it added the context minikube to your config.
-       
-        </div>
-    </a>
-    <p class="post-meta">
-    Posted by Craig Johnston Saturday, March 24, 2018
-    </p>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="https://mk2.imti.co/microservices/">
-        <h2 class="post-title">
-            Microservices &amp; Kubernetes
-        </h2>
-	
-        <h3 class="post-subtitle">
-            Overview
-        </h3>
-	
-        <div class="post-content-preview">
-	
-            The following is a collection of articles, videos, and notes on Microservices. The Microservices architecture is a variant of the service-oriented architecture, a collection of loosely coupled services.
-Articles  Background concept - &ldquo;Open Data: Small Pieces Loosely Joined&rdquo;, Tim O’Reilly Modern software design problems and solutions - &ldquo;12-Fractured Apps&rdquo;, Kelsey Hightower (SysAdmin @ Google) 12-Factor Defined - &ldquo;The 12-Factor App&rdquo;, Adam Wiggins Pros and Cons of Microservices - &ldquo;Microservices&rdquo; and Microservice Trade-Offs, Martin Fowler &ldquo;What are containers and why do you need them?
-       
-        </div>
-    </a>
-    <p class="post-meta">
-    Posted by Craig Johnston Saturday, March 24, 2018
     </p>
 </div>
 <hr>
@@ -313,6 +311,8 @@ Articles  Background concept - &ldquo;Open Data: Small Pieces Loosely Joined&rdq
                 
             
                 
+            
+                
                     <a href="/tags/docker" title="Docker">
                         Docker
                     </a>
@@ -323,11 +323,17 @@ Articles  Background concept - &ldquo;Open Data: Small Pieces Loosely Joined&rdq
                 
             
                 
+                    <a href="/tags/golang" title="Golang">
+                        Golang
+                    </a>
+                
             
                 
                     <a href="/tags/ingress" title="Ingress">
                         Ingress
                     </a>
+                
+            
                 
             
                 

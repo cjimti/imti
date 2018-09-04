@@ -215,47 +215,46 @@ Explore the Elasticsearch official documentation: Search in Depth.
 <hr>
 
 <div class="post-preview">
-    <a href="https://mk2.imti.co/kubernetes-ingress-nginx-cors/">
+    <a href="https://mk2.imti.co/golang-reverse-proxy/">
         <h2 class="post-title">
-            CORS on Kubernetes Ingress Nginx
+            Reverse Proxy in Golang
         </h2>
 	
         <h3 class="post-subtitle">
-            Painless CORS header configuration in Kubernetes
+            Retrofit security proxy to prevent XSS and code injection.
         </h3>
 	
         <div class="post-content-preview">
 	
-            Using ingress-nginx on Kubernetes makes adding CORS headers painless. Kubernetes ingress-nginx uses annotations as a quick way to allow you to specify the automatic generation of an extensive list of common nginx configuration options.
-Example ingress configuration enabling CORS:
-apiVersion: extensions/v1beta1 kind: Ingress metadata: name: api namespace: fuse labels: app: api annotations: nginx.ingress.kubernetes.io/enable-cors: &quot;true&quot; nginx.ingress.kubernetes.io/cors-allow-methods: &quot;PUT, GET, POST, OPTIONS&quot; nginx.ingress.kubernetes.io/cors-allow-origin: &quot;https://admin.example.com&quot; nginx.ingress.kubernetes.io/cors-allow-credentials: &quot;true&quot; spec: rules: - host: api.example.com http: paths: - backend: serviceName: api-example servicePort: 80 path: /api tls: - hosts: - api.
+            Reverse proxies are standard components in many web architectures, from Nginx in front of php-fpm serving Drupal or Wordpress, to endless mixtures of load balancers, security appliances, and popular firewall applications. Reverse proxies differ from forward proxies in little but their intended implementation, be it service-side or client side. The following information is useful in either context. However, I focus on a service-side architecture. Further down this article, I&rsquo;ll be going over the reasonably simple go code needed to develop a basic, yet production quality proxy, but first I&rsquo;ll give you my take on why they solve so many problems and offer up my little workhorse, n2proxy.
        
         </div>
     </a>
     <p class="post-meta">
-    Posted by Craig Johnston Monday, May 28, 2018
+    Posted by Craig Johnston Friday, June 15, 2018
     </p>
 </div>
 <hr>
 
 <div class="post-preview">
-    <a href="https://mk2.imti.co/kubernetes-ingress-basic-auth/">
+    <a href="https://mk2.imti.co/golang-to-jupyter/">
         <h2 class="post-title">
-            Basic Auth on Kubernetes Ingress
+            Golang to Jupyter
         </h2>
 	
         <h3 class="post-subtitle">
-            Basic Auth is supported by nearly every major web client, library, and utility.
+            Golang with Jupyter Notebooks
         </h3>
 	
         <div class="post-content-preview">
 	
-            Basic Auth is one of the oldest and easiest ways to secure a web page or API endpoint. Basic Auth does not have many features and lacks the sophistication of more modern access controls (see Ingress Nginx Auth Examples). However, Basic Auth is supported by nearly every major web client, library, and utility. Basic Auth is secure, stable and perfect for quick security on Kubernetes projects. Basic Auth can easily we swapped out later as requirements demand or provide a foundation for implementations such as OAuth 2 and JWT.
+            Jupyter Notbooks have been a popular technology in the Python data science community for a while now, especially in academics. Jupyter Notebooks are a way to mix inline, executable code with documentation in a presentation format. Best practices in organizing source code are not always the most efficient at communicating it&rsquo;s functionality to a user.
+While the intention of a programming language is the abstraction of computational complexity into a simplified language humans can read and write, they must always weigh toward the efficiency of the primary interpreter, the computer.
        
         </div>
     </a>
     <p class="post-meta">
-    Posted by Craig Johnston Saturday, May 19, 2018
+    Posted by Craig Johnston Sunday, June 10, 2018
     </p>
 </div>
 <hr>
@@ -309,6 +308,8 @@ apiVersion: extensions/v1beta1 kind: Ingress metadata: name: api namespace: fuse
                 
             
                 
+            
+                
                     <a href="/tags/docker" title="Docker">
                         Docker
                     </a>
@@ -319,11 +320,17 @@ apiVersion: extensions/v1beta1 kind: Ingress metadata: name: api namespace: fuse
                 
             
                 
+                    <a href="/tags/golang" title="Golang">
+                        Golang
+                    </a>
+                
             
                 
                     <a href="/tags/ingress" title="Ingress">
                         Ingress
                     </a>
+                
+            
                 
             
                 

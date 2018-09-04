@@ -18,6 +18,21 @@
   </url>
   
   <url>
+    <loc>https://mk2.imti.co/golang-reverse-proxy/</loc>
+    <lastmod>2018-06-15T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://mk2.imti.co/golang-to-jupyter/</loc>
+    <lastmod>2018-06-10T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://mk2.imti.co/essential-python3/</loc>
+    <lastmod>2018-05-31T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://mk2.imti.co/kubernetes-ingress-nginx-cors/</loc>
     <lastmod>2018-05-28T00:00:00+00:00</lastmod>
   </url>
@@ -153,6 +168,12 @@
   </url>
   
   <url>
+    <loc>https://mk2.imti.co/tags/devops/</loc>
+    <lastmod>2018-06-15T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://mk2.imti.co/tags/development/</loc>
     <lastmod>2018-08-11T00:00:00+00:00</lastmod>
     <priority>0</priority>
@@ -178,7 +199,7 @@
   
   <url>
     <loc>https://mk2.imti.co/tags/golang/</loc>
-    <lastmod>2018-05-18T00:00:00+00:00</lastmod>
+    <lastmod>2018-06-15T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -203,6 +224,12 @@
   <url>
     <loc>https://mk2.imti.co/tags/ingress/</loc>
     <lastmod>2018-05-15T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://mk2.imti.co/tags/jupyter-notebooks/</loc>
+    <lastmod>2018-06-10T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -268,13 +295,13 @@
   
   <url>
     <loc>https://mk2.imti.co/tags/security/</loc>
-    <lastmod>2018-05-10T00:00:00+00:00</lastmod>
+    <lastmod>2018-06-15T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://mk2.imti.co/tags/security/</loc>
-    <lastmod>2018-05-28T00:00:00+00:00</lastmod>
+    <lastmod>2018-05-10T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   

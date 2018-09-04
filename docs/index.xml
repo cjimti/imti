@@ -42,6 +42,35 @@ Explore the Elasticsearch official documentation: Search in Depth.
     </item>
     
     <item>
+      <title>Reverse Proxy in Golang</title>
+      <link>https://mk2.imti.co/golang-reverse-proxy/</link>
+      <pubDate>Fri, 15 Jun 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://mk2.imti.co/golang-reverse-proxy/</guid>
+      <description>Reverse proxies are standard components in many web architectures, from Nginx in front of php-fpm serving Drupal or Wordpress, to endless mixtures of load balancers, security appliances, and popular firewall applications. Reverse proxies differ from forward proxies in little but their intended implementation, be it service-side or client side. The following information is useful in either context. However, I focus on a service-side architecture. Further down this article, I&amp;rsquo;ll be going over the reasonably simple go code needed to develop a basic, yet production quality proxy, but first I&amp;rsquo;ll give you my take on why they solve so many problems and offer up my little workhorse, n2proxy.</description>
+    </item>
+    
+    <item>
+      <title>Golang to Jupyter</title>
+      <link>https://mk2.imti.co/golang-to-jupyter/</link>
+      <pubDate>Sun, 10 Jun 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://mk2.imti.co/golang-to-jupyter/</guid>
+      <description>Jupyter Notbooks have been a popular technology in the Python data science community for a while now, especially in academics. Jupyter Notebooks are a way to mix inline, executable code with documentation in a presentation format. Best practices in organizing source code are not always the most efficient at communicating it&amp;rsquo;s functionality to a user.
+While the intention of a programming language is the abstraction of computational complexity into a simplified language humans can read and write, they must always weigh toward the efficiency of the primary interpreter, the computer.</description>
+    </item>
+    
+    <item>
+      <title>Essential Python 3</title>
+      <link>https://mk2.imti.co/essential-python3/</link>
+      <pubDate>Thu, 31 May 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://mk2.imti.co/essential-python3/</guid>
+      <description>This article is a quick tour of basic Python 3 syntax, components and structure. I intend to balance a cheat sheet format with hello world style boilerplate. If you are already a software developer and need a quick refresh on Python then I hope you benefit from my notes below.
+I am a professional software developer for a software development company, and for that reason, I work with a lot of languages, expert in some, and ok in others.</description>
+    </item>
+    
+    <item>
       <title>CORS on Kubernetes Ingress Nginx</title>
       <link>https://mk2.imti.co/kubernetes-ingress-nginx-cors/</link>
       <pubDate>Mon, 28 May 2018 00:00:00 +0000</pubDate>

@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head><head>
+    <meta name="google-site-verification" content="" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <meta name="description" content="I lead a talented team of software development and creative engineers, covering many industries looking to collect, analyze, move, buffer, queue, process and present data in significant ways. My expertise and that of my team revolve around microservices, artificial intelligence, algorithms, machine learning and blockchain technologies.">
+    
+    <meta name="keyword"  content="Go, Kubernetes, Elasticsearch, Python, Docker, Big Data, Artificial Intelligence, Machine Learning, Blockchain">
+    <link rel="shortcut icon" href="https://mk2.imti.co/img/favicon.ico">
+
+    <title>Reverse Proxy in Golang-IMTI | Craig Johnston</title>
+
+    <link rel="canonical" href="https://mk2.imti.co/golang-reverse-proxy/">
+
+    <link rel="stylesheet" href="https://mk2.imti.co/css/iDisqus.min.css"/>
+	
+    
+    <link rel="stylesheet" href="https://mk2.imti.co/css/bootstrap.min.css">
+
+    
+    <link rel="stylesheet" href="https://mk2.imti.co/css/hux-blog.min.css">
+
+    
+    <link rel="stylesheet" href="https://mk2.imti.co/css/syntax.css">
+
+    
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    
+    
+    <link rel="stylesheet" href="/css/imti.css">
+
+    
+    <script src="https://mk2.imti.co/js/jquery.min.js"></script>
+    
+    
+    <script src="https://mk2.imti.co/js/bootstrap.min.js"></script>
+    
+    
+    <script src="https://mk2.imti.co/js/hux-blog.min.js"></script>
+
+    <meta name="twitter:site" content="@cjimti">
+<meta name="twitter:creator" content="@cjimti">
+
+<meta name="twitter:description" content="Reverse proxies are standard components in many web architectures, from Nginx in front of php-fpm serving Drupal or Wordpress, to endless mixtures of load balancers, security appliances, and popular firewall applications. Reverse proxies differ from forward proxies in little but their intended implementation, be it service-side or client side. The following information is useful in either context. However, I focus on a service-side architecture. Further down this article, I&rsquo;ll be going over the reasonably simple go code needed to develop a basic, yet production quality proxy, but first I&rsquo;ll give you my take on why they solve so many problems and offer up my little workhorse, n2proxy." />
+<meta name="twitter:title" content="Reverse Proxy in Golang" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://mk2.imti.co/img/post/dentalinst_876_438.jpg" />
+<meta property="og:image" content="https://mk2.imti.co/img/post/dentalinst_876_438.jpg" />
+
+
+
+    
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Article",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://mk2.imti.co/golang-reverse-proxy/"
+  },
+  "headline": "Reverse Proxy in Golang",
+  "image": [
+    "https://mk2.imti.co/img/post/dentalinst_876_438.jpg"
+   ],
+  "datePublished": "2018-06-15T00:00:00",
+  "dateModified": "2018-06-15T00:00:00",
+  "author": {
+    "@type": "Person",
+    "name": "Craig Johnston"
+  },
+   "publisher": {
+    "@type": "Organization",
+    "name": 'imti.co",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://mk2.imti.co/img/craig_johnston_cjimti.jpg"
+    }
+  },
+  "description": "Reverse proxies are standard components in many web architectures, from Nginx in front of php-fpm serving Drupal or Wordpress, to endless mixtures of load balancers, security appliances, and popular firewall applications. Reverse proxies differ from forward proxies in little but their intended implementation, be it service-side or client side. The following information is useful in either context. However, I focus on a service-side architecture. Further down this article, I&rsquo;ll be going over the reasonably simple go code needed to develop a basic, yet production quality proxy, but first I&rsquo;ll give you my take on why they solve so many problems and offer up my little workhorse, n2proxy."
+}
+</script>
+
+</head></head>
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="https://mk2.imti.co/">IMTI</a>
+        </div>
+
+        
+        
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="https://mk2.imti.co/">Home</a>
+                    </li>
+                    
+
+                    
+                </ul>
+            </div>
+        </div>
+        
+    </div>
+    
+</nav>
+<script>
+    
+    
+    
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        
+            $navbar.className = " ";
+            
+            setTimeout(function(){
+                
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+
+
+<style type="text/css">
+    header.intro-header{
+        background-image: url('https://mk2.imti.co/img/post/dentalinst.jpg')
+    }
+</style>
+<header class="intro-header" >
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/devops" title="DevOps">
+                        DevOps
+                        </a>
+                        
+                        <a class="tag" href="/tags/security" title="Security">
+                        Security
+                        </a>
+                        
+                        <a class="tag" href="/tags/golang" title="Golang">
+                        Golang
+                        </a>
+                        
+                    </div>
+                    <h1>Reverse Proxy in Golang</h1>
+                    <h2 class="subheading">Retrofit security proxy to prevent XSS and code injection.</h2>
+                    <span  class="meta">Posted by Craig Johnston on Friday, June 15, 2018
+                        
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+<article>
+    <div class="container">
+        <div class="row">
+
+            
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                
+
+<p>Reverse proxies are standard components in many web architectures, from <a href="https://www.nginx.com/">Nginx</a> in front of <a href="https://php-fpm.org/">php-fpm</a> serving <a href="http://www.drupal.com/">Drupal</a> or <a href="https://wordpress.org/">Wordpress</a>, to endless mixtures of load balancers, security appliances, and popular firewall applications. <a href="https://www.jscape.com/blog/bid/87783/Forward-Proxy-vs-Reverse-Proxy">Reverse proxies differ from forward proxies</a> in little but their intended implementation, be it service-side or client side. The following information is useful in either context. However, I focus on a service-side architecture. Further down this article, I&rsquo;ll be going over the reasonably simple <a href="https://golang.org/">go</a> code needed to develop a basic, yet production quality proxy, but first I&rsquo;ll give you my take on why they solve so many problems and offer up my little workhorse, <a href="https://github.com/txn2/n2proxy">n2proxy</a>.</p>
+
+<h2 id="reverse-proxies">Reverse Proxies</h2>
+
+<p>So why do we write custom Reverse Proxies? We don&rsquo;t need to write another <a href="https://www.nginx.com/">Nginx</a> or <a href="http://www.haproxy.org/">HAProxy</a> unless we are directly in the business to do so. Reverse Proxies have the capability of providing a variety solutions beyond their common usage. Custom reverse proxies are great solutions for:</p>
+
+<ul>
+<li>Middleware logging into message queues</li>
+<li>Event triggering</li>
+<li>API adaptors and translators</li>
+<li>Message Buffering</li>
+</ul>
+
+<p>Proxies give you complete control over the communication between a client and a service, without needing to modify either, whether it be impractical or impossible. It&rsquo;s like tapping a phone line where you don&rsquo;t just get to listen but modify the conversation itself.</p>
+
+<h2 id="n2proxy">n2proxy</h2>
+
+<p><img src="https://raw.githubusercontent.com/txn2/n2proxy/master/mast.jpg" alt="n2proxy" /></p>
+
+<p>I put <a href="https://github.com/txn2/n2proxy">n2proxy</a> together from a few different projects that had very different needs but the same underpinning solution. A common problem, are older or proprietary systems that lack reasonable security standards, these older sites and web apps suffer routinely from <a href="https://www.owasp.org/index.php/Cross-site_Scripting_(XSS)">XSS</a>, <a href="https://www.owasp.org/index.php/SQL_Injection">SQL injection</a> and many vulnerabilities to malicious data, some legacy systems very architecture prevents a fix at the source.</p>
+
+<p><a href="https://github.com/txn2/n2proxy">n2proxy</a> is open source, so you can fork it, contribute to it or write your own just like it, or better. If you want to write your own, I&rsquo;ll be going over the source further down.</p>
+
+<p><a href="https://github.com/txn2/n2proxy">n2proxy</a> was built to:</p>
+
+<ul>
+<li>Inspect requested URLs and ban them if they match a set of patterns</li>
+<li>Inspect HTTP Post data and nullify it for any data matching a set of patterns.</li>
+<li>Inspect HTTP Post and make modifications based on matched patterns.</li>
+</ul>
+
+<p><a href="https://github.com/txn2/n2proxy">n2proxy</a> is compiled and tested for Linux, MaxOs and Arm based systems (Raspberry Pi, Tinkerboard, and so on) as well as stand-alone <a href="https://www.docker.com/">Docker</a> implementations or <a href="https://mk.imti.co/tag/kubernetes/">Kubernetes</a>.</p>
+
+<p>If you are using a Mac I recommend installing <a href="https://github.com/txn2/n2proxy">n2proxy</a> with <a href="https://brew.sh/">brew</a>:</p>
+
+<pre><code class="language-bash">brew install txn2/tap/n2proxy
+
+# upgrade later with
+brew upgrade n2proxy
+</code></pre>
+
+<p>You need a configuration file to get started:</p>
+
+<pre><code class="language-bash">wget https://raw.githubusercontent.com/txn2/n2proxy/master/cfg.yml
+</code></pre>
+
+<p>I&rsquo;ll be focusing on three main sections of the configuration. <strong>postBan</strong> for nullifying all post data when the system discovers a match, <strong>urlBan</strong> rewrites the path to &ldquo;/&rdquo; (slash) when the system discovers a match, and <strong>postFilter</strong> uses the powerful and fast <a href="https://blog.gopheracademy.com/advent-2017/using-go-templates/">go templates</a> for modifying post data in-line when the system discovers a match. <strong>postFilter</strong> uses <a href="http://masterminds.github.io/sprig/">sprig</a> with <a href="https://blog.gopheracademy.com/advent-2017/using-go-templates/">go templates</a> to provide over 70 template functions in additional to built-in functions. <strong>postFilter</strong> allows you to make nearly any type of mutation to HTTP post body data, all in the confines of a configuration file.</p>
+
+<p><strong>Sample Configuration</strong>
+<script src="https://gist.github.com/cjimti/e664ad48b7f356f9d5b6e66117d6b9ab.js"></script></p>
+
+<p>Unfortunately <strong>postBan</strong> and <strong>urlBan</strong> might look like alien code, or someone punched their keyboard, however <a href="https://en.wikipedia.org/wiki/Regular_expression">regular expressions</a> are an implementation of highly efficient search patterns common to most programming languages. The example set is taken primarily from K. K. Mookhey, and Nilesh Burghate&rsquo;s 2004 article, <a href="https://www.symantec.com/connect/articles/detection-sql-injection-and-cross-site-scripting-attacks">Detection of SQL Injection and Cross-site Scripting Attacks</a>. This list is far from inclusive but get the point across.</p>
+
+<p>Harmful post data and URLs can damage many legacy systems (and even Wordpress and Drupal sites that lack their monthly updates). Since <a href="https://github.com/txn2/n2proxy">n2proxy</a> is a proxy, it exists outside the application layer, there is not much it can do elegantly for the end-user on that layer, but then again an elegant response is not entirely necessary when dealing with an attacker.</p>
+
+<p><strong>postFilter</strong> is the fun section, and if you are interested building API adaptors and translators, or rewiring the messages of that closed source <a href="https://en.wikipedia.org/wiki/Internet_of_things">IOT</a> device so it can post data conforming to the interface of some distant web server, this is the section. Although the examples show how to shuffle the letters in the word &ldquo;taco&rdquo; and uppercase any instance of &ldquo;good times&rdquo;, with <a href="https://blog.gopheracademy.com/advent-2017/using-go-templates/">go templates</a> and <a href="http://masterminds.github.io/sprig/">sprig</a> you have a clear jumping off point for considerable number of possibilities.</p>
+
+<h2 id="running-n2proxy">Running <a href="https://github.com/txn2/n2proxy">n2proxy</a></h2>
+
+<p>I use the command line <code>n2proxy</code> when working and testing patterns locally, however in production use I prefer using the docker container (<code>docker pull txn2/n2proxy</code>). See the following examples:</p>
+
+<p><strong>Command Version</strong></p>
+
+<pre><code class="language-bash">n2proxy --port=9099 --backend=https://www.google.com/ --cfg=./cfg.yml
+</code></pre>
+
+<p><strong>Docker Version</strong></p>
+
+<pre><code class="language-bash">docker run --rm -t -v &quot;$(pwd)&quot;:/n2p/ -p 9099:9099 \
+    txn2/n2proxy --port=9099 --cfg=/n2p/cfg.yml \
+    --backend=https://www.google.com/
+</code></pre>
+
+<p>The <a href="https://www.docker.com/">Docker</a> method is preferred when you need it to run in the background or survive reboots.</p>
+
+<p><strong>Background Docker</strong></p>
+
+<p>Naming your <a href="https://www.docker.com/">Docker</a> container is a good idea if you plan to run more than one proxy (be sure they each get their own port on the host).</p>
+
+<pre><code class="language-bash">docker run --name n2p-google -d \
+    -v &quot;$(pwd)&quot;:/n2p/ \
+    -p 9099:9099 \
+    --restart=unless-stopped \
+    txn2/n2proxy \
+    --port=9099 \
+    --cfg=/n2p/cfg.yml \
+    --backend=https://www.google.com/
+    
+# tail the logs
+docker logs -f n2p-google
+</code></pre>
+
+<p>You now have <a href="https://www.google.com">https://www.google.com</a> served through <a href="https://github.com/txn2/n2proxy">n2proxy</a> to <a href="http://localhost:9099">http://localhost:9099</a> on your local workstation.</p>
+
+<p>A Google.com proxy is a sound proof of concept, however, unless we run another HTTP proxy like <a href="https://www.charlesproxy.com/">Charles</a>. We can&rsquo;t see what Google is receiving from us. Only it&rsquo;s response.</p>
+
+<p>Now is a good time switch over to using <a href="https://docs.postman-echo.com/">postman-echo.com</a> since it&rsquo;s very purpose is to send us back what we sent it. <a href="https://docs.postman-echo.com/">postman-echo.com</a> returns <a href="https://www.json.org/">json</a> data and therefore I highly recommend installing <strong><a href="https://www.google.com/search?q=jsonpp">jsonpp</a></strong> or <strong><a href="https://www.google.com/search?q=json_pp">json_pp</a></strong> or a number of variations, on MacOs you can use brew:</p>
+
+<pre><code class="language-bash">brew install jsonpp
+</code></pre>
+
+<p>Now start up a new proxy pointed to <a href="https://docs.postman-echo.com/">postman-echo.com</a> as the backend.</p>
+
+<pre><code class="language-bash"># get a config if you don't already have one
+wget https://github.com/txn2/n2proxy/blob/master/cfg.yml
+
+# open a proxy to postman-echo.com on port 9090
+n2proxy --port=9090 --backend=https://postman-echo.com/ --cfg=./cfg.yml
+</code></pre>
+
+<p>In a separate terminal window use <a href="https://curl.haxx.se/docs/manpage.html">curl</a> to make an HTTP post request:</p>
+
+<pre><code class="language-bash">curl -s --request POST --url http://localhost:9090/post \
+--data 'This taco is expected to be sent back, good   times.' \
+| jsonpp
+</code></pre>
+
+<p>Postman sends back what is received, and with this, we can see the correct filtering was performed:</p>
+
+<pre><code class="language-json">{
+  &quot;args&quot;: {},
+  &quot;data&quot;: &quot;&quot;,
+  &quot;files&quot;: {},
+  &quot;form&quot;: {
+    &quot;This cato is expected to be sent back, GOODTIMES.&quot;: &quot;&quot;
+  },
+  &quot;headers&quot;: {
+    &quot;host&quot;: &quot;postman-echo.com&quot;,
+    &quot;content-length&quot;: &quot;49&quot;,
+    &quot;accept&quot;: &quot;*/*&quot;,
+    &quot;accept-encoding&quot;: &quot;gzip&quot;,
+    &quot;content-type&quot;: &quot;application/x-www-form-urlencoded&quot;,
+    &quot;user-agent&quot;: &quot;curl/7.60.0&quot;,
+    &quot;x-forwarded-port&quot;: &quot;443&quot;,
+    &quot;x-forwarded-proto&quot;: &quot;https&quot;
+  },
+  &quot;json&quot;: {
+    &quot;This cato is expected to be sent back, GOODTIMES.&quot;: &quot;&quot;
+  },
+  &quot;url&quot;: &quot;https://postman-echo.com/post&quot;
+}
+</code></pre>
+
+<p>In the <strong>form</strong> and <strong>json</strong> sections we see the word <strong>taco</strong> became <strong>cato</strong> as a result of the <code>shuffle</code> function in the first <strong>postFilter</strong>  <code>.Match | shuffle</code> and <strong>good    times</strong> became <strong>GOODTIMES</strong> from the from the <code>upper</code> and <code>nospace</code> functions in the second <strong>postFilter</strong> <code>.Match | upper | nospace</code></p>
+
+<p>The response from <a href="https://docs.postman-echo.com/">postman-echo.com</a> is a clear indication that rules in <strong>postFilter</strong> are functioning as intended.</p>
+
+<p>For the remainder of this article, I&rsquo;ll be going over the essential pieces of <a href="https://golang.org/">go</a> code that are used to create <a href="https://github.com/txn2/n2proxy">n2proxy</a>.</p>
+
+<h2 id="proxy-with-golang">Proxy with Golang</h2>
+
+<p>The <a href="https://golang.org/">go</a> standard libraries <a href="https://golang.org/pkg/net/http/">net/http</a> and <a href="https://golang.org/pkg/net/http/httputil/">net/http/httputil</a> come with all the functionality needed for the proxy.</p>
+
+<p>The following source code is an abstract from the file <a href="https://github.com/txn2/n2proxy/blob/master/server.go">server.go</a>, which contains the main application <a href="https://thenewstack.io/understanding-golang-packages/">package</a>.</p>
+
+<p><strong>HTTP Server</strong></p>
+
+<pre><code class="language-go">// server
+http.HandleFunc(&quot;/&quot;, proxy.handle)
+
+if *tls != true {
+    logger.Info(&quot;Starting proxy in plain HTTP mode.&quot;)
+    err = http.ListenAndServe(&quot;:&quot;+*port, nil)
+    if err != nil {
+        fmt.Printf(&quot;Error starting proxy: %s\n&quot;, err.Error())
+    }
+    os.Exit(0)
+}
+
+logger.Info(&quot;Starting proxy in TLS mode.&quot;)
+err = http.ListenAndServeTLS(&quot;:&quot;+*port, *crt, *key, nil)
+if err != nil {
+    fmt.Printf(&quot;Error starting proxyin TLS mode: %s\n&quot;, err.Error())
+}
+</code></pre>
+
+<p>Starting at the implementation, we see that the proxy is merely a path handler on the standard <a href="https://golang.org/">go</a> HTTP server.  The <strong>handle</strong> method on the <strong>proxy</strong> object passed all HTTP requests sent to the server beginning with <code>/</code>.</p>
+
+<p>Using an environment variable or flag (<code>if *tls != true {</code>) we can choose between serving plain HTTP with <a href="https://golang.org/pkg/net/http/#ListenAndServe">http.ListenAndServe</a> or encrypted HTTP over TLS (HTTPS) with <a href="https://golang.org/pkg/net/http/#ListenAndServeTLS">http.ListenAndServeTLS</a>.</p>
+
+<p>Working from the implementation up, we see the <strong>proxy</strong> object is created with three arguments: <strong>backend</strong>, <strong>cfg</strong> and <strong>logger</strong>*:</p>
+
+<pre><code class="language-bash">proxy := NewProxy(*backend, *cfg, logger)
+</code></pre>
+
+<p>Because I am using the command line <a href="https://golang.org/pkg/flag/">flag</a> package from <a href="https://golang.org/">go</a>, I must dereference pointers to values with a <code>*</code>, since the <code>NewProxy</code> function is expecting values.</p>
+
+<ul>
+<li><strong>backend</strong> - example: <a href="https://postman-echo.com/">https://postman-echo.com/</a></li>
+<li><strong>cfg</strong> - example: ./cfg.yml</li>
+<li><strong>logger</strong> - a configured <a href="https://github.com/uber-go/zap">zap</a> logger (speed is essential)</li>
+</ul>
+
+<h3 id="new-proxy">New Proxy</h3>
+
+<p>The <code>NewProxy</code> function returns an object with a <code>handle</code> method we passed to the <a href="https://golang.org/pkg/net/http/#HandleFunc">http.HandleFunc</a> in the implementation above. Since <code>handle</code> is a method of the new proxy object created by <code>NewProxy</code> it has access to its configuration. The <code>proxy</code> object is a <a href="https://golang.org/">go</a> struct with a method called <code>handle</code>:</p>
+
+<pre><code class="language-go">type Proxy struct {
+    target  *url.URL
+    proxy   *httputil.ReverseProxy
+    cfgFile string
+    logger  *zap.Logger
+    eng     *rweng.Eng
+}
+</code></pre>
+
+<p>The core component of this proxy object is a pointer to a <a href="https://golang.org/pkg/net/http/httputil/#ReverseProxy">ReverseProxy</a> object created by the <a href="https://golang.org/pkg/net/http/httputil/">httputil</a> package&rsquo;s <a href="https://golang.org/pkg/net/http/httputil/#NewSingleHostReverseProxy">NewSingleHostReverseProxy</a> function:</p>
+
+<pre><code class="language-go">func NewProxy(target string, cfgFile string, logger *zap.Logger) *Proxy {
+    targetUrl, err := url.Parse(target)
+    if err != nil {
+        fmt.Printf(&quot;Unable to parse URL: %s\n&quot;, err.Error())
+        os.Exit(1)
+    }
+
+    // create an rweng engine from a yaml configuration
+    eng, err := rweng.NewEngFromYml(cfgFile, logger)
+    if err != nil {
+        fmt.Printf(&quot;Engine failure: %s\n&quot;, err.Error())
+        os.Exit(1)
+    }
+
+    pxy := httputil.NewSingleHostReverseProxy(targetUrl)
+
+    proxy := &amp;Proxy{
+        target: targetUrl,
+        proxy:  pxy,
+        logger: logger,
+        eng:    eng,
+    }
+
+    return proxy
+}
+</code></pre>
+
+<p>Filtering and blocking is the central purpose of this proxy. The <code>handle</code> method below has access to <code>eng</code> where a method called <code>ProcessRequest</code> gets a shot at modifying the response and request data. You can think of it as a proxy within a proxy. The following code shows <strong>http.ResponseWriter</strong> and <strong>http.Request</strong> objects are sent first to <code>p.eng.ProcessRequest(w, r)</code> and finally handled by <code>p.proxy.ServeHTTP(w, r)</code>:</p>
+
+<pre><code class="language-go">func (p *Proxy) handle(w http.ResponseWriter, r *http.Request) {
+
+    start := time.Now()
+    reqPath := r.URL.Path
+    reqMethod := r.Method
+
+    end := time.Now()
+    latency := end.Sub(start)
+
+    p.logger.Info(reqPath,
+        zap.String(&quot;method&quot;, reqMethod),
+        zap.String(&quot;path&quot;, reqPath),
+        zap.String(&quot;time&quot;, end.Format(time.RFC3339)),
+        zap.Duration(&quot;latency&quot;, latency),
+    )
+
+    r.Host = p.target.Host
+
+    // process request
+    p.eng.ProcessRequest(w, r)
+
+    p.proxy.ServeHTTP(w, r)
+}
+</code></pre>
+
+<p>If you are curious how <code>p.eng.ProcessRequest(w, r)</code> filters data check out the method <code>ProcessRequest</code> in the <a href="https://github.com/txn2/n2proxy/blob/master/rweng/rweng.go">rweng</a> source code (read/write engine). In <a href="https://github.com/txn2/n2proxy/blob/master/rweng/rweng.go">rweng</a> the function <strong>NewEngFromYml</strong> is where the <a href="https://github.com/txn2/n2proxy/blob/master/cfg.yml">yaml configuration</a> file is Unmarshaled into a configuration struct after which all <a href="http://www.rexegg.com/regex-quickstart.html">regex patterns</a> and <a href="https://blog.gopheracademy.com/advent-2017/using-go-templates/">go templates</a> are pre-compiled.</p>
+
+<h3 id="next-steps">Next Steps</h3>
+
+<p><strong>Middleware</strong>: The method <code>p.eng.ProcessRequest(w, r)</code> is called before <code>p.proxy.ServeHTTP(w, r)</code> and of course this would be a great place to call dynamically any number of handler middlewares. We can also inject middleware higher up in the <a href="https://golang.org/pkg/net/http/">net/http</a> package.</p>
+
+<p><strong>Concurrency</strong>: In the <a href="https://github.com/txn2/n2proxy/blob/master/rweng/rweng.go">rweng</a> method <code>ProcessRequest</code> filters run serially, however, if dealing with a vast number of rules, a more sophisticated Fan-out, fan-in solution can chunk the rules and process them concurrently (assuming you are working on copies of data). See <a href="https://blog.golang.org/pipelines">Go Concurrency Patterns: Pipelines and cancellation</a>.</p>
+
+<h2 id="resources">Resources</h2>
+
+<ul>
+<li><a href="https://www.charlesproxy.com/">Charles</a> HTTP proxy</li>
+<li><a href="https://brew.sh/">brew</a> is the missing package manager for macOS</li>
+<li><a href="http://www.haproxy.org/">haproxy</a> is a reliable, high performance TCP/HTTP load balancer</li>
+<li><a href="https://www.nginx.com/">nginx</a> started as a web server / proxy and now considers itself a platform.</li>
+<li><a href="https://github.com/txn2/n2proxy">n2proxy</a> for contraband filtering reverse proxy for plain HTTP and SSL.</li>
+<li>The <a href="https://golang.org/">go</a> programming language.</li>
+<li><a href="https://www.jscape.com/blog/bid/87783/Forward-Proxy-vs-Reverse-Proxy">Forward Proxy vs. Reverse Proxy</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Regular_expression">regular expressions</a></li>
+<li><a href="https://www.symantec.com/connect/articles/detection-sql-injection-and-cross-site-scripting-attacks">Detection of SQL Injection and Cross-site Scripting Attacks</a></li>
+<li><a href="https://blog.golang.org/pipelines">Go Concurrency Patterns: Pipelines and cancellation</a></li>
+<li><a href="https://blog.gopheracademy.com/advent-2017/using-go-templates/">go templates</a></li>
+<li><a href="http://masterminds.github.io/sprig/">sprig</a> - Over 70 template functions for Go’s template language.</li>
+<li><a href="https://docs.postman-echo.com/">postman-echo.com</a> - test your REST clients and make sample API calls.</li>
+</ul>
+
+
+                
+<div id="disqus-comment"></div>
+
+
+
+            </div>
+            
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                
+                <section>
+                    <hr class="hidden-sm hidden-xs">
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/data" title="Data">
+                        Data
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/docker" title="Docker">
+                        Docker
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/golang" title="Golang">
+                        Golang
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/ingress" title="Ingress">
+                        Ingress
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/kubernetes" title="Kubernetes">
+                        Kubernetes
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/security" title="Security">
+                        Security
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/utils" title="Utils">
+                        Utils
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/kubectl" title="kubectl">
+                        kubectl
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                    </div>
+                </section>
+
+                
+                <hr>
+                <h5>RELATED</h5>
+                <ul class="list-inline">
+                    
+                </ul>
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                   
+                   <li>
+                       <a href="" rel="alternate" type="application/rss+xml" title="IMTI" >
+                           <span class="fa-stack fa-lg">
+                               <i class="fa fa-circle fa-stack-2x"></i>
+                               <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+                           </span>
+                       </a>
+                   </li>
+                   
+                    
+                    <li>
+                        <a href="mailto:cjimti@gmail.com">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                    
+                    
+                    <li>
+                        <a href="https://twitter.com/cjimti">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    
+
+                    
+
+		    
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/cjimti">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                    
+                    <li>
+                        <a target="_blank" href="https://www.linkedin.com/in/cjimti/">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                </ul>
+		<p class="copyright text-muted">
+            Copyright &copy; <a href="">Craig Johnston</a> , 2018
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+
+
+
+
+<script>
+    
+    if($('#tag_cloud').length !== 0){
+        async("/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+
+
+    
+        
+        
+    
+
+
+
+
+
+</body>
+</html>
