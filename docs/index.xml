@@ -42,6 +42,25 @@ Explore the Elasticsearch official documentation: Search in Depth.
     </item>
     
     <item>
+      <title>JWT Microservice, Tokenize Remote APIs</title>
+      <link>https://mk2.imti.co/jwt-microservice/</link>
+      <pubDate>Fri, 18 May 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://mk2.imti.co/jwt-microservice/</guid>
+      <description>txToken is a small high performance microservice utility container. txToken is used for adding JSON Web Token based security to existing or new API development. txToken is specifically for systems that communicate in JSON over HTTP. txToken is called from a client with a JSON post body and passes received JSON to a remote endpoint. JSON retrieved from a remote endpoint is used to create a JWT token with an HS256 symmetrically encrypted signature.</description>
+    </item>
+    
+    <item>
+      <title>Let&#39;s Encrypt, Kubernetes</title>
+      <link>https://mk2.imti.co/lets-encrypt-kubernetes/</link>
+      <pubDate>Fri, 18 May 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://mk2.imti.co/lets-encrypt-kubernetes/</guid>
+      <description>Use cert-manager to get port 443/https running with signed x509 certificates for Ingress on your Kubernetes Production Hobby Cluster. cert-manager is the successor to kube-lego and the preferred way to &amp;ldquo;automatically obtain browser-trusted certificates, without any human intervention.&amp;rdquo; using Let&amp;rsquo;s Encrypt.
+You need to install Helm first if you do not already have it. Otherwise, check out my article Helm on Custom Kubernetes, especially if you are following along with my Production Hobby Cluster guides.</description>
+    </item>
+    
+    <item>
       <title>Helm on Custom Kubernetes</title>
       <link>https://mk2.imti.co/helm-on-custom-cluster/</link>
       <pubDate>Thu, 17 May 2018 00:00:00 +0000</pubDate>

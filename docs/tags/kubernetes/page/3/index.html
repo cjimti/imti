@@ -145,6 +145,53 @@
             
 
 <div class="post-preview">
+    <a href="https://mk2.imti.co/413-request-entity-too-large/">
+        <h2 class="post-title">
+            Kubernetes - 413 Request Entity Too Large
+        </h2>
+	
+        <h3 class="post-subtitle">
+            Configuring the NGINX Ingress Controller
+        </h3>
+	
+        <div class="post-content-preview">
+	
+            When setting up nginx ingress on Kubernetes for a private Docker Registry, I ran into an error when trying to push an image to it.
+Error parsing HTTP response: invalid character '&lt;' looking for beginning of value: &quot;&lt;html&gt;\r\n&lt;head&gt;&lt;title&gt;413 Request Entity Too Large&lt;/title&gt;&lt;/head&gt;\r\n&lt;body bgcolor=\&quot;white\&quot;&gt;\r\n&lt;center&gt;&lt;h1&gt;413 Request Entity Too Large&lt;/h1&gt;&lt;/center&gt;\r\n&lt;hr&gt;&lt;center&gt;nginx/1.9.14&lt;/center&gt;\r\n&lt;/body&gt;\r\n&lt;/html&gt;\r\n&quot;  The &ldquo;413 Request Entity Too Large&rdquo; error is something many accustomed to running nginx as a standard web server/proxy. nginx is configured to restrict the size of files it will allow over a post.
+       
+        </div>
+    </a>
+    <p class="post-meta">
+    Posted by Craig Johnston Saturday, March 24, 2018
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="https://mk2.imti.co/kubectl-remote/">
+        <h2 class="post-title">
+            Kubernetes Remote Control
+        </h2>
+	
+        <h3 class="post-subtitle">
+            Using kubectl to Control a Remote Kubernetes Cluster
+        </h3>
+	
+        <div class="post-content-preview">
+	
+            I use Minikube to run a local Kubernetes single node cluster (cluster?). However, I also work with a custom production cluster for work. This cluster consists of development and production nodes. I often need to switch between working on my local Minikube and the online Kubernetes cluster.
+TIP: Visit the kubectl Cheat Sheet often.
+The default configuration kubectl is stored in ~/.kube/config and if you have Minikube installed, it added the context minikube to your config.
+       
+        </div>
+    </a>
+    <p class="post-meta">
+    Posted by Craig Johnston Saturday, March 24, 2018
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
     <a href="https://mk2.imti.co/microservices/">
         <h2 class="post-title">
             Microservices &amp; Kubernetes
@@ -249,9 +296,15 @@ The following is primarily a getting started guide wrapped around my personal de
                 
             
                 
+            
+                
+            
+                
                     <a href="/tags/kubernetes" title="Kubernetes">
                         Kubernetes
                     </a>
+                
+            
                 
             
                 

@@ -190,6 +190,51 @@ Developing services in a Microservices architecture presents local development c
 <hr>
 
 <div class="post-preview">
+    <a href="https://mk2.imti.co/jwt-microservice/">
+        <h2 class="post-title">
+            JWT Microservice, Tokenize Remote APIs
+        </h2>
+	
+        <h3 class="post-subtitle">
+            Using txToken to create JWT Tokens from JSON POST data.
+        </h3>
+	
+        <div class="post-content-preview">
+	
+            txToken is a small high performance microservice utility container. txToken is used for adding JSON Web Token based security to existing or new API development. txToken is specifically for systems that communicate in JSON over HTTP. txToken is called from a client with a JSON post body and passes received JSON to a remote endpoint. JSON retrieved from a remote endpoint is used to create a JWT token with an HS256 symmetrically encrypted signature.
+       
+        </div>
+    </a>
+    <p class="post-meta">
+    Posted by Craig Johnston Friday, May 18, 2018
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="https://mk2.imti.co/lets-encrypt-kubernetes/">
+        <h2 class="post-title">
+            Let&#39;s Encrypt, Kubernetes
+        </h2>
+	
+        <h3 class="post-subtitle">
+            Automated, secure and free 443/https with signed x509 certificates for Ingress.
+        </h3>
+	
+        <div class="post-content-preview">
+	
+            Use cert-manager to get port 443/https running with signed x509 certificates for Ingress on your Kubernetes Production Hobby Cluster. cert-manager is the successor to kube-lego and the preferred way to &ldquo;automatically obtain browser-trusted certificates, without any human intervention.&rdquo; using Let&rsquo;s Encrypt.
+You need to install Helm first if you do not already have it. Otherwise, check out my article Helm on Custom Kubernetes, especially if you are following along with my Production Hobby Cluster guides.
+       
+        </div>
+    </a>
+    <p class="post-meta">
+    Posted by Craig Johnston Friday, May 18, 2018
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
     <a href="https://mk2.imti.co/helm-on-custom-cluster/">
         <h2 class="post-title">
             Helm on Custom Kubernetes
@@ -208,51 +253,6 @@ Developing services in a Microservices architecture presents local development c
     </a>
     <p class="post-meta">
     Posted by Craig Johnston Thursday, May 17, 2018
-    </p>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="https://mk2.imti.co/kubernetes-custom-dns/">
-        <h2 class="post-title">
-            Kubernetes Custom Upstream DNS
-        </h2>
-	
-        <h3 class="post-subtitle">
-            Customize upstream DNS resolution.
-        </h3>
-	
-        <div class="post-content-preview">
-	
-            Customize the Upstream Nameservers used by kube-dns by Pods when looking up external hostnames from within a Kubernetes cluster. I found that adding custom Upstream Nameservers to my kube-dns solved many issues encountered in in the past with external hostname resolution on individual Pods.
-If you want to experiment on a production-like cluster, I suggest reading my article &ldquo;Production Hobby Cluster&rdquo; for a guide on setting up a fun, cheap-yet-robust experimental cluster.
-       
-        </div>
-    </a>
-    <p class="post-meta">
-    Posted by Craig Johnston Thursday, May 17, 2018
-    </p>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="https://mk2.imti.co/web-cluster-ingress/">
-        <h2 class="post-title">
-            Ingress on Custom Kubernetes
-        </h2>
-	
-        <h3 class="post-subtitle">
-            Setting up ingress-nginx on a custom cluster.
-        </h3>
-	
-        <div class="post-content-preview">
-	
-            There are more than a handful of ways to set up port 80 and 443 web ingress on a custom Kubernetes cluster. Specifically a bare metal cluster. If you are looking to experiment or learn on a non-production cluster, but something more true to production than minikube, I suggest you check out my previous article Production Hobby Cluster, a step-by-step guide for setting up a custom production capable Kubernetes cluster.
-       
-        </div>
-    </a>
-    <p class="post-meta">
-    Posted by Craig Johnston Tuesday, May 15, 2018
     </p>
 </div>
 <hr>
@@ -316,9 +316,15 @@ If you want to experiment on a production-like cluster, I suggest reading my art
                 
             
                 
+            
+                
+            
+                
                     <a href="/tags/kubernetes" title="Kubernetes">
                         Kubernetes
                     </a>
+                
+            
                 
             
                 
