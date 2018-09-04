@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>DNS on IMTI</title>
+    <link>https://mk2.imti.co/tags/dns/</link>
+    <description>Recent content in DNS on IMTI</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 17 May 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://mk2.imti.co/tags/dns/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Kubernetes Custom Upstream DNS</title>
+      <link>https://mk2.imti.co/kubernetes-custom-dns/</link>
+      <pubDate>Thu, 17 May 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://mk2.imti.co/kubernetes-custom-dns/</guid>
+      <description>Customize the Upstream Nameservers used by kube-dns by Pods when looking up external hostnames from within a Kubernetes cluster. I found that adding custom Upstream Nameservers to my kube-dns solved many issues encountered in in the past with external hostname resolution on individual Pods.
+If you want to experiment on a production-like cluster, I suggest reading my article &amp;ldquo;Production Hobby Cluster&amp;rdquo; for a guide on setting up a fun, cheap-yet-robust experimental cluster.</description>
+    </item>
+    
+  </channel>
+</rss>

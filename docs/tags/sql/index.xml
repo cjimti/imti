@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>SQL on IMTI</title>
+    <link>https://mk2.imti.co/tags/sql/</link>
+    <description>Recent content in SQL on IMTI</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 02 Apr 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://mk2.imti.co/tags/sql/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>SQL Foundations</title>
+      <link>https://mk2.imti.co/sql-select-joins-aliases/</link>
+      <pubDate>Mon, 02 Apr 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://mk2.imti.co/sql-select-joins-aliases/</guid>
+      <description>The following is an attempt at explaining the basics of an SQL query, and more importantly how I believe you can best think through them. All queries can be broken down into the basics of this declarative language.
+I recently helped a co-worker read through a large SQL query with a few dozen joins and left joins, alias, and recursions. He is mostly a front-end integrator and although he has been tinkering with SQL for years, he never really understood the basics.</description>
+    </item>
+    
+  </channel>
+</rss>

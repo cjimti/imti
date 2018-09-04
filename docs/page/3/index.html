@@ -146,24 +146,116 @@
             
 
 <div class="post-preview">
-    <a href="https://mk2.imti.co/kubernetes/">
+    <a href="https://mk2.imti.co/sql-select-joins-aliases/">
         <h2 class="post-title">
-            Kubernetes Overview
+            SQL Foundations
         </h2>
 	
         <h3 class="post-subtitle">
-            Container Orchestration &amp; Microservices
+            Selects, joins and aliases.
         </h3>
 	
         <div class="post-content-preview">
 	
-            Getting started with Kubernetes for local development. I develop on a Mac however much of this is easily translated to windows.
-The following is primarily a getting started guide wrapped around my personal development notes. This set of notes are specifically for my co-workers in helping them get up to speed quickly. If you see an error feel free to make a pull request or just add an issue.
+            The following is an attempt at explaining the basics of an SQL query, and more importantly how I believe you can best think through them. All queries can be broken down into the basics of this declarative language.
+I recently helped a co-worker read through a large SQL query with a few dozen joins and left joins, alias, and recursions. He is mostly a front-end integrator and although he has been tinkering with SQL for years, he never really understood the basics.
        
         </div>
     </a>
     <p class="post-meta">
-    Posted by Craig Johnston Thursday, March 1, 2018
+    Posted by Craig Johnston Monday, April 2, 2018
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="https://mk2.imti.co/raspberry-pi-rsync-interval/">
+        <h2 class="post-title">
+            rSync Files on Interval
+        </h2>
+	
+        <h3 class="post-subtitle">
+            Sync media to Raspberry Pi or any ARM SoC.
+        </h3>
+	
+        <div class="post-content-preview">
+	
+            A recurring requirement for my IOT projects involves keeping a set of files synced with a central server. Many of these projects include media players, kiosk systems, or applications that need frequently updated configuration files, all while entirely unattended, and in most cases unreachable through firewalls. I have one project that alone has 2000+ devices pulling media continuously from an rsync server. Many of these devices are on doggy wifi networks.
+       
+        </div>
+    </a>
+    <p class="post-meta">
+    Posted by Craig Johnston Monday, April 2, 2018
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="https://mk2.imti.co/mac-cli-burn-images/">
+        <h2 class="post-title">
+            Burn SD Images on MacOs
+        </h2>
+	
+        <h3 class="post-subtitle">
+            Use the command line to burn SD cards, easy and fast.
+        </h3>
+	
+        <div class="post-content-preview">
+	
+            Use your terminal to burn images fast and easy with dd. I do a lot of professional and hobby development for projects using devices such as Raspberry Pi, Orange Pi, Libre Computer, Tinker Board, etc. I run across a lot of tutorials with people downloading and using big GUI apps with clunky drag and drop interfaces to burn images.
+It&rsquo;s one command in your terminal. Technically, it&rsquo;s three, but I don&rsquo;t count listing and unmounting as the final act of burning.
+       
+        </div>
+    </a>
+    <p class="post-meta">
+    Posted by Craig Johnston Sunday, April 1, 2018
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="https://mk2.imti.co/413-request-entity-too-large/">
+        <h2 class="post-title">
+            Kubernetes - 413 Request Entity Too Large
+        </h2>
+	
+        <h3 class="post-subtitle">
+            Configuring the NGINX Ingress Controller
+        </h3>
+	
+        <div class="post-content-preview">
+	
+            When setting up nginx ingress on Kubernetes for a private Docker Registry, I ran into an error when trying to push an image to it.
+Error parsing HTTP response: invalid character '&lt;' looking for beginning of value: &quot;&lt;html&gt;\r\n&lt;head&gt;&lt;title&gt;413 Request Entity Too Large&lt;/title&gt;&lt;/head&gt;\r\n&lt;body bgcolor=\&quot;white\&quot;&gt;\r\n&lt;center&gt;&lt;h1&gt;413 Request Entity Too Large&lt;/h1&gt;&lt;/center&gt;\r\n&lt;hr&gt;&lt;center&gt;nginx/1.9.14&lt;/center&gt;\r\n&lt;/body&gt;\r\n&lt;/html&gt;\r\n&quot;  The &ldquo;413 Request Entity Too Large&rdquo; error is something many accustomed to running nginx as a standard web server/proxy. nginx is configured to restrict the size of files it will allow over a post.
+       
+        </div>
+    </a>
+    <p class="post-meta">
+    Posted by Craig Johnston Saturday, March 24, 2018
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="https://mk2.imti.co/kubectl-remote/">
+        <h2 class="post-title">
+            Kubernetes Remote Control
+        </h2>
+	
+        <h3 class="post-subtitle">
+            Using kubectl to Control a Remote Kubernetes Cluster
+        </h3>
+	
+        <div class="post-content-preview">
+	
+            I use Minikube to run a local Kubernetes single node cluster (cluster?). However, I also work with a custom production cluster for work. This cluster consists of development and production nodes. I often need to switch between working on my local Minikube and the online Kubernetes cluster.
+TIP: Visit the kubectl Cheat Sheet often.
+The default configuration kubectl is stored in ~/.kube/config and if you have Minikube installed, it added the context minikube to your config.
+       
+        </div>
+    </a>
+    <p class="post-meta">
+    Posted by Craig Johnston Saturday, March 24, 2018
     </p>
 </div>
 <hr>
@@ -178,6 +270,10 @@ The following is primarily a getting started guide wrapped around my personal de
         <a href="/page/2/">&larr; Newer Posts</a>
     </li>
     
+    
+    <li class="next">
+        <a href="/page/4/">Older Posts &rarr;</a>
+    </li>
     
 </ul>
 
@@ -202,6 +298,14 @@ The following is primarily a getting started guide wrapped around my personal de
             
                 
             
+                
+            
+                
+            
+                
+                    <a href="/tags/data" title="Data">
+                        Data
+                    </a>
                 
             
                 
@@ -236,6 +340,22 @@ The following is primarily a getting started guide wrapped around my personal de
             
                 
             
+                
+            
+                
+                    <a href="/tags/utils" title="Utils">
+                        Utils
+                    </a>
+                
+            
+                
+            
+                
+            
+                
+                    <a href="/tags/kubectl" title="kubectl">
+                        kubectl
+                    </a>
                 
             
                 

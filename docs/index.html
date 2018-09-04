@@ -215,46 +215,47 @@ Explore the Elasticsearch official documentation: Search in Depth.
 <hr>
 
 <div class="post-preview">
-    <a href="https://mk2.imti.co/raspberry-pi-rsync-interval/">
+    <a href="https://mk2.imti.co/helm-on-custom-cluster/">
         <h2 class="post-title">
-            rSync Files on Interval
+            Helm on Custom Kubernetes
         </h2>
 	
         <h3 class="post-subtitle">
-            Sync media to Raspberry Pi or any ARM SoC.
+            Kubernetes package management.
         </h3>
 	
         <div class="post-content-preview">
 	
-            A recurring requirement for my IOT projects involves keeping a set of files synced with a central server. Many of these projects include media players, kiosk systems, or applications that need frequently updated configuration files, all while entirely unattended, and in most cases unreachable through firewalls. I have one project that alone has 2000+ devices pulling media continuously from an rsync server. Many of these devices are on doggy wifi networks.
+            Helm is the official package manager for Kubernetes. If you are looking to start using Helm or want to test its capabilities, I suggest you set up a Production Hobby Cluster. This article is a continuation of the Production Hobby Cluster configuration but should be entirely useful on its own.
+ From https://github.com/kubernetes/helm - Helm has two parts: a client (helm) and a server (tiller) - Tiller runs inside of your Kubernetes cluster and manages releases (installations) of your charts.
        
         </div>
     </a>
     <p class="post-meta">
-    Posted by Craig Johnston Monday, April 2, 2018
+    Posted by Craig Johnston Thursday, May 17, 2018
     </p>
 </div>
 <hr>
 
 <div class="post-preview">
-    <a href="https://mk2.imti.co/mac-cli-burn-images/">
+    <a href="https://mk2.imti.co/kubernetes-custom-dns/">
         <h2 class="post-title">
-            Burn SD Images on MacOs
+            Kubernetes Custom Upstream DNS
         </h2>
 	
         <h3 class="post-subtitle">
-            Use the command line to burn SD cards, easy and fast.
+            Customize upstream DNS resolution.
         </h3>
 	
         <div class="post-content-preview">
 	
-            Use your terminal to burn images fast and easy with dd. I do a lot of professional and hobby development for projects using devices such as Raspberry Pi, Orange Pi, Libre Computer, Tinker Board, etc. I run across a lot of tutorials with people downloading and using big GUI apps with clunky drag and drop interfaces to burn images.
-It&rsquo;s one command in your terminal. Technically, it&rsquo;s three, but I don&rsquo;t count listing and unmounting as the final act of burning.
+            Customize the Upstream Nameservers used by kube-dns by Pods when looking up external hostnames from within a Kubernetes cluster. I found that adding custom Upstream Nameservers to my kube-dns solved many issues encountered in in the past with external hostname resolution on individual Pods.
+If you want to experiment on a production-like cluster, I suggest reading my article &ldquo;Production Hobby Cluster&rdquo; for a guide on setting up a fun, cheap-yet-robust experimental cluster.
        
         </div>
     </a>
     <p class="post-meta">
-    Posted by Craig Johnston Sunday, April 1, 2018
+    Posted by Craig Johnston Thursday, May 17, 2018
     </p>
 </div>
 <hr>
@@ -298,6 +299,14 @@ It&rsquo;s one command in your terminal. Technically, it&rsquo;s three, but I do
                 
             
                 
+                    <a href="/tags/data" title="Data">
+                        Data
+                    </a>
+                
+            
+                
+            
+                
             
                 
                     <a href="/tags/docker" title="Docker">
@@ -327,6 +336,22 @@ It&rsquo;s one command in your terminal. Technically, it&rsquo;s three, but I do
             
                 
             
+                
+            
+                
+                    <a href="/tags/utils" title="Utils">
+                        Utils
+                    </a>
+                
+            
+                
+            
+                
+            
+                
+                    <a href="/tags/kubectl" title="kubectl">
+                        kubectl
+                    </a>
                 
             
                 

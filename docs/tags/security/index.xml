@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Security on IMTI</title>
+    <link>https://mk2.imti.co/tags/security/</link>
+    <description>Recent content in Security on IMTI</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 10 May 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://mk2.imti.co/tags/security/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Kubectl x509 Unable to Connect</title>
+      <link>https://mk2.imti.co/kubectl-remote-x509-valid/</link>
+      <pubDate>Thu, 10 May 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://mk2.imti.co/kubectl-remote-x509-valid/</guid>
+      <description>Just set up a brand new cluster? Changed the domain or IP of your admin node? Then you may have encountered the error Unable to connect to the server: x509: certificate is valid for &amp;hellip;. The following is a fix for this common issue. However, there are often other reasons to rebuild your cluster cert, and it&amp;rsquo;s relatively easy.
+TL;DR: &amp;ldquo;I don&amp;rsquo;t care about the fix I need to remote control my cluster.</description>
+    </item>
+    
+  </channel>
+</rss>

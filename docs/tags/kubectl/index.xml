@@ -6,10 +6,30 @@
     <description>Recent content in Kubectl on IMTI</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 24 Mar 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 15 May 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://mk2.imti.co/tags/kubectl/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>kubectl Context Multiple Clusters</title>
+      <link>https://mk2.imti.co/kubectl-remote-context/</link>
+      <pubDate>Tue, 15 May 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://mk2.imti.co/kubectl-remote-context/</guid>
+      <description>I use a few Kubernetes clusters on a daily basis, and I use kubectl to access and configure them from my workstation. There are dozens of ways to configure kubectl however I find the following method the easiest for me to manage and not make a mess.
+I also set up test clusters from time-to-time, and so keeping my configs organized is, so I don&amp;rsquo;t confuse myself or make a mess.</description>
+    </item>
+    
+    <item>
+      <title>Kubectl x509 Unable to Connect</title>
+      <link>https://mk2.imti.co/kubectl-remote-x509-valid/</link>
+      <pubDate>Thu, 10 May 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://mk2.imti.co/kubectl-remote-x509-valid/</guid>
+      <description>Just set up a brand new cluster? Changed the domain or IP of your admin node? Then you may have encountered the error Unable to connect to the server: x509: certificate is valid for &amp;hellip;. The following is a fix for this common issue. However, there are often other reasons to rebuild your cluster cert, and it&amp;rsquo;s relatively easy.
+TL;DR: &amp;ldquo;I don&amp;rsquo;t care about the fix I need to remote control my cluster.</description>
+    </item>
     
     <item>
       <title>Kubernetes Remote Control</title>

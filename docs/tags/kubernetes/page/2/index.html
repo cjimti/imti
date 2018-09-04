@@ -145,24 +145,116 @@
             
 
 <div class="post-preview">
-    <a href="https://mk2.imti.co/kubernetes/">
+    <a href="https://mk2.imti.co/kubectl-remote-context/">
         <h2 class="post-title">
-            Kubernetes Overview
+            kubectl Context Multiple Clusters
         </h2>
 	
         <h3 class="post-subtitle">
-            Container Orchestration &amp; Microservices
+            Managing multiple clusters with kubectl.
         </h3>
 	
         <div class="post-content-preview">
 	
-            Getting started with Kubernetes for local development. I develop on a Mac however much of this is easily translated to windows.
-The following is primarily a getting started guide wrapped around my personal development notes. This set of notes are specifically for my co-workers in helping them get up to speed quickly. If you see an error feel free to make a pull request or just add an issue.
+            I use a few Kubernetes clusters on a daily basis, and I use kubectl to access and configure them from my workstation. There are dozens of ways to configure kubectl however I find the following method the easiest for me to manage and not make a mess.
+I also set up test clusters from time-to-time, and so keeping my configs organized is, so I don&rsquo;t confuse myself or make a mess.
        
         </div>
     </a>
     <p class="post-meta">
-    Posted by Craig Johnston Thursday, March 1, 2018
+    Posted by Craig Johnston Tuesday, May 15, 2018
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="https://mk2.imti.co/kubectl-remote-x509-valid/">
+        <h2 class="post-title">
+            Kubectl x509 Unable to Connect
+        </h2>
+	
+        <h3 class="post-subtitle">
+            Kubernetes remote access and TLS certs.
+        </h3>
+	
+        <div class="post-content-preview">
+	
+            Just set up a brand new cluster? Changed the domain or IP of your admin node? Then you may have encountered the error Unable to connect to the server: x509: certificate is valid for &hellip;. The following is a fix for this common issue. However, there are often other reasons to rebuild your cluster cert, and it&rsquo;s relatively easy.
+TL;DR: &ldquo;I don&rsquo;t care about the fix I need to remote control my cluster.
+       
+        </div>
+    </a>
+    <p class="post-meta">
+    Posted by Craig Johnston Thursday, May 10, 2018
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="https://mk2.imti.co/hobby-cluster/">
+        <h2 class="post-title">
+            Production Hobby Cluster
+        </h2>
+	
+        <h3 class="post-subtitle">
+            Production-grade cluster on a hobby budget.
+        </h3>
+	
+        <div class="post-content-preview">
+	
+            Setting up a production-grade Kubernetes cluster can be done on a hobby budget, and if this is true why mess around with a lesser grade. If you are investing time to learn distributed cloud computing or microservices, is the distance between $0 and 15 dollars a month worth the time in translating best practices? Kubernetes is designed to host production applications. My personal web applications may only be hobbies, but they might as well be production grade hobbies.
+       
+        </div>
+    </a>
+    <p class="post-meta">
+    Posted by Craig Johnston Wednesday, May 9, 2018
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="https://mk2.imti.co/413-request-entity-too-large/">
+        <h2 class="post-title">
+            Kubernetes - 413 Request Entity Too Large
+        </h2>
+	
+        <h3 class="post-subtitle">
+            Configuring the NGINX Ingress Controller
+        </h3>
+	
+        <div class="post-content-preview">
+	
+            When setting up nginx ingress on Kubernetes for a private Docker Registry, I ran into an error when trying to push an image to it.
+Error parsing HTTP response: invalid character '&lt;' looking for beginning of value: &quot;&lt;html&gt;\r\n&lt;head&gt;&lt;title&gt;413 Request Entity Too Large&lt;/title&gt;&lt;/head&gt;\r\n&lt;body bgcolor=\&quot;white\&quot;&gt;\r\n&lt;center&gt;&lt;h1&gt;413 Request Entity Too Large&lt;/h1&gt;&lt;/center&gt;\r\n&lt;hr&gt;&lt;center&gt;nginx/1.9.14&lt;/center&gt;\r\n&lt;/body&gt;\r\n&lt;/html&gt;\r\n&quot;  The &ldquo;413 Request Entity Too Large&rdquo; error is something many accustomed to running nginx as a standard web server/proxy. nginx is configured to restrict the size of files it will allow over a post.
+       
+        </div>
+    </a>
+    <p class="post-meta">
+    Posted by Craig Johnston Saturday, March 24, 2018
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="https://mk2.imti.co/kubectl-remote/">
+        <h2 class="post-title">
+            Kubernetes Remote Control
+        </h2>
+	
+        <h3 class="post-subtitle">
+            Using kubectl to Control a Remote Kubernetes Cluster
+        </h3>
+	
+        <div class="post-content-preview">
+	
+            I use Minikube to run a local Kubernetes single node cluster (cluster?). However, I also work with a custom production cluster for work. This cluster consists of development and production nodes. I often need to switch between working on my local Minikube and the online Kubernetes cluster.
+TIP: Visit the kubectl Cheat Sheet often.
+The default configuration kubectl is stored in ~/.kube/config and if you have Minikube installed, it added the context minikube to your config.
+       
+        </div>
+    </a>
+    <p class="post-meta">
+    Posted by Craig Johnston Saturday, March 24, 2018
     </p>
 </div>
 <hr>
@@ -177,6 +269,10 @@ The following is primarily a getting started guide wrapped around my personal de
         <a href="/tags/kubernetes/">&larr; Newer Posts</a>
     </li>
     
+    
+    <li class="next">
+        <a href="/tags/kubernetes/page/3/">Older Posts &rarr;</a>
+    </li>
     
 </ul>
 
@@ -201,6 +297,14 @@ The following is primarily a getting started guide wrapped around my personal de
             
                 
             
+                
+            
+                
+            
+                
+                    <a href="/tags/data" title="Data">
+                        Data
+                    </a>
                 
             
                 
@@ -235,6 +339,22 @@ The following is primarily a getting started guide wrapped around my personal de
             
                 
             
+                
+            
+                
+                    <a href="/tags/utils" title="Utils">
+                        Utils
+                    </a>
+                
+            
+                
+            
+                
+            
+                
+                    <a href="/tags/kubectl" title="kubectl">
+                        kubectl
+                    </a>
                 
             
                 
