@@ -1,11 +1,18 @@
 ---
-published: true
-layout: post
-title: Reverse Proxy in Golang
-tags: coding golang docker cli
-featured: coding golang docker cli
-mast: proxy
+layout:     post
+title:      "Reverse Proxy in Golang"
+subtitle:   "Retrofit security proxy to prevent XSS and code injection."
+date:       2018-06-15
+author:     "Craig Johnston"
+URL:        "golang-reverse-proxy/"
+image:      "/img/post/dentalinst.jpg"
+twitter_image: "/img/post/dentalinst_876_438.jpg"
+tags:
+- DevOps
+- Security
+- Golang
 ---
+
 Reverse proxies are standard components in many web architectures, from [Nginx] in front of [php-fpm] serving [Drupal] or [Wordpress], to endless mixtures of load balancers, security appliances, and popular firewall applications. [Reverse proxies differ from forward proxies][Forward Proxy vs. Reverse Proxy] in little but their intended implementation, be it service-side or client side. The following information is useful in either context. However, I focus on a service-side architecture. Further down this article, I'll be going over the reasonably simple [go] code needed to develop a basic, yet production quality proxy, but first I'll give you my take on why they solve so many problems and offer up my little workhorse, [n2proxy].
 
 ## Reverse Proxies

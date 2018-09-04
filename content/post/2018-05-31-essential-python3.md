@@ -1,22 +1,25 @@
 ---
-published: true
-layout: post
-title: Essential Python 3
-tags: coding python
-featured: python coding
-mast: python
+layout:     post
+title:      "Essential Python 3"
+subtitle:   "Programming in Python"
+date:       2018-05-31
+author:     "Craig Johnston"
+URL:        "essential-python3/"
+image:      "/img/post/watchgears.jpg"
+twitter_image: "/img/post/watchgears_876_438.jpg"
+tags:
+- Python
+series:
+- Python
 ---
 
-This article is a quick tour of basic [Python] 3 syntax, components and structure. I intend to ballance a cheat sheet format with hello world style boilerplates. If you are already a software developer and need a quick refresh on [Python] then I hope you benefit from my notes below.
+This article is a quick tour of basic [Python] 3 syntax, components and structure. I intend to balance a cheat sheet format with hello world style boilerplate. If you are already a software developer and need a quick refresh on [Python] then I hope you benefit from my notes below.
 
 I am a professional software developer for a software development company, and for that reason, I work with a lot of languages, expert in some, and ok in others.  I context switch often, and sometimes months in between languages. I  often find myself just needing a quick overview to prime the pump so to say, and rather than keep my notes to myself I thought I would clean them up a bit and publish for anyone needing a quick tour, starting with [Python] and more languages as time and interest permits.
 
-Each of the following code blocks is executable.
+Each of the following code blocks are executable.
 
-**Quick Reference:**
-
-* Do not remove this line (it will not be displayed)
-{:toc}
+{{< toc >}}
 
 ### Script Execution
 
