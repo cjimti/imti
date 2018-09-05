@@ -24,6 +24,12 @@
                     <li>
                         <a href="{{ .Site.BaseURL }}/">Home</a>
                     </li>
+                    <li>
+                        <a href="{{ .Site.BaseURL }}/about/">About</a>
+                    </li>
+                    <li>
+                        <a href="https://twitter.com/cjimti">Follow</a>
+                    </li>
                     {{ range $name, $taxonomy := .Site.Taxonomies.categories }}
                     <li>
                         <a href="{{ "categories/" | absLangURL }}{{ $name | urlize }}">{{ $name }}</a>

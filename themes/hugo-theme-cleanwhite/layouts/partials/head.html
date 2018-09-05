@@ -12,11 +12,9 @@
     <meta name="keyword"  content="{{ .Site.Params.keyword }}">
     <link rel="shortcut icon" href="{{ "img/favicon.ico" | absURL }}">
 
-    <title>{{ if .Title }}{{ .Title }}-{{ .Site.Params.SEOTitle }}{{ else }}{{ .Site.Params.SEOTitle }}{{ end }}</title>
+    <title>{{ if .Title }}{{ .Title }} - IMTI - Craig Johnston{{ else }}IMTI - Craig Johnston{{ end }}</title>
 
     <link rel="canonical" href="{{ .URL | absURL }}">
-
-    <link rel="stylesheet" href="{{ "css/iDisqus.min.css" | absURL }}"/>
 	
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="{{ "css/bootstrap.min.css" | absURL }}">
