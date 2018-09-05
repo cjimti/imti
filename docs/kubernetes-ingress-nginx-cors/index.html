@@ -12,11 +12,9 @@
     <meta name="keyword"  content="Go, Kubernetes, Elasticsearch, Python, Docker, Big Data, Artificial Intelligence, Machine Learning, Blockchain">
     <link rel="shortcut icon" href="https://mk2.imti.co/img/favicon.ico">
 
-    <title>CORS on Kubernetes Ingress Nginx-IMTI | Craig Johnston</title>
+    <title>CORS on Kubernetes Ingress Nginx - IMTI - Craig Johnston</title>
 
     <link rel="canonical" href="https://mk2.imti.co/kubernetes-ingress-nginx-cors/">
-
-    <link rel="stylesheet" href="https://mk2.imti.co/css/iDisqus.min.css"/>
 	
     
     <link rel="stylesheet" href="https://mk2.imti.co/css/bootstrap.min.css">
@@ -111,6 +109,12 @@ apiVersion: extensions/v1beta1 kind: Ingress metadata: name: api namespace: fuse
                     <li>
                         <a href="https://mk2.imti.co/">Home</a>
                     </li>
+                    <li>
+                        <a href="https://mk2.imti.co/about/">About</a>
+                    </li>
+                    <li>
+                        <a href="https://twitter.com/cjimti">Follow</a>
+                    </li>
                     
 
                     
@@ -202,6 +206,11 @@ apiVersion: extensions/v1beta1 kind: Ingress metadata: name: api namespace: fuse
                 col-md-10 col-md-offset-1
                 post-container">
 
+                <h5>SHARE</h5>
+                <ul class="list-inline">
+                    <li><div class="addthis_inline_share_toolbox"></div></li>
+                </ul>
+
                 
 
 <p>Using <a href="/web-cluster-ingress/">ingress</a>-nginx on <a href="https://kubernetes.io/">Kubernetes</a> makes adding <a href="https://en.wikipedia.org/wiki/Cross-origin_resource_sharing">CORS</a> headers painless. Kubernetes <a href="/web-cluster-ingress/">ingress</a>-nginx uses <a href="https://github.com/kubernetes/ingress-nginx/blob/master/docs/user-guide/nginx-configuration/annotations.md">annotations</a> as a quick way to allow you to specify the automatic generation of an extensive list of common <a href="http://nginx.org/en/docs/beginners_guide.html">nginx</a> configuration options.</p>
@@ -278,9 +287,16 @@ more_set_headers 'Access-Control-Allow-Credentials: true';
 
 
                 
-<div id="disqus-comment"></div>
+                <hr>
+                <h5>SHARE</h5>
+                <ul class="list-inline">
+                    <li><div class="addthis_inline_share_toolbox"></div></li>
+                </ul>
 
-
+                <h5>FOLLOW</h5>
+                <ul class="list-inline">
+                    <li><div class="addthis_inline_follow_toolbox"></div></li>
+                </ul>
 
             </div>
             
@@ -500,7 +516,7 @@ more_set_headers 'Access-Control-Allow-Credentials: true';
 		    
                 </ul>
 		<p class="copyright text-muted">
-            Copyright &copy; <a href="">Craig Johnston</a> , 2018
+            Copyright &copy; <a href="https://www.linkedin.com/in/cjimti/">Craig Johnston</a> , 2018
                 </p>
             </div>
         </div>
@@ -538,6 +554,9 @@ more_set_headers 'Access-Control-Allow-Credentials: true';
         })
     }
 </script>
+
+
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5b905a667cf4d77c"></script>
 
 
 

@@ -362,5 +362,15 @@ Case: Cassandra development and your local workstation.</description>
 The following is primarily a getting started guide wrapped around my personal development notes. This set of notes are specifically for my co-workers in helping them get up to speed quickly. If you see an error feel free to make a pull request or just add an issue.</description>
     </item>
     
+    <item>
+      <title>About this site...</title>
+      <link>https://mk2.imti.co/about/</link>
+      <pubDate>Mon, 01 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://mk2.imti.co/about/</guid>
+      <description>I drive the vision and development of advanced software applications and user experience at Deasil Cognitive and Deasil Works. I have been developing software for over 25 years.
+I lead a talented team of software development and creative engineers, covering many industries looking to collect, analyze, move, buffer, queue, process and present data in significant ways. My expertise and that of my team revolve around microservices, artificial intelligence, algorithms, machine learning and blockchain technologies.</description>
+    </item>
+    
   </channel>
 </rss>

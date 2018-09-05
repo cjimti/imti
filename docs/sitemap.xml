@@ -183,6 +183,11 @@
   </url>
   
   <url>
+    <loc>https://mk2.imti.co/about/</loc>
+    <lastmod>2018-01-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://mk2.imti.co/tags/cassandra/</loc>
     <lastmod>2018-03-01T00:00:00+00:00</lastmod>
     <priority>0</priority>
@@ -285,13 +290,13 @@
   
   <url>
     <loc>https://mk2.imti.co/tags/ingress/</loc>
-    <lastmod>2018-05-15T00:00:00+00:00</lastmod>
+    <lastmod>2018-05-28T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://mk2.imti.co/tags/ingress/</loc>
-    <lastmod>2018-05-28T00:00:00+00:00</lastmod>
+    <lastmod>2018-05-15T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
