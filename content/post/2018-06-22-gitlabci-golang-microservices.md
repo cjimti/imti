@@ -18,7 +18,7 @@ Many of the resources on Cloud Native [Microservices] show you how easy it is to
 
 The following workflow currently manages dozens of projects for me, some of which have been through thousands of builds; I find it highly stable. This workflow is also much more flexible and customizable than a lot of turn-key solutions. It requires a bit of explanation but typically only involves about twenty minutes of setup per microservice application, well worth the investment considering you get a simplified build and deploy script.
 
-![Gitlab Microservices Workflow](https://mk.imti.co/images/content/microservices-woirkflow.png)
+![Gitlab Microservices Workflow](/images/content/microservices-woirkflow.png)
 
 {{< toc >}}
 
@@ -148,7 +148,7 @@ First, you need to obtain a token from Gitlab, see below.
 
 You need to create a [Gitlab] user with access to specific repositories, groups, or all (or use your personal account if you work solo). If your team is small, you may not need fine-grained security here. Remember we only need read-only access, so it's not essential to keep the secret safe from anyone who already had read access. Make sure to copy the generated token to your notes for use further down to configure the Gitlab project.
 
-![Gitlab Access Tokens](https://mk.imti.co/images/content/gitlab_access_tokens.png)
+![Gitlab Access Tokens](/images/content/gitlab_access_tokens.png)
 
 All you need is the generated token; the **Name** is used for keeping track of your tokens in **Gitlab**.
 
@@ -158,13 +158,13 @@ Assuming you have already setup a Gitlab repository for your Microservice, add t
 
 There are ways to avoid having to `go get` dependencies, by using utilities like `godeps` and pre-packaging required libraries; you don't have to retrieve at build time. However, this can also make development difficult if you are actively developing those libraries at the same time, as I often do. The configuration above gives you the option to do it either way.
 
-![Gitlab Project Settings](https://mk.imti.co/images/content/gitlab_ci_cd_settings.png)
+![Gitlab Project Settings](/images/content/gitlab_ci_cd_settings.png)
 
 #### Kubernetes: `./k8s/dev`
 
 My workflow starts with deploying a minimally working version of my microservice to a development environment; this can be a separate cluster, a just a separate [namespace]. I use a separate cluster. Setting up a cheap development cluster is easy and gives you more opportunities to experiment; check out [Production Hobby Cluster] for an agile environment perfect for development and experimentation.
 
-We use [kubectl] to configure and deploy the new service. I'll assume you have some familiarity with it. [kubectl] makes it easy to switch between multiple clusters: `kubectl config use-context phc-dev`, see my post, [kubectl Context Multiple Clusters](https://mk.imti.co/kubectl-remote-context/) for a detailed example.
+We use [kubectl] to configure and deploy the new service. I'll assume you have some familiarity with it. [kubectl] makes it easy to switch between multiple clusters: `kubectl config use-context phc-dev`, see my post, [kubectl Context Multiple Clusters](/kubectl-remote-context/) for a detailed example.
 
 ##### Namespace: `./k8s/dev/10-namespace.yml`
 
@@ -307,7 +307,7 @@ Before running you need another token from Gitlab: a Deploy Token Kubernetes nee
 
 In Gitlab under the repository settings for your **example-microservice**, choose **Repository** and expand the **Deploy Tokens** section. Create a deploy token by giving it a name (I leave the expiration empty) and check the **read_registry** scope. You need the generated **Username** and token below, keep them in your notes.
 
-![Gitlab Deploy Token](https://mk.imti.co/images/content/gitlab_deploy_token.png)
+![Gitlab Deploy Token](/images/content/gitlab_deploy_token.png)
 
  In the `40-deployment.yml` file above you can review the entry under **imagePullSecrets** to see we reference **example-microservice-regcred**.
 
@@ -591,7 +591,7 @@ Next, paste the key into Gitlab along with the path to your Kubernetes cluster.
 
 **Giltab Project** > **Settings (gear)** > **CI/CD** > **Secret variables**:
 
-![Gitlab secret variables](https://mk.imti.co/images/content/gitlab_secret_variables_2.png)
+![Gitlab secret variables](/images/content/gitlab_secret_variables_2.png)
 
 These four variables allow Gitlab to communicate with its own registry from a container in the **build stage** with `GITLAB_DOMAIN` and `GITLAB_TOKEN`, and allow it to communicate with Kubernetes in the **deploy stage** with `K8S_DEV_SERVER` and `K8S_DEV_TOKEN`.
 
@@ -610,7 +610,7 @@ Streamlining this workflow can be accomplished with utilities like the Kubernete
 - The package manager [Helm on Custom Kubernetes]
 
 [Building Docker Images for Static Go Binaries]:https://medium.com/@kelseyhightower/optimizing-docker-images-for-static-binaries-b5696e26eb07
-[Production Hobby Cluster]: https://mk.imti.co/hobby-cluster/
+[Production Hobby Cluster]: /hobby-cluster/
 [Digital Ocean]: https://m.do.co/c/97b733e7eba4
 [Vultr]: https://www.vultr.com/?ref=7418713
 [Linode]: https://www.linode.com/?r=848a6b0b21dc8edd33124f05ec8f99207ccddfde
@@ -622,25 +622,25 @@ Streamlining this workflow can be accomplished with utilities like the Kubernete
 [Pods]:https://Kubernetes.io/docs/concepts/workloads/pods/pod/
 [Pod]:https://Kubernetes.io/docs/concepts/workloads/pods/pod/
 [Services]:https://Kubernetes.io/docs/concepts/services-networking/service/
-[Ingress on Custom Kubernetes]:https://mk.imti.co/web-cluster-ingress/
+[Ingress on Custom Kubernetes]:/web-cluster-ingress/
 [ConfigMap]:https://Kubernetes.io/docs/tasks/configure-pod-container/configure-pod-configmap/
 [Secret]:https://Kubernetes.io/docs/concepts/configuration/secret/
 [deployments]:https://Kubernetes.io/docs/concepts/workloads/controllers/deployment/
 [deployment]:https://Kubernetes.io/docs/concepts/workloads/controllers/deployment/
 [Gitlab container registry]:https://docs.gitlab.com/ee/user/project/container_registry.html
-[Let's Encrypt, Kubernetes]:https://mk.imti.co/lets-encrypt-Kubernetes/
-[Let's Encrypt on Kubernetes]:https://mk.imti.co/lets-encrypt-Kubernetes/
-[Microservices]:https://mk.imti.co/microservices/
-[Ingress on Custom Kubernetes]:https://mk.imti.co/web-cluster-ingress/
-[Helm]:https://mk.imti.co/helm-on-custom-cluster/
-[Helm on Custom Kubernetes]:https://mk.imti.co/helm-on-custom-cluster/
+[Let's Encrypt, Kubernetes]:/lets-encrypt-Kubernetes/
+[Let's Encrypt on Kubernetes]:/lets-encrypt-Kubernetes/
+[Microservices]:/microservices/
+[Ingress on Custom Kubernetes]:/web-cluster-ingress/
+[Helm]:/helm-on-custom-cluster/
+[Helm on Custom Kubernetes]:/helm-on-custom-cluster/
 [configure runners]:https://docs.gitlab.com/ee/ci/quick_start/#configuring-a-runner
 [enable runners for the current repository]:https://docs.gitlab.com/ee/ci/runners/
 [txn2/docker-kubectl]:https://github.com/txn2/docker-kubectl
 [Gitlab container registry]:https://docs.gitlab.com/ee/user/project/container_registry.html
 [GitLab CI/CD Variables]:https://docs.gitlab.com/ee/ci/variables/
 [Docker login]:https://docs.docker.com/engine/reference/commandline/login/
-[.gitlab-ci.yml]:https://mk.imti.co/gitlabci-golang-microservices/#automated-builds-and-deployments-gitlab-ciyml
+[.gitlab-ci.yml]:/gitlabci-golang-microservices/#automated-builds-and-deployments-gitlab-ciyml
 [docker tag]:https://docs.docker.com/engine/reference/commandline/tag/
 [docker push]:https://docs.docker.com/engine/reference/commandline/push/
 [kubectl set image]:https://Kubernetes.io/docs/concepts/workloads/controllers/deployment/#updating-a-deployment
@@ -650,8 +650,8 @@ Streamlining this workflow can be accomplished with utilities like the Kubernete
 [ServiceAccount]:https://Kubernetes.io/docs/reference/access-authn-authz/service-accounts-admin/
 [Role]:https://Kubernetes.io/docs/reference/access-authn-authz/rbac/#default-roles-and-role-bindings
 [RoleBinding]:https://Kubernetes.io/docs/reference/access-authn-authz/rbac/#default-roles-and-role-bindings
-[k8s]:https://mk.imti.co/tag/Kubernetes/
-[ingress]:https://mk.imti.co/web-cluster-ingress/
+[k8s]:/tag/Kubernetes/
+[ingress]:/web-cluster-ingress/
 [Gitlab]:https://about.gitlab.com/installation/
 [Github]:https://github.com/
 [Golang]:https://golang.org/

@@ -37,11 +37,11 @@ If in a few days you find yourself setting up a cluster in Japan or Germany on [
 [![k8s performance hobby clusters](https://github.com/cjimti/mk/raw/master/images/content/k8s-tshirt-banner.jpg)](https://amzn.to/2IOe8Yu)
 
 [Debugging DNS Resolution]: https://kubernetes.io/docs/tasks/administer-cluster/dns-debugging-resolution/
-[Production Hobby Cluster]: https://mk.imti.co/hobby-cluster/
+[Production Hobby Cluster]: /hobby-cluster/
 [Pods]: https://kubernetes.io/docs/concepts/workloads/pods/pod/
 [Upstream Nameservers]: https://kubernetes.io/docs/tasks/administer-cluster/dns-custom-nameservers/
 [kube-dns]: https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/
-[Hobby Cluster]: https://mk.imti.co/hobby-cluster/
+[Hobby Cluster]: /hobby-cluster/
 [Linode]: https://www.linode.com/?r=848a6b0b21dc8edd33124f05ec8f99207ccddfde
 [vultr]: https://www.vultr.com/?ref=7418713
 [DNS servers]: https://developers.google.com/speed/public-dns/

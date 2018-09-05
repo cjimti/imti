@@ -1,10 +1,18 @@
 ---
-published: true
-layout: post
-title: Production Grade Elasticsearch on Kubernetes
-tags: kubernetes elastic database
-featured: kubernetes elastic
-mast: es
+layout:     post
+title:      "Production Grade Elasticsearch on Kubernetes"
+subtitle:   "Setup a fast, custom production grade Elasticsearch cluster."
+date:       2018-07-14
+author:     "Craig Johnston"
+URL:        "kubernetes-production-elasticsearch/"
+image:      "/img/post/nav.jpg"
+twitter_image: "/img/post/nav_876_438.jpg?card"
+tags:
+- Kubernetes
+- Elasticsearch
+- Data
+series:
+- Kubernetes
 ---
 
 Installing production ready, Elasticsearch 6.2 on Kubernetes requires a hand full of simple configurations. The following guide is a high-level overview of an installation process using Elastic's [recommendations for best practices]. The Github project [kubernetes-elasticsearch-cluster] is used for the Elastic Docker container and built to operate Elasticsearch with nodes dedicated as Master, Data, and Client/Ingest.
@@ -15,10 +23,7 @@ The Github repository [kubernetes-elasticsearch-cluster] contains detailed docum
 
 If you need to set up a quick, yet custom production grade cluster, check out my article [Production Hobby Cluster] to get you started.
 
-**Quick Reference:**
-
-* Do not remove this line (for toc on a rendered blog)
-{:toc}
+{{< toc >}}
 
 ### Project [Namespace]
 
@@ -569,18 +574,18 @@ Example output:
 - Setup [Kibana on Kubernetes] for data exploration and visualization.
 - Process [High Traffic JSON Data into Elasticsearch on Kubernetes].
 
-[Kibana on Kubernetes]:https://mk.imti.co/kibana-kubernetes/
-[High Traffic JSON Data into Elasticsearch on Kubernetes]:https://mk.imti.co/post-json-elasticsearch-kubernetes/
+[Kibana on Kubernetes]:/kibana-kubernetes/
+[High Traffic JSON Data into Elasticsearch on Kubernetes]:/post-json-elasticsearch-kubernetes/
 [recommendations for best practices]: https://www.elastic.co/guide/en/elasticsearch/reference/6.2/modules-node.html
 [kubernetes-elasticsearch-cluster]: https://github.com/pires/kubernetes-elasticsearch-cluster
 [txn2/k8s-es]:https://github.com/txn2/k8s-es
 [txn2/k8s-es:v6.2.3]:https://hub.docker.com/r/txn2/k8s-es/tags/
 [pires]:https://github.com/pires
 [docker-elasticsearch]:https://github.com/pires/docker-elasticsearch
-[permissive RBAC]:https://mk.imti.co/hobby-cluster/#permissions-rbac-role-based-access-control
-[Production Hobby Cluster]:https://mk.imti.co/hobby-cluster/
-[ServiceAccount]:https://mk.imti.co/team-kubernetes-remote-access/#serviceaccount
-[Role and RoleBinding]:https://mk.imti.co/team-kubernetes-remote-access/#role-and-rolebinding
+[permissive RBAC]:/hobby-cluster/#permissions-rbac-role-based-access-control
+[Production Hobby Cluster]:/hobby-cluster/
+[ServiceAccount]:/team-kubernetes-remote-access/#serviceaccount
+[Role and RoleBinding]:/team-kubernetes-remote-access/#role-and-rolebinding
 [Services]:https://kubernetes.io/docs/concepts/services-networking/service/
 [Pod]:https://kubernetes.io/docs/concepts/workloads/pods/pod/
 [selectors]:https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/

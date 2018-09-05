@@ -33,11 +33,11 @@ This article will focus on [NumPy] because it is the core numeric library that m
 
 [data science]:http://www.scipy-lectures.org/intro/intro.html#why-python
 [kubeless]:https://kubeless.io/
-[kubernetes]: https://mk.imti.co/tag/kubernetes/
+[kubernetes]: /tag/kubernetes/
 [go]:https://golang.org/
 [Numpy]:http://www.numpy.org/
-[pandas]:https://mk.imti.co/python-data-essentials-pandas/
-[Matplotlib]:https://mk.imti.co/python-data-essentials-matplotlib-seaborn/
+[pandas]:/python-data-essentials-pandas/
+[Matplotlib]:/python-data-essentials-matplotlib-seaborn/
 [The Most Popular Languages for Data Science]: https://dzone.com/articles/which-are-the-popular-languages-for-data-science
 [services]: https://kubernetes.io/docs/concepts/services-networking/service/
 [ingress]: https://kubernetes.io/docs/concepts/services-networking/ingress/
@@ -892,10 +892,10 @@ A lot of data science in done in [Jupyter Notbooks] and libraries like [NumPy] m
 - Check out my article on [Essential Python 3] for a clean boilerplate script template to get you going.
 - [Pandas] bring Python a data type equivalent to super-charged spreadsheets. Read [Python Data Essentials - Pandas][Pandas] to get a taste of this incredible library. 
 
-[Pandas]:https://mk.imti.co/python-data-essentials-pandas/
-[Essential Python 3]: https://mk.imti.co/essential-python3/
-[kubernetes]: https://mk.imti.co/hobby-cluster/
+[Pandas]:/python-data-essentials-pandas/
+[Essential Python 3]: /essential-python3/
+[kubernetes]: /hobby-cluster/
 [kubeless]:https://kubeless.io/
-[Jupyter Notbooks]:https://mk.imti.co/golang-to-jupyter/
+[Jupyter Notbooks]:/golang-to-jupyter/
 [Numpy]:https://docs.scipy.org/doc/numpy-1.13.0/reference/index.html
 [Lambda Function Handler]:https://docs.aws.amazon.com/lambda/latest/dg/python-programming-model-handler-types.html

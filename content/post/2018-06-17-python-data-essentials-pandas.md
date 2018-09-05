@@ -21,7 +21,7 @@ series:
 
 [Series]: https://pandas.pydata.org/pandas-docs/stable/generated/pandas.Series.html
 [DataFrame]: https://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.html
-[NumPy]: https://mk.imti.co/python-data-essentials-numpy/
+[NumPy]: /python-data-essentials-numpy/
 [Pandas]:https://pandas.pydata.org/
 
 {{< toc >}}
@@ -199,7 +199,7 @@ print(f'Add 1 to all values: \n{inventory}\n')
 
 #### [NumPy] on [Series] data.
 
-[NumPy]: https://mk.imti.co/python-data-essentials-numpy/
+[NumPy]: /python-data-essentials-numpy/
 [Series]: https://pandas.pydata.org/pandas-docs/stable/generated/pandas.Series.html
 
 
@@ -1109,10 +1109,10 @@ A lot of data science in done in [Jupyter Notbooks] and libraries like [NumPy] m
 
 Check out my article on [Essential Python 3] for a clean boilerplate script template to get you going.
 
-[Essential Python 3]: https://mk.imti.co/essential-python3/
-[kubernetes]: https://mk.imti.co/hobby-cluster/
+[Essential Python 3]: /essential-python3/
+[kubernetes]: /hobby-cluster/
 [kubeless]:https://kubeless.io/
-[Jupyter Notbooks]:https://mk.imti.co/golang-to-jupyter/
-[Numpy]:https://mk.imti.co/python-data-essentials-numpy/
+[Jupyter Notbooks]:/golang-to-jupyter/
+[Numpy]:/python-data-essentials-numpy/
 [Lambda Function Handler]:https://docs.aws.amazon.com/lambda/latest/dg/python-programming-model-handler-types.html
 [DataFrame]:https://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.html

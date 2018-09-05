@@ -321,13 +321,13 @@ If in a few days you find yourself setting up a cluster in Japan or Germany on [
 [![k8s performance hobby clusters](https://github.com/cjimti/mk/raw/master/images/content/k8s-tshirt-banner.jpg)](https://amzn.to/2IOe8Yu)
 
 [common name]: https://www.quora.com/What-does-the-CN-name-in-a-client-certificate-refer-to
-[Helm on Custom Kubernetes]: https://mk.imti.co/helm-on-custom-cluster/
-[install Helm]: https://mk.imti.co/helm-on-custom-cluster/
-[Ingress]: https://mk.imti.co/web-cluster-ingress/
+[Helm on Custom Kubernetes]: /helm-on-custom-cluster/
+[install Helm]: /helm-on-custom-cluster/
+[Ingress]: /web-cluster-ingress/
 [cert-manager]: https://github.com/jetstack/cert-manager/
-[Production Hobby Cluster]: https://mk.imti.co/hobby-cluster/
+[Production Hobby Cluster]: /hobby-cluster/
 [Let's Encrypt]: https://letsencrypt.org/
-[Hobby Cluster]: https://mk.imti.co/hobby-cluster/
+[Hobby Cluster]: /hobby-cluster/
 [Linode]: https://www.linode.com/?r=848a6b0b21dc8edd33124f05ec8f99207ccddfde
 [vultr]: https://www.vultr.com/?ref=7418713
 [Helm]: https://helm.sh/
@@ -342,4 +342,4 @@ If in a few days you find yourself setting up a cluster in Japan or Germany on [
 [Issuer]: https://cert-manager.readthedocs.io/en/latest/reference/issuers.html
 [Certificate]: https://cert-manager.readthedocs.io/en/latest/reference/certificates.html
 [Secret]: https://kubernetes.io/docs/concepts/configuration/secret/
-[Ingress on Custom Kubernetes]: https://mk.imti.co/web-cluster-ingress/
+[Ingress on Custom Kubernetes]: /web-cluster-ingress/

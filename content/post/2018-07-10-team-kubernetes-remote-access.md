@@ -413,20 +413,20 @@ You now have access to **the-project** namespace on the **dev** cluster. Check o
 [RBAC]: https://kubernetes.io/docs/reference/access-authn-authz/rbac/
 [namespace]: https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/
 [namespaces]: https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/
-[Kubernetes and GitlabCI]: https://mk.imti.co/gitlabci-golang-microservices/
-[microservices]: https://mk.imti.co/microservices/
+[Kubernetes and GitlabCI]: /gitlabci-golang-microservices/
+[microservices]: /microservices/
 [kubectl]: https://kubernetes.io/docs/reference/kubectl/kubectl/
-[Production Hobby Cluster]:https://mk.imti.co/hobby-cluster/
-[A Microservices Workflow with Golang and Gitlab CI]:https://mk.imti.co/gitlabci-golang-microservices/
+[Production Hobby Cluster]:/hobby-cluster/
+[A Microservices Workflow with Golang and Gitlab CI]:/gitlabci-golang-microservices/
 [txn2/ok]: https://github.com/txn2/ok
 [GitlabCI]:https://about.gitlab.com/features/gitlab-ci-cd/
 [Deployment]: https://kubernetes.io/docs/concepts/workloads/controllers/deployment/
 [pods]: https://kubernetes.io/docs/concepts/workloads/pods/pod/
 [Service]:https://kubernetes.io/docs/concepts/services-networking/service/
 [ingress]:https://kubernetes.io/docs/concepts/services-networking/ingress/
-[Ingress on Custom Kubernetes]:https://mk.imti.co/web-cluster-ingress/
+[Ingress on Custom Kubernetes]:/web-cluster-ingress/
 [Let's Encrypt]:https://letsencrypt.org/
-[Let's Encrypt, Kubernetes]:https://mk.imti.co/lets-encrypt-kubernetes/
+[Let's Encrypt, Kubernetes]:/lets-encrypt-kubernetes/
 [ServiceAccount]:https://kubernetes.io/docs/reference/access-authn-authz/service-accounts-admin/
 [RoleBinding]: https://kubernetes.io/docs/reference/access-authn-authz/rbac/#default-roles-and-role-bindings
 [Example Microservice]:#example-microservice

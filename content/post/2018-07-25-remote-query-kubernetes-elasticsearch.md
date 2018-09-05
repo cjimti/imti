@@ -1,10 +1,18 @@
 ---
-published: true
-layout: post
-title: Remote Query Elasticsearch on Kubernetes
-tags: kubernetes elastic database
-featured: kubernetes elastic docker
-mast: lines
+layout:     post
+title:      "Remote Query Elasticsearch on Kubernetes"
+subtitle:   "Local workstation-based microservices development"
+date:       2018-07-25
+author:     "Craig Johnston"
+URL:        "remote-query-kubernetes-elasticsearch/"
+image:      "/img/post/tel.jpg"
+twitter_image: "/img/post/tel_876_438.jpg"
+tags:
+- Kubernetes
+- Elasticsearch
+- Data
+series:
+- Kubernetes
 ---
 
 Developing on our local workstations has always been a conceptual challenge for my team when it comes to remote data access.  Local workstation-based development of services that intend to connect to a wide range of remote services that may have no options for external connections poses a challenge. Mirroring the entire development environment is possible in many cases, just not practical.
@@ -23,10 +31,7 @@ In the command above, I'm forwarding the Kubernetes Service `elasticsearch`, and
 
 If you don't understand that command, or running it produces an error, read on.
 
-**Quick Reference:**
-
-* Do not remove this line (for toc on a rendered blog)
-{:toc}
+{{< toc >}}
 
 
 ### Port Forward `elasticsearch` Kubernetes Service
@@ -587,25 +592,25 @@ Explore the Elasticsearch official documentation: [Search in Depth].
 
 [rtBeat]:https://hub.docker.com/r/txn2/rtbeat/
 [rxtx]: https://hub.docker.com/r/txn2/rxtx/
-[Kibana on Kubernetes]:https://mk.imti.co/kibana-kubernetes/
-[Production Hobby Cluster]:https://mk.imti.co/hobby-cluster/
+[Kibana on Kubernetes]:/kibana-kubernetes/
+[Production Hobby Cluster]:/hobby-cluster/
 [Search in Depth]:https://www.elastic.co/guide/en/elasticsearch/guide/current/search-in-depth.html
-[wx-rtbeat ConfigMap]:https://mk.imti.co/post-json-elasticsearch-kubernetes/#wx-rtbeat-configmap
-[Kibana service]: https://mk.imti.co/kibana-kubernetes/
+[wx-rtbeat ConfigMap]:/post-json-elasticsearch-kubernetes/#wx-rtbeat-configmap
+[Kibana service]: /kibana-kubernetes/
 [Dark Sky API]:https://darksky.net/dev
-[High Traffic JSON Data into Elasticsearch on Kubernetes]:https://mk.imti.co/post-json-elasticsearch-kubernetes/
+[High Traffic JSON Data into Elasticsearch on Kubernetes]:/post-json-elasticsearch-kubernetes/
 [Indices]:https://www.elastic.co/blog/what-is-an-elasticsearch-index
-[Production Grade Elasticsearch on Kubernetes]:https://mk.imti.co/kubernetes-production-elasticsearch/
-[Kubernetes Team Access - RBAC for developers and QA]:https://mk.imti.co/team-kubernetes-remote-access/
+[Production Grade Elasticsearch on Kubernetes]:/kubernetes-production-elasticsearch/
+[Kubernetes Team Access - RBAC for developers and QA]:/team-kubernetes-remote-access/
 [Postman]:https://www.getpostman.com/
 [MAMP]:https://www.mamp.info/en/
 [WAMP]:http://www.wampserver.com/en/
 [Vagrant]:https://www.vagrantup.com/
-[Roles]:https://mk.imti.co/team-kubernetes-remote-access/#role-and-rolebinding
-[Roles and RoleBindings]:https://mk.imti.co/team-kubernetes-remote-access/#role-and-rolebinding
+[Roles]:/team-kubernetes-remote-access/#role-and-rolebinding
+[Roles and RoleBindings]:/team-kubernetes-remote-access/#role-and-rolebinding
 [kubectl port-forward]:https://kubernetes.io/docs/tasks/access-application-cluster/port-forward-access-application-cluster/#forward-a-local-port-to-a-port-on-the-pod
 [resource name]:https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
 [RBAC Permissions]:#port-forwarding-rbac-permissions
-[Deployment for Client and Ingest Nodes]:https://mk.imti.co/kubernetes-production-elasticsearch/#deployment-for-client-and-ingest-nodes
+[Deployment for Client and Ingest Nodes]:/kubernetes-production-elasticsearch/#deployment-for-client-and-ingest-nodes
 [Get Mapping]:https://www.elastic.co/guide/en/elasticsearch/reference/6.3/indices-get-mapping.html#indices-get-mapping
 [Service]:https://kubernetes.io/docs/concepts/services-networking/service/

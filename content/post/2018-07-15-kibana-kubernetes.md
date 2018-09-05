@@ -1,18 +1,24 @@
 ---
-published: true
-layout: post
-title: Kibana on Kubernetes
-tags: kubernetes elastic
-featured: kubernetes elastic
-mast: kib
+layout:     post
+title:      "Kibana on Kubernetes"
+subtitle:   "Visualize your Elasticsearch data."
+date:       2018-07-15
+author:     "Craig Johnston"
+URL:        "kibana-kubernetes/"
+image:      "/img/post/k.jpg"
+twitter_image: "/img/post/k_876_438.jpg"
+tags:
+- Kubernetes
+- Elasticsearch
+- Data
+- Kibana
+series:
+- Kubernetes
 ---
 
 This guide walks through a process for setting up [Kibana] within a [namespace] on a Kubernetes cluster. If you followed along with [Production Grade Elasticsearch on Kubernetes] then aside from personal or corporate preferences, little modifications are necessary for the configurations below.
 
-**Quick Reference:**
-
-* Do not remove this line (for toc on a rendered blog)
-{:toc}
+{{< toc >}}
 
 ## Project [Namespace]
 
@@ -262,21 +268,21 @@ You now have [Kibana] up and running in Kubernetes and pointed to your [Producti
 [www.docker.elastic.co]:https://www.docker.elastic.co/#kibana
 [kibana service]: #service
 [Kubernetes Namespaces]:https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/
-[namespace]: https://mk.imti.co/kubernetes-production-elasticsearch/#project-namespace
+[namespace]: /kubernetes-production-elasticsearch/#project-namespace
 [Kibana]: https://www.elastic.co/products/kibana
-[Production Grade Elasticsearch on Kubernetes]: https://mk.imti.co/kubernetes-production-elasticsearch/
+[Production Grade Elasticsearch on Kubernetes]: /kubernetes-production-elasticsearch/
 [Service]:https://kubernetes.io/docs/concepts/services-networking/service/
 [Pods]:https://kubernetes.io/docs/concepts/workloads/pods/pod-overview/
 [label]:https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/
 [ConfigMap]: https://kubernetes.io/docs/tasks/configure-pod-container/configure-pod-configmap/#create-a-configmap
 [kibana.yml]:https://github.com/elastic/kibana/blob/master/config/kibana.yml
 [ReplicaSet]:https://kubernetes.io/docs/concepts/workloads/controllers/replicaset/
-[Basic Auth]: https://mk.imti.co/kubernetes-ingress-basic-auth/
-[Basic Auth on Kubernetes Ingress]: https://mk.imti.co/kubernetes-ingress-basic-auth/
+[Basic Auth]: /kubernetes-ingress-basic-auth/
+[Basic Auth on Kubernetes Ingress]: /kubernetes-ingress-basic-auth/
 [kubectl]:https://kubernetes.io/docs/reference/kubectl/cheatsheet/
-[Ingress]:https://mk.imti.co/web-cluster-ingress/
-[Ingress on Custom Kubernetes]:https://mk.imti.co/web-cluster-ingress/
+[Ingress]:/web-cluster-ingress/
+[Ingress on Custom Kubernetes]:/web-cluster-ingress/
 [Secret]:https://kubernetes.io/docs/concepts/configuration/secret/
 [htpasswd]:https://httpd.apache.org/docs/2.4/programs/htpasswd.html
-[Let's Encrypt]:https://mk.imti.co/lets-encrypt-kubernetes/
+[Let's Encrypt]:/lets-encrypt-kubernetes/
 [Kibana Documentation]: https://www.elastic.co/guide/en/kibana/current/index.html

@@ -184,7 +184,7 @@ Check out [Designing For Print With CSS] by Rachel Andrew on SmashingMag for an 
 [wkhtmltopdf]: https://wkhtmltopdf.org/
 [bug]: https://github.com/wkhtmltopdf/wkhtmltopdf/issues
 [wkhtmltopdf source]: https://github.com/wkhtmltopdf/wkhtmltopdf
-[Custom Kubernetes Cluster]: https://mk.imti.co/hobby-cluster/
+[Custom Kubernetes Cluster]: /hobby-cluster/
 [golang]: https://golang.org
 [go-wkhtmltopdf]:https://github.com/SebastiaanKlippert/go-wkhtmltopdf
 [go template]: https://golang.org/pkg/text/template/
@@ -192,4 +192,4 @@ Check out [Designing For Print With CSS] by Rachel Andrew on SmashingMag for an 
 [hackaday]:https://hackaday.com/
 [@media]:https://developer.mozilla.org/en-US/docs/Web/CSS/@media
 [Designing For Print With CSS]:https://www.smashingmagazine.com/2015/01/designing-for-print-with-css/
-[Microservice]:https://mk.imti.co/microservices/
+[Microservice]:/microservices/

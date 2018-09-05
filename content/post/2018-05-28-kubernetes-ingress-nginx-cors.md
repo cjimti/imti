@@ -100,9 +100,9 @@ If in a few days you find yourself setting up a [Production Hobby Cluster] in Ja
 [Kubernetes]: https://kubernetes.io/
 [txToken]: https://github.com/txn2/txtoken
 [phc.txn2.net]: http://localhost:4000/tag/phc.txn2.net/
-[Ingress]: https://mk.imti.co/web-cluster-ingress/
-[Production Hobby Cluster]: https://mk.imti.co/hobby-cluster/
-[Hobby Cluster]: https://mk.imti.co/hobby-cluster/
+[Ingress]: /web-cluster-ingress/
+[Production Hobby Cluster]: /hobby-cluster/
+[Hobby Cluster]: /hobby-cluster/
 [Linode]: https://www.linode.com/?r=848a6b0b21dc8edd33124f05ec8f99207ccddfde
 [vultr]: https://www.vultr.com/?ref=7418713
 

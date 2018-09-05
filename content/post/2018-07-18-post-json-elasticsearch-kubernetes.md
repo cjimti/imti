@@ -1,18 +1,24 @@
 ---
-published: true
-layout: post
-title: High Traffic JSON Data into Elasticsearch on Kubernetes
-tags: kubernetes elastic database
-featured: kubernetes elastic docker
-mast: water
+layout:     post
+title:      "High Traffic JSON Data into Elasticsearch on Kubernetes"
+subtitle:   "Instant, reliable, send and forget."
+date:       2018-07-18
+author:     "Craig Johnston"
+URL:        "post-json-elasticsearch-kubernetes/"
+image:      "/img/post/firehose.jpg"
+twitter_image: "/img/post/firehose_876_438.jpg"
+tags:
+- Kubernetes
+- Elasticsearch
+- Data
+- JSON
+series:
+- Kubernetes
 ---
 
 IOT devices, Point-of-Sale systems, application events or any client that sends data destined for indexing in Elasticsearch often need to send and forget, however, unless that data is of low value there needs to be assurance that arrives at its final destination. Back-pressure and database outages can pose a considerable threat to data integrity.
 
-**Quick Reference:**
-
-* Do not remove this line (for toc on a rendered blog)
-{:toc}
+{{< toc >}}
 
 
 ## Background
@@ -567,9 +573,9 @@ If you have setup [Kibana on Kubernetes], you should begin to see data. You are 
 [redis]: https://redis.io/
 [rtBeat]:https://hub.docker.com/r/txn2/rtbeat/
 [rxtx]: https://hub.docker.com/r/txn2/rxtx/
-[Production Hobby Cluster]:https://mk.imti.co/hobby-cluster/
-[Production Grade Elasticsearch on Kubernetes]:https://mk.imti.co/kubernetes-production-elasticsearch/
-[Kibana on Kubernetes]:https://mk.imti.co/kibana-kubernetes/
+[Production Hobby Cluster]:/hobby-cluster/
+[Production Grade Elasticsearch on Kubernetes]:/kubernetes-production-elasticsearch/
+[Kibana on Kubernetes]:/kibana-kubernetes/
 [Dark Sky API]:https://darksky.net/dev
 [namespace]:https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/
 [Services]:https://kubernetes.io/docs/concepts/services-networking/service/
@@ -578,7 +584,7 @@ If you have setup [Kibana on Kubernetes], you should begin to see data. You are 
 [Ceph]:https://ceph.com/
 [rook]:https://rook.io/
 [rtBeat configuration]:https://github.com/txn2/rtbeat/blob/master/rtbeat.reference.yml
-[ingress]:https://mk.imti.co/web-cluster-ingress/
+[ingress]:/web-cluster-ingress/
 [Elasticsearch data types]:https://www.elastic.co/guide/en/elasticsearch/reference/6.3/mapping-types.html
 [ConfigMap]:https://kubernetes.io/docs/tasks/configure-pod-container/configure-pod-configmap/
 [Deployment]:https://kubernetes.io/docs/concepts/workloads/controllers/deployment/

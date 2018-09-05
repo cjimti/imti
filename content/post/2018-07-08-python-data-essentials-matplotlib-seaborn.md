@@ -564,15 +564,15 @@ sb.regplot(ax=ax3, data = df_ai_t, marker="o", color="red", x='dangerous', y='hu
 [Matplotlib]: https://matplotlib.org/
 [Seaborn]: https://seaborn.pydata.org/
 [PyData]: https://pydata.org/
-[numpy]: https://mk.imti.co/python-data-essentials-numpy/
-[pandas]: https://mk.imti.co/python-data-essentials-pandas/
+[numpy]: /python-data-essentials-numpy/
+[pandas]: /python-data-essentials-pandas/
 [scipy]: https://www.scipy.org/
 [statsmodels]: https://www.statsmodels.org/stable/index.html
 [Tableau]: https://www.tableau.com/
 [Pentaho]: https://www.hitachivantara.com/en-us/products/big-data-integration-analytics/pentaho-data-integration.html
 [d3js]: https://d3js.org/
 [c3js]:https://c3js.org/samples/timeseries.html
-[Webpage to PDF Microservice]:https://mk.imti.co/webpage-to-pdf-microservice/
+[Webpage to PDF Microservice]:/webpage-to-pdf-microservice/
 [txpdf]:https://github.com/txn2/txpdf]:https://github.com/txn2/txpdf
 [Python]:https://www.python.org/
 [kaggle]: https://www.kaggle.com/datasets

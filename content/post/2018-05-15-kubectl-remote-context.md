@@ -135,10 +135,10 @@ If in a few days you find yourself setting up a cluster in Japan or Germany on [
 - [Production Hobby Cluster] how-to article.
 - [vultr] for cheap instance hosting for [Production Hobby Cluster]
 
-[Production Hobby Cluster]: https://mk.imti.co/hobby-cluster/
+[Production Hobby Cluster]: /hobby-cluster/
 [install kubectl]: https://kubernetes.io/docs/tasks/tools/install-kubectl/
-[Hobby Cluster]: https://mk.imti.co/hobby-cluster/
+[Hobby Cluster]: /hobby-cluster/
 [Linode]: https://www.linode.com/?r=848a6b0b21dc8edd33124f05ec8f99207ccddfde
 [vultr]: https://www.vultr.com/?ref=7418713
 [kubectl]: https://kubernetes.io/docs/reference/kubectl/cheatsheet/
-[Kubectl x509 Unable to Connect]: https://mk.imti.co/kubectl-remote-x509-valid/
+[Kubectl x509 Unable to Connect]: /kubectl-remote-x509-valid/

@@ -129,15 +129,15 @@ If in a few days you find yourself setting up a cluster in Japan or Germany on [
 [generic]: https://kubernetes-v1-4.github.io/docs/user-guide/kubectl/kubectl_create_secret_generic/
 [kubectl create secret]: https://kubernetes-v1-4.github.io/docs/user-guide/kubectl/kubectl_create_secret/
 [htpasswd]: https://httpd.apache.org/docs/current/programs/htpasswd.html
-[Let's Encrypt, Kubernetes]: https://mk.imti.co/lets-encrypt-kubernetes/
+[Let's Encrypt, Kubernetes]: /lets-encrypt-kubernetes/
 [base64]: https://en.wikipedia.org/wiki/Base64
 [Basic Auth]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Authentication
 [OAuth 2]: https://oauth.net/2/
 [JWT]: https://jwt.io/
-[Ingress]: https://mk.imti.co/web-cluster-ingress/
-[Production Hobby Cluster]: https://mk.imti.co/hobby-cluster/
+[Ingress]: /web-cluster-ingress/
+[Production Hobby Cluster]: /hobby-cluster/
 [Let's Encrypt]: https://letsencrypt.org/
-[Hobby Cluster]: https://mk.imti.co/hobby-cluster/
+[Hobby Cluster]: /hobby-cluster/
 [Linode]: https://www.linode.com/?r=848a6b0b21dc8edd33124f05ec8f99207ccddfde
 [vultr]: https://www.vultr.com/?ref=7418713
 [Secret]: https://kubernetes.io/docs/concepts/configuration/secret/

@@ -742,13 +742,13 @@ The example data is powered by the [Dark Sky API]. If you are interested in gath
 
 [REST]:https://en.wikipedia.org/wiki/Representational_state_transfer
 [Lucene]:https://blog.parse.ly/post/1691/lucene/
-[Kibana on Kubernetes]:https://mk.imti.co/kibana-kubernetes/
-[Production Hobby Cluster]:https://mk.imti.co/hobby-cluster/
+[Kibana on Kubernetes]:/kibana-kubernetes/
+[Production Hobby Cluster]:/hobby-cluster/
 [Search in Depth]:https://www.elastic.co/guide/en/elasticsearch/guide/current/search-in-depth.html
 [Dark Sky API]:https://darksky.net/dev
-[High Traffic JSON Data into Elasticsearch on Kubernetes]:https://mk.imti.co/post-json-elasticsearch-kubernetes/
-[Production Grade Elasticsearch on Kubernetes]:https://mk.imti.co/kubernetes-production-elasticsearch/
-[Kubernetes Team Access, RBAC for developers and QA]:https://mk.imti.co/team-kubernetes-remote-access/
+[High Traffic JSON Data into Elasticsearch on Kubernetes]:/post-json-elasticsearch-kubernetes/
+[Production Grade Elasticsearch on Kubernetes]:/kubernetes-production-elasticsearch/
+[Kubernetes Team Access, RBAC for developers and QA]:/team-kubernetes-remote-access/
 [RBAC Permissions]:#port-forwarding-rbac-permissions
 [http verbs]:https://www.restapitutorial.com/lessons/httpmethods.html
 [data types]:https://www.elastic.co/guide/en/elasticsearch/reference/6.3/mapping-types.html

@@ -215,7 +215,7 @@ If in a few days you find yourself setting up a [Production Hobby Cluster] in Ja
 [Bearer Token]: https://oauth.net/2/bearer-tokens/
 [YAML is a superset of JSON]: https://medium.com/@williamhayes/yaml-is-a-superset-of-json-it-is-explained-in-more-detail-here-1d758a069508
 [curl]: https://curl.haxx.se/
-[kubernetes ingress]: https://mk.imti.co/web-cluster-ingress/
+[kubernetes ingress]: /web-cluster-ingress/
 [monolithic]: https://en.wikipedia.org/wiki/Monolithic_application
 [microservice]: http://microservices.io/
 [Kubernetes]: https://kubernetes.io/
@@ -224,9 +224,9 @@ If in a few days you find yourself setting up a [Production Hobby Cluster] in Ja
 [txToken]: https://github.com/txn2/txtoken
 [phc.txn2.net]: http://localhost:4000/tag/phc.txn2.net/
 [JWT]: https://jwt.io/
-[Ingress]: https://mk.imti.co/web-cluster-ingress/
-[Production Hobby Cluster]: https://mk.imti.co/hobby-cluster/
-[Hobby Cluster]: https://mk.imti.co/hobby-cluster/
+[Ingress]: /web-cluster-ingress/
+[Production Hobby Cluster]: /hobby-cluster/
+[Hobby Cluster]: /hobby-cluster/
 [Linode]: https://www.linode.com/?r=848a6b0b21dc8edd33124f05ec8f99207ccddfde
 [vultr]: https://www.vultr.com/?ref=7418713
 [Secret]: https://kubernetes.io/docs/concepts/configuration/secret/

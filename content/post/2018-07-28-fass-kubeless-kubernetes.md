@@ -314,13 +314,13 @@ Kubless supports a variety of [runtimes][Kubeless runtime]. In my case, most of 
 - [Python Data Essentials - Numpy] provides a wide variety of options for working with numbers, extraordinarily powerful N-dimensional array objects in which we can perform linear algebra.
 - [Python Data Essentials - Pandas] is a data type equivalent to super-charged spreadsheets. Pandas add two highly expressive data structures to Python, Series, and DataFrame.
 
-[Python Data Essentials - Pandas]:https://mk.imti.co/python-data-essentials-pandas/
-[Python Data Essentials - Numpy]:https://mk.imti.co/python-data-essentials-numpy/
+[Python Data Essentials - Pandas]:/python-data-essentials-pandas/
+[Python Data Essentials - Numpy]:/python-data-essentials-numpy/
 [python dict]:https://docs.python.org/3/tutorial/datastructures.html#dictionaries
 [Elasticsearch DSL]:https://elasticsearch-dsl.readthedocs.io/en/latest/search_dsl.html
 [Services]:https://kubernetes.io/docs/concepts/services-networking/service/
-[Remote Query Elasticsearch on Kubernetes]:https://mk.imti.co/remote-query-kubernetes-elasticsearch/
-[Elasticsearch]:https://mk.imti.co/kubernetes-production-elasticsearch/
+[Remote Query Elasticsearch on Kubernetes]:/remote-query-kubernetes-elasticsearch/
+[Elasticsearch]:/kubernetes-production-elasticsearch/
 [Atom]:https://atom.io/
 [Visual Studio Code]:https://code.visualstudio.com/
 [PyCharm]:https://www.jetbrains.com/pycharm/
@@ -328,7 +328,7 @@ Kubless supports a variety of [runtimes][Kubeless runtime]. In my case, most of 
 [Jet Brains]:https://www.jetbrains.com/
 [Python]:https://www.python.org/
 [Golang]:https://golang.org/
-[Production Hobby Cluster]:https://mk.imti.co/hobby-cluster/
+[Production Hobby Cluster]:/hobby-cluster/
 [official installation instructions]:https://kubeless.io/docs/quick-start/
 [Function as a Service]:https://en.wikipedia.org/wiki/Function_as_a_service
 [Serverless computing]:https://en.wikipedia.org/wiki/Serverless_computing
@@ -340,7 +340,7 @@ Kubless supports a variety of [runtimes][Kubeless runtime]. In my case, most of 
 [Kubeless Function]:https://kubeless.io/docs/quick-start/
 [RBAC]:https://kubernetes.io/docs/reference/access-authn-authz/rbac/
 [Serverless]:https://serverless.com/
-[Kubernetes Team Access - RBAC for developers and QA]:https://mk.imti.co/team-kubernetes-remote-access/
+[Kubernetes Team Access - RBAC for developers and QA]:/team-kubernetes-remote-access/
 [pip]:https://pypi.org/project/pip/
 [Kubeless runtime]:https://github.com/kubeless/kubeless/blob/master/docs/runtimes.md
 [Kubless Function resources in yml]:https://github.com/kubeless/kubeless/blob/master/examples/python/function.yaml

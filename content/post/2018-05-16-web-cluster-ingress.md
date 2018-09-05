@@ -19,7 +19,7 @@ There are more than a handful of ways to set up port **80** and **443** web [ing
 
 This article builds on the [Production Hobby Cluster] guide. The following closely the official [deploy ingress] Installation Guide with a few adjustments suitable for the [Production Hobby Cluster], specifically the use of a [DaemonSet] rather than a [Deployment] and leveraging **hostNetwork** and **hostPort** for the [Pod]s on our [DaemonSet]. There are quite a few [ingress nginx examples] in the official repository if you are looking for a more specific implementation.
 
-By now you may be managing multiple clusters. [kubectl] is a great tool to use on your local workstation to manage remote clusters, and with little effort you can quickly point it to a new cluster and switch between them all day. Check out my article [kubectl Context Multiple Clusters](https://mk.imti.co/kubectl-remote-context/) for a quick tutorial.
+By now you may be managing multiple clusters. [kubectl] is a great tool to use on your local workstation to manage remote clusters, and with little effort you can quickly point it to a new cluster and switch between them all day. Check out my article [kubectl Context Multiple Clusters](/kubectl-remote-context/) for a quick tutorial.
 
 ### Namespace
 
@@ -257,8 +257,8 @@ If in a few days you find yourself setting up a cluster in Japan or Germany on [
 [minikube]: https://kubernetes.io/docs/getting-started-guides/minikube/
 [Kubernetes]: https://kubernetes.io/
 [DaemonSet]: https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/
-[Hobby Cluster]: https://mk.imti.co/hobby-cluster/
-[Production Hobby Cluster]: https://mk.imti.co/hobby-cluster/
+[Hobby Cluster]: /hobby-cluster/
+[Production Hobby Cluster]: /hobby-cluster/
 [deploy ingress]: https://github.com/kubernetes/ingress-nginx/blob/master/docs/deploy/index.md
 [ingress]: https://github.com/kubernetes/ingress-nginx
 [Linode]: https://www.linode.com/?r=848a6b0b21dc8edd33124f05ec8f99207ccddfde

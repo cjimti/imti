@@ -312,7 +312,7 @@ If you are curious how `p.eng.ProcessRequest(w, r)` filters data check out the m
 [regular expressions]:https://en.wikipedia.org/wiki/Regular_expression
 [sprig]: http://masterminds.github.io/sprig/
 [brew]: https://brew.sh/
-[Kubernetes]: https://mk.imti.co/tag/kubernetes/
+[Kubernetes]: /tag/kubernetes/
 [Docker]: https://www.docker.com/
 [haproxy]: http://www.haproxy.org/
 [nginx]: https://www.nginx.com/

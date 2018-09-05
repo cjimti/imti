@@ -118,10 +118,10 @@ docker exec fwd curl -s http://ok
 [![k8s performance hobby clusters](https://github.com/cjimti/mk/raw/master/images/content/k8s-tshirt-banner.jpg)](https://amzn.to/2IOe8Yu)
 
 
-[Kubernetes FaaS - Kubeless Python and Elasticsearch]:https://mk.imti.co/fass-kubeless-kubernetes/
-[A Microservices Workflow with Golang and Gitlab CI]:https://mk.imti.co/gitlabci-golang-microservices/
-[Kubernetes Team Access - RBAC for developers and QA]:https://mk.imti.co/team-kubernetes-remote-access/
-[Production Hobby Cluster]:https://mk.imti.co/hobby-cluster/
+[Kubernetes FaaS - Kubeless Python and Elasticsearch]:/fass-kubeless-kubernetes/
+[A Microservices Workflow with Golang and Gitlab CI]:/gitlabci-golang-microservices/
+[Kubernetes Team Access - RBAC for developers and QA]:/team-kubernetes-remote-access/
+[Production Hobby Cluster]:/hobby-cluster/
 [Dockerfile]:https://github.com/txn2/kubefwd/blob/master/Dockerfile
 [txn2/kubefwd]:https://hub.docker.com/r/txn2/kubefwd/
 [@cjimti]: https://twitter.com/cjimti

@@ -87,8 +87,8 @@ If in a few days you find yourself setting up a cluster in Japan or Germany on [
 [Pod]: https://kubernetes.io/docs/concepts/workloads/pods/pod/
 [Deployment]: https://kubernetes.io/docs/concepts/workloads/controllers/deployment/
 [Kubernetes]: https://kubernetes.io/
-[Hobby Cluster]: https://mk.imti.co/hobby-cluster/
-[Production Hobby Cluster]: https://mk.imti.co/hobby-cluster/
+[Hobby Cluster]: /hobby-cluster/
+[Production Hobby Cluster]: /hobby-cluster/
 [Linode]: https://www.linode.com/?r=848a6b0b21dc8edd33124f05ec8f99207ccddfde
 [Digital Ocean]: https://m.do.co/c/97b733e7eba4
 [vultr]: https://www.vultr.com/?ref=7418713
