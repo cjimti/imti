@@ -1,17 +1,23 @@
 ---
-published: true
-layout: post
-title: Python Data Essentials - Numpy
-tags: coding python
-featured: python coding
-mast: sorting
+layout:     post
+title:      "Python Data Essentials - Numpy"
+subtitle:   "Powerful N-dimensional array objects."
+date:       2018-06-16
+author:     "Craig Johnston"
+URL:        "python-data-essentials-numpy/"
+image:      "/img/post/sand.jpg"
+twitter_image: "/img/post/sand_876_438.jpg"
+tags:
+- Python
+- Data
+- Data Science
+series:
+- Data Science
 ---
+
 Python is one of [The Most Popular Languages for Data Science], and because of this adoption by the [data science] community, we have libraries like [NumPy], [Pandas] and [Matplotlib]. [NumPy] at it's core provides a powerful N-dimensional array objects in which we can perform linear algebra, [Pandas] give us data structures and data analysis tools, similar to working with a specialized database or powerful spreadsheets and finally [Matplotlib] to generate plots, histograms, power spectra, bar charts, error charts and scatterplots to name a few.
 
-**Quick Reference:**
-
-* Do not remove this line (for toc on rendered blog)
-{:toc}
+{{< toc >}}
 
 ## Microservices Data Eco-System
 

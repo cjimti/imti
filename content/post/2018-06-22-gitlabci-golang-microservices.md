@@ -1,10 +1,17 @@
 ---
-published: true
-layout: post
-title: A Microservices Workflow with Golang and Gitlab CI
-tags: golang docker gitlab kubernetes
-featured: golang docker gitlab kubernetes
-mast: ci
+layout:     post
+title:      "A Microservices Workflow with Golang and Gitlab CI"
+subtitle:   "Continuous Integration & Deployment"
+date:       2018-06-22
+author:     "Craig Johnston"
+URL:        "gitlabci-golang-microservices/"
+image:      "/img/post/tracks.jpg"
+twitter_image: "/img/post/tracks_876_438.jpg"
+tags:
+- Microservices
+- DevOps
+- Golang
+- Gitlab
 ---
 
 Many of the resources on Cloud Native [Microservices] show you how easy it is to get up and running with AWS or GKE. I think this is great but for the fact that I see a trend (in my clients at least) of associating concepts with particular products or worse, companies. I love Amazon, but it's not THE cloud). In my opinion, to embrace Cloud Native and [Microservices] you should develop some, and host them yourself. The cloud is not Google or Amazon; it's any cluster of virtualized systems, abstracted from their hardware interfaces and centrally managed.
@@ -13,10 +20,7 @@ The following workflow currently manages dozens of projects for me, some of whic
 
 ![Gitlab Microservices Workflow](https://mk.imti.co/images/content/microservices-woirkflow.png)
 
-**Outline:**
-
-* Do not remove this line (for toc on a rendered blog)
-{:toc}
+{{< toc >}}
 
 ## Overview
 

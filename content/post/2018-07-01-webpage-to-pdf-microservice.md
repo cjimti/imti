@@ -1,10 +1,18 @@
 ---
-published: true
-layout: post
-title: Webpage to PDF Microservice
-tags: docker kubernetes
-featured: docker golang
-mast: document
+layout:     post
+title:      "Webpage to PDF Microservice"
+subtitle:   "Automate PDF Report Generation"
+date:       2018-07-01
+author:     "Craig Johnston"
+URL:        "webpage-to-pdf-microservice/"
+image:      "/img/post/briefcase.jpg"
+twitter_image: "/img/post/briefcase_876_438.jpg"
+tags:
+- Microservice
+- PDF
+- Data
+- Docker
+- Kubernetes
 ---
 
 I create a lot of data visualizations for clients, many of which are internal, portal-style websites that present data in real time, as well as give options for viewing reports from previous time-frames. PDFs are useful for data such as bank statements or any form of time-snapshot progress reporting. It is common for clients to want PDF versions generated on a regular basis for sharing through email or other technologies.

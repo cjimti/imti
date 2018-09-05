@@ -1,10 +1,19 @@
 ---
-published: true
-layout: post
-title: Kubernetes Team Access - RBAC for developers and QA
-tags: kubernetes
-featured: kubernetes
-mast: team
+layout:     post
+title:      "Kubernetes Team Access - RBAC for developers and QA"
+subtitle:   "Role Based Access Control"
+date:       2018-07-10
+author:     "Craig Johnston"
+URL:        "team-kubernetes-remote-access/"
+image:      "/img/post/switchboard.jpg"
+twitter_image: "/img/post/switchboard_876_438.jpg"
+tags:
+- Kubernetes
+- DevOps
+- Security
+- kubectl
+series:
+- Kubernetes
 ---
 
 RBAC (Role Based Access Control) allows our Kubernetes clusters to provide the development team better visibility and access into the development, staging and production environments than it has have ever had in the past. Developers using the command line tool **[kubectl]**, can explore the network topology of running [microservices], tail live server logs, proxy local ports directly to services or even execute shells into running pods.
@@ -15,10 +24,7 @@ If you don't already have a Kubernetes cluster up and running, then I highly sug
 
 > TLDR: If you are reading this article because you received a **token** and the URL of a cluster from your Kubernetes administrator, you can skip ahead to the section [Accessing a Remote Kubernetes Cluster].
 
-**Quick Reference:**
-
-* Do not remove this line (for toc on a rendered blog)
-{:toc}
+{{< toc >}}
 
 ## Our Clusters (Overview)
 

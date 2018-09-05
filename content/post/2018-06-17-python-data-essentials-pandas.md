@@ -1,11 +1,20 @@
 ---
-published: true
-layout: post
-title: Python Data Essentials - Pandas
-tags: coding python
-featured: python coding
-mast: columns
+layout:     post
+title:      "Python Data Essentials - Pandas"
+subtitle:   "A data type equivalent to super-charged spreadsheets."
+date:       2018-06-17
+author:     "Craig Johnston"
+URL:        "python-data-essentials-pandas/"
+image:      "/img/post/columns.jpg"
+twitter_image: "/img/post/columns_876_438.jpg"
+tags:
+- Python
+- Data
+- Data Science
+series:
+- Data Science
 ---
+
 [Pandas] bring Python a data type equivalent to super-charged spreadsheets. Pandas add two highly expressive data structures to Python, [Series] and [DataFrame]. Pandas [Series] and [DataFrame]s provide a performant analysis and manipulation of “relational” or “labeled” data similar to relational database tables like MySQL or the rows and columns of Excel. [Pandas] are great for working with time series data as well as arbitrary matrix data, and unlabeled data.
 
 [Pandas] leverage [NumPy] and if you are not familiar with this fundamental library for working with numbers, then I suggest you take a look at [Python Data Essentials - NumPy][Numpy] to get a decent footing.
@@ -15,10 +24,7 @@ mast: columns
 [NumPy]: https://mk.imti.co/python-data-essentials-numpy/
 [Pandas]:https://pandas.pydata.org/
 
-**Quick reference to the examples below:**
-
-* Do not remove this line (for toc on a rendered blog)
-{:toc}
+{{< toc >}}
 
 If you want to go beyond this brief overview of [Pandas] I suggest the following resources:
 

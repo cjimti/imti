@@ -1,21 +1,27 @@
 ---
-published: true
-layout: post
-title: Python Data Essentials - Matplotlib and Seaborn
-tags: coding python
-featured: python coding
-mast: art
+layout:     post
+title:      "Python Data Essentials - Matplotlib and Seaborn"
+subtitle:   "A beginners guide."
+date:       2018-07-08
+author:     "Craig Johnston"
+URL:        "python-data-essentials-matplotlib-seaborn/"
+image:      "/img/post/brushes.jpg"
+twitter_image: "/img/post/brushes_876_438.jpg"
+tags:
+- Python
+- Data
+- Data Science
+- Data Visualization
+series:
+- Data Science
 ---
+
 There is an overwhelming number of options for developers needing to provide data visualization. The most popular library for data visualization in Python is [Matplotlib], and built directly on top of Matplotlib is [Seaborn]. The Seaborn library is "tightly integrated with the [PyData] stack, including support for [numpy] and [pandas] data structures and statistical routines from [scipy] and [statsmodels]."
 
 This article is only intended to get you started with [Matplotlib] and [Seaborn]. Both libraries have extensive and mature documentation.
 
 
-**Quick Reference:**
-
-* Do not remove this line (for toc on a rendered blog)
-{:toc}
-
+{{< toc >}}
 
 ## Data Visualization Landscape
 
