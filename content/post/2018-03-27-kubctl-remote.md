@@ -6,15 +6,15 @@ date:       2018-03-24
 author:     "Craig Johnston"
 URL:        "kubectl-remote/"
 aliases:
-- "kubctl-remote/"
+  - "kubctl-remote/"
 image:      "/img/post/containercrain.jpg"
 twitter_image: "/img/post/containercrain_876_438.jpg"
 tags:
-- Kubernetes
-- kubectl
+    - Kubernetes
+    - kubectl
 series:
-- Kubernetes
-- kubectl
+    - Kubernetes
+    - kubectl
 ---
 
 I use [Minikube] to run a local [Kubernetes] single node cluster (cluster?). However, I also work with a custom production cluster for work. This cluster consists of development and production nodes. I often need to switch between working on my local [Minikube] and the online [Kubernetes] cluster.
