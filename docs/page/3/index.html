@@ -146,115 +146,115 @@
             
 
 <div class="post-preview">
-    <a href="https://mk2.imti.co/helm-on-custom-cluster/">
+    <a href="https://mk2.imti.co/golang-to-jupyter/">
         <h2 class="post-title">
-            Helm on Custom Kubernetes
+            Golang to Jupyter
         </h2>
 	
         <h3 class="post-subtitle">
-            Kubernetes package management.
+            Golang with Jupyter Notebooks
         </h3>
 	
         <div class="post-content-preview">
 	
-            Helm is the official package manager for Kubernetes. If you are looking to start using Helm or want to test its capabilities, I suggest you set up a Production Hobby Cluster. This article is a continuation of the Production Hobby Cluster configuration but should be entirely useful on its own.
- From https://github.com/kubernetes/helm - Helm has two parts: a client (helm) and a server (tiller) - Tiller runs inside of your Kubernetes cluster and manages releases (installations) of your charts.
+            Jupyter Notbooks have been a popular technology in the Python data science community for a while now, especially in academics. Jupyter Notebooks are a way to mix inline, executable code with documentation in a presentation format. Best practices in organizing source code are not always the most efficient at communicating it&rsquo;s functionality to a user.
+While the intention of a programming language is the abstraction of computational complexity into a simplified language humans can read and write, they must always weigh toward the efficiency of the primary interpreter, the computer.
        
         </div>
     </a>
     <p class="post-meta">
-    Posted by Craig Johnston Thursday, May 17, 2018
+    Posted by Craig Johnston Sunday, June 10, 2018
     </p>
 </div>
 <hr>
 
 <div class="post-preview">
-    <a href="https://mk2.imti.co/kubernetes-custom-dns/">
+    <a href="https://mk2.imti.co/essential-python3/">
         <h2 class="post-title">
-            Kubernetes Custom Upstream DNS
+            Essential Python 3
         </h2>
 	
         <h3 class="post-subtitle">
-            Customize upstream DNS resolution.
+            Programming in Python
         </h3>
 	
         <div class="post-content-preview">
 	
-            Customize the Upstream Nameservers used by kube-dns by Pods when looking up external hostnames from within a Kubernetes cluster. I found that adding custom Upstream Nameservers to my kube-dns solved many issues encountered in in the past with external hostname resolution on individual Pods.
-If you want to experiment on a production-like cluster, I suggest reading my article &ldquo;Production Hobby Cluster&rdquo; for a guide on setting up a fun, cheap-yet-robust experimental cluster.
+            This article is a quick tour of basic Python 3 syntax, components and structure. I intend to balance a cheat sheet format with hello world style boilerplate. If you are already a software developer and need a quick refresh on Python then I hope you benefit from my notes below.
+I am a professional software developer for a software development company, and for that reason, I work with a lot of languages, expert in some, and ok in others.
        
         </div>
     </a>
     <p class="post-meta">
-    Posted by Craig Johnston Thursday, May 17, 2018
+    Posted by Craig Johnston Thursday, May 31, 2018
     </p>
 </div>
 <hr>
 
 <div class="post-preview">
-    <a href="https://mk2.imti.co/web-cluster-ingress/">
+    <a href="https://mk2.imti.co/kubernetes-ingress-nginx-cors/">
         <h2 class="post-title">
-            Ingress on Custom Kubernetes
+            CORS on Kubernetes Ingress Nginx
         </h2>
 	
         <h3 class="post-subtitle">
-            Setting up ingress-nginx on a custom cluster.
+            Painless CORS header configuration in Kubernetes
         </h3>
 	
         <div class="post-content-preview">
 	
-            There are more than a handful of ways to set up port 80 and 443 web ingress on a custom Kubernetes cluster. Specifically a bare metal cluster. If you are looking to experiment or learn on a non-production cluster, but something more true to production than minikube, I suggest you check out my previous article Production Hobby Cluster, a step-by-step guide for setting up a custom production capable Kubernetes cluster.
+            Using ingress-nginx on Kubernetes makes adding CORS headers painless. Kubernetes ingress-nginx uses annotations as a quick way to allow you to specify the automatic generation of an extensive list of common nginx configuration options.
+Example ingress configuration enabling CORS:
+apiVersion: extensions/v1beta1 kind: Ingress metadata: name: api namespace: fuse labels: app: api annotations: nginx.ingress.kubernetes.io/enable-cors: &quot;true&quot; nginx.ingress.kubernetes.io/cors-allow-methods: &quot;PUT, GET, POST, OPTIONS&quot; nginx.ingress.kubernetes.io/cors-allow-origin: &quot;https://admin.example.com&quot; nginx.ingress.kubernetes.io/cors-allow-credentials: &quot;true&quot; spec: rules: - host: api.example.com http: paths: - backend: serviceName: api-example servicePort: 80 path: /api tls: - hosts: - api.
        
         </div>
     </a>
     <p class="post-meta">
-    Posted by Craig Johnston Tuesday, May 15, 2018
+    Posted by Craig Johnston Monday, May 28, 2018
     </p>
 </div>
 <hr>
 
 <div class="post-preview">
-    <a href="https://mk2.imti.co/kubectl-remote-context/">
+    <a href="https://mk2.imti.co/kubernetes-ingress-basic-auth/">
         <h2 class="post-title">
-            kubectl Context Multiple Clusters
+            Basic Auth on Kubernetes Ingress
         </h2>
 	
         <h3 class="post-subtitle">
-            Managing multiple clusters with kubectl.
+            Basic Auth is supported by nearly every major web client, library, and utility.
         </h3>
 	
         <div class="post-content-preview">
 	
-            I use a few Kubernetes clusters on a daily basis, and I use kubectl to access and configure them from my workstation. There are dozens of ways to configure kubectl however I find the following method the easiest for me to manage and not make a mess.
-I also set up test clusters from time-to-time, and so keeping my configs organized is, so I don&rsquo;t confuse myself or make a mess.
+            Basic Auth is one of the oldest and easiest ways to secure a web page or API endpoint. Basic Auth does not have many features and lacks the sophistication of more modern access controls (see Ingress Nginx Auth Examples). However, Basic Auth is supported by nearly every major web client, library, and utility. Basic Auth is secure, stable and perfect for quick security on Kubernetes projects. Basic Auth can easily we swapped out later as requirements demand or provide a foundation for implementations such as OAuth 2 and JWT.
        
         </div>
     </a>
     <p class="post-meta">
-    Posted by Craig Johnston Tuesday, May 15, 2018
+    Posted by Craig Johnston Saturday, May 19, 2018
     </p>
 </div>
 <hr>
 
 <div class="post-preview">
-    <a href="https://mk2.imti.co/mac-format-command-line/">
+    <a href="https://mk2.imti.co/jwt-microservice/">
         <h2 class="post-title">
-            Formatting Drives on MacOS
+            JWT Microservice, Tokenize Remote APIs
         </h2>
 	
         <h3 class="post-subtitle">
-            A stack of old drives, a terminal and diskutil.
+            Using txToken to create JWT Tokens from JSON POST data.
         </h3>
 	
         <div class="post-content-preview">
 	
-            I have had this collection of old external drives hanging around for years. There was a time I was having terrible luck with hard drives. It turned out I managed to amass a collection of about eight drives from one terabyte to four terabytes.
-Fortunately, I keep copies of nearly all my files on cloud drives, split between Amazon, Google and DropBox. I had a sneaking suspicion that the discs themselves were ok and somehow my Mac was communicating with the RAID controllers in a way that caused them to fail.
+            txToken is a small high performance microservice utility container. txToken is used for adding JSON Web Token based security to existing or new API development. txToken is specifically for systems that communicate in JSON over HTTP. txToken is called from a client with a JSON post body and passes received JSON to a remote endpoint. JSON retrieved from a remote endpoint is used to create a JWT token with an HS256 symmetrically encrypted signature.
        
         </div>
     </a>
     <p class="post-meta">
-    Posted by Craig Johnston Saturday, May 12, 2018
+    Posted by Craig Johnston Friday, May 18, 2018
     </p>
 </div>
 <hr>
@@ -308,7 +308,19 @@ Fortunately, I keep copies of nearly all my files on cloud drives, split between
                 
             
                 
+                    <a href="/tags/data-science" title="Data Science">
+                        Data Science
+                    </a>
+                
             
+                
+            
+                
+            
+                
+                    <a href="/tags/devops" title="DevOps">
+                        DevOps
+                    </a>
                 
             
                 
@@ -317,6 +329,8 @@ Fortunately, I keep copies of nearly all my files on cloud drives, split between
                     <a href="/tags/docker" title="Docker">
                         Docker
                     </a>
+                
+            
                 
             
                 
@@ -349,6 +363,18 @@ Fortunately, I keep copies of nearly all my files on cloud drives, split between
             
                 
             
+                
+                    <a href="/tags/microservices" title="Microservices">
+                        Microservices
+                    </a>
+                
+            
+                
+            
+                
+                    <a href="/tags/python" title="Python">
+                        Python
+                    </a>
                 
             
                 

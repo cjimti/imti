@@ -42,6 +42,62 @@ Explore the Elasticsearch official documentation: Search in Depth.
     </item>
     
     <item>
+      <title>Kubernetes Team Access - RBAC for developers and QA</title>
+      <link>https://mk2.imti.co/team-kubernetes-remote-access/</link>
+      <pubDate>Tue, 10 Jul 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://mk2.imti.co/team-kubernetes-remote-access/</guid>
+      <description>RBAC (Role Based Access Control) allows our Kubernetes clusters to provide the development team better visibility and access into the development, staging and production environments than it has have ever had in the past. Developers using the command line tool kubectl, can explore the network topology of running microservices, tail live server logs, proxy local ports directly to services or even execute shells into running pods.
+Kubernetes and GitlabCI are the central components of our DevOps toolchain and have increased our productivity by many multiples over the traditional approaches of the past.</description>
+    </item>
+    
+    <item>
+      <title>Python Data Essentials - Matplotlib and Seaborn</title>
+      <link>https://mk2.imti.co/python-data-essentials-matplotlib-seaborn/</link>
+      <pubDate>Sun, 08 Jul 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://mk2.imti.co/python-data-essentials-matplotlib-seaborn/</guid>
+      <description>There is an overwhelming number of options for developers needing to provide data visualization. The most popular library for data visualization in Python is Matplotlib, and built directly on top of Matplotlib is Seaborn. The Seaborn library is &amp;ldquo;tightly integrated with the PyData stack, including support for numpy and pandas data structures and statistical routines from scipy and statsmodels.&amp;rdquo;
+This article is only intended to get you started with Matplotlib and Seaborn.</description>
+    </item>
+    
+    <item>
+      <title>Webpage to PDF Microservice</title>
+      <link>https://mk2.imti.co/webpage-to-pdf-microservice/</link>
+      <pubDate>Sun, 01 Jul 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://mk2.imti.co/webpage-to-pdf-microservice/</guid>
+      <description>I create a lot of data visualizations for clients, many of which are internal, portal-style websites that present data in real time, as well as give options for viewing reports from previous time-frames. PDFs are useful for data such as bank statements or any form of time-snapshot progress reporting. It is common for clients to want PDF versions generated on a regular basis for sharing through email or other technologies.</description>
+    </item>
+    
+    <item>
+      <title>A Microservices Workflow with Golang and Gitlab CI</title>
+      <link>https://mk2.imti.co/gitlabci-golang-microservices/</link>
+      <pubDate>Fri, 22 Jun 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://mk2.imti.co/gitlabci-golang-microservices/</guid>
+      <description>Many of the resources on Cloud Native Microservices show you how easy it is to get up and running with AWS or GKE. I think this is great but for the fact that I see a trend (in my clients at least) of associating concepts with particular products or worse, companies. I love Amazon, but it&amp;rsquo;s not THE cloud). In my opinion, to embrace Cloud Native and Microservices you should develop some, and host them yourself.</description>
+    </item>
+    
+    <item>
+      <title>Python Data Essentials - Pandas</title>
+      <link>https://mk2.imti.co/python-data-essentials-pandas/</link>
+      <pubDate>Sun, 17 Jun 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://mk2.imti.co/python-data-essentials-pandas/</guid>
+      <description>Pandas bring Python a data type equivalent to super-charged spreadsheets. Pandas add two highly expressive data structures to Python, Series and DataFrame. Pandas Series and DataFrames provide a performant analysis and manipulation of “relational” or “labeled” data similar to relational database tables like MySQL or the rows and columns of Excel. Pandas are great for working with time series data as well as arbitrary matrix data, and unlabeled data.</description>
+    </item>
+    
+    <item>
+      <title>Python Data Essentials - Numpy</title>
+      <link>https://mk2.imti.co/python-data-essentials-numpy/</link>
+      <pubDate>Sat, 16 Jun 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://mk2.imti.co/python-data-essentials-numpy/</guid>
+      <description>Python is one of The Most Popular Languages for Data Science, and because of this adoption by the data science community, we have libraries like NumPy, Pandas and Matplotlib. NumPy at it&amp;rsquo;s core provides a powerful N-dimensional array objects in which we can perform linear algebra, Pandas give us data structures and data analysis tools, similar to working with a specialized database or powerful spreadsheets and finally Matplotlib to generate plots, histograms, power spectra, bar charts, error charts and scatterplots to name a few.</description>
+    </item>
+    
+    <item>
       <title>Reverse Proxy in Golang</title>
       <link>https://mk2.imti.co/golang-reverse-proxy/</link>
       <pubDate>Fri, 15 Jun 2018 00:00:00 +0000</pubDate>

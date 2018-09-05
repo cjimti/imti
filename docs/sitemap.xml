@@ -18,6 +18,36 @@
   </url>
   
   <url>
+    <loc>https://mk2.imti.co/team-kubernetes-remote-access/</loc>
+    <lastmod>2018-07-10T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://mk2.imti.co/python-data-essentials-matplotlib-seaborn/</loc>
+    <lastmod>2018-07-08T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://mk2.imti.co/webpage-to-pdf-microservice/</loc>
+    <lastmod>2018-07-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://mk2.imti.co/gitlabci-golang-microservices/</loc>
+    <lastmod>2018-06-22T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://mk2.imti.co/python-data-essentials-pandas/</loc>
+    <lastmod>2018-06-17T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://mk2.imti.co/python-data-essentials-numpy/</loc>
+    <lastmod>2018-06-16T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://mk2.imti.co/golang-reverse-proxy/</loc>
     <lastmod>2018-06-15T00:00:00+00:00</lastmod>
   </url>
@@ -162,6 +192,18 @@
   </url>
   
   <url>
+    <loc>https://mk2.imti.co/tags/data-science/</loc>
+    <lastmod>2018-07-08T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://mk2.imti.co/tags/data-visualization/</loc>
+    <lastmod>2018-07-08T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://mk2.imti.co/tags/database/</loc>
     <lastmod>2018-04-02T00:00:00+00:00</lastmod>
     <priority>0</priority>
@@ -169,7 +211,7 @@
   
   <url>
     <loc>https://mk2.imti.co/tags/devops/</loc>
-    <lastmod>2018-06-15T00:00:00+00:00</lastmod>
+    <lastmod>2018-07-10T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -181,7 +223,7 @@
   
   <url>
     <loc>https://mk2.imti.co/tags/docker/</loc>
-    <lastmod>2018-05-18T00:00:00+00:00</lastmod>
+    <lastmod>2018-07-01T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -198,8 +240,14 @@
   </url>
   
   <url>
+    <loc>https://mk2.imti.co/tags/gitlab/</loc>
+    <lastmod>2018-06-22T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://mk2.imti.co/tags/golang/</loc>
-    <lastmod>2018-06-15T00:00:00+00:00</lastmod>
+    <lastmod>2018-06-22T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -217,13 +265,13 @@
   
   <url>
     <loc>https://mk2.imti.co/tags/ingress/</loc>
-    <lastmod>2018-05-28T00:00:00+00:00</lastmod>
+    <lastmod>2018-05-15T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://mk2.imti.co/tags/ingress/</loc>
-    <lastmod>2018-05-15T00:00:00+00:00</lastmod>
+    <lastmod>2018-05-28T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -235,7 +283,7 @@
   
   <url>
     <loc>https://mk2.imti.co/tags/kubectl/</loc>
-    <lastmod>2018-05-15T00:00:00+00:00</lastmod>
+    <lastmod>2018-07-10T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -258,14 +306,26 @@
   </url>
   
   <url>
+    <loc>https://mk2.imti.co/tags/microservice/</loc>
+    <lastmod>2018-07-01T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://mk2.imti.co/tags/microservices/</loc>
-    <lastmod>2018-03-24T00:00:00+00:00</lastmod>
+    <lastmod>2018-06-22T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://mk2.imti.co/tags/nginx/</loc>
     <lastmod>2018-05-15T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://mk2.imti.co/tags/pdf/</loc>
+    <lastmod>2018-07-01T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -295,7 +355,7 @@
   
   <url>
     <loc>https://mk2.imti.co/tags/security/</loc>
-    <lastmod>2018-06-15T00:00:00+00:00</lastmod>
+    <lastmod>2018-07-10T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   

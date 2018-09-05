@@ -146,116 +146,114 @@
             
 
 <div class="post-preview">
-    <a href="https://mk2.imti.co/413-request-entity-too-large/">
+    <a href="https://mk2.imti.co/mac-format-command-line/">
         <h2 class="post-title">
-            Kubernetes - 413 Request Entity Too Large
+            Formatting Drives on MacOS
         </h2>
 	
         <h3 class="post-subtitle">
-            Configuring the NGINX Ingress Controller
+            A stack of old drives, a terminal and diskutil.
         </h3>
 	
         <div class="post-content-preview">
 	
-            When setting up nginx ingress on Kubernetes for a private Docker Registry, I ran into an error when trying to push an image to it.
-Error parsing HTTP response: invalid character '&lt;' looking for beginning of value: &quot;&lt;html&gt;\r\n&lt;head&gt;&lt;title&gt;413 Request Entity Too Large&lt;/title&gt;&lt;/head&gt;\r\n&lt;body bgcolor=\&quot;white\&quot;&gt;\r\n&lt;center&gt;&lt;h1&gt;413 Request Entity Too Large&lt;/h1&gt;&lt;/center&gt;\r\n&lt;hr&gt;&lt;center&gt;nginx/1.9.14&lt;/center&gt;\r\n&lt;/body&gt;\r\n&lt;/html&gt;\r\n&quot;  The &ldquo;413 Request Entity Too Large&rdquo; error is something many accustomed to running nginx as a standard web server/proxy. nginx is configured to restrict the size of files it will allow over a post.
+            I have had this collection of old external drives hanging around for years. There was a time I was having terrible luck with hard drives. It turned out I managed to amass a collection of about eight drives from one terabyte to four terabytes.
+Fortunately, I keep copies of nearly all my files on cloud drives, split between Amazon, Google and DropBox. I had a sneaking suspicion that the discs themselves were ok and somehow my Mac was communicating with the RAID controllers in a way that caused them to fail.
        
         </div>
     </a>
     <p class="post-meta">
-    Posted by Craig Johnston Saturday, March 24, 2018
+    Posted by Craig Johnston Saturday, May 12, 2018
     </p>
 </div>
 <hr>
 
 <div class="post-preview">
-    <a href="https://mk2.imti.co/kubectl-remote/">
+    <a href="https://mk2.imti.co/kubectl-remote-x509-valid/">
         <h2 class="post-title">
-            Kubernetes Remote Control
+            Kubectl x509 Unable to Connect
         </h2>
 	
         <h3 class="post-subtitle">
-            Using kubectl to Control a Remote Kubernetes Cluster
+            Kubernetes remote access and TLS certs.
         </h3>
 	
         <div class="post-content-preview">
 	
-            I use Minikube to run a local Kubernetes single node cluster (cluster?). However, I also work with a custom production cluster for work. This cluster consists of development and production nodes. I often need to switch between working on my local Minikube and the online Kubernetes cluster.
-TIP: Visit the kubectl Cheat Sheet often.
-The default configuration kubectl is stored in ~/.kube/config and if you have Minikube installed, it added the context minikube to your config.
+            Just set up a brand new cluster? Changed the domain or IP of your admin node? Then you may have encountered the error Unable to connect to the server: x509: certificate is valid for &hellip;. The following is a fix for this common issue. However, there are often other reasons to rebuild your cluster cert, and it&rsquo;s relatively easy.
+TL;DR: &ldquo;I don&rsquo;t care about the fix I need to remote control my cluster.
        
         </div>
     </a>
     <p class="post-meta">
-    Posted by Craig Johnston Saturday, March 24, 2018
+    Posted by Craig Johnston Thursday, May 10, 2018
     </p>
 </div>
 <hr>
 
 <div class="post-preview">
-    <a href="https://mk2.imti.co/microservices/">
+    <a href="https://mk2.imti.co/hobby-cluster/">
         <h2 class="post-title">
-            Microservices &amp; Kubernetes
+            Production Hobby Cluster
         </h2>
 	
         <h3 class="post-subtitle">
-            Overview
+            Production-grade cluster on a hobby budget.
         </h3>
 	
         <div class="post-content-preview">
 	
-            The following is a collection of articles, videos, and notes on Microservices. The Microservices architecture is a variant of the service-oriented architecture, a collection of loosely coupled services.
-Articles  Background concept - &ldquo;Open Data: Small Pieces Loosely Joined&rdquo;, Tim O’Reilly Modern software design problems and solutions - &ldquo;12-Fractured Apps&rdquo;, Kelsey Hightower (SysAdmin @ Google) 12-Factor Defined - &ldquo;The 12-Factor App&rdquo;, Adam Wiggins Pros and Cons of Microservices - &ldquo;Microservices&rdquo; and Microservice Trade-Offs, Martin Fowler &ldquo;What are containers and why do you need them?
+            Setting up a production-grade Kubernetes cluster can be done on a hobby budget, and if this is true why mess around with a lesser grade. If you are investing time to learn distributed cloud computing or microservices, is the distance between $0 and 15 dollars a month worth the time in translating best practices? Kubernetes is designed to host production applications. My personal web applications may only be hobbies, but they might as well be production grade hobbies.
        
         </div>
     </a>
     <p class="post-meta">
-    Posted by Craig Johnston Saturday, March 24, 2018
+    Posted by Craig Johnston Wednesday, May 9, 2018
     </p>
 </div>
 <hr>
 
 <div class="post-preview">
-    <a href="https://mk2.imti.co/dont-install-emacs/">
+    <a href="https://mk2.imti.co/sql-select-joins-aliases/">
         <h2 class="post-title">
-            Don&#39;t Install Emacs
+            SQL Foundations
         </h2>
 	
         <h3 class="post-subtitle">
-            Containers as utility applications
+            Selects, joins and aliases.
         </h3>
 	
         <div class="post-content-preview">
 	
-            I grew up on emacs. One of my first jobs I sat down at a terminal and was editing some files with pico, it&rsquo;s what I knew since I used that fantastic email client pine. I was quickly told by my the lead developer that I need to use a real text editor if I&rsquo;m going to progress in my career. He told me I need to try emacs, and after suffering through a few weeks of memorizing multi command-char sequences and training the muscle memory in my pinky to perform bizarre contortions of my left hand just to save my file, I became a convert.
+            The following is an attempt at explaining the basics of an SQL query, and more importantly how I believe you can best think through them. All queries can be broken down into the basics of this declarative language.
+I recently helped a co-worker read through a large SQL query with a few dozen joins and left joins, alias, and recursions. He is mostly a front-end integrator and although he has been tinkering with SQL for years, he never really understood the basics.
        
         </div>
     </a>
     <p class="post-meta">
-    Posted by Craig Johnston Thursday, March 1, 2018
+    Posted by Craig Johnston Monday, April 2, 2018
     </p>
 </div>
 <hr>
 
 <div class="post-preview">
-    <a href="https://mk2.imti.co/dont-install-cqlsh/">
+    <a href="https://mk2.imti.co/raspberry-pi-rsync-interval/">
         <h2 class="post-title">
-            Don&#39;t Install cqlsh
+            rSync Files on Interval
         </h2>
 	
         <h3 class="post-subtitle">
-            Containers as utility applications
+            Sync media to Raspberry Pi or any ARM SoC.
         </h3>
 	
         <div class="post-content-preview">
 	
-            We live in a world of process isolation and tools that make utilizing it extremely simple, with apps like Docker we can perform dependency management with dependency isolation. As I am slowly becoming a fanboy of containerization, I look forward to the day when typing ps on my local workstation or remote server is nearly synonymous with commands like docker ps or kubectl get services.
-Case: Cassandra development and your local workstation.
+            A recurring requirement for my IOT projects involves keeping a set of files synced with a central server. Many of these projects include media players, kiosk systems, or applications that need frequently updated configuration files, all while entirely unattended, and in most cases unreachable through firewalls. I have one project that alone has 2000+ devices pulling media continuously from an rsync server. Many of these devices are on doggy wifi networks.
        
         </div>
     </a>
     <p class="post-meta">
-    Posted by Craig Johnston Thursday, March 1, 2018
+    Posted by Craig Johnston Monday, April 2, 2018
     </p>
 </div>
 <hr>
@@ -309,7 +307,19 @@ Case: Cassandra development and your local workstation.
                 
             
                 
+                    <a href="/tags/data-science" title="Data Science">
+                        Data Science
+                    </a>
+                
             
+                
+            
+                
+            
+                
+                    <a href="/tags/devops" title="DevOps">
+                        DevOps
+                    </a>
                 
             
                 
@@ -318,6 +328,8 @@ Case: Cassandra development and your local workstation.
                     <a href="/tags/docker" title="Docker">
                         Docker
                     </a>
+                
+            
                 
             
                 
@@ -350,6 +362,18 @@ Case: Cassandra development and your local workstation.
             
                 
             
+                
+                    <a href="/tags/microservices" title="Microservices">
+                        Microservices
+                    </a>
+                
+            
+                
+            
+                
+                    <a href="/tags/python" title="Python">
+                        Python
+                    </a>
                 
             
                 

@@ -146,114 +146,115 @@
             
 
 <div class="post-preview">
-    <a href="https://mk2.imti.co/kubectl-remote-x509-valid/">
+    <a href="https://mk2.imti.co/lets-encrypt-kubernetes/">
         <h2 class="post-title">
-            Kubectl x509 Unable to Connect
+            Let&#39;s Encrypt, Kubernetes
         </h2>
 	
         <h3 class="post-subtitle">
-            Kubernetes remote access and TLS certs.
+            Automated, secure and free 443/https with signed x509 certificates for Ingress.
         </h3>
 	
         <div class="post-content-preview">
 	
-            Just set up a brand new cluster? Changed the domain or IP of your admin node? Then you may have encountered the error Unable to connect to the server: x509: certificate is valid for &hellip;. The following is a fix for this common issue. However, there are often other reasons to rebuild your cluster cert, and it&rsquo;s relatively easy.
-TL;DR: &ldquo;I don&rsquo;t care about the fix I need to remote control my cluster.
+            Use cert-manager to get port 443/https running with signed x509 certificates for Ingress on your Kubernetes Production Hobby Cluster. cert-manager is the successor to kube-lego and the preferred way to &ldquo;automatically obtain browser-trusted certificates, without any human intervention.&rdquo; using Let&rsquo;s Encrypt.
+You need to install Helm first if you do not already have it. Otherwise, check out my article Helm on Custom Kubernetes, especially if you are following along with my Production Hobby Cluster guides.
        
         </div>
     </a>
     <p class="post-meta">
-    Posted by Craig Johnston Thursday, May 10, 2018
+    Posted by Craig Johnston Friday, May 18, 2018
     </p>
 </div>
 <hr>
 
 <div class="post-preview">
-    <a href="https://mk2.imti.co/hobby-cluster/">
+    <a href="https://mk2.imti.co/helm-on-custom-cluster/">
         <h2 class="post-title">
-            Production Hobby Cluster
+            Helm on Custom Kubernetes
         </h2>
 	
         <h3 class="post-subtitle">
-            Production-grade cluster on a hobby budget.
+            Kubernetes package management.
         </h3>
 	
         <div class="post-content-preview">
 	
-            Setting up a production-grade Kubernetes cluster can be done on a hobby budget, and if this is true why mess around with a lesser grade. If you are investing time to learn distributed cloud computing or microservices, is the distance between $0 and 15 dollars a month worth the time in translating best practices? Kubernetes is designed to host production applications. My personal web applications may only be hobbies, but they might as well be production grade hobbies.
+            Helm is the official package manager for Kubernetes. If you are looking to start using Helm or want to test its capabilities, I suggest you set up a Production Hobby Cluster. This article is a continuation of the Production Hobby Cluster configuration but should be entirely useful on its own.
+ From https://github.com/kubernetes/helm - Helm has two parts: a client (helm) and a server (tiller) - Tiller runs inside of your Kubernetes cluster and manages releases (installations) of your charts.
        
         </div>
     </a>
     <p class="post-meta">
-    Posted by Craig Johnston Wednesday, May 9, 2018
+    Posted by Craig Johnston Thursday, May 17, 2018
     </p>
 </div>
 <hr>
 
 <div class="post-preview">
-    <a href="https://mk2.imti.co/sql-select-joins-aliases/">
+    <a href="https://mk2.imti.co/kubernetes-custom-dns/">
         <h2 class="post-title">
-            SQL Foundations
+            Kubernetes Custom Upstream DNS
         </h2>
 	
         <h3 class="post-subtitle">
-            Selects, joins and aliases.
+            Customize upstream DNS resolution.
         </h3>
 	
         <div class="post-content-preview">
 	
-            The following is an attempt at explaining the basics of an SQL query, and more importantly how I believe you can best think through them. All queries can be broken down into the basics of this declarative language.
-I recently helped a co-worker read through a large SQL query with a few dozen joins and left joins, alias, and recursions. He is mostly a front-end integrator and although he has been tinkering with SQL for years, he never really understood the basics.
+            Customize the Upstream Nameservers used by kube-dns by Pods when looking up external hostnames from within a Kubernetes cluster. I found that adding custom Upstream Nameservers to my kube-dns solved many issues encountered in in the past with external hostname resolution on individual Pods.
+If you want to experiment on a production-like cluster, I suggest reading my article &ldquo;Production Hobby Cluster&rdquo; for a guide on setting up a fun, cheap-yet-robust experimental cluster.
        
         </div>
     </a>
     <p class="post-meta">
-    Posted by Craig Johnston Monday, April 2, 2018
+    Posted by Craig Johnston Thursday, May 17, 2018
     </p>
 </div>
 <hr>
 
 <div class="post-preview">
-    <a href="https://mk2.imti.co/raspberry-pi-rsync-interval/">
+    <a href="https://mk2.imti.co/web-cluster-ingress/">
         <h2 class="post-title">
-            rSync Files on Interval
+            Ingress on Custom Kubernetes
         </h2>
 	
         <h3 class="post-subtitle">
-            Sync media to Raspberry Pi or any ARM SoC.
+            Setting up ingress-nginx on a custom cluster.
         </h3>
 	
         <div class="post-content-preview">
 	
-            A recurring requirement for my IOT projects involves keeping a set of files synced with a central server. Many of these projects include media players, kiosk systems, or applications that need frequently updated configuration files, all while entirely unattended, and in most cases unreachable through firewalls. I have one project that alone has 2000+ devices pulling media continuously from an rsync server. Many of these devices are on doggy wifi networks.
+            There are more than a handful of ways to set up port 80 and 443 web ingress on a custom Kubernetes cluster. Specifically a bare metal cluster. If you are looking to experiment or learn on a non-production cluster, but something more true to production than minikube, I suggest you check out my previous article Production Hobby Cluster, a step-by-step guide for setting up a custom production capable Kubernetes cluster.
        
         </div>
     </a>
     <p class="post-meta">
-    Posted by Craig Johnston Monday, April 2, 2018
+    Posted by Craig Johnston Tuesday, May 15, 2018
     </p>
 </div>
 <hr>
 
 <div class="post-preview">
-    <a href="https://mk2.imti.co/mac-cli-burn-images/">
+    <a href="https://mk2.imti.co/kubectl-remote-context/">
         <h2 class="post-title">
-            Burn SD Images on MacOs
+            kubectl Context Multiple Clusters
         </h2>
 	
         <h3 class="post-subtitle">
-            Use the command line to burn SD cards, easy and fast.
+            Managing multiple clusters with kubectl.
         </h3>
 	
         <div class="post-content-preview">
 	
-            Use your terminal to burn images fast and easy with dd. I do a lot of professional and hobby development for projects using devices such as Raspberry Pi, Orange Pi, Libre Computer, Tinker Board, etc. I run across a lot of tutorials with people downloading and using big GUI apps with clunky drag and drop interfaces to burn images.
-It&rsquo;s one command in your terminal. Technically, it&rsquo;s three, but I don&rsquo;t count listing and unmounting as the final act of burning.
+            I use a few Kubernetes clusters on a daily basis, and I use kubectl to access and configure them from my workstation. There are dozens of ways to configure kubectl however I find the following method the easiest for me to manage and not make a mess.
+I also set up test clusters from time-to-time, and so keeping my configs organized is, so I don&rsquo;t confuse myself or make a mess.
        
         </div>
     </a>
     <p class="post-meta">
-    Posted by Craig Johnston Sunday, April 1, 2018
+    Posted by Craig Johnston Tuesday, May 15, 2018
     </p>
 </div>
 <hr>
@@ -307,7 +308,19 @@ It&rsquo;s one command in your terminal. Technically, it&rsquo;s three, but I do
                 
             
                 
+                    <a href="/tags/data-science" title="Data Science">
+                        Data Science
+                    </a>
+                
             
+                
+            
+                
+            
+                
+                    <a href="/tags/devops" title="DevOps">
+                        DevOps
+                    </a>
                 
             
                 
@@ -316,6 +329,8 @@ It&rsquo;s one command in your terminal. Technically, it&rsquo;s three, but I do
                     <a href="/tags/docker" title="Docker">
                         Docker
                     </a>
+                
+            
                 
             
                 
@@ -348,6 +363,18 @@ It&rsquo;s one command in your terminal. Technically, it&rsquo;s three, but I do
             
                 
             
+                
+                    <a href="/tags/microservices" title="Microservices">
+                        Microservices
+                    </a>
+                
+            
+                
+            
+                
+                    <a href="/tags/python" title="Python">
+                        Python
+                    </a>
                 
             
                 

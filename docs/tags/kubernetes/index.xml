@@ -31,6 +31,25 @@ Developing services in a Microservices architecture presents local development c
     </item>
     
     <item>
+      <title>Kubernetes Team Access - RBAC for developers and QA</title>
+      <link>https://mk2.imti.co/team-kubernetes-remote-access/</link>
+      <pubDate>Tue, 10 Jul 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://mk2.imti.co/team-kubernetes-remote-access/</guid>
+      <description>RBAC (Role Based Access Control) allows our Kubernetes clusters to provide the development team better visibility and access into the development, staging and production environments than it has have ever had in the past. Developers using the command line tool kubectl, can explore the network topology of running microservices, tail live server logs, proxy local ports directly to services or even execute shells into running pods.
+Kubernetes and GitlabCI are the central components of our DevOps toolchain and have increased our productivity by many multiples over the traditional approaches of the past.</description>
+    </item>
+    
+    <item>
+      <title>Webpage to PDF Microservice</title>
+      <link>https://mk2.imti.co/webpage-to-pdf-microservice/</link>
+      <pubDate>Sun, 01 Jul 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://mk2.imti.co/webpage-to-pdf-microservice/</guid>
+      <description>I create a lot of data visualizations for clients, many of which are internal, portal-style websites that present data in real time, as well as give options for viewing reports from previous time-frames. PDFs are useful for data such as bank statements or any form of time-snapshot progress reporting. It is common for clients to want PDF versions generated on a regular basis for sharing through email or other technologies.</description>
+    </item>
+    
+    <item>
       <title>CORS on Kubernetes Ingress Nginx</title>
       <link>https://mk2.imti.co/kubernetes-ingress-nginx-cors/</link>
       <pubDate>Mon, 28 May 2018 00:00:00 +0000</pubDate>

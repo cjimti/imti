@@ -21,6 +21,34 @@
     </item>
     
     <item>
+      <title>Python Data Essentials - Matplotlib and Seaborn</title>
+      <link>https://mk2.imti.co/python-data-essentials-matplotlib-seaborn/</link>
+      <pubDate>Sun, 08 Jul 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://mk2.imti.co/python-data-essentials-matplotlib-seaborn/</guid>
+      <description>There is an overwhelming number of options for developers needing to provide data visualization. The most popular library for data visualization in Python is Matplotlib, and built directly on top of Matplotlib is Seaborn. The Seaborn library is &amp;ldquo;tightly integrated with the PyData stack, including support for numpy and pandas data structures and statistical routines from scipy and statsmodels.&amp;rdquo;
+This article is only intended to get you started with Matplotlib and Seaborn.</description>
+    </item>
+    
+    <item>
+      <title>Python Data Essentials - Pandas</title>
+      <link>https://mk2.imti.co/python-data-essentials-pandas/</link>
+      <pubDate>Sun, 17 Jun 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://mk2.imti.co/python-data-essentials-pandas/</guid>
+      <description>Pandas bring Python a data type equivalent to super-charged spreadsheets. Pandas add two highly expressive data structures to Python, Series and DataFrame. Pandas Series and DataFrames provide a performant analysis and manipulation of “relational” or “labeled” data similar to relational database tables like MySQL or the rows and columns of Excel. Pandas are great for working with time series data as well as arbitrary matrix data, and unlabeled data.</description>
+    </item>
+    
+    <item>
+      <title>Python Data Essentials - Numpy</title>
+      <link>https://mk2.imti.co/python-data-essentials-numpy/</link>
+      <pubDate>Sat, 16 Jun 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://mk2.imti.co/python-data-essentials-numpy/</guid>
+      <description>Python is one of The Most Popular Languages for Data Science, and because of this adoption by the data science community, we have libraries like NumPy, Pandas and Matplotlib. NumPy at it&amp;rsquo;s core provides a powerful N-dimensional array objects in which we can perform linear algebra, Pandas give us data structures and data analysis tools, similar to working with a specialized database or powerful spreadsheets and finally Matplotlib to generate plots, histograms, power spectra, bar charts, error charts and scatterplots to name a few.</description>
+    </item>
+    
+    <item>
       <title>Essential Python 3</title>
       <link>https://mk2.imti.co/essential-python3/</link>
       <pubDate>Thu, 31 May 2018 00:00:00 +0000</pubDate>
