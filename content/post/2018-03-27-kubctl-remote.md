@@ -6,7 +6,7 @@ date:       2018-03-24
 author:     "Craig Johnston"
 URL:        "kubectl-remote/"
 aliases:
-  - "kubctl-remote/"
+  - "/kubctl-remote/"
 image:      "/img/post/containercrain.jpg"
 twitter_image: "/img/post/containercrain_876_438.jpg"
 tags:
