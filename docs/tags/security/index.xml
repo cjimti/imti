@@ -6,19 +6,67 @@
     <description>Recent content in Security on IMTI</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 10 May 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 10 Jul 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://mk2.imti.co/tags/security/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>Kubectl x509 Unable to Connect</title>
-      <link>https://mk2.imti.co/kubectl-remote-x509-valid/</link>
-      <pubDate>Thu, 10 May 2018 00:00:00 +0000</pubDate>
+      <title>Kubernetes Team Access - RBAC for developers and QA</title>
+      <link>https://mk2.imti.co/team-kubernetes-remote-access/</link>
+      <pubDate>Tue, 10 Jul 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://mk2.imti.co/kubectl-remote-x509-valid/</guid>
-      <description>Just set up a brand new cluster? Changed the domain or IP of your admin node? Then you may have encountered the error Unable to connect to the server: x509: certificate is valid for &amp;hellip;. The following is a fix for this common issue. However, there are often other reasons to rebuild your cluster cert, and it&amp;rsquo;s relatively easy.
-TL;DR: &amp;ldquo;I don&amp;rsquo;t care about the fix I need to remote control my cluster.</description>
+      <guid>https://mk2.imti.co/team-kubernetes-remote-access/</guid>
+      <description>RBAC (Role Based Access Control) allows our Kubernetes clusters to provide the development team better visibility and access into the development, staging and production environments than it has have ever had in the past. Developers using the command line tool kubectl, can explore the network topology of running microservices, tail live server logs, proxy local ports directly to services or even execute shells into running pods.
+Kubernetes and GitlabCI are the central components of our DevOps toolchain and have increased our productivity by many multiples over the traditional approaches of the past.</description>
+    </item>
+    
+    <item>
+      <title>Reverse Proxy in Golang</title>
+      <link>https://mk2.imti.co/golang-reverse-proxy/</link>
+      <pubDate>Fri, 15 Jun 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://mk2.imti.co/golang-reverse-proxy/</guid>
+      <description>Reverse proxies are standard components in many web architectures, from Nginx in front of php-fpm serving Drupal or Wordpress, to endless mixtures of load balancers, security appliances, and popular firewall applications. Reverse proxies differ from forward proxies in little but their intended implementation, be it service-side or client side. The following information is useful in either context. However, I focus on a service-side architecture. Further down this article, I&amp;rsquo;ll be going over the reasonably simple go code needed to develop a basic, yet production quality proxy, but first I&amp;rsquo;ll give you my take on why they solve so many problems and offer up my little workhorse, n2proxy.</description>
+    </item>
+    
+    <item>
+      <title>CORS on Kubernetes Ingress Nginx</title>
+      <link>https://mk2.imti.co/kubernetes-ingress-nginx-cors/</link>
+      <pubDate>Mon, 28 May 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://mk2.imti.co/kubernetes-ingress-nginx-cors/</guid>
+      <description>Using ingress-nginx on Kubernetes makes adding CORS headers painless. Kubernetes ingress-nginx uses annotations as a quick way to allow you to specify the automatic generation of an extensive list of common nginx configuration options.
+Example ingress configuration enabling CORS:
+apiVersion: extensions/v1beta1 kind: Ingress metadata: name: api namespace: fuse labels: app: api annotations: nginx.ingress.kubernetes.io/enable-cors: &amp;quot;true&amp;quot; nginx.ingress.kubernetes.io/cors-allow-methods: &amp;quot;PUT, GET, POST, OPTIONS&amp;quot; nginx.ingress.kubernetes.io/cors-allow-origin: &amp;quot;https://admin.example.com&amp;quot; nginx.ingress.kubernetes.io/cors-allow-credentials: &amp;quot;true&amp;quot; spec: rules: - host: api.example.com http: paths: - backend: serviceName: api-example servicePort: 80 path: /api tls: - hosts: - api.</description>
+    </item>
+    
+    <item>
+      <title>Basic Auth on Kubernetes Ingress</title>
+      <link>https://mk2.imti.co/kubernetes-ingress-basic-auth/</link>
+      <pubDate>Sat, 19 May 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://mk2.imti.co/kubernetes-ingress-basic-auth/</guid>
+      <description>Basic Auth is one of the oldest and easiest ways to secure a web page or API endpoint. Basic Auth does not have many features and lacks the sophistication of more modern access controls (see Ingress Nginx Auth Examples). However, Basic Auth is supported by nearly every major web client, library, and utility. Basic Auth is secure, stable and perfect for quick security on Kubernetes projects. Basic Auth can easily we swapped out later as requirements demand or provide a foundation for implementations such as OAuth 2 and JWT.</description>
+    </item>
+    
+    <item>
+      <title>JWT Microservice, Tokenize Remote APIs</title>
+      <link>https://mk2.imti.co/jwt-microservice/</link>
+      <pubDate>Fri, 18 May 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://mk2.imti.co/jwt-microservice/</guid>
+      <description>txToken is a small high performance microservice utility container. txToken is used for adding JSON Web Token based security to existing or new API development. txToken is specifically for systems that communicate in JSON over HTTP. txToken is called from a client with a JSON post body and passes received JSON to a remote endpoint. JSON retrieved from a remote endpoint is used to create a JWT token with an HS256 symmetrically encrypted signature.</description>
+    </item>
+    
+    <item>
+      <title>Let&#39;s Encrypt, Kubernetes</title>
+      <link>https://mk2.imti.co/lets-encrypt-kubernetes/</link>
+      <pubDate>Fri, 18 May 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://mk2.imti.co/lets-encrypt-kubernetes/</guid>
+      <description>Use cert-manager to get port 443/https running with signed x509 certificates for Ingress on your Kubernetes Production Hobby Cluster. cert-manager is the successor to kube-lego and the preferred way to &amp;ldquo;automatically obtain browser-trusted certificates, without any human intervention.&amp;rdquo; using Let&amp;rsquo;s Encrypt.
+You need to install Helm first if you do not already have it. Otherwise, check out my article Helm on Custom Kubernetes, especially if you are following along with my Production Hobby Cluster guides.</description>
     </item>
     
   </channel>

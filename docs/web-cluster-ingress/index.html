@@ -200,11 +200,11 @@
 
                 
 
-<p>There are more than a handful of ways to set up port <strong>80</strong> and <strong>443</strong> web <a href="https://github.com/kubernetes/ingress-nginx">ingress</a> on a custom <a href="https://kubernetes.io/">Kubernetes</a> cluster. Specifically a bare metal cluster. If you are looking to experiment or learn on a non-production cluster, but something more true to production than <a href="https://kubernetes.io/docs/getting-started-guides/minikube/">minikube</a>, I suggest you check out my previous article <a href="https://mk.imti.co/hobby-cluster/">Production Hobby Cluster</a>, a step-by-step guide for setting up a custom production capable Kubernetes cluster.</p>
+<p>There are more than a handful of ways to set up port <strong>80</strong> and <strong>443</strong> web <a href="https://github.com/kubernetes/ingress-nginx">ingress</a> on a custom <a href="https://kubernetes.io/">Kubernetes</a> cluster. Specifically a bare metal cluster. If you are looking to experiment or learn on a non-production cluster, but something more true to production than <a href="https://kubernetes.io/docs/getting-started-guides/minikube/">minikube</a>, I suggest you check out my previous article <a href="/hobby-cluster/">Production Hobby Cluster</a>, a step-by-step guide for setting up a custom production capable Kubernetes cluster.</p>
 
-<p>This article builds on the <a href="https://mk.imti.co/hobby-cluster/">Production Hobby Cluster</a> guide. The following closely the official <a href="https://github.com/kubernetes/ingress-nginx/blob/master/docs/deploy/index.md">deploy ingress</a> Installation Guide with a few adjustments suitable for the <a href="https://mk.imti.co/hobby-cluster/">Production Hobby Cluster</a>, specifically the use of a <a href="https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/">DaemonSet</a> rather than a <a href="https://kubernetes.io/docs/concepts/workloads/controllers/deployment/">Deployment</a> and leveraging <strong>hostNetwork</strong> and <strong>hostPort</strong> for the <a href="https://kubernetes.io/docs/concepts/workloads/pods/pod/">Pod</a>s on our <a href="https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/">DaemonSet</a>. There are quite a few <a href="https://github.com/kubernetes/ingress-nginx/tree/master/docs/examples">ingress nginx examples</a> in the official repository if you are looking for a more specific implementation.</p>
+<p>This article builds on the <a href="/hobby-cluster/">Production Hobby Cluster</a> guide. The following closely the official <a href="https://github.com/kubernetes/ingress-nginx/blob/master/docs/deploy/index.md">deploy ingress</a> Installation Guide with a few adjustments suitable for the <a href="/hobby-cluster/">Production Hobby Cluster</a>, specifically the use of a <a href="https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/">DaemonSet</a> rather than a <a href="https://kubernetes.io/docs/concepts/workloads/controllers/deployment/">Deployment</a> and leveraging <strong>hostNetwork</strong> and <strong>hostPort</strong> for the <a href="https://kubernetes.io/docs/concepts/workloads/pods/pod/">Pod</a>s on our <a href="https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/">DaemonSet</a>. There are quite a few <a href="https://github.com/kubernetes/ingress-nginx/tree/master/docs/examples">ingress nginx examples</a> in the official repository if you are looking for a more specific implementation.</p>
 
-<p>By now you may be managing multiple clusters. <a href="https://kubernetes.io/docs/tasks/tools/install-kubectl/">kubectl</a> is a great tool to use on your local workstation to manage remote clusters, and with little effort you can quickly point it to a new cluster and switch between them all day. Check out my article <a href="https://mk.imti.co/kubectl-remote-context/">kubectl Context Multiple Clusters</a> for a quick tutorial.</p>
+<p>By now you may be managing multiple clusters. <a href="https://kubernetes.io/docs/tasks/tools/install-kubectl/">kubectl</a> is a great tool to use on your local workstation to manage remote clusters, and with little effort you can quickly point it to a new cluster and switch between them all day. Check out my article <a href="/kubectl-remote-context/">kubectl Context Multiple Clusters</a> for a quick tutorial.</p>
 
 <h3 id="namespace">Namespace</h3>
 
@@ -389,7 +389,7 @@ spec:
 
 <hr />
 
-<p>If in a few days you find yourself setting up a cluster in Japan or Germany on <a href="https://www.linode.com/?r=848a6b0b21dc8edd33124f05ec8f99207ccddfde">Linode</a>, and another two in Australia and France on <a href="https://www.vultr.com/?ref=7418713">vultr</a>, then you may have just joined the PHC (Performance <a href="https://mk.imti.co/hobby-cluster/">Hobby Cluster</a>s) club. Some people tinker late at night on their truck, we benchmark and test the resilience of node failures on our overseas, budget kubernetes clusters. It&rsquo;s all about going big, on the cheap.</p>
+<p>If in a few days you find yourself setting up a cluster in Japan or Germany on <a href="https://www.linode.com/?r=848a6b0b21dc8edd33124f05ec8f99207ccddfde">Linode</a>, and another two in Australia and France on <a href="https://www.vultr.com/?ref=7418713">vultr</a>, then you may have just joined the PHC (Performance <a href="/hobby-cluster/">Hobby Cluster</a>s) club. Some people tinker late at night on their truck, we benchmark and test the resilience of node failures on our overseas, budget kubernetes clusters. It&rsquo;s all about going big, on the cheap.</p>
 
 <p><a href="https://amzn.to/2IOe8Yu"><img src="https://github.com/cjimti/mk/raw/master/images/content/k8s-tshirt-banner.jpg" alt="k8s performance hobby clusters" /></a></p>
 
@@ -468,6 +468,10 @@ spec:
                         
                         
                         
+                        <a href="/tags/elasticsearch" title="Elasticsearch">
+                        Elasticsearch
+                        </a>
+                        
                         
                         
                         
@@ -483,6 +487,10 @@ spec:
                         <a href="/tags/ingress" title="Ingress">
                         Ingress
                         </a>
+                        
+                        
+                        
+                        
                         
                         
                         

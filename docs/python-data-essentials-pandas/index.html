@@ -202,7 +202,7 @@
 
 <p><a href="https://pandas.pydata.org/">Pandas</a> bring Python a data type equivalent to super-charged spreadsheets. Pandas add two highly expressive data structures to Python, <a href="https://pandas.pydata.org/pandas-docs/stable/generated/pandas.Series.html">Series</a> and <a href="https://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.html">DataFrame</a>. Pandas <a href="https://pandas.pydata.org/pandas-docs/stable/generated/pandas.Series.html">Series</a> and <a href="https://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.html">DataFrame</a>s provide a performant analysis and manipulation of “relational” or “labeled” data similar to relational database tables like MySQL or the rows and columns of Excel. <a href="https://pandas.pydata.org/">Pandas</a> are great for working with time series data as well as arbitrary matrix data, and unlabeled data.</p>
 
-<p><a href="https://pandas.pydata.org/">Pandas</a> leverage <a href="https://mk.imti.co/python-data-essentials-numpy/">NumPy</a> and if you are not familiar with this fundamental library for working with numbers, then I suggest you take a look at <a href="https://mk.imti.co/python-data-essentials-numpy/">Python Data Essentials - NumPy</a> to get a decent footing.</p>
+<p><a href="https://pandas.pydata.org/">Pandas</a> leverage <a href="/python-data-essentials-numpy/">NumPy</a> and if you are not familiar with this fundamental library for working with numbers, then I suggest you take a look at <a href="/python-data-essentials-numpy/">Python Data Essentials - NumPy</a> to get a decent footing.</p>
 
 <aside class="toc">
     <header>
@@ -217,7 +217,7 @@
 <ul>
 <li><a href="#accessing-and-deleting-elements">Accessing and Deleting Elements</a>
 <ul>
-<li><a href="#numpy-on-series-data"><a href="https://mk.imti.co/python-data-essentials-numpy/">NumPy</a> on <a href="https://pandas.pydata.org/pandas-docs/stable/generated/pandas.Series.html">Series</a> data.</a></li>
+<li><a href="#numpy-on-series-data"><a href="/python-data-essentials-numpy/">NumPy</a> on <a href="https://pandas.pydata.org/pandas-docs/stable/generated/pandas.Series.html">Series</a> data.</a></li>
 </ul></li>
 <li><a href="#arithmetic-on-series-data">Arithmetic on Series Data</a></li>
 </ul></li>
@@ -385,7 +385,7 @@ Asus Tinker Board    3
 dtype: int64
 </code></pre>
 
-<h4 id="numpy-on-series-data"><a href="https://mk.imti.co/python-data-essentials-numpy/">NumPy</a> on <a href="https://pandas.pydata.org/pandas-docs/stable/generated/pandas.Series.html">Series</a> data.</h4>
+<h4 id="numpy-on-series-data"><a href="/python-data-essentials-numpy/">NumPy</a> on <a href="https://pandas.pydata.org/pandas-docs/stable/generated/pandas.Series.html">Series</a> data.</h4>
 
 <pre><code class="language-python">import numpy as np
 </code></pre>
@@ -479,7 +479,7 @@ dtype: float64
 
 <h3 id="creating">Creating</h3>
 
-<p><a href="https://pandas.pydata.org/">Pandas</a> can create a <a href="https://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.html">DataFrame</a> from a <a href="https://mk.imti.co/python-data-essentials-numpy/">NumPy</a> ndarray (structured or homogeneous), dict, or another DataFrame. A DataFrame with a Python <a href="http://www.pythonforbeginners.com/dictionary/how-to-use-dictionaries-in-python">Dict</a> can contain <a href="https://pandas.pydata.org/pandas-docs/stable/generated/pandas.Series.html">Series</a>, arrays, constants, or list-like objects.</p>
+<p><a href="https://pandas.pydata.org/">Pandas</a> can create a <a href="https://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.html">DataFrame</a> from a <a href="/python-data-essentials-numpy/">NumPy</a> ndarray (structured or homogeneous), dict, or another DataFrame. A DataFrame with a Python <a href="http://www.pythonforbeginners.com/dictionary/how-to-use-dictionaries-in-python">Dict</a> can contain <a href="https://pandas.pydata.org/pandas-docs/stable/generated/pandas.Series.html">Series</a>, arrays, constants, or list-like objects.</p>
 
 <p>In the example below I create a <a href="http://www.pythonforbeginners.com/dictionary/how-to-use-dictionaries-in-python">dictionary</a> that maps three indexes to three varied data sets. The fictional AI machines &lsquo;hal&rsquo;, &lsquo;johnny 5&rsquo; and &lsquo;bender&rsquo; all have different attributes with some overlap. Each of the dictionary keys contains a Pandas Series object. However, they may contain any list-like objects.</p>
 
@@ -1162,13 +1162,13 @@ The bot with the lowest intelligence is bender.
 
 <h3 id="math">Math</h3>
 
-<p>Use <a href="https://mk.imti.co/python-data-essentials-numpy/">NumPy</a> to perform any number of arithmetic operations on the values of a <a href="https://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.html">DataFrames</a>. I suggest you take a look at my article <a href="https://mk.imti.co/python-data-essentials-numpy/">Python Data Essentials - Pandas</a> for an overview of this compelling data science library.</p>
+<p>Use <a href="/python-data-essentials-numpy/">NumPy</a> to perform any number of arithmetic operations on the values of a <a href="https://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.html">DataFrames</a>. I suggest you take a look at my article <a href="/python-data-essentials-numpy/">Python Data Essentials - Pandas</a> for an overview of this compelling data science library.</p>
 
 <h2 id="essential-python-3">Essential Python 3</h2>
 
-<p>A lot of data science in done in <a href="https://mk.imti.co/golang-to-jupyter/">Jupyter Notbooks</a> and libraries like <a href="https://mk.imti.co/python-data-essentials-numpy/">NumPy</a> make developing reports or documenting numerical processes. However if you a software developer like me, this code needs to run in a script on a server, in Amazon&rsquo;s <a href="https://docs.aws.amazon.com/lambda/latest/dg/python-programming-model-handler-types.html">Lambda Function Handler</a> or even <a href="https://kubeless.io/">kubeless</a> in a custom <a href="https://mk.imti.co/hobby-cluster/">kubernetes</a> cluster.</p>
+<p>A lot of data science in done in <a href="/golang-to-jupyter/">Jupyter Notbooks</a> and libraries like <a href="/python-data-essentials-numpy/">NumPy</a> make developing reports or documenting numerical processes. However if you a software developer like me, this code needs to run in a script on a server, in Amazon&rsquo;s <a href="https://docs.aws.amazon.com/lambda/latest/dg/python-programming-model-handler-types.html">Lambda Function Handler</a> or even <a href="https://kubeless.io/">kubeless</a> in a custom <a href="/hobby-cluster/">kubernetes</a> cluster.</p>
 
-<p>Check out my article on <a href="https://mk.imti.co/essential-python3/">Essential Python 3</a> for a clean boilerplate script template to get you going.</p>
+<p>Check out my article on <a href="/essential-python3/">Essential Python 3</a> for a clean boilerplate script template to get you going.</p>
 
 
                 
@@ -1227,6 +1227,10 @@ The bot with the lowest intelligence is bender.
                         
                         
                         
+                        <a href="/tags/elasticsearch" title="Elasticsearch">
+                        Elasticsearch
+                        </a>
+                        
                         
                         
                         
@@ -1242,6 +1246,10 @@ The bot with the lowest intelligence is bender.
                         <a href="/tags/ingress" title="Ingress">
                         Ingress
                         </a>
+                        
+                        
+                        
+                        
                         
                         
                         

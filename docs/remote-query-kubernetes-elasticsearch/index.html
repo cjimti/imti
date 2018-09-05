@@ -1,0 +1,1069 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head><head>
+    <meta name="google-site-verification" content="" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <meta name="description" content="I lead a talented team of software development and creative engineers, covering many industries looking to collect, analyze, move, buffer, queue, process and present data in significant ways. My expertise and that of my team revolve around microservices, artificial intelligence, algorithms, machine learning and blockchain technologies.">
+    
+    <meta name="keyword"  content="Go, Kubernetes, Elasticsearch, Python, Docker, Big Data, Artificial Intelligence, Machine Learning, Blockchain">
+    <link rel="shortcut icon" href="https://mk2.imti.co/img/favicon.ico">
+
+    <title>Remote Query Elasticsearch on Kubernetes-IMTI | Craig Johnston</title>
+
+    <link rel="canonical" href="https://mk2.imti.co/remote-query-kubernetes-elasticsearch/">
+
+    <link rel="stylesheet" href="https://mk2.imti.co/css/iDisqus.min.css"/>
+	
+    
+    <link rel="stylesheet" href="https://mk2.imti.co/css/bootstrap.min.css">
+
+    
+    <link rel="stylesheet" href="https://mk2.imti.co/css/hux-blog.min.css">
+
+    
+    <link rel="stylesheet" href="https://mk2.imti.co/css/syntax.css">
+
+    
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    
+    
+    <link rel="stylesheet" href="/css/imti.css">
+
+    
+    <script src="https://mk2.imti.co/js/jquery.min.js"></script>
+    
+    
+    <script src="https://mk2.imti.co/js/bootstrap.min.js"></script>
+    
+    
+    <script src="https://mk2.imti.co/js/hux-blog.min.js"></script>
+
+    <meta name="twitter:site" content="@cjimti">
+<meta name="twitter:creator" content="@cjimti">
+
+<meta name="twitter:description" content="Developing on our local workstations has always been a conceptual challenge for my team when it comes to remote data access. Local workstation-based development of services that intend to connect to a wide range of remote services that may have no options for external connections poses a challenge. Mirroring the entire development environment is possible in many cases, just not practical.
+In days before Kubernetes, writing code in IDEs on our local workstation meant we had only a few options for developing server-side-API-style services that needed to connect to a database." />
+<meta name="twitter:title" content="Remote Query Elasticsearch on Kubernetes" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://mk2.imti.co/img/post/tel_876_438.jpg" />
+<meta property="og:image" content="https://mk2.imti.co/img/post/tel_876_438.jpg" />
+
+
+
+    
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Article",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://mk2.imti.co/remote-query-kubernetes-elasticsearch/"
+  },
+  "headline": "Remote Query Elasticsearch on Kubernetes",
+  "image": [
+    "https://mk2.imti.co/img/post/tel_876_438.jpg"
+   ],
+  "datePublished": "2018-07-25T00:00:00",
+  "dateModified": "2018-07-25T00:00:00",
+  "author": {
+    "@type": "Person",
+    "name": "Craig Johnston"
+  },
+   "publisher": {
+    "@type": "Organization",
+    "name": 'imti.co",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://mk2.imti.co/img/craig_johnston_cjimti.jpg"
+    }
+  },
+  "description": "Developing on our local workstations has always been a conceptual challenge for my team when it comes to remote data access. Local workstation-based development of services that intend to connect to a wide range of remote services that may have no options for external connections poses a challenge. Mirroring the entire development environment is possible in many cases, just not practical.
+In days before Kubernetes, writing code in IDEs on our local workstation meant we had only a few options for developing server-side-API-style services that needed to connect to a database."
+}
+</script>
+
+</head></head>
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="https://mk2.imti.co/">IMTI</a>
+        </div>
+
+        
+        
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="https://mk2.imti.co/">Home</a>
+                    </li>
+                    
+
+                    
+                </ul>
+            </div>
+        </div>
+        
+    </div>
+    
+</nav>
+<script>
+    
+    
+    
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        
+            $navbar.className = " ";
+            
+            setTimeout(function(){
+                
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+
+
+<style type="text/css">
+    header.intro-header{
+        background-image: url('https://mk2.imti.co/img/post/tel.jpg')
+    }
+</style>
+<header class="intro-header" >
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/kubernetes" title="Kubernetes">
+                        Kubernetes
+                        </a>
+                        
+                        <a class="tag" href="/tags/elasticsearch" title="Elasticsearch">
+                        Elasticsearch
+                        </a>
+                        
+                        <a class="tag" href="/tags/data" title="Data">
+                        Data
+                        </a>
+                        
+                    </div>
+                    <h1>Remote Query Elasticsearch on Kubernetes</h1>
+                    <h2 class="subheading">Local workstation-based microservices development</h2>
+                    <span  class="meta">Posted by Craig Johnston on Wednesday, July 25, 2018
+                        
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+<article>
+    <div class="container">
+        <div class="row">
+
+            
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                
+
+<p>Developing on our local workstations has always been a conceptual challenge for my team when it comes to remote data access.  Local workstation-based development of services that intend to connect to a wide range of remote services that may have no options for external connections poses a challenge. Mirroring the entire development environment is possible in many cases, just not practical.</p>
+
+<p>In days before Kubernetes, writing code in IDEs on our local workstation meant we had only a few options for developing server-side-API-style services that needed to connect to a database. We could set up a database server on our local workstation manually or use packages like <a href="https://www.mamp.info/en/">MAMP</a>/<a href="http://www.wampserver.com/en/">WAMP</a>, or run big virtual servers managed with <a href="https://www.vagrantup.com/">Vagrant</a>. Even after we got the database running, we needed a good set of data to work with, and that often meant asking a DBA or Sysadmin for SQL dumps from an environment in which we have no access.</p>
+
+<p>Kubernetes gives us new ways to connect to remote services, some of these services are never intended to be connected to outside the cluster, having no ingress or firewall rules, yet we still need to connect from the outside when developing on a local workstation.</p>
+
+<p><strong>Port-forward a Kubernetes service:</strong></p>
+
+<pre><code class="language-bash">kubectl port-forward svc/elasticsearch 9200:9200 -n the-project
+</code></pre>
+
+<p>In the command above, I&rsquo;m forwarding the Kubernetes Service <code>elasticsearch</code>, and it&rsquo;s port 9200 from <code>the-project</code> namespace to port 9200 on my local workstation. Studying this command may be enough to get you going, and if you followed my guide, <a href="/kubernetes-production-elasticsearch/">Production Grade Elasticsearch on Kubernetes</a>, you could run this same command.</p>
+
+<p>If you don&rsquo;t understand that command, or running it produces an error, read on.</p>
+
+<aside class="toc">
+    <header>
+        <h2>Contents</h2>
+    </header>
+    <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#port-forward-elasticsearch-kubernetes-service">Port Forward <code>elasticsearch</code> Kubernetes Service</a>
+<ul>
+<li><a href="#port-forwarding-rbac-permissions">Port-forwarding RBAC Permissions</a></li>
+</ul></li>
+<li><a href="#postman">Postman</a></li>
+<li><a href="#query-elasticsearch-indices-and-mappings">Query Elasticsearch Indices and Mappings</a>
+<ul>
+<li><a href="#get-indices">Get Indices</a></li>
+<li><a href="#get-index-mapping">Get Index Mapping</a></li>
+</ul></li>
+<li><a href="#query-elasticsearch-data">Query Elasticsearch Data</a></li>
+</ul></li>
+<li><a href="#resources">Resources</a></li>
+</ul></li>
+</ul>
+</nav>
+</aside>
+
+<h3 id="port-forward-elasticsearch-kubernetes-service">Port Forward <code>elasticsearch</code> Kubernetes Service</h3>
+
+<p>Since Kubernetes v1.10, the command <a href="https://kubernetes.io/docs/tasks/access-application-cluster/port-forward-access-application-cluster/#forward-a-local-port-to-a-port-on-the-pod">kubectl port-forward</a> &ldquo;allows using <a href="https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names">resource name</a>, such as a service name, to select a matching pod to port forward to.&rdquo;  <a href="https://kubernetes.io/docs/tasks/access-application-cluster/port-forward-access-application-cluster/#forward-a-local-port-to-a-port-on-the-pod">kubectl port-forward</a> also works with deployments, daemon sets, replica sets and so on.</p>
+
+<p>Get a list of services running in <code>the-project</code> namespace:</p>
+
+<pre><code class="language-bash">kubectl get services -n the-project
+</code></pre>
+
+<p><a href="https://kubernetes.io/docs/concepts/services-networking/service/">Service</a>s expose a port and map it to another port on a pod. In the case of connecting to Elasticsearch, we don&rsquo;t care what pod we are connecting to, in fact, we want to connect the same way or application will, and that is through a <a href="https://kubernetes.io/docs/concepts/services-networking/service/">Service</a>. It so happens that the <code>elasticsearch</code> Service in <code>the-project</code> namespace uses Port 9200, the default for elasticsearch; however this could have easily been customized to some other port, and this is why we always want to list our services and ports they expose.</p>
+
+<p><img src="/images/content/kubectl-cmd-getsvc.png" alt="kubectl get services" /></p>
+
+<p>Now that we have the <a href="https://kubernetes.io/docs/concepts/services-networking/service/">Service</a> name and port we can issue a port-forward command with <code>kubectl</code>:</p>
+
+<p>To port-forward the Elasticsearch <a href="https://kubernetes.io/docs/concepts/services-networking/service/">Service</a> to my local workstation I need to provide a local port that is available. I would need to choose a port other than 9200 if I had something already on that port.</p>
+
+<pre><code class="language-bash">kubectl port-forward svc/elasticsearch 9200:9200 -n the-project
+</code></pre>
+
+<p>The following diagram is a breakdown of the <code>kubectl port-forward</code> command:</p>
+
+<p><img src="/images/content/kubectl-cmd-pf.png" alt="kubectl port-forward" /></p>
+
+<p>If the above command is running without error, open another terminal and use Curl to get the cluster stats:</p>
+
+<pre><code class="language-bash">curl &quot;http://localhost:9200/_cluster/stats?human&amp;pretty&quot;
+</code></pre>
+
+<p>If the command above returned a large JSON object describing the Elasticsearch cluster in your Kubernetes environment, congratulations. If you encountered an error, read on.</p>
+
+<p><strong>Permission Denied</strong></p>
+
+<p>If <code>kubectl port-forward</code> claims you don&rsquo;t have permission to port forward a <a href="https://kubernetes.io/docs/concepts/services-networking/service/">Service</a> on the cluster, you need to review the <a href="#port-forwarding-rbac-permissions">RBAC Permissions</a> for the credentials used for remote access to the Kubernetes cluster.</p>
+
+<p>If you are getting an error along the lines of <code>127.0.0.1:9200, 16): Connection refused</code> it is most likely that Elasticsearch is not binding to all local interfaces on the Pod and is defaulting to its hostname. Since you can not provide a hostname through simple port-forward, you want to check your <code>elasticsearch.yml</code> configuration and ensure that Elasticsearch listens on all interfaces by specifying <code>network.host: 0.0.0.0</code>. However, if you are using the configuration from the article <a href="/kubernetes-production-elasticsearch/">Production Grade Elasticsearch on Kubernetes</a>, the value of <strong>network.host</strong> is set from the environment variable <strong>NETWORK_HOST</strong> for the Pod. See the <a href="/kubernetes-production-elasticsearch/#deployment-for-client-and-ingest-nodes">Deployment for Client and Ingest Nodes</a> configuration, paying special attention to the <strong>env:</strong> section where the environment variable setting <strong>NETWORK_HOST</strong> is <strong>0.0.0.0</strong>.</p>
+
+<h4 id="port-forwarding-rbac-permissions">Port-forwarding RBAC Permissions</h4>
+
+<p>In the article, <a href="/team-kubernetes-remote-access/">Kubernetes Team Access - RBAC for developers and QA</a>, I set up the <a href="/team-kubernetes-remote-access/#role-and-rolebinding">Roles</a> <strong>developer</strong> and <strong>deployer</strong>. In this example, I am using the <code>kubectl config</code> context with the developer service account. Whatever Role you are bound to must have the following RBAC rules applied to port forward:</p>
+
+<pre><code class="language-yaml">- apiGroups:
+  - '*'
+  resources:
+  - 'pods/portforward'
+  - 'services/portforward'
+  verbs:
+  - create
+</code></pre>
+
+<p>See <a href="/team-kubernetes-remote-access/#role-and-rolebinding">Roles and RoleBindings</a> for a better understanding of how these rules apply to our access.</p>
+
+<h3 id="postman">Postman</h3>
+
+<p>In the following examples, I use my favorite (and free) HTTP client, <a href="https://www.getpostman.com/">Postman</a>. When working with HTTP based APIs, I typically use <a href="https://www.getpostman.com/">Postman</a>. However, I&rsquo;ll be exporting the <a href="https://www.getpostman.com/">Postman</a> calls to <code>curl</code> commands so they can also be displayed here and tested on the command line.</p>
+
+<p>If you want access to my <a href="https://www.getpostman.com/">Postman</a> calls to run for yourself:</p>
+
+<p><a href="https://app.getpostman.com/run-collection/d5db089e68b44d01d046"><img src="https://run.pstmn.io/button.svg" alt="Run in Postman" /></a></p>
+
+<h3 id="query-elasticsearch-indices-and-mappings">Query Elasticsearch Indices and Mappings</h3>
+
+<p>If the command <code>kubectl port-forward svc/elasticsearch 9200:9200 -n the-project</code> is running without error in a terminal we are ready to start working with Elasticsearch on our local workstation through port 9200.</p>
+
+<h4 id="get-indices">Get Indices</h4>
+
+<p>Get a list of <a href="https://www.elastic.co/blog/what-is-an-elasticsearch-index">Indices</a>:</p>
+
+<pre><code class="language-bash">curl -X GET \
+  'http://localhost:9200/_cat/indices?format=json&amp;pretty=true'
+</code></pre>
+
+<p>Output:</p>
+
+<pre><code class="language-json">[
+    {
+        &quot;health&quot;: &quot;green&quot;,
+        &quot;status&quot;: &quot;open&quot;,
+        &quot;index&quot;: &quot;.kibana&quot;,
+        &quot;uuid&quot;: &quot;9qr9qjD4T1-2KhWi70zcYw&quot;,
+        &quot;pri&quot;: &quot;1&quot;,
+        &quot;rep&quot;: &quot;0&quot;,
+        &quot;docs.count&quot;: &quot;6&quot;,
+        &quot;docs.deleted&quot;: &quot;0&quot;,
+        &quot;store.size&quot;: &quot;33.1kb&quot;,
+        &quot;pri.store.size&quot;: &quot;33.1kb&quot;
+    },
+    {
+        &quot;health&quot;: &quot;green&quot;,
+        &quot;status&quot;: &quot;open&quot;,
+        &quot;index&quot;: &quot;wx-rtbeat-2018.07&quot;,
+        &quot;uuid&quot;: &quot;nMHK2dxfTbmbnLubKvLTRQ&quot;,
+        &quot;pri&quot;: &quot;5&quot;,
+        &quot;rep&quot;: &quot;1&quot;,
+        &quot;docs.count&quot;: &quot;5566&quot;,
+        &quot;docs.deleted&quot;: &quot;0&quot;,
+        &quot;store.size&quot;: &quot;4.8mb&quot;,
+        &quot;pri.store.size&quot;: &quot;4.8mb&quot;
+    }
+]
+</code></pre>
+
+<p>The output of <code>_cat/indices</code> returns a JSON array of <a href="https://www.elastic.co/blog/what-is-an-elasticsearch-index">Indices</a>. In the article, <a href="/post-json-elasticsearch-kubernetes/">High Traffic JSON Data into Elasticsearch on Kubernetes</a> I demonstrate collecting weather data from the <a href="https://darksky.net/dev">Dark Sky API</a>. The weather data populates an Elasticssearch index based on the year and month. As of the time of this writing, I only have one index <strong>wx-rtbeat-2018.07</strong>. The index <strong>.kibana</strong> is used by my <a href="/kibana-kubernetes/">Kibana service</a>.</p>
+
+<h4 id="get-index-mapping">Get Index Mapping</h4>
+
+<p>The <a href="https://www.elastic.co/guide/en/elasticsearch/reference/6.3/indices-get-mapping.html#indices-get-mapping">Get Mapping</a> call gives us the field mapping of an index or a group of indexes. In this case, we want all of the fields any index starting with <strong><code>wx-rtbeat-*</code></strong> (* being a wildcard.) <a href="https://www.getpostman.com/">Postman</a> generates the Curl call with the URL encoding <strong>%2A</strong> for the * character.</p>
+
+<pre><code class="language-bash">curl -X GET \
+  http://localhost:9200/wx-rtbeat-%2A/_mapping
+</code></pre>
+
+<p>Output:</p>
+
+<pre><code class="language-json">{
+    &quot;wx-rtbeat-2018.07&quot;: {
+        &quot;mappings&quot;: {
+            &quot;doc&quot;: {
+                &quot;_meta&quot;: {
+                    &quot;version&quot;: &quot;7.0.0-alpha1&quot;
+                },
+                &quot;dynamic_templates&quot;: [
+                    {
+                        &quot;fields&quot;: {
+                            &quot;path_match&quot;: &quot;fields.*&quot;,
+                            &quot;match_mapping_type&quot;: &quot;string&quot;,
+                            &quot;mapping&quot;: {
+                                &quot;type&quot;: &quot;keyword&quot;
+                            }
+                        }
+                    },
+                    {
+                        &quot;strings_as_keyword&quot;: {
+                            &quot;match_mapping_type&quot;: &quot;string&quot;,
+                            &quot;mapping&quot;: {
+                                &quot;ignore_above&quot;: 1024,
+                                &quot;type&quot;: &quot;keyword&quot;
+                            }
+                        }
+                    }
+                ],
+                &quot;date_detection&quot;: false,
+                &quot;properties&quot;: {
+                    &quot;@timestamp&quot;: {
+                        &quot;type&quot;: &quot;date&quot;
+                    },
+                    &quot;beat&quot;: {
+                        &quot;properties&quot;: {
+                            &quot;hostname&quot;: {
+                                &quot;type&quot;: &quot;keyword&quot;,
+                                &quot;ignore_above&quot;: 1024
+                            },
+                            &quot;name&quot;: {
+                                &quot;type&quot;: &quot;keyword&quot;,
+                                &quot;ignore_above&quot;: 1024
+                            },
+                            &quot;version&quot;: {
+                                &quot;type&quot;: &quot;keyword&quot;,
+                                &quot;ignore_above&quot;: 1024
+                            }
+                        }
+                    },
+                    &quot;clientIp&quot;: {
+                        &quot;type&quot;: &quot;keyword&quot;,
+                        &quot;ignore_above&quot;: 1024
+                    },
+                    &quot;error&quot;: {
+                        &quot;properties&quot;: {
+                            &quot;code&quot;: {
+                                &quot;type&quot;: &quot;long&quot;
+                            },
+                            &quot;message&quot;: {
+                                &quot;type&quot;: &quot;text&quot;,
+                                &quot;norms&quot;: false
+                            },
+                            &quot;type&quot;: {
+                                &quot;type&quot;: &quot;keyword&quot;,
+                                &quot;ignore_above&quot;: 1024
+                            }
+                        }
+                    },
+                    &quot;fields&quot;: {
+                        &quot;type&quot;: &quot;object&quot;
+                    },
+                    &quot;rxtxMsg&quot;: {
+                        &quot;properties&quot;: {
+                            &quot;key&quot;: {
+                                &quot;type&quot;: &quot;keyword&quot;,
+                                &quot;ignore_above&quot;: 1024
+                            },
+                            &quot;label&quot;: {
+                                &quot;type&quot;: &quot;keyword&quot;,
+                                &quot;ignore_above&quot;: 1024
+                            },
+                            &quot;payload&quot;: {
+                                &quot;properties&quot;: {
+                                    &quot;alerts&quot;: {
+                                        &quot;properties&quot;: {
+                                            &quot;description&quot;: {
+                                                &quot;type&quot;: &quot;keyword&quot;,
+                                                &quot;ignore_above&quot;: 1024
+                                            },
+                                            &quot;expires&quot;: {
+                                                &quot;type&quot;: &quot;float&quot;
+                                            },
+                                            &quot;regions&quot;: {
+                                                &quot;type&quot;: &quot;keyword&quot;,
+                                                &quot;ignore_above&quot;: 1024
+                                            },
+                                            &quot;severity&quot;: {
+                                                &quot;type&quot;: &quot;keyword&quot;,
+                                                &quot;ignore_above&quot;: 1024
+                                            },
+                                            &quot;time&quot;: {
+                                                &quot;type&quot;: &quot;float&quot;
+                                            },
+                                            &quot;title&quot;: {
+                                                &quot;type&quot;: &quot;keyword&quot;,
+                                                &quot;ignore_above&quot;: 1024
+                                            },
+                                            &quot;uri&quot;: {
+                                                &quot;type&quot;: &quot;keyword&quot;,
+                                                &quot;ignore_above&quot;: 1024
+                                            }
+                                        }
+                                    },
+                                    &quot;currently&quot;: {
+                                        &quot;properties&quot;: {
+                                            &quot;apparentTemperature&quot;: {
+                                                &quot;type&quot;: &quot;half_float&quot;
+                                            },
+                                            &quot;cloudCover&quot;: {
+                                                &quot;type&quot;: &quot;half_float&quot;
+                                            },
+                                            &quot;dewPoint&quot;: {
+                                                &quot;type&quot;: &quot;half_float&quot;
+                                            },
+                                            &quot;humidity&quot;: {
+                                                &quot;type&quot;: &quot;half_float&quot;
+                                            },
+                                            &quot;icon&quot;: {
+                                                &quot;type&quot;: &quot;keyword&quot;,
+                                                &quot;ignore_above&quot;: 1024
+                                            },
+                                            &quot;nearestStormBearing&quot;: {
+                                                &quot;type&quot;: &quot;long&quot;
+                                            },
+                                            &quot;nearestStormDistance&quot;: {
+                                                &quot;type&quot;: &quot;long&quot;
+                                            },
+                                            &quot;ozone&quot;: {
+                                                &quot;type&quot;: &quot;half_float&quot;
+                                            },
+                                            &quot;precipIntensity&quot;: {
+                                                &quot;type&quot;: &quot;half_float&quot;
+                                            },
+                                            &quot;precipIntensityError&quot;: {
+                                                &quot;type&quot;: &quot;half_float&quot;
+                                            },
+                                            &quot;precipProbability&quot;: {
+                                                &quot;type&quot;: &quot;half_float&quot;
+                                            },
+                                            &quot;precipType&quot;: {
+                                                &quot;type&quot;: &quot;keyword&quot;,
+                                                &quot;ignore_above&quot;: 1024
+                                            },
+                                            &quot;pressure&quot;: {
+                                                &quot;type&quot;: &quot;half_float&quot;
+                                            },
+                                            &quot;summary&quot;: {
+                                                &quot;type&quot;: &quot;keyword&quot;,
+                                                &quot;ignore_above&quot;: 1024
+                                            },
+                                            &quot;temperature&quot;: {
+                                                &quot;type&quot;: &quot;half_float&quot;
+                                            },
+                                            &quot;time&quot;: {
+                                                &quot;type&quot;: &quot;long&quot;
+                                            },
+                                            &quot;uvIndex&quot;: {
+                                                &quot;type&quot;: &quot;half_float&quot;
+                                            },
+                                            &quot;visibility&quot;: {
+                                                &quot;type&quot;: &quot;half_float&quot;
+                                            },
+                                            &quot;windBearing&quot;: {
+                                                &quot;type&quot;: &quot;half_float&quot;
+                                            },
+                                            &quot;windGust&quot;: {
+                                                &quot;type&quot;: &quot;half_float&quot;
+                                            },
+                                            &quot;windSpeed&quot;: {
+                                                &quot;type&quot;: &quot;half_float&quot;
+                                            }
+                                        }
+                                    },
+                                    &quot;latitude&quot;: {
+                                        &quot;type&quot;: &quot;half_float&quot;
+                                    },
+                                    &quot;longitude&quot;: {
+                                        &quot;type&quot;: &quot;half_float&quot;
+                                    },
+                                    &quot;offset&quot;: {
+                                        &quot;type&quot;: &quot;byte&quot;
+                                    },
+                                    &quot;timezone&quot;: {
+                                        &quot;type&quot;: &quot;keyword&quot;,
+                                        &quot;ignore_above&quot;: 1024
+                                    }
+                                }
+                            },
+                            &quot;producer&quot;: {
+                                &quot;type&quot;: &quot;keyword&quot;,
+                                &quot;ignore_above&quot;: 1024
+                            },
+                            &quot;seq&quot;: {
+                                &quot;type&quot;: &quot;long&quot;
+                            },
+                            &quot;time&quot;: {
+                                &quot;type&quot;: &quot;date&quot;
+                            },
+                            &quot;uuid&quot;: {
+                                &quot;type&quot;: &quot;keyword&quot;,
+                                &quot;ignore_above&quot;: 1024
+                            }
+                        }
+                    },
+                    &quot;tags&quot;: {
+                        &quot;type&quot;: &quot;keyword&quot;,
+                        &quot;ignore_above&quot;: 1024
+                    },
+                    &quot;type&quot;: {
+                        &quot;type&quot;: &quot;keyword&quot;,
+                        &quot;ignore_above&quot;: 1024
+                    }
+                }
+            }
+        }
+    }
+}
+</code></pre>
+
+<p>If you followed along with the <a href="/post-json-elasticsearch-kubernetes/">High Traffic JSON Data into Elasticsearch on Kubernetes</a> guide, the mapping returned by the <strong>_mapping</strong> call should match the <code>fields.yml</code> section of the <a href="/post-json-elasticsearch-kubernetes/#wx-rtbeat-configmap">wx-rtbeat ConfigMap</a>.</p>
+
+<h3 id="query-elasticsearch-data">Query Elasticsearch Data</h3>
+
+<p>Get the last ten minutes of weather data from our <code>wx-rtbeat-*</code> indices:</p>
+
+<pre><code class="language-bash">curl -X POST \
+  http://localhost:9200/wx-rtbeat-%2A/_search \
+  -H 'Content-Type: application/json' \
+  -d '{ &quot;query&quot;: {
+           &quot;range&quot; : {
+              &quot;@timestamp&quot; : {
+                 &quot;gt&quot; : &quot;now-5m&quot;
+               }
+            }
+         }
+      }'
+</code></pre>
+
+<p>Output:</p>
+
+<pre><code class="language-json">{
+    &quot;took&quot;: 19,
+    &quot;timed_out&quot;: false,
+    &quot;_shards&quot;: {
+        &quot;total&quot;: 5,
+        &quot;successful&quot;: 5,
+        &quot;skipped&quot;: 0,
+        &quot;failed&quot;: 0
+    },
+    &quot;hits&quot;: {
+        &quot;total&quot;: 3,
+        &quot;max_score&quot;: 1,
+        &quot;hits&quot;: [
+            {
+                &quot;_index&quot;: &quot;wx-rtbeat-2018.07&quot;,
+                &quot;_type&quot;: &quot;doc&quot;,
+                &quot;_id&quot;: &quot;pv8y2GQB4YMKAkYm7rjf&quot;,
+                &quot;_score&quot;: 1,
+                &quot;_source&quot;: {
+                    &quot;@timestamp&quot;: &quot;2018-07-26T20:06:12.982Z&quot;,
+                    &quot;type&quot;: &quot;wx-rtbeat-f744b8497-ch4ln&quot;,
+                    &quot;rxtxMsg&quot;: {
+                        &quot;producer&quot;: &quot;cron&quot;,
+                        &quot;label&quot;: &quot;/wx-data&quot;,
+                        &quot;key&quot;: &quot;collector&quot;,
+                        &quot;payload&quot;: {
+                            &quot;longitude&quot;: -117.826581,
+                            &quot;offset&quot;: -7,
+                            &quot;timezone&quot;: &quot;America/Los_Angeles&quot;,
+                            &quot;currently&quot;: {
+                                &quot;apparentTemperature&quot;: 87.99,
+                                &quot;nearestStormDistance&quot;: 8,
+                                &quot;windGust&quot;: 10.26,
+                                &quot;windSpeed&quot;: 6.29,
+                                &quot;uvIndex&quot;: 11,
+                                &quot;visibility&quot;: 10,
+                                &quot;cloudCover&quot;: 0.15,
+                                &quot;icon&quot;: &quot;clear-day&quot;,
+                                &quot;ozone&quot;: 303.81,
+                                &quot;precipIntensity&quot;: 0,
+                                &quot;summary&quot;: &quot;Clear&quot;,
+                                &quot;time&quot;: 1532635571,
+                                &quot;humidity&quot;: 0.56,
+                                &quot;temperature&quot;: 84.9,
+                                &quot;windBearing&quot;: 221,
+                                &quot;dewPoint&quot;: 67.59,
+                                &quot;nearestStormBearing&quot;: 98,
+                                &quot;precipProbability&quot;: 0,
+                                &quot;pressure&quot;: 1013.35
+                            },
+                            &quot;latitude&quot;: 33.8148455
+                        },
+                        &quot;seq&quot;: &quot;2018726000000005612&quot;,
+                        &quot;time&quot;: &quot;2018-07-26T20:06:11.456058885Z&quot;,
+                        &quot;uuid&quot;: &quot;7bbb1b5b-a360-44bb-bd2e-9c0cce898623&quot;
+                    },
+                    &quot;clientIp&quot;: &quot;192.168.247.255&quot;,
+                    &quot;beat&quot;: {
+                        &quot;name&quot;: &quot;wx-rtbeat-f744b8497-ch4ln&quot;,
+                        &quot;hostname&quot;: &quot;wx-rtbeat-f744b8497-ch4ln&quot;,
+                        &quot;version&quot;: &quot;7.0.0-alpha1&quot;
+                    }
+                }
+            },
+            {
+                &quot;_index&quot;: &quot;wx-rtbeat-2018.07&quot;,
+                &quot;_type&quot;: &quot;doc&quot;,
+                &quot;_id&quot;: &quot;p_802GQB4YMKAkYmxLi4&quot;,
+                &quot;_score&quot;: 1,
+                &quot;_source&quot;: {
+                    &quot;@timestamp&quot;: &quot;2018-07-26T20:08:13.263Z&quot;,
+                    &quot;clientIp&quot;: &quot;192.168.247.255&quot;,
+                    &quot;beat&quot;: {
+                        &quot;name&quot;: &quot;wx-rtbeat-f744b8497-ch4ln&quot;,
+                        &quot;hostname&quot;: &quot;wx-rtbeat-f744b8497-ch4ln&quot;,
+                        &quot;version&quot;: &quot;7.0.0-alpha1&quot;
+                    },
+                    &quot;type&quot;: &quot;wx-rtbeat-f744b8497-ch4ln&quot;,
+                    &quot;rxtxMsg&quot;: {
+                        &quot;seq&quot;: &quot;2018726000000005613&quot;,
+                        &quot;time&quot;: &quot;2018-07-26T20:08:11.893558485Z&quot;,
+                        &quot;uuid&quot;: &quot;4fe80f2b-54d2-4df6-8b60-e9152e4c2754&quot;,
+                        &quot;producer&quot;: &quot;cron&quot;,
+                        &quot;label&quot;: &quot;/wx-data&quot;,
+                        &quot;key&quot;: &quot;collector&quot;,
+                        &quot;payload&quot;: {
+                            &quot;currently&quot;: {
+                                &quot;pressure&quot;: 1013.33,
+                                &quot;uvIndex&quot;: 11,
+                                &quot;windSpeed&quot;: 6.35,
+                                &quot;precipIntensity&quot;: 0,
+                                &quot;time&quot;: 1532635691,
+                                &quot;visibility&quot;: 10,
+                                &quot;windBearing&quot;: 221,
+                                &quot;humidity&quot;: 0.56,
+                                &quot;nearestStormBearing&quot;: 98,
+                                &quot;nearestStormDistance&quot;: 8,
+                                &quot;ozone&quot;: 303.8,
+                                &quot;windGust&quot;: 10.3,
+                                &quot;cloudCover&quot;: 0.15,
+                                &quot;precipProbability&quot;: 0,
+                                &quot;summary&quot;: &quot;Clear&quot;,
+                                &quot;apparentTemperature&quot;: 88.08,
+                                &quot;dewPoint&quot;: 67.58,
+                                &quot;icon&quot;: &quot;clear-day&quot;,
+                                &quot;temperature&quot;: 84.99
+                            },
+                            &quot;latitude&quot;: 33.8148455,
+                            &quot;longitude&quot;: -117.826581,
+                            &quot;offset&quot;: -7,
+                            &quot;timezone&quot;: &quot;America/Los_Angeles&quot;
+                        }
+                    }
+                }
+            },
+            {
+                &quot;_index&quot;: &quot;wx-rtbeat-2018.07&quot;,
+                &quot;_type&quot;: &quot;doc&quot;,
+                &quot;_id&quot;: &quot;qP822GQB4YMKAkYmc7hg&quot;,
+                &quot;_score&quot;: 1,
+                &quot;_source&quot;: {
+                    &quot;@timestamp&quot;: &quot;2018-07-26T20:10:03.510Z&quot;,
+                    &quot;beat&quot;: {
+                        &quot;name&quot;: &quot;wx-rtbeat-f744b8497-ch4ln&quot;,
+                        &quot;hostname&quot;: &quot;wx-rtbeat-f744b8497-ch4ln&quot;,
+                        &quot;version&quot;: &quot;7.0.0-alpha1&quot;
+                    },
+                    &quot;type&quot;: &quot;wx-rtbeat-f744b8497-ch4ln&quot;,
+                    &quot;rxtxMsg&quot;: {
+                        &quot;label&quot;: &quot;/wx-data&quot;,
+                        &quot;key&quot;: &quot;collector&quot;,
+                        &quot;payload&quot;: {
+                            &quot;currently&quot;: {
+                                &quot;nearestStormDistance&quot;: 8,
+                                &quot;pressure&quot;: 1013.31,
+                                &quot;summary&quot;: &quot;Clear&quot;,
+                                &quot;windBearing&quot;: 221,
+                                &quot;windGust&quot;: 10.33,
+                                &quot;humidity&quot;: 0.56,
+                                &quot;precipIntensity&quot;: 0,
+                                &quot;time&quot;: 1532635802,
+                                &quot;visibility&quot;: 10,
+                                &quot;icon&quot;: &quot;clear-day&quot;,
+                                &quot;dewPoint&quot;: 67.57,
+                                &quot;nearestStormBearing&quot;: 98,
+                                &quot;uvIndex&quot;: 11,
+                                &quot;windSpeed&quot;: 6.4,
+                                &quot;cloudCover&quot;: 0.15,
+                                &quot;ozone&quot;: 303.79,
+                                &quot;precipProbability&quot;: 0,
+                                &quot;temperature&quot;: 85.06,
+                                &quot;apparentTemperature&quot;: 88.16
+                            },
+                            &quot;latitude&quot;: 33.8148455,
+                            &quot;longitude&quot;: -117.826581,
+                            &quot;offset&quot;: -7,
+                            &quot;timezone&quot;: &quot;America/Los_Angeles&quot;
+                        },
+                        &quot;seq&quot;: &quot;2018726000000005614&quot;,
+                        &quot;time&quot;: &quot;2018-07-26T20:10:02.217602453Z&quot;,
+                        &quot;uuid&quot;: &quot;9e10b07e-d618-4c71-940a-8634d35db682&quot;,
+                        &quot;producer&quot;: &quot;cron&quot;
+                    },
+                    &quot;clientIp&quot;: &quot;192.168.247.255&quot;
+                }
+            }
+        ]
+    }
+}
+</code></pre>
+
+<p>Explore the Elasticsearch official documentation: <a href="https://www.elastic.co/guide/en/elasticsearch/guide/current/search-in-depth.html">Search in Depth</a>.</p>
+
+<h2 id="resources">Resources</h2>
+
+<ul>
+<li>Setup a Custom Kubernetes <a href="/hobby-cluster/">Production Hobby Cluster</a> for a more production-like development environment.</li>
+<li>Implement <a href="/team-kubernetes-remote-access/">Kubernetes Team Access - RBAC for developers and QA</a> to use <code>kubectl</code> for token-based authentication for developing locally with remote clusters.</li>
+<li>Setup <a href="/kubernetes-production-elasticsearch/">Production Grade Elasticsearch on Kubernetes</a> for development, testing and production.</li>
+<li>Install <a href="/kibana-kubernetes/">Kibana on Kubernetes</a> for Elasticsearch data browsing and visualization.</li>
+<li>Support <a href="/post-json-elasticsearch-kubernetes/">High Traffic JSON Data into Elasticsearch on Kubernetes</a> with <a href="https://hub.docker.com/r/txn2/rxtx/">rxtx</a> and <a href="https://hub.docker.com/r/txn2/rtbeat/">rtBeat</a>.</li>
+</ul>
+
+
+                
+<div id="disqus-comment"></div>
+
+
+
+            </div>
+            
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                
+                <section>
+                    <hr class="hidden-sm hidden-xs">
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/data" title="Data">
+                        Data
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/data-science" title="Data Science">
+                        Data Science
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/devops" title="DevOps">
+                        DevOps
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/docker" title="Docker">
+                        Docker
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/elasticsearch" title="Elasticsearch">
+                        Elasticsearch
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/golang" title="Golang">
+                        Golang
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/ingress" title="Ingress">
+                        Ingress
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/kubernetes" title="Kubernetes">
+                        Kubernetes
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/microservices" title="Microservices">
+                        Microservices
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/python" title="Python">
+                        Python
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/security" title="Security">
+                        Security
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/utils" title="Utils">
+                        Utils
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/kubectl" title="kubectl">
+                        kubectl
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                    </div>
+                </section>
+
+                
+                <hr>
+                <h5>RELATED</h5>
+                <ul class="list-inline">
+                    
+                </ul>
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                   
+                   <li>
+                       <a href="" rel="alternate" type="application/rss+xml" title="IMTI" >
+                           <span class="fa-stack fa-lg">
+                               <i class="fa fa-circle fa-stack-2x"></i>
+                               <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+                           </span>
+                       </a>
+                   </li>
+                   
+                    
+                    <li>
+                        <a href="mailto:cjimti@gmail.com">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                    
+                    
+                    <li>
+                        <a href="https://twitter.com/cjimti">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    
+
+                    
+
+		    
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/cjimti">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                    
+                    <li>
+                        <a target="_blank" href="https://www.linkedin.com/in/cjimti/">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                </ul>
+		<p class="copyright text-muted">
+            Copyright &copy; <a href="">Craig Johnston</a> , 2018
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+
+
+
+
+<script>
+    
+    if($('#tag_cloud').length !== 0){
+        async("/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+
+
+    
+        
+        
+    
+
+
+
+
+
+</body>
+</html>

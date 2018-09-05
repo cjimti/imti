@@ -208,7 +208,7 @@ I also set up test clusters from time-to-time, and so keeping my configs organiz
 <li><strong>minikube</strong>: running on my local workstation</li>
 <li><strong>work-dev</strong>:  a development cluster for my professional projects</li>
 <li><strong>work-prod</strong>: a large production cluster I host client projects and services on</li>
-<li><strong>txn2-phc</strong>: is a <a href="https://mk.imti.co/hobby-cluster/">Production Hobby Cluster</a> I use for experiments in infrastructure and microservices</li>
+<li><strong>txn2-phc</strong>: is a <a href="/hobby-cluster/">Production Hobby Cluster</a> I use for experiments in infrastructure and microservices</li>
 </ul>
 
 <p><a href="https://kubernetes.io/docs/reference/kubectl/cheatsheet/">kubectl</a> looks at an environment variable called <strong>KUBECONFIG</strong> to hold a colon-separated list of paths to configuration files. <a href="https://kubernetes.io/docs/reference/kubectl/cheatsheet/">kubectl</a> configurations can all be confined in one file. However, if multiple files are specified, <a href="https://kubernetes.io/docs/reference/kubectl/cheatsheet/">kubectl</a> combines them internally. I prefer the separate config file method since it&rsquo;s a little bit more scalable for my brain.</p>
@@ -302,11 +302,11 @@ kubectl config use-context work-dev
 
 <h3 id="unable-to-connect-to-the-server-x509-certificate-is-valid-for"><strong>Unable to connect to the server: x509: certificate is valid for &hellip;</strong>.</h3>
 
-<p>If you changed the cluster server to a hostname (like lax2.example.com) and did not use that name when setting up the cluster with <code>kubeadm</code>, then you will need to rebuild the cert on the master. This is easy to do. Check out my article <a href="https://mk.imti.co/kubectl-remote-x509-valid/">Kubectl x509 Unable to Connect</a> for a few simple steps. Otherwise, just use the public IP address of the master node.</p>
+<p>If you changed the cluster server to a hostname (like lax2.example.com) and did not use that name when setting up the cluster with <code>kubeadm</code>, then you will need to rebuild the cert on the master. This is easy to do. Check out my article <a href="/kubectl-remote-x509-valid/">Kubectl x509 Unable to Connect</a> for a few simple steps. Otherwise, just use the public IP address of the master node.</p>
 
 <hr />
 
-<p>If in a few days you find yourself setting up a cluster in Japan or Germany on <a href="https://www.linode.com/?r=848a6b0b21dc8edd33124f05ec8f99207ccddfde">Linode</a>, and another two in Australia and France on <a href="https://www.vultr.com/?ref=7418713">vultr</a>, then you may have just joined the PHC (Performance <a href="https://mk.imti.co/hobby-cluster/">Hobby Cluster</a>s) club. Some people tinker late at night on their truck, we benchmark and test the resilience of node failures on our overseas, budget kubernetes clusters. It&rsquo;s all about going big, on the cheap.</p>
+<p>If in a few days you find yourself setting up a cluster in Japan or Germany on <a href="https://www.linode.com/?r=848a6b0b21dc8edd33124f05ec8f99207ccddfde">Linode</a>, and another two in Australia and France on <a href="https://www.vultr.com/?ref=7418713">vultr</a>, then you may have just joined the PHC (Performance <a href="/hobby-cluster/">Hobby Cluster</a>s) club. Some people tinker late at night on their truck, we benchmark and test the resilience of node failures on our overseas, budget kubernetes clusters. It&rsquo;s all about going big, on the cheap.</p>
 
 <p><a href="https://amzn.to/2IOe8Yu"><img src="https://github.com/cjimti/mk/raw/master/images/content/k8s-tshirt-banner.jpg" alt="k8s performance hobby clusters" /></a></p>
 
@@ -314,8 +314,8 @@ kubectl config use-context work-dev
 
 <ul>
 <li><a href="https://kubernetes.io/docs/tasks/tools/install-kubectl/">install kubectl</a></li>
-<li><a href="https://mk.imti.co/hobby-cluster/">Production Hobby Cluster</a> how-to article.</li>
-<li><a href="https://www.vultr.com/?ref=7418713">vultr</a> for cheap instance hosting for <a href="https://mk.imti.co/hobby-cluster/">Production Hobby Cluster</a></li>
+<li><a href="/hobby-cluster/">Production Hobby Cluster</a> how-to article.</li>
+<li><a href="https://www.vultr.com/?ref=7418713">vultr</a> for cheap instance hosting for <a href="/hobby-cluster/">Production Hobby Cluster</a></li>
 </ul>
 
 
@@ -375,6 +375,10 @@ kubectl config use-context work-dev
                         
                         
                         
+                        <a href="/tags/elasticsearch" title="Elasticsearch">
+                        Elasticsearch
+                        </a>
+                        
                         
                         
                         
@@ -390,6 +394,10 @@ kubectl config use-context work-dev
                         <a href="/tags/ingress" title="Ingress">
                         Ingress
                         </a>
+                        
+                        
+                        
+                        
                         
                         
                         

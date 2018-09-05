@@ -198,7 +198,7 @@
 
                 
 
-<p><a href="https://helm.sh/">Helm</a> is the official package manager for <a href="https://kubernetes.io/">Kubernetes</a>. If you are looking to start using <a href="https://helm.sh/">Helm</a> or want to test its capabilities, I suggest you set up a <a href="https://mk.imti.co/hobby-cluster/">Production Hobby Cluster</a>. This article is a continuation of the <a href="https://mk.imti.co/hobby-cluster/">Production Hobby Cluster</a> configuration but should be entirely useful on its own.</p>
+<p><a href="https://helm.sh/">Helm</a> is the official package manager for <a href="https://kubernetes.io/">Kubernetes</a>. If you are looking to start using <a href="https://helm.sh/">Helm</a> or want to test its capabilities, I suggest you set up a <a href="/hobby-cluster/">Production Hobby Cluster</a>. This article is a continuation of the <a href="/hobby-cluster/">Production Hobby Cluster</a> configuration but should be entirely useful on its own.</p>
 
 <blockquote>
 <p>From <a href="https://github.com/kubernetes/helm">https://github.com/kubernetes/helm</a>
@@ -220,9 +220,9 @@ brew install kubernetes-helm
 choco install kubernetes-helm
 </code></pre>
 
-<p>Since our <a href="https://mk.imti.co/hobby-cluster/">Production Hobby Cluster</a> uses <a href="https://kubernetes.io/docs/admin/authorization/rbac/">RBAC</a> Roles, we start by adding a <a href="https://kubernetes.io/docs/admin/service-accounts-admin/">ServiceAccount</a> called <strong>tiller</strong>. Tiller is Kubernetes service that manages <a href="https://helm.sh/">Helm</a> installs on the cluster.</p>
+<p>Since our <a href="/hobby-cluster/">Production Hobby Cluster</a> uses <a href="https://kubernetes.io/docs/admin/authorization/rbac/">RBAC</a> Roles, we start by adding a <a href="https://kubernetes.io/docs/admin/service-accounts-admin/">ServiceAccount</a> called <strong>tiller</strong>. Tiller is Kubernetes service that manages <a href="https://helm.sh/">Helm</a> installs on the cluster.</p>
 
-<p>The following configuration creates a <a href="https://kubernetes.io/docs/admin/service-accounts-admin/">ServiceAccount</a> named <strong>tiller</strong> and a <a href="https://kubernetes.io/docs/admin/authorization/rbac/#rolebinding-and-clusterrolebinding">ClusterRoleBinding</a> between the new <strong>tiller</strong> account and the <strong>cluster-admin</strong> role. Of course, you can define your own <a href="https://kubernetes.io/docs/admin/authorization/rbac/#role-and-clusterrole">Role</a> and permissions, however, the <strong>cluster-admin</strong> role has admin access, and that is what we want for a <a href="https://mk.imti.co/hobby-cluster/">Production Hobby Cluster</a>. Permissions can always become more restrictive in the future should our hobby become more sophisticated.</p>
+<p>The following configuration creates a <a href="https://kubernetes.io/docs/admin/service-accounts-admin/">ServiceAccount</a> named <strong>tiller</strong> and a <a href="https://kubernetes.io/docs/admin/authorization/rbac/#rolebinding-and-clusterrolebinding">ClusterRoleBinding</a> between the new <strong>tiller</strong> account and the <strong>cluster-admin</strong> role. Of course, you can define your own <a href="https://kubernetes.io/docs/admin/authorization/rbac/#role-and-clusterrole">Role</a> and permissions, however, the <strong>cluster-admin</strong> role has admin access, and that is what we want for a <a href="/hobby-cluster/">Production Hobby Cluster</a>. Permissions can always become more restrictive in the future should our hobby become more sophisticated.</p>
 
 <script src="https://gist.github.com/cjimti/9fab60c0b21a97cbe15688f5e28d940f.js"></script>
 
@@ -245,7 +245,7 @@ choco install kubernetes-helm
 
 <hr />
 
-<p>If in a few days you find yourself setting up a cluster in Japan or Germany on <a href="https://www.linode.com/?r=848a6b0b21dc8edd33124f05ec8f99207ccddfde">Linode</a>, and another two in Australia and France on <a href="https://www.vultr.com/?ref=7418713">vultr</a>, then you may have just joined the PHC (Performance <a href="https://mk.imti.co/hobby-cluster/">Hobby Cluster</a>s) club. Some people tinker late at night on their truck, we benchmark and test the resilience of node failures on our overseas, budget kubernetes clusters. It&rsquo;s all about going big, on the cheap.</p>
+<p>If in a few days you find yourself setting up a cluster in Japan or Germany on <a href="https://www.linode.com/?r=848a6b0b21dc8edd33124f05ec8f99207ccddfde">Linode</a>, and another two in Australia and France on <a href="https://www.vultr.com/?ref=7418713">vultr</a>, then you may have just joined the PHC (Performance <a href="/hobby-cluster/">Hobby Cluster</a>s) club. Some people tinker late at night on their truck, we benchmark and test the resilience of node failures on our overseas, budget kubernetes clusters. It&rsquo;s all about going big, on the cheap.</p>
 
 <p><a href="https://amzn.to/2IOe8Yu"><img src="https://github.com/cjimti/mk/raw/master/images/content/k8s-tshirt-banner.jpg" alt="k8s performance hobby clusters" /></a></p>
 
@@ -314,6 +314,10 @@ choco install kubernetes-helm
                         
                         
                         
+                        <a href="/tags/elasticsearch" title="Elasticsearch">
+                        Elasticsearch
+                        </a>
+                        
                         
                         
                         
@@ -329,6 +333,10 @@ choco install kubernetes-helm
                         <a href="/tags/ingress" title="Ingress">
                         Ingress
                         </a>
+                        
+                        
+                        
+                        
                         
                         
                         

@@ -204,7 +204,7 @@
 
                 
 
-<p>FaaS or <a href="https://en.wikipedia.org/wiki/Function_as_a_service">Function as a Service</a> also known as <a href="https://en.wikipedia.org/wiki/Serverless_computing">Serverless computing</a> implementations are gaining popularity. Discussed often are the cost savings and each implementations relationship to the physical and network architecture of a specific platform or vendor. While many of the <a href="https://martinfowler.com/articles/serverless.html#ReducedOperationalCost">cost and infrastructure</a> advantages of FaaS are compelling, its only one of many advantages. Below, I hope to demonstrate how easy it is to develop and deploy FaaS components into a custom Kubernetes cluster. The functions I develop are nearly all business logic, and I believe therein lies the advantage, <strong>high-density business logic</strong>. Functions can have a higher degree of focus directly on business logic and communication with other services. Functions can communicate with other functions, microservices or monoliths. In this article, I demonstrate this with <a href="https://mk.imti.co/kubernetes-production-elasticsearch/">Elasticsearch</a>.</p>
+<p>FaaS or <a href="https://en.wikipedia.org/wiki/Function_as_a_service">Function as a Service</a> also known as <a href="https://en.wikipedia.org/wiki/Serverless_computing">Serverless computing</a> implementations are gaining popularity. Discussed often are the cost savings and each implementations relationship to the physical and network architecture of a specific platform or vendor. While many of the <a href="https://martinfowler.com/articles/serverless.html#ReducedOperationalCost">cost and infrastructure</a> advantages of FaaS are compelling, its only one of many advantages. Below, I hope to demonstrate how easy it is to develop and deploy FaaS components into a custom Kubernetes cluster. The functions I develop are nearly all business logic, and I believe therein lies the advantage, <strong>high-density business logic</strong>. Functions can have a higher degree of focus directly on business logic and communication with other services. Functions can communicate with other functions, microservices or monoliths. In this article, I demonstrate this with <a href="/kubernetes-production-elasticsearch/">Elasticsearch</a>.</p>
 
 <p><img src="/images/content/faas_architecture.png" alt="" /></p>
 
@@ -279,9 +279,9 @@ wx-stats    the-project    wx-stats.stats     python3.6    python-dateutil==2.7.
 
 <h3 id="install-kubeless">Install Kubeless</h3>
 
-<p><a href="https://kubeless.io/">Kubeless</a> installs in the <code>kubeless</code> namespace by default and can be used to create functions in any namespace. I use <a href="https://kubernetes.io/docs/reference/access-authn-authz/rbac/">RBAC</a> for all my clusters, and if you are looking to set up a custom Kubernetes cluster, I recommend spending about an hour following my article <a href="https://mk.imti.co/hobby-cluster/">Production Hobby Cluster</a>.</p>
+<p><a href="https://kubeless.io/">Kubeless</a> installs in the <code>kubeless</code> namespace by default and can be used to create functions in any namespace. I use <a href="https://kubernetes.io/docs/reference/access-authn-authz/rbac/">RBAC</a> for all my clusters, and if you are looking to set up a custom Kubernetes cluster, I recommend spending about an hour following my article <a href="/hobby-cluster/">Production Hobby Cluster</a>.</p>
 
-<p>Setting up Kubeless in your <a href="https://mk.imti.co/hobby-cluster/">Production Hobby Cluster</a> or hosted solution is easy, and the <a href="https://kubeless.io/docs/quick-start/">official installation instructions</a> are clear.</p>
+<p>Setting up Kubeless in your <a href="/hobby-cluster/">Production Hobby Cluster</a> or hosted solution is easy, and the <a href="https://kubeless.io/docs/quick-start/">official installation instructions</a> are clear.</p>
 
 <p>If you have a <a href="https://kubeless.io/">Kubeless</a> cluster already available and only need the CLI, then I suggest a <code>brew install kubeless</code> for the MacOs users.</p>
 
@@ -289,7 +289,7 @@ wx-stats    the-project    wx-stats.stats     python3.6    python-dateutil==2.7.
 
 <p>Developing <a href="https://kubeless.io/">Kubeless</a> Functions can be performed with the same tools as any other services. I build my <a href="https://golang.org/">Golang</a> and <a href="https://www.python.org/">Python</a> functions with the commercial <a href="https://www.jetbrains.com/">Jet Brains</a> IDEs <a href="https://www.jetbrains.com/go/">Goland</a> and <a href="https://www.jetbrains.com/pycharm/">PyCharm</a> however free IDEs such as <a href="https://code.visualstudio.com/">Visual Studio Code</a> and <a href="https://atom.io/">Atom</a> work great as well.</p>
 
-<p>In this demo, my Functions are API endpoints that query <a href="https://mk.imti.co/kubernetes-production-elasticsearch/">Elasticsearch</a>, check out my article <a href="https://mk.imti.co/remote-query-kubernetes-elasticsearch/">Remote Query Elasticsearch on Kubernetes</a> on how I port-forward Kubernetes <a href="https://kubernetes.io/docs/concepts/services-networking/service/">Services</a> for remote access. If your Kubernetes cluster needs set up for remote access, I suggest reading <a href="https://mk.imti.co/team-kubernetes-remote-access/">Kubernetes Team Access - RBAC for developers and QA</a>.</p>
+<p>In this demo, my Functions are API endpoints that query <a href="/kubernetes-production-elasticsearch/">Elasticsearch</a>, check out my article <a href="/remote-query-kubernetes-elasticsearch/">Remote Query Elasticsearch on Kubernetes</a> on how I port-forward Kubernetes <a href="https://kubernetes.io/docs/concepts/services-networking/service/">Services</a> for remote access. If your Kubernetes cluster needs set up for remote access, I suggest reading <a href="/team-kubernetes-remote-access/">Kubernetes Team Access - RBAC for developers and QA</a>.</p>
 
 <h2 id="python-function">Python Function</h2>
 
@@ -517,8 +517,8 @@ elasticsearch-dsl==6.2.1
 
 <ul>
 <li><a href="https://elasticsearch-dsl.readthedocs.io/en/latest/search_dsl.html">Elasticsearch DSL</a> delivers a clean <a href="https://blog.startifact.com/posts/older/what-is-pythonic.html">pythonic</a> syntax for working with Elasticsearch.</li>
-<li><a href="https://mk.imti.co/python-data-essentials-numpy/">Python Data Essentials - Numpy</a> provides a wide variety of options for working with numbers, extraordinarily powerful N-dimensional array objects in which we can perform linear algebra.</li>
-<li><a href="https://mk.imti.co/python-data-essentials-pandas/">Python Data Essentials - Pandas</a> is a data type equivalent to super-charged spreadsheets. Pandas add two highly expressive data structures to Python, Series, and DataFrame.</li>
+<li><a href="/python-data-essentials-numpy/">Python Data Essentials - Numpy</a> provides a wide variety of options for working with numbers, extraordinarily powerful N-dimensional array objects in which we can perform linear algebra.</li>
+<li><a href="/python-data-essentials-pandas/">Python Data Essentials - Pandas</a> is a data type equivalent to super-charged spreadsheets. Pandas add two highly expressive data structures to Python, Series, and DataFrame.</li>
 </ul>
 
 
@@ -578,6 +578,10 @@ elasticsearch-dsl==6.2.1
                         
                         
                         
+                        <a href="/tags/elasticsearch" title="Elasticsearch">
+                        Elasticsearch
+                        </a>
+                        
                         
                         
                         
@@ -593,6 +597,10 @@ elasticsearch-dsl==6.2.1
                         <a href="/tags/ingress" title="Ingress">
                         Ingress
                         </a>
+                        
+                        
+                        
+                        
                         
                         
                         

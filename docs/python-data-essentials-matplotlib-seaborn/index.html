@@ -206,7 +206,7 @@ This article is only intended to get you started with Matplotlib and Seaborn."
 
                 
 
-<p>There is an overwhelming number of options for developers needing to provide data visualization. The most popular library for data visualization in Python is <a href="https://matplotlib.org/">Matplotlib</a>, and built directly on top of Matplotlib is <a href="https://seaborn.pydata.org/">Seaborn</a>. The Seaborn library is &ldquo;tightly integrated with the <a href="https://pydata.org/">PyData</a> stack, including support for <a href="https://mk.imti.co/python-data-essentials-numpy/">numpy</a> and <a href="https://mk.imti.co/python-data-essentials-pandas/">pandas</a> data structures and statistical routines from <a href="https://www.scipy.org/">scipy</a> and <a href="https://www.statsmodels.org/stable/index.html">statsmodels</a>.&rdquo;</p>
+<p>There is an overwhelming number of options for developers needing to provide data visualization. The most popular library for data visualization in Python is <a href="https://matplotlib.org/">Matplotlib</a>, and built directly on top of Matplotlib is <a href="https://seaborn.pydata.org/">Seaborn</a>. The Seaborn library is &ldquo;tightly integrated with the <a href="https://pydata.org/">PyData</a> stack, including support for <a href="/python-data-essentials-numpy/">numpy</a> and <a href="/python-data-essentials-pandas/">pandas</a> data structures and statistical routines from <a href="https://www.scipy.org/">scipy</a> and <a href="https://www.statsmodels.org/stable/index.html">statsmodels</a>.&rdquo;</p>
 
 <p>This article is only intended to get you started with <a href="https://matplotlib.org/">Matplotlib</a> and <a href="https://seaborn.pydata.org/">Seaborn</a>. Both libraries have extensive and mature documentation.</p>
 
@@ -253,7 +253,7 @@ This article is only intended to get you started with Matplotlib and Seaborn."
 
 <p>For front-end interactive developers there are open source javascript libraries like <a href="https://d3js.org/">d3js</a>/<a href="https://c3js.org/samples/timeseries.html">c3js</a>. However, these solutions are often overkill for simple, static bar charts, histograms and plots; they are also problematic for print and PDF.</p>
 
-<p>It&rsquo;s common in many of my projects to generate static reports. These static reports are designed in HTML and use a tool I build called <a href="https://github.com/txn2/txpdf]:https://github.com/txn2/txpdf">txpdf</a>, a <a href="https://mk.imti.co/webpage-to-pdf-microservice/">Webpage to PDF Microservice</a> use to convert them to PDF and email them to the appropriate stakeholder. I use <a href="https://www.python.org/">serverless</a> functions with <a href="https://mk.imti.co/python-data-essentials-numpy/">numpy</a> and <a href="https://mk.imti.co/python-data-essentials-pandas/">pandas</a> to processes many forms of data, which makes <a href="https://matplotlib.org/">Matplotlib</a> with <a href="https://seaborn.pydata.org/">Seaborn</a> an excellent tool for adding data visualization to these reports.</p>
+<p>It&rsquo;s common in many of my projects to generate static reports. These static reports are designed in HTML and use a tool I build called <a href="https://github.com/txn2/txpdf]:https://github.com/txn2/txpdf">txpdf</a>, a <a href="/webpage-to-pdf-microservice/">Webpage to PDF Microservice</a> use to convert them to PDF and email them to the appropriate stakeholder. I use <a href="https://www.python.org/">serverless</a> functions with <a href="/python-data-essentials-numpy/">numpy</a> and <a href="/python-data-essentials-pandas/">pandas</a> to processes many forms of data, which makes <a href="https://matplotlib.org/">Matplotlib</a> with <a href="https://seaborn.pydata.org/">Seaborn</a> an excellent tool for adding data visualization to these reports.</p>
 
 <h2 id="notes-on-data">Notes on Data</h2>
 
@@ -261,7 +261,7 @@ This article is only intended to get you started with Matplotlib and Seaborn."
 
 <h2 id="python-libraries">Python Libraries</h2>
 
-<p>This article is written using <a href="http://jupyter.org/">Juypter Notebooks</a> installed and running under <a href="https://www.anaconda.com/download/">Anaconda</a>. I recommend this setup for experimenting and learning. In the examples below I use Python 3 with the libraries <a href="https://mk.imti.co/python-data-essentials-numpy/">numpy</a>, <a href="https://mk.imti.co/python-data-essentials-pandas/">pandas</a>, <a href="https://matplotlib.org/">Matplotlib</a> and <a href="https://seaborn.pydata.org/">Seaborn</a>. The <a href="https://www.anaconda.com/download/">Anaconda</a> command <code>conda list</code> shows me the available libraries and their installed versions. The line <code>%matplotlib inline</code> instructs <a href="http://jupyter.org/">Juypter Notebooks</a> to display <a href="https://matplotlib.org/">Matplotlib</a> output inline, rather than rendered to a file. If you are running <a href="https://www.anaconda.com/download/">Anaconda</a> you likely have all the required libraries.</p>
+<p>This article is written using <a href="http://jupyter.org/">Juypter Notebooks</a> installed and running under <a href="https://www.anaconda.com/download/">Anaconda</a>. I recommend this setup for experimenting and learning. In the examples below I use Python 3 with the libraries <a href="/python-data-essentials-numpy/">numpy</a>, <a href="/python-data-essentials-pandas/">pandas</a>, <a href="https://matplotlib.org/">Matplotlib</a> and <a href="https://seaborn.pydata.org/">Seaborn</a>. The <a href="https://www.anaconda.com/download/">Anaconda</a> command <code>conda list</code> shows me the available libraries and their installed versions. The line <code>%matplotlib inline</code> instructs <a href="http://jupyter.org/">Juypter Notebooks</a> to display <a href="https://matplotlib.org/">Matplotlib</a> output inline, rather than rendered to a file. If you are running <a href="https://www.anaconda.com/download/">Anaconda</a> you likely have all the required libraries.</p>
 
 <pre><code class="language-python">import numpy as np
 import pandas as pd
@@ -301,7 +301,7 @@ seaborn                   0.8.1            py36h595ecd9_0
 
 <h2 id="dataset">Dataset</h2>
 
-<p>Below I set up a simple data set in a <a href="https://mk.imti.co/python-data-essentials-pandas/">Pandas</a> using a <a href="https://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.html">DataFrame</a>.</p>
+<p>Below I set up a simple data set in a <a href="/python-data-essentials-pandas/">Pandas</a> using a <a href="https://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.html">DataFrame</a>.</p>
 
 <pre><code class="language-python">ai = {'wintermute': pd.Series(data = [1, 4030, 100, 100], index = ['type','id','dangerous','intellect']),
       'hal': pd.Series(data = [1, 70, 100, 90, 20], index = ['type','id','intellect','dangerous','bending']),
@@ -716,9 +716,9 @@ sb.regplot(ax=ax3, data = df_ai_t, marker=&quot;o&quot;, color=&quot;red&quot;, 
 <ul>
 <li><a href="https://matplotlib.org/">Matplotlib</a></li>
 <li><a href="https://seaborn.pydata.org/">Seaborn</a></li>
-<li><a href="https://mk.imti.co/python-data-essentials-pandas/">pandas</a></li>
-<li><a href="https://mk.imti.co/python-data-essentials-numpy/">numpy</a></li>
-<li><a href="https://mk.imti.co/webpage-to-pdf-microservice/">Webpage to PDF Microservice</a></li>
+<li><a href="/python-data-essentials-pandas/">pandas</a></li>
+<li><a href="/python-data-essentials-numpy/">numpy</a></li>
+<li><a href="/webpage-to-pdf-microservice/">Webpage to PDF Microservice</a></li>
 <li><a href="https://www.kaggle.com/datasets">kaggle</a></li>
 </ul>
 
@@ -779,6 +779,10 @@ sb.regplot(ax=ax3, data = df_ai_t, marker=&quot;o&quot;, color=&quot;red&quot;, 
                         
                         
                         
+                        <a href="/tags/elasticsearch" title="Elasticsearch">
+                        Elasticsearch
+                        </a>
+                        
                         
                         
                         
@@ -794,6 +798,10 @@ sb.regplot(ax=ax3, data = df_ai_t, marker=&quot;o&quot;, color=&quot;red&quot;, 
                         <a href="/tags/ingress" title="Ingress">
                         Ingress
                         </a>
+                        
+                        
+                        
+                        
                         
                         
                         

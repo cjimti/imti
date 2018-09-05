@@ -206,11 +206,11 @@ Kubernetes and GitlabCI are the central components of our DevOps toolchain and h
 
                 
 
-<p>RBAC (Role Based Access Control) allows our Kubernetes clusters to provide the development team better visibility and access into the development, staging and production environments than it has have ever had in the past. Developers using the command line tool <strong><a href="https://kubernetes.io/docs/reference/kubectl/kubectl/">kubectl</a></strong>, can explore the network topology of running <a href="https://mk.imti.co/microservices/">microservices</a>, tail live server logs, proxy local ports directly to services or even execute shells into running pods.</p>
+<p>RBAC (Role Based Access Control) allows our Kubernetes clusters to provide the development team better visibility and access into the development, staging and production environments than it has have ever had in the past. Developers using the command line tool <strong><a href="https://kubernetes.io/docs/reference/kubectl/kubectl/">kubectl</a></strong>, can explore the network topology of running <a href="/microservices/">microservices</a>, tail live server logs, proxy local ports directly to services or even execute shells into running pods.</p>
 
-<p><a href="https://mk.imti.co/gitlabci-golang-microservices/">Kubernetes and GitlabCI</a> are the central components of our DevOps toolchain and have increased our productivity by many multiples over the traditional approaches of the past.</p>
+<p><a href="/gitlabci-golang-microservices/">Kubernetes and GitlabCI</a> are the central components of our DevOps toolchain and have increased our productivity by many multiples over the traditional approaches of the past.</p>
 
-<p>If you don&rsquo;t already have a Kubernetes cluster up and running, then I highly suggest you read my article <a href="https://mk.imti.co/hobby-cluster/">Production Hobby Cluster</a> to get you up and running in a custom, vendor-neutral production capable cluster.</p>
+<p>If you don&rsquo;t already have a Kubernetes cluster up and running, then I highly suggest you read my article <a href="/hobby-cluster/">Production Hobby Cluster</a> to get you up and running in a custom, vendor-neutral production capable cluster.</p>
 
 <blockquote>
 <p>TLDR: If you are reading this article because you received a <strong>token</strong> and the URL of a cluster from your Kubernetes administrator, you can skip ahead to the section <a href="#accessing-a-remote-kubernetes-cluster">Accessing a Remote Kubernetes Cluster</a>.</p>
@@ -260,17 +260,17 @@ Kubernetes and GitlabCI are the central components of our DevOps toolchain and h
 
 <p>We grant developers read-level access to one common developer account per <a href="https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/">namespace</a> on the development cluster. We tighten access to some resources on production.</p>
 
-<p>We create a separate deployment account for our continuous integration/deployment solution, see my article, <a href="https://mk.imti.co/gitlabci-golang-microservices/">A Microservices Workflow with Golang and Gitlab CI</a> to get a high-level view of our toolchain and how it integrates cleanly with Kubernetes <a href="https://kubernetes.io/docs/reference/access-authn-authz/rbac/">RBAC</a> security model.</p>
+<p>We create a separate deployment account for our continuous integration/deployment solution, see my article, <a href="/gitlabci-golang-microservices/">A Microservices Workflow with Golang and Gitlab CI</a> to get a high-level view of our toolchain and how it integrates cleanly with Kubernetes <a href="https://kubernetes.io/docs/reference/access-authn-authz/rbac/">RBAC</a> security model.</p>
 
 <h2 id="cluster-setup">Cluster Setup</h2>
 
-<p>These cluster setup steps assume you are a cluster administrator if you are only looking to set up <a href="https://kubernetes.io/docs/reference/kubectl/kubectl/">kubectl</a> access on your local workstation to an existing cluster skip ahead to the section: <a href="#accessing-a-remote-kubernetes-cluster">Accessing a Remote Kubernetes Cluster</a>, otherwise I suggestion that you set up a <a href="https://mk.imti.co/hobby-cluster/">Production Hobby Cluster</a> to help you follow along.</p>
+<p>These cluster setup steps assume you are a cluster administrator if you are only looking to set up <a href="https://kubernetes.io/docs/reference/kubectl/kubectl/">kubectl</a> access on your local workstation to an existing cluster skip ahead to the section: <a href="#accessing-a-remote-kubernetes-cluster">Accessing a Remote Kubernetes Cluster</a>, otherwise I suggestion that you set up a <a href="/hobby-cluster/">Production Hobby Cluster</a> to help you follow along.</p>
 
 <h3 id="example-microservice">Example Microservice</h3>
 
 <p>You can skip the following steps and head directly to <a href="#setup-remote-access">Setup Remote Access</a> if you already have a <a href="https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/">namespace</a> with projects you plan to provide remote access <a href="https://kubernetes.io/docs/reference/kubectl/kubectl/">kubectl</a>.</p>
 
-<p>To demonstrate team access control we need some pods running in the namespace <code>the-project</code>. The example below uses a pre-built Docker container designed specifically for testing called <a href="https://github.com/txn2/ok">txn2/ok</a>. If you are curious about how to automate subsequent deployments using the free and open source <a href="https://about.gitlab.com/features/gitlab-ci-cd/">GitlabCI</a>, check out <a href="https://mk.imti.co/gitlabci-golang-microservices/">A Microservices Workflow with Golang and Gitlab CI</a>.</p>
+<p>To demonstrate team access control we need some pods running in the namespace <code>the-project</code>. The example below uses a pre-built Docker container designed specifically for testing called <a href="https://github.com/txn2/ok">txn2/ok</a>. If you are curious about how to automate subsequent deployments using the free and open source <a href="https://about.gitlab.com/features/gitlab-ci-cd/">GitlabCI</a>, check out <a href="/gitlabci-golang-microservices/">A Microservices Workflow with Golang and Gitlab CI</a>.</p>
 
 <p>We don&rsquo;t automate the initial configuration, and so the following steps are part of the setup stage of any new project. It is easy to automate this process with the Kubernetes package manager <a href="https://helm.sh/">Helm</a>, but that would be overkill for most of our projects and abstract away some welcome verbosity. <a href="https://helm.sh/">Helm</a> is a great tool but better-used adjacent to our initial development process. In fact, we use <a href="https://helm.sh/">Helm</a> to create charts from our initial development configurations, but that is outside the scope of this article.</p>
 
@@ -363,7 +363,7 @@ spec:
 
 <h4 id="service">Service</h4>
 
-<p>Kubernetes <a href="https://kubernetes.io/docs/concepts/workloads/controllers/deployment/">Deployment</a>s manage <a href="https://kubernetes.io/docs/concepts/workloads/pods/pod/">Pods</a>. Consider <a href="https://kubernetes.io/docs/concepts/workloads/pods/pod/">Pods</a> ephemeral, being moved from one node to another, destroyed or re-created at any time. <a href="https://kubernetes.io/docs/concepts/services-networking/service/">Service</a>s are persistent and give us a point to attach our network <a href="https://kubernetes.io/docs/concepts/services-networking/ingress/">ingress</a>. If you don&rsquo;t already have ingress setup, you might want to read my article <a href="https://mk.imti.co/web-cluster-ingress/">Ingress on Custom Kubernetes</a> to get started. <a href="https://kubernetes.io/docs/concepts/services-networking/ingress/">Ingress</a> needs a <a href="https://kubernetes.io/docs/concepts/services-networking/service/">service</a> to attach to; however you don&rsquo;t need ingress to set up a service.</p>
+<p>Kubernetes <a href="https://kubernetes.io/docs/concepts/workloads/controllers/deployment/">Deployment</a>s manage <a href="https://kubernetes.io/docs/concepts/workloads/pods/pod/">Pods</a>. Consider <a href="https://kubernetes.io/docs/concepts/workloads/pods/pod/">Pods</a> ephemeral, being moved from one node to another, destroyed or re-created at any time. <a href="https://kubernetes.io/docs/concepts/services-networking/service/">Service</a>s are persistent and give us a point to attach our network <a href="https://kubernetes.io/docs/concepts/services-networking/ingress/">ingress</a>. If you don&rsquo;t already have ingress setup, you might want to read my article <a href="/web-cluster-ingress/">Ingress on Custom Kubernetes</a> to get started. <a href="https://kubernetes.io/docs/concepts/services-networking/ingress/">Ingress</a> needs a <a href="https://kubernetes.io/docs/concepts/services-networking/service/">service</a> to attach to; however you don&rsquo;t need ingress to set up a service.</p>
 
 <p><code>50-service-ok.yml</code>:</p>
 
@@ -422,7 +422,7 @@ spec:
 <pre><code class="language-bash">kubectl create -f 80-ingress-ok.yml
 </code></pre>
 
-<p>Adding TLS support is easy but out the scope of this article. If you are interested in setting up free, automated TLS certificate using <a href="https://letsencrypt.org/">Let&rsquo;s Encrypt</a> on Kubernetes, check out my article: <a href="https://mk.imti.co/lets-encrypt-kubernetes/">Let&rsquo;s Encrypt, Kubernetes</a>. Setting up <a href="https://mk.imti.co/lets-encrypt-kubernetes/">Let&rsquo;s Encrypt, Kubernetes</a> should only have to be done once and take only about twenty minutes.</p>
+<p>Adding TLS support is easy but out the scope of this article. If you are interested in setting up free, automated TLS certificate using <a href="https://letsencrypt.org/">Let&rsquo;s Encrypt</a> on Kubernetes, check out my article: <a href="/lets-encrypt-kubernetes/">Let&rsquo;s Encrypt, Kubernetes</a>. Setting up <a href="/lets-encrypt-kubernetes/">Let&rsquo;s Encrypt, Kubernetes</a> should only have to be done once and take only about twenty minutes.</p>
 
 <p>We now have a fully functional test API service answering at <a href="http://ok.d4ldev.txn2.com/">http://ok.d4ldev.txn2.com/</a>. In the next few steps, we create Kubernetes <a href="https://kubernetes.io/docs/reference/access-authn-authz/rbac/">RBAC</a> tokens for deployment and ready-only developer access.</p>
 
@@ -619,8 +619,8 @@ subjects:
 <li><a href="https://kubernetes.io/docs/reference/kubectl/kubectl/">kubectl</a> is the essential Kubernetes command line administration utility.</li>
 <li><a href="https://kubernetes.io/docs/reference/kubectl/cheatsheet/#viewing-finding-resources">kubectl Cheat Sheet</a></li>
 <li><a href="https://kubernetes.io/docs/reference/access-authn-authz/rbac/">RBAC</a> on Kubernetes for role-based access control</li>
-<li>Setup a <a href="https://mk.imti.co/hobby-cluster/">Production Hobby Cluster</a>, a production capable kubernetes on the cheap.</li>
-<li><a href="https://mk.imti.co/gitlabci-golang-microservices/">A Microservices Workflow with Golang and Gitlab CI</a></li>
+<li>Setup a <a href="/hobby-cluster/">Production Hobby Cluster</a>, a production capable kubernetes on the cheap.</li>
+<li><a href="/gitlabci-golang-microservices/">A Microservices Workflow with Golang and Gitlab CI</a></li>
 <li><a href="https://about.gitlab.com/features/gitlab-ci-cd/">GitlabCI</a> for Continuous Integration &amp; Deployment</li>
 </ul>
 
@@ -681,6 +681,10 @@ subjects:
                         
                         
                         
+                        <a href="/tags/elasticsearch" title="Elasticsearch">
+                        Elasticsearch
+                        </a>
+                        
                         
                         
                         
@@ -696,6 +700,10 @@ subjects:
                         <a href="/tags/ingress" title="Ingress">
                         Ingress
                         </a>
+                        
+                        
+                        
+                        
                         
                         
                         

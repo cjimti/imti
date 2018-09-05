@@ -31,6 +31,46 @@ Developing services in a Microservices architecture presents local development c
     </item>
     
     <item>
+      <title>Remote Query Elasticsearch on Kubernetes</title>
+      <link>https://mk2.imti.co/remote-query-kubernetes-elasticsearch/</link>
+      <pubDate>Wed, 25 Jul 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://mk2.imti.co/remote-query-kubernetes-elasticsearch/</guid>
+      <description>Developing on our local workstations has always been a conceptual challenge for my team when it comes to remote data access. Local workstation-based development of services that intend to connect to a wide range of remote services that may have no options for external connections poses a challenge. Mirroring the entire development environment is possible in many cases, just not practical.
+In days before Kubernetes, writing code in IDEs on our local workstation meant we had only a few options for developing server-side-API-style services that needed to connect to a database.</description>
+    </item>
+    
+    <item>
+      <title>High Traffic JSON Data into Elasticsearch on Kubernetes</title>
+      <link>https://mk2.imti.co/post-json-elasticsearch-kubernetes/</link>
+      <pubDate>Wed, 18 Jul 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://mk2.imti.co/post-json-elasticsearch-kubernetes/</guid>
+      <description>IOT devices, Point-of-Sale systems, application events or any client that sends data destined for indexing in Elasticsearch often need to send and forget, however, unless that data is of low value there needs to be assurance that arrives at its final destination. Back-pressure and database outages can pose a considerable threat to data integrity.
+ Contents     Background Overview Development Environment  the-project Namespace  The Project: Weather (wx) Data rxtx for Store-and-Forward  wx-rxtx Service wx-rxtx StatefulSet  rtBeat to Collect, Buffer and Publish  wx-rtbeat Service wx-rtbeat ConfigMap wx-rtbeat Deployment  Client Simulation / Kubernetes Cron Performance Conclusion Reference     Background High availability and high performance often mean burdensome complexity.</description>
+    </item>
+    
+    <item>
+      <title>Kibana on Kubernetes</title>
+      <link>https://mk2.imti.co/kibana-kubernetes/</link>
+      <pubDate>Sun, 15 Jul 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://mk2.imti.co/kibana-kubernetes/</guid>
+      <description>This guide walks through a process for setting up Kibana within a namespace on a Kubernetes cluster. If you followed along with Production Grade Elasticsearch on Kubernetes then aside from personal or corporate preferences, little modifications are necessary for the configurations below.
+ Contents     Project Namespace Service Kibana ConfigMap Deployment Basic Auth TLS Certificate (Optional) Ingress Conclusion Resources     Project Namespace I use the-project as a namespace for all my examples and testing.</description>
+    </item>
+    
+    <item>
+      <title>Production Grade Elasticsearch on Kubernetes</title>
+      <link>https://mk2.imti.co/kubernetes-production-elasticsearch/</link>
+      <pubDate>Sat, 14 Jul 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://mk2.imti.co/kubernetes-production-elasticsearch/</guid>
+      <description>Installing production ready, Elasticsearch 6.2 on Kubernetes requires a hand full of simple configurations. The following guide is a high-level overview of an installation process using Elastic&amp;rsquo;s recommendations for best practices. The Github project kubernetes-elasticsearch-cluster is used for the Elastic Docker container and built to operate Elasticsearch with nodes dedicated as Master, Data, and Client/Ingest.
+The Docker container docker-elasticsearch, a &amp;ldquo;Ready to use, lean and highly configurable Elasticsearch container image.</description>
+    </item>
+    
+    <item>
       <title>Kubernetes Team Access - RBAC for developers and QA</title>
       <link>https://mk2.imti.co/team-kubernetes-remote-access/</link>
       <pubDate>Tue, 10 Jul 2018 00:00:00 +0000</pubDate>
