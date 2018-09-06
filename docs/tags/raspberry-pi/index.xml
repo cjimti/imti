@@ -20,5 +20,15 @@
       <description>A recurring requirement for my IOT projects involves keeping a set of files synced with a central server. Many of these projects include media players, kiosk systems, or applications that need frequently updated configuration files, all while entirely unattended, and in most cases unreachable through firewalls. I have one project that alone has 2000+ devices pulling media continuously from an rsync server. Many of these devices are on doggy wifi networks.</description>
     </item>
     
+    <item>
+      <title>Raspberry Pi 3 - WiFi Station&#43;AP</title>
+      <link>https://mk2.imti.co/iot-wifi/</link>
+      <pubDate>Thu, 15 Mar 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://mk2.imti.co/iot-wifi/</guid>
+      <description>Update: Looking for contributors.
+   Golang Size Pulls           IOT Wifi is very small/8MB Docker Container built for the Raspberry Pi 3. IOT Wifi exposes a simple JSON based REST API for controlling the wireless network interface. This container allows the Raspberry Pi to accept wifi connections as an access point (aka AP) while at the same time connecting to an existing wifi network (station mode).</description>
+    </item>
+    
   </channel>
 </rss>

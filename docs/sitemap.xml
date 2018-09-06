@@ -294,6 +294,12 @@
   </url>
   
   <url>
+    <loc>https://mk2.imti.co/tags/iot/</loc>
+    <lastmod>2018-03-15T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://mk2.imti.co/tags/ingress/</loc>
     <lastmod>2018-05-15T00:00:00+00:00</lastmod>
     <priority>0</priority>
@@ -422,6 +428,12 @@
   <url>
     <loc>https://mk2.imti.co/tags/utils/</loc>
     <lastmod>2018-05-12T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://mk2.imti.co/tags/wifi/</loc>
+    <lastmod>2018-03-15T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
