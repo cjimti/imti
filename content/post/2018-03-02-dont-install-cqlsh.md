@@ -5,6 +5,9 @@ subtitle:   "Containers as utility applications"
 date:       2018-03-01
 author:     "Craig Johnston"
 URL:        "dont-install-cqlsh/"
+aliases:
+  - "/post/149439588728/cassandra-keyspaces-tables"
+  - "/post/152084743878/cassandra-install-cassandra-39-on-centos-6x"
 image:      "/img/post/eye.jpg"
 twitter_image: "/img/post/eye_876_438.jpg"
 tags:

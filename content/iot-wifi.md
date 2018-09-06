@@ -9,6 +9,14 @@ aliases:
   - "/post/145442415333/raspberry-pi-3-wifi-station-ap"
 image:      "/img/pi.jpg"
 twitter_image: "/img/post/pi_876_438.jpg"
+tags:
+- Development
+- Raspberry Pi
+- Docker
+- IOT
+- Wifi
+series:
+- Raspberry Pi
 ---
 
 **Update**: Looking for contributors.
