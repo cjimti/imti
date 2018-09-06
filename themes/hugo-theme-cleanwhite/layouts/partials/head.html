@@ -12,7 +12,7 @@
     <meta name="keyword"  content="{{ .Site.Params.keyword }}">
     <link rel="shortcut icon" href="{{ "img/favicon.ico" | absURL }}">
 
-    <title>{{ if .Title }}{{ .Title }} - IMTI - Craig Johnston{{ else }}IMTI - Craig Johnston{{ end }}</title>
+    <title>{{ if and (.Title) (ne .Title "IMTI") }}{{ .Title }} - IMTI - Craig Johnston{{ else }}IMTI - Craig Johnston{{ end }}</title>
 
     <link rel="canonical" href="{{ .URL | absURL }}">
 	

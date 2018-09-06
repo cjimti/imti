@@ -16,7 +16,7 @@ home = ["HTML", "RSS"]
   ISO8601 = "2006-01-02T15:04:05-07:00"
 
   header_image = "img/imti.jpg"
-  SEOTitle = "IMTI | Craig Johnston"
+  SEOTitle = "| Craig Johnston"
   description = "I lead a talented team of software development and creative engineers, covering many industries looking to collect, analyze, move, buffer, queue, process and present data in significant ways. My expertise and that of my team revolve around microservices, artificial intelligence, algorithms, machine learning and blockchain technologies."
   keyword = "Go, Kubernetes, Elasticsearch, Python, Docker, Big Data, Artificial Intelligence, Machine Learning, Blockchain"
   slogan = "Architecting, Developing, nixCraft, DevOps, AI/ML, Blockchain"
@@ -65,6 +65,9 @@ home = ["HTML", "RSS"]
   [[params.bookmark_link]]
   title =  "Deasil Cognitive"
   href =  "https://deasilcognitive.com/"
+  [[params.bookmark_link]]
+  title =  "Deasil Works"
+  href =  "https://deasil.works/"
   [[params.bookmark_link]]
   title = "TXN2 Microservices"
   href = "https://github.com/txn2"
