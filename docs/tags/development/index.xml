@@ -2,31 +2,31 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Development on IMTI</title>
-    <link>https://mk2.imti.co/tags/development/</link>
+    <link>https://imti.co/tags/development/</link>
     <description>Recent content in Development on IMTI</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sat, 11 Aug 2018 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://mk2.imti.co/tags/development/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://imti.co/tags/development/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Kubernetes Port Forwarding for Local Development</title>
-      <link>https://mk2.imti.co/kubernetes-port-forwarding/</link>
+      <link>https://imti.co/kubernetes-port-forwarding/</link>
       <pubDate>Sat, 11 Aug 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://mk2.imti.co/kubernetes-port-forwarding/</guid>
+      <guid>https://imti.co/kubernetes-port-forwarding/</guid>
       <description>kubefwd helps to enable a seamless and efficient way to develop applications and services on a local workstation. Locally develop applications that intend to interact with other services in a Kubernetes cluster. kubefwd allows applications with connection strings like http://elasticsearch:9200/ or tcp://db:3306 to communicate into the remote cluster. kubefwd can be used to reduce or eliminate the need for local environment specific connection configurations.
 Developing services in a Microservices architecture presents local development challenges, especially when the service you are developing needs to interact with a mixture of other services.</description>
     </item>
     
     <item>
       <title>Raspberry Pi 3 - WiFi Station&#43;AP</title>
-      <link>https://mk2.imti.co/iot-wifi/</link>
+      <link>https://imti.co/iot-wifi/</link>
       <pubDate>Thu, 15 Mar 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://mk2.imti.co/iot-wifi/</guid>
+      <guid>https://imti.co/iot-wifi/</guid>
       <description>Update: Looking for contributors.
    Golang Size Pulls           IOT Wifi is very small/8MB Docker Container built for the Raspberry Pi 3. IOT Wifi exposes a simple JSON based REST API for controlling the wireless network interface. This container allows the Raspberry Pi to accept wifi connections as an access point (aka AP) while at the same time connecting to an existing wifi network (station mode).</description>
     </item>

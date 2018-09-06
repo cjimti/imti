@@ -2,40 +2,40 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Microservices on IMTI</title>
-    <link>https://mk2.imti.co/tags/microservices/</link>
+    <link>https://imti.co/tags/microservices/</link>
     <description>Recent content in Microservices on IMTI</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Fri, 22 Jun 2018 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://mk2.imti.co/tags/microservices/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://imti.co/tags/microservices/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>A Microservices Workflow with Golang and Gitlab CI</title>
-      <link>https://mk2.imti.co/gitlabci-golang-microservices/</link>
+      <link>https://imti.co/gitlabci-golang-microservices/</link>
       <pubDate>Fri, 22 Jun 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://mk2.imti.co/gitlabci-golang-microservices/</guid>
+      <guid>https://imti.co/gitlabci-golang-microservices/</guid>
       <description>Many of the resources on Cloud Native Microservices show you how easy it is to get up and running with AWS or GKE. I think this is great but for the fact that I see a trend (in my clients at least) of associating concepts with particular products or worse, companies. I love Amazon, but it&amp;rsquo;s not THE cloud). In my opinion, to embrace Cloud Native and Microservices you should develop some, and host them yourself.</description>
     </item>
     
     <item>
       <title>Microservices &amp; Kubernetes</title>
-      <link>https://mk2.imti.co/microservices/</link>
+      <link>https://imti.co/microservices/</link>
       <pubDate>Sat, 24 Mar 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://mk2.imti.co/microservices/</guid>
+      <guid>https://imti.co/microservices/</guid>
       <description>The following is a collection of articles, videos, and notes on Microservices. The Microservices architecture is a variant of the service-oriented architecture, a collection of loosely coupled services.
 Articles  Background concept - &amp;ldquo;Open Data: Small Pieces Loosely Joined&amp;rdquo;, Tim O’Reilly Modern software design problems and solutions - &amp;ldquo;12-Fractured Apps&amp;rdquo;, Kelsey Hightower (SysAdmin @ Google) 12-Factor Defined - &amp;ldquo;The 12-Factor App&amp;rdquo;, Adam Wiggins Pros and Cons of Microservices - &amp;ldquo;Microservices&amp;rdquo; and Microservice Trade-Offs, Martin Fowler &amp;ldquo;What are containers and why do you need them?</description>
     </item>
     
     <item>
       <title>Kubernetes Overview</title>
-      <link>https://mk2.imti.co/kubernetes/</link>
+      <link>https://imti.co/kubernetes/</link>
       <pubDate>Thu, 01 Mar 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://mk2.imti.co/kubernetes/</guid>
+      <guid>https://imti.co/kubernetes/</guid>
       <description>Getting started with Kubernetes for local development. I develop on a Mac however much of this is easily translated to windows.
 The following is primarily a getting started guide wrapped around my personal development notes. This set of notes are specifically for my co-workers in helping them get up to speed quickly. If you see an error feel free to make a pull request or just add an issue.</description>
     </item>

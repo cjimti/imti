@@ -2,68 +2,68 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Docker on IMTI</title>
-    <link>https://mk2.imti.co/tags/docker/</link>
+    <link>https://imti.co/tags/docker/</link>
     <description>Recent content in Docker on IMTI</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sun, 01 Jul 2018 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://mk2.imti.co/tags/docker/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://imti.co/tags/docker/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Webpage to PDF Microservice</title>
-      <link>https://mk2.imti.co/webpage-to-pdf-microservice/</link>
+      <link>https://imti.co/webpage-to-pdf-microservice/</link>
       <pubDate>Sun, 01 Jul 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://mk2.imti.co/webpage-to-pdf-microservice/</guid>
+      <guid>https://imti.co/webpage-to-pdf-microservice/</guid>
       <description>I create a lot of data visualizations for clients, many of which are internal, portal-style websites that present data in real time, as well as give options for viewing reports from previous time-frames. PDFs are useful for data such as bank statements or any form of time-snapshot progress reporting. It is common for clients to want PDF versions generated on a regular basis for sharing through email or other technologies.</description>
     </item>
     
     <item>
       <title>JWT Microservice, Tokenize Remote APIs</title>
-      <link>https://mk2.imti.co/jwt-microservice/</link>
+      <link>https://imti.co/jwt-microservice/</link>
       <pubDate>Fri, 18 May 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://mk2.imti.co/jwt-microservice/</guid>
+      <guid>https://imti.co/jwt-microservice/</guid>
       <description>txToken is a small high performance microservice utility container. txToken is used for adding JSON Web Token based security to existing or new API development. txToken is specifically for systems that communicate in JSON over HTTP. txToken is called from a client with a JSON post body and passes received JSON to a remote endpoint. JSON retrieved from a remote endpoint is used to create a JWT token with an HS256 symmetrically encrypted signature.</description>
     </item>
     
     <item>
       <title>Raspberry Pi 3 - WiFi Station&#43;AP</title>
-      <link>https://mk2.imti.co/iot-wifi/</link>
+      <link>https://imti.co/iot-wifi/</link>
       <pubDate>Thu, 15 Mar 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://mk2.imti.co/iot-wifi/</guid>
+      <guid>https://imti.co/iot-wifi/</guid>
       <description>Update: Looking for contributors.
    Golang Size Pulls           IOT Wifi is very small/8MB Docker Container built for the Raspberry Pi 3. IOT Wifi exposes a simple JSON based REST API for controlling the wireless network interface. This container allows the Raspberry Pi to accept wifi connections as an access point (aka AP) while at the same time connecting to an existing wifi network (station mode).</description>
     </item>
     
     <item>
       <title>Don&#39;t Install Emacs</title>
-      <link>https://mk2.imti.co/dont-install-emacs/</link>
+      <link>https://imti.co/dont-install-emacs/</link>
       <pubDate>Thu, 01 Mar 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://mk2.imti.co/dont-install-emacs/</guid>
+      <guid>https://imti.co/dont-install-emacs/</guid>
       <description>I grew up on emacs. One of my first jobs I sat down at a terminal and was editing some files with pico, it&amp;rsquo;s what I knew since I used that fantastic email client pine. I was quickly told by my the lead developer that I need to use a real text editor if I&amp;rsquo;m going to progress in my career. He told me I need to try emacs, and after suffering through a few weeks of memorizing multi command-char sequences and training the muscle memory in my pinky to perform bizarre contortions of my left hand just to save my file, I became a convert.</description>
     </item>
     
     <item>
       <title>Don&#39;t Install cqlsh</title>
-      <link>https://mk2.imti.co/dont-install-cqlsh/</link>
+      <link>https://imti.co/dont-install-cqlsh/</link>
       <pubDate>Thu, 01 Mar 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://mk2.imti.co/dont-install-cqlsh/</guid>
+      <guid>https://imti.co/dont-install-cqlsh/</guid>
       <description>We live in a world of process isolation and tools that make utilizing it extremely simple, with apps like Docker we can perform dependency management with dependency isolation. As I am slowly becoming a fanboy of containerization, I look forward to the day when typing ps on my local workstation or remote server is nearly synonymous with commands like docker ps or kubectl get services.
 Case: Cassandra development and your local workstation.</description>
     </item>
     
     <item>
       <title>Kubernetes Overview</title>
-      <link>https://mk2.imti.co/kubernetes/</link>
+      <link>https://imti.co/kubernetes/</link>
       <pubDate>Thu, 01 Mar 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://mk2.imti.co/kubernetes/</guid>
+      <guid>https://imti.co/kubernetes/</guid>
       <description>Getting started with Kubernetes for local development. I develop on a Mac however much of this is easily translated to windows.
 The following is primarily a getting started guide wrapped around my personal development notes. This set of notes are specifically for my co-workers in helping them get up to speed quickly. If you see an error feel free to make a pull request or just add an issue.</description>
     </item>

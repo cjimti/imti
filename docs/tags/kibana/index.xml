@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Kibana on IMTI</title>
-    <link>https://mk2.imti.co/tags/kibana/</link>
+    <link>https://imti.co/tags/kibana/</link>
     <description>Recent content in Kibana on IMTI</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sun, 15 Jul 2018 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://mk2.imti.co/tags/kibana/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://imti.co/tags/kibana/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Kibana on Kubernetes</title>
-      <link>https://mk2.imti.co/kibana-kubernetes/</link>
+      <link>https://imti.co/kibana-kubernetes/</link>
       <pubDate>Sun, 15 Jul 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://mk2.imti.co/kibana-kubernetes/</guid>
+      <guid>https://imti.co/kibana-kubernetes/</guid>
       <description>This guide walks through a process for setting up Kibana within a namespace on a Kubernetes cluster. If you followed along with Production Grade Elasticsearch on Kubernetes then aside from personal or corporate preferences, little modifications are necessary for the configurations below.
  Contents     Project Namespace Service Kibana ConfigMap Deployment Basic Auth TLS Certificate (Optional) Ingress Conclusion Resources     Project Namespace I use the-project as a namespace for all my examples and testing.</description>
     </item>

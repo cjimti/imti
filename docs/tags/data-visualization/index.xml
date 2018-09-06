@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Data Visualization on IMTI</title>
-    <link>https://mk2.imti.co/tags/data-visualization/</link>
+    <link>https://imti.co/tags/data-visualization/</link>
     <description>Recent content in Data Visualization on IMTI</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sun, 08 Jul 2018 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://mk2.imti.co/tags/data-visualization/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://imti.co/tags/data-visualization/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Python Data Essentials - Matplotlib and Seaborn</title>
-      <link>https://mk2.imti.co/python-data-essentials-matplotlib-seaborn/</link>
+      <link>https://imti.co/python-data-essentials-matplotlib-seaborn/</link>
       <pubDate>Sun, 08 Jul 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://mk2.imti.co/python-data-essentials-matplotlib-seaborn/</guid>
+      <guid>https://imti.co/python-data-essentials-matplotlib-seaborn/</guid>
       <description>There is an overwhelming number of options for developers needing to provide data visualization. The most popular library for data visualization in Python is Matplotlib, and built directly on top of Matplotlib is Seaborn. The Seaborn library is &amp;ldquo;tightly integrated with the PyData stack, including support for numpy and pandas data structures and statistical routines from scipy and statsmodels.&amp;rdquo;
 This article is only intended to get you started with Matplotlib and Seaborn.</description>
     </item>

@@ -2,40 +2,40 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Utils on IMTI</title>
-    <link>https://mk2.imti.co/tags/utils/</link>
+    <link>https://imti.co/tags/utils/</link>
     <description>Recent content in Utils on IMTI</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sat, 12 May 2018 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://mk2.imti.co/tags/utils/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://imti.co/tags/utils/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Formatting Drives on MacOS</title>
-      <link>https://mk2.imti.co/mac-format-command-line/</link>
+      <link>https://imti.co/mac-format-command-line/</link>
       <pubDate>Sat, 12 May 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://mk2.imti.co/mac-format-command-line/</guid>
+      <guid>https://imti.co/mac-format-command-line/</guid>
       <description>I have had this collection of old external drives hanging around for years. There was a time I was having terrible luck with hard drives. It turned out I managed to amass a collection of about eight drives from one terabyte to four terabytes.
 Fortunately, I keep copies of nearly all my files on cloud drives, split between Amazon, Google and DropBox. I had a sneaking suspicion that the discs themselves were ok and somehow my Mac was communicating with the RAID controllers in a way that caused them to fail.</description>
     </item>
     
     <item>
       <title>rSync Files on Interval</title>
-      <link>https://mk2.imti.co/raspberry-pi-rsync-interval/</link>
+      <link>https://imti.co/raspberry-pi-rsync-interval/</link>
       <pubDate>Mon, 02 Apr 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://mk2.imti.co/raspberry-pi-rsync-interval/</guid>
+      <guid>https://imti.co/raspberry-pi-rsync-interval/</guid>
       <description>A recurring requirement for my IOT projects involves keeping a set of files synced with a central server. Many of these projects include media players, kiosk systems, or applications that need frequently updated configuration files, all while entirely unattended, and in most cases unreachable through firewalls. I have one project that alone has 2000+ devices pulling media continuously from an rsync server. Many of these devices are on doggy wifi networks.</description>
     </item>
     
     <item>
       <title>Burn SD Images on MacOs</title>
-      <link>https://mk2.imti.co/mac-cli-burn-images/</link>
+      <link>https://imti.co/mac-cli-burn-images/</link>
       <pubDate>Sun, 01 Apr 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://mk2.imti.co/mac-cli-burn-images/</guid>
+      <guid>https://imti.co/mac-cli-burn-images/</guid>
       <description>Use your terminal to burn images fast and easy with dd. I do a lot of professional and hobby development for projects using devices such as Raspberry Pi, Orange Pi, Libre Computer, Tinker Board, etc. I run across a lot of tutorials with people downloading and using big GUI apps with clunky drag and drop interfaces to burn images.
 It&amp;rsquo;s one command in your terminal. Technically, it&amp;rsquo;s three, but I don&amp;rsquo;t count listing and unmounting as the final act of burning.</description>
     </item>

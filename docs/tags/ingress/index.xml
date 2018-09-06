@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Ingress on IMTI</title>
-    <link>https://mk2.imti.co/tags/ingress/</link>
+    <link>https://imti.co/tags/ingress/</link>
     <description>Recent content in Ingress on IMTI</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Mon, 28 May 2018 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://mk2.imti.co/tags/ingress/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://imti.co/tags/ingress/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>CORS on Kubernetes Ingress Nginx</title>
-      <link>https://mk2.imti.co/kubernetes-ingress-nginx-cors/</link>
+      <link>https://imti.co/kubernetes-ingress-nginx-cors/</link>
       <pubDate>Mon, 28 May 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://mk2.imti.co/kubernetes-ingress-nginx-cors/</guid>
+      <guid>https://imti.co/kubernetes-ingress-nginx-cors/</guid>
       <description>Using ingress-nginx on Kubernetes makes adding CORS headers painless. Kubernetes ingress-nginx uses annotations as a quick way to allow you to specify the automatic generation of an extensive list of common nginx configuration options.
 Example ingress configuration enabling CORS:
 apiVersion: extensions/v1beta1 kind: Ingress metadata: name: api namespace: fuse labels: app: api annotations: nginx.ingress.kubernetes.io/enable-cors: &amp;quot;true&amp;quot; nginx.ingress.kubernetes.io/cors-allow-methods: &amp;quot;PUT, GET, POST, OPTIONS&amp;quot; nginx.ingress.kubernetes.io/cors-allow-origin: &amp;quot;https://admin.example.com&amp;quot; nginx.ingress.kubernetes.io/cors-allow-credentials: &amp;quot;true&amp;quot; spec: rules: - host: api.example.com http: paths: - backend: serviceName: api-example servicePort: 80 path: /api tls: - hosts: - api.</description>
@@ -24,28 +24,28 @@ apiVersion: extensions/v1beta1 kind: Ingress metadata: name: api namespace: fuse
     
     <item>
       <title>Basic Auth on Kubernetes Ingress</title>
-      <link>https://mk2.imti.co/kubernetes-ingress-basic-auth/</link>
+      <link>https://imti.co/kubernetes-ingress-basic-auth/</link>
       <pubDate>Sat, 19 May 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://mk2.imti.co/kubernetes-ingress-basic-auth/</guid>
+      <guid>https://imti.co/kubernetes-ingress-basic-auth/</guid>
       <description>Basic Auth is one of the oldest and easiest ways to secure a web page or API endpoint. Basic Auth does not have many features and lacks the sophistication of more modern access controls (see Ingress Nginx Auth Examples). However, Basic Auth is supported by nearly every major web client, library, and utility. Basic Auth is secure, stable and perfect for quick security on Kubernetes projects. Basic Auth can easily we swapped out later as requirements demand or provide a foundation for implementations such as OAuth 2 and JWT.</description>
     </item>
     
     <item>
       <title>JWT Microservice, Tokenize Remote APIs</title>
-      <link>https://mk2.imti.co/jwt-microservice/</link>
+      <link>https://imti.co/jwt-microservice/</link>
       <pubDate>Fri, 18 May 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://mk2.imti.co/jwt-microservice/</guid>
+      <guid>https://imti.co/jwt-microservice/</guid>
       <description>txToken is a small high performance microservice utility container. txToken is used for adding JSON Web Token based security to existing or new API development. txToken is specifically for systems that communicate in JSON over HTTP. txToken is called from a client with a JSON post body and passes received JSON to a remote endpoint. JSON retrieved from a remote endpoint is used to create a JWT token with an HS256 symmetrically encrypted signature.</description>
     </item>
     
     <item>
       <title>Let&#39;s Encrypt, Kubernetes</title>
-      <link>https://mk2.imti.co/lets-encrypt-kubernetes/</link>
+      <link>https://imti.co/lets-encrypt-kubernetes/</link>
       <pubDate>Fri, 18 May 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://mk2.imti.co/lets-encrypt-kubernetes/</guid>
+      <guid>https://imti.co/lets-encrypt-kubernetes/</guid>
       <description>Use cert-manager to get port 443/https running with signed x509 certificates for Ingress on your Kubernetes Production Hobby Cluster. cert-manager is the successor to kube-lego and the preferred way to &amp;ldquo;automatically obtain browser-trusted certificates, without any human intervention.&amp;rdquo; using Let&amp;rsquo;s Encrypt.
 You need to install Helm first if you do not already have it. Otherwise, check out my article Helm on Custom Kubernetes, especially if you are following along with my Production Hobby Cluster guides.</description>
     </item>

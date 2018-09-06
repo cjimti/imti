@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Cassandra on IMTI</title>
-    <link>https://mk2.imti.co/tags/cassandra/</link>
+    <link>https://imti.co/tags/cassandra/</link>
     <description>Recent content in Cassandra on IMTI</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Thu, 01 Mar 2018 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://mk2.imti.co/tags/cassandra/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://imti.co/tags/cassandra/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Don&#39;t Install cqlsh</title>
-      <link>https://mk2.imti.co/dont-install-cqlsh/</link>
+      <link>https://imti.co/dont-install-cqlsh/</link>
       <pubDate>Thu, 01 Mar 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://mk2.imti.co/dont-install-cqlsh/</guid>
+      <guid>https://imti.co/dont-install-cqlsh/</guid>
       <description>We live in a world of process isolation and tools that make utilizing it extremely simple, with apps like Docker we can perform dependency management with dependency isolation. As I am slowly becoming a fanboy of containerization, I look forward to the day when typing ps on my local workstation or remote server is nearly synonymous with commands like docker ps or kubectl get services.
 Case: Cassandra development and your local workstation.</description>
     </item>

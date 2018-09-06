@@ -10,20 +10,20 @@
     <meta name="description" content="I lead a talented team of software development and creative engineers, covering many industries looking to collect, analyze, move, buffer, queue, process and present data in significant ways. My expertise and that of my team revolve around microservices, artificial intelligence, algorithms, machine learning and blockchain technologies.">
     
     <meta name="keyword"  content="Go, Kubernetes, Elasticsearch, Python, Docker, Big Data, Artificial Intelligence, Machine Learning, Blockchain">
-    <link rel="shortcut icon" href="https://mk2.imti.co/img/favicon.ico">
+    <link rel="shortcut icon" href="https://imti.co/img/favicon.ico">
 
     <title>Reverse Proxy in Golang - IMTI - Craig Johnston</title>
 
-    <link rel="canonical" href="https://mk2.imti.co/golang-reverse-proxy/">
+    <link rel="canonical" href="https://imti.co/golang-reverse-proxy/">
 	
     
-    <link rel="stylesheet" href="https://mk2.imti.co/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://imti.co/css/bootstrap.min.css">
 
     
-    <link rel="stylesheet" href="https://mk2.imti.co/css/hux-blog.min.css">
+    <link rel="stylesheet" href="https://imti.co/css/hux-blog.min.css">
 
     
-    <link rel="stylesheet" href="https://mk2.imti.co/css/syntax.css">
+    <link rel="stylesheet" href="https://imti.co/css/syntax.css">
 
     
     <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
@@ -32,13 +32,13 @@
     <link rel="stylesheet" href="/css/imti.css">
 
     
-    <script src="https://mk2.imti.co/js/jquery.min.js"></script>
+    <script src="https://imti.co/js/jquery.min.js"></script>
     
     
-    <script src="https://mk2.imti.co/js/bootstrap.min.js"></script>
+    <script src="https://imti.co/js/bootstrap.min.js"></script>
     
     
-    <script src="https://mk2.imti.co/js/hux-blog.min.js"></script>
+    <script src="https://imti.co/js/hux-blog.min.js"></script>
 
     <meta name="twitter:site" content="@cjimti">
 <meta name="twitter:creator" content="@cjimti">
@@ -46,8 +46,8 @@
 <meta name="twitter:description" content="Reverse proxies are standard components in many web architectures, from Nginx in front of php-fpm serving Drupal or Wordpress, to endless mixtures of load balancers, security appliances, and popular firewall applications. Reverse proxies differ from forward proxies in little but their intended implementation, be it service-side or client side. The following information is useful in either context. However, I focus on a service-side architecture. Further down this article, I&rsquo;ll be going over the reasonably simple go code needed to develop a basic, yet production quality proxy, but first I&rsquo;ll give you my take on why they solve so many problems and offer up my little workhorse, n2proxy." />
 <meta name="twitter:title" content="Reverse Proxy in Golang" />
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:image" content="https://mk2.imti.co/img/post/dentalinst_876_438.jpg" />
-<meta property="og:image" content="https://mk2.imti.co/img/post/dentalinst_876_438.jpg" />
+<meta name="twitter:image" content="https://imti.co/img/post/dentalinst_876_438.jpg" />
+<meta property="og:image" content="https://imti.co/img/post/dentalinst_876_438.jpg" />
 
 
 
@@ -58,11 +58,11 @@
   "@type": "Article",
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://mk2.imti.co/golang-reverse-proxy/"
+    "@id": "https://imti.co/golang-reverse-proxy/"
   },
   "headline": "Reverse Proxy in Golang",
   "image": [
-    "https://mk2.imti.co/img/post/dentalinst_876_438.jpg"
+    "https://imti.co/img/post/dentalinst_876_438.jpg"
    ],
   "datePublished": "2018-06-15T00:00:00",
   "dateModified": "2018-06-15T00:00:00",
@@ -75,7 +75,7 @@
     "name": 'imti.co",
     "logo": {
       "@type": "ImageObject",
-      "url": "https://mk2.imti.co/img/craig_johnston_cjimti.jpg"
+      "url": "https://imti.co/img/craig_johnston_cjimti.jpg"
     }
   },
   "description": "Reverse proxies are standard components in many web architectures, from Nginx in front of php-fpm serving Drupal or Wordpress, to endless mixtures of load balancers, security appliances, and popular firewall applications. Reverse proxies differ from forward proxies in little but their intended implementation, be it service-side or client side. The following information is useful in either context. However, I focus on a service-side architecture. Further down this article, I&rsquo;ll be going over the reasonably simple go code needed to develop a basic, yet production quality proxy, but first I&rsquo;ll give you my take on why they solve so many problems and offer up my little workhorse, n2proxy."
@@ -94,7 +94,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="https://mk2.imti.co/">IMTI</a>
+            <a class="navbar-brand" href="https://imti.co/">IMTI</a>
         </div>
 
         
@@ -103,10 +103,10 @@
             <div class="navbar-collapse">
                 <ul class="nav navbar-nav navbar-right">
                     <li>
-                        <a href="https://mk2.imti.co/">Home</a>
+                        <a href="https://imti.co/">Home</a>
                     </li>
                     <li>
-                        <a href="https://mk2.imti.co/about/">About</a>
+                        <a href="https://imti.co/about/">About</a>
                     </li>
                     <li>
                         <a href="https://twitter.com/cjimti">Follow</a>
@@ -155,7 +155,7 @@
 
 <style type="text/css">
     header.intro-header{
-        background-image: url('https://mk2.imti.co/img/post/dentalinst.jpg')
+        background-image: url('https://imti.co/img/post/dentalinst.jpg')
     }
 </style>
 <header class="intro-header" >
