@@ -6,10 +6,19 @@
     <description>Recent content in Tags on IMTI</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 01 Mar 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 01 Sep 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://imti.co/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Blockchain</title>
+      <link>https://imti.co/tags/blockchain/</link>
+      <pubDate>Sat, 01 Sep 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://imti.co/tags/blockchain/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>Cassandra</title>
@@ -158,7 +167,7 @@
     <item>
       <title>Ingress</title>
       <link>https://imti.co/tags/ingress/</link>
-      <pubDate>Tue, 15 May 2018 00:00:00 +0000</pubDate>
+      <pubDate>Mon, 28 May 2018 00:00:00 +0000</pubDate>
       
       <guid>https://imti.co/tags/ingress/</guid>
       <description></description>
@@ -167,7 +176,7 @@
     <item>
       <title>Ingress</title>
       <link>https://imti.co/tags/ingress/</link>
-      <pubDate>Mon, 28 May 2018 00:00:00 +0000</pubDate>
+      <pubDate>Tue, 15 May 2018 00:00:00 +0000</pubDate>
       
       <guid>https://imti.co/tags/ingress/</guid>
       <description></description>

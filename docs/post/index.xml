@@ -6,10 +6,19 @@
     <description>Recent content in Posts on IMTI</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 11 Aug 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 01 Sep 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://imti.co/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Blockchain</title>
+      <link>https://imti.co/blockchain/</link>
+      <pubDate>Sat, 01 Sep 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://imti.co/blockchain/</guid>
+      <description>The Internet of Transactions Blockchain may be a recent entry to the technology landscape. However, it has quickly become an essential iteration in the evolution of peer-to-peer communication and distributed computing. Originally developed as a way to protect digital currency, Blockchain technologies now support any digital asset, from signal data to complex messaging, to the execution of business logic through code. Blockchain technologies are rapidly forming a new decentralized internet of transactions.</description>
+    </item>
     
     <item>
       <title>Kubernetes Port Forwarding for Local Development</title>
