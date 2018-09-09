@@ -31,5 +31,16 @@ Developing services in a Microservices architecture presents local development c
    Golang Size Pulls           IOT Wifi is very small/8MB Docker Container built for the Raspberry Pi 3. IOT Wifi exposes a simple JSON based REST API for controlling the wireless network interface. This container allows the Raspberry Pi to accept wifi connections as an access point (aka AP) while at the same time connecting to an existing wifi network (station mode).</description>
     </item>
     
+    <item>
+      <title>Raspberry Pi - Serial Number</title>
+      <link>https://imti.co/raspberry-pi-serial/</link>
+      <pubDate>Mon, 13 Feb 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://imti.co/raspberry-pi-serial/</guid>
+      <description>Getting the unique serial number from a Raspberry Pi.
+cat /proc/cpuinfo | grep ^Serial | cut -d&amp;quot;:&amp;quot; -f2  Example output:
+ 00000000e215b4a2  An interesting use for this is &amp;ldquo;binding&amp;rdquo; software, encryption or other servcies to a specific Pi. Found this in a suggestion on the Stack Overflow question &amp;ldquo;Securing data on SD card Raspberry Pi&amp;rdquo;</description>
+    </item>
+    
   </channel>
 </rss>

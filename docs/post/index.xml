@@ -371,5 +371,16 @@ Case: Cassandra development and your local workstation.</description>
 The following is primarily a getting started guide wrapped around my personal development notes. This set of notes are specifically for my co-workers in helping them get up to speed quickly. If you see an error feel free to make a pull request or just add an issue.</description>
     </item>
     
+    <item>
+      <title>Raspberry Pi - Serial Number</title>
+      <link>https://imti.co/raspberry-pi-serial/</link>
+      <pubDate>Mon, 13 Feb 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://imti.co/raspberry-pi-serial/</guid>
+      <description>Getting the unique serial number from a Raspberry Pi.
+cat /proc/cpuinfo | grep ^Serial | cut -d&amp;quot;:&amp;quot; -f2  Example output:
+ 00000000e215b4a2  An interesting use for this is &amp;ldquo;binding&amp;rdquo; software, encryption or other servcies to a specific Pi. Found this in a suggestion on the Stack Overflow question &amp;ldquo;Securing data on SD card Raspberry Pi&amp;rdquo;</description>
+    </item>
+    
   </channel>
 </rss>

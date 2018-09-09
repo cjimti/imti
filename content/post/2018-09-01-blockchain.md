@@ -6,7 +6,7 @@ date:     2018-09-01
 author:   "Craig Johnston"
 URL:      "blockchain/"
 image:    "/img/post/blockchainconcept.jpg"
-twitter_image:  "/img/post/blockchainconcept_876_438.jpg?card"
+twitter_image:  "/img/post/blockchainconcept_876_438.jpg"
 tags:
 - Blockchain
 series:
