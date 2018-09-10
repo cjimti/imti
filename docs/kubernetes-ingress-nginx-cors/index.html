@@ -43,9 +43,7 @@
     <meta name="twitter:site" content="@cjimti">
 <meta name="twitter:creator" content="@cjimti">
 
-<meta name="twitter:description" content="Using ingress-nginx on Kubernetes makes adding CORS headers painless. Kubernetes ingress-nginx uses annotations as a quick way to allow you to specify the automatic generation of an extensive list of common nginx configuration options.
-Example ingress configuration enabling CORS:
-apiVersion: extensions/v1beta1 kind: Ingress metadata: name: api namespace: fuse labels: app: api annotations: nginx.ingress.kubernetes.io/enable-cors: &quot;true&quot; nginx.ingress.kubernetes.io/cors-allow-methods: &quot;PUT, GET, POST, OPTIONS&quot; nginx.ingress.kubernetes.io/cors-allow-origin: &quot;https://admin.example.com&quot; nginx.ingress.kubernetes.io/cors-allow-credentials: &quot;true&quot; spec: rules: - host: api.example.com http: paths: - backend: serviceName: api-example servicePort: 80 path: /api tls: - hosts: - api." />
+<meta name="twitter:description" content="Painless CORS header configuration in Kubernetes" />
 <meta name="twitter:title" content="CORS on Kubernetes Ingress Nginx" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:image" content="https://imti.co/img/post/bwire_876_438.jpg" />

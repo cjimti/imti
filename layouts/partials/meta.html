@@ -1,7 +1,7 @@
 <meta name="twitter:site" content="@cjimti">
 <meta name="twitter:creator" content="@cjimti">
 {{ if .IsPage }}
-<meta name="twitter:description" content="{{ .Summary }}" />
+<meta name="twitter:description" content="{{ .Params.subtitle }}" />
 <meta name="twitter:title" content="{{ .Title }}" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:image" content="{{ .Params.twitter_image | absURL }}" />

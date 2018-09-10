@@ -7,7 +7,7 @@ date:     2018-09-04
 author:   "Craig Johnston"
 URL:      "ethereum-kubernetes/"
 image:    "/img/post/kubeeth.jpg"
-twitter_image:  "/img/post/kubeeth.jpg"
+twitter_image:  "/img/post/kubeeth_876_438.jpg"
 tags:
 - Ethereum
 - Kubernetes
