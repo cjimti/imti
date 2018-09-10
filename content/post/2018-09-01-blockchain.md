@@ -34,6 +34,12 @@ Artifical Intelligence has traditionally placed its trust in logic designed and 
 
 **Contact <a href="mailto:info@deasilcognitive.com">info@deasilcognitive.com</a> for more information on Blockchain or to schedule a Blockchain workshop.**
 
+### Develop
+
+Read my article on how to "[Deploy a Private Ethereum Blockchain on a Custom Kubernetes Cluster.](https://imti.co/ethereum-kubernetes/)" to get you started in building custom Blockchain solutions.
+
+
+
 ##### Selected Reading
 - [How does the Blockchain Work? (Part 1)](https://medium.com/blockchain-review/how-does-the-blockchain-work-for-dummies-explained-simply-9f94d386e093) by Collin Thompson
 - [How Does the Blockchain Work?](https://medium.com/s/story/how-does-the-blockchain-work-98c8cd01d2ae) by Michele D'Aliessi
