@@ -7,7 +7,7 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
-    <meta name="description" content="I lead a talented team of software development and creative engineers, covering many industries looking to collect, analyze, move, buffer, queue, process and present data in significant ways. My expertise and that of my team revolve around microservices, artificial intelligence, algorithms, machine learning and blockchain technologies.">
+    <meta name="description" content="Deploy a Private Ethereum Blockchain on a Custom Kubernetes Cluster.">
     
     <meta name="keyword"  content="Go, Kubernetes, Elasticsearch, Python, Docker, Big Data, Artificial Intelligence, Machine Learning, Blockchain">
     <link rel="shortcut icon" href="https://imti.co/img/favicon.ico">
@@ -43,12 +43,11 @@
     <meta name="twitter:site" content="@cjimti">
 <meta name="twitter:creator" content="@cjimti">
 
-<meta name="twitter:description" content="Blockchain technologies have been made popular by Cryptocurrencies such as Bitcoin and Ethereum. However, the concepts behind Blockchain are fore more reaching than their support for cryptocurrency. Blockchain technologies now support any digital asset, from signal data to complex messaging, to the execution of business logic through code. Blockchain technologies are rapidly forming a new decentralized internet of transactions.
-Kubernetes is an efficient and productive platform for the configuration, deployment, and management of private blockchains." />
+<meta name="twitter:description" content="Deploy a Private Ethereum Blockchain on a Custom Kubernetes Cluster." />
 <meta name="twitter:title" content="Ethereum Blockchain on Kubernetes" />
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:image" content="https://imti.co/img/post/kubeeth.jpg" />
-<meta property="og:image" content="https://imti.co/img/post/kubeeth.jpg" />
+<meta name="twitter:image" content="https://imti.co/img/post/kubeeth_876_438.jpg" />
+<meta property="og:image" content="https://imti.co/img/post/kubeeth_876_438.jpg" />
 
 
 
@@ -63,7 +62,7 @@ Kubernetes is an efficient and productive platform for the configuration, deploy
   },
   "headline": "Ethereum Blockchain on Kubernetes",
   "image": [
-    "https://imti.co/img/post/kubeeth.jpg"
+    "https://imti.co/img/post/kubeeth_876_438.jpg"
    ],
   "datePublished": "2018-09-04T00:00:00",
   "dateModified": "2018-09-04T00:00:00",
@@ -79,7 +78,7 @@ Kubernetes is an efficient and productive platform for the configuration, deploy
       "url": "https://imti.co/img/craig_johnston_cjimti.jpg"
     }
   },
-  "description": "Blockchain technologies have been made popular by Cryptocurrencies such as Bitcoin and Ethereum. However, the concepts behind Blockchain are fore more reaching than their support for cryptocurrency. Blockchain technologies now support any digital asset, from signal data to complex messaging, to the execution of business logic through code. Blockchain technologies are rapidly forming a new decentralized internet of transactions.
+  "description": "Blockchain technologies have been made famous by Cryptocurrencies such as Bitcoin and Ethereum. However, the concepts behind Blockchain are fore more reaching than their support for cryptocurrency. Blockchain technologies now support any digital asset, from signal data to complex messaging, to the execution of business logic through code. Blockchain technologies are rapidly forming a new decentralized internet of transactions.
 Kubernetes is an efficient and productive platform for the configuration, deployment, and management of private blockchains."
 }
 </script>
@@ -211,7 +210,7 @@ Kubernetes is an efficient and productive platform for the configuration, deploy
 
                 
 
-<p>Blockchain technologies have been made popular by Cryptocurrencies such as Bitcoin and Ethereum. However, the concepts behind <a href="http://imti.co/blockchain/">Blockchain</a> are fore more reaching than their support for cryptocurrency. Blockchain technologies now support any digital asset, from signal data to complex messaging, to the execution of business logic through code. Blockchain technologies are rapidly forming a new decentralized internet of transactions.</p>
+<p>Blockchain technologies have been made famous by Cryptocurrencies such as Bitcoin and Ethereum. However, the concepts behind <a href="http://imti.co/blockchain/">Blockchain</a> are fore more reaching than their support for cryptocurrency. Blockchain technologies now support any digital asset, from signal data to complex messaging, to the execution of business logic through code. Blockchain technologies are rapidly forming a new decentralized internet of transactions.</p>
 
 <p><a href="https://kubernetes.io/">Kubernetes</a> is an efficient and productive platform for the configuration, deployment, and management of private blockchains. Blockchain technology is intended to provide a decentralized transaction ledger, making it a perfect fit for the distributed nature of Kubernetes Pod deployments. The Kubernetes network infrastructure provides the necessary elements for security, scalability and fault tolerance needed for private or protected Blockchains.</p>
 
@@ -272,7 +271,7 @@ Kubernetes is an efficient and productive platform for the configuration, deploy
 
 <h2 id="setting-up-ethereum-on-kubernetes">Setting up Ethereum on Kubernetes</h2>
 
-<p>In my opinion, the best way to learn and understand the capabilities of this technology is by implementing your own private <strong>production ready</strong> Blockchain. Beginner tutorials often get you up and running on a local workstation leaving out important production implementation details; other quick start guides use package managers like Helm that do all the work for you. However, both these approaches leave gaps, either in understanding how to migrate and scale into a production system in the case of local development or in the case of package managers hiding implementation details and limiting configuration options.</p>
+<p>In my opinion, the best way to learn and understand the capabilities of this technology is by implementing your own private <strong>production ready</strong> Blockchain. Beginner tutorials often get you up and running on a local workstation leaving out important production implementation details; other quick start guides use package managers like Helm that do all the work for you. However, both these approaches leave gaps, either in understanding how to migrate and scale into a production system in the case of local development or the case of package managers hiding implementation details and limiting configuration options.</p>
 
 <p>The following is an idiomatic Kubernetes setup. Providing and describing each configuration step in leveraging the Kubernetes core concept of declarative state configuration.</p>
 
@@ -280,7 +279,7 @@ Kubernetes is an efficient and productive platform for the configuration, deploy
 
 <h3 id="bare-metal-custom-kubernetes">Bare Metal / Custom Kubernetes</h3>
 
-<p>In order to avoid vendor lock-in or vendor specific instructions, this guide builds a private Ethereum Blockchain on a custom Kubernetes cluster. If you don&rsquo;t already have a cluster, I recommend setting up a <a href="https://imti.co/hobby-cluster/">production ready Kubernetes hobby cluster</a>.</p>
+<p>This guide builds a private Ethereum Blockchain on a custom Kubernetes cluster and avoids vendor lock-in or vendor specific instructions. If you don&rsquo;t already have a cluster, I recommend setting up a <a href="https://imti.co/hobby-cluster/">production ready Kubernetes hobby cluster</a>.</p>
 
 <h3 id="resource-organization-namespaces">Resource Organization / Namespaces</h3>
 
@@ -290,7 +289,7 @@ Kubernetes is an efficient and productive platform for the configuration, deploy
 
 <h3 id="private-blockchain-network-topology">Private Blockchain Network Topology</h3>
 
-<p>The articles <a href="https://www.microsoft.com/developerblog/2018/02/09/using-helm-deploy-blockchain-kubernetes/">Using Helm to Deploy Blockchain to Kubernetes</a> and <a href="https://www.microsoft.com/developerblog/2018/06/01/creating-private-ethereum-consortium-kubernetes/">Building a Private Ethereum Consortium</a> on Microsoft&rsquo;s Developer Blog offer some greate illustrations of this private Blockchain setup, following implementation is a deconstruction of the referenced Helm Chart.</p>
+<p>The articles <a href="https://www.microsoft.com/developerblog/2018/02/09/using-helm-deploy-blockchain-kubernetes/">Using Helm to Deploy Blockchain to Kubernetes</a> and <a href="https://www.microsoft.com/developerblog/2018/06/01/creating-private-ethereum-consortium-kubernetes/">Building a Private Ethereum Consortium</a> on Microsoft&rsquo;s Developer Blog offer some great illustrations of this private Blockchain setup, following implementation is a deconstruction of the referenced Helm Chart.</p>
 
 <h3 id="bootnode">Bootnode</h3>
 
@@ -506,7 +505,7 @@ spec:
 
 <p><a href="/ethereum-ethstats/"><img src="/img/post/ethstats.jpg" alt="Ethstats Dashboard" /></a></p>
 
-<!--Read the article [Ethereum Ethstats / Describing the metrics.](/ethereum-ethstats/) if you are new to Blockchain or Ethereum terminology. In the article, I review essential metrics and their meaning.-->
+<p>Read the article <a href="/ethereum-ethstats/">Ethereum Ethstats / Describing the metrics.</a> if you are new to Blockchain or Ethereum terminology. In the article, I review essential metrics and their meaning.</p>
 
 <h4 id="ethstats-dashboard-service">Ethstats Dashboard Service</h4>
 
@@ -569,7 +568,7 @@ data:
 
 <h4 id="ethstats-dashboard-deployment">Ethstats Dashboard Deployment</h4>
 
-<p>The Ethstats dashboard Deployment uses the Docker <a href="https://hub.docker.com/r/ethereumex/eth-stats-dashboard/">ethereumex/eth-stats-dashboard container</a> from <a href="https://github.com/EthereumEx">Ethereum Expertise</a>. The container uses the environment variable <strong>WS_SECRET</strong> to set the password the Ethereum nodes use in calling to report their stats. The password is defined in the <strong>eth-ethstats</strong> Secret created above.</p>
+<p>The Ethstats dashboard Deployment uses the Docker <a href="https://hub.docker.com/r/ethereumex/eth-stats-dashboard/">ethereumex/eth-stats-dashboard container</a> from <a href="https://github.com/EthereumEx">Ethereum Expertise</a>. The container uses the environment variable <strong>WS_SECRET</strong> to set the password the Ethereum nodes use in calling to report their stats.  The <strong>eth-ethstats</strong> Secret created above defines the password.</p>
 
 <p>Create the file <code>230-ethstats-deployment.yml</code>:</p>
 
@@ -720,7 +719,7 @@ data:
 
 <h4 id="geth-miner-secret">Geth Miner Secret</h4>
 
-<p>A Kubernetes <a href="https://kubernetes.io/docs/concepts/configuration/secret/">Secret</a> is used to store a common password each miner uses for creating an Ethereum account funded by block creation rewards, this is called the coinbase. This password is used to unlock the associated Ethereum account to transfer Eth gained from the minder nodes to other accounts. However, the coinbase may be configured for each miner can at any time.</p>
+<p>A Kubernetes <a href="https://kubernetes.io/docs/concepts/configuration/secret/">Secret</a> is used to store a common password each miner uses for creating an Ethereum account funded by block creation rewards; this is called the coinbase. This password is used to unlock the associated Ethereum account to transfer Eth gained from the minder nodes to other accounts. However, the coinbase may be configured for each miner can at any time.</p>
 
 <p>You can create a password on MacOs or Linux terminals by piping a string to the command base64, or you can use the site <a href="https://www.base64decode.org/">base64decode.org</a> to create a base64 encoded string.</p>
 
@@ -918,7 +917,7 @@ spec:
 
 <h4 id="geth-transaction-nodes-deployment">Geth Transaction Nodes Deployment</h4>
 
-<p>Issuing transactions on the private Blockchain occurs through a set of two Geth Transaction Nodes; these Pods are setup similar to miners running the official <a href="https://hub.docker.com/r/ethereum/client-go/">ethereum/client-go:release-1.8</a>. Geth Transaction Node consist of one main container named <strong>geth-tx</strong> and two initialization containers <strong>init-genesis</strong> and <strong>get-bootnodes</strong>.</p>
+<p>Issuing transactions on the private Blockchain occur through a set of two Geth Transaction Nodes; these Pods are setup similar to miners running the official <a href="https://hub.docker.com/r/ethereum/client-go/">ethereum/client-go:release-1.8</a>. Geth Transaction Node consist of one main container named <strong>geth-tx</strong> and two initialization containers <strong>init-genesis</strong> and <strong>get-bootnodes</strong>.</p>
 
 <p>Create the file <code>420-geth-tx-deployment.yml</code>:</p>
 
