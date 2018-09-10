@@ -1,5 +1,5 @@
 ---
-draft: false
+draft: true
 layout:   post
 title:    "Ethereum Blockchain on Kubernetes"
 subtitle: "Deploy a Private Ethereum Blockchain on a Custom Kubernetes Cluster."
@@ -17,7 +17,7 @@ series:
 - Kubernetes
 ---
 
-Blockchain technologies have been made popular by Cryptocurrencies such as Bitcoin and Ethereum. However, the concepts behind [Blockchain] are fore more reaching than their support for cryptocurrency. Blockchain technologies now support any digital asset, from signal data to complex messaging, to the execution of business logic through code. Blockchain technologies are rapidly forming a new decentralized internet of transactions.
+Blockchain technologies have been made famous by Cryptocurrencies such as Bitcoin and Ethereum. However, the concepts behind [Blockchain] are fore more reaching than their support for cryptocurrency. Blockchain technologies now support any digital asset, from signal data to complex messaging, to the execution of business logic through code. Blockchain technologies are rapidly forming a new decentralized internet of transactions.
 
 [Kubernetes] is an efficient and productive platform for the configuration, deployment, and management of private blockchains. Blockchain technology is intended to provide a decentralized transaction ledger, making it a perfect fit for the distributed nature of Kubernetes Pod deployments. The Kubernetes network infrastructure provides the necessary elements for security, scalability and fault tolerance needed for private or protected Blockchains.
 
@@ -27,7 +27,7 @@ Ethereum is a Cryptocurrency as well as a platform. [Ethereum] "is a decentraliz
 
 ## Setting up Ethereum on Kubernetes
 
-In my opinion, the best way to learn and understand the capabilities of this technology is by implementing your own private **production ready** Blockchain. Beginner tutorials often get you up and running on a local workstation leaving out important production implementation details; other quick start guides use package managers like Helm that do all the work for you. However, both these approaches leave gaps, either in understanding how to migrate and scale into a production system in the case of local development or in the case of package managers hiding implementation details and limiting configuration options.
+In my opinion, the best way to learn and understand the capabilities of this technology is by implementing your own private **production ready** Blockchain. Beginner tutorials often get you up and running on a local workstation leaving out important production implementation details; other quick start guides use package managers like Helm that do all the work for you. However, both these approaches leave gaps, either in understanding how to migrate and scale into a production system in the case of local development or the case of package managers hiding implementation details and limiting configuration options.
 
 The following is an idiomatic Kubernetes setup. Providing and describing each configuration step in leveraging the Kubernetes core concept of declarative state configuration.
 
@@ -35,7 +35,7 @@ The transaction and miner nodes run the official [ethereum/client-go:release-1.8
 
 ### Bare Metal / Custom Kubernetes
 
-In order to avoid vendor lock-in or vendor specific instructions, this guide builds a private Ethereum Blockchain on a custom Kubernetes cluster. If you don't already have a cluster, I recommend setting up a [production ready Kubernetes hobby cluster][Kubernetes Hobby Cluster].
+This guide builds a private Ethereum Blockchain on a custom Kubernetes cluster and avoids vendor lock-in or vendor specific instructions. If you don't already have a cluster, I recommend setting up a [production ready Kubernetes hobby cluster][Kubernetes Hobby Cluster].
 
 ### Resource Organization / Namespaces
 
@@ -45,7 +45,7 @@ In order to avoid vendor lock-in or vendor specific instructions, this guide bui
 
 ### Private Blockchain Network Topology
 
-The articles [Using Helm to Deploy Blockchain to Kubernetes] and [Building a Private Ethereum Consortium] on Microsoft's Developer Blog offer some greate illustrations of this private Blockchain setup, following implementation is a deconstruction of the referenced Helm Chart.
+The articles [Using Helm to Deploy Blockchain to Kubernetes] and [Building a Private Ethereum Consortium] on Microsoft's Developer Blog offer some great illustrations of this private Blockchain setup, following implementation is a deconstruction of the referenced Helm Chart.
 
 ### Bootnode
 
@@ -260,7 +260,7 @@ The [eth-netstats] project provides an incredible dashboard interface for monito
 
 [![Ethstats Dashboard](/img/post/ethstats.jpg)](/ethereum-ethstats/)
 
-<!--Read the article [Ethereum Ethstats / Describing the metrics.](/ethereum-ethstats/) if you are new to Blockchain or Ethereum terminology. In the article, I review essential metrics and their meaning.-->
+Read the article [Ethereum Ethstats / Describing the metrics.](/ethereum-ethstats/) if you are new to Blockchain or Ethereum terminology. In the article, I review essential metrics and their meaning.
 
 
 #### Ethstats Dashboard Service
@@ -324,7 +324,7 @@ kubectl create -f ./220-ethstats-secret.yml
 
 #### Ethstats Dashboard Deployment
 
-The Ethstats dashboard Deployment uses the Docker [ethereumex/eth-stats-dashboard container] from [Ethereum Expertise](https://github.com/EthereumEx). The container uses the environment variable **WS_SECRET** to set the password the Ethereum nodes use in calling to report their stats. The password is defined in the **eth-ethstats** Secret created above.
+The Ethstats dashboard Deployment uses the Docker [ethereumex/eth-stats-dashboard container] from [Ethereum Expertise](https://github.com/EthereumEx). The container uses the environment variable **WS_SECRET** to set the password the Ethereum nodes use in calling to report their stats.  The **eth-ethstats** Secret created above defines the password.
 
 Create the file `230-ethstats-deployment.yml`:
 ```yaml
@@ -476,7 +476,7 @@ The following configuration deploys three [Geth] miner nodes that share a [Secre
 
 #### Geth Miner Secret
 
-A Kubernetes [Secret] is used to store a common password each miner uses for creating an Ethereum account funded by block creation rewards, this is called the coinbase. This password is used to unlock the associated Ethereum account to transfer Eth gained from the minder nodes to other accounts. However, the coinbase may be configured for each miner can at any time.
+A Kubernetes [Secret] is used to store a common password each miner uses for creating an Ethereum account funded by block creation rewards; this is called the coinbase. This password is used to unlock the associated Ethereum account to transfer Eth gained from the minder nodes to other accounts. However, the coinbase may be configured for each miner can at any time.
 
 You can create a password on MacOs or Linux terminals by piping a string to the command base64, or you can use the site [base64decode.org] to create a base64 encoded string.
 
@@ -674,7 +674,7 @@ kubectl create -f ./410-geth-tx-service.yml
 
 #### Geth Transaction Nodes Deployment
 
-Issuing transactions on the private Blockchain occurs through a set of two Geth Transaction Nodes; these Pods are setup similar to miners running the official [ethereum/client-go:release-1.8]. Geth Transaction Node consist of one main container named **geth-tx** and two initialization containers **init-genesis** and **get-bootnodes**.
+Issuing transactions on the private Blockchain occur through a set of two Geth Transaction Nodes; these Pods are setup similar to miners running the official [ethereum/client-go:release-1.8]. Geth Transaction Node consist of one main container named **geth-tx** and two initialization containers **init-genesis** and **get-bootnodes**.
 
 Create the file `420-geth-tx-deployment.yml`:
 ```yaml

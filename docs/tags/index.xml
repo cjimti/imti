@@ -6,7 +6,7 @@
     <description>Recent content in Tags on IMTI</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 04 Sep 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 01 Sep 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://imti.co/tags/index.xml" rel="self" type="application/rss+xml" />
     
@@ -14,7 +14,7 @@
     <item>
       <title>Blockchain</title>
       <link>https://imti.co/tags/blockchain/</link>
-      <pubDate>Tue, 04 Sep 2018 00:00:00 +0000</pubDate>
+      <pubDate>Sat, 01 Sep 2018 00:00:00 +0000</pubDate>
       
       <guid>https://imti.co/tags/blockchain/</guid>
       <description></description>
@@ -129,15 +129,6 @@
     </item>
     
     <item>
-      <title>Ethereum</title>
-      <link>https://imti.co/tags/ethereum/</link>
-      <pubDate>Tue, 04 Sep 2018 00:00:00 +0000</pubDate>
-      
-      <guid>https://imti.co/tags/ethereum/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>Gitlab</title>
       <link>https://imti.co/tags/gitlab/</link>
       <pubDate>Fri, 22 Jun 2018 00:00:00 +0000</pubDate>
@@ -176,7 +167,7 @@
     <item>
       <title>Ingress</title>
       <link>https://imti.co/tags/ingress/</link>
-      <pubDate>Tue, 15 May 2018 00:00:00 +0000</pubDate>
+      <pubDate>Mon, 28 May 2018 00:00:00 +0000</pubDate>
       
       <guid>https://imti.co/tags/ingress/</guid>
       <description></description>
@@ -185,7 +176,7 @@
     <item>
       <title>Ingress</title>
       <link>https://imti.co/tags/ingress/</link>
-      <pubDate>Mon, 28 May 2018 00:00:00 +0000</pubDate>
+      <pubDate>Tue, 15 May 2018 00:00:00 +0000</pubDate>
       
       <guid>https://imti.co/tags/ingress/</guid>
       <description></description>
@@ -230,7 +221,7 @@
     <item>
       <title>Kubernetes</title>
       <link>https://imti.co/tags/kubernetes/</link>
-      <pubDate>Tue, 04 Sep 2018 00:00:00 +0000</pubDate>
+      <pubDate>Sat, 11 Aug 2018 00:00:00 +0000</pubDate>
       
       <guid>https://imti.co/tags/kubernetes/</guid>
       <description></description>
@@ -320,7 +311,7 @@
     <item>
       <title>Security</title>
       <link>https://imti.co/tags/security/</link>
-      <pubDate>Tue, 10 Jul 2018 00:00:00 +0000</pubDate>
+      <pubDate>Thu, 10 May 2018 00:00:00 +0000</pubDate>
       
       <guid>https://imti.co/tags/security/</guid>
       <description></description>
@@ -329,7 +320,7 @@
     <item>
       <title>Security</title>
       <link>https://imti.co/tags/security/</link>
-      <pubDate>Thu, 10 May 2018 00:00:00 +0000</pubDate>
+      <pubDate>Tue, 10 Jul 2018 00:00:00 +0000</pubDate>
       
       <guid>https://imti.co/tags/security/</guid>
       <description></description>
