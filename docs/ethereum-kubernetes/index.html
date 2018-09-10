@@ -216,6 +216,14 @@ Kubernetes is an efficient and productive platform for the configuration, deploy
 
 <p>Ethereum is a Cryptocurrency as well as a platform. <a href="https://www.ethereum.org/">Ethereum</a> &ldquo;is a decentralized platform that runs smart contracts: applications that run exactly as programmed without any possibility of downtime, censorship, fraud or third-party interference.&rdquo;</p>
 
+<h2 id="setting-up-ethereum-on-kubernetes">Setting up Ethereum on Kubernetes</h2>
+
+<p>In my opinion, the best way to learn and understand the capabilities of this technology is by implementing your own private <strong>production ready</strong> Blockchain. Beginner tutorials often get you up and running on a local workstation leaving out important production implementation details; other quick start guides use package managers like Helm that do all the work for you. However, both these approaches leave gaps, either in understanding how to migrate and scale into a production system in the case of local development or the case of package managers hiding implementation details and limiting configuration options.</p>
+
+<p>The following is an idiomatic Kubernetes setup. Providing and describing each configuration step in leveraging the Kubernetes core concept of declarative state configuration.</p>
+
+<p>The transaction and miner nodes run the official <a href="https://hub.docker.com/r/ethereum/client-go/">ethereum/client-go:release-1.8</a> Docker containers.</p>
+
 <aside class="toc">
     <header>
         <h2>Contents</h2>
@@ -268,14 +276,6 @@ Kubernetes is an efficient and productive platform for the configuration, deploy
 </ul>
 </nav>
 </aside>
-
-<h2 id="setting-up-ethereum-on-kubernetes">Setting up Ethereum on Kubernetes</h2>
-
-<p>In my opinion, the best way to learn and understand the capabilities of this technology is by implementing your own private <strong>production ready</strong> Blockchain. Beginner tutorials often get you up and running on a local workstation leaving out important production implementation details; other quick start guides use package managers like Helm that do all the work for you. However, both these approaches leave gaps, either in understanding how to migrate and scale into a production system in the case of local development or the case of package managers hiding implementation details and limiting configuration options.</p>
-
-<p>The following is an idiomatic Kubernetes setup. Providing and describing each configuration step in leveraging the Kubernetes core concept of declarative state configuration.</p>
-
-<p>The transaction and miner nodes run the official <a href="https://hub.docker.com/r/ethereum/client-go/">ethereum/client-go:release-1.8</a> Docker containers.</p>
 
 <h3 id="bare-metal-custom-kubernetes">Bare Metal / Custom Kubernetes</h3>
 
