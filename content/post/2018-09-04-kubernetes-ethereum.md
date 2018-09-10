@@ -23,8 +23,6 @@ Blockchain technologies have been made famous by Cryptocurrencies such as Bitcoi
 
 Ethereum is a Cryptocurrency as well as a platform. [Ethereum] "is a decentralized platform that runs smart contracts: applications that run exactly as programmed without any possibility of downtime, censorship, fraud or third-party interference."
 
-{{< toc >}}
-
 ## Setting up Ethereum on Kubernetes
 
 In my opinion, the best way to learn and understand the capabilities of this technology is by implementing your own private **production ready** Blockchain. Beginner tutorials often get you up and running on a local workstation leaving out important production implementation details; other quick start guides use package managers like Helm that do all the work for you. However, both these approaches leave gaps, either in understanding how to migrate and scale into a production system in the case of local development or the case of package managers hiding implementation details and limiting configuration options.
@@ -32,6 +30,8 @@ In my opinion, the best way to learn and understand the capabilities of this tec
 The following is an idiomatic Kubernetes setup. Providing and describing each configuration step in leveraging the Kubernetes core concept of declarative state configuration.
 
 The transaction and miner nodes run the official [ethereum/client-go:release-1.8] Docker containers.
+
+{{< toc >}}
 
 ### Bare Metal / Custom Kubernetes
 
