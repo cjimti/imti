@@ -47,6 +47,8 @@ This guide builds a private Ethereum Blockchain on a custom Kubernetes cluster a
 
 The articles [Using Helm to Deploy Blockchain to Kubernetes] and [Building a Private Ethereum Consortium] on Microsoft's Developer Blog offer some great illustrations of this private Blockchain setup, following implementation is a deconstruction of the referenced Helm Chart.
 
+![Private Ethereum Blockchain Network Diagram](/img/post/ethnet.png)
+
 ### Bootnode
 
 A **bootnode** is a "Stripped down version of our Ethereum client implementation that only takes part in the network node discovery protocol, but does not run any of the higher level application protocols. It can be used as a lightweight bootstrap node to aid in finding peers in private networks."
