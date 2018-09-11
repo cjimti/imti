@@ -40,6 +40,8 @@ If you have a Raspberry Pi 3 and you want to provide wifi based configuration ab
 > TL;DR? If you are not interested in reading all this, you can skip ahead to
 [Getting Started](#getting-started).
 
+{{< amazon-rpi >}}
+
 IOT Wifi is a [Raspberry Pi] wifi management REST service written in [Go] and
 intended to run in a [Docker container on a Raspberry Pi](https://hub.docker.com/r/cjimti/iotwifi/).
 
@@ -504,6 +506,7 @@ Reboot the the Pi
 
 * [How to connect to a WPA/WPA2 WiFi network using Linux command line](http://linuxcommando.blogspot.com/2013/10/how-to-connect-to-wpawpa2-wifi-network.html)
 
+<div id="amzn-assoc-ad-0fe3d6da-b252-4a87-a36c-72a4cc7ee81e"></div><script async src="//z-na.amazon-adsystem.com/widgets/onejs?MarketPlace=US&adInstanceId=0fe3d6da-b252-4a87-a36c-72a4cc7ee81e"></script>
 
 
 [Raspberry Pi]: https://amzn.to/2jfXhCA
