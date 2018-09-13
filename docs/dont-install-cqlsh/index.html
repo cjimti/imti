@@ -220,6 +220,17 @@ Case: Cassandra development and your local workstation."
 
 <p>Case: <strong>Cassandra development and your local workstation.</strong></p>
 
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<ins class="adsbygoogle"
+     style="display:block; text-align:center;"
+     data-ad-layout="in-article"
+     data-ad-format="fluid"
+     data-ad-client="ca-pub-5984764595236029"
+     data-ad-slot="7730310582"></ins>
+<script>
+    (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
 <p>I use <a href="http://cassandra.apache.org/">Apache Cassandra</a> almost daily for my job. A lot of our services require this high performance, highly available database. The command line tool <a href="http://cassandra.apache.org/doc/latest/tools/cqlsh.html"><code>cqlsh</code></a> is the official tool for interacting with Cassandra. <a href="http://cassandra.apache.org/doc/latest/tools/cqlsh.html"><code>cqlsh</code></a> is an easy and intuitive terminal into <a href="http://cassandra.apache.org/">Apache Cassandra</a>, but it has dependencies, one of which is <a href="https://www.python.org/">Python</a>. Over the years of local development on my MacBook Pro, I have had many tools that require <a href="https://www.python.org/">Python</a> and Python libraries. Some of these tools I installed years ago require older versions of Python, or older Python libraries not able to run in newer Python versions. <a href="https://www.python.org/">Python</a> is a great language, but sooner or later you run into dependency nightmares, (see <a href="https://medium.com/knerd/the-nine-circles-of-python-dependency-hell-481d53e3e025">The Nine Circles of Python Dependency Hell</a>) including missing libs, version conflicts, and the list goes on. It makes sense to resolve these issues or use a <a href="https://github.com/pyenv/pyenv">Python version manager</a> like Ruby&rsquo;s <a href="https://rvm.io/">RVM</a> if you are actively developing locally in <a href="https://www.python.org/">Python</a>. But wait, <strong>I&rsquo;m not developing in Python at the moment</strong>, I just want to run <a href="http://cassandra.apache.org/doc/latest/tools/cqlsh.html"><code>cqlsh</code></a>, and it is not the weekend, so I am not motivated to Google my Python version conflicts and library dependency errors because I have a ton of work to get done. Yes, my problems, likely caused by something dumb I did playing around with the questionable code I found in the far-off corners of Github.</p>
 
 <p>So I&rsquo;m going to ignore my confused local install of <code>cqlsh</code>, the broken state of my Python and the mess I made of its libraries. I&rsquo;m just going to run:</p>
@@ -247,6 +258,17 @@ Case: Cassandra development and your local workstation."
 </code></pre>
 
 <p>The <a href="https://hub.docker.com/_/cassandra/">Cassandra Docker</a> image is 323MB, and when run without a command will start up a fully functional Cassandra node, which is useful for testing. However, if this is not something you need, then a 323MB image is a bit overkill. You can always make a small Docker image using [Alpine Linux], adding only the packages you need. However, that is a subject of another article I suppose.</p>
+
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<ins class="adsbygoogle"
+     style="display:block; text-align:center;"
+     data-ad-layout="in-article"
+     data-ad-format="fluid"
+     data-ad-client="ca-pub-5984764595236029"
+     data-ad-slot="7730310582"></ins>
+<script>
+    (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
 
 
                 

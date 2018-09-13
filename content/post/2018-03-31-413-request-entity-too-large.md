@@ -24,6 +24,8 @@ Error parsing HTTP response: invalid character '<' looking for beginning of valu
 
 The "413 Request Entity Too Large" error is something many accustomed to running [nginx] as a standard web server/proxy. [nginx] is configured to restrict the size of files it will allow over a post. This restriction helps avoid some DoS attacks. The default values are easy to adjust in the Nginx configuration. However, in the [Kubernetes] world things are a bit different. I prefer to do things the [Kubernetes] way; however, there is still a lack of established configuration idioms, since part of its appeal is flexibility. One thousand different ways of doing something means ten thousand variations of remedies to every potential problem. Googling errors in the [Kubernetes] world leads to a mess of solutions not always explicitly tied to an implementation. I am hoping that as [Kubernetes] continues to gain popularity more care will be taken to provide context for solutions to common problems.
 
+{{< content-ad >}}
+
 ### Context
 
 I now use the official [NGINX Ingress Controller], there are quite a few options out there, so this solution only applies to the official [NGINX Ingress Controller]. If you don't already have it, you can follow the easy [ingress controller deployment] instructions.

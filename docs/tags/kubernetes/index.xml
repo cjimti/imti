@@ -214,7 +214,7 @@ Error parsing HTTP response: invalid character &#39;&amp;lt;&#39; looking for be
       <guid>https://imti.co/kubectl-remote/</guid>
       <description>I use Minikube to run a local Kubernetes single node cluster (cluster?). However, I also work with a custom production cluster for work. This cluster consists of development and production nodes. I often need to switch between working on my local Minikube and the online Kubernetes cluster.
 TIP: Visit the kubectl Cheat Sheet often.
-The default configuration kubectl is stored in ~/.kube/config and if you have Minikube installed, it added the context minikube to your config.</description>
+   (adsbygoogle = window.adsbygoogle || []).push({});  The default configuration kubectl is stored in ~/.</description>
     </item>
     
     <item>

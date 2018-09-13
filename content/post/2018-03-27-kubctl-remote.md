@@ -21,6 +21,8 @@ I use [Minikube] to run a local [Kubernetes] single node cluster (cluster?). How
 
 TIP: Visit the [kubectl Cheat Sheet] often.
 
+{{< content-ad >}}
+
 The default configuration `kubectl` is stored in `~/.kube/config` and
 if you have [Minikube] installed, it added the context **minikube** to your config.
 
@@ -108,6 +110,8 @@ example
 Of course, `kubectl config use-context minikube` will put you back
 to managing your local [Minikube].
 
+
+{{< content-ad >}}
 
 ## Resources
 

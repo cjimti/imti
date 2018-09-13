@@ -225,6 +225,17 @@ Error parsing HTTP response: invalid character '&lt;' looking for beginning of v
 
 <p>The &ldquo;413 Request Entity Too Large&rdquo; error is something many accustomed to running <a href="https://www.nginx.com/">nginx</a> as a standard web server/proxy. <a href="https://www.nginx.com/">nginx</a> is configured to restrict the size of files it will allow over a post. This restriction helps avoid some DoS attacks. The default values are easy to adjust in the Nginx configuration. However, in the <a href="https://kubernetes.io/">Kubernetes</a> world things are a bit different. I prefer to do things the <a href="https://kubernetes.io/">Kubernetes</a> way; however, there is still a lack of established configuration idioms, since part of its appeal is flexibility. One thousand different ways of doing something means ten thousand variations of remedies to every potential problem. Googling errors in the <a href="https://kubernetes.io/">Kubernetes</a> world leads to a mess of solutions not always explicitly tied to an implementation. I am hoping that as <a href="https://kubernetes.io/">Kubernetes</a> continues to gain popularity more care will be taken to provide context for solutions to common problems.</p>
 
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<ins class="adsbygoogle"
+     style="display:block; text-align:center;"
+     data-ad-layout="in-article"
+     data-ad-format="fluid"
+     data-ad-client="ca-pub-5984764595236029"
+     data-ad-slot="7730310582"></ins>
+<script>
+    (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
 <h3 id="context">Context</h3>
 
 <p>I now use the official <a href="https://github.com/kubernetes/ingress-nginx">NGINX Ingress Controller</a>, there are quite a few options out there, so this solution only applies to the official <a href="https://github.com/kubernetes/ingress-nginx">NGINX Ingress Controller</a>. If you don&rsquo;t already have it, you can follow the easy <a href="https://github.com/kubernetes/ingress-nginx/tree/master/deploy">ingress controller deployment</a> instructions.</p>
