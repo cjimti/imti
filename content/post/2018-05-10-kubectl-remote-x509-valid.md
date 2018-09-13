@@ -39,6 +39,7 @@ docker rm -f `docker ps -q -f 'name=k8s_kube-apiserver*'`
 # restart the kublet
 systemctl restart kubelet
 ```
+{{< content-ad >}}
 
 ### Resources
 

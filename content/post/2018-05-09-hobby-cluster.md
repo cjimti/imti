@@ -19,6 +19,8 @@ Setting up a production-grade Kubernetes cluster can be done on a hobby budget, 
 
 {{< toc >}}
 
+{{< content-ad >}}
+
 ## Motivation
 
 I have read my thousandth tutorial on how to do things the wrong way; well, the not-good-for-production-way, you know for "learning." The following are my notes as I unlearn the "not for production" tutorial way and re-apply my production notes to a 15 dollar-a-month production grade hobby way.

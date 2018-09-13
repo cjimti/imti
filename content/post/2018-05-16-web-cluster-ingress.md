@@ -21,6 +21,8 @@ This article builds on the [Production Hobby Cluster] guide. The following close
 
 By now you may be managing multiple clusters. [kubectl] is a great tool to use on your local workstation to manage remote clusters, and with little effort you can quickly point it to a new cluster and switch between them all day. Check out my article [kubectl Context Multiple Clusters](/kubectl-remote-context/) for a quick tutorial.
 
+{{< content-ad >}}
+
 ### Namespace
 
 Setup a new [namespace] called **ingress-nginx**

@@ -20,6 +20,8 @@ This guide walks through a process for setting up [Kibana] within a [namespace] 
 
 {{< toc >}}
 
+{{< content-ad >}}
+
 ## Project [Namespace]
 
 I use `the-project` as a namespace for all my examples and testing. [Kubernetes Namespaces] are the main delimiter I use for security and organization. Configuration files are organized by project, and in Kubernetes, these projects are separated by namespace; therefore I always include a namespace configuration. There is no harm in asking Kubernetes to create a namespace that already exists; an error is returned confirming its existence.

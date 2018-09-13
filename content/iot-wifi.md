@@ -176,6 +176,8 @@ The default configuration looks like this:
 
 You may want to change the **ssid** (AP/Hotspot Name) and the **wpa_passphrase** to something more appropriate to your needs. However, the defaults are fine for testing.
 
+{{< content-ad >}}
+
 ### Run The IOT Wifi Docker Container
 
 The following `docker run` command will create a running Docker container from
