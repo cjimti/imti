@@ -33,6 +33,8 @@ The transaction and miner nodes run the official [ethereum/client-go:release-1.8
 
 {{< toc >}}
 
+{{< content-ad >}}
+
 ### Bare Metal / Custom Kubernetes
 
 This guide builds a private Ethereum Blockchain on a custom Kubernetes cluster and avoids vendor lock-in or vendor specific instructions. If you don't already have a cluster, I recommend setting up a [production ready Kubernetes hobby cluster][Kubernetes Hobby Cluster].

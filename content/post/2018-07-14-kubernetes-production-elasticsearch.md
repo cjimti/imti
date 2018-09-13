@@ -25,6 +25,8 @@ If you need to set up a quick, yet custom production grade cluster, check out my
 
 {{< toc >}}
 
+{{< content-ad >}}
+
 ### Project [Namespace]
 
 In the examples below I'll use the namespace **the-project** for all the configurations. The file names are suggestions and may be adjusted to your standards.

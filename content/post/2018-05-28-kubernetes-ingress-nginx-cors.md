@@ -83,7 +83,7 @@ more_set_headers 'Access-Control-Allow-Credentials: true';
 
 [CORS], or [Cross-origin resource sharing][CORS] consists of a few HTTP response headers intended to let a web browser know if it's ok to POST data to a specific endpoint. Before a web browser lets Javascript issue a POST to a URL, then performs a "preflight" request. A preflight request is merely a request to the server with the same URL using the method OPTIONS rather than POST. The web browser checks the HTTP headers for [CORS] related headers to determine if POSTing data on behalf of the user is ok.
 
-
+{{< content-ad >}}
 
 ## Resources
 

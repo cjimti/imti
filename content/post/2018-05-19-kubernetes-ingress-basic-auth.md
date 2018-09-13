@@ -112,6 +112,8 @@ All that is needed are three [Ingress] annotations:
 
 The [Ingress] for [ok-auth.la.txn2.net](https://ok-auth.la.txn2.net) is now [Basic Auth] protected using credentials in a [Secret] called **sysop**.
 
+{{< content-ad >}}
+
 ## Resources
 
 If you found this article useful, you may want to check out all the articles used to build on the [Production Hobby Cluster] tagged with [phc.txn2.net].
