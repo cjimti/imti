@@ -264,8 +264,7 @@ The [eth-netstats] project provides an incredible dashboard interface for monito
 
 [![Ethstats Dashboard](/img/post/ethstats.jpg)](/ethereum-ethstats/)
 
-<!--Read the article [Ethereum Ethstats / Describing the metrics.](/ethereum-ethstats/) if you are new to Blockchain or Ethereum terminology. In the article, I review essential metrics and their meaning.-->
-
+Read the article [Ethereum Ethstats - Learning the Ethereum Blockchain through its metrics](/ethereum-ethstats/) if you are new to Blockchain or Ethereum terminology. In the article, I review essential metrics and their meaning.
 
 #### Ethstats Dashboard Service
 
