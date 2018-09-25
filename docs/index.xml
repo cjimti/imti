@@ -6,10 +6,20 @@
     <description>Recent content on IMTI</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 22 Sep 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 25 Sep 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://imti.co/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Kafka on Kubernetes</title>
+      <link>https://imti.co/kafka-kubernetes/</link>
+      <pubDate>Tue, 25 Sep 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://imti.co/kafka-kubernetes/</guid>
+      <description>Kafka is a fast, horizontally scalable, fault-tolerant, message queue service. Kafka is used for building real-time data pipelines and streaming apps.
+There are a few Helm based installers out there including the official Kubernetes incubator/kafka. However, in this article, I walk through applying a surprisingly small set of Kubernetes configuration files needed to stand up high performance, highly available Kafka. Manually applying Kubernetes configurations gives you a step-by-step understanding of the system you are deploying and limitless opportunities to customize.</description>
+    </item>
     
     <item>
       <title>Ethereum Ethstats</title>
