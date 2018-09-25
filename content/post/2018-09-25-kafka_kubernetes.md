@@ -367,7 +367,6 @@ spec:
     targetPort: 9092
   selector:
     app: kafka
-    release: kafka
   sessionAffinity: None
   type: ClusterIP
 
