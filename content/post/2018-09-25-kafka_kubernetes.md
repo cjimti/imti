@@ -357,7 +357,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: kafka-headless
-  namespace: dcp
+  namespace: the-project
 spec:
   clusterIP: None
   ports:
