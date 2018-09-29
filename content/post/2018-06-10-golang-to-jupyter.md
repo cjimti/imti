@@ -31,6 +31,8 @@ Beyond the ability to execute code in-line, the most useful features to me are e
 
 ![Notebook Screenshot](/images/content/GolangToJupyter-screen.png)
 
+{{< content-ad >}}
+
 ## Example
 
 In the sections below I demonstrate simple HTTP client call in Golang with Golang code executed directly in the Jupyter Notebook.
