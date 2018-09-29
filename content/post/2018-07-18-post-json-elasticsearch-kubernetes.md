@@ -20,6 +20,7 @@ IOT devices, Point-of-Sale systems, application events or any client that sends 
 
 {{< toc >}}
 
+{{< content-ad >}}
 
 ## Background
 

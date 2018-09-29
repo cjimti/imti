@@ -19,6 +19,8 @@ Python is one of [The Most Popular Languages for Data Science], and because of t
 
 {{< toc >}}
 
+{{< content-ad >}}
+
 ## Microservices Data Eco-System
 
 I am not a data scientist, but like most software architects and full stack developers, I interact with data science at many points. However, where I spend the majority of my time building frameworks and pipelines, those in data science have been busy churning out amazing libraries.

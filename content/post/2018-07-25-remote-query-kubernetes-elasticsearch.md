@@ -33,6 +33,8 @@ If you don't understand that command, or running it produces an error, read on.
 
 {{< toc >}}
 
+{{< content-ad >}}
+
 
 ### Port Forward `elasticsearch` Kubernetes Service
 

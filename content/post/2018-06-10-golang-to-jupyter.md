@@ -129,3 +129,5 @@ You can test out the [gophernotes](https://github.com/gopherdata/gophernotes) Go
 - [Jupyter Notbooks Documentation](http://jupyter.org/documentation)
 - [nteract - desktop application](https://nteract.io/)
 - [Markdown-Cheatsheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet)
+
+{{< content-ad >}}

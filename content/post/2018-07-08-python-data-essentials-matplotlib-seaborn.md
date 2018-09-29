@@ -23,6 +23,8 @@ This article is only intended to get you started with [Matplotlib] and [Seaborn]
 
 {{< toc >}}
 
+{{< content-ad >}}
+
 ## Data Visualization Landscape
 
 For large scale business analytics and analysis, there are commercial tools such as [Tableau] or [Pentaho], they look great and have ample features, yet they have high costs and implementation commitments, not to mention vendor lock-in. Commercial applications and large visualization platforms focus your development around their feature set.

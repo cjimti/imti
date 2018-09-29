@@ -27,6 +27,8 @@ series:
 
 [txToken] can be run as a standalone binary on amd64 or arm6/7 based systems, however [txToken] is most at home in it's [Docker container][Docker] within a [Kubernetes] cluster.
 
+{{< content-ad >}}
+
 ### Implementation
 
 For demonstration, assume the existence of a fictional API endpoint, something like `https://auth.exmaple.com/login`. **login** excepts POST body data in the form of JSON.

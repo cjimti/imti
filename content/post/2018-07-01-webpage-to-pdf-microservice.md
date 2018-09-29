@@ -25,6 +25,8 @@ The [wkhtmltopdf] utility has been around awhile and works great when you get it
 
 [txpdf] is a web server written in [golang] and utilizes the go library [go-wkhtmltopdf] interact with a custom [wkhtmltopdf] binary explicitly compiled for an [Alpine Linux] container with all the necessary dependencies. With [txpdf], [Docker] is the only dependency, and therefore running web (html) to PDF conversion service.
 
+{{< content-ad >}}
+
 ## Docker and Microservices
 
 [txpdf] wraps [wkhtmltopdf] in a small [Alpine Linux] container and exposes an API endpoint (/getPdf) on port 8080 by default.

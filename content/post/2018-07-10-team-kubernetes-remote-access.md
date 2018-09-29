@@ -26,6 +26,8 @@ If you don't already have a Kubernetes cluster up and running, then I highly sug
 
 {{< toc >}}
 
+{{< content-ad >}}
+
 ## Our Clusters (Overview)
 
 Development and staging environments share a cluster across many clients and projects. On the production front, more extensive projects and clients get a dedicated cluster, and smaller projects might share a cluster.

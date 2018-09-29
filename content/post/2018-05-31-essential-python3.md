@@ -21,6 +21,8 @@ Each of the following code blocks are executable.
 
 {{< toc >}}
 
+{{< content-ad >}}
+
 ### Script Execution
 
 Scripts should execute with the environment available python3.

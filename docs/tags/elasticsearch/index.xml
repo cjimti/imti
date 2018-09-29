@@ -48,7 +48,7 @@ In days before Kubernetes, writing code in IDEs on our local workstation meant w
       
       <guid>https://imti.co/post-json-elasticsearch-kubernetes/</guid>
       <description>IOT devices, Point-of-Sale systems, application events or any client that sends data destined for indexing in Elasticsearch often need to send and forget, however, unless that data is of low value there needs to be assurance that arrives at its final destination. Back-pressure and database outages can pose a considerable threat to data integrity.
- Contents     Background Overview Development Environment  the-project Namespace  The Project: Weather (wx) Data rxtx for Store-and-Forward  wx-rxtx Service wx-rxtx StatefulSet  rtBeat to Collect, Buffer and Publish  wx-rtbeat Service wx-rtbeat ConfigMap wx-rtbeat Deployment  Client Simulation / Kubernetes Cron Performance Conclusion Reference     Background High availability and high performance often mean burdensome complexity.</description>
+ Contents     Background Overview Development Environment  the-project Namespace  The Project: Weather (wx) Data rxtx for Store-and-Forward  wx-rxtx Service wx-rxtx StatefulSet  rtBeat to Collect, Buffer and Publish  wx-rtbeat Service wx-rtbeat ConfigMap wx-rtbeat Deployment  Client Simulation / Kubernetes Cron Performance Conclusion Reference        (adsbygoogle = window.</description>
     </item>
     
     <item>

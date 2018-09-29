@@ -26,6 +26,8 @@ series:
 
 {{< toc >}}
 
+{{< content-ad >}}
+
 If you want to go beyond this brief overview of [Pandas] I suggest the following resources:
 
 - [10 Minutes to pandas] - Official
