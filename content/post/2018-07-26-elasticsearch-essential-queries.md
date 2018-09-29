@@ -20,6 +20,8 @@ Explore the [Elasticsearch official documentation][Search in Depth]: [Search in 
 
 {{< toc >}}
 
+{{< content-ad >}}
+
 ## Motivation
 
 My team and I work with a lot of SQL-based data, from MySQL, SQLite and even our large Cassandra cluster, however, our reporting systems are built on [Elasticsearch]. Transitioning our thinking from SQL to the [Lucene] syntax on occasion requires hitting the docs. However, most technical documentation is either for getting started or gives you every variation of every feature, which is great when you are neck deep and need a specific problem solved.
