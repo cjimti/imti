@@ -74,6 +74,37 @@ home = ["HTML", "RSS"]
   [[params.bookmark_link]]
   title = "Merch"
   href =  "https://amzn.to/2Ot1ft3"
+  [[params.bookmark_link]]
+  title = "Hacker News"
+  href =  "https://news.ycombinator.com/"
+  [[params.bookmark_link]]
+  title = "Hacker News (cjimti)"
+  href =  "https://news.ycombinator.com/submitted?id=cjimti"
 
-
-
+  [[params.reddit_link]]
+  title = "user/imti_co"
+  href =  "https://www.reddit.com/user/imti_co/posts/"
+  [[params.reddit_link]]
+  title = "r/programming"
+  href =  "https://www.reddit.com/r/programming/"
+  [[params.reddit_link]]
+  title = "r/golang"
+  href =  "https://www.reddit.com/r/golang/"
+  [[params.reddit_link]]
+  title = "r/kubernetes"
+  href =  "https://www.reddit.com/r/kubernetes/"
+  [[params.reddit_link]]
+  title = "r/docker"
+  href =  "https://www.reddit.com/r/docker/"
+  [[params.reddit_link]]
+  title = "r/elasticsearch"
+  href =  "https://www.reddit.com/r/elasticsearch/"
+  [[params.reddit_link]]
+  title = "r/apachekafka"
+  href =  "https://www.reddit.com/r/apachekafka/"
+  [[params.reddit_link]]
+  title = "r/ethereum"
+  href =  "https://www.reddit.com/r/ethereum/"
+  [[params.reddit_link]]
+  title = "r/blockchain"
+  href =  "https://www.reddit.com/r/blockchain/"
