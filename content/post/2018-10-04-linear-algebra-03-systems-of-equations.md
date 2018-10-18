@@ -2,7 +2,7 @@
 draft: true
 layout:   post
 title:    "Linear Algebra: Systems of Equations"
-subtitle: "Linear Algebra Crash Course Part 3 of 9"
+subtitle: "Linear Algebra Crash Course for Programmers Part 3 of 9"
 date:     2018-10-04
 author:   "Craig Johnston"
 URL:      "linear-algebra-systems-of-equations/"

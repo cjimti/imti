@@ -2,7 +2,7 @@
 draft: true
 layout:   post
 title:    "Linear Algebra: Projections and Orthogonalization"
-subtitle: "Linear Algebra Crash Course Part 5"
+subtitle: "Linear Algebra Crash Course for Programmers Part 5 of 9"
 date:     2018-10-08
 author:   "Craig Johnston"
 URL:      "linear-algebra-projections-orthogonalizations/"

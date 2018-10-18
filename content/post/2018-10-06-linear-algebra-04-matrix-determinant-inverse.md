@@ -2,7 +2,7 @@
 draft: true
 layout:   post
 title:    "Linear Algebra: Matrix Determinant and Inverse"
-subtitle: "Linear Algebra Crash Course Part 4 of 9"
+subtitle: "Linear Algebra Crash Course for Programmers Part 4 of 9"
 date:     2018-10-06
 author:   "Craig Johnston"
 URL:      "linear-algebra-matrix-determinant-and-inverse/"

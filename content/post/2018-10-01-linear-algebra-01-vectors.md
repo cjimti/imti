@@ -2,7 +2,7 @@
 draft: true
 layout:   post
 title:    "Linear Algebra: Vectors"
-subtitle: "Linear Algebra Crash Course Part 1 of 9"
+subtitle: "Linear Algebra Crash Course for Programmers Part 1 of 9"
 date:     2018-10-01
 author:   "Craig Johnston"
 URL:      "linear-algebra-vectors/"
