@@ -1,5 +1,5 @@
 ---
-draft: false
+draft: true
 layout:   post
 title:    "Linear Algebra: Least-squares"
 subtitle: "Linear Algebra Crash Course for Programmers Part 6 of 9"

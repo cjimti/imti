@@ -1,5 +1,5 @@
 ---
-draft: false
+draft: true
 layout:   post
 title:    "Linear Algebra: Singular Value Decomposition"
 subtitle: "Linear Algebra Crash Course for Programmers Part 8 of 9"

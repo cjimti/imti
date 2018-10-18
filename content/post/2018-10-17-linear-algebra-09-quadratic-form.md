@@ -1,5 +1,5 @@
 ---
-draft: false
+draft: true
 layout:   post
 title:    "Linear Algebra: Quadratic Form"
 subtitle: "Linear Algebra Crash Course for Programmers Part 9 of 9"

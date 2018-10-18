@@ -6,46 +6,10 @@
     <description>Recent content in Posts on IMTI</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 17 Oct 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 25 Sep 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://imti.co/post/index.xml" rel="self" type="application/rss+xml" />
     
-    
-    <item>
-      <title>Linear Algebra: Quadratic Form</title>
-      <link>https://imti.co/linear-algebra-quadratic-form/</link>
-      <pubDate>Wed, 17 Oct 2018 00:00:00 +0000</pubDate>
-      
-      <guid>https://imti.co/linear-algebra-quadratic-form/</guid>
-      <description>This article on quadratic form is part of an ongoing crash course on linear algebra programming, demonstrating concepts and implementations in Python and Octave/Matlab code.</description>
-    </item>
-    
-    <item>
-      <title>Linear Algebra: Singular Value Decomposition</title>
-      <link>https://imti.co/linear-algebra-singular-value-decomposition/</link>
-      <pubDate>Sun, 14 Oct 2018 00:00:00 +0000</pubDate>
-      
-      <guid>https://imti.co/linear-algebra-singular-value-decomposition/</guid>
-      <description>This article on Singular Value Decomposition (SVD) is part of an ongoing crash course on linear algebra programming, demonstrating concepts and implementations in Python and Octave/Matlab code.</description>
-    </item>
-    
-    <item>
-      <title>Linear Algebra: Eigendecomposition</title>
-      <link>https://imti.co/linear-algebra-eigendecomposition/</link>
-      <pubDate>Fri, 12 Oct 2018 00:00:00 +0000</pubDate>
-      
-      <guid>https://imti.co/linear-algebra-eigendecomposition/</guid>
-      <description>This article on Eigendecomposition is part of an ongoing crash course on linear algebra programming, demonstrating concepts and implementations in Python and Octave/Matlab code.</description>
-    </item>
-    
-    <item>
-      <title>Linear Algebra: Least-squares</title>
-      <link>https://imti.co/linear-algebra-least-squares/</link>
-      <pubDate>Thu, 11 Oct 2018 00:00:00 +0000</pubDate>
-      
-      <guid>https://imti.co/linear-algebra-least-squares/</guid>
-      <description>This article on least-squares is part of an ongoing crash course on linear algebra programming, demonstrating concepts and implementations in Python and Octave/Matlab code.</description>
-    </item>
     
     <item>
       <title>Kafka on Kubernetes</title>

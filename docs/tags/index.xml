@@ -129,15 +129,6 @@
     </item>
     
     <item>
-      <title>Equasions</title>
-      <link>https://imti.co/tags/equasions/</link>
-      <pubDate>Sun, 14 Oct 2018 00:00:00 +0000</pubDate>
-      
-      <guid>https://imti.co/tags/equasions/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>Ethereum</title>
       <link>https://imti.co/tags/ethereum/</link>
       <pubDate>Sat, 22 Sep 2018 00:00:00 +0000</pubDate>
@@ -255,15 +246,6 @@
     </item>
     
     <item>
-      <title>Linear Algebra</title>
-      <link>https://imti.co/tags/linear-algebra/</link>
-      <pubDate>Wed, 17 Oct 2018 00:00:00 +0000</pubDate>
-      
-      <guid>https://imti.co/tags/linear-algebra/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>MacOS</title>
       <link>https://imti.co/tags/macos/</link>
       <pubDate>Sun, 01 Apr 2018 00:00:00 +0000</pubDate>
@@ -278,24 +260,6 @@
       <pubDate>Sat, 12 May 2018 00:00:00 +0000</pubDate>
       
       <guid>https://imti.co/tags/macos/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Math</title>
-      <link>https://imti.co/tags/math/</link>
-      <pubDate>Sun, 14 Oct 2018 00:00:00 +0000</pubDate>
-      
-      <guid>https://imti.co/tags/math/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Matlab</title>
-      <link>https://imti.co/tags/matlab/</link>
-      <pubDate>Wed, 17 Oct 2018 00:00:00 +0000</pubDate>
-      
-      <guid>https://imti.co/tags/matlab/</guid>
       <description></description>
     </item>
     
@@ -327,15 +291,6 @@
     </item>
     
     <item>
-      <title>Octave</title>
-      <link>https://imti.co/tags/octave/</link>
-      <pubDate>Wed, 17 Oct 2018 00:00:00 +0000</pubDate>
-      
-      <guid>https://imti.co/tags/octave/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>PDF</title>
       <link>https://imti.co/tags/pdf/</link>
       <pubDate>Sun, 01 Jul 2018 00:00:00 +0000</pubDate>
@@ -347,18 +302,9 @@
     <item>
       <title>Python</title>
       <link>https://imti.co/tags/python/</link>
-      <pubDate>Wed, 17 Oct 2018 00:00:00 +0000</pubDate>
+      <pubDate>Sat, 28 Jul 2018 00:00:00 +0000</pubDate>
       
       <guid>https://imti.co/tags/python/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Quadratic</title>
-      <link>https://imti.co/tags/quadratic/</link>
-      <pubDate>Wed, 17 Oct 2018 00:00:00 +0000</pubDate>
-      
-      <guid>https://imti.co/tags/quadratic/</guid>
       <description></description>
     </item>
     
@@ -383,7 +329,7 @@
     <item>
       <title>Security</title>
       <link>https://imti.co/tags/security/</link>
-      <pubDate>Thu, 10 May 2018 00:00:00 +0000</pubDate>
+      <pubDate>Tue, 10 Jul 2018 00:00:00 +0000</pubDate>
       
       <guid>https://imti.co/tags/security/</guid>
       <description></description>
@@ -392,7 +338,7 @@
     <item>
       <title>Security</title>
       <link>https://imti.co/tags/security/</link>
-      <pubDate>Tue, 10 Jul 2018 00:00:00 +0000</pubDate>
+      <pubDate>Thu, 10 May 2018 00:00:00 +0000</pubDate>
       
       <guid>https://imti.co/tags/security/</guid>
       <description></description>

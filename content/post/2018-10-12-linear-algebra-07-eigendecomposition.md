@@ -1,5 +1,5 @@
 ---
-draft: false
+draft: true
 layout:   post
 title:    "Linear Algebra: Eigendecomposition"
 subtitle: "Linear Algebra Crash Course for Programmers Part 7 of 9"
