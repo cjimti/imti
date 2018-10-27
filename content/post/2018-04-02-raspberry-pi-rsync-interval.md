@@ -64,7 +64,7 @@ networks:
 
 services:
   server:
-    image: "cjimti/rsyncd"
+    image: "txn2/rsyncd"
     container_name: rsyncd-server
     environment:
       - USERNAME=test
@@ -79,7 +79,7 @@ services:
     networks:
       - sync-net
   client:
-    image: "cjimti/irsync"
+    image: "txn2/irsync"
     container_name: irsync-client
     environment:
       - RSYNC_PASSWORD=password
