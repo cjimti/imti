@@ -16,6 +16,9 @@ A recurring requirement for my [IOT] projects involves keeping a set of files sy
 
 The [rsync] utility works excellent on [Raspberry Pi] as well as an assortment of [Armbian] installed devices. However, writing scripts to manage [rsync] when it fails, or restarting it on some interval when it finishes can be a pain. I have a dozen rickety, cobbled-together [bash] hacks that have somewhat worked in the past. I needed something more stable, portable and upgradeable.
 
+
+Open Source: https://github.com/txn2/irsync
+
 [![irsync: interval rsync](https://raw.githubusercontent.com/cjimti/irsync/master/irsync-mast.jpg)](https://github.com/cjimti/irsync)
 
 I built [irsync] to operate on any ([amd64/x86-64] or [armhf]) system that has [Docker] running on it.
@@ -39,7 +42,72 @@ docker run --rm -e RSYNC_PASSWORD=password \
 
 **docker-compose example:**
 
-<script src="https://gist.github.com/cjimti/dbbb951ec389be4b0202ef0cffb5e668.js"></script>
+```yaml
+# Use for testing Interval rSync
+#
+# This docker compose file creates server and
+# client services, mounting ./data/dest and ./data/source
+# respectivly.
+#
+# source: https://hub.docker.com/r/cjimti/irsync/
+# irsync docker image: https://hub.docker.com/r/cjimti/irsync/
+# rsyncd docker image: https://hub.docker.com/r/cjimti/rsyncd/ (or use any rsync server)
+#
+version: '3'
+
+# Setting up an internal network allow us to use the
+# default port and not wory about exposing ports on our
+# host.
+#
+networks:
+  sync-net:
+
+services:
+  server:
+    image: "cjimti/rsyncd"
+    container_name: rsyncd-server
+    environment:
+      - USERNAME=test
+      - PASSWORD=password
+      - VOLUME_PATH=/source_data
+      - READ_ONLY=true
+      - CHROOT=yes
+      - VOLUME_NAME=source_data
+      - HOSTS_ALLOW=0.0.0.0/0
+    volumes:
+      - ./data/source:/source_data
+    networks:
+      - sync-net
+  client:
+    image: "cjimti/irsync"
+    container_name: irsync-client
+    environment:
+      - RSYNC_PASSWORD=password
+
+    # irsync and rsync options can be intermixed.
+    #
+    # irsync - has two configuration directives:
+    #     --irsync-interval-seconds=SECONDS  number of seconds between intervals
+    #     --irsync-timeout-seconds=SECONDS   number of seconds allowed for inactivity
+    #
+    # rsync has over one hundred options:
+    #     see: https://download.samba.org/pub/rsync/rsync.html
+    #
+    command: [
+      "--irsync-interval-seconds=30",
+      "-pvrt",
+      "--delete",
+      "--modify-window=2",
+      "rsync://test@rsyncd-server:873/source_data/",
+      "/data/"
+    ]
+    volumes:
+      - ./data/dest:/data
+    depends_on:
+      - server
+    networks:
+      - sync-net
+```
 
 Say you need to ensure your device (or another server) always has the latest files from the server. However, syncing hundreds or even thousands of files could take hours or days. First, [rsync] will only grab the data you don't have, or may have an outdated version of, you can never assume the state of the data on your device. [irsync] will use it's built-in [rsync] to do the heavy lifting of determining your state versus the server. But [rsync] is not perfect, and dealing with an unstable network can sometimes cause it to hang or fail. The good news is that, if restarted, [rsync] will pick up where it left off.
 
@@ -53,7 +121,36 @@ In the IOT device world you can't sit watch the transfer and restart it when nee
 
 You can run a simple little demo on your local workstation using a docker-compose file I put together.
 
-<script src="https://gist.github.com/cjimti/6fdc17192a1b13366144ee0a92e3e3c1.js"></script>
+```bash
+# create a source and dest directories (mounted from the docker-compose)
+mkdir -p ./data/source
+mkdir -p ./data/dest
+
+# make a couple of sample files
+touch ./data/source/test1.txt
+touch ./data/source/test2.txt
+
+# get the docker-compose.yml
+curl https://raw.githubusercontent.com/txn2/irsync/master/docker-compose.yml >docker-compose.yml
+
+# run docker-compose in the background (-d flag)
+docker-compose up -d
+
+# view logs
+docker-compose logs -f
+
+# drop some more files in the ./data/source directory
+# irsync is configured to check every 30 seconds in this demo.
+
+#### Cleanup
+
+# stop containers
+# docker-compose stop
+
+# remove containers
+# docker-compose rm
+
+```
 
 I recorded a video performing the demo above:
 
@@ -63,7 +160,19 @@ I recorded a video performing the demo above:
 
 Another useful implementation method involves creating a custom Docker image for each source and destination synchronizations you want to keep running. See the following example Dockerfile:
 
-<script src="https://gist.github.com/cjimti/4d01753a76db9f49b9db8daf5c37db40.js"></script>
+```Dockerfile
+FROM txn2/irsync
+LABEL vendor="txn2.com"
+LABEL com.txn2.irsync="https://github.com/txn2/irsync"
+
+# if the rsync server requires a password
+ENV RSYNC_PASSWORD=password
+
+# exampe: keep local synchronized with server
+# interval default: --irsync-interval-seconds=120
+# activity timout default: --irsync-timeout-seconds=7200
+CMD ["-pvrt", "--modify-window=30", "--delete", "--exclude='fun'", "rsync://sync@imti.co:873/data/", "/media"]
+```
 
 **Build:**
 

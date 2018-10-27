@@ -9,6 +9,8 @@ paginate = 30 #frontpage pagination
 hasCJKLanguage = true
 publishDir = "docs"
 
+displayMath = [['$','$'], ['$$','$$'], ['\\[','\\]']]
+
 [outputs]
 home = ["HTML", "RSS"]
 
