@@ -135,3 +135,11 @@ home = ["HTML", "RSS"]
   [[params.docker_link]]
   title = "kubefwd"
   href =  "https://hub.docker.com/r/txn2/kubefwd/"
+
+  [[params.awesome_link]]
+  title = "Cloud Native"
+  href = "https://github.com/rootsongjc/awesome-cloud-native"
+
+  [[params.awesome_link]]
+  title = "Raspberry Pi"
+  href = "https://github.com/thibmaek/awesome-raspberry-pi"
