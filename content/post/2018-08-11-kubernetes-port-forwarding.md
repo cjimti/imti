@@ -18,6 +18,8 @@ series:
 
 [kubefwd] helps to enable a seamless and efficient way to develop applications and services on a local workstation. Locally develop applications that intend to interact with other services in a Kubernetes cluster. [kubefwd] allows applications with connection strings like http://elasticsearch:9200/ or tcp://db:3306 to communicate into the remote cluster. [kubefwd] can be used to reduce or eliminate the need for local environment specific connection configurations.
 
+{{< tweet 1059519420064706579 >}}
+
 Developing services in a [Microservices] architecture presents local development challenges, especially when the service you are developing needs to interact with a mixture of other services. [Microservices], like any other applications are rarely ever self-contained and often need access to databases, authentication services, and other public or private APIs. Loosely-coupled applications still have couplings, they happen on a higher layer of the application stack and often through TCP networking.
 
 ## [kubectl port-forward][port-forward]
@@ -35,6 +37,8 @@ kubectl port-forward service/ok 8080:8080 8081:80 -n the-project
 Access the Service through `http://localhost:8081/` and `http://localhost:8080/`. Additional services can be port forwarded by back-grounding the command or opening new terminals and issuing more kubectl port-forward commands.
 
 [kubectl port-forward][port-forward] is convenient for quick one-off port forward access to a Services, Deployments or directly to Pods in your cluster. Your application can use environment variables or configuration files along with scripts that set up all the required forwards to bootstrap your local app. However, I find this cumbersome. [kubectl port-forward][port-forward] is great for debugging but falls a bit short for a development utility.
+
+{{< content-ad >}}
 
 ## [kubefwd]
 

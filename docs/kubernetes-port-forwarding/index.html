@@ -88,7 +88,7 @@
     }
   },
   "description": "kubefwd helps to enable a seamless and efficient way to develop applications and services on a local workstation. Locally develop applications that intend to interact with other services in a Kubernetes cluster. kubefwd allows applications with connection strings like http://elasticsearch:9200/ or tcp://db:3306 to communicate into the remote cluster. kubefwd can be used to reduce or eliminate the need for local environment specific connection configurations.
-Developing services in a Microservices architecture presents local development challenges, especially when the service you are developing needs to interact with a mixture of other services."
+I don&#39;t run Kubernetes locally, but I do depend on services running in remote clusters."
 }
 </script>
 
@@ -221,6 +221,10 @@ Developing services in a Microservices architecture presents local development c
 
 <p><a href="https://github.com/txn2/kubefwd">kubefwd</a> helps to enable a seamless and efficient way to develop applications and services on a local workstation. Locally develop applications that intend to interact with other services in a Kubernetes cluster. <a href="https://github.com/txn2/kubefwd">kubefwd</a> allows applications with connection strings like <a href="http://elasticsearch:9200/">http://elasticsearch:9200/</a> or tcp://db:3306 to communicate into the remote cluster. <a href="https://github.com/txn2/kubefwd">kubefwd</a> can be used to reduce or eliminate the need for local environment specific connection configurations.</p>
 
+<blockquote class="twitter-tweet"><p lang="en" dir="ltr">I don&#39;t run Kubernetes locally, but I do depend on services running in remote clusters. I either extract service IPs, or set up port forwarding, and keep my existing workflow. kubefwd is the tool I&#39;ve been missing. <a href="https://t.co/SCMZfl4eZn">https://t.co/SCMZfl4eZn</a> <a href="https://t.co/7j6EpevHN1">pic.twitter.com/7j6EpevHN1</a></p>&mdash; Kelsey Hightower (@kelseyhightower) <a href="https://twitter.com/kelseyhightower/status/1059519420064706579?ref_src=twsrc%5Etfw">November 5, 2018</a></blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+
 <p>Developing services in a <a href="https://microservices.io/">Microservices</a> architecture presents local development challenges, especially when the service you are developing needs to interact with a mixture of other services. <a href="https://microservices.io/">Microservices</a>, like any other applications are rarely ever self-contained and often need access to databases, authentication services, and other public or private APIs. Loosely-coupled applications still have couplings, they happen on a higher layer of the application stack and often through TCP networking.</p>
 
 <h2 id="kubectl-port-forward-port-forward"><a href="https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#port-forward">kubectl port-forward</a></h2>
@@ -237,6 +241,17 @@ Developing services in a Microservices architecture presents local development c
 <p>Access the Service through <code>http://localhost:8081/</code> and <code>http://localhost:8080/</code>. Additional services can be port forwarded by back-grounding the command or opening new terminals and issuing more kubectl port-forward commands.</p>
 
 <p><a href="https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#port-forward">kubectl port-forward</a> is convenient for quick one-off port forward access to a Services, Deployments or directly to Pods in your cluster. Your application can use environment variables or configuration files along with scripts that set up all the required forwards to bootstrap your local app. However, I find this cumbersome. <a href="https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#port-forward">kubectl port-forward</a> is great for debugging but falls a bit short for a development utility.</p>
+
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<ins class="adsbygoogle"
+     style="display:block; text-align:center;"
+     data-ad-layout="in-article"
+     data-ad-format="fluid"
+     data-ad-client="ca-pub-5984764595236029"
+     data-ad-slot="7730310582"></ins>
+<script>
+    (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
 
 <h2 id="kubefwd"><a href="https://github.com/txn2/kubefwd">kubefwd</a></h2>
 

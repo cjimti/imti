@@ -76,7 +76,7 @@ Kubernetes is an efficient and productive platform for the configuration, deploy
       
       <guid>https://imti.co/kubernetes-port-forwarding/</guid>
       <description>kubefwd helps to enable a seamless and efficient way to develop applications and services on a local workstation. Locally develop applications that intend to interact with other services in a Kubernetes cluster. kubefwd allows applications with connection strings like http://elasticsearch:9200/ or tcp://db:3306 to communicate into the remote cluster. kubefwd can be used to reduce or eliminate the need for local environment specific connection configurations.
-Developing services in a Microservices architecture presents local development challenges, especially when the service you are developing needs to interact with a mixture of other services.</description>
+I don&amp;#39;t run Kubernetes locally, but I do depend on services running in remote clusters.</description>
     </item>
     
     <item>
