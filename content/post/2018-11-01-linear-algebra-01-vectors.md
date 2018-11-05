@@ -432,21 +432,6 @@ The dot product (or scalar product) is a single number representing the relation
 - $\vec{vects}$ is an $\mathbb{R}3$ array with coordinates [ 1.5, 4, -1 ]
 - The dot product of $\vec{vectr}$ and $\vec{vects}$ is 30.
 - $\vec{vectr}\cdot\vec{vects} = \vec{vectr}^T\vec{vects} = \sum_{i=1}^n\vec{vectr_i}\vec{vects_i}$
-- $\langle\ \vec{vectr} ,\ \vec{vects} \rangle \!\, = 
-\langle\ \left[
-\begin{array}{ccc}
-    2.5 \\
-    5 \\
-    -7 \\ 
-\end{array}
-\right] ,\ \left[
-\begin{array}{ccc}
-    1.5 \\
-    4 \\
-    -1 \\ 
-\end{array}
-\right] \rangle \!\, = 30$
-
 
 ```python
 vectr = np.array([ 2, 5, -7])
