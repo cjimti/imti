@@ -36,6 +36,10 @@ import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 ```
 
+{{< toc >}}
+
+{{< content-ad >}}
+
 ## Algebraic vs Geometric Interpretations
 
 Vectors are a list of numbers containing metrics or coordinates. Both algebraic or geometric intuitions may be used to represent vectors. Each number inside a vector is considered an **element** and the order of elements in a vector is important. The $\mathbb{R}$ symbol denotes a [Real number], and in this example, two real numbers are created with a row vector.
