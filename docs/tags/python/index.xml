@@ -6,10 +6,20 @@
     <description>Recent content in Python on IMTI</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 28 Jul 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 01 Nov 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://imti.co/tags/python/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Linear Algebra: Vectors</title>
+      <link>https://imti.co/linear-algebra-vectors/</link>
+      <pubDate>Thu, 01 Nov 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://imti.co/linear-algebra-vectors/</guid>
+      <description>This article on vectors is part of an ongoing crash course on linear algebra programming, demonstrating concepts and implementations in Python. The following examples will demonstrate some of the algebraic and geometric interpretations of a vector using Python. A vector is an ordered list of numbers, represented in row or column form.
+ Python examples in this article make use of the Numpy library. Read my article Python Data Essentials - Numpy if you want a quick overview on this important Python library.</description>
+    </item>
     
     <item>
       <title>FaaS on Kubernetes</title>

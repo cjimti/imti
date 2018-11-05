@@ -1,0 +1,961 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head><head>
+    <meta name="msvalidate.01" content="DBC34551F2DD1BA3DC0D62EE46D7448F" />
+    <meta name="google-site-verification" content="DrtKc88u9uc7iptd4LyURAKBmFcOn7Kuk6HcRk_kNmo" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <meta name="description" content="Crash Course for Python Programmers Part 1">
+    
+    <meta name="keyword"  content="Go, Kubernetes, Elasticsearch, Python, Docker, Big Data, Artificial Intelligence, Machine Learning, Blockchain">
+    <link rel="shortcut icon" href="https://imti.co/img/favicon.ico">
+
+    <title>Linear Algebra: Vectors - IMTI - Craig Johnston</title>
+
+    <link rel="canonical" href="https://imti.co/linear-algebra-vectors/">
+	
+    
+    <link rel="stylesheet" href="https://imti.co/css/bootstrap.min.css">
+
+    
+    <link rel="stylesheet" href="https://imti.co/css/hux-blog.min.css">
+
+    
+    <link rel="stylesheet" href="https://imti.co/css/syntax.css">
+
+    
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    
+    
+    <link rel="stylesheet" href="/css/imti.css">
+
+    
+    <script src="https://imti.co/js/jquery.min.js"></script>
+    
+    
+    <script src="https://imti.co/js/bootstrap.min.js"></script>
+    
+    
+    <script src="https://imti.co/js/hux-blog.min.js"></script>
+
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({
+            google_ad_client: "ca-pub-5984764595236029",
+            enable_page_level_ads: true
+        });
+    </script>
+
+    <meta name="twitter:site" content="@cjimti">
+<meta name="twitter:creator" content="@cjimti">
+
+<meta name="twitter:description" content="Crash Course for Python Programmers Part 1" />
+<meta name="twitter:title" content="Linear Algebra: Vectors" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://imti.co/img/post/paper-vector_876_438.jpg" />
+<meta property="og:image" content="https://imti.co/img/post/paper-vector_876_438.jpg" />
+
+
+
+    
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Article",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://imti.co/linear-algebra-vectors/"
+  },
+  "headline": "Linear Algebra: Vectors",
+  "image": [
+    "https://imti.co/img/post/paper-vector_876_438.jpg"
+   ],
+  "datePublished": "2018-11-01T00:00:00",
+  "dateModified": "2018-11-01T00:00:00",
+  "author": {
+    "@type": "Person",
+    "name": "Craig Johnston"
+  },
+   "publisher": {
+    "@type": "Organization",
+    "name": 'imti.co",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://imti.co/img/craig_johnston_cjimti.jpg"
+    }
+  },
+  "description": "This article on vectors is part of an ongoing crash course on linear algebra programming, demonstrating concepts and implementations in Python. The following examples will demonstrate some of the algebraic and geometric interpretations of a vector using Python. A vector is an ordered list of numbers, represented in row or column form.
+ Python examples in this article make use of the Numpy library. Read my article Python Data Essentials - Numpy if you want a quick overview on this important Python library."
+}
+</script>
+
+</head></head>
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="https://imti.co/">IMTI</a>
+        </div>
+
+        
+        
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="https://imti.co/">Home</a>
+                    </li>
+                    <li>
+                        <a href="https://imti.co/about/">About</a>
+                    </li>
+                    <li>
+                        <a href="https://twitter.com/cjimti">Follow</a>
+                    </li>
+                    
+
+                    
+                </ul>
+            </div>
+        </div>
+        
+    </div>
+    
+</nav>
+<script>
+    
+    
+    
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        
+            $navbar.className = " ";
+            
+            setTimeout(function(){
+                
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+
+
+<style type="text/css">
+    header.intro-header{
+        background-image: url('https://imti.co/img/post/paper-vector.jpg')
+    }
+</style>
+<header class="intro-header" >
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/linear-algebra" title="Linear Algebra">
+                        Linear Algebra
+                        </a>
+                        
+                        <a class="tag" href="/tags/math" title="Math">
+                        Math
+                        </a>
+                        
+                        <a class="tag" href="/tags/python" title="Python">
+                        Python
+                        </a>
+                        
+                        <a class="tag" href="/tags/numpy" title="Numpy">
+                        Numpy
+                        </a>
+                        
+                        <a class="tag" href="/tags/vectors" title="Vectors">
+                        Vectors
+                        </a>
+                        
+                    </div>
+                    <h1>Linear Algebra: Vectors</h1>
+                    <h2 class="subheading">Crash Course for Python Programmers Part 1</h2>
+                    <span  class="meta">Posted by Craig Johnston on Thursday, November 1, 2018
+                        
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+<article>
+    <div class="container">
+        <div class="row">
+
+            
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <h5>SHARE</h5>
+                <ul class="list-inline">
+                    <li><div class="addthis_inline_share_toolbox"></div></li>
+                </ul>
+
+                
+
+<p>This article on <strong>vectors</strong> is part of an ongoing crash course on linear algebra programming, demonstrating concepts and implementations in Python. The following examples will demonstrate some of the algebraic and geometric interpretations of a vector using Python. A vector is an ordered list of numbers, represented in row or column form.</p>
+
+<blockquote>
+<p>Python examples in this article make use of the <a href="https://imti.co/python-data-essentials-numpy/">Numpy</a> library. Read my article <a href="https://imti.co/python-data-essentials-numpy/">Python Data Essentials - Numpy</a> if you want a quick overview on this important Python library. Visualizations are accomplished with the <a href="https://imti.co/python-data-essentials-matplotlib-seaborn/">Matplotlib</a> Python library. For a beginners guide to <a href="https://imti.co/python-data-essentials-matplotlib-seaborn/">Matplotlib</a> might try my article <a href="https://imti.co/python-data-essentials-matplotlib-seaborn/">Python Data Essentials - Matplotlib and Seaborn</a></p>
+</blockquote>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS_HTML" type="text/javascript">
+</script>
+<script type="text/javascript">
+    init_mathjax = function() {
+        if (window.MathJax) {
+            
+            MathJax.Hub.Config({
+                TeX: {
+                    equationNumbers: {
+                        autoNumber: "AMS",
+                        useLabelIds: true
+                    }
+                },
+                tex2jax: {
+                    inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+                    displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+                    processEscapes: true,
+                    processEnvironments: true
+                },
+                displayAlign: 'center',
+                "HTML-CSS": {
+                    styles: {'.MathJax_Display': {"margin": 0}},
+                    linebreaks: { automatic: true }
+                }
+            });
+            MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+        }
+    }
+    init_mathjax();
+</script>
+
+
+<pre><code class="language-python">import numpy as np
+import matplotlib.pyplot as plt
+from mpl_toolkits.mplot3d import Axes3D
+</code></pre>
+
+<h2 id="algebraic-vs-geometric-interpretations">Algebraic vs Geometric Interpretations</h2>
+
+<p>Vectors are a list of numbers containing metrics or coordinates. Both algebraic or geometric intuitions may be used to represent vectors. Each number inside a vector is considered an <strong>element</strong> and the order of elements in a vector is important. The $\mathbb{R}$ symbol denotes a <a href="https://en.wikipedia.org/wiki/Real_number">Real number</a>, and in this example, two real numbers are created with a row vector.</p>
+
+<h3 id="an-mathbb-r-2-row-vector">An $\mathbb{R}^2$ row vector</h3>
+
+<p>$
+\vec{va} =
+\left[
+\begin{array}{ccc}
+    10 &amp; -20 <br />
+\end{array}
+\right]
+$</p>
+
+<p>In Matlab / Octave:</p>
+
+<pre><code class="language-octave">va = [ 10 -20 ];
+</code></pre>
+
+<pre><code class="language-python"># a 2-dimensional row vector
+va = np.array([ 10, -20 ])
+
+print(f'\n{va}\n')
+print(f' type: {type(va)}')
+print(f' size: {va.size}')
+print(f'shape: {va.shape}')
+</code></pre>
+
+<pre><code>[ 10 -20]
+
+ type: &lt;class 'numpy.ndarray'&gt;
+ size: 2
+shape: (2,)
+</code></pre>
+
+<p>Geometric vectors describe a length and direction. The origin (0,0) is a common starting point for most vectors. However, they may begin anywhere.</p>
+
+<pre><code class="language-python"># plot the vector in &quot;standard position&quot;
+plt.plot([0,va[0]],[0,va[1]])
+
+# create a dotted line from -20 to 20 on 0 x axis
+plt.plot([-30, 30],[0, 0],'k--')
+
+# create a dotted line from -20 to 20 on 0 y axis
+plt.plot([0, 0],[-30, 30],'k--')
+
+# add some grid lines
+plt.grid()
+
+# fit the axis
+plt.axis((-30, 30, -30, 30))
+plt.show()
+</code></pre>
+
+<p><img src="/images/content/la-1/output_6_0.png" alt="png" /></p>
+
+<p>Vectors are robust to translation, meaning that there can be many [ 10 -20] vectors all with different origins. A geometric vector begins at an origin, whereas a coordinate may exist anywhere.</p>
+
+<pre><code class="language-python"># standard position
+sp = np.array([ 0, 0 ])
+
+# position a
+pa = np.array([ 5, 5 ])
+
+# position b
+pb = np.array([ -20, 15 ])
+
+plt.plot([sp[0],va[0]],[sp[0],va[1]])
+plt.plot([pa[0],va[0]+pa[0]],[pa[1],va[1]+pa[1]])
+plt.plot([pb[0],va[0]+pb[0]],[pb[1],va[1]+pb[1]])
+
+# create a dotted line from -20 to 20 on 0 x axis
+plt.plot([-30, 30],[0, 0],'k--')
+
+# create a dotted line from -20 to 20 on 0 y axis
+plt.plot([0, 0],[-30, 30],'k--')
+
+# add some grid lines
+plt.grid()
+
+plt.xlabel('x (0)')
+plt.ylabel('y (1)')
+
+# fit the axis
+plt.axis((-30, 30, -30, 30))
+plt.show()
+</code></pre>
+
+<p><img src="/images/content/la-1/output_8_0.png" alt="png" /></p>
+
+<h4 id="a-3-dimensional-row-vector">A 3-dimensional row vector</h4>
+
+<p>$
+\vec{vb} =
+\left[
+\begin{array}{ccc}
+    10 &amp; -20 &amp; \pi <br />
+\end{array}
+\right]
+$</p>
+
+<pre><code class="language-python"># a 3-dimensional row vector
+vb = np.array([ 10, -20, np.pi ])
+
+print(f'\n{vectb}\n')
+print(f' type: {type(vectb)}')
+print(f' size: {vb.size}')
+print(f'shape: {vb.shape}')
+</code></pre>
+
+<pre><code>[ 10.         -20.           3.14159265]
+
+ type: &lt;class 'numpy.ndarray'&gt;
+ size: 3
+shape: (3,)
+</code></pre>
+
+<pre><code class="language-python"># plotting the 3-dimensional vb
+fig = plt.figure()
+ax = fig.gca(projection='3d')
+ax.plot([0, vb[0]],[0, vb[1]],[0, vb[2]])
+
+# add some dashed lines across the x, y and z axis
+ax.plot([0, 0],[0, 0],[-20, 20],'k--')
+ax.plot([0, 0],[-20, 20],[0, 0],'k--')
+ax.plot([-20, 20],[0, 0],[0, 0],'k--')
+plt.show()
+</code></pre>
+
+<p><img src="/images/content/la-1/output_11_0.png" alt="png" /></p>
+
+<h4 id="a-3-dimensional-column-vector">A 3-dimensional column vector</h4>
+
+<p>$\vec{vectb}$ can be transposed $\vec{vectb} = \vec{vectb}^{T}$ to form a 3-dimensional column vector.</p>
+
+<p><div>
+$
+\vec{vectb} =
+\left[
+\begin{array}{ccc}
+    10 \\ 
+    -20 \\ 
+    \pi \\
+\end{array}
+\right]
+= \mathbb{R}^{3\times1}
+$
+</div></p>
+
+<pre><code class="language-python"># transposing 1-d vectores is not typically needed 
+# with numpy as it will automatically broadcast a 
+# 1D array when doing various calculations
+np.vstack(vect_b) 
+</code></pre>
+
+<pre><code>array([[ 10.  ],
+       [-20.  ],
+       [  3.14]])
+</code></pre>
+
+<h2 id="addition-and-subtraction">Addition and Subtraction</h2>
+
+<p>Vector addition and subtraction requires vectors of equal length. Create two $\mathbb{R}2$ (<a href="https://en.wikipedia.org/wiki/Real_number">Real number</a>) vectors $\vec{vectc}$ and $\vec{vectd}$.</p>
+
+<ul>
+<li>Add the vectors together $\vec{vecte} = \vec{vectc} + \vec{vectd}$</li>
+<li>Subtract c from d, $\vec{vectf} = \vec{vectc} - \vec{vectd}$</li>
+</ul>
+
+<pre><code class="language-python"># two R2 vectors
+vectc = np.array([ 15, 8 ])
+vectd = np.array([ 1,  -11 ])
+
+# add the vectors
+vecte = vectc + vectd
+vecte
+</code></pre>
+
+<pre><code>array([16, -3])
+</code></pre>
+
+<pre><code class="language-python"># geometric intuition
+fig, ax = plt.subplots()
+
+ax.annotate([0,0], (0,0))
+ax.annotate(vectc, vectc)
+ax.annotate(vecte, vecte)
+
+ax.plot([0, vectc[0]],[0, vectc[1]],'b',label='vectc')
+ax.plot([0, vectd[0]]+vectc[0],[0, vectd[1]]+vectc[1],'g',label='vectd')
+ax.plot([0, vecte[0]],[0, vecte[1]],'r',label='vecte')
+
+ax.axis('square')
+ax.axis((-10, 25, -15, 20 ))
+ax.grid()
+plt.legend()
+plt.xlabel('vecte = vectc + vectd')
+plt.show()
+</code></pre>
+
+<p><img src="/images/content/la-1/output_16_0.png" alt="png" /></p>
+
+<p>An algebeaiac interpretation:</p>
+
+<p><div>
+$
+\left[
+\begin{array}{ccc}
+    15 \\ 
+    8 \\ 
+\end{array}
+\right]
++
+\left[
+\begin{array}{ccc}
+    1 \\ 
+    -11 \\ 
+\end{array}
+\right]
+=
+\left[
+\begin{array}{ccc}
+    16 \\ 
+    -3 \\ 
+\end{array}
+\right]
+$
+</div></p>
+
+<pre><code class="language-python"># subtract d from c
+vectf = vectc - vectd
+vectf
+</code></pre>
+
+<pre><code>array([14, 19])
+</code></pre>
+
+<h2 id="scalar-multiplication">Scalar Multiplication</h2>
+
+<p>Create $\vec{vectg}$ as an $\mathbb{R}2$ array with coordinates [ 2, 5 ]</p>
+
+<pre><code class="language-python">vectg = np.array([ 5, 2 ])
+
+# geometric intuition
+fig, ax = plt.subplots()
+ax.plot([0, vectg[0]],[0, vectg[1]],'b',label='vectg')
+ax.grid()
+ax.axis('square')
+ax.axis((-10, 10, -10, 10 ))
+plt.legend()
+plt.show()
+</code></pre>
+
+<p><img src="/images/content/la-1/output_20_0.png" alt="png" /></p>
+
+<p>Scalars are often noted with lowercase greek symbols like alpha: $\alpha$, beta: $\beta$, and theta: $\theta$</p>
+
+<p>$\vec{vecth} = \theta\vec{vectg}$</p>
+
+<p><div>
+$
+1.5
+\left[
+\begin{array}{ccc}
+    5 \\ 
+    2 \\ 
+\end{array}
+\right]
+=
+\left[
+\begin{array}{ccc}
+    7.5 \\ 
+    3 \\ 
+\end{array}
+\right]
+$
+</div></p>
+
+<pre><code class="language-python">m = 1.5
+vecth = vectg * m
+vecth
+</code></pre>
+
+<pre><code>array([ 7.5,  3. ])
+</code></pre>
+
+<p>A geometric intrepretation shows the scaling of the vector through multiplication, changing it&rsquo;s lenth while it&rsquo;s orgin remains constant.</p>
+
+<pre><code class="language-python"># geometric intuition
+fig, ax = plt.subplots()
+ax.plot([0, vectg[0]],[0, vectg[1]],'b',label='vect_g')
+ax.plot([0, vecth[0]],[0, vecth[1]],'g:',label='vect_h')
+ax.grid()
+ax.axis('square')
+ax.axis((-10, 10, -10, 10 ))
+plt.legend()
+plt.show()
+
+</code></pre>
+
+<p><img src="/images/content/la-1/output_24_0.png" alt="png" /></p>
+
+<p>Multiply $\vec{vectg}$ by the scalar m2.</p>
+
+<p>$\vec{vecti} = \vec{vectg}\alpha$</p>
+
+<pre><code class="language-python">alpha = -1.5
+
+vecti = vectg * alpha
+
+# geometric intuition
+fig, ax = plt.subplots()
+ax.plot([0, vectg[0]],[0, vectg[1]],'b',label='vect_g')
+ax.plot([0, vecti[0]],[0, vecti[1]],'r:',label='vect_i')
+ax.grid()
+ax.axis('square')
+ax.axis((-10, 10, -10, 10 ))
+plt.legend()
+plt.show()
+</code></pre>
+
+<p><img src="/images/content/la-1/output_26_0.png" alt="png" /></p>
+
+<h1 id="vector-multiplication-dot-product">Vector multiplication (dot product)</h1>
+
+<p>The dot product (or scalar product) is a single number representing the relationship between two vectors.</p>
+
+<ul>
+<li>$\vec{vectr}$ is an $\mathbb{R}3$ array with coordinates [ 2, 5, -7 ]</li>
+<li>$\vec{vects}$ is an $\mathbb{R}3$ array with coordinates [ 1.5, 4, -1 ]</li>
+<li>The dot product of $\vec{vectr}$ and $\vec{vects}$ is 30.</li>
+<li>$\vec{vectr}\cdot\vec{vects} = \vec{vectr}^T\vec{vects} = \sum_{i=1}^n\vec{vectr_i}\vec{vects_i}$</li>
+<li>$\langle\ \vec{vectr} ,\ \vec{vects} \rangle !\, =
+\langle\ \left[
+\begin{array}{ccc}
+2.5 <br />
+5 <br />
+-7 \
+\end{array}
+\right] ,\ \left[
+\begin{array}{ccc}
+1.5 <br />
+4 <br />
+-1 \
+\end{array}
+\right] \rangle !\, = 30$</li>
+</ul>
+
+<pre><code class="language-python">vectr = np.array([ 2, 5, -7])
+vects = np.array([ 1.5, 4, -1])
+
+# the dot product is the sum of products
+rs = np.dot(vectr,vects)
+rs
+</code></pre>
+
+<pre><code>30.0
+</code></pre>
+
+
+                
+                <hr>
+                <h5>SHARE</h5>
+                <ul class="list-inline">
+                    <li><div class="addthis_inline_share_toolbox"></div></li>
+                </ul>
+
+                <h5>FOLLOW</h5>
+                <ul class="list-inline">
+                    <li><div class="addthis_inline_follow_toolbox"></div></li>
+                </ul>
+
+            </div>
+            
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                
+                <section>
+                    <hr class="hidden-sm hidden-xs">
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                        
+                        
+                        
+                        <a href="/tags/blockchain" title="Blockchain">
+                        Blockchain
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/data" title="Data">
+                        Data
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/data-science" title="Data Science">
+                        Data Science
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/devops" title="DevOps">
+                        DevOps
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/development" title="Development">
+                        Development
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/docker" title="Docker">
+                        Docker
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/elasticsearch" title="Elasticsearch">
+                        Elasticsearch
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/golang" title="Golang">
+                        Golang
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/ingress" title="Ingress">
+                        Ingress
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/kubernetes" title="Kubernetes">
+                        Kubernetes
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/microservices" title="Microservices">
+                        Microservices
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/python" title="Python">
+                        Python
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/raspberry-pi" title="Raspberry Pi">
+                        Raspberry Pi
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/security" title="Security">
+                        Security
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/utils" title="Utils">
+                        Utils
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/kubectl" title="kubectl">
+                        kubectl
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                    </div>
+                </section>
+
+                
+                <hr>
+                <h5>RELATED</h5>
+                <ul class="list-inline">
+                    
+                </ul>
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                   
+                   <li>
+                       <a href="" rel="alternate" type="application/rss+xml" title="IMTI" >
+                           <span class="fa-stack fa-lg">
+                               <i class="fa fa-circle fa-stack-2x"></i>
+                               <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+                           </span>
+                       </a>
+                   </li>
+                   
+                    
+                    <li>
+                        <a href="mailto:cjimti@gmail.com">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                    
+                    
+                    <li>
+                        <a href="https://twitter.com/cjimti">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    
+
+                    
+
+		    
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/cjimti">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                    
+                    <li>
+                        <a target="_blank" href="https://www.linkedin.com/in/cjimti/">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                </ul>
+		<p class="copyright text-muted">
+            Copyright &copy; <a href="https://www.linkedin.com/in/cjimti/">Craig Johnston</a> , 2018
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+
+
+
+
+<script>
+    
+    if($('#tag_cloud').length !== 0){
+        async("/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5b905a667cf4d77c"></script>
+
+
+
+    
+        
+        
+    
+
+
+
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-78786435-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+</body>
+</html>

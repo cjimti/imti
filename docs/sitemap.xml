@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://imti.co/linear-algebra-vectors/</loc>
+    <lastmod>2018-11-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://imti.co/edu/</loc>
     <lastmod>2018-10-01T00:00:00+00:00</lastmod>
   </url>
@@ -331,7 +336,7 @@
   
   <url>
     <loc>https://imti.co/</loc>
-    <lastmod>2018-10-01T00:00:00+00:00</lastmod>
+    <lastmod>2018-11-01T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -390,6 +395,12 @@
   </url>
   
   <url>
+    <loc>https://imti.co/tags/linear-algebra/</loc>
+    <lastmod>2018-11-01T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://imti.co/tags/macos/</loc>
     <lastmod>2018-04-01T00:00:00+00:00</lastmod>
     <priority>0</priority>
@@ -398,6 +409,12 @@
   <url>
     <loc>https://imti.co/tags/macos/</loc>
     <lastmod>2018-05-12T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://imti.co/tags/math/</loc>
+    <lastmod>2018-11-01T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -420,6 +437,12 @@
   </url>
   
   <url>
+    <loc>https://imti.co/tags/numpy/</loc>
+    <lastmod>2018-11-01T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://imti.co/tags/pdf/</loc>
     <lastmod>2018-07-01T00:00:00+00:00</lastmod>
     <priority>0</priority>
@@ -427,13 +450,13 @@
   
   <url>
     <loc>https://imti.co/post/</loc>
-    <lastmod>2018-09-25T00:00:00+00:00</lastmod>
+    <lastmod>2018-11-01T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://imti.co/tags/python/</loc>
-    <lastmod>2018-07-28T00:00:00+00:00</lastmod>
+    <lastmod>2018-11-01T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -476,6 +499,12 @@
   <url>
     <loc>https://imti.co/tags/utils/</loc>
     <lastmod>2018-05-12T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://imti.co/tags/vectors/</loc>
+    <lastmod>2018-11-01T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   

@@ -246,6 +246,15 @@
     </item>
     
     <item>
+      <title>Linear Algebra</title>
+      <link>https://imti.co/tags/linear-algebra/</link>
+      <pubDate>Thu, 01 Nov 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://imti.co/tags/linear-algebra/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>MacOS</title>
       <link>https://imti.co/tags/macos/</link>
       <pubDate>Sun, 01 Apr 2018 00:00:00 +0000</pubDate>
@@ -260,6 +269,15 @@
       <pubDate>Sat, 12 May 2018 00:00:00 +0000</pubDate>
       
       <guid>https://imti.co/tags/macos/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Math</title>
+      <link>https://imti.co/tags/math/</link>
+      <pubDate>Thu, 01 Nov 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://imti.co/tags/math/</guid>
       <description></description>
     </item>
     
@@ -291,6 +309,15 @@
     </item>
     
     <item>
+      <title>Numpy</title>
+      <link>https://imti.co/tags/numpy/</link>
+      <pubDate>Thu, 01 Nov 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://imti.co/tags/numpy/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>PDF</title>
       <link>https://imti.co/tags/pdf/</link>
       <pubDate>Sun, 01 Jul 2018 00:00:00 +0000</pubDate>
@@ -302,7 +329,7 @@
     <item>
       <title>Python</title>
       <link>https://imti.co/tags/python/</link>
-      <pubDate>Sat, 28 Jul 2018 00:00:00 +0000</pubDate>
+      <pubDate>Thu, 01 Nov 2018 00:00:00 +0000</pubDate>
       
       <guid>https://imti.co/tags/python/</guid>
       <description></description>
@@ -359,6 +386,15 @@
       <pubDate>Sat, 12 May 2018 00:00:00 +0000</pubDate>
       
       <guid>https://imti.co/tags/utils/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Vectors</title>
+      <link>https://imti.co/tags/vectors/</link>
+      <pubDate>Thu, 01 Nov 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://imti.co/tags/vectors/</guid>
       <description></description>
     </item>
     
