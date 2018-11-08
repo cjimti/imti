@@ -93,6 +93,9 @@ home = ["HTML", "RSS"]
   title = "r/golang"
   href =  "https://www.reddit.com/r/golang/"
   [[params.reddit_link]]
+  title = "r/python"
+  href =  "https://www.reddit.com/r/python/"
+  [[params.reddit_link]]
   title = "r/kubernetes"
   href =  "https://www.reddit.com/r/kubernetes/"
   [[params.reddit_link]]
