@@ -137,6 +137,10 @@ home = ["HTML", "RSS"]
   href =  "https://hub.docker.com/r/txn2/kubefwd/"
 
   [[params.awesome_link]]
+  title = "Kubernetes"
+  href = "https://github.com/ramitsurana/awesome-kubernetes"
+
+  [[params.awesome_link]]
   title = "Cloud Native"
   href = "https://github.com/rootsongjc/awesome-cloud-native"
 

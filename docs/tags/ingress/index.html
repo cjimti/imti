@@ -158,46 +158,92 @@
             
 
 <div class="post-preview">
-    <a href="https://imti.co/web-cluster-ingress/">
+    <a href="https://imti.co/kubernetes-ingress-nginx-cors/">
         <h2 class="post-title">
-            Ingress on Custom Kubernetes
+            CORS on Kubernetes Ingress Nginx
         </h2>
 	
         <h3 class="post-subtitle">
-            Setting up ingress-nginx on a custom cluster.
+            Painless CORS header configuration in Kubernetes
         </h3>
 	
         <div class="post-content-preview">
 	
-            There are more than a handful of ways to set up port 80 and 443 web ingress on a custom Kubernetes cluster. Specifically a bare metal cluster. If you are looking to experiment or learn on a non-production cluster, but something more true to production than minikube, I suggest you check out my previous article Production Hobby Cluster, a step-by-step guide for setting up a custom production capable Kubernetes cluster.
+            Using ingress-nginx on Kubernetes makes adding CORS headers painless. Kubernetes ingress-nginx uses annotations as a quick way to allow you to specify the automatic generation of an extensive list of common nginx configuration options.
+Example ingress configuration enabling CORS:
+apiVersion: extensions/v1beta1 kind: Ingress metadata: name: api namespace: fuse labels: app: api annotations: nginx.ingress.kubernetes.io/enable-cors: &quot;true&quot; nginx.ingress.kubernetes.io/cors-allow-methods: &quot;PUT, GET, POST, OPTIONS&quot; nginx.ingress.kubernetes.io/cors-allow-origin: &quot;https://admin.example.com&quot; nginx.ingress.kubernetes.io/cors-allow-credentials: &quot;true&quot; spec: rules: - host: api.example.com http: paths: - backend: serviceName: api-example servicePort: 80 path: /api tls: - hosts: - api.
        
         </div>
     </a>
     <p class="post-meta">
-    Posted by Craig Johnston Tuesday, May 15, 2018
+    Posted by Craig Johnston Monday, May 28, 2018
     </p>
 </div>
 <hr>
 
 <div class="post-preview">
-    <a href="https://imti.co/413-request-entity-too-large/">
+    <a href="https://imti.co/kubernetes-ingress-basic-auth/">
         <h2 class="post-title">
-            Kubernetes - 413 Request Entity Too Large
+            Basic Auth on Kubernetes Ingress
         </h2>
 	
         <h3 class="post-subtitle">
-            Configuring the NGINX Ingress Controller
+            Basic Auth is supported by nearly every major web client, library, and utility.
         </h3>
 	
         <div class="post-content-preview">
 	
-            When setting up nginx ingress on Kubernetes for a private Docker Registry, I ran into an error when trying to push an image to it.
-Error parsing HTTP response: invalid character '&lt;' looking for beginning of value: &quot;&lt;html&gt;\r\n&lt;head&gt;&lt;title&gt;413 Request Entity Too Large&lt;/title&gt;&lt;/head&gt;\r\n&lt;body bgcolor=\&quot;white\&quot;&gt;\r\n&lt;center&gt;&lt;h1&gt;413 Request Entity Too Large&lt;/h1&gt;&lt;/center&gt;\r\n&lt;hr&gt;&lt;center&gt;nginx/1.9.14&lt;/center&gt;\r\n&lt;/body&gt;\r\n&lt;/html&gt;\r\n&quot;  The &ldquo;413 Request Entity Too Large&rdquo; error is something many accustomed to running nginx as a standard web server/proxy. nginx is configured to restrict the size of files it will allow over a post.
+            Basic Auth is one of the oldest and easiest ways to secure a web page or API endpoint. Basic Auth does not have many features and lacks the sophistication of more modern access controls (see Ingress Nginx Auth Examples). However, Basic Auth is supported by nearly every major web client, library, and utility. Basic Auth is secure, stable and perfect for quick security on Kubernetes projects. Basic Auth can easily we swapped out later as requirements demand or provide a foundation for implementations such as OAuth 2 and JWT.
        
         </div>
     </a>
     <p class="post-meta">
-    Posted by Craig Johnston Saturday, March 24, 2018
+    Posted by Craig Johnston Saturday, May 19, 2018
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="https://imti.co/jwt-microservice/">
+        <h2 class="post-title">
+            JWT Microservice, Tokenize Remote APIs
+        </h2>
+	
+        <h3 class="post-subtitle">
+            Using txToken to create JWT Tokens from JSON POST data.
+        </h3>
+	
+        <div class="post-content-preview">
+	
+            txToken is a small high performance microservice utility container. txToken is used for adding JSON Web Token based security to existing or new API development. txToken is specifically for systems that communicate in JSON over HTTP. txToken is called from a client with a JSON post body and passes received JSON to a remote endpoint. JSON retrieved from a remote endpoint is used to create a JWT token with an HS256 symmetrically encrypted signature.
+       
+        </div>
+    </a>
+    <p class="post-meta">
+    Posted by Craig Johnston Friday, May 18, 2018
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="https://imti.co/lets-encrypt-kubernetes/">
+        <h2 class="post-title">
+            Let&#39;s Encrypt, Kubernetes
+        </h2>
+	
+        <h3 class="post-subtitle">
+            Automated, secure and free 443/https with signed x509 certificates for Ingress.
+        </h3>
+	
+        <div class="post-content-preview">
+	
+            Use cert-manager to get port 443/https running with signed x509 certificates for Ingress on your Kubernetes Production Hobby Cluster. cert-manager is the successor to kube-lego and the preferred way to &ldquo;automatically obtain browser-trusted certificates, without any human intervention.&rdquo; using Let&rsquo;s Encrypt.
+You need to install Helm first if you do not already have it. Otherwise, check out my article Helm on Custom Kubernetes, especially if you are following along with my Production Hobby Cluster guides.
+       
+        </div>
+    </a>
+    <p class="post-meta">
+    Posted by Craig Johnston Friday, May 18, 2018
     </p>
 </div>
 <hr>
@@ -490,6 +536,8 @@ Error parsing HTTP response: invalid character '&lt;' looking for beginning of v
     <hr>
     <h5>AWESOME</h5>
     <ul class="bookmarks">
+        
+        <li><a target="_blank" href="https://github.com/ramitsurana/awesome-kubernetes">Kubernetes</a></li>
         
         <li><a target="_blank" href="https://github.com/rootsongjc/awesome-cloud-native">Cloud Native</a></li>
         
