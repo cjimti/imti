@@ -56,12 +56,6 @@ $
 \right]
 $
 
-In Matlab / Octave:
-```octave
-va = [ 10 -20 ];
-```
-
-
 ```python
 # a 2-dimensional row vector
 va = np.array([ 10, -20 ])

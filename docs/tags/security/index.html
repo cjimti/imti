@@ -158,137 +158,24 @@
             
 
 <div class="post-preview">
-    <a href="https://imti.co/team-kubernetes-remote-access/">
+    <a href="https://imti.co/kubectl-remote-x509-valid/">
         <h2 class="post-title">
-            Kubernetes Team Access - RBAC for developers and QA
+            Kubectl x509 Unable to Connect
         </h2>
 	
         <h3 class="post-subtitle">
-            Role Based Access Control
+            Kubernetes remote access and TLS certs.
         </h3>
 	
         <div class="post-content-preview">
 	
-            RBAC (Role Based Access Control) allows our Kubernetes clusters to provide the development team better visibility and access into the development, staging and production environments than it has have ever had in the past. Developers using the command line tool kubectl, can explore the network topology of running microservices, tail live server logs, proxy local ports directly to services or even execute shells into running pods.
-Kubernetes and GitlabCI are the central components of our DevOps toolchain and have increased our productivity by many multiples over the traditional approaches of the past.
+            Just set up a brand new cluster? Changed the domain or IP of your admin node? Then you may have encountered the error Unable to connect to the server: x509: certificate is valid for &hellip;. The following is a fix for this common issue. However, there are often other reasons to rebuild your cluster cert, and it&rsquo;s relatively easy.
+TL;DR: &ldquo;I don&rsquo;t care about the fix I need to remote control my cluster.
        
         </div>
     </a>
     <p class="post-meta">
-    Posted by Craig Johnston Tuesday, July 10, 2018
-    </p>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="https://imti.co/golang-reverse-proxy/">
-        <h2 class="post-title">
-            Reverse Proxy in Golang
-        </h2>
-	
-        <h3 class="post-subtitle">
-            Retrofit security proxy to prevent XSS and code injection.
-        </h3>
-	
-        <div class="post-content-preview">
-	
-            Reverse proxies are standard components in many web architectures, from Nginx in front of php-fpm serving Drupal or Wordpress, to endless mixtures of load balancers, security appliances, and popular firewall applications. Reverse proxies differ from forward proxies in little but their intended implementation, be it service-side or client side. The following information is useful in either context. However, I focus on a service-side architecture. Further down this article, I&rsquo;ll be going over the reasonably simple go code needed to develop a basic, yet production quality proxy, but first I&rsquo;ll give you my take on why they solve so many problems and offer up my little workhorse, n2proxy.
-       
-        </div>
-    </a>
-    <p class="post-meta">
-    Posted by Craig Johnston Friday, June 15, 2018
-    </p>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="https://imti.co/kubernetes-ingress-nginx-cors/">
-        <h2 class="post-title">
-            CORS on Kubernetes Ingress Nginx
-        </h2>
-	
-        <h3 class="post-subtitle">
-            Painless CORS header configuration in Kubernetes
-        </h3>
-	
-        <div class="post-content-preview">
-	
-            Using ingress-nginx on Kubernetes makes adding CORS headers painless. Kubernetes ingress-nginx uses annotations as a quick way to allow you to specify the automatic generation of an extensive list of common nginx configuration options.
-Example ingress configuration enabling CORS:
-apiVersion: extensions/v1beta1 kind: Ingress metadata: name: api namespace: fuse labels: app: api annotations: nginx.ingress.kubernetes.io/enable-cors: &quot;true&quot; nginx.ingress.kubernetes.io/cors-allow-methods: &quot;PUT, GET, POST, OPTIONS&quot; nginx.ingress.kubernetes.io/cors-allow-origin: &quot;https://admin.example.com&quot; nginx.ingress.kubernetes.io/cors-allow-credentials: &quot;true&quot; spec: rules: - host: api.example.com http: paths: - backend: serviceName: api-example servicePort: 80 path: /api tls: - hosts: - api.
-       
-        </div>
-    </a>
-    <p class="post-meta">
-    Posted by Craig Johnston Monday, May 28, 2018
-    </p>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="https://imti.co/kubernetes-ingress-basic-auth/">
-        <h2 class="post-title">
-            Basic Auth on Kubernetes Ingress
-        </h2>
-	
-        <h3 class="post-subtitle">
-            Basic Auth is supported by nearly every major web client, library, and utility.
-        </h3>
-	
-        <div class="post-content-preview">
-	
-            Basic Auth is one of the oldest and easiest ways to secure a web page or API endpoint. Basic Auth does not have many features and lacks the sophistication of more modern access controls (see Ingress Nginx Auth Examples). However, Basic Auth is supported by nearly every major web client, library, and utility. Basic Auth is secure, stable and perfect for quick security on Kubernetes projects. Basic Auth can easily we swapped out later as requirements demand or provide a foundation for implementations such as OAuth 2 and JWT.
-       
-        </div>
-    </a>
-    <p class="post-meta">
-    Posted by Craig Johnston Saturday, May 19, 2018
-    </p>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="https://imti.co/jwt-microservice/">
-        <h2 class="post-title">
-            JWT Microservice, Tokenize Remote APIs
-        </h2>
-	
-        <h3 class="post-subtitle">
-            Using txToken to create JWT Tokens from JSON POST data.
-        </h3>
-	
-        <div class="post-content-preview">
-	
-            txToken is a small high performance microservice utility container. txToken is used for adding JSON Web Token based security to existing or new API development. txToken is specifically for systems that communicate in JSON over HTTP. txToken is called from a client with a JSON post body and passes received JSON to a remote endpoint. JSON retrieved from a remote endpoint is used to create a JWT token with an HS256 symmetrically encrypted signature.
-       
-        </div>
-    </a>
-    <p class="post-meta">
-    Posted by Craig Johnston Friday, May 18, 2018
-    </p>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="https://imti.co/lets-encrypt-kubernetes/">
-        <h2 class="post-title">
-            Let&#39;s Encrypt, Kubernetes
-        </h2>
-	
-        <h3 class="post-subtitle">
-            Automated, secure and free 443/https with signed x509 certificates for Ingress.
-        </h3>
-	
-        <div class="post-content-preview">
-	
-            Use cert-manager to get port 443/https running with signed x509 certificates for Ingress on your Kubernetes Production Hobby Cluster. cert-manager is the successor to kube-lego and the preferred way to &ldquo;automatically obtain browser-trusted certificates, without any human intervention.&rdquo; using Let&rsquo;s Encrypt.
-You need to install Helm first if you do not already have it. Otherwise, check out my article Helm on Custom Kubernetes, especially if you are following along with my Production Hobby Cluster guides.
-       
-        </div>
-    </a>
-    <p class="post-meta">
-    Posted by Craig Johnston Friday, May 18, 2018
+    Posted by Craig Johnston Thursday, May 10, 2018
     </p>
 </div>
 <hr>
@@ -565,6 +452,193 @@ You need to install Helm first if you do not already have it. Otherwise, check o
         <li><a target="_blank" href="https://www.reddit.com/r/golang/">r/golang</a></li>
         
         <li><a target="_blank" href="https://www.reddit.com/r/kubernetes/">r/kubernetes</a></li>
+        
+        <li><a target="_blank" href="https://www.reddit.com/r/docker/">r/docker</a></li>
+        
+        <li><a target="_blank" href="https://www.reddit.com/r/elasticsearch/">r/elasticsearch</a></li>
+        
+        <li><a target="_blank" href="https://www.reddit.com/r/apachekafka/">r/apachekafka</a></li>
+        
+        <li><a target="_blank" href="https://www.reddit.com/r/ethereum/">r/ethereum</a></li>
+        
+        <li><a target="_blank" href="https://www.reddit.com/r/blockchain/">r/blockchain</a></li>
+        
+    </ul>
+
+    <hr>
+    <h5>AWESOME</h5>
+    <ul class="bookmarks">
+        
+        <li><a target="_blank" href="https://github.com/rootsongjc/awesome-cloud-native">Cloud Native</a></li>
+        
+        <li><a target="_blank" href="https://github.com/thibmaek/awesome-raspberry-pi">Raspberry Pi</a></li>
+        
+    </ul>
+
+    <hr>
+    <h5>DOCKER CONTAINERS</h5>
+    <ul class="bookmarks">
+        
+        <li><a target="_blank" href="https://hub.docker.com/r/txn2/n2proxy/">n2proxy</a></li>
+        
+        <li><a target="_blank" href="https://hub.docker.com/r/cjimti/iotwifi/">iotwifi</a></li>
+        
+        <li><a target="_blank" href="https://hub.docker.com/r/cjimti/irsync/">irsync</a></li>
+        
+        <li><a target="_blank" href="https://hub.docker.com/r/txn2/rxtx/">rxtx</a></li>
+        
+        <li><a target="_blank" href="https://hub.docker.com/r/txn2/rtbeat/">rtbeat</a></li>
+        
+        <li><a target="_blank" href="https://hub.docker.com/r/txn2/asws/">asws</a></li>
+        
+        <li><a target="_blank" href="https://hub.docker.com/r/txn2/txtoken/">txtoken</a></li>
+        
+        <li><a target="_blank" href="https://hub.docker.com/r/txn2/kubefwd/">kubefwd</a></li>
+        
+    </ul>
+</div>
+
+	</div>
+</div>
+
+
+
+
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                   
+                   <li>
+                       <a href="https://imti.co/tags/security/index.xml" rel="alternate" type="application/rss+xml" title="IMTI" >
+                           <span class="fa-stack fa-lg">
+                               <i class="fa fa-circle fa-stack-2x"></i>
+                               <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+                           </span>
+                       </a>
+                   </li>
+                   
+                    
+                    <li>
+                        <a href="mailto:cjimti@gmail.com">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                    
+                    
+                    <li>
+                        <a href="https://twitter.com/cjimti">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    
+
+                    
+
+		    
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/cjimti">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                    
+                    <li>
+                        <a target="_blank" href="https://www.linkedin.com/in/cjimti/">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                </ul>
+		<p class="copyright text-muted">
+            Copyright &copy; <a href="https://www.linkedin.com/in/cjimti/">Craig Johnston</a> , 2018
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+
+
+
+
+<script>
+    
+    if($('#tag_cloud').length !== 0){
+        async("/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5b905a667cf4d77c"></script>
+
+
+
+    
+        
+        
+    
+
+
+
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-78786435-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+</body>
+</html>
+es</a></li>
         
         <li><a target="_blank" href="https://www.reddit.com/r/docker/">r/docker</a></li>
         
