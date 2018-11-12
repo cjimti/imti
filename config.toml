@@ -82,6 +82,9 @@ home = ["HTML", "RSS"]
   [[params.bookmark_link]]
   title = "Hacker News (cjimti)"
   href =  "https://news.ycombinator.com/submitted?id=cjimti"
+  [[params.bookmark_link]]
+  title = "Sourcerer (cjimti)"
+  href =  "https://sourcerer.io/cjimti"
 
   [[params.reddit_link]]
   title = "user/imti_co"
