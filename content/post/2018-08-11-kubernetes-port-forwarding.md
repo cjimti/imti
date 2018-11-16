@@ -112,7 +112,7 @@ docker exec fwd curl -s http://ok
 
 [kubefwd] is an independent project not affiliated or endorsed by Kubernetes. I welcome any contributions to its development.
 
-- [kubectl] on [Github]
+- [kubefwd] on [Github]
 - kubectl [port-forward] command
 - Setting up a [Production Hobby Cluster]
 - [Kubernetes Team Access - RBAC for developers and QA]
