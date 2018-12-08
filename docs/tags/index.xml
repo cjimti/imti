@@ -59,7 +59,7 @@
     <item>
       <title>Data Science</title>
       <link>https://imti.co/tags/data-science/</link>
-      <pubDate>Sun, 08 Jul 2018 00:00:00 +0000</pubDate>
+      <pubDate>Sat, 08 Dec 2018 00:00:00 +0000</pubDate>
       
       <guid>https://imti.co/tags/data-science/</guid>
       <description></description>
@@ -248,7 +248,7 @@
     <item>
       <title>Linear Algebra</title>
       <link>https://imti.co/tags/linear-algebra/</link>
-      <pubDate>Thu, 01 Nov 2018 00:00:00 +0000</pubDate>
+      <pubDate>Sat, 08 Dec 2018 00:00:00 +0000</pubDate>
       
       <guid>https://imti.co/tags/linear-algebra/</guid>
       <description></description>
@@ -275,9 +275,18 @@
     <item>
       <title>Math</title>
       <link>https://imti.co/tags/math/</link>
-      <pubDate>Thu, 01 Nov 2018 00:00:00 +0000</pubDate>
+      <pubDate>Sat, 08 Dec 2018 00:00:00 +0000</pubDate>
       
       <guid>https://imti.co/tags/math/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Matrices</title>
+      <link>https://imti.co/tags/matrices/</link>
+      <pubDate>Sat, 08 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://imti.co/tags/matrices/</guid>
       <description></description>
     </item>
     
@@ -329,7 +338,7 @@
     <item>
       <title>Python</title>
       <link>https://imti.co/tags/python/</link>
-      <pubDate>Thu, 01 Nov 2018 00:00:00 +0000</pubDate>
+      <pubDate>Sat, 08 Dec 2018 00:00:00 +0000</pubDate>
       
       <guid>https://imti.co/tags/python/</guid>
       <description></description>
