@@ -842,19 +842,21 @@ $
 $
 </div></p>
 
+<p><div>
 $\boldsymbol{G} + \boldsymbol{H} = \boldsymbol{H} + \boldsymbol{G} =
 \begin{pmatrix}
     3 & 5 \\
     6 & 7 \\
 \end{pmatrix}
-$
+$</div></p>
 
+<p><div>
 $\boldsymbol{G} + (\boldsymbol{H} + \boldsymbol{F}) = (\boldsymbol{G} + \boldsymbol{H}) + \boldsymbol{F} =
 \begin{pmatrix}
     8 & 9 \\
     9 & 6 \\
 \end{pmatrix}
-$
+$</div></p>
 
 There are other types of [matrix addition opperations] including Direct Sum and Kronecker sum.
 
