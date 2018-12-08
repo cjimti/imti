@@ -263,6 +263,7 @@ Kubernetes and GitlabCI are the central components of our DevOps toolchain and h
 <li><a href="#add-user-credentials-to-kubectl">Add User (credentials) to <code>kubectl</code></a></li>
 <li><a href="#add-a-context-to-kubectl">Add a Context to <code>kubectl</code></a></li>
 </ul></li>
+<li><a href="#port-forwarding-local-development">Port Forwarding / Local Development</a></li>
 <li><a href="#resources">Resources</a></li>
 </ul></li>
 </ul>
@@ -640,6 +641,10 @@ subjects:
 </code></pre>
 
 <p>You now have access to <strong>the-project</strong> namespace on the <strong>dev</strong> cluster. Check out the <a href="https://kubernetes.io/docs/reference/kubectl/cheatsheet/#viewing-finding-resources">kubectl Cheat Sheet</a> for a quick list of useful commands.</p>
+
+<h2 id="port-forwarding-local-development">Port Forwarding / Local Development</h2>
+
+<p>Check out <a href="https://github.com/txn2/kubefwd">kubefwd</a> for a simple command line utility that bulk forwards services of one or more namespaces to your local workstation.</p>
 
 <h2 id="resources">Resources</h2>
 

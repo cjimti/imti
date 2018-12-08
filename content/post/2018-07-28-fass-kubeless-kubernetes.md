@@ -314,6 +314,10 @@ Kubless supports a variety of [runtimes][Kubeless runtime]. In my case, most of 
 - [Python Data Essentials - Numpy] provides a wide variety of options for working with numbers, extraordinarily powerful N-dimensional array objects in which we can perform linear algebra.
 - [Python Data Essentials - Pandas] is a data type equivalent to super-charged spreadsheets. Pandas add two highly expressive data structures to Python, Series, and DataFrame.
 
+## Port Forwarding / Local Development
+
+Check out [kubefwd](https://github.com/txn2/kubefwd) for a simple command line utility that bulk forwards services of one or more namespaces to your local workstation.
+
 [Python Data Essentials - Pandas]:/python-data-essentials-pandas/
 [Python Data Essentials - Numpy]:/python-data-essentials-numpy/
 [python dict]:https://docs.python.org/3/tutorial/datastructures.html#dictionaries

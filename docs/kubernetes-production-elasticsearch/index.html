@@ -244,6 +244,9 @@ The Docker container docker-elasticsearch, a &ldquo;Ready to use, lean and highl
 <li><a href="#deployment-for-master-nodes"><a href="https://kubernetes.io/docs/concepts/workloads/controllers/deployment/">Deployment</a> for <a href="https://www.elastic.co/guide/en/elasticsearch/reference/6.2/modules-node.html#master-node">Master</a> Nodes</a></li>
 <li><a href="#deployment-for-client-and-ingest-nodes"><a href="https://kubernetes.io/docs/concepts/workloads/controllers/deployment/">Deployment</a> for Client and <a href="https://www.elastic.co/guide/en/elasticsearch/reference/6.2/ingest.html">Ingest</a> Nodes</a></li>
 <li><a href="#testing">Testing</a></li>
+</ul></li>
+<li><a href="#port-forwarding-local-development">Port Forwarding / Local Development</a>
+<ul>
 <li><a href="#next">Next</a></li>
 </ul></li>
 </ul></li>
@@ -801,6 +804,10 @@ spec:
   }
 }
 </code></pre>
+
+<h2 id="port-forwarding-local-development">Port Forwarding / Local Development</h2>
+
+<p>Check out <a href="https://github.com/txn2/kubefwd">kubefwd</a> for a simple command line utility that bulk forwards services of one or more namespaces to your local workstation.</p>
 
 <h3 id="next">Next</h3>
 

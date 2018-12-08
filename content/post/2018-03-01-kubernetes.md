@@ -158,7 +158,9 @@ Command | Description
 `kubectl label pods <pod> mylabel=fun` | Add a new label to a pod
 `kubectl run -i --tty alpine --image=alpine --restart=Never --sh` | Run a shell in a pod
 
+## Port Forwarding / Local Development
 
+Check out [kubefwd](https://github.com/txn2/kubefwd) for a simple command line utility that bulk forwards services of one or more namespaces to your local workstation.
 
 
 [Kubernetes Basics]: https://kubernetes.io/docs/tutorials/kubernetes-basics/

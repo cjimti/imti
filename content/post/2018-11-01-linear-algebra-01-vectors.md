@@ -438,4 +438,6 @@ rs
 
     30.0
 
+## Next: Matrices
 
+Check out the next article in this series, [Linear Algebra: Matrices 1: Linear Algebra Crash Course for Programmers Part 2a](https://imti.co/linear-algebra-matrices/).

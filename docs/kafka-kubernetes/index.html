@@ -257,6 +257,7 @@ There are a few Helm based installers out there including the official Kubernete
 <li><a href="#create-topic">Create Topic</a></li>
 <li><a href="#listen-on-a-topic">Listen on a Topic</a></li>
 </ul></li>
+<li><a href="#port-forwarding-local-development">Port Forwarding / Local Development</a></li>
 </ul></li>
 </ul>
 </nav>
@@ -784,6 +785,10 @@ spec:
 /usr/bin/kafka-console-consumer --bootstrap-server kafka:9092 \
 --topic test --from-beginning
 </code></pre>
+
+<h2 id="port-forwarding-local-development">Port Forwarding / Local Development</h2>
+
+<p>Check out <a href="https://github.com/txn2/kubefwd">kubefwd</a> for a simple command line utility that bulk forwards services of one or more namespaces to your local workstation.</p>
 
 
                 <p>

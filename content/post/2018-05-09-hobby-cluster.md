@@ -648,6 +648,10 @@ I maintain three personal hobby clusters, one with [Digital Ocean] hosted in New
 
 Are you in the business or collecting, moving, buffering, queueing, processing or presenting data on your cluster? If so, check out [txn2.com](https://txn2.com/).
 
+## Port Forwarding / Local Development
+
+Check out [kubefwd](https://github.com/txn2/kubefwd) for a simple command line utility that bulk forwards services of one or more namespaces to your local workstation.
+
 ## Resources
 
 - [Linode]

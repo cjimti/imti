@@ -41,6 +41,10 @@ systemctl restart kubelet
 ```
 {{< content-ad >}}
 
+## Port Forwarding / Local Development
+
+Check out [kubefwd](https://github.com/txn2/kubefwd) for a simple command line utility that bulk forwards services of one or more namespaces to your local workstation.
+
 ### Resources
 
 - [systemctl] - How To Use Systemctl to Manage Systemd Services and Units

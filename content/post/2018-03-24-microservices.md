@@ -372,6 +372,9 @@ My `/etc/hosts' entry should be `192.168.99.100  local.imti.cloud`. Browsing to 
 - [Pain(less) NGINX Ingress](http://danielfm.me/posts/painless-nginx-ingress.html)
 - [Kubernetes nginx-ingress-controller](https://daemonza.github.io/2017/02/13/kubernetes-nginx-ingress-controller/)
 
+## Port Forwarding / Local Development
+
+Check out [kubefwd](https://github.com/txn2/kubefwd) for a simple command line utility that bulk forwards services of one or more namespaces to your local workstation.
 
 ---
 [Setting up Nginx Ingress on Kubernetes]: https://hackernoon.com/setting-up-nginx-ingress-on-kubernetes-2b733d8d2f45

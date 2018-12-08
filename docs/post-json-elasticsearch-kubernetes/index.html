@@ -88,7 +88,7 @@
     }
   },
   "description": "IOT devices, Point-of-Sale systems, application events or any client that sends data destined for indexing in Elasticsearch often need to send and forget, however, unless that data is of low value there needs to be assurance that arrives at its final destination. Back-pressure and database outages can pose a considerable threat to data integrity.
- Contents     Background Overview Development Environment  the-project Namespace  The Project: Weather (wx) Data rxtx for Store-and-Forward  wx-rxtx Service wx-rxtx StatefulSet  rtBeat to Collect, Buffer and Publish  wx-rtbeat Service wx-rtbeat ConfigMap wx-rtbeat Deployment  Client Simulation / Kubernetes Cron Performance Conclusion Reference        (adsbygoogle = window."
+ Contents     Background Overview Development Environment  the-project Namespace  The Project: Weather (wx) Data rxtx for Store-and-Forward  wx-rxtx Service wx-rxtx StatefulSet  rtBeat to Collect, Buffer and Publish  wx-rtbeat Service wx-rtbeat ConfigMap wx-rtbeat Deployment  Client Simulation / Kubernetes Cron Performance Conclusion Port Forwarding / Local Development Reference        (adsbygoogle = window."
 }
 </script>
 
@@ -254,6 +254,7 @@
 <li><a href="#client-simulation-kubernetes-cron">Client Simulation / Kubernetes Cron</a></li>
 <li><a href="#performance">Performance</a></li>
 <li><a href="#conclusion">Conclusion</a></li>
+<li><a href="#port-forwarding-local-development">Port Forwarding / Local Development</a></li>
 <li><a href="#reference">Reference</a></li>
 </ul></li>
 </ul>
@@ -809,6 +810,10 @@ spec:
 
 <p><img src="/images/content/txn2/wx-kibana.png" alt="Kibana Dashboard" />
 <img src="/images/content/txn2/wx-discover.png" alt="Kibana Discover" /></p>
+
+<h2 id="port-forwarding-local-development">Port Forwarding / Local Development</h2>
+
+<p>Check out <a href="https://github.com/txn2/kubefwd">kubefwd</a> for a simple command line utility that bulk forwards services of one or more namespaces to your local workstation.</p>
 
 <h2 id="reference">Reference</h2>
 

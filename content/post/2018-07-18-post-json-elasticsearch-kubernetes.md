@@ -558,6 +558,10 @@ If you have setup [Kibana on Kubernetes], you should begin to see data. You are 
 ![Kibana Dashboard](/images/content/txn2/wx-kibana.png)
 ![Kibana Discover](/images/content/txn2/wx-discover.png)
 
+## Port Forwarding / Local Development
+
+Check out [kubefwd](https://github.com/txn2/kubefwd) for a simple command line utility that bulk forwards services of one or more namespaces to your local workstation.
+
 
 ## Reference
 - [Production Hobby Cluster]

@@ -45,6 +45,8 @@ import seaborn as sb
 ```
 {{< math >}}
 {{< toc >}}
+{{< content-ad >}}
+
 ## Matrix Notation
 
 It is common to note a matrix with a capital letter. The following is a three by two matrix of [Real number]s.

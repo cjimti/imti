@@ -571,6 +571,10 @@ Example output:
 }
 ```
 
+## Port Forwarding / Local Development
+
+Check out [kubefwd](https://github.com/txn2/kubefwd) for a simple command line utility that bulk forwards services of one or more namespaces to your local workstation.
+
 ### Next
 
 - Setup [Kibana on Kubernetes] for data exploration and visualization.

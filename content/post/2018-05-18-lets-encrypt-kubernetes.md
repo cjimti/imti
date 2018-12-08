@@ -314,6 +314,10 @@ spec:
 ```
 I could have easily created a seperate cert for imti.co and grouped it under a seperate `hosts:` section. However I'll probably be redirecting it in the future so it suits my need at the moment.
 
+## Port Forwarding / Local Development
+
+Check out [kubefwd](https://github.com/txn2/kubefwd) for a simple command line utility that bulk forwards services of one or more namespaces to your local workstation.
+
 ---
 
 If in a few days you find yourself setting up a cluster in Japan or Germany on [Linode], and another two in Australia and France on [vultr], then you may have just joined the PHC (Performance [Hobby Cluster]s) club. Some people tinker late at night on their truck, we benchmark and test the resilience of node failures on our overseas, budget kubernetes clusters. It's all about going big, on the cheap.

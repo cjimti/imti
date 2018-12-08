@@ -398,6 +398,9 @@ kubectl config get-contexts
 You now have access to **the-project** namespace on the **dev** cluster. Check out the [kubectl Cheat Sheet] for a quick list of useful commands.
 
 
+## Port Forwarding / Local Development
+
+Check out [kubefwd](https://github.com/txn2/kubefwd) for a simple command line utility that bulk forwards services of one or more namespaces to your local workstation.
 
 ## Resources
 

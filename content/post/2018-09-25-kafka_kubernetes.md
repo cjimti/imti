@@ -543,6 +543,10 @@ kubectl -n the-project exec -ti kafka-test-client -- \
 --topic test --from-beginning
 ```
 
+## Port Forwarding / Local Development
+
+Check out [kubefwd](https://github.com/txn2/kubefwd) for a simple command line utility that bulk forwards services of one or more namespaces to your local workstation.
+
 
 [Kafka]: https://kafka.apache.org/
 [helm]: https://helm.sh/

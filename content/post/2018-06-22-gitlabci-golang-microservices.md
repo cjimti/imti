@@ -605,6 +605,10 @@ Streamlining this workflow can be accomplished with utilities like the Kubernete
 
 {{< content-ad >}}
 
+## Port Forwarding / Local Development
+
+Check out [kubefwd](https://github.com/txn2/kubefwd) for a simple command line utility that bulk forwards services of one or more namespaces to your local workstation.
+
 ## Resources
 - [Production Hobby Cluster]
 - [Ingress on Custom Kubernetes]

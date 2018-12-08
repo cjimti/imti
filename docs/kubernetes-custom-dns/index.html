@@ -213,7 +213,9 @@ If you want to experiment on a production-like cluster, I suggest reading my art
                     <li><div class="addthis_inline_share_toolbox"></div></li>
                 </ul>
 
-                <p>Customize the <a href="https://kubernetes.io/docs/tasks/administer-cluster/dns-custom-nameservers/">Upstream Nameservers</a> used by <a href="https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/">kube-dns</a> by <a href="https://kubernetes.io/docs/concepts/workloads/pods/pod/">Pods</a> when looking up external hostnames from within a Kubernetes cluster. I found that adding custom <a href="https://kubernetes.io/docs/tasks/administer-cluster/dns-custom-nameservers/">Upstream Nameservers</a> to my <a href="https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/">kube-dns</a> solved many issues encountered in in the past with external hostname resolution on individual <a href="https://kubernetes.io/docs/concepts/workloads/pods/pod/">Pods</a>.</p>
+                
+
+<p>Customize the <a href="https://kubernetes.io/docs/tasks/administer-cluster/dns-custom-nameservers/">Upstream Nameservers</a> used by <a href="https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/">kube-dns</a> by <a href="https://kubernetes.io/docs/concepts/workloads/pods/pod/">Pods</a> when looking up external hostnames from within a Kubernetes cluster. I found that adding custom <a href="https://kubernetes.io/docs/tasks/administer-cluster/dns-custom-nameservers/">Upstream Nameservers</a> to my <a href="https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/">kube-dns</a> solved many issues encountered in in the past with external hostname resolution on individual <a href="https://kubernetes.io/docs/concepts/workloads/pods/pod/">Pods</a>.</p>
 
 <p>If you want to experiment on a production-like cluster, I suggest reading my article &ldquo;<a href="/hobby-cluster/">Production Hobby Cluster</a>&rdquo; for a guide on setting up a fun, cheap-yet-robust experimental cluster.</p>
 
@@ -227,6 +229,10 @@ If you want to experiment on a production-like cluster, I suggest reading my art
 </code></pre>
 
 <p>If you are having trouble with DNS on your Kubernetes cluster, you may want to read the official documentation on <a href="https://kubernetes.io/docs/tasks/administer-cluster/dns-debugging-resolution/">Debugging DNS Resolution</a>.</p>
+
+<h2 id="port-forwarding-local-development">Port Forwarding / Local Development</h2>
+
+<p>Check out <a href="https://github.com/txn2/kubefwd">kubefwd</a> for a simple command line utility that bulk forwards services of one or more namespaces to your local workstation.</p>
 
 <hr />
 

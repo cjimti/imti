@@ -583,6 +583,10 @@ Output:
 
 Explore the Elasticsearch official documentation: [Search in Depth].
 
+## Port Forwarding / Local Development
+
+Check out [kubefwd](https://github.com/txn2/kubefwd) for a simple command line utility that bulk forwards services of one or more namespaces to your local workstation.
+
 ## Resources
 
 - Setup a Custom Kubernetes [Production Hobby Cluster] for a more production-like development environment.

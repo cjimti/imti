@@ -260,6 +260,10 @@ kubectl create -f 60-ingress.yml
 
 You now have [Kibana] up and running in Kubernetes and pointed to your [Production Grade Elasticsearch on Kubernetes]. Check out the official [Kibana Documentation].
 
+## Port Forwarding / Local Development
+
+Check out [kubefwd](https://github.com/txn2/kubefwd) for a simple command line utility that bulk forwards services of one or more namespaces to your local workstation.
+
 ## Resources
 
 - [Production Grade Elasticsearch on Kubernetes]

@@ -792,6 +792,10 @@ kubectl create -f ./420-geth-tx-deployment.yml
 
 Depending on your difficulty and resources it may take 10-20 minutes to mine your first block in this private chain. However, the difficulty is automatically adjusted, and you may begin to mine blocks at around 20-30 seconds on average.
 
+## Port Forwarding / Local Development
+
+Check out [kubefwd](https://github.com/txn2/kubefwd) for a simple command line utility that bulk forwards services of one or more namespaces to your local workstation.
+
 ## Additional Resources
 
 - [go-ethereum Private-network] Github Wiki

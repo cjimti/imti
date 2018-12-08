@@ -68,7 +68,9 @@ If in a few days you find yourself setting up a cluster in Japan or Germany on [
 
 [![k8s performance hobby clusters](https://github.com/cjimti/mk/raw/master/images/content/k8s-tshirt-banner.jpg)](https://amzn.to/2IOe8Yu)
 
+## Port Forwarding / Local Development
 
+Check out [kubefwd](https://github.com/txn2/kubefwd) for a simple command line utility that bulk forwards services of one or more namespaces to your local workstation.
 
 ## Resources
 

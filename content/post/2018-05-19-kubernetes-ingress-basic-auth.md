@@ -114,6 +114,10 @@ The [Ingress] for [ok-auth.la.txn2.net](https://ok-auth.la.txn2.net) is now [Bas
 
 {{< content-ad >}}
 
+## Port Forwarding / Local Development
+
+Check out [kubefwd](https://github.com/txn2/kubefwd) for a simple command line utility that bulk forwards services of one or more namespaces to your local workstation.
+
 ## Resources
 
 If you found this article useful, you may want to check out all the articles used to build on the [Production Hobby Cluster] tagged with [phc.txn2.net].

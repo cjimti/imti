@@ -85,6 +85,10 @@ more_set_headers 'Access-Control-Allow-Credentials: true';
 
 {{< content-ad >}}
 
+## Port Forwarding / Local Development
+
+Check out [kubefwd](https://github.com/txn2/kubefwd) for a simple command line utility that bulk forwards services of one or more namespaces to your local workstation.
+
 ## Resources
 
 If you found this article useful, you may want to check out [all my articles on Kubernetes][phc.txn2.net], used to build on the [Production Hobby Cluster]. [PHC][Production Hobby Cluster] an excellent environment for developing and testing cloud-native microservices like [txToken]. While using Minikube or similar environments for testing and developing cloud-native [microservice]s, I find it a much better experience to use a more true-to-production cluster like [PHC][Production Hobby Cluster].
