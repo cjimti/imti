@@ -1734,7 +1734,7 @@ plt.show()
 ```
 
 
-![png](img/matrix1/output_105_0.png)
+![png](/images/content/matrix1/output_105_0.png)
 
 
 ### Multiplication with a Diagonal Matrix
