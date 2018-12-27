@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head><head>
+    <meta name="msvalidate.01" content="DBC34551F2DD1BA3DC0D62EE46D7448F" />
+    <meta name="google-site-verification" content="DrtKc88u9uc7iptd4LyURAKBmFcOn7Kuk6HcRk_kNmo" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <meta name="description" content="Airflow and KubeFlow set to ease enterprise deployment of AI/ML">
+    
+    <meta name="keyword"  content="Go, Kubernetes, Elasticsearch, Python, Docker, Big Data, Artificial Intelligence, Machine Learning, Blockchain">
+    <link rel="shortcut icon" href="https://imti.co/img/favicon.ico">
+
+    <title>2019 Cloud Native Machine Learning - IMTI - Craig Johnston</title>
+
+    <link rel="canonical" href="https://imti.co/2019-cloud-native-machine-learning/">
+	
+    
+    <link rel="stylesheet" href="https://imti.co/css/bootstrap.min.css">
+
+    
+    <link rel="stylesheet" href="https://imti.co/css/hux-blog.min.css">
+
+    
+    <link rel="stylesheet" href="https://imti.co/css/syntax.css">
+
+    
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    
+    
+    <link rel="stylesheet" href="/css/imti.css">
+
+    
+    <script src="https://imti.co/js/jquery.min.js"></script>
+    
+    
+    <script src="https://imti.co/js/bootstrap.min.js"></script>
+    
+    
+    <script src="https://imti.co/js/hux-blog.min.js"></script>
+
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({
+            google_ad_client: "ca-pub-5984764595236029",
+            enable_page_level_ads: true
+        });
+    </script>
+
+    <meta name="twitter:site" content="@cjimti">
+<meta name="twitter:creator" content="@cjimti">
+
+<meta name="twitter:description" content="Airflow and KubeFlow set to ease enterprise deployment of AI/ML" />
+<meta name="twitter:title" content="2019 Cloud Native Machine Learning" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://imti.co/img/post/industrial-pipeline_876_438.jpg" />
+<meta property="og:image" content="https://imti.co/img/post/industrial-pipeline_876_438.jpg" />
+
+
+
+    
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Article",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://imti.co/2019-cloud-native-machine-learning/"
+  },
+  "headline": "2019 Cloud Native Machine Learning",
+  "image": [
+    "https://imti.co/img/post/industrial-pipeline_876_438.jpg"
+   ],
+  "datePublished": "2018-12-26T00:00:00",
+  "dateModified": "2018-12-26T00:00:00",
+  "author": {
+    "@type": "Person",
+    "name": "Craig Johnston"
+  },
+   "publisher": {
+    "@type": "Organization",
+    "name": 'imti.co",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://imti.co/img/craig_johnston_cjimti.jpg"
+    }
+  },
+  "description": "2018 has been an excellent year for machine learning, with frameworks such as PyTorch, Karas, Tensorflow and CNTK maturing in levels of stability and ease of use, sophisticated and academic concepts have become highly accessible to a wide range of developers. Anyone investing a few hours in technical tutorials can build a learner; yet, scaled production integration remains a pain point. However, 2018 saw significant advances in Cloud-Native and DevOps technologies."
+}
+</script>
+
+</head></head>
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="https://imti.co/">IMTI</a>
+        </div>
+
+        
+        
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="https://imti.co/">Home</a>
+                    </li>
+                    <li>
+                        <a href="https://imti.co/about/">About</a>
+                    </li>
+                    <li>
+                        <a href="https://twitter.com/cjimti">Follow</a>
+                    </li>
+                    
+
+                    
+                </ul>
+            </div>
+        </div>
+        
+    </div>
+    
+</nav>
+<script>
+    
+    
+    
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        
+            $navbar.className = " ";
+            
+            setTimeout(function(){
+                
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+
+
+<style type="text/css">
+    header.intro-header{
+        background-image: url('https://imti.co/img/post/industrial-pipeline.jpg')
+    }
+</style>
+<header class="intro-header" >
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/machine-learning" title="Machine Learning">
+                        Machine Learning
+                        </a>
+                        
+                        <a class="tag" href="/tags/data-science" title="Data Science">
+                        Data Science
+                        </a>
+                        
+                    </div>
+                    <h1>2019 Cloud Native Machine Learning</h1>
+                    <h2 class="subheading">Airflow and KubeFlow set to ease enterprise deployment of AI/ML</h2>
+                    <span  class="meta">Posted by Craig Johnston on Wednesday, December 26, 2018
+                        
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+<article>
+    <div class="container">
+        <div class="row">
+
+            
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <h5>SHARE</h5>
+                <ul class="list-inline">
+                    <li><div class="addthis_inline_share_toolbox"></div></li>
+                </ul>
+
+                
+
+<p>2018 has been an excellent year for machine learning, with frameworks such as <a href="https://pytorch.org/">PyTorch</a>, <a href="https://keras.io/">Karas</a>, <a href="https://www.tensorflow.org/">Tensorflow</a> and <a href="https://www.microsoft.com/en-us/cognitive-toolkit/">CNTK</a> maturing in levels of stability and ease of use, sophisticated and academic concepts have become highly accessible to a wide range of developers. Anyone investing a few hours in technical tutorials can build a learner; yet, scaled production integration remains a pain point. However, 2018 saw significant advances in Cloud-Native and DevOps technologies. <a href="https://kubernetes.io/">Kubernetes</a> is now as <a href="https://hackernoon.com/10-disruptive-devops-trends-of-2018-b0b6d5719376">ubiquitous</a> as &ldquo;the cloud&rdquo; and with projects like <a href="https://airflow.apache.org/">Airflow</a> and <a href="https://pytorch.org/">KubeFlow</a> integrating seamlessly, along with their resolve to ease ML integration at scale, I expect 2018 to be a big year in highly accessible, vendor-neutral, <a href="https://www.infoworld.com/article/3281046/cloud-computing/what-is-cloud-native-the-modern-way-to-develop-software.html">Cloud-Native</a> Machine Learning.</p>
+
+<h3 id="declarative-configuration-of-machine-learning-architectures">Declarative Configuration of Machine Learning Architectures</h3>
+
+<p>2019 looks to be the year for <a href="https://www.forbes.com/sites/forbestechcouncil/2018/07/05/cloud-native-machine-learning-and-ai/#3f361e539719">Cloud-Native Machine Learning</a>. Technologies like Airflow and KubeFlow help reduce complexity and production integration by leveraging declarative configuration and orchestration of data processing pipelines in <a href="https://kubernetes.io/">Kubernetes</a> with a specific focus on Machine Learning.  Just as technologies such as PyTorch and Tensorflow brought Machine Learning from academic papers to plug and play libraries, solutions like Airflow and KubeFlow are bringing many frameworks like PyTorch and Tensorflow to enterprise architectures.</p>
+
+<h3 id="machine-learning-functions-as-a-service">Machine Learning Functions as a Service</h3>
+
+<p>Kubernetes has propelled the trends in Microservices and FaaS (serverless) architectures by offering an ideal environment, not only in deep native support for their core concepts but additionally easing the integration of CI/CD technologies, propelled by a growing culture of Agile and rapid release schedules.  As Microservices and FaaS continue to gain popularity, I expect technologies such as <a href="https://github.com/Hydrospheredata/hydro-serving">Hydrosphere.io</a> and many others to automate and integrate ML pipelines further into existing Kubernetes based architectures, offering a variety of <a href="https://hydrosphere.io/blog/machine-learning-function-service-ml-faas/">serverless functions for Machine Learning</a>.</p>
+
+
+                <p>
+                   <span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">2019 Cloud Native Machine Learning: Airflow and KubeFlow set to ease enterprise deployment of AI/ML</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="https://imti.co/" property="cc:attributionName" rel="cc:attributionURL">Craig Johnston</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+                    <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a>
+                </p>
+
+                
+                <hr>
+                <h5>SHARE</h5>
+                <ul class="list-inline">
+                    <li><div class="addthis_inline_share_toolbox"></div></li>
+                </ul>
+
+                <h5>FOLLOW</h5>
+                <ul class="list-inline">
+                    <li><div class="addthis_inline_follow_toolbox"></div></li>
+                </ul>
+
+            </div>
+            
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                
+                <section>
+                    <hr class="hidden-sm hidden-xs">
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                        
+                        
+                        
+                        <a href="/tags/blockchain" title="Blockchain">
+                        Blockchain
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/data" title="Data">
+                        Data
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/data-science" title="Data Science">
+                        Data Science
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/devops" title="DevOps">
+                        DevOps
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/development" title="Development">
+                        Development
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/docker" title="Docker">
+                        Docker
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/elasticsearch" title="Elasticsearch">
+                        Elasticsearch
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/golang" title="Golang">
+                        Golang
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/ingress" title="Ingress">
+                        Ingress
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/kubernetes" title="Kubernetes">
+                        Kubernetes
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/microservices" title="Microservices">
+                        Microservices
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/python" title="Python">
+                        Python
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/raspberry-pi" title="Raspberry Pi">
+                        Raspberry Pi
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/security" title="Security">
+                        Security
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/utils" title="Utils">
+                        Utils
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/kubectl" title="kubectl">
+                        kubectl
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                    </div>
+                </section>
+
+                
+                <hr>
+                <h5>RELATED</h5>
+                <ul class="list-inline">
+                    
+                </ul>
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                   
+                   <li>
+                       <a href="" rel="alternate" type="application/rss+xml" title="IMTI" >
+                           <span class="fa-stack fa-lg">
+                               <i class="fa fa-circle fa-stack-2x"></i>
+                               <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+                           </span>
+                       </a>
+                   </li>
+                   
+                    
+                    <li>
+                        <a href="mailto:cjimti@gmail.com">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                    
+                    
+                    <li>
+                        <a href="https://twitter.com/cjimti">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    
+
+                    
+
+		    
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/cjimti">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                    
+                    <li>
+                        <a target="_blank" href="https://www.linkedin.com/in/cjimti/">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                </ul>
+
+                
+                
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+
+
+
+
+<script>
+    
+    if($('#tag_cloud').length !== 0){
+        async("/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5b905a667cf4d77c"></script>
+
+
+
+    
+        
+        
+    
+
+
+
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-78786435-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+</body>
+</html>
