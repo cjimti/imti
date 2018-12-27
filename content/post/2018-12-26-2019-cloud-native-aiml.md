@@ -16,7 +16,7 @@ series:
 - Artificial Intelligence
 ---
 
-2018 has been an excellent year for machine learning, with frameworks such as [PyTorch], [Karas], [Tensorflow] and [CNTK] maturing in levels of stability and ease of use, sophisticated and academic concepts have become highly accessible to a wide range of developers. Anyone investing a few hours in technical tutorials can build a learner; yet, scaled production integration remains a pain point. However, 2018 saw significant advances in Cloud-Native and DevOps technologies. [Kubernetes] is now as [ubiquitous] as "the cloud" and with projects like [Airflow] and [KubeFlow] integrating seamlessly, along with their resolve to ease ML integration at scale, I expect 2018 to be a big year in highly accessible, vendor-neutral, [Cloud-Native] Machine Learning.
+2018 has been an excellent year for machine learning, with frameworks such as [PyTorch], [Karas], [Tensorflow] and [CNTK] maturing in levels of stability and ease of use, sophisticated and academic concepts have become highly accessible to a wide range of developers. Anyone investing a few hours in technical tutorials can build a learner; yet, scaled production integration remains a pain point. However, 2018 saw significant advances in Cloud-Native and DevOps technologies. [Kubernetes] is now as [ubiquitous] as "the cloud" and with projects like [Airflow] and [KubeFlow] integrating seamlessly, along with their resolve to ease ML integration at scale, I expect 2019 to be a big year in highly accessible, vendor-neutral, [Cloud-Native] Machine Learning.
 
 ### Declarative Configuration of Machine Learning Architectures
 
