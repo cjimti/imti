@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Machine Learning on IMTI</title>
+    <link>https://imti.co/tags/machine-learning/</link>
+    <description>Recent content in Machine Learning on IMTI</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 26 Dec 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://imti.co/tags/machine-learning/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>2018 Cloud Native Machine Learning</title>
+      <link>https://imti.co/2018-cloud-native-machine-learning/</link>
+      <pubDate>Wed, 26 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://imti.co/2018-cloud-native-machine-learning/</guid>
+      <description>2017 has been an excellent year for machine learning, with frameworks such as PyTorch, Karas, Tensorflow and CNTK maturing in levels of stability and ease of use, sophisticated and academic concepts have become highly accessible to a wide range of developers. Anyone investing a few hours in technical tutorials can build a learner; yet, scaled production integration remains a pain point. However, 2017 saw significant advances in Cloud-Native and DevOps technologies.</description>
+    </item>
+    
+  </channel>
+</rss>
