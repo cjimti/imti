@@ -1,11 +1,11 @@
 ---
 draft: false
 layout:   post
-title:    "2018 Cloud Native Machine Learning"
+title:    "2019 Cloud Native Machine Learning"
 subtitle: "Airflow and KubeFlow set to ease enterprise deployment of AI/ML"
 date:     2018-12-26
 author:   "Craig Johnston"
-URL:      "2018-cloud-native-machine-learning/"
+URL:      "2019-cloud-native-machine-learning/"
 image:    "/img/post/industrial-pipeline.jpg"
 twitter_image:  "/img/post/industrial-pipeline_876_438.jpg"
 tags:
@@ -16,11 +16,11 @@ series:
 - Artificial Intelligence
 ---
 
-2017 has been an excellent year for machine learning, with frameworks such as [PyTorch], [Karas], [Tensorflow] and [CNTK] maturing in levels of stability and ease of use, sophisticated and academic concepts have become highly accessible to a wide range of developers. Anyone investing a few hours in technical tutorials can build a learner; yet, scaled production integration remains a pain point. However, 2017 saw significant advances in Cloud-Native and DevOps technologies. [Kubernetes] is now as [ubiquitous] as "the cloud" and with projects like [Airflow] and [KubeFlow] integrating seamlessly, along with their resolve to ease ML integration at scale, I expect 2018 to be a big year in highly accessible, vendor-neutral, [Cloud-Native] Machine Learning.
+2018 has been an excellent year for machine learning, with frameworks such as [PyTorch], [Karas], [Tensorflow] and [CNTK] maturing in levels of stability and ease of use, sophisticated and academic concepts have become highly accessible to a wide range of developers. Anyone investing a few hours in technical tutorials can build a learner; yet, scaled production integration remains a pain point. However, 2018 saw significant advances in Cloud-Native and DevOps technologies. [Kubernetes] is now as [ubiquitous] as "the cloud" and with projects like [Airflow] and [KubeFlow] integrating seamlessly, along with their resolve to ease ML integration at scale, I expect 2018 to be a big year in highly accessible, vendor-neutral, [Cloud-Native] Machine Learning.
 
 ### Declarative Configuration of Machine Learning Architectures
 
-2018 looks to be the year for [Cloud-Native Machine Learning]. Technologies like Airflow and KubeFlow help reduce complexity and production integration by leveraging declarative configuration and orchestration of data processing pipelines in [Kubernetes] with a specific focus on Machine Learning.  Just as technologies such as PyTorch and Tensorflow brought Machine Learning from academic papers to plug and play libraries, solutions like Airflow and KubeFlow are bringing many frameworks like PyTorch and Tensorflow to enterprise architectures.
+2019 looks to be the year for [Cloud-Native Machine Learning]. Technologies like Airflow and KubeFlow help reduce complexity and production integration by leveraging declarative configuration and orchestration of data processing pipelines in [Kubernetes] with a specific focus on Machine Learning.  Just as technologies such as PyTorch and Tensorflow brought Machine Learning from academic papers to plug and play libraries, solutions like Airflow and KubeFlow are bringing many frameworks like PyTorch and Tensorflow to enterprise architectures.
 
 ### Machine Learning Functions as a Service
 
