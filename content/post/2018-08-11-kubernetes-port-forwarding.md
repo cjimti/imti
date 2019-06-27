@@ -26,7 +26,7 @@ Developing services in a [Microservices] architecture presents local development
 
 The [kubectl] command offers a vast array of features for working with a [Kubernetes] cluster, one of which is the [port-forward] command. Forwarding one or more ports on your local workstation to a Kubernetes service, deployment or individual pod is a simple command. The [kubectl] [port-forward] was likely developed as a debugging utility and works great for that.
 
-In most cases, it makes sense to port forward a Kubernetes [Service]. A Kubernetes Service can listen-on and forward to one or more ports of an associated [Pod]. Services are a persistent resource the provide a consistent way to reach a Pod. Pods can come and go, where Services persist and find the appropriate Pod when one is available.
+In most cases, it makes sense to port forward a Kubernetes [Service]. A Kubernetes Service can listen-on and forward to one or more ports of an associated [Pod]. Services are a persistent resource, as they provide a consistent way to reach a Pod. Pods can come and go, where Services persist and find the appropriate Pod when one is available.
 
 The following is an example of a Kubectl [port-forward] command, forwarding port 8080 on the local workstation to 8080 for the service `ok`, additionally port 8081 on the local workstation to port 80 on `ok` service, in the [Namespace] `the-project`:
 
@@ -70,7 +70,7 @@ Local access to a Service named `elasticsearch` listening on port 9200 in `the-p
 curl http://elasticsearch:9200
 ```
 
-[kubefwd] gives each Service forward it's own IP address, allowing multiple services to use the same port just as they may in the cluster. You might have a few services responding to port 80 or 8080 or have multiple databases like `db-customer:3306` and `db-auth:3306`.
+[kubefwd] gives each Service forward its own IP address, allowing multiple services to use the same port just as they may in the cluster. You might have a few services responding to port 80 or 8080 or have multiple databases like `db-customer:3306` and `db-auth:3306`.
 
 ## Install [kubefwd]
 

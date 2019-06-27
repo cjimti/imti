@@ -231,7 +231,7 @@ I don&#39;t run Kubernetes locally, but I do depend on services running in remot
 
 <p>The <a href="https://kubernetes.io/docs/reference/kubectl/overview/">kubectl</a> command offers a vast array of features for working with a <a href="https://kubernetes.io/">Kubernetes</a> cluster, one of which is the <a href="https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#port-forward">port-forward</a> command. Forwarding one or more ports on your local workstation to a Kubernetes service, deployment or individual pod is a simple command. The <a href="https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#port-forward">kubectl</a> was likely developed as a debugging utility and works great for that.</p>
 
-<p>In most cases, it makes sense to port forward a Kubernetes <a href="https://kubernetes.io/docs/concepts/services-networking/service/">Service</a>. A Kubernetes Service can listen-on and forward to one or more ports of an associated <a href="https://kubernetes.io/docs/concepts/workloads/pods/pod/">Pod</a>. Services are a persistent resource the provide a consistent way to reach a Pod. Pods can come and go, where Services persist and find the appropriate Pod when one is available.</p>
+<p>In most cases, it makes sense to port forward a Kubernetes <a href="https://kubernetes.io/docs/concepts/services-networking/service/">Service</a>. A Kubernetes Service can listen-on and forward to one or more ports of an associated <a href="https://kubernetes.io/docs/concepts/workloads/pods/pod/">Pod</a>. Services are a persistent resource, as they provide a consistent way to reach a Pod. Pods can come and go, where Services persist and find the appropriate Pod when one is available.</p>
 
 <p>The following is an example of a Kubectl <a href="https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#port-forward">port-forward</a> command, forwarding port 8080 on the local workstation to 8080 for the service <code>ok</code>, additionally port 8081 on the local workstation to port 80 on <code>ok</code> service, in the <a href="https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/">Namespace</a> <code>the-project</code>:</p>
 
@@ -282,7 +282,7 @@ I don&#39;t run Kubernetes locally, but I do depend on services running in remot
 <pre><code class="language-bash">curl http://elasticsearch:9200
 </code></pre>
 
-<p><a href="https://github.com/txn2/kubefwd">kubefwd</a> gives each Service forward it&rsquo;s own IP address, allowing multiple services to use the same port just as they may in the cluster. You might have a few services responding to port 80 or 8080 or have multiple databases like <code>db-customer:3306</code> and <code>db-auth:3306</code>.</p>
+<p><a href="https://github.com/txn2/kubefwd">kubefwd</a> gives each Service forward its own IP address, allowing multiple services to use the same port just as they may in the cluster. You might have a few services responding to port 80 or 8080 or have multiple databases like <code>db-customer:3306</code> and <code>db-auth:3306</code>.</p>
 
 <h2 id="install-kubefwd">Install <a href="https://github.com/txn2/kubefwd">kubefwd</a></h2>
 
