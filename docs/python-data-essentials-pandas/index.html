@@ -67,11 +67,11 @@
   "@type": "Article",
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://imti.co/python-data-essentials-pandas/"
+    "@id": "https:\/\/imti.co\/python-data-essentials-pandas\/"
   },
   "headline": "Python Data Essentials - Pandas",
   "image": [
-    "https://imti.co/img/post/columns_876_438.jpg"
+    "https:\/\/imti.co\/img\/post\/columns_876_438.jpg"
    ],
   "datePublished": "2018-06-17T00:00:00",
   "dateModified": "2018-06-17T00:00:00",
@@ -84,7 +84,7 @@
     "name": 'imti.co",
     "logo": {
       "@type": "ImageObject",
-      "url": "https://imti.co/img/craig_johnston_cjimti.jpg"
+      "url": "https:\/\/imti.co\/img\/craig_johnston_cjimti.jpg"
     }
   },
   "description": "Pandas bring Python a data type equivalent to super-charged spreadsheets. Pandas add two highly expressive data structures to Python, Series and DataFrame. Pandas Series and DataFrames provide a performant analysis and manipulation of “relational” or “labeled” data similar to relational database tables like MySQL or the rows and columns of Excel. Pandas are great for working with time series data as well as arbitrary matrix data, and unlabeled data."
@@ -294,8 +294,7 @@ pandas                    0.22.0           py36h0a44026_0
 </blockquote>
 
 <ul>
-<li><a href="https://pandas.pydata.org/pandas-docs/stable/generated/pandas.Series.html">Series</a> official documentation</li>
-</ul>
+<li><p><a href="https://pandas.pydata.org/pandas-docs/stable/generated/pandas.Series.html">Series</a> official documentation</p>
 
 <pre><code class="language-python">import pandas as pd
 
@@ -309,28 +308,29 @@ print(f'Dimensions: {board.ndim}')
 print(f'      Size: {board.size}')
 </code></pre>
 
-<pre><code>Series: 
+<p>Series:
 Name     Orange Pi Plus
 CPU       ARM Cortex-A7
 GHz               1.536
 Cores                 4
 Ram                1046
 Own                   2
-dtype: object
+dtype: object</p>
 
-     Shape: (6,)
-Dimensions: 1
-      Size: 6
+<pre><code> Shape: (6,)
 </code></pre>
+
+<p>Dimensions: 1
+      Size: 6</p>
 
 <pre><code class="language-python"># check for label
 print(f'Do we have GPU data? {&quot;GPU&quot; in board}')
 print(f'Do we have CPU data? {&quot;CPU&quot; in board}')
 </code></pre>
 
-<pre><code>Do we have GPU data? False
-Do we have CPU data? True
-</code></pre>
+<p>Do we have GPU data? False
+Do we have CPU data? True</p></li>
+</ul>
 
 <h3 id="accessing-and-deleting-elements">Accessing and Deleting Elements</h3>
 
@@ -338,18 +338,17 @@ Do we have CPU data? True
 <li><a href="http://pandas.pydata.org/pandas-docs/version/0.22/generated/pandas.DataFrame.iloc.html">pandas.DataFrame.iloc</a> - explicit selection by integer-index</li>
 <li><a href="http://pandas.pydata.org/pandas-docs/version/0.22/generated/pandas.DataFrame.loc.html">pandas.DataFrame.loc</a> - explicit selection by label</li>
 <li><a href="https://pandas.pydata.org/pandas-docs/stable/generated/pandas.Series.drop.html">pandas.Series.drop</a> - return Series with specified index labels removed.</li>
-<li><a href="https://pandas.pydata.org/pandas-docs/stable/indexing.html">Indexing and Selecting Data</a> official documentation.</li>
-</ul>
+
+<li><p><a href="https://pandas.pydata.org/pandas-docs/stable/indexing.html">Indexing and Selecting Data</a> official documentation.</p>
 
 <pre><code class="language-python">print(f'The {board[&quot;Name&quot;]} runs at {board[&quot;GHz&quot;]} GHz.')
 print(f'The {board[0]} has {board[3]} cores.')
 print(f'The {board[0]} has {board[-1]:,} megabytes of ram.')
 </code></pre>
 
-<pre><code>The Orange Pi Plus runs at 1.536 GHz.
+<p>The Orange Pi Plus runs at 1.536 GHz.
 The Orange Pi Plus has 4 cores.
-The Orange Pi Plus has 2 megabytes of ram.
-</code></pre>
+The Orange Pi Plus has 2 megabytes of ram.</p>
 
 <pre><code class="language-python"># select specific columns
 cc = board[[&quot;CPU&quot;,&quot;Cores&quot;]]
@@ -360,15 +359,16 @@ print(f'Dimensions: {cc.ndim}')
 print(f'      Size: {cc.size}')
 </code></pre>
 
-<pre><code>Series: 
+<p>Series:
 CPU      ARM Cortex-A7
 Cores                4
-dtype: object
+dtype: object</p>
 
-     Shape: (2,)
-Dimensions: 1
-      Size: 2
+<pre><code> Shape: (2,)
 </code></pre>
+
+<p>Dimensions: 1
+      Size: 2</p>
 
 <pre><code class="language-python"># remove a column return or inplace=True
 nb = board.drop(&quot;Cores&quot;)
@@ -379,40 +379,40 @@ print(f'Dimensions: {nb.ndim}')
 print(f'      Size: {nb.size}')
 </code></pre>
 
-<pre><code>Series: 
+<p>Series:
 Name    Orange Pi Plus
 CPU      ARM Cortex-A7
 GHz              1.536
 Ram               1046
 Own                  2
-dtype: object
+dtype: object</p>
 
-     Shape: (5,)
-Dimensions: 1
-      Size: 5
+<pre><code> Shape: (5,)
 </code></pre>
+
+<p>Dimensions: 1
+      Size: 5</p>
 
 <pre><code class="language-python">inventory = pd.Series([1,3,2],['Orange Pi Plus', 'Raspberry Pi 3', 'Asus Tinker Board'])
 print(f'Series: \n{inventory}\n')
 </code></pre>
 
-<pre><code>Series: 
+<p>Series:
 Orange Pi Plus       1
 Raspberry Pi 3       3
 Asus Tinker Board    2
-dtype: int64
-</code></pre>
+dtype: int64</p>
 
 <pre><code class="language-python">inventory = inventory.add(1)
 print(f'Add 1 to all values: \n{inventory}\n')
 </code></pre>
 
-<pre><code>Add 1 to all values: 
+<p>Add 1 to all values:
 Orange Pi Plus       2
 Raspberry Pi 3       4
 Asus Tinker Board    3
-dtype: int64
-</code></pre>
+dtype: int64</p></li>
+</ul>
 
 <h4 id="numpy-on-series-data"><a href="/python-data-essentials-numpy/">NumPy</a> on <a href="https://pandas.pydata.org/pandas-docs/stable/generated/pandas.Series.html">Series</a> data.</h4>
 
@@ -500,11 +500,11 @@ dtype: float64
 </blockquote>
 
 <ul>
-<li><a href="https://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.html">pandas.DataFrame</a> official documentation.</li>
-</ul>
+<li><p><a href="https://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.html">pandas.DataFrame</a> official documentation.</p>
 
 <pre><code class="language-python">import pandas as pd
-</code></pre>
+</code></pre></li>
+</ul>
 
 <h3 id="creating">Creating</h3>
 
@@ -609,12 +609,13 @@ dtype: int64
 <li><a href="http://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.mask.html">pandas.DataFrame.mask</a></li>
 <li><a href="http://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.where.html">pandas.DataFrame.where</a></li>
 <li><a href="http://pandas.pydata.org/pandas-docs/stable/generated/pandas.Series.mask.html">pandas.Series.mask</a></li>
-<li><a href="http://pandas.pydata.org/pandas-docs/stable/generated/pandas.Series.where.html">pandas.Series.where</a></li>
-</ul>
+
+<li><p><a href="http://pandas.pydata.org/pandas-docs/stable/generated/pandas.Series.where.html">pandas.Series.where</a></p>
 
 <pre><code class="language-python"># mask out any data greater than 10
 df_ai.mask(df_ai &gt; 10)
-</code></pre>
+</code></pre></li>
+</ul>
 
 <div>
 <style scoped>
@@ -1232,8 +1233,54 @@ The bot with the lowest intelligence is bender.
                         
                         
                         
-                        <a href="/tags/blockchain" title="Blockchain">
-                        Blockchain
+                        <a href="/tags/blockchain" title="blockchain">
+                        blockchain
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/data" title="data">
+                        data
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/data-science" title="data-science">
+                        data-science
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/development" title="development">
+                        development
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/devops" title="devops">
+                        devops
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/docker" title="docker">
+                        docker
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/elasticsearch" title="elasticsearch">
+                        elasticsearch
                         </a>
                         
                         
@@ -1244,129 +1291,19 @@ The bot with the lowest intelligence is bender.
                         
                         
                         
-                        <a href="/tags/data" title="Data">
-                        Data
-                        </a>
-                        
-                        
-                        
-                        <a href="/tags/data-science" title="Data Science">
-                        Data Science
+                        <a href="/tags/golang" title="golang">
+                        golang
                         </a>
                         
                         
                         
                         
                         
-                        
-                        
-                        <a href="/tags/devops" title="DevOps">
-                        DevOps
+                        <a href="/tags/ingress" title="ingress">
+                        ingress
                         </a>
                         
                         
-                        
-                        <a href="/tags/development" title="Development">
-                        Development
-                        </a>
-                        
-                        
-                        
-                        <a href="/tags/docker" title="Docker">
-                        Docker
-                        </a>
-                        
-                        
-                        
-                        <a href="/tags/elasticsearch" title="Elasticsearch">
-                        Elasticsearch
-                        </a>
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        <a href="/tags/golang" title="Golang">
-                        Golang
-                        </a>
-                        
-                        
-                        
-                        
-                        
-                        <a href="/tags/ingress" title="Ingress">
-                        Ingress
-                        </a>
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        <a href="/tags/kubernetes" title="Kubernetes">
-                        Kubernetes
-                        </a>
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        <a href="/tags/microservices" title="Microservices">
-                        Microservices
-                        </a>
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        <a href="/tags/python" title="Python">
-                        Python
-                        </a>
-                        
-                        
-                        
-                        <a href="/tags/raspberry-pi" title="Raspberry Pi">
-                        Raspberry Pi
-                        </a>
-                        
-                        
-                        
-                        
-                        
-                        <a href="/tags/security" title="Security">
-                        Security
-                        </a>
-                        
-                        
-                        
-                        
-                        
-                        <a href="/tags/utils" title="Utils">
-                        Utils
-                        </a>
                         
                         
                         
@@ -1380,6 +1317,62 @@ The bot with the lowest intelligence is bender.
                         
                         <a href="/tags/kubectl" title="kubectl">
                         kubectl
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/kubernetes" title="kubernetes">
+                        kubernetes
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/microservices" title="microservices">
+                        microservices
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/python" title="python">
+                        python
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/raspberry-pi" title="raspberry-pi">
+                        raspberry-pi
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/security" title="security">
+                        security
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/utils" title="utils">
+                        utils
                         </a>
                         
                         

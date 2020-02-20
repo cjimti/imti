@@ -1,14 +1,49 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://imti.co/2019-cloud-native-machine-learning/</loc>
-    <lastmod>2018-12-26T00:00:00+00:00</lastmod>
+    <loc>https://imti.co/tags/data-science/</loc>
+    <lastmod>2018-12-08T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://imti.co/</loc>
+    <lastmod>2018-12-08T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://imti.co/tags/linear-algebra/</loc>
+    <lastmod>2018-12-08T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://imti.co/linear-algebra-matrices/</loc>
+    <lastmod>2018-12-08T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://imti.co/tags/math/</loc>
+    <lastmod>2018-12-08T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://imti.co/tags/matrices/</loc>
+    <lastmod>2018-12-08T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://imti.co/post/</loc>
+    <lastmod>2018-12-08T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://imti.co/tags/python/</loc>
+    <lastmod>2018-12-08T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://imti.co/tags/</loc>
     <lastmod>2018-12-08T00:00:00+00:00</lastmod>
   </url>
   
@@ -18,13 +53,48 @@
   </url>
   
   <url>
+    <loc>https://imti.co/tags/numpy/</loc>
+    <lastmod>2018-11-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://imti.co/tags/vectors/</loc>
+    <lastmod>2018-11-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://imti.co/edu/</loc>
     <lastmod>2018-10-01T00:00:00+00:00</lastmod>
   </url>
   
   <url>
+    <loc>https://imti.co/tags/data/</loc>
+    <lastmod>2018-09-25T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://imti.co/tags/kafka/</loc>
+    <lastmod>2018-09-25T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://imti.co/kafka-kubernetes/</loc>
     <lastmod>2018-09-25T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://imti.co/tags/kubernetes/</loc>
+    <lastmod>2018-09-25T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://imti.co/tags/blockchain/</loc>
+    <lastmod>2018-09-22T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://imti.co/tags/ethereum/</loc>
+    <lastmod>2018-09-22T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -43,12 +113,32 @@
   </url>
   
   <url>
+    <loc>https://imti.co/tags/coding/</loc>
+    <lastmod>2018-08-11T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://imti.co/tags/development/</loc>
+    <lastmod>2018-08-11T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://imti.co/kubernetes-port-forwarding/</loc>
     <lastmod>2018-08-11T00:00:00+00:00</lastmod>
   </url>
   
   <url>
+    <loc>https://imti.co/tags/elasticsearch/</loc>
+    <lastmod>2018-07-28T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://imti.co/fass-kubeless-kubernetes/</loc>
+    <lastmod>2018-07-28T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://imti.co/tags/serverless/</loc>
     <lastmod>2018-07-28T00:00:00+00:00</lastmod>
   </url>
   
@@ -68,6 +158,16 @@
   </url>
   
   <url>
+    <loc>https://imti.co/tags/json/</loc>
+    <lastmod>2018-07-18T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://imti.co/tags/kibana/</loc>
+    <lastmod>2018-07-15T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://imti.co/kibana-kubernetes/</loc>
     <lastmod>2018-07-15T00:00:00+00:00</lastmod>
   </url>
@@ -78,13 +178,48 @@
   </url>
   
   <url>
+    <loc>https://imti.co/tags/devops/</loc>
+    <lastmod>2018-07-10T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://imti.co/tags/kubectl/</loc>
+    <lastmod>2018-07-10T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://imti.co/team-kubernetes-remote-access/</loc>
     <lastmod>2018-07-10T00:00:00+00:00</lastmod>
   </url>
   
   <url>
+    <loc>https://imti.co/tags/security/</loc>
+    <lastmod>2018-07-10T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://imti.co/tags/data-visualization/</loc>
+    <lastmod>2018-07-08T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://imti.co/python-data-essentials-matplotlib-seaborn/</loc>
     <lastmod>2018-07-08T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://imti.co/tags/docker/</loc>
+    <lastmod>2018-07-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://imti.co/tags/microservice/</loc>
+    <lastmod>2018-07-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://imti.co/tags/pdf/</loc>
+    <lastmod>2018-07-01T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -94,6 +229,21 @@
   
   <url>
     <loc>https://imti.co/gitlabci-golang-microservices/</loc>
+    <lastmod>2018-06-22T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://imti.co/tags/gitlab/</loc>
+    <lastmod>2018-06-22T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://imti.co/tags/golang/</loc>
+    <lastmod>2018-06-22T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://imti.co/tags/microservices/</loc>
     <lastmod>2018-06-22T00:00:00+00:00</lastmod>
   </url>
   
@@ -118,12 +268,22 @@
   </url>
   
   <url>
+    <loc>https://imti.co/tags/jupyter-notebooks/</loc>
+    <lastmod>2018-06-10T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://imti.co/essential-python3/</loc>
     <lastmod>2018-05-31T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://imti.co/kubernetes-ingress-nginx-cors/</loc>
+    <lastmod>2018-05-28T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://imti.co/tags/ingress/</loc>
     <lastmod>2018-05-28T00:00:00+00:00</lastmod>
   </url>
   
@@ -140,6 +300,16 @@
   <url>
     <loc>https://imti.co/lets-encrypt-kubernetes/</loc>
     <lastmod>2018-05-18T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://imti.co/tags/dns/</loc>
+    <lastmod>2018-05-17T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://imti.co/tags/helm/</loc>
+    <lastmod>2018-05-17T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -163,7 +333,22 @@
   </url>
   
   <url>
+    <loc>https://imti.co/tags/nginx/</loc>
+    <lastmod>2018-05-15T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://imti.co/mac-format-command-line/</loc>
+    <lastmod>2018-05-12T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://imti.co/tags/macos/</loc>
+    <lastmod>2018-05-12T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://imti.co/tags/utils/</loc>
     <lastmod>2018-05-12T00:00:00+00:00</lastmod>
   </url>
   
@@ -178,12 +363,27 @@
   </url>
   
   <url>
-    <loc>https://imti.co/sql-select-joins-aliases/</loc>
+    <loc>https://imti.co/tags/database/</loc>
+    <lastmod>2018-04-02T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://imti.co/tags/raspberry-pi/</loc>
     <lastmod>2018-04-02T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://imti.co/raspberry-pi-rsync-interval/</loc>
+    <lastmod>2018-04-02T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://imti.co/tags/sql/</loc>
+    <lastmod>2018-04-02T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://imti.co/sql-select-joins-aliases/</loc>
     <lastmod>2018-04-02T00:00:00+00:00</lastmod>
   </url>
   
@@ -208,8 +408,28 @@
   </url>
   
   <url>
+    <loc>https://imti.co/tags/iot/</loc>
+    <lastmod>2018-03-15T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://imti.co/iot-wifi/</loc>
     <lastmod>2018-03-15T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://imti.co/tags/wifi/</loc>
+    <lastmod>2018-03-15T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://imti.co/tags/cassandra/</loc>
+    <lastmod>2018-03-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://imti.co/dont-install-cqlsh/</loc>
+    <lastmod>2018-03-01T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -218,7 +438,7 @@
   </url>
   
   <url>
-    <loc>https://imti.co/dont-install-cqlsh/</loc>
+    <loc>https://imti.co/tags/emacs/</loc>
     <lastmod>2018-03-01T00:00:00+00:00</lastmod>
   </url>
   
@@ -238,302 +458,7 @@
   </url>
   
   <url>
-    <loc>https://imti.co/tags/blockchain/</loc>
-    <lastmod>2018-09-22T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://imti.co/tags/cassandra/</loc>
-    <lastmod>2018-03-01T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>https://imti.co/categories/</loc>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://imti.co/tags/coding/</loc>
-    <lastmod>2018-08-11T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://imti.co/tags/dns/</loc>
-    <lastmod>2018-05-17T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://imti.co/tags/data/</loc>
-    <lastmod>2018-09-25T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://imti.co/tags/data-science/</loc>
-    <lastmod>2018-12-26T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://imti.co/tags/data-visualization/</loc>
-    <lastmod>2018-07-08T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://imti.co/tags/database/</loc>
-    <lastmod>2018-04-02T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://imti.co/tags/devops/</loc>
-    <lastmod>2018-07-10T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://imti.co/tags/development/</loc>
-    <lastmod>2018-08-11T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://imti.co/tags/docker/</loc>
-    <lastmod>2018-07-01T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://imti.co/tags/elasticsearch/</loc>
-    <lastmod>2018-07-28T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://imti.co/tags/emacs/</loc>
-    <lastmod>2018-03-01T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://imti.co/tags/ethereum/</loc>
-    <lastmod>2018-09-22T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://imti.co/tags/gitlab/</loc>
-    <lastmod>2018-06-22T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://imti.co/tags/golang/</loc>
-    <lastmod>2018-06-22T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://imti.co/tags/helm/</loc>
-    <lastmod>2018-05-17T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://imti.co/</loc>
-    <lastmod>2018-12-26T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://imti.co/tags/iot/</loc>
-    <lastmod>2018-03-15T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://imti.co/tags/ingress/</loc>
-    <lastmod>2018-05-28T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://imti.co/tags/ingress/</loc>
-    <lastmod>2018-05-15T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://imti.co/tags/json/</loc>
-    <lastmod>2018-07-18T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://imti.co/tags/jupyter-notebooks/</loc>
-    <lastmod>2018-06-10T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://imti.co/tags/kafka/</loc>
-    <lastmod>2018-09-25T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://imti.co/tags/kibana/</loc>
-    <lastmod>2018-07-15T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://imti.co/tags/kubectl/</loc>
-    <lastmod>2018-07-10T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://imti.co/tags/kubernetes/</loc>
-    <lastmod>2018-09-25T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://imti.co/tags/linear-algebra/</loc>
-    <lastmod>2018-12-08T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://imti.co/tags/macos/</loc>
-    <lastmod>2018-04-01T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://imti.co/tags/macos/</loc>
-    <lastmod>2018-05-12T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://imti.co/tags/machine-learning/</loc>
-    <lastmod>2018-12-26T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://imti.co/tags/math/</loc>
-    <lastmod>2018-12-08T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://imti.co/tags/matrices/</loc>
-    <lastmod>2018-12-08T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://imti.co/tags/microservice/</loc>
-    <lastmod>2018-07-01T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://imti.co/tags/microservices/</loc>
-    <lastmod>2018-06-22T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://imti.co/tags/nginx/</loc>
-    <lastmod>2018-05-15T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://imti.co/tags/numpy/</loc>
-    <lastmod>2018-11-01T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://imti.co/tags/pdf/</loc>
-    <lastmod>2018-07-01T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://imti.co/post/</loc>
-    <lastmod>2018-12-26T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://imti.co/tags/python/</loc>
-    <lastmod>2018-12-08T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://imti.co/tags/raspberry-pi/</loc>
-    <lastmod>2018-04-02T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://imti.co/tags/sql/</loc>
-    <lastmod>2018-04-02T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://imti.co/tags/security/</loc>
-    <lastmod>2018-07-10T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://imti.co/tags/security/</loc>
-    <lastmod>2018-05-10T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://imti.co/tags/serverless/</loc>
-    <lastmod>2018-07-28T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://imti.co/tags/</loc>
-    <lastmod>2018-09-22T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://imti.co/tags/utils/</loc>
-    <lastmod>2018-05-12T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://imti.co/tags/vectors/</loc>
-    <lastmod>2018-11-01T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://imti.co/tags/wifi/</loc>
-    <lastmod>2018-03-15T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
 </urlset>

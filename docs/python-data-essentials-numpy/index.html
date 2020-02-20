@@ -67,11 +67,11 @@
   "@type": "Article",
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://imti.co/python-data-essentials-numpy/"
+    "@id": "https:\/\/imti.co\/python-data-essentials-numpy\/"
   },
   "headline": "Python Data Essentials - Numpy",
   "image": [
-    "https://imti.co/img/post/sand_876_438.jpg"
+    "https:\/\/imti.co\/img\/post\/sand_876_438.jpg"
    ],
   "datePublished": "2018-06-16T00:00:00",
   "dateModified": "2018-06-16T00:00:00",
@@ -84,10 +84,10 @@
     "name": 'imti.co",
     "logo": {
       "@type": "ImageObject",
-      "url": "https://imti.co/img/craig_johnston_cjimti.jpg"
+      "url": "https:\/\/imti.co\/img\/craig_johnston_cjimti.jpg"
     }
   },
-  "description": "Python is one of The Most Popular Languages for Data Science, and because of this adoption by the data science community, we have libraries like NumPy, Pandas and Matplotlib. NumPy at it&rsquo;s core provides a powerful N-dimensional array objects in which we can perform linear algebra, Pandas give us data structures and data analysis tools, similar to working with a specialized database or powerful spreadsheets and finally Matplotlib to generate plots, histograms, power spectra, bar charts, error charts and scatterplots to name a few."
+  "description": "Python is one of The Most Popular Languages for Data Science, and because of this adoption by the data science community, we have libraries like NumPy, Pandas and Matplotlib. NumPy at it\x26rsquo;s core provides a powerful N-dimensional array objects in which we can perform linear algebra, Pandas give us data structures and data analysis tools, similar to working with a specialized database or powerful spreadsheets and finally Matplotlib to generate plots, histograms, power spectra, bar charts, error charts and scatterplots to name a few."
 }
 </script>
 
@@ -332,8 +332,7 @@ np.mean(x)
 <p>NumPy&rsquo;s <a href="https://docs.scipy.org/doc/numpy-1.13.0/reference/generated/numpy.array.html">array</a> function creates n-dimentional arrays from any object exposing the array interface, an object whose <strong>array</strong> method returns an array, or any (nested) sequence.</p>
 
 <ul>
-<li><a href="https://docs.scipy.org/doc/numpy-1.13.0/user/basics.creation.html">Array Creation</a> Documentation</li>
-</ul>
+<li><p><a href="https://docs.scipy.org/doc/numpy-1.13.0/user/basics.creation.html">Array Creation</a> Documentation</p>
 
 <pre><code class="language-python">x = np.array([1,2,3,4,5])
 
@@ -343,12 +342,12 @@ print(f' size: {x.size}')
 print(f'shape: {x.shape}')
 </code></pre>
 
-<pre><code>data:
+<p>data:
 [1 2 3 4 5]
- type: &lt;class 'numpy.ndarray'&gt;
+ type: <class 'numpy.ndarray'>
  size: 5
-shape: (5,)
-</code></pre>
+shape: (5,)</p></li>
+</ul>
 
 <p>Rank 2 arrays are just arrays within arrays. The outter array holds rows of column data (axis=0) arrays. Row (axis=1) index 0 is being set to [1,1,1].</p>
 
@@ -801,8 +800,8 @@ even numbers:
 
 <ul>
 <li><a href="https://docs.scipy.org/doc/numpy-1.13.0/reference/routines.math.html">Mathematical functions</a> documentation</li>
-<li><a href="https://docs.scipy.org/doc/numpy/user/basics.broadcasting.html">Broadcasting</a> documentation</li>
-</ul>
+
+<li><p><a href="https://docs.scipy.org/doc/numpy/user/basics.broadcasting.html">Broadcasting</a> documentation</p>
 
 <pre><code class="language-python"># rank 1 arrays
 ax = np.array([1,2,3,4])
@@ -814,18 +813,23 @@ print(f'      multiply:\n{ np.multiply(ax,ay) } \n')
 print(f'        divide:\n{ np.divide(ax,ay) } \n')
 </code></pre>
 
-<pre><code>add two arrays:
-[ 6  8 10 12] 
+<p>add two arrays:
+[ 6  8 10 12]</p>
 
-      subtract:
-[-4 -4 -4 -4] 
-
-      multiply:
-[ 5 12 21 32] 
-
-        divide:
-[ 0.2         0.33333333  0.42857143  0.5       ] 
+<pre><code>  subtract:
 </code></pre>
+
+<p>[-4 -4 -4 -4]</p>
+
+<pre><code>  multiply:
+</code></pre>
+
+<p>[ 5 12 21 32]</p>
+
+<pre><code>    divide:
+</code></pre>
+
+<p>[ 0.2         0.33333333  0.42857143  0.5       ]</p>
 
 <pre><code class="language-python"># rank 2 arrays
 aX = np.array([1,2,3,4]).reshape(2,2)
@@ -837,22 +841,27 @@ print(f'      multiply:\n{ np.multiply(aX,aY) } \n')
 print(f'        divide:\n{ np.divide(aX,aY) } \n')
 </code></pre>
 
-<pre><code>add two arrays:
+<p>add two arrays:
 [[ 6  8]
- [10 12]] 
+ [10 12]]</p>
 
-      subtract:
-[[-4 -4]
- [-4 -4]] 
-
-      multiply:
-[[ 5 12]
- [21 32]] 
-
-        divide:
-[[ 0.2         0.33333333]
- [ 0.42857143  0.5       ]] 
+<pre><code>  subtract:
 </code></pre>
+
+<p>[[-4 -4]
+ [-4 -4]]</p>
+
+<pre><code>  multiply:
+</code></pre>
+
+<p>[[ 5 12]
+ [21 32]]</p>
+
+<pre><code>    divide:
+</code></pre>
+
+<p>[[ 0.2         0.33333333]
+ [ 0.42857143  0.5       ]]</p>
 
 <pre><code class="language-python">print(f'square roots:\n{ np.sqrt(aX) } \n')
 print(f'exp (Euler\'s number):\n{ np.exp(aX) } \n')
@@ -861,23 +870,22 @@ print(f'average each column (mean):\n{ aX.mean(axis=0) } \n')
 print(f'average each row (mean):\n{ aX.mean(axis=1) } \n')
 </code></pre>
 
-<pre><code>square roots:
+<p>square roots:
 [[ 1.          1.41421356]
- [ 1.73205081  2.        ]] 
+ [ 1.73205081  2.        ]]</p>
 
-exp (Euler's number):
+<p>exp (Euler&rsquo;s number):
 [[  2.71828183   7.3890561 ]
- [ 20.08553692  54.59815003]] 
+ [ 20.08553692  54.59815003]]</p>
 
-average of all elements (mean):
-2.5 
+<p>average of all elements (mean):
+2.5</p>
 
-average each column (mean):
-[ 2.  3.] 
+<p>average each column (mean):
+[ 2.  3.]</p>
 
-average each row (mean):
-[ 1.5  3.5] 
-</code></pre>
+<p>average each row (mean):
+[ 1.5  3.5]</p>
 
 <pre><code class="language-python">aE = np.full((4,4), 1)
 aF = np.array([1,2,3,4])
@@ -888,18 +896,18 @@ print(f' brodcasting sum of [1,2,3,4]:\n{ aG } \n')
 
 </code></pre>
 
-<pre><code> 4x4 of ones:
+<p>4x4 of ones:
 [[1 1 1 1]
  [1 1 1 1]
  [1 1 1 1]
- [1 1 1 1]] 
+ [1 1 1 1]]</p>
 
- brodcasting sum of [1,2,3,4]:
+<p>brodcasting sum of [1,2,3,4]:
 [[2 3 4 5]
  [2 3 4 5]
  [2 3 4 5]
- [2 3 4 5]] 
-</code></pre>
+ [2 3 4 5]]</p></li>
+</ul>
 
 <h3 id="mean-normalization">Mean normalization</h3>
 
@@ -909,8 +917,8 @@ print(f' brodcasting sum of [1,2,3,4]:\n{ aG } \n')
 <li><a href="https://www.coursera.org/learn/deep-neural-network/lecture/lXv6U/normalizing-inputs">Normalizing inputs</a> - Improving Deep Neural Networks: Hyperparameter tuning, Regularization and Optimization</li>
 <li><a href="https://www.coursera.org/learn/machine-learning/lecture/Adk8G/implementational-detail-mean-normalization">Mean Normalization</a> - Machine Learning</li>
 <li><a href="https://en.wikipedia.org/wiki/Feature_scaling">Feature scaling</a></li>
-<li><a href="https://en.wikipedia.org/wiki/Normalization_(statistics)">Statistics Normalization</a></li>
-</ul>
+
+<li><p><a href="https://en.wikipedia.org/wiki/Normalization_(statistics)">Statistics Normalization</a></p>
 
 <pre><code class="language-python">MN = np.random.randint(5000, size=(10,10))
 
@@ -920,7 +928,7 @@ print(f'min value:\n{ MN.min() } \n')
 print(f'mean value:\n{ MN.mean() } \n')
 </code></pre>
 
-<pre><code>a 10x10 of random integers 0-4999:
+<p>a 10x10 of random integers 0-4999:
 [[1363  941 2244 3740  131 2652 2374 2420  252 4859]
  [2902  275 4906 2677 3735 1955 2148 3565  792 2112]
  [1651 2195 1586 4975 1647  471  970  278 4116 4092]
@@ -930,17 +938,16 @@ print(f'mean value:\n{ MN.mean() } \n')
  [1145  653 3907  830  228 4055 3314 1010  936  676]
  [4846 2543 4079 2492 2817 1608  874 4627  672 3586]
  [4441 2559 3305 4077  964 4623 1594 3166 2136 4421]
- [2303  156 4824 1973  313 2170 3686 2381  342 1027]] 
+ [2303  156 4824 1973  313 2170 3686 2381  342 1027]]</p>
 
-max value:
-4975 
+<p>max value:
+4975</p>
 
-min value:
-43 
+<p>min value:
+43</p>
 
-mean value:
-2352.47 
-</code></pre>
+<p>mean value:
+2352.47</p>
 
 <pre><code class="language-python"># average of each column
 MN_ave_cols = MN.mean(axis=0, dtype=np.float64)
@@ -952,14 +959,17 @@ print(f'average of each column:\n{ NM_ave_cols } \n')
 print(f'standard Deviation of each column:\n{ NM_std_cols } \n')
 </code></pre>
 
-<pre><code>average of each column:
-[ 2369.9  2147.2  1968.4  2359.1  2340.   1867.4  2614.5  2289.4  2856.1
-  2552. ] 
+<p>average of each column:
+[ 2369.9  2147.2  1968.4  2359.1  2340.   1867.4  2614.5  2289.4  2856.1</p>
 
-standard Deviation of each column:
+<ol>
+<li>]
+<br /></li>
+</ol>
+
+<p>standard Deviation of each column:
 [ 1273.86643334  1413.64400045  1386.22604217  1333.5585064   1390.563411
-  1505.58043292  1436.11470642  1456.26400079  1253.61225664  1444.22394385] 
-</code></pre>
+  1505.58043292  1436.11470642  1456.26400079  1253.61225664  1444.22394385]</p>
 
 <pre><code class="language-python"># substract the mean from each column then divide by the standard deviation
 MN_norm = (MN - MN_ave_cols) / MN_std_cols
@@ -974,7 +984,7 @@ print(f'      new max: { MN_norm.min() }\n')
 
 </code></pre>
 
-<pre><code>scaled and normalized:
+<p>scaled and normalized:
 [[-0.51966084 -1.19801688  0.0295472   0.59720419 -1.55766063  0.57982528
    0.50089332 -0.28174638 -2.35596301  2.03185556]
  [ 0.56903781 -1.70761594  1.7431561  -0.32901124  1.04590533  0.07928253
@@ -994,14 +1004,14 @@ print(f'      new max: { MN_norm.min() }\n')
  [ 1.65773646  0.04001806  0.71254459  0.89083975 -0.95589303  1.9952769
   -0.05836346  0.25117147 -0.81294893  1.72930491]
  [ 0.1453013  -1.79867043  1.69037025 -0.94242202 -1.426182    0.23368237
-   1.44159191 -0.3096067  -2.28225215 -0.61511724]] 
+   1.44159191 -0.3096067  -2.28225215 -0.61511724]]</p>
 
-old max value: 4975
-      new max: 2.0318555579499042
+<p>old max value: 4975
+      new max: 2.0318555579499042</p>
 
-old min value: 43
-      new max: -2.355963009127506
-</code></pre>
+<p>old min value: 43
+      new max: -2.355963009127506</p></li>
+</ul>
 
 <h2 id="essential-python-3">Essential Python 3</h2>
 
@@ -1045,8 +1055,54 @@ old min value: 43
                         
                         
                         
-                        <a href="/tags/blockchain" title="Blockchain">
-                        Blockchain
+                        <a href="/tags/blockchain" title="blockchain">
+                        blockchain
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/data" title="data">
+                        data
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/data-science" title="data-science">
+                        data-science
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/development" title="development">
+                        development
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/devops" title="devops">
+                        devops
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/docker" title="docker">
+                        docker
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/elasticsearch" title="elasticsearch">
+                        elasticsearch
                         </a>
                         
                         
@@ -1057,129 +1113,19 @@ old min value: 43
                         
                         
                         
-                        <a href="/tags/data" title="Data">
-                        Data
-                        </a>
-                        
-                        
-                        
-                        <a href="/tags/data-science" title="Data Science">
-                        Data Science
+                        <a href="/tags/golang" title="golang">
+                        golang
                         </a>
                         
                         
                         
                         
                         
-                        
-                        
-                        <a href="/tags/devops" title="DevOps">
-                        DevOps
+                        <a href="/tags/ingress" title="ingress">
+                        ingress
                         </a>
                         
                         
-                        
-                        <a href="/tags/development" title="Development">
-                        Development
-                        </a>
-                        
-                        
-                        
-                        <a href="/tags/docker" title="Docker">
-                        Docker
-                        </a>
-                        
-                        
-                        
-                        <a href="/tags/elasticsearch" title="Elasticsearch">
-                        Elasticsearch
-                        </a>
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        <a href="/tags/golang" title="Golang">
-                        Golang
-                        </a>
-                        
-                        
-                        
-                        
-                        
-                        <a href="/tags/ingress" title="Ingress">
-                        Ingress
-                        </a>
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        <a href="/tags/kubernetes" title="Kubernetes">
-                        Kubernetes
-                        </a>
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        <a href="/tags/microservices" title="Microservices">
-                        Microservices
-                        </a>
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        <a href="/tags/python" title="Python">
-                        Python
-                        </a>
-                        
-                        
-                        
-                        <a href="/tags/raspberry-pi" title="Raspberry Pi">
-                        Raspberry Pi
-                        </a>
-                        
-                        
-                        
-                        
-                        
-                        <a href="/tags/security" title="Security">
-                        Security
-                        </a>
-                        
-                        
-                        
-                        
-                        
-                        <a href="/tags/utils" title="Utils">
-                        Utils
-                        </a>
                         
                         
                         
@@ -1193,6 +1139,62 @@ old min value: 43
                         
                         <a href="/tags/kubectl" title="kubectl">
                         kubectl
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/kubernetes" title="kubernetes">
+                        kubernetes
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/microservices" title="microservices">
+                        microservices
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/python" title="python">
+                        python
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/raspberry-pi" title="raspberry-pi">
+                        raspberry-pi
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/security" title="security">
+                        security
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/utils" title="utils">
+                        utils
                         </a>
                         
                         

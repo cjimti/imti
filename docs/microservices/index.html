@@ -67,11 +67,11 @@
   "@type": "Article",
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://imti.co/microservices/"
+    "@id": "https:\/\/imti.co\/microservices\/"
   },
-  "headline": "Microservices &amp; Kubernetes",
+  "headline": "Microservices \x26 Kubernetes",
   "image": [
-    "https://imti.co/img/post/cars_876_438.jpg"
+    "https:\/\/imti.co\/img\/post\/cars_876_438.jpg"
    ],
   "datePublished": "2018-03-24T00:00:00",
   "dateModified": "2018-03-24T00:00:00",
@@ -84,11 +84,10 @@
     "name": 'imti.co",
     "logo": {
       "@type": "ImageObject",
-      "url": "https://imti.co/img/craig_johnston_cjimti.jpg"
+      "url": "https:\/\/imti.co\/img\/craig_johnston_cjimti.jpg"
     }
   },
-  "description": "The following is a collection of articles, videos, and notes on Microservices. The Microservices architecture is a variant of the service-oriented architecture, a collection of loosely coupled services.
-Articles  Background concept - &ldquo;Open Data: Small Pieces Loosely Joined&rdquo;, Tim O’Reilly Modern software design problems and solutions - &ldquo;12-Fractured Apps&rdquo;, Kelsey Hightower (SysAdmin @ Google) 12-Factor Defined - &ldquo;The 12-Factor App&rdquo;, Adam Wiggins Pros and Cons of Microservices - &ldquo;Microservices&rdquo; and Microservice Trade-Offs, Martin Fowler &ldquo;What are containers and why do you need them?"
+  "description": "The following is a collection of articles, videos, and notes on Microservices. The Microservices architecture is a variant of the service-oriented architecture, a collection of loosely coupled services.\nArticles  Background concept - \x26ldquo;Open Data: Small Pieces Loosely Joined\x26rdquo;, Tim O’Reilly Modern software design problems and solutions - \x26ldquo;12-Fractured Apps\x26rdquo;, Kelsey Hightower (SysAdmin @ Google) 12-Factor Defined - \x26ldquo;The 12-Factor App\x26rdquo;, Adam Wiggins Pros and Cons of Microservices - \x26ldquo;Microservices\x26rdquo; and Microservice Trade-Offs, Martin Fowler \x26ldquo;What are containers and why do you need them?"
 }
 </script>
 
@@ -296,52 +295,47 @@ Articles  Background concept - &ldquo;Open Data: Small Pieces Loosely Joined&rdq
 <p>In order to follow the examples below you will need to <a href="https://kubernetes.io/docs/tasks/tools/install-minikube/">Install Minikube</a> and it&rsquo;s dependencies. The command <a href="https://kubernetes.io/docs/reference/kubectl/cheatsheet/">kubectl</a> is used to interact with the <a href="https://kubernetes.io/">kubernetes</a> cluster.</p>
 
 <ul>
-<li>Version: <code>minikube version</code></li>
-</ul>
+<li><p>Version: <code>minikube version</code></p>
 
 <pre><code>minikube version: v0.25.2
-</code></pre>
+</code></pre></li>
 
-<ul>
-<li>Status: <code>minikube status</code></li>
-</ul>
+<li><p>Status: <code>minikube status</code></p>
 
 <pre><code>minikube: Stopped
 cluster:
 kubectl:
-</code></pre>
+</code></pre></li>
 
-<ul>
-<li>Start: <code>minikube start</code></li>
-</ul>
+<li><p>Start: <code>minikube start</code></p>
 
 <pre><code class="language-bash">Starting local Kubernetes v1.9.4 cluster...
 Starting VM...
 Getting VM IP address...
 Moving files into cluster...
 Downloading localkube binary
- 163.02 MB / 163.02 MB [============================================] 100.00% 0s
- 0 B / 65 B [----------------------------------------------------------]   0.00%
- 65 B / 65 B [======================================================] 100.00% 0sSetting up certs...
+163.02 MB / 163.02 MB [============================================] 100.00% 0s
+0 B / 65 B [----------------------------------------------------------]   0.00%
+65 B / 65 B [======================================================] 100.00% 0sSetting up certs...
 Connecting to cluster...
 Setting up kubeconfig...
 Starting cluster components...
 Kubectl is now configured to use the cluster.
 Loading cached images from config file.
-</code></pre>
+</code></pre></li>
 
-<ul>
-<li>Addons: <code>minikube addons list</code></li>
-<li>Enable Heapster: <code>minikube addons enable heapster</code> to provide CPU and memory usage in the dashboard.</li>
-</ul>
+<li><p>Addons: <code>minikube addons list</code></p></li>
+
+<li><p>Enable Heapster: <code>minikube addons enable heapster</code> to provide CPU and memory usage in the dashboard.</p>
 
 <pre><code class="language-plain">heapster was successfully enabled
-</code></pre>
+</code></pre></li>
 
-<ul>
-<li>Dashboard: <code>minikube dashboard</code></li>
-<li>Kubernetes cluster status: <code>kubectl cluster-info</code></li>
-<li>Kubernetes nodes in the cluster: <code>kubectl get nodes</code></li>
+<li><p>Dashboard: <code>minikube dashboard</code></p></li>
+
+<li><p>Kubernetes cluster status: <code>kubectl cluster-info</code></p></li>
+
+<li><p>Kubernetes nodes in the cluster: <code>kubectl get nodes</code></p></li>
 </ul>
 
 <h3 id="kubernetes-using-kubernetes">Kubernetes: Using Kubernetes</h3>
@@ -542,28 +536,32 @@ go-ok     <sup>1</sup>&frasl;<sub>1</sub>       Running   0          3m</p>
 
 <pre><code>
 Add a label to a running [Pod]:
-```bash
-kubectl label pods go-ok owner=cjimti
 </code></pre>
 
-<p>Delete the pod created from <code>pod.yaml</code> as easily as creating it with:</p>
+<p>bash
+kubectl label pods go-ok owner=cjimti</p>
 
-<pre><code class="language-bash">kubectl delete -f pod.yml
+<pre><code>
+Delete the pod created from `pod.yaml` as easily as creating it with:
 </code></pre>
 
-<p>Re-create the <a href="https://kubernetes.io/docs/concepts/workloads/pods/pod/">Pod</a> if you are following along.</p>
+<p>bash
+kubectl delete -f pod.yml</p>
 
-<h2 id="services"><a href="https://kubernetes.io/docs/concepts/services-networking/service/">Services</a></h2>
+<pre><code>
+Re-create the [Pod] if you are following along.
 
-<p><a href="https://kubernetes.io/docs/concepts/services-networking/service/">Services</a> are persisten endpoints for <a href="https://kubernetes.io/docs/concepts/workloads/pods/pod/">Pods</a>.
-- Use <a href="https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/#label-selectors">Labels</a> to select <a href="https://kubernetes.io/docs/concepts/workloads/pods/pod/">Pods</a>
-- Internal or External IPs</p>
+## [Services]
 
-<p>Create a <a href="https://kubernetes.io/docs/concepts/services-networking/service/">Service</a> using a <a href="https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/#label-selectors">Selector</a>:</p>
+[Services] are persisten endpoints for [Pods].
+- Use [Labels] to select [Pods]
+- Internal or External IPs
 
-<p><code>service.yml</code>:</p>
+Create a [Service] using a [Selector]:
 
-<pre><code class="language-yaml">apiVersion: v1
+`service.yml`:
+~~~ yaml
+apiVersion: v1
 kind: Service
 metadata:
   name: &quot;go-ok&quot;
@@ -577,32 +575,37 @@ spec:
       targetPort: 80
       nodePort: 31000 //port exposed on the node (cluster)
   type: NodePort
+~~~
+
+List the service created with the config:
 </code></pre>
 
-<p>List the service created with the config:</p>
+<p>bash
+kubectl get -f service.yml</p>
 
-<pre><code class="language-bash">kubectl get -f service.yml
+<pre><code>
+## [Ingress] Controller
+
+Exposing external traffic to our service is done through an [Ingress] controller. Check out [Setting up Nginx Ingress on Kubernetes] for a detailed how-to and also a good write up on [Ingress] itself on Medium: [Kubernetes Ingress]
+
+&gt; Traditionally, you would create a LoadBalancer service for each public system you want to expose. This can get rather expensive. Ingress gives you a way to route requests to services based on the request host or path, centralizing a number of services into a single entrypoint. --[Kubernetes Ingress]
+
+Since I am using [Minikube] on my local workstation I am going to add the domain `local.imti.cloud` to my `/etc/hosts` file and resolve it to the Minikube IP.
+
+Get the Minikube IP:
 </code></pre>
 
-<h2 id="ingress-controller"><a href="https://kubernetes.io/docs/concepts/services-networking/ingress/">Ingress</a> Controller</h2>
+<p>bash
+minikube status</p>
 
-<p>Exposing external traffic to our service is done through an <a href="https://kubernetes.io/docs/concepts/services-networking/ingress/">Ingress</a> controller. Check out <a href="https://hackernoon.com/setting-up-nginx-ingress-on-kubernetes-2b733d8d2f45">Setting up Nginx Ingress on Kubernetes</a> for a detailed how-to and also a good write up on <a href="https://kubernetes.io/docs/concepts/services-networking/ingress/">Ingress</a> itself on Medium: <a href="https://medium.com/@cashisclay/kubernetes-ingress-82aa960f658e">Kubernetes Ingress</a></p>
-
-<blockquote>
-<p>Traditionally, you would create a LoadBalancer service for each public system you want to expose. This can get rather expensive. Ingress gives you a way to route requests to services based on the request host or path, centralizing a number of services into a single entrypoint. &ndash;<a href="https://medium.com/@cashisclay/kubernetes-ingress-82aa960f658e">Kubernetes Ingress</a></p>
-</blockquote>
-
-<p>Since I am using <a href="https://kubernetes.io/docs/getting-started-guides/minikube/">Minikube</a> on my local workstation I am going to add the domain <code>local.imti.cloud</code> to my <code>/etc/hosts</code> file and resolve it to the Minikube IP.</p>
-
-<p>Get the Minikube IP:</p>
-
-<pre><code class="language-bash">minikube status
+<pre><code>
 </code></pre>
 
-<pre><code class="language-plain">minikube: Running
+<p>plain
+minikube: Running
 cluster: Running
 kubectl: Correctly Configured: pointing to minikube-vm at 192.168.99.100
-</code></pre>
+```</p>
 
 <p>My <code>/etc/hosts' entry should be</code>192.168.99.100  local.imti.cloud`. Browsing to <a href="http://local.imti.cloud:30000/">http://local.imti.cloud:30000/</a> will now give me the <a href="https://kubernetes.io/docs/tasks/access-application-cluster/web-ui-dashboard/">dashboard</a> for my <a href="https://kubernetes.io/docs/getting-started-guides/minikube/">Minikube</a> cluster.</p>
 
@@ -654,8 +657,54 @@ kubectl: Correctly Configured: pointing to minikube-vm at 192.168.99.100
                         
                         
                         
-                        <a href="/tags/blockchain" title="Blockchain">
-                        Blockchain
+                        <a href="/tags/blockchain" title="blockchain">
+                        blockchain
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/data" title="data">
+                        data
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/data-science" title="data-science">
+                        data-science
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/development" title="development">
+                        development
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/devops" title="devops">
+                        devops
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/docker" title="docker">
+                        docker
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/elasticsearch" title="elasticsearch">
+                        elasticsearch
                         </a>
                         
                         
@@ -666,129 +715,19 @@ kubectl: Correctly Configured: pointing to minikube-vm at 192.168.99.100
                         
                         
                         
-                        <a href="/tags/data" title="Data">
-                        Data
-                        </a>
-                        
-                        
-                        
-                        <a href="/tags/data-science" title="Data Science">
-                        Data Science
+                        <a href="/tags/golang" title="golang">
+                        golang
                         </a>
                         
                         
                         
                         
                         
-                        
-                        
-                        <a href="/tags/devops" title="DevOps">
-                        DevOps
+                        <a href="/tags/ingress" title="ingress">
+                        ingress
                         </a>
                         
                         
-                        
-                        <a href="/tags/development" title="Development">
-                        Development
-                        </a>
-                        
-                        
-                        
-                        <a href="/tags/docker" title="Docker">
-                        Docker
-                        </a>
-                        
-                        
-                        
-                        <a href="/tags/elasticsearch" title="Elasticsearch">
-                        Elasticsearch
-                        </a>
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        <a href="/tags/golang" title="Golang">
-                        Golang
-                        </a>
-                        
-                        
-                        
-                        
-                        
-                        <a href="/tags/ingress" title="Ingress">
-                        Ingress
-                        </a>
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        <a href="/tags/kubernetes" title="Kubernetes">
-                        Kubernetes
-                        </a>
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        <a href="/tags/microservices" title="Microservices">
-                        Microservices
-                        </a>
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        <a href="/tags/python" title="Python">
-                        Python
-                        </a>
-                        
-                        
-                        
-                        <a href="/tags/raspberry-pi" title="Raspberry Pi">
-                        Raspberry Pi
-                        </a>
-                        
-                        
-                        
-                        
-                        
-                        <a href="/tags/security" title="Security">
-                        Security
-                        </a>
-                        
-                        
-                        
-                        
-                        
-                        <a href="/tags/utils" title="Utils">
-                        Utils
-                        </a>
                         
                         
                         
@@ -802,6 +741,62 @@ kubectl: Correctly Configured: pointing to minikube-vm at 192.168.99.100
                         
                         <a href="/tags/kubectl" title="kubectl">
                         kubectl
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/kubernetes" title="kubernetes">
+                        kubernetes
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/microservices" title="microservices">
+                        microservices
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/python" title="python">
+                        python
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/raspberry-pi" title="raspberry-pi">
+                        raspberry-pi
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/security" title="security">
+                        security
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/utils" title="utils">
+                        utils
                         </a>
                         
                         
