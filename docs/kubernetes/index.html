@@ -87,7 +87,7 @@
       "url": "https:\/\/imti.co\/img\/craig_johnston_cjimti.jpg"
     }
   },
-  "description": "Getting started with Kubernetes for local development. I develop on a Mac however much of this is easily translated to windows.\nThe following is primarily a getting started guide wrapped around my personal development notes. This set of notes are specifically for my co-workers in helping them get up to speed quickly. If you see an error feel free to make a pull request or just add an issue."
+  "description": "Getting started with Kubernetes for local development. I develop on a Mac however much of this is easily translated to windows.\nThe following is primarily a getting started guide wrapped around my personal development notes. This set of notes are specifically for my co-workers in helping them get up to speed quickly. If you see an error feel free to make a pull request or just add an issue.\nContents  Deeper Reading and Resources  Free Courses Paid Courses   Prerequisites Test Installation Get some status  Architecture   Create a Deployment Useful Commands  Deeper Reading and Resources Free Courses  Official Kubernetes Tutorials Udacity: Scalable Microservices with Kubernetes Kubernetes The Hard Way For anyone planning to support a production Kubernetes cluster and wants to understand how everything fits together."
 }
 </script>
 
@@ -211,68 +211,49 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h5>SHARE</h5>
-                <ul class="list-inline">
-                    <li><div class="addthis_inline_share_toolbox"></div></li>
-                </ul>
-
-                
-
-<p>Getting started with Kubernetes for local development. I develop on a Mac however much of this is easily translated to windows.</p>
-
+                <p>Getting started with Kubernetes for local development. I develop on a Mac however much of this is easily translated to windows.</p>
 <p>The following is primarily a getting started guide wrapped around my personal development notes. This set of notes are specifically for my co-workers in helping them get up to speed quickly. If you see an error feel free to make a pull request or just add an issue.</p>
-
 <h1 id="contents">Contents</h1>
-
 <ul>
 <li><a href="#deeper-reading-and-resources">Deeper Reading and Resources</a>
-
 <ul>
 <li><a href="#free-courses">Free Courses</a></li>
 <li><a href="#paid-courses">Paid Courses</a></li>
-</ul></li>
+</ul>
+</li>
 <li><a href="#prerequisites">Prerequisites</a></li>
 <li><a href="#test-installation">Test Installation</a></li>
 <li><a href="#get-some-status">Get some status</a>
-
 <ul>
 <li><a href="#architecture">Architecture</a></li>
-</ul></li>
+</ul>
+</li>
 <li><a href="#create-a-deployment">Create a Deployment</a></li>
 <li><a href="#useful-commands">Useful Commands</a></li>
 </ul>
-
 <h2 id="deeper-reading-and-resources">Deeper Reading and Resources</h2>
-
 <h3 id="free-courses">Free Courses</h3>
-
 <ul>
 <li><a href="https://kubernetes.io/docs/tutorials/">Official Kubernetes Tutorials</a></li>
 <li>Udacity: <a href="https://www.udacity.com/course/scalable-microservices-with-kubernetes--ud615">Scalable Microservices with Kubernetes</a></li>
 <li><a href="https://github.com/kelseyhightower/kubernetes-the-hard-way">Kubernetes The Hard Way</a>
 For anyone planning to support a production Kubernetes cluster and wants to understand how everything fits together.</li>
 </ul>
-
 <h3 id="paid-courses">Paid Courses</h3>
-
 <ul>
 <li>Lynda: <a href="https://www.lynda.com/Kubernetes-tutorials/Learning-Kubernetes/647663-2.html">Learning Kubernetes</a></li>
 <li>Lynda: <a href="https://www.lynda.com/Kubernetes-tutorials/Kubernetes-Native-Tools/661764-2.html">Kubernetes: Native Tools</a></li>
 <li>Udemy: <a href="https://www.udemy.com/learn-devops-the-complete-kubernetes-course/learn/v4/content">Learn DevOps: The Complete Kubernetes Course</a></li>
 <li>Udemy: <a href="https://www.udemy.com/learn-devops-advanced-kubernetes-usage">Learn DevOps: Advanced Kubernetes Usage</a></li>
 </ul>
-
 <h2 id="prerequisites">Prerequisites</h2>
-
 <ul>
 <li>Install <a href="https://store.docker.com/search?type=edition&amp;offering=community">Docker</a></li>
 <li>Install <a href="https://www.virtualbox.org/">Virtualbox</a></li>
 <li>Install <a href="https://kubernetes.io/docs/tasks/tools/install-kubectl/">Kubectl</a></li>
 <li>Install <a href="https://kubernetes.io/docs/tasks/tools/install-minikube/#install-minikube">Minikube</a></li>
 </ul>
-
 <h2 id="test-installation">Test Installation</h2>
-
 <pre><code>$ minikube version
 minikube version: v0.25.0
 
@@ -309,58 +290,45 @@ heapster was successfully enabled
 
 # open the dashboard (in a browser)
 $ minikube dashboard
-</code></pre>
-
-<h2 id="get-some-status">Get some status</h2>
-
-<pre><code class="language-bash"># are we running a cluster?
+</code></pre><h2 id="get-some-status">Get some status</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># are we running a cluster?</span>
 $ kubectl cluster-info
 Kubernetes master is running at https://192.168.99.100:8443
 
-# we should have a minikube node
+<span style="color:#75715e"># we should have a minikube node</span>
 $ kubectl get nodes
 NAME       STATUS    ROLES     AGE       VERSION
 minikube   Ready     &lt;none&gt;    2d        v1.9.0
 
-</code></pre>
-
-<h3 id="architecture">Architecture</h3>
-
+</code></pre></div><h3 id="architecture">Architecture</h3>
 <p>Read <a href="https://kubernetes.io/docs/tutorials/kubernetes-basics/">Kubernetes Basics</a> for a better understanding.</p>
-
 <ul>
 <li>A Cluster has Nodes</li>
 <li>A Node has Pods</li>
 <li>A Pod has (Docker in our case) containers and volumes</li>
 </ul>
-
 <h2 id="create-a-deployment">Create a Deployment</h2>
-
 <p>Run a &ldquo;hello world&rdquo; using example echoserver</p>
-
-<pre><code class="language-bash">
-# get a list of commands
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">
+<span style="color:#75715e"># get a list of commands</span>
 $ kubectl run --help
 
-# run a hello world echo server
-$ kubectl run hello-minikube --image=gcr.io/google_containers/echoserver:1.4 --port=8080
+<span style="color:#75715e"># run a hello world echo server</span>
+$ kubectl run hello-minikube --image<span style="color:#f92672">=</span>gcr.io/google_containers/echoserver:1.4 --port<span style="color:#f92672">=</span><span style="color:#ae81ff">8080</span>
 
-deployment &quot;hello-minikube&quot; created
+deployment <span style="color:#e6db74">&#34;hello-minikube&#34;</span> created
 
-# expose the node's port
-$ kubectl expose deployment hello-minikube --type=NodePort
+<span style="color:#75715e"># expose the node&#39;s port</span>
+$ kubectl expose deployment hello-minikube --type<span style="color:#f92672">=</span>NodePort
 
-service &quot;hello-minikube&quot; exposed
+service <span style="color:#e6db74">&#34;hello-minikube&#34;</span> exposed
 
-# get the URL
+<span style="color:#75715e"># get the URL</span>
 $ minikube service hello-minikube --url
 
 http://192.168.99.100:31923
 
-</code></pre>
-
-<h2 id="useful-commands">Useful Commands</h2>
-
+</code></pre></div><h2 id="useful-commands">Useful Commands</h2>
 <table>
 <thead>
 <tr>
@@ -368,52 +336,42 @@ http://192.168.99.100:31923
 <th>Description</th>
 </tr>
 </thead>
-
 <tbody>
 <tr>
 <td><code>kubectl get pods -o wide</code></td>
 <td>Get information about all running pods in the default namespace</td>
 </tr>
-
 <tr>
 <td><code>kubectl get pods -o wide --namespace=test</code></td>
 <td>Get information about all running pods in the <strong>test</strong> namespace</td>
 </tr>
-
 <tr>
 <td><code>kubectl describe pod &lt;pod&gt;</code></td>
 <td>Describe one pod</td>
 </tr>
-
 <tr>
 <td><code>kubectl expose pod &lt;pod&gt; --port=2701 --name=api</code></td>
 <td>Expose the port of a pod (creates a new service)</td>
 </tr>
-
 <tr>
 <td><code>kubectl attach &lt;podname&gt; -i</code></td>
 <td>Attach to a pod</td>
 </tr>
-
 <tr>
 <td><code>kubectl exec &lt;pod&gt; -- command</code></td>
 <td>Execute a command in the pod</td>
 </tr>
-
 <tr>
 <td><code>kubectl label pods &lt;pod&gt; mylabel=fun</code></td>
 <td>Add a new label to a pod</td>
 </tr>
-
 <tr>
 <td><code>kubectl run -i --tty alpine --image=alpine --restart=Never --sh</code></td>
 <td>Run a shell in a pod</td>
 </tr>
 </tbody>
 </table>
-
-<h2 id="port-forwarding-local-development">Port Forwarding / Local Development</h2>
-
+<h2 id="port-forwarding--local-development">Port Forwarding / Local Development</h2>
 <p>Check out <a href="https://github.com/txn2/kubefwd">kubefwd</a> for a simple command line utility that bulk forwards services of one or more namespaces to your local workstation.</p>
 
 
@@ -421,6 +379,23 @@ http://192.168.99.100:31923
                    <span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">Kubernetes Overview: Container Orchestration &amp; Microservices</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="https://imti.co/" property="cc:attributionName" rel="cc:attributionURL">Craig Johnston</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
                     <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a>
                 </p>
+
+                <h5>SUPPORT</h5>
+                <p>
+                    Order my new Kubernetes book: <a href="https://amzn.to/34D56v6">Advanced Platform Development with Kubernetes: Enabling Data Management, the Internet of Things, Blockchain, and Machine Learning</a>
+                </p>
+                <script type="text/javascript">
+                  amzn_assoc_tracking_id = "imti-20";
+                  amzn_assoc_ad_mode = "manual";
+                  amzn_assoc_ad_type = "smart";
+                  amzn_assoc_marketplace = "amazon";
+                  amzn_assoc_region = "US";
+                  amzn_assoc_design = "enhanced_links";
+                  amzn_assoc_asins = "1484256107";
+                  amzn_assoc_placement = "adunit";
+                  amzn_assoc_linkid = "14a9d8b8d1b0bd44e9256e0e0a948015";
+                </script>
+                <script src="//z-na.amazon-adsystem.com/widgets/onejs?MarketPlace=US"></script>
 
                 
                 <hr>

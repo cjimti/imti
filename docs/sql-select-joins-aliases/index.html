@@ -211,90 +211,65 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h5>SHARE</h5>
-                <ul class="list-inline">
-                    <li><div class="addthis_inline_share_toolbox"></div></li>
-                </ul>
-
-                
-
-<p>The following is an attempt at explaining the basics of an SQL query, and more importantly how I believe you can best think through them. All queries can be broken down into the basics of this declarative language.</p>
-
+                <p>The following is an attempt at explaining the basics of an SQL query, and more importantly how I believe you can best think through them. All queries can be broken down into the basics of this declarative language.</p>
 <p>I recently helped a co-worker read through a large SQL query with a few dozen joins and left joins, alias, and recursions. He is mostly a front-end integrator and although he has been tinkering with SQL for years, he never really understood the basics. I realize that unless you have to write SQL, many front-end developers work from the API layer, where database interaction has been highly abstracted, and with only brief interactions, many do not realize how easy it is to know the fundamentals. I do not address subqueries, stored procedures or vendor-specific syntax. This example is just the foundation, yet everything builds up from it and can be broken down into it.</p>
-
 <h3 id="the-foundation">The Foundation</h3>
-
 <p>Declaring what you want by selecting, joining, and aliasing in the development of readable SQL queries.</p>
-
-<pre><code class="language-sql">SELECT [what] FROM [location] WHERE [a condition is true]
-</code></pre>
-
-<p><strong>[what]</strong> is the columns you want back. The statement &ldquo;SELECT *&rdquo; litters hundreds of examples and is often scattered though sloppy code. &ldquo;SELECT *&rdquo; is generally an anti-pattern, it hides your dependencies, even if you genuinely want everything, it is not clear in that statement what everything is. SQL is declarative and so you should declare something, rather than being vague.</p>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">SELECT</span> [what] <span style="color:#66d9ef">FROM</span> [<span style="color:#66d9ef">location</span>] <span style="color:#66d9ef">WHERE</span> [a condition <span style="color:#66d9ef">is</span> <span style="color:#66d9ef">true</span>]
+</code></pre></div><p><strong>[what]</strong> is the columns you want back. The statement &ldquo;SELECT *&rdquo; litters hundreds of examples and is often scattered though sloppy code. &ldquo;SELECT *&rdquo; is generally an anti-pattern, it hides your dependencies, even if you genuinely want everything, it is not clear in that statement what everything is. SQL is declarative and so you should declare something, rather than being vague.</p>
 <h3 id="designing-a-query">Designing a Query</h3>
-
 <p>Start with the analog. A proper database schema is going to be as generic as possible, typically to accommodate a broader set of requirements than your specific query. Design the query to declare what you want from the database and use aliases to abstract the underlying implementation.</p>
-
 <h3 id="the-analog">The Analog</h3>
-
 <p>We are going to make a <a href="https://www.stupideasypaleo.com/2017/03/02/bitchin-bowl-recipe/">Paleo Bowl</a> (I live on these things.) For this meal, we need meat, vegetable, and dressing.  So I might start my query like this.</p>
-
-<pre><code class="language-sql">SELECT meat, price
-</code></pre>
-
-<p>I know what it is that I want, so I declare it. I know I can get it at the grocery store in the meat aisle, so I declare that as well.</p>
-
-<pre><code class="language-sql">SELECT meat FROM meat_aisle
-</code></pre>
-
-<p>I have some preferences, so I declare a specific as a condition.</p>
-
-<pre><code class="language-sql">SELECT meat, price FROM meat_aisle WHERE meat_type = &quot;tri-tip&quot;
-</code></pre>
-
-<p>The example above is an analog, stores in my area do not take orders directly via SQL, although they nearly all do in their inventory and point-of-sale systems. I can take this abstract query and make it concrete. In fact, this is how I design all my queries.  I start with an abstract query based on my requirements, and refactor back to the physical entities. This use of abstraction is what makes aliases so great. However, I often see them used merely to make code smaller, and I think that is a shame. Today I saw a query on a <a href="https://www.drupal.org/">Drupal</a> module use an alias to reduce a table called field_collection_field_data_value to fcfdv. That is like Mr. <a href="https://amzn.to/2FSgfbq">Solzhenitsyn</a> asking you to call him slzhntsyn for short; it got shorter but not easier.</p>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">SELECT</span> meat, price
+</code></pre></div><p>I know what it is that I want, so I declare it. I know I can get it at the grocery store in the meat aisle, so I declare that as well.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">SELECT</span> meat <span style="color:#66d9ef">FROM</span> meat_aisle
+</code></pre></div><p>I have some preferences, so I declare a specific as a condition.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">SELECT</span> meat, price <span style="color:#66d9ef">FROM</span> meat_aisle <span style="color:#66d9ef">WHERE</span> meat_type <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;tri-tip&#34;</span>
+</code></pre></div><p>The example above is an analog, stores in my area do not take orders directly via SQL, although they nearly all do in their inventory and point-of-sale systems. I can take this abstract query and make it concrete. In fact, this is how I design all my queries.  I start with an abstract query based on my requirements, and refactor back to the physical entities. This use of abstraction is what makes aliases so great. However, I often see them used merely to make code smaller, and I think that is a shame. Today I saw a query on a <a href="https://www.drupal.org/">Drupal</a> module use an alias to reduce a table called field_collection_field_data_value to fcfdv. That is like Mr. <a href="https://amzn.to/2FSgfbq">Solzhenitsyn</a> asking you to call him slzhntsyn for short; it got shorter but not easier.</p>
 <h3 id="the-implementation">The Implementation</h3>
-
 <p>Here is how I use aliases, I start with them, by keeping my straw query above but tying it to a real table. The database has a table called “product” however to my analog example it is a meat aisle, so I declare it as such with an alias.</p>
-
-<pre><code class="language-sql">SELECT meat, price FROM product AS meat_aisle
-</code></pre>
-
-<p>&ldquo;product&rdquo; does not have a column called meat. In this database, it is called type. I use meat to alias type, since that is the condition I will be putting on it.</p>
-
-<pre><code class="language-sql">SELECT meat_aisle.type AS meat, meat_aisle.price as price
-FROM product AS meat_aisle
-WHERE meat_aisle.type = &quot;tri-tip&quot;
-</code></pre>
-
-<p><strong>Output:</strong></p>
-
-<pre><code class="language-plain">meat, price
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">SELECT</span> meat, price <span style="color:#66d9ef">FROM</span> product <span style="color:#66d9ef">AS</span> meat_aisle
+</code></pre></div><p>&ldquo;product&rdquo; does not have a column called meat. In this database, it is called type. I use meat to alias type, since that is the condition I will be putting on it.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">SELECT</span> meat_aisle.<span style="color:#66d9ef">type</span> <span style="color:#66d9ef">AS</span> meat, meat_aisle.price <span style="color:#66d9ef">as</span> price
+<span style="color:#66d9ef">FROM</span> product <span style="color:#66d9ef">AS</span> meat_aisle
+<span style="color:#66d9ef">WHERE</span> meat_aisle.<span style="color:#66d9ef">type</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;tri-tip&#34;</span>
+</code></pre></div><p><strong>Output:</strong></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plain" data-lang="plain">meat, price
 tri-tip, 699
-</code></pre>
-
-<p>It might seem strange at first to alias the beautifully generic product table to a specific like &ldquo;meat.&rdquo; However, I know I need other ingredients and may be joining the same product table multiple times, and calling &ldquo;product,&rdquo; &ldquo;product2&rdquo; is a terrible thing, but encountered too often. SQL is a declarative language for humans to interact with databases. The SQL should be readable by both.</p>
-
+</code></pre></div><p>It might seem strange at first to alias the beautifully generic product table to a specific like &ldquo;meat.&rdquo; However, I know I need other ingredients and may be joining the same product table multiple times, and calling &ldquo;product,&rdquo; &ldquo;product2&rdquo; is a terrible thing, but encountered too often. SQL is a declarative language for humans to interact with databases. The SQL should be readable by both.</p>
 <p>My query should not be concerned about describing the underlying schema; the database does a great job at that.  My query is best understood by clearly representing what I am trying to accomplish with it.</p>
-
 <h3 id="mastery">Mastery</h3>
-
 <p>If you are interested in really mastering SQL, I can highly recommend three books that got me through some of the most incredibly intricate database designs with challenging and unique requirements. Thanks to <a href="https://amzn.to/2rs09jC">Joe Celko</a>, I have successfully developed numerous queries that have been efficiently processing millions of records every day for over a decade.</p>
-
 <ul>
 <li><a href="https://amzn.to/2wn5232">Joe Celko&rsquo;s SQL for Smarties</a></li>
 <li><a href="https://amzn.to/2KFBL6J">Joe Celko&rsquo;s Trees and Hierarchies in SQL for Smarties</a></li>
 <li><a href="https://amzn.to/2Im8NdT">Joe Celko&rsquo;s Thinking in Sets: Auxiliary, Temporal, and Virtual Tables in SQL</a></li>
 </ul>
-
-<p><a href="https://amzn.to/2rs09jC"><img src="/images/content/celko.png" alt="celko" /></a></p>
+<p><a href="https://amzn.to/2rs09jC"><img src="/images/content/celko.png" alt="celko"></a></p>
 
 
                 <p>
                    <span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">SQL Foundations: Selects, joins and aliases.</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="https://imti.co/" property="cc:attributionName" rel="cc:attributionURL">Craig Johnston</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
                     <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a>
                 </p>
+
+                <h5>SUPPORT</h5>
+                <p>
+                    Order my new Kubernetes book: <a href="https://amzn.to/34D56v6">Advanced Platform Development with Kubernetes: Enabling Data Management, the Internet of Things, Blockchain, and Machine Learning</a>
+                </p>
+                <script type="text/javascript">
+                  amzn_assoc_tracking_id = "imti-20";
+                  amzn_assoc_ad_mode = "manual";
+                  amzn_assoc_ad_type = "smart";
+                  amzn_assoc_marketplace = "amazon";
+                  amzn_assoc_region = "US";
+                  amzn_assoc_design = "enhanced_links";
+                  amzn_assoc_asins = "1484256107";
+                  amzn_assoc_placement = "adunit";
+                  amzn_assoc_linkid = "14a9d8b8d1b0bd44e9256e0e0a948015";
+                </script>
+                <script src="//z-na.amazon-adsystem.com/widgets/onejs?MarketPlace=US"></script>
 
                 
                 <hr>

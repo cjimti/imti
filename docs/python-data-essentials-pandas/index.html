@@ -87,7 +87,7 @@
       "url": "https:\/\/imti.co\/img\/craig_johnston_cjimti.jpg"
     }
   },
-  "description": "Pandas bring Python a data type equivalent to super-charged spreadsheets. Pandas add two highly expressive data structures to Python, Series and DataFrame. Pandas Series and DataFrames provide a performant analysis and manipulation of “relational” or “labeled” data similar to relational database tables like MySQL or the rows and columns of Excel. Pandas are great for working with time series data as well as arbitrary matrix data, and unlabeled data."
+  "description": "Pandas bring Python a data type equivalent to super-charged spreadsheets. Pandas add two highly expressive data structures to Python, Series and DataFrame. Pandas Series and DataFrames provide a performant analysis and manipulation of “relational” or “labeled” data similar to relational database tables like MySQL or the rows and columns of Excel. Pandas are great for working with time series data as well as arbitrary matrix data, and unlabeled data.\nPandas leverage NumPy and if you are not familiar with this fundamental library for working with numbers, then I suggest you take a look at Python Data Essentials - NumPy to get a decent footing."
 }
 </script>
 
@@ -211,219 +211,178 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h5>SHARE</h5>
-                <ul class="list-inline">
-                    <li><div class="addthis_inline_share_toolbox"></div></li>
-                </ul>
-
-                
-
-<p><a href="https://pandas.pydata.org/">Pandas</a> bring Python a data type equivalent to super-charged spreadsheets. Pandas add two highly expressive data structures to Python, <a href="https://pandas.pydata.org/pandas-docs/stable/generated/pandas.Series.html">Series</a> and <a href="https://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.html">DataFrame</a>. Pandas <a href="https://pandas.pydata.org/pandas-docs/stable/generated/pandas.Series.html">Series</a> and <a href="https://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.html">DataFrame</a>s provide a performant analysis and manipulation of “relational” or “labeled” data similar to relational database tables like MySQL or the rows and columns of Excel. <a href="https://pandas.pydata.org/">Pandas</a> are great for working with time series data as well as arbitrary matrix data, and unlabeled data.</p>
-
+                <p><a href="https://pandas.pydata.org/">Pandas</a> bring Python a data type equivalent to super-charged spreadsheets. Pandas add two highly expressive data structures to Python, <a href="https://pandas.pydata.org/pandas-docs/stable/generated/pandas.Series.html">Series</a> and <a href="https://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.html">DataFrame</a>. Pandas <a href="https://pandas.pydata.org/pandas-docs/stable/generated/pandas.Series.html">Series</a> and <a href="https://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.html">DataFrame</a>s provide a performant analysis and manipulation of “relational” or “labeled” data similar to relational database tables like MySQL or the rows and columns of Excel. <a href="https://pandas.pydata.org/">Pandas</a> are great for working with time series data as well as arbitrary matrix data, and unlabeled data.</p>
 <p><a href="https://pandas.pydata.org/">Pandas</a> leverage <a href="/python-data-essentials-numpy/">NumPy</a> and if you are not familiar with this fundamental library for working with numbers, then I suggest you take a look at <a href="/python-data-essentials-numpy/">Python Data Essentials - NumPy</a> to get a decent footing.</p>
-
 <aside class="toc">
     <header>
         <h2>Contents</h2>
     </header>
     <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#getting-started">Getting Started</a></li>
-<li><a href="#series">Series</a>
-<ul>
-<li><a href="#accessing-and-deleting-elements">Accessing and Deleting Elements</a>
-<ul>
-<li><a href="#numpy-on-series-data"><a href="/python-data-essentials-numpy/">NumPy</a> on <a href="https://pandas.pydata.org/pandas-docs/stable/generated/pandas.Series.html">Series</a> data.</a></li>
-</ul></li>
-<li><a href="#arithmetic-on-series-data">Arithmetic on Series Data</a></li>
-</ul></li>
-<li><a href="#dataframes"><a href="https://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.html">DataFrames</a></a>
-<ul>
-<li><a href="#creating">Creating</a></li>
-<li><a href="#selecting">Selecting</a></li>
-<li><a href="#modifying">Modifying</a></li>
-<li><a href="#sorting">Sorting</a></li>
-<li><a href="#math">Math</a></li>
-</ul></li>
-<li><a href="#essential-python-3">Essential Python 3</a></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#getting-started">Getting Started</a></li>
+    <li><a href="#series">Series</a>
+      <ul>
+        <li><a href="#accessing-and-deleting-elements">Accessing and Deleting Elements</a></li>
+        <li><a href="#arithmetic-on-series-data">Arithmetic on Series Data</a></li>
+      </ul>
+    </li>
+    <li><a href="#dataframes"><a href="https://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.html">DataFrames</a></a>
+      <ul>
+        <li><a href="#creating">Creating</a></li>
+        <li><a href="#selecting">Selecting</a></li>
+        <li><a href="#modifying">Modifying</a></li>
+        <li><a href="#sorting">Sorting</a></li>
+        <li><a href="#math">Math</a></li>
+      </ul>
+    </li>
+    <li><a href="#essential-python-3">Essential Python 3</a></li>
+  </ul>
 </nav>
 </aside>
 
-<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<ins class="adsbygoogle"
-     style="display:block; text-align:center;"
-     data-ad-layout="in-article"
-     data-ad-format="fluid"
-     data-ad-client="ca-pub-5984764595236029"
-     data-ad-slot="7730310582"></ins>
-<script>
-    (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-
+<table>
+    <tr><td colspan="2" style="text-align: center"><b>Please support my new book!</b></td></tr>
+    <tr>
+        <td>
+            <a href="https://amzn.to/3hAZUvx">
+                <img src="/img/kubernetes_platform_development.jpg" style="padding:0; margin: 0"/>
+            </a>
+        </td>
+        <td>
+            <b><a href="https://amzn.to/3hAZUvx">Advanced Platform Development with Kubernetes: Enabling Data Management, the Internet of Things, Blockchain, and Machine Learning</a></b>
+            <h4>What You'll Learn</h4>
+            <ul style="padding-bottom: 0; margin: 0">
+                <li>Use data pipelines with <b>MQTT, NiFi, Logstash, Kafka and Elasticsearch</b></li>
+                <li>Install a serverless platform with <b>OpenFaaS</b></li>
+                <li>Explore <b>blockchain</b> network capabilities with <b>Ethereum</b></li>
+                <li>Support a multi-tenant <b>data science</b> platform and web IDE with <b>JupyterHub, MLflow and Seldon Core</b></li>
+                <li>Build a <b>hybrid cluster</b>, securely bridging <b>on-premise</b> and cloud-based Kubernetes nodes</li>
+                <li>Implement an integrated development toolchain for continuous integration and deployment</li>
+            </ul>
+        </td>
+    </tr>
+</table>
 <p>If you want to go beyond this brief overview of <a href="https://pandas.pydata.org/">Pandas</a> I suggest the following resources:</p>
-
 <ul>
 <li><a href="http://pandas.pydata.org/pandas-docs/stable/10min.html">10 Minutes to pandas</a> - Official</li>
 <li><a href="http://pandas.pydata.org/pandas-docs/stable/tutorials.html">Official Tutorials</a></li>
 <li><a href="https://www.youtube.com/watch?v=Iqjy9UqKKuo">Data Analysis with Python and Pandas Tutorial Introduction</a> - Video</li>
 </ul>
-
 <h2 id="getting-started">Getting Started</h2>
-
 <p>In this article, I&rsquo;ll be working with <a href="https://pandas.pydata.org/">Pandas</a> version 0.22.0. If you are running a newer version, there is a possibility of interfaces changing or functionality being deprecated or replaced. I these cases a quick review of the official documentation should suffice.</p>
-
-<pre><code class="language-python">!conda list pandas
-</code></pre>
-
-<pre><code># packages in environment at /Users/cjimti/anaconda3:
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#960050;background-color:#1e0010">!</span>conda list pandas
+</code></pre></div><pre><code># packages in environment at /Users/cjimti/anaconda3:
 #
 # Name                    Version                   Build  Channel
 pandas                    0.22.0           py36h0a44026_0  
 </code></pre>
-
 <h2 id="series">Series</h2>
-
 <p><a href="https://pandas.pydata.org/pandas-docs/stable/generated/pandas.Series.html">Series</a> data structures support integer and label based indexing.</p>
-
 <blockquote>
 <p>One-dimensional ndarray with axis labels (including time series).</p>
 </blockquote>
-
 <ul>
-<li><p><a href="https://pandas.pydata.org/pandas-docs/stable/generated/pandas.Series.html">Series</a> official documentation</p>
+<li><a href="https://pandas.pydata.org/pandas-docs/stable/generated/pandas.Series.html">Series</a> official documentation</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> pandas <span style="color:#f92672">as</span> pd
 
-<pre><code class="language-python">import pandas as pd
+fields <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#39;Name&#39;</span>,<span style="color:#e6db74">&#39;CPU&#39;</span>, <span style="color:#e6db74">&#39;GHz&#39;</span>, <span style="color:#e6db74">&#39;Cores&#39;</span>,<span style="color:#e6db74">&#39;Ram&#39;</span>,<span style="color:#e6db74">&#39;Own&#39;</span>]
+b1 <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#39;Orange Pi Plus&#39;</span>,<span style="color:#e6db74">&#39;ARM Cortex-A7&#39;</span>,<span style="color:#ae81ff">1.536</span>,<span style="color:#ae81ff">4</span>,<span style="color:#ae81ff">1046</span>,<span style="color:#ae81ff">2</span>]
+board <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>Series(data<span style="color:#f92672">=</span>b1, index <span style="color:#f92672">=</span> fields)
 
-fields = ['Name','CPU', 'GHz', 'Cores','Ram','Own']
-b1 = ['Orange Pi Plus','ARM Cortex-A7',1.536,4,1046,2]
-board = pd.Series(data=b1, index = fields)
-
-print(f'Series: \n{board}\n')
-print(f'     Shape: {board.shape}')
-print(f'Dimensions: {board.ndim}')
-print(f'      Size: {board.size}')
-</code></pre>
-
-<p>Series:
+<span style="color:#66d9ef">print</span>(f<span style="color:#e6db74">&#39;Series: </span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">{board}</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#39;</span>)
+<span style="color:#66d9ef">print</span>(f<span style="color:#e6db74">&#39;     Shape: {board.shape}&#39;</span>)
+<span style="color:#66d9ef">print</span>(f<span style="color:#e6db74">&#39;Dimensions: {board.ndim}&#39;</span>)
+<span style="color:#66d9ef">print</span>(f<span style="color:#e6db74">&#39;      Size: {board.size}&#39;</span>)
+</code></pre></div><pre><code>Series: 
 Name     Orange Pi Plus
 CPU       ARM Cortex-A7
 GHz               1.536
 Cores                 4
 Ram                1046
 Own                   2
-dtype: object</p>
+dtype: object
 
-<pre><code> Shape: (6,)
+     Shape: (6,)
+Dimensions: 1
+      Size: 6
 </code></pre>
-
-<p>Dimensions: 1
-      Size: 6</p>
-
-<pre><code class="language-python"># check for label
-print(f'Do we have GPU data? {&quot;GPU&quot; in board}')
-print(f'Do we have CPU data? {&quot;CPU&quot; in board}')
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># check for label</span>
+<span style="color:#66d9ef">print</span>(f<span style="color:#e6db74">&#39;Do we have GPU data? {&#34;GPU&#34; in board}&#39;</span>)
+<span style="color:#66d9ef">print</span>(f<span style="color:#e6db74">&#39;Do we have CPU data? {&#34;CPU&#34; in board}&#39;</span>)
+</code></pre></div><pre><code>Do we have GPU data? False
+Do we have CPU data? True
 </code></pre>
-
-<p>Do we have GPU data? False
-Do we have CPU data? True</p></li>
-</ul>
-
 <h3 id="accessing-and-deleting-elements">Accessing and Deleting Elements</h3>
-
 <ul>
 <li><a href="http://pandas.pydata.org/pandas-docs/version/0.22/generated/pandas.DataFrame.iloc.html">pandas.DataFrame.iloc</a> - explicit selection by integer-index</li>
 <li><a href="http://pandas.pydata.org/pandas-docs/version/0.22/generated/pandas.DataFrame.loc.html">pandas.DataFrame.loc</a> - explicit selection by label</li>
 <li><a href="https://pandas.pydata.org/pandas-docs/stable/generated/pandas.Series.drop.html">pandas.Series.drop</a> - return Series with specified index labels removed.</li>
-
-<li><p><a href="https://pandas.pydata.org/pandas-docs/stable/indexing.html">Indexing and Selecting Data</a> official documentation.</p>
-
-<pre><code class="language-python">print(f'The {board[&quot;Name&quot;]} runs at {board[&quot;GHz&quot;]} GHz.')
-print(f'The {board[0]} has {board[3]} cores.')
-print(f'The {board[0]} has {board[-1]:,} megabytes of ram.')
-</code></pre>
-
-<p>The Orange Pi Plus runs at 1.536 GHz.
+<li><a href="https://pandas.pydata.org/pandas-docs/stable/indexing.html">Indexing and Selecting Data</a> official documentation.</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">print</span>(f<span style="color:#e6db74">&#39;The {board[&#34;Name&#34;]} runs at {board[&#34;GHz&#34;]} GHz.&#39;</span>)
+<span style="color:#66d9ef">print</span>(f<span style="color:#e6db74">&#39;The {board[0]} has {board[3]} cores.&#39;</span>)
+<span style="color:#66d9ef">print</span>(f<span style="color:#e6db74">&#39;The {board[0]} has {board[-1]:,} megabytes of ram.&#39;</span>)
+</code></pre></div><pre><code>The Orange Pi Plus runs at 1.536 GHz.
 The Orange Pi Plus has 4 cores.
-The Orange Pi Plus has 2 megabytes of ram.</p>
-
-<pre><code class="language-python"># select specific columns
-cc = board[[&quot;CPU&quot;,&quot;Cores&quot;]]
-
-print(f'Series: \n{cc}\n')
-print(f'     Shape: {cc.shape}')
-print(f'Dimensions: {cc.ndim}')
-print(f'      Size: {cc.size}')
+The Orange Pi Plus has 2 megabytes of ram.
 </code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># select specific columns</span>
+cc <span style="color:#f92672">=</span> board[[<span style="color:#e6db74">&#34;CPU&#34;</span>,<span style="color:#e6db74">&#34;Cores&#34;</span>]]
 
-<p>Series:
+<span style="color:#66d9ef">print</span>(f<span style="color:#e6db74">&#39;Series: </span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">{cc}</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#39;</span>)
+<span style="color:#66d9ef">print</span>(f<span style="color:#e6db74">&#39;     Shape: {cc.shape}&#39;</span>)
+<span style="color:#66d9ef">print</span>(f<span style="color:#e6db74">&#39;Dimensions: {cc.ndim}&#39;</span>)
+<span style="color:#66d9ef">print</span>(f<span style="color:#e6db74">&#39;      Size: {cc.size}&#39;</span>)
+</code></pre></div><pre><code>Series: 
 CPU      ARM Cortex-A7
 Cores                4
-dtype: object</p>
+dtype: object
 
-<pre><code> Shape: (2,)
+     Shape: (2,)
+Dimensions: 1
+      Size: 2
 </code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># remove a column return or inplace=True</span>
+nb <span style="color:#f92672">=</span> board<span style="color:#f92672">.</span>drop(<span style="color:#e6db74">&#34;Cores&#34;</span>)
 
-<p>Dimensions: 1
-      Size: 2</p>
-
-<pre><code class="language-python"># remove a column return or inplace=True
-nb = board.drop(&quot;Cores&quot;)
-
-print(f'Series: \n{nb}\n')
-print(f'     Shape: {nb.shape}')
-print(f'Dimensions: {nb.ndim}')
-print(f'      Size: {nb.size}')
-</code></pre>
-
-<p>Series:
+<span style="color:#66d9ef">print</span>(f<span style="color:#e6db74">&#39;Series: </span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">{nb}</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#39;</span>)
+<span style="color:#66d9ef">print</span>(f<span style="color:#e6db74">&#39;     Shape: {nb.shape}&#39;</span>)
+<span style="color:#66d9ef">print</span>(f<span style="color:#e6db74">&#39;Dimensions: {nb.ndim}&#39;</span>)
+<span style="color:#66d9ef">print</span>(f<span style="color:#e6db74">&#39;      Size: {nb.size}&#39;</span>)
+</code></pre></div><pre><code>Series: 
 Name    Orange Pi Plus
 CPU      ARM Cortex-A7
 GHz              1.536
 Ram               1046
 Own                  2
-dtype: object</p>
+dtype: object
 
-<pre><code> Shape: (5,)
+     Shape: (5,)
+Dimensions: 1
+      Size: 5
 </code></pre>
-
-<p>Dimensions: 1
-      Size: 5</p>
-
-<pre><code class="language-python">inventory = pd.Series([1,3,2],['Orange Pi Plus', 'Raspberry Pi 3', 'Asus Tinker Board'])
-print(f'Series: \n{inventory}\n')
-</code></pre>
-
-<p>Series:
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">inventory <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>Series([<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">2</span>],[<span style="color:#e6db74">&#39;Orange Pi Plus&#39;</span>, <span style="color:#e6db74">&#39;Raspberry Pi 3&#39;</span>, <span style="color:#e6db74">&#39;Asus Tinker Board&#39;</span>])
+<span style="color:#66d9ef">print</span>(f<span style="color:#e6db74">&#39;Series: </span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">{inventory}</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#39;</span>)
+</code></pre></div><pre><code>Series: 
 Orange Pi Plus       1
 Raspberry Pi 3       3
 Asus Tinker Board    2
-dtype: int64</p>
-
-<pre><code class="language-python">inventory = inventory.add(1)
-print(f'Add 1 to all values: \n{inventory}\n')
+dtype: int64
 </code></pre>
-
-<p>Add 1 to all values:
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">inventory <span style="color:#f92672">=</span> inventory<span style="color:#f92672">.</span>add(<span style="color:#ae81ff">1</span>)
+<span style="color:#66d9ef">print</span>(f<span style="color:#e6db74">&#39;Add 1 to all values: </span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">{inventory}</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#39;</span>)
+</code></pre></div><pre><code>Add 1 to all values: 
 Orange Pi Plus       2
 Raspberry Pi 3       4
 Asus Tinker Board    3
-dtype: int64</p></li>
-</ul>
-
+dtype: int64
+</code></pre>
 <h4 id="numpy-on-series-data"><a href="/python-data-essentials-numpy/">NumPy</a> on <a href="https://pandas.pydata.org/pandas-docs/stable/generated/pandas.Series.html">Series</a> data.</h4>
-
-<pre><code class="language-python">import numpy as np
-</code></pre>
-
-<pre><code class="language-python">print(f'Square root of each item: \n{np.sqrt(inventory)}\n')
-print(f'Each item to the power of 2: \n{np.power(inventory,2)}\n')
-</code></pre>
-
-<pre><code>Square root of each item: 
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> numpy <span style="color:#f92672">as</span> np
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">print</span>(f<span style="color:#e6db74">&#39;Square root of each item: </span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">{np.sqrt(inventory)}</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#39;</span>)
+<span style="color:#66d9ef">print</span>(f<span style="color:#e6db74">&#39;Each item to the power of 2: </span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">{np.power(inventory,2)}</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#39;</span>)
+</code></pre></div><pre><code>Square root of each item: 
 Orange Pi Plus       1.414214
 Raspberry Pi 3       2.000000
 Asus Tinker Board    1.732051
@@ -435,28 +394,21 @@ Raspberry Pi 3       16
 Asus Tinker Board     9
 dtype: int64
 </code></pre>
-
-<pre><code class="language-python"># Orange Pi Plus and Asus Tinker Boards
-inventory[['Orange Pi Plus', 'Asus Tinker Board']] * 2
-</code></pre>
-
-<pre><code>Orange Pi Plus       4
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Orange Pi Plus and Asus Tinker Boards</span>
+inventory[[<span style="color:#e6db74">&#39;Orange Pi Plus&#39;</span>, <span style="color:#e6db74">&#39;Asus Tinker Board&#39;</span>]] <span style="color:#f92672">*</span> <span style="color:#ae81ff">2</span>
+</code></pre></div><pre><code>Orange Pi Plus       4
 Asus Tinker Board    6
 dtype: int64
 </code></pre>
-
 <h3 id="arithmetic-on-series-data">Arithmetic on Series Data</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">containers <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#39;a&#39;</span>,<span style="color:#e6db74">&#39;b&#39;</span>,<span style="color:#e6db74">&#39;c&#39;</span>]
+items <span style="color:#f92672">=</span> [<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">10</span>,<span style="color:#ae81ff">100</span>]
 
-<pre><code class="language-python">containers = ['a','b','c']
-items = [1,10,100]
+item_containers <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>Series(index<span style="color:#f92672">=</span>containers, data<span style="color:#f92672">=</span>items)
 
-item_containers = pd.Series(index=containers, data=items)
-
-print(f'All: \n{item_containers}\n')
-print(f'Greater than 1: \n{item_containers[item_containers &gt; 1]}\n')
-</code></pre>
-
-<pre><code>All: 
+<span style="color:#66d9ef">print</span>(f<span style="color:#e6db74">&#39;All: </span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">{item_containers}</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#39;</span>)
+<span style="color:#66d9ef">print</span>(f<span style="color:#e6db74">&#39;Greater than 1: </span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">{item_containers[item_containers &gt; 1]}</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#39;</span>)
+</code></pre></div><pre><code>All: 
 a      1
 b     10
 c    100
@@ -467,120 +419,59 @@ b     10
 c    100
 dtype: int64
 </code></pre>
-
-<pre><code class="language-python"># add 10 items to a
-item_containers = item_containers.add([10,0,0])
-print(f'All: \n{item_containers}\n')
-</code></pre>
-
-<pre><code>All: 
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># add 10 items to a</span>
+item_containers <span style="color:#f92672">=</span> item_containers<span style="color:#f92672">.</span>add([<span style="color:#ae81ff">10</span>,<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">0</span>])
+<span style="color:#66d9ef">print</span>(f<span style="color:#e6db74">&#39;All: </span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">{item_containers}</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#39;</span>)
+</code></pre></div><pre><code>All: 
 a     11
 b     10
 c    100
 dtype: int64
 </code></pre>
-
-<pre><code class="language-python">half_containers = item_containers / 2
-print(f'Half: \n{half_containers}\n')
-</code></pre>
-
-<pre><code>Half: 
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">half_containers <span style="color:#f92672">=</span> item_containers <span style="color:#f92672">/</span> <span style="color:#ae81ff">2</span>
+<span style="color:#66d9ef">print</span>(f<span style="color:#e6db74">&#39;Half: </span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">{half_containers}</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#39;</span>)
+</code></pre></div><pre><code>Half: 
 a     5.5
 b     5.0
 c    50.0
 dtype: float64
 </code></pre>
-
 <h2 id="dataframes"><a href="https://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.html">DataFrames</a></h2>
-
 <p><a href="https://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.html">DataFrames</a> are the central feature of <a href="https://pandas.pydata.org/">Pandas</a>, a dictionary like data object.</p>
-
 <blockquote>
 <p>Two-dimensional size-mutable, potentially heterogeneous tabular data structure with labeled axes (rows and columns). Arithmetic operations align on both row and column labels. Can be thought of as a dict-like container for Series objects. The primary pandas data structure.</p>
 </blockquote>
-
 <ul>
-<li><p><a href="https://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.html">pandas.DataFrame</a> official documentation.</p>
-
-<pre><code class="language-python">import pandas as pd
-</code></pre></li>
+<li><a href="https://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.html">pandas.DataFrame</a> official documentation.</li>
 </ul>
-
-<h3 id="creating">Creating</h3>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> pandas <span style="color:#f92672">as</span> pd
+</code></pre></div><h3 id="creating">Creating</h3>
 <p><a href="https://pandas.pydata.org/">Pandas</a> can create a <a href="https://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.html">DataFrame</a> from a <a href="/python-data-essentials-numpy/">NumPy</a> ndarray (structured or homogeneous), dict, or another DataFrame. A DataFrame with a Python <a href="http://www.pythonforbeginners.com/dictionary/how-to-use-dictionaries-in-python">Dict</a> can contain <a href="https://pandas.pydata.org/pandas-docs/stable/generated/pandas.Series.html">Series</a>, arrays, constants, or list-like objects.</p>
-
 <p>In the example below I create a <a href="http://www.pythonforbeginners.com/dictionary/how-to-use-dictionaries-in-python">dictionary</a> that maps three indexes to three varied data sets. The fictional AI machines &lsquo;hal&rsquo;, &lsquo;johnny 5&rsquo; and &lsquo;bender&rsquo; all have different attributes with some overlap. Each of the dictionary keys contains a Pandas Series object. However, they may contain any list-like objects.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">ai <span style="color:#f92672">=</span> {<span style="color:#e6db74">&#39;hal&#39;</span>: pd<span style="color:#f92672">.</span>Series(data <span style="color:#f92672">=</span> [<span style="color:#ae81ff">100</span>, <span style="color:#ae81ff">90</span>], index <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#39;intellect&#39;</span>, <span style="color:#e6db74">&#39;dangerous&#39;</span>]),
+      <span style="color:#e6db74">&#39;johnny 5&#39;</span>: pd<span style="color:#f92672">.</span>Series(data <span style="color:#f92672">=</span> [<span style="color:#ae81ff">12</span>, <span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">2</span>], index <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#39;dangerous&#39;</span>,<span style="color:#e6db74">&#39;humor&#39;</span>,<span style="color:#e6db74">&#39;bending&#39;</span>]),
+      <span style="color:#e6db74">&#39;bender&#39;</span>: pd<span style="color:#f92672">.</span>Series(data <span style="color:#f92672">=</span> [<span style="color:#ae81ff">20</span>, <span style="color:#ae81ff">50</span>, <span style="color:#ae81ff">50</span>, <span style="color:#ae81ff">100</span>], index <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#39;intellect&#39;</span>, <span style="color:#e6db74">&#39;dangerous&#39;</span>, <span style="color:#e6db74">&#39;humor&#39;</span>, <span style="color:#e6db74">&#39;bending&#39;</span>])}
 
-<pre><code class="language-python">ai = {'hal': pd.Series(data = [100, 90], index = ['intellect', 'dangerous']),
-      'johnny 5': pd.Series(data = [12, 5, 2], index = ['dangerous','humor','bending']),
-      'bender': pd.Series(data = [20, 50, 50, 100], index = ['intellect', 'dangerous', 'humor', 'bending'])}
-
-df_ai = pd.DataFrame(ai)
+df_ai <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>DataFrame(ai)
 df_ai
+</code></pre></div><!-- raw HTML omitted -->
+<pre><code>.dataframe tbody tr th {
+    vertical-align: top;
+}
+
+.dataframe thead th {
+    text-align: right;
+}
 </code></pre>
+<p><!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">print</span>(f<span style="color:#e6db74">&#39;     Shape: {df_ai.shape}&#39;</span>)
+<span style="color:#66d9ef">print</span>(f<span style="color:#e6db74">&#39;Dimensions: {df_ai.ndim}&#39;</span>)
+<span style="color:#66d9ef">print</span>(f<span style="color:#e6db74">&#39;      Size: {df_ai.size}&#39;</span>)
+<span style="color:#66d9ef">print</span>(f<span style="color:#e6db74">&#39;Total NaNs: {df_ai.isnull().sum().sum()}&#39;</span>)
+<span style="color:#66d9ef">print</span>(f<span style="color:#e6db74">&#39;NaN Counts: </span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">{df_ai.isnull().sum()}</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#39;</span>)
 
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>bender</th>
-      <th>hal</th>
-      <th>johnny 5</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>bending</th>
-      <td>100</td>
-      <td>NaN</td>
-      <td>2.0</td>
-    </tr>
-    <tr>
-      <th>dangerous</th>
-      <td>50</td>
-      <td>90.0</td>
-      <td>12.0</td>
-    </tr>
-    <tr>
-      <th>humor</th>
-      <td>50</td>
-      <td>NaN</td>
-      <td>5.0</td>
-    </tr>
-    <tr>
-      <th>intellect</th>
-      <td>20</td>
-      <td>100.0</td>
-      <td>NaN</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-<pre><code class="language-python">print(f'     Shape: {df_ai.shape}')
-print(f'Dimensions: {df_ai.ndim}')
-print(f'      Size: {df_ai.size}')
-print(f'Total NaNs: {df_ai.isnull().sum().sum()}')
-print(f'NaN Counts: \n{df_ai.isnull().sum()}\n')
-
-</code></pre>
-
-<pre><code>     Shape: (4, 3)
+</code></pre></div><pre><code>     Shape: (4, 3)
 Dimensions: 2
       Size: 12
 Total NaNs: 3
@@ -590,614 +481,183 @@ hal         2
 johnny 5    1
 dtype: int64
 </code></pre>
-
-<pre><code class="language-python">print(f'DataFrame Values: \n{df_ai.values}\n')
-</code></pre>
-
-<pre><code>DataFrame Values: 
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">print</span>(f<span style="color:#e6db74">&#39;DataFrame Values: </span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">{df_ai.values}</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#39;</span>)
+</code></pre></div><pre><code>DataFrame Values: 
 [[ 100.   nan    2.]
  [  50.   90.   12.]
  [  50.   nan    5.]
  [  20.  100.   nan]]
 </code></pre>
-
 <h3 id="selecting">Selecting</h3>
-
 <p>The methods <a href="http://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.mask.html">mask</a> and <a href="http://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.where.html">where</a> are provided by Panda&rsquo;s <a href="https://pandas.pydata.org/pandas-docs/stable/generated/pandas.Series.html">Series</a> and <a href="https://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.html">DataFrame</a> data types. See the examples below for some simple examples of value selection using basic arithmatic expressions.</p>
-
 <ul>
 <li><a href="http://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.mask.html">pandas.DataFrame.mask</a></li>
 <li><a href="http://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.where.html">pandas.DataFrame.where</a></li>
 <li><a href="http://pandas.pydata.org/pandas-docs/stable/generated/pandas.Series.mask.html">pandas.Series.mask</a></li>
-
-<li><p><a href="http://pandas.pydata.org/pandas-docs/stable/generated/pandas.Series.where.html">pandas.Series.where</a></p>
-
-<pre><code class="language-python"># mask out any data greater than 10
-df_ai.mask(df_ai &gt; 10)
-</code></pre></li>
+<li><a href="http://pandas.pydata.org/pandas-docs/stable/generated/pandas.Series.where.html">pandas.Series.where</a></li>
 </ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># mask out any data greater than 10</span>
+df_ai<span style="color:#f92672">.</span>mask(df_ai <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">10</span>)
+</code></pre></div><!-- raw HTML omitted -->
+<pre><code>.dataframe tbody tr th {
+    vertical-align: top;
+}
 
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>bender</th>
-      <th>hal</th>
-      <th>johnny 5</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>bending</th>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>2.0</td>
-    </tr>
-    <tr>
-      <th>dangerous</th>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>humor</th>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>5.0</td>
-    </tr>
-    <tr>
-      <th>intellect</th>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-<pre><code class="language-python"># only return data greater than 10, otherwise NaN
-df_ai.where(df_ai &gt; 10)
+.dataframe thead th {
+    text-align: right;
+}
 </code></pre>
+<p><!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># only return data greater than 10, otherwise NaN</span>
+df_ai<span style="color:#f92672">.</span>where(df_ai <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">10</span>)
+</code></pre></div><!-- raw HTML omitted -->
+<pre><code>.dataframe tbody tr th {
+    vertical-align: top;
+}
 
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>bender</th>
-      <th>hal</th>
-      <th>johnny 5</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>bending</th>
-      <td>100</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>dangerous</th>
-      <td>50</td>
-      <td>90.0</td>
-      <td>12.0</td>
-    </tr>
-    <tr>
-      <th>humor</th>
-      <td>50</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>intellect</th>
-      <td>20</td>
-      <td>100.0</td>
-      <td>NaN</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-<pre><code class="language-python"># only return data greater than 10, otherwise 0
-df_ai.where(df_ai &gt; 10, 0)
+.dataframe thead th {
+    text-align: right;
+}
 </code></pre>
+<p><!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># only return data greater than 10, otherwise 0</span>
+df_ai<span style="color:#f92672">.</span>where(df_ai <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">0</span>)
+</code></pre></div><!-- raw HTML omitted -->
+<pre><code>.dataframe tbody tr th {
+    vertical-align: top;
+}
 
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>bender</th>
-      <th>hal</th>
-      <th>johnny 5</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>bending</th>
-      <td>100</td>
-      <td>0.0</td>
-      <td>0.0</td>
-    </tr>
-    <tr>
-      <th>dangerous</th>
-      <td>50</td>
-      <td>90.0</td>
-      <td>12.0</td>
-    </tr>
-    <tr>
-      <th>humor</th>
-      <td>50</td>
-      <td>0.0</td>
-      <td>0.0</td>
-    </tr>
-    <tr>
-      <th>intellect</th>
-      <td>20</td>
-      <td>100.0</td>
-      <td>0.0</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
+.dataframe thead th {
+    text-align: right;
+}
+</code></pre>
+<p><!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
 <h3 id="modifying">Modifying</h3>
-
 <p>The AI bots &lsquo;hal&rsquo;, &lsquo;johnny 5&rsquo; and &lsquo;bender&rsquo; share some common attributes, however where they do not, we get <strong>nan</strong> (not a number). Running the AI bot data through any math function would be problematic with the existence of non-numbers. Pandas give us quite a few options.</p>
-
 <p>There are many options for cleaning this data. I&rsquo;ll start with removing any rows that contain <strong>nan</strong> values. We can make these adjustments with the optional parameter <strong>inplace=True</strong> if we wanted to modify the DataFrame in place, however for the sake of examples it is better to keep the original in-tact.</p>
-
-<pre><code class="language-python"># return a frame eliminating rows with NaN values
-df_ai_common_rows = df_ai.dropna(axis=0)
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># return a frame eliminating rows with NaN values</span>
+df_ai_common_rows <span style="color:#f92672">=</span> df_ai<span style="color:#f92672">.</span>dropna(axis<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>)
 df_ai_common_rows
+</code></pre></div><!-- raw HTML omitted -->
+<pre><code>.dataframe tbody tr th {
+    vertical-align: top;
+}
+
+.dataframe thead th {
+    text-align: right;
+}
 </code></pre>
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>bender</th>
-      <th>hal</th>
-      <th>johnny 5</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>dangerous</th>
-      <td>50</td>
-      <td>90.0</td>
-      <td>12.0</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-<pre><code class="language-python"># return a frame eliminating rows with NaN values
-df_ai_common_cols = df_ai.dropna(axis=1)
+<p><!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># return a frame eliminating rows with NaN values</span>
+df_ai_common_cols <span style="color:#f92672">=</span> df_ai<span style="color:#f92672">.</span>dropna(axis<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)
 df_ai_common_cols
+</code></pre></div><!-- raw HTML omitted -->
+<pre><code>.dataframe tbody tr th {
+    vertical-align: top;
+}
+
+.dataframe thead th {
+    text-align: right;
+}
 </code></pre>
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>bender</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>bending</th>
-      <td>100</td>
-    </tr>
-    <tr>
-      <th>dangerous</th>
-      <td>50</td>
-    </tr>
-    <tr>
-      <th>humor</th>
-      <td>50</td>
-    </tr>
-    <tr>
-      <th>intellect</th>
-      <td>20</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
+<p><!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
 <p>Depending on requirements, no data could mean zero in our scale of 0-100. While zero is not a reasonable assumption for our AI bots, it&rsquo;s an easy data fix:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># fill all NaNs with 0</span>
+df_ai<span style="color:#f92672">.</span>fillna(<span style="color:#ae81ff">0</span>)
+</code></pre></div><!-- raw HTML omitted -->
+<pre><code>.dataframe tbody tr th {
+    vertical-align: top;
+}
 
-<pre><code class="language-python"># fill all NaNs with 0
-df_ai.fillna(0)
+.dataframe thead th {
+    text-align: right;
+}
 </code></pre>
+<p><!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># forward fill rows with previous column (axis=0) data </span>
+df_ai<span style="color:#f92672">.</span>fillna(method<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;ffill&#39;</span>, axis<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>)
+</code></pre></div><!-- raw HTML omitted -->
+<pre><code>.dataframe tbody tr th {
+    vertical-align: top;
+}
 
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>bender</th>
-      <th>hal</th>
-      <th>johnny 5</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>bending</th>
-      <td>100</td>
-      <td>0.0</td>
-      <td>2.0</td>
-    </tr>
-    <tr>
-      <th>dangerous</th>
-      <td>50</td>
-      <td>90.0</td>
-      <td>12.0</td>
-    </tr>
-    <tr>
-      <th>humor</th>
-      <td>50</td>
-      <td>0.0</td>
-      <td>5.0</td>
-    </tr>
-    <tr>
-      <th>intellect</th>
-      <td>20</td>
-      <td>100.0</td>
-      <td>0.0</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-<pre><code class="language-python"># forward fill rows with previous column (axis=0) data 
-df_ai.fillna(method='ffill', axis=0)
+.dataframe thead th {
+    text-align: right;
+}
 </code></pre>
+<p><!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># forward fill rows with previous column (axis=0) data </span>
+<span style="color:#75715e"># then back fill</span>
+df_ai<span style="color:#f92672">.</span>fillna(method<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;ffill&#39;</span>, axis<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>)<span style="color:#f92672">.</span>fillna(method<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;bfill&#39;</span>, axis<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>)
+</code></pre></div><!-- raw HTML omitted -->
+<pre><code>.dataframe tbody tr th {
+    vertical-align: top;
+}
 
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>bender</th>
-      <th>hal</th>
-      <th>johnny 5</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>bending</th>
-      <td>100</td>
-      <td>NaN</td>
-      <td>2.0</td>
-    </tr>
-    <tr>
-      <th>dangerous</th>
-      <td>50</td>
-      <td>90.0</td>
-      <td>12.0</td>
-    </tr>
-    <tr>
-      <th>humor</th>
-      <td>50</td>
-      <td>90.0</td>
-      <td>5.0</td>
-    </tr>
-    <tr>
-      <th>intellect</th>
-      <td>20</td>
-      <td>100.0</td>
-      <td>5.0</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-<pre><code class="language-python"># forward fill rows with previous column (axis=0) data 
-# then back fill
-df_ai.fillna(method='ffill', axis=0).fillna(method='bfill', axis=0)
+.dataframe thead th {
+    text-align: right;
+}
 </code></pre>
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>bender</th>
-      <th>hal</th>
-      <th>johnny 5</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>bending</th>
-      <td>100</td>
-      <td>90.0</td>
-      <td>2.0</td>
-    </tr>
-    <tr>
-      <th>dangerous</th>
-      <td>50</td>
-      <td>90.0</td>
-      <td>12.0</td>
-    </tr>
-    <tr>
-      <th>humor</th>
-      <td>50</td>
-      <td>90.0</td>
-      <td>5.0</td>
-    </tr>
-    <tr>
-      <th>intellect</th>
-      <td>20</td>
-      <td>100.0</td>
-      <td>5.0</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
+<p><!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
 <p>Forward (ffill) and backfilling (bfill) have far better uses in time-series data. In this case, <code>hal</code> having a danger rating of 90 should not assume that his bending ability would be 90 as well, but this example clearly illustrates the forward and backfilling capabilities of <a href="https://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.html">DataFrame</a>&rsquo;s <a href="https://pandas.pydata.org/pandas-docs/version/0.22/generated/pandas.DataFrame.fillna.html">fillna</a> method.</p>
-
 <p>If we needed to make assumptions regarding the ability of this team of AI bots we could assume unknown data could start as an average of known data.</p>
-
-<pre><code class="language-python"># get the mean of data for each attribute row by column (axis=1)
-df_ai.mean(axis=1)
-</code></pre>
-
-<pre><code>bending      51.000000
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># get the mean of data for each attribute row by column (axis=1)</span>
+df_ai<span style="color:#f92672">.</span>mean(axis<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)
+</code></pre></div><pre><code>bending      51.000000
 dangerous    50.666667
 humor        27.500000
 intellect    60.000000
 dtype: float64
 </code></pre>
-
 <p><a href="http://pandas.pydata.org/pandas-docs/version/0.22/generated/pandas.DataFrame.apply.html">pandas.DataFrame.apply</a> method applies the return value of a function along an axis of DataFrame, axis=1 in the example below. The function given to <a href="http://pandas.pydata.org/pandas-docs/version/0.22/generated/pandas.DataFrame.apply.html">pandas.DataFrame.apply</a> is passed the row or column depending the axis specified, the function below receives rows (because axis=1 is specified) and assigns each row to the variable &ldquo;x&rdquo; in which the method &ldquo;mean&rdquo; is called and resulting data returned from the function.</p>
-
 <p>We could have defied a named function; however this small opperation <strong>x.fillna(x.mean())</strong> is hardly worthy of such attention. Python&rsquo;s <a href="https://docs.python.org/3/tutorial/controlflow.html#lambda-expressions">lambda</a>s are one line, anonymous functions, and then used responsibly, can make the code more compact and readable at the same time.</p>
-
-<pre><code class="language-python">clean_df_ai = df_ai.apply(lambda x: x.fillna(x.mean()),axis=1)
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">clean_df_ai <span style="color:#f92672">=</span> df_ai<span style="color:#f92672">.</span>apply(<span style="color:#66d9ef">lambda</span> x: x<span style="color:#f92672">.</span>fillna(x<span style="color:#f92672">.</span>mean()),axis<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)
 clean_df_ai
+</code></pre></div><!-- raw HTML omitted -->
+<pre><code>.dataframe tbody tr th {
+    vertical-align: top;
+}
+
+.dataframe thead th {
+    text-align: right;
+}
 </code></pre>
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>bender</th>
-      <th>hal</th>
-      <th>johnny 5</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>bending</th>
-      <td>100.0</td>
-      <td>51.0</td>
-      <td>2.0</td>
-    </tr>
-    <tr>
-      <th>dangerous</th>
-      <td>50.0</td>
-      <td>90.0</td>
-      <td>12.0</td>
-    </tr>
-    <tr>
-      <th>humor</th>
-      <td>50.0</td>
-      <td>27.5</td>
-      <td>5.0</td>
-    </tr>
-    <tr>
-      <th>intellect</th>
-      <td>20.0</td>
-      <td>100.0</td>
-      <td>60.0</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
+<p><!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
 <h3 id="sorting">Sorting</h3>
-
-<pre><code class="language-python"># order the columns by ai bot with the highest intellect
-hii = clean_df_ai.sort_values(['intellect'], axis=1, ascending=False)
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># order the columns by ai bot with the highest intellect</span>
+hii <span style="color:#f92672">=</span> clean_df_ai<span style="color:#f92672">.</span>sort_values([<span style="color:#e6db74">&#39;intellect&#39;</span>], axis<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>, ascending<span style="color:#f92672">=</span>False)
 hii
+</code></pre></div><!-- raw HTML omitted -->
+<pre><code>.dataframe tbody tr th {
+    vertical-align: top;
+}
+
+.dataframe thead th {
+    text-align: right;
+}
 </code></pre>
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>hal</th>
-      <th>johnny 5</th>
-      <th>bender</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>bending</th>
-      <td>51.0</td>
-      <td>2.0</td>
-      <td>100.0</td>
-    </tr>
-    <tr>
-      <th>dangerous</th>
-      <td>90.0</td>
-      <td>12.0</td>
-      <td>50.0</td>
-    </tr>
-    <tr>
-      <th>humor</th>
-      <td>27.5</td>
-      <td>5.0</td>
-      <td>50.0</td>
-    </tr>
-    <tr>
-      <th>intellect</th>
-      <td>100.0</td>
-      <td>60.0</td>
-      <td>20.0</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-<pre><code class="language-python">print(f'The bot with the highest intelligence is {hii.columns[0]}.')
-print(f'The bot with the lowest intelligence is {hii.columns[-1]}.')
-</code></pre>
-
-<pre><code>The bot with the highest intelligence is hal.
+<p><!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">print</span>(f<span style="color:#e6db74">&#39;The bot with the highest intelligence is {hii.columns[0]}.&#39;</span>)
+<span style="color:#66d9ef">print</span>(f<span style="color:#e6db74">&#39;The bot with the lowest intelligence is {hii.columns[-1]}.&#39;</span>)
+</code></pre></div><pre><code>The bot with the highest intelligence is hal.
 The bot with the lowest intelligence is bender.
 </code></pre>
-
 <p>I doubt that <code>johnny 5</code> is more intelligent than <code>bender</code> but his data was unknown and therefore derived by using a mean, so the score is mathematically correct.</p>
-
 <p>I won&rsquo;t attempt even to scratch the surface of sorting functions and their parameters provided by <a href="https://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.html">DataFrame</a>s. This article is only intended to give you a taste and get you going.</p>
-
 <h3 id="math">Math</h3>
-
 <p>Use <a href="/python-data-essentials-numpy/">NumPy</a> to perform any number of arithmetic operations on the values of a <a href="https://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.html">DataFrames</a>. I suggest you take a look at my article <a href="/python-data-essentials-numpy/">Python Data Essentials - Pandas</a> for an overview of this compelling data science library.</p>
-
 <h2 id="essential-python-3">Essential Python 3</h2>
-
 <p>A lot of data science in done in <a href="/golang-to-jupyter/">Jupyter Notbooks</a> and libraries like <a href="/python-data-essentials-numpy/">NumPy</a> make developing reports or documenting numerical processes. However if you a software developer like me, this code needs to run in a script on a server, in Amazon&rsquo;s <a href="https://docs.aws.amazon.com/lambda/latest/dg/python-programming-model-handler-types.html">Lambda Function Handler</a> or even <a href="https://kubeless.io/">kubeless</a> in a custom <a href="/hobby-cluster/">kubernetes</a> cluster.</p>
-
 <p>Check out my article on <a href="/essential-python3/">Essential Python 3</a> for a clean boilerplate script template to get you going.</p>
 
 
@@ -1205,6 +665,23 @@ The bot with the lowest intelligence is bender.
                    <span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">Python Data Essentials - Pandas: A data type equivalent to super-charged spreadsheets.</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="https://imti.co/" property="cc:attributionName" rel="cc:attributionURL">Craig Johnston</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
                     <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a>
                 </p>
+
+                <h5>SUPPORT</h5>
+                <p>
+                    Order my new Kubernetes book: <a href="https://amzn.to/34D56v6">Advanced Platform Development with Kubernetes: Enabling Data Management, the Internet of Things, Blockchain, and Machine Learning</a>
+                </p>
+                <script type="text/javascript">
+                  amzn_assoc_tracking_id = "imti-20";
+                  amzn_assoc_ad_mode = "manual";
+                  amzn_assoc_ad_type = "smart";
+                  amzn_assoc_marketplace = "amazon";
+                  amzn_assoc_region = "US";
+                  amzn_assoc_design = "enhanced_links";
+                  amzn_assoc_asins = "1484256107";
+                  amzn_assoc_placement = "adunit";
+                  amzn_assoc_linkid = "14a9d8b8d1b0bd44e9256e0e0a948015";
+                </script>
+                <script src="//z-na.amazon-adsystem.com/widgets/onejs?MarketPlace=US"></script>
 
                 
                 <hr>

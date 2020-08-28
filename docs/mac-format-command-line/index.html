@@ -207,33 +207,22 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h5>SHARE</h5>
-                <ul class="list-inline">
-                    <li><div class="addthis_inline_share_toolbox"></div></li>
-                </ul>
-
                 <p>I have had this collection of old external drives hanging around for years. There was a time I was having terrible luck with hard drives. It turned out I managed to amass a collection of about eight drives from one terabyte to four terabytes.</p>
-
 <p>Fortunately, I keep copies of nearly all my files on cloud drives, split between <a href="https://amzn.to/2KiZ31d">Amazon</a>, Google and DropBox. I had a sneaking suspicion that the discs themselves were ok and somehow my Mac was communicating with the RAID controllers in a way that caused them to fail.</p>
-
 <p>This weekend I received a <a href="https://amzn.to/2Ge0aNb">Cable Matters USB 3.0 SATA HDD/SSD Docking Station</a> I ordered a few days ago. I removed all my drives from their old cases and plugged them directly into my new dock. Out of my eight drives, only two were unusable.</p>
-
 <p>I did quick work of re-setting my stack of drives. I do my work on the command line when I can, and the MacOs command <code>diskutil</code> works great for this.</p>
-
 <p>My Mac complained about most of the drives I plugged in, but <code>diskutil</code> was able to see them fine.</p>
-
 <p>Run <code>diskutil list</code> for a listing of internal and external drives and their partitions.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ diskutil list
 
-<pre><code class="language-bash">$ diskutil list
-
-/dev/disk0 (internal):
-   #:                       TYPE NAME                    SIZE       IDENTIFIER
+/dev/disk0 <span style="color:#f92672">(</span>internal<span style="color:#f92672">)</span>:
+   <span style="color:#75715e">#:                       TYPE NAME                    SIZE       IDENTIFIER</span>
    0:      GUID_partition_scheme                         1.0 TB     disk0
    1:                        EFI EFI                     314.6 MB   disk0s1
    2:                 Apple_APFS Container disk1         1.0 TB     disk0s2
 
-/dev/disk1 (synthesized):
-   #:                       TYPE NAME                    SIZE       IDENTIFIER
+/dev/disk1 <span style="color:#f92672">(</span>synthesized<span style="color:#f92672">)</span>:
+   <span style="color:#75715e">#:                       TYPE NAME                    SIZE       IDENTIFIER</span>
    0:      APFS Container Scheme -                      +1.0 TB     disk1
                                  Physical Store disk0s2
    1:                APFS Volume Macintosh HD            376.2 GB   disk1s1
@@ -241,32 +230,41 @@
    3:                APFS Volume Recovery                517.8 MB   disk1s3
    4:                APFS Volume VM                      7.5 GB     disk1s4
 
-/dev/disk2 (external, physical):
-   #:                       TYPE NAME                    SIZE       IDENTIFIER
+/dev/disk2 <span style="color:#f92672">(</span>external, physical<span style="color:#f92672">)</span>:
+   <span style="color:#75715e">#:                       TYPE NAME                    SIZE       IDENTIFIER</span>
    0:      GUID_partition_scheme                        *3.0 TB     disk2
    1:                        EFI EFI                     314.6 MB   disk2s1
    2:                  Apple_HFS                         3.0 TB     disk2s2
    
-</code></pre>
-
-<p>Mounted on <code>/dev/disk2</code> is a <a href="https://amzn.to/2KV0u7b">three terabyte Seagate</a> that was part of a failed RAID. The data is corrupt, but the disk is in working order. It just needs a new format.</p>
-
+</code></pre></div><p>Mounted on <code>/dev/disk2</code> is a <a href="https://amzn.to/2KV0u7b">three terabyte Seagate</a> that was part of a failed RAID. The data is corrupt, but the disk is in working order. It just needs a new format.</p>
 <p><code>diskutility</code> has a ton of options and <a href="http://osxdaily.com/2016/08/30/erase-disk-command-line-mac/">OSX Daily has a great article and cheatsheet</a> for some of the most common commands.</p>
-
 <p>I used the following command to format my stack of drives and now have a ton of extra backup storage.</p>
-
 <p><strong>Mac OS Extended Journaled (JHFS+)</strong>:</p>
-
-<pre><code class="language-bash">diskutil eraseDisk JHFS+ 3TBackup /dev/disk2
-</code></pre>
-
-<p>I&rsquo;ll probably stick with just using bare hard drives and a dock from now on. Drives are pretty cheap these days, and if you don&rsquo;t need to keep your drive in a backpack, then I can attest they sit nicely on my bookshelf neatly labeled on their sides.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">diskutil eraseDisk JHFS+ 3TBackup /dev/disk2
+</code></pre></div><p>I&rsquo;ll probably stick with just using bare hard drives and a dock from now on. Drives are pretty cheap these days, and if you don&rsquo;t need to keep your drive in a backpack, then I can attest they sit nicely on my bookshelf neatly labeled on their sides.</p>
 
 
                 <p>
                    <span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">Formatting Drives on MacOS: A stack of old drives, a terminal and diskutil.</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="https://imti.co/" property="cc:attributionName" rel="cc:attributionURL">Craig Johnston</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
                     <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a>
                 </p>
+
+                <h5>SUPPORT</h5>
+                <p>
+                    Order my new Kubernetes book: <a href="https://amzn.to/34D56v6">Advanced Platform Development with Kubernetes: Enabling Data Management, the Internet of Things, Blockchain, and Machine Learning</a>
+                </p>
+                <script type="text/javascript">
+                  amzn_assoc_tracking_id = "imti-20";
+                  amzn_assoc_ad_mode = "manual";
+                  amzn_assoc_ad_type = "smart";
+                  amzn_assoc_marketplace = "amazon";
+                  amzn_assoc_region = "US";
+                  amzn_assoc_design = "enhanced_links";
+                  amzn_assoc_asins = "1484256107";
+                  amzn_assoc_placement = "adunit";
+                  amzn_assoc_linkid = "14a9d8b8d1b0bd44e9256e0e0a948015";
+                </script>
+                <script src="//z-na.amazon-adsystem.com/widgets/onejs?MarketPlace=US"></script>
 
                 
                 <hr>

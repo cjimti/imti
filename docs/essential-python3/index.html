@@ -203,388 +203,362 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h5>SHARE</h5>
-                <ul class="list-inline">
-                    <li><div class="addthis_inline_share_toolbox"></div></li>
-                </ul>
-
-                
-
-<p>This article is a quick tour of basic <a href="https://www.python.org/">Python</a> 3 syntax, components and structure. I intend to balance a cheat sheet format with hello world style boilerplate. If you are already a software developer and need a quick refresh on <a href="https://www.python.org/">Python</a> then I hope you benefit from my notes below.</p>
-
+                <p>This article is a quick tour of basic <a href="https://www.python.org/">Python</a> 3 syntax, components and structure. I intend to balance a cheat sheet format with hello world style boilerplate. If you are already a software developer and need a quick refresh on <a href="https://www.python.org/">Python</a> then I hope you benefit from my notes below.</p>
 <p>I am a professional software developer for a software development company, and for that reason, I work with a lot of languages, expert in some, and ok in others.  I context switch often, and sometimes months in between languages. I  often find myself just needing a quick overview to prime the pump so to say, and rather than keep my notes to myself I thought I would clean them up a bit and publish for anyone needing a quick tour, starting with <a href="https://www.python.org/">Python</a> and more languages as time and interest permits.</p>
-
 <p>Each of the following code blocks are executable.</p>
-
 <aside class="toc">
     <header>
         <h2>Contents</h2>
     </header>
     <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li>
-<ul>
-<li><a href="#script-execution">Script Execution</a></li>
-<li><a href="#script-boilerplate">Script Boilerplate</a></li>
-<li><a href="#types">Types</a></li>
-<li><a href="#conditional-control-flow">Conditional &amp; Control Flow</a></li>
-<li><a href="#loops">Loops</a></li>
-<li><a href="#classes">Classes</a></li>
-<li><a href="#python-books-on-amazon">Python Books on Amazon</a></li>
-</ul></li>
-</ul></li>
-</ul>
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#script-execution">Script Execution</a></li>
+        <li><a href="#script-boilerplate">Script Boilerplate</a></li>
+        <li><a href="#types">Types</a></li>
+        <li><a href="#conditional--control-flow">Conditional &amp; Control Flow</a></li>
+        <li><a href="#loops">Loops</a></li>
+        <li><a href="#classes">Classes</a></li>
+        <li><a href="#python-books-on-amazon">Python Books on Amazon</a></li>
+      </ul>
+    </li>
+  </ul>
 </nav>
 </aside>
 
-<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<ins class="adsbygoogle"
-     style="display:block; text-align:center;"
-     data-ad-layout="in-article"
-     data-ad-format="fluid"
-     data-ad-client="ca-pub-5984764595236029"
-     data-ad-slot="7730310582"></ins>
-<script>
-    (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-
+<table>
+    <tr><td colspan="2" style="text-align: center"><b>Please support my new book!</b></td></tr>
+    <tr>
+        <td>
+            <a href="https://amzn.to/3hAZUvx">
+                <img src="/img/kubernetes_platform_development.jpg" style="padding:0; margin: 0"/>
+            </a>
+        </td>
+        <td>
+            <b><a href="https://amzn.to/3hAZUvx">Advanced Platform Development with Kubernetes: Enabling Data Management, the Internet of Things, Blockchain, and Machine Learning</a></b>
+            <h4>What You'll Learn</h4>
+            <ul style="padding-bottom: 0; margin: 0">
+                <li>Use data pipelines with <b>MQTT, NiFi, Logstash, Kafka and Elasticsearch</b></li>
+                <li>Install a serverless platform with <b>OpenFaaS</b></li>
+                <li>Explore <b>blockchain</b> network capabilities with <b>Ethereum</b></li>
+                <li>Support a multi-tenant <b>data science</b> platform and web IDE with <b>JupyterHub, MLflow and Seldon Core</b></li>
+                <li>Build a <b>hybrid cluster</b>, securely bridging <b>on-premise</b> and cloud-based Kubernetes nodes</li>
+                <li>Implement an integrated development toolchain for continuous integration and deployment</li>
+            </ul>
+        </td>
+    </tr>
+</table>
 <h3 id="script-execution">Script Execution</h3>
-
 <p>Scripts should execute with the environment available python3.</p>
-
-<pre><code class="language-python">#!/usr/bin/env python3
-</code></pre>
-
-<h3 id="script-boilerplate">Script Boilerplate</h3>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e">#!/usr/bin/env python3</span>
+</code></pre></div><h3 id="script-boilerplate">Script Boilerplate</h3>
 <p>See <a href="https://www.python-boilerplate.com/py3+executable">python-boilerplate.com</a> for more boilerplate examples. However, this is a good start for most Python 3 scripts. Read more on <a href="https://www.python.org/dev/peps/pep-0257/">PEP 257 &ndash; Docstring Conventions</a>.</p>
-
-<pre><code class="language-python">#!/usr/bin/env python3
-&quot;&quot;&quot;
-Docstring
-&quot;&quot;&quot;
-__author__ = &quot;Craig Johnston&quot;
-__version__ = &quot;0.0.1&quot;
-__license__ = &quot;MIT&quot;
-
-
-def main():
-    &quot;&quot;&quot;
-        Main Function
-    &quot;&quot;&quot;
-    print(&quot;Python 3&quot;)
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e">#!/usr/bin/env python3</span>
+<span style="color:#e6db74">&#34;&#34;&#34;
+</span><span style="color:#e6db74">Docstring
+</span><span style="color:#e6db74">&#34;&#34;&#34;</span>
+__author__ <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Craig Johnston&#34;</span>
+__version__ <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;0.0.1&#34;</span>
+__license__ <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;MIT&#34;</span>
 
 
-if __name__ == '__main__': main()
-&quot;&quot;&quot;
- Ensures main() only gets executed if the script is
- executed directly and not as an include.
-&quot;&quot;&quot;
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">main</span>():
+    <span style="color:#e6db74">&#34;&#34;&#34;
+</span><span style="color:#e6db74">        Main Function
+</span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;Python 3&#34;</span>)
 
-</code></pre>
 
-<h3 id="types">Types</h3>
+<span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;__main__&#39;</span>: main()
+<span style="color:#e6db74">&#34;&#34;&#34;
+</span><span style="color:#e6db74"> Ensures main() only gets executed if the script is
+</span><span style="color:#e6db74"> executed directly and not as an include.
+</span><span style="color:#e6db74">&#34;&#34;&#34;</span>
 
+</code></pre></div><h3 id="types">Types</h3>
 <p>Read the official documentation on <a href="https://docs.python.org/3/library/stdtypes.html">Python3 Built-in Types</a>.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e">#!/usr/bin/env python3</span>
+<span style="color:#e6db74">&#34;&#34;&#34;
+</span><span style="color:#e6db74">Types
+</span><span style="color:#e6db74">&#34;&#34;&#34;</span>
+__author__ <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Craig Johnston&#34;</span>
+__version__ <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;0.0.1&#34;</span>
+__license__ <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;MIT&#34;</span>
 
-<pre><code class="language-python">#!/usr/bin/env python3
-&quot;&quot;&quot;
-Types
-&quot;&quot;&quot;
-__author__ = &quot;Craig Johnston&quot;
-__version__ = &quot;0.0.1&quot;
-__license__ = &quot;MIT&quot;
 
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">main</span>():
+    <span style="color:#e6db74">&#34;&#34;&#34;
+</span><span style="color:#e6db74">        Main Function
+</span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;Some Python 3 Types&#34;</span>)
 
-def main():
-    &quot;&quot;&quot;
-        Main Function
-    &quot;&quot;&quot;
-    print(&quot;Some Python 3 Types&quot;)
-
-    # list of various type
-    some_types = [
-        ['a','list'],
-        ('a','tuple'),
-        dict(a='im a dictionary', b='type of map'),
-        {&quot;a&quot;: &quot;another dictionary&quot;, &quot;b&quot;: &quot;json flavor&quot;},
-        1,
-        1.1,
-        1 + 1.1,
-        'a string',
-        &quot;another&quot; ' string',
+    <span style="color:#75715e"># list of various type</span>
+    some_types <span style="color:#f92672">=</span> [
+        [<span style="color:#e6db74">&#39;a&#39;</span>,<span style="color:#e6db74">&#39;list&#39;</span>],
+        (<span style="color:#e6db74">&#39;a&#39;</span>,<span style="color:#e6db74">&#39;tuple&#39;</span>),
+        dict(a<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;im a dictionary&#39;</span>, b<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;type of map&#39;</span>),
+        {<span style="color:#e6db74">&#34;a&#34;</span>: <span style="color:#e6db74">&#34;another dictionary&#34;</span>, <span style="color:#e6db74">&#34;b&#34;</span>: <span style="color:#e6db74">&#34;json flavor&#34;</span>},
+        <span style="color:#ae81ff">1</span>,
+        <span style="color:#ae81ff">1.1</span>,
+        <span style="color:#ae81ff">1</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">1.1</span>,
+        <span style="color:#e6db74">&#39;a string&#39;</span>,
+        <span style="color:#e6db74">&#34;another&#34;</span> <span style="color:#e6db74">&#39; string&#39;</span>,
     ]
 
-    for i, v in enumerate(some_types):
-        print(f'Idx: {i:&gt;03} is a {type(v)} with value: {v}')
+    <span style="color:#66d9ef">for</span> i, v <span style="color:#f92672">in</span> enumerate(some_types):
+        <span style="color:#66d9ef">print</span>(f<span style="color:#e6db74">&#39;Idx: {i:&gt;03} is a {type(v)} with value: {v}&#39;</span>)
 
 
-if __name__ == '__main__': main()
-&quot;&quot;&quot;
- Ensures main() only gets executed if the script is
- executed directly and not as an include.
-&quot;&quot;&quot;
+<span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;__main__&#39;</span>: main()
+<span style="color:#e6db74">&#34;&#34;&#34;
+</span><span style="color:#e6db74"> Ensures main() only gets executed if the script is
+</span><span style="color:#e6db74"> executed directly and not as an include.
+</span><span style="color:#e6db74">&#34;&#34;&#34;</span>
 
-</code></pre>
-
-<h3 id="conditional-control-flow">Conditional &amp; Control Flow</h3>
-
+</code></pre></div><h3 id="conditional--control-flow">Conditional &amp; Control Flow</h3>
 <p>Read the official documentation for Python3 <a href="https://docs.python.org/3/tutorial/controlflow.html">Control Flow</a>.</p>
-
-<pre><code class="language-python">#!/usr/bin/env python3
-&quot;&quot;&quot;
-Conditionals
-&quot;&quot;&quot;
-__author__ = &quot;Craig Johnston&quot;
-__version__ = &quot;0.0.1&quot;
-__license__ = &quot;MIT&quot;
-
-
-def main():
-    &quot;&quot;&quot;
-        The main function is demonstrating conditionals.
-    &quot;&quot;&quot;
-    print(&quot;Python 3: Conditionals&quot;)
-
-    x = True
-    y = x
-
-    if x:
-        print(f'x has the value: {repr(x)} and the id: {id(x)}')  # eg 4361511296
-        print(f'x has the value: {repr(y)} and the id: {id(y)}')  # eg 4361511296
-
-    if x == y:
-        print('Simple comparison')
-    elif not y:
-        print('Not my thing really')
-    else:
-        print('We should probably refactor...')
-
-    y = False  # no longer the same as y
-    if not y:
-        print(f'y has the value: {repr(y)} and the id: {id(y)}')  # eg 4532404640
-
-    if (x and not y) or (not x and y):
-        print('XOR')
-
-    a = [1,2,3]
-    if 2 in a:
-        print(f'found 2 in {a}')
-
-    salad = &quot;spinach with cucumber and carrots&quot;
-    if 'cucumber' in salad:
-        print(f'found a cucumber in {repr(salad)}')
-
-    if 'bug' not in salad:
-        print(f'good. no bug in {repr(salad)}')
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e">#!/usr/bin/env python3</span>
+<span style="color:#e6db74">&#34;&#34;&#34;
+</span><span style="color:#e6db74">Conditionals
+</span><span style="color:#e6db74">&#34;&#34;&#34;</span>
+__author__ <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Craig Johnston&#34;</span>
+__version__ <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;0.0.1&#34;</span>
+__license__ <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;MIT&#34;</span>
 
 
-if __name__ == '__main__': main()
-&quot;&quot;&quot;
- Ensures main() only gets executed if the script is
- executed directly and not as an include.
-&quot;&quot;&quot;
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">main</span>():
+    <span style="color:#e6db74">&#34;&#34;&#34;
+</span><span style="color:#e6db74">        The main function is demonstrating conditionals.
+</span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;Python 3: Conditionals&#34;</span>)
 
-</code></pre>
+    x <span style="color:#f92672">=</span> True
+    y <span style="color:#f92672">=</span> x
 
-<h3 id="loops">Loops</h3>
+    <span style="color:#66d9ef">if</span> x:
+        <span style="color:#66d9ef">print</span>(f<span style="color:#e6db74">&#39;x has the value: {repr(x)} and the id: {id(x)}&#39;</span>)  <span style="color:#75715e"># eg 4361511296</span>
+        <span style="color:#66d9ef">print</span>(f<span style="color:#e6db74">&#39;x has the value: {repr(y)} and the id: {id(y)}&#39;</span>)  <span style="color:#75715e"># eg 4361511296</span>
 
+    <span style="color:#66d9ef">if</span> x <span style="color:#f92672">==</span> y:
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;Simple comparison&#39;</span>)
+    <span style="color:#66d9ef">elif</span> <span style="color:#f92672">not</span> y:
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;Not my thing really&#39;</span>)
+    <span style="color:#66d9ef">else</span>:
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;We should probably refactor...&#39;</span>)
+
+    y <span style="color:#f92672">=</span> False  <span style="color:#75715e"># no longer the same as y</span>
+    <span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span> y:
+        <span style="color:#66d9ef">print</span>(f<span style="color:#e6db74">&#39;y has the value: {repr(y)} and the id: {id(y)}&#39;</span>)  <span style="color:#75715e"># eg 4532404640</span>
+
+    <span style="color:#66d9ef">if</span> (x <span style="color:#f92672">and</span> <span style="color:#f92672">not</span> y) <span style="color:#f92672">or</span> (<span style="color:#f92672">not</span> x <span style="color:#f92672">and</span> y):
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;XOR&#39;</span>)
+
+    a <span style="color:#f92672">=</span> [<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">3</span>]
+    <span style="color:#66d9ef">if</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">in</span> a:
+        <span style="color:#66d9ef">print</span>(f<span style="color:#e6db74">&#39;found 2 in {a}&#39;</span>)
+
+    salad <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;spinach with cucumber and carrots&#34;</span>
+    <span style="color:#66d9ef">if</span> <span style="color:#e6db74">&#39;cucumber&#39;</span> <span style="color:#f92672">in</span> salad:
+        <span style="color:#66d9ef">print</span>(f<span style="color:#e6db74">&#39;found a cucumber in {repr(salad)}&#39;</span>)
+
+    <span style="color:#66d9ef">if</span> <span style="color:#e6db74">&#39;bug&#39;</span> <span style="color:#f92672">not</span> <span style="color:#f92672">in</span> salad:
+        <span style="color:#66d9ef">print</span>(f<span style="color:#e6db74">&#39;good. no bug in {repr(salad)}&#39;</span>)
+
+
+<span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;__main__&#39;</span>: main()
+<span style="color:#e6db74">&#34;&#34;&#34;
+</span><span style="color:#e6db74"> Ensures main() only gets executed if the script is
+</span><span style="color:#e6db74"> executed directly and not as an include.
+</span><span style="color:#e6db74">&#34;&#34;&#34;</span>
+
+</code></pre></div><h3 id="loops">Loops</h3>
 <p>Check out a few <a href="https://www.learnpython.org/en/Loops">loop examples at learnpython.org</a>.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e">#!/usr/bin/env python3</span>
+<span style="color:#e6db74">&#34;&#34;&#34;
+</span><span style="color:#e6db74">Some example Loops
+</span><span style="color:#e6db74">&#34;&#34;&#34;</span>
+__author__ <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Craig Johnston&#34;</span>
+__version__ <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;0.0.1&#34;</span>
+__license__ <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;MIT&#34;</span>
 
-<pre><code class="language-python">#!/usr/bin/env python3
-&quot;&quot;&quot;
-Some example Loops
-&quot;&quot;&quot;
-__author__ = &quot;Craig Johnston&quot;
-__version__ = &quot;0.0.1&quot;
-__license__ = &quot;MIT&quot;
 
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">main</span>():
+    <span style="color:#e6db74">&#34;&#34;&#34;
+</span><span style="color:#e6db74">        Loops
+</span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;Python 3: Loops&#34;</span>)
 
-def main():
-    &quot;&quot;&quot;
-        Loops
-    &quot;&quot;&quot;
-    print(&quot;Python 3: Loops&quot;)
-
-    words = example_while_loops(words=[&quot;one&quot;, &quot;two&quot;, &quot;three&quot;, &quot;four&quot;])
-    print(f'words: {words}')
+    words <span style="color:#f92672">=</span> example_while_loops(words<span style="color:#f92672">=</span>[<span style="color:#e6db74">&#34;one&#34;</span>, <span style="color:#e6db74">&#34;two&#34;</span>, <span style="color:#e6db74">&#34;three&#34;</span>, <span style="color:#e6db74">&#34;four&#34;</span>])
+    <span style="color:#66d9ef">print</span>(f<span style="color:#e6db74">&#39;words: {words}&#39;</span>)
 
     example_for_loops(words)
 
-    # for i in words:
-    #     print(i)
+    <span style="color:#75715e"># for i in words:</span>
+    <span style="color:#75715e">#     print(i)</span>
 
 
-def example_for_loops(words):
-    &quot;&quot;&quot;
-    Example for loops
-    :param words:
-    :return set:
-    &quot;&quot;&quot;
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">example_for_loops</span>(words):
+    <span style="color:#e6db74">&#34;&#34;&#34;
+</span><span style="color:#e6db74">    Example for loops
+</span><span style="color:#e6db74">    :param words:
+</span><span style="color:#e6db74">    :return set:
+</span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
     
-    for w in words:
-        print(f'Word {w} in words has a lengh of {len(w)}.')
+    <span style="color:#66d9ef">for</span> w <span style="color:#f92672">in</span> words:
+        <span style="color:#66d9ef">print</span>(f<span style="color:#e6db74">&#39;Word {w} in words has a lengh of {len(w)}.&#39;</span>)
 
-    for i in range(len(words)):
-        print(f'Word at index {i} is {words[i]}')
+    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(len(words)):
+        <span style="color:#66d9ef">print</span>(f<span style="color:#e6db74">&#39;Word at index {i} is {words[i]}&#39;</span>)
 
-    return words
-
-
-def example_while_loops(words):
-    &quot;&quot;&quot;
-    Example while loops
-    :param words:
-    :return set:
-    &quot;&quot;&quot;
-    n = 0
-    while n &lt; len(words):
-        print(f'{words[n]} is index {n} in {words}')
-        n = n + 1
-
-    print(&quot;Pop out two.&quot;)
-    n = 0
-    while True:
-        if n &gt; len(words) - 1:
-            break
-        if words[n] == 'two':
-            words.pop(n)
-            continue
-        n = n + 1
-
-    return words
+    <span style="color:#66d9ef">return</span> words
 
 
-if __name__ == '__main__': main()
-&quot;&quot;&quot;
- Ensures main() only gets executed if the script is
- executed directly and not as an include.
-&quot;&quot;&quot;
-</code></pre>
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">example_while_loops</span>(words):
+    <span style="color:#e6db74">&#34;&#34;&#34;
+</span><span style="color:#e6db74">    Example while loops
+</span><span style="color:#e6db74">    :param words:
+</span><span style="color:#e6db74">    :return set:
+</span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+    n <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+    <span style="color:#66d9ef">while</span> n <span style="color:#f92672">&lt;</span> len(words):
+        <span style="color:#66d9ef">print</span>(f<span style="color:#e6db74">&#39;{words[n]} is index {n} in {words}&#39;</span>)
+        n <span style="color:#f92672">=</span> n <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>
 
-<h3 id="classes">Classes</h3>
+    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;Pop out two.&#34;</span>)
+    n <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+    <span style="color:#66d9ef">while</span> True:
+        <span style="color:#66d9ef">if</span> n <span style="color:#f92672">&gt;</span> len(words) <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>:
+            <span style="color:#66d9ef">break</span>
+        <span style="color:#66d9ef">if</span> words[n] <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;two&#39;</span>:
+            words<span style="color:#f92672">.</span>pop(n)
+            <span style="color:#66d9ef">continue</span>
+        n <span style="color:#f92672">=</span> n <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>
 
+    <span style="color:#66d9ef">return</span> words
+
+
+<span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;__main__&#39;</span>: main()
+<span style="color:#e6db74">&#34;&#34;&#34;
+</span><span style="color:#e6db74"> Ensures main() only gets executed if the script is
+</span><span style="color:#e6db74"> executed directly and not as an include.
+</span><span style="color:#e6db74">&#34;&#34;&#34;</span>
+</code></pre></div><h3 id="classes">Classes</h3>
 <p>Check out <a href="http://learnpython.org/en/Classes_and_Objects">class and object examples at learnpython.org</a>.</p>
-
-<pre><code class="language-python">#!/usr/bin/env python3
-&quot;&quot;&quot;
-Example Classes
-&quot;&quot;&quot;
-__author__ = &quot;Craig Johnston&quot;
-__version__ = &quot;0.0.1&quot;
-__license__ = &quot;MIT&quot;
-
-
-class Animal:
-    &quot;&quot;&quot;
-    Animal
-
-    __init__ is the constructor
-    &quot;&quot;&quot;
-    def __init__(self, type, sound):
-        &quot;&quot;&quot;
-        Constructor documentation.
-
-        The underscore is a convention for private
-        :param type: string, type of animal
-        :param sound: string, sound the animal makes
-        &quot;&quot;&quot;
-        self._type = type
-        self._sound = sound
-
-    def type(self, t=None):
-        &quot;&quot;&quot;
-        Animal.type
-
-        Example getter / setter. If t is defined then we
-        set. We always return.
-        :param t: string, type of animal
-        :return: string, type of animal
-        &quot;&quot;&quot;
-        if t:
-            self._type = t
-        return self._type
-
-    def sound(self, s=None):
-        &quot;&quot;&quot;
-        Animal.sound
-
-        Example getter/setter. If s is defined, then we set. We always return.
-        :param s: string, sound the animal makes
-        :return: string, sound the animal makes
-        &quot;&quot;&quot;
-        if s:
-            self._sound = s
-        return self._sound
-
-    def __str__(self):
-        &quot;&quot;&quot;
-        String representation.
-        :return: string representation of an animal
-        &quot;&quot;&quot;
-        return f'The {self.type()} goes {self.sound()}.'
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e">#!/usr/bin/env python3</span>
+<span style="color:#e6db74">&#34;&#34;&#34;
+</span><span style="color:#e6db74">Example Classes
+</span><span style="color:#e6db74">&#34;&#34;&#34;</span>
+__author__ <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Craig Johnston&#34;</span>
+__version__ <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;0.0.1&#34;</span>
+__license__ <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;MIT&#34;</span>
 
 
-class Snake(Animal):
-    &quot;&quot;&quot;
-    Snake is a Subclass of Animal
-    &quot;&quot;&quot;
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Animal</span>:
+    <span style="color:#e6db74">&#34;&#34;&#34;
+</span><span style="color:#e6db74">    Animal
+</span><span style="color:#e6db74">
+</span><span style="color:#e6db74">    __init__ is the constructor
+</span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+    <span style="color:#66d9ef">def</span> __init__(self, type, sound):
+        <span style="color:#e6db74">&#34;&#34;&#34;
+</span><span style="color:#e6db74">        Constructor documentation.
+</span><span style="color:#e6db74">
+</span><span style="color:#e6db74">        The underscore is a convention for private
+</span><span style="color:#e6db74">        :param type: string, type of animal
+</span><span style="color:#e6db74">        :param sound: string, sound the animal makes
+</span><span style="color:#e6db74">        &#34;&#34;&#34;</span>
+        self<span style="color:#f92672">.</span>_type <span style="color:#f92672">=</span> type
+        self<span style="color:#f92672">.</span>_sound <span style="color:#f92672">=</span> sound
 
-    def __init__(self):
-        super().__init__('Snake', 'sssss')
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">type</span>(self, t<span style="color:#f92672">=</span>None):
+        <span style="color:#e6db74">&#34;&#34;&#34;
+</span><span style="color:#e6db74">        Animal.type
+</span><span style="color:#e6db74">
+</span><span style="color:#e6db74">        Example getter / setter. If t is defined then we
+</span><span style="color:#e6db74">        set. We always return.
+</span><span style="color:#e6db74">        :param t: string, type of animal
+</span><span style="color:#e6db74">        :return: string, type of animal
+</span><span style="color:#e6db74">        &#34;&#34;&#34;</span>
+        <span style="color:#66d9ef">if</span> t:
+            self<span style="color:#f92672">.</span>_type <span style="color:#f92672">=</span> t
+        <span style="color:#66d9ef">return</span> self<span style="color:#f92672">.</span>_type
 
-    @staticmethod
-    def eat(*animals):
-        for a in animals:
-            if isinstance(a, Snake):
-                print(f'The Snake eats itself!')
-                return
-            if isinstance(a, Animal):
-                print(f'The Snake eats the {a.type()} as it goes {a.sound()}.')
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">sound</span>(self, s<span style="color:#f92672">=</span>None):
+        <span style="color:#e6db74">&#34;&#34;&#34;
+</span><span style="color:#e6db74">        Animal.sound
+</span><span style="color:#e6db74">
+</span><span style="color:#e6db74">        Example getter/setter. If s is defined, then we set. We always return.
+</span><span style="color:#e6db74">        :param s: string, sound the animal makes
+</span><span style="color:#e6db74">        :return: string, sound the animal makes
+</span><span style="color:#e6db74">        &#34;&#34;&#34;</span>
+        <span style="color:#66d9ef">if</span> s:
+            self<span style="color:#f92672">.</span>_sound <span style="color:#f92672">=</span> s
+        <span style="color:#66d9ef">return</span> self<span style="color:#f92672">.</span>_sound
+
+    <span style="color:#66d9ef">def</span> __str__(self):
+        <span style="color:#e6db74">&#34;&#34;&#34;
+</span><span style="color:#e6db74">        String representation.
+</span><span style="color:#e6db74">        :return: string representation of an animal
+</span><span style="color:#e6db74">        &#34;&#34;&#34;</span>
+        <span style="color:#66d9ef">return</span> f<span style="color:#e6db74">&#39;The {self.type()} goes {self.sound()}.&#39;</span>
+
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Snake</span>(Animal):
+    <span style="color:#e6db74">&#34;&#34;&#34;
+</span><span style="color:#e6db74">    Snake is a Subclass of Animal
+</span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+
+    <span style="color:#66d9ef">def</span> __init__(self):
+        super()<span style="color:#f92672">.</span>__init__(<span style="color:#e6db74">&#39;Snake&#39;</span>, <span style="color:#e6db74">&#39;sssss&#39;</span>)
+
+    <span style="color:#a6e22e">@staticmethod</span>
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">eat</span>(<span style="color:#f92672">*</span>animals):
+        <span style="color:#66d9ef">for</span> a <span style="color:#f92672">in</span> animals:
+            <span style="color:#66d9ef">if</span> isinstance(a, Snake):
+                <span style="color:#66d9ef">print</span>(f<span style="color:#e6db74">&#39;The Snake eats itself!&#39;</span>)
+                <span style="color:#66d9ef">return</span>
+            <span style="color:#66d9ef">if</span> isinstance(a, Animal):
+                <span style="color:#66d9ef">print</span>(f<span style="color:#e6db74">&#39;The Snake eats the {a.type()} as it goes {a.sound()}.&#39;</span>)
 
 
 
-def main():
-    &quot;&quot;&quot;
-        Example Classes
-    &quot;&quot;&quot;
-    print(&quot;Python 3&quot;)
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">main</span>():
+    <span style="color:#e6db74">&#34;&#34;&#34;
+</span><span style="color:#e6db74">        Example Classes
+</span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;Python 3&#34;</span>)
 
-    animals = [
-        Animal(&quot;Owl&quot;, &quot;whoo&quot;),
-        Animal(&quot;Pig&quot;, &quot;oink&quot;),
-        Animal(&quot;Dog&quot;, &quot;woof&quot;),
-        Animal(&quot;Cat&quot;, &quot;meow&quot;),
+    animals <span style="color:#f92672">=</span> [
+        Animal(<span style="color:#e6db74">&#34;Owl&#34;</span>, <span style="color:#e6db74">&#34;whoo&#34;</span>),
+        Animal(<span style="color:#e6db74">&#34;Pig&#34;</span>, <span style="color:#e6db74">&#34;oink&#34;</span>),
+        Animal(<span style="color:#e6db74">&#34;Dog&#34;</span>, <span style="color:#e6db74">&#34;woof&#34;</span>),
+        Animal(<span style="color:#e6db74">&#34;Cat&#34;</span>, <span style="color:#e6db74">&#34;meow&#34;</span>),
         Snake(),
-        &quot;This is a rock.&quot;
+        <span style="color:#e6db74">&#34;This is a rock.&#34;</span>
     ]
 
-    for a in animals:
-        print(a)
+    <span style="color:#66d9ef">for</span> a <span style="color:#f92672">in</span> animals:
+        <span style="color:#66d9ef">print</span>(a)
 
-    # find the snake
-    snake = [a for a in animals if isinstance(a, Snake)]
+    <span style="color:#75715e"># find the snake</span>
+    snake <span style="color:#f92672">=</span> [a <span style="color:#66d9ef">for</span> a <span style="color:#f92672">in</span> animals <span style="color:#66d9ef">if</span> isinstance(a, Snake)]
 
-    # free the owl
-    owl = animals.pop(0)
-    print(f'Freeing the {owl.type()} as it goes {owl.sound()}')
+    <span style="color:#75715e"># free the owl</span>
+    owl <span style="color:#f92672">=</span> animals<span style="color:#f92672">.</span>pop(<span style="color:#ae81ff">0</span>)
+    <span style="color:#66d9ef">print</span>(f<span style="color:#e6db74">&#39;Freeing the {owl.type()} as it goes {owl.sound()}&#39;</span>)
 
-    # feed the snake
-    if len(snake):
-        snake[0].eat(*animals)
+    <span style="color:#75715e"># feed the snake</span>
+    <span style="color:#66d9ef">if</span> len(snake):
+        snake[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">.</span>eat(<span style="color:#f92672">*</span>animals)
 
 
-if __name__ == '__main__': main()
-&quot;&quot;&quot;
- Ensures main() only gets executed if the script is
- executed directly and not as an include.
-&quot;&quot;&quot;
-</code></pre>
-
-<h3 id="python-books-on-amazon">Python Books on Amazon</h3>
-
+<span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;__main__&#39;</span>: main()
+<span style="color:#e6db74">&#34;&#34;&#34;
+</span><span style="color:#e6db74"> Ensures main() only gets executed if the script is
+</span><span style="color:#e6db74"> executed directly and not as an include.
+</span><span style="color:#e6db74">&#34;&#34;&#34;</span>
+</code></pre></div><h3 id="python-books-on-amazon">Python Books on Amazon</h3>
 <ul>
 <li><a href="https://amzn.to/2LYUpYb">Python Crash Course: A Hands-On, Project-Based Introduction to Programming</a></li>
 <li><a href="https://amzn.to/2JvTno8">Learning Python, 5th Edition</a></li>
@@ -596,6 +570,23 @@ if __name__ == '__main__': main()
                    <span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">Essential Python 3: Programming in Python</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="https://imti.co/" property="cc:attributionName" rel="cc:attributionURL">Craig Johnston</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
                     <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a>
                 </p>
+
+                <h5>SUPPORT</h5>
+                <p>
+                    Order my new Kubernetes book: <a href="https://amzn.to/34D56v6">Advanced Platform Development with Kubernetes: Enabling Data Management, the Internet of Things, Blockchain, and Machine Learning</a>
+                </p>
+                <script type="text/javascript">
+                  amzn_assoc_tracking_id = "imti-20";
+                  amzn_assoc_ad_mode = "manual";
+                  amzn_assoc_ad_type = "smart";
+                  amzn_assoc_marketplace = "amazon";
+                  amzn_assoc_region = "US";
+                  amzn_assoc_design = "enhanced_links";
+                  amzn_assoc_asins = "1484256107";
+                  amzn_assoc_placement = "adunit";
+                  amzn_assoc_linkid = "14a9d8b8d1b0bd44e9256e0e0a948015";
+                </script>
+                <script src="//z-na.amazon-adsystem.com/widgets/onejs?MarketPlace=US"></script>
 
                 
                 <hr>

@@ -87,7 +87,7 @@
       "url": "https:\/\/imti.co\/img\/craig_johnston_cjimti.jpg"
     }
   },
-  "description": "Helm is the official package manager for Kubernetes. If you are looking to start using Helm or want to test its capabilities, I suggest you set up a Production Hobby Cluster. This article is a continuation of the Production Hobby Cluster configuration but should be entirely useful on its own.\n From https:\/\/github.com\/kubernetes\/helm - Helm has two parts: a client (helm) and a server (tiller) - Tiller runs inside of your Kubernetes cluster and manages releases (installations) of your charts."
+  "description": "Helm is the official package manager for Kubernetes. If you are looking to start using Helm or want to test its capabilities, I suggest you set up a Production Hobby Cluster. This article is a continuation of the Production Hobby Cluster configuration but should be entirely useful on its own.\n From https:\/\/github.com\/kubernetes\/helm\n Helm has two parts: a client (helm) and a server (tiller) Tiller runs inside of your Kubernetes cluster and manages releases (installations) of your charts."
 }
 </script>
 
@@ -207,70 +207,41 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h5>SHARE</h5>
-                <ul class="list-inline">
-                    <li><div class="addthis_inline_share_toolbox"></div></li>
-                </ul>
-
-                
-
-<p><a href="https://helm.sh/">Helm</a> is the official package manager for <a href="https://kubernetes.io/">Kubernetes</a>. If you are looking to start using <a href="https://helm.sh/">Helm</a> or want to test its capabilities, I suggest you set up a <a href="/hobby-cluster/">Production Hobby Cluster</a>. This article is a continuation of the <a href="/hobby-cluster/">Production Hobby Cluster</a> configuration but should be entirely useful on its own.</p>
-
+                <p><a href="https://helm.sh/">Helm</a> is the official package manager for <a href="https://kubernetes.io/">Kubernetes</a>. If you are looking to start using <a href="https://helm.sh/">Helm</a> or want to test its capabilities, I suggest you set up a <a href="/hobby-cluster/">Production Hobby Cluster</a>. This article is a continuation of the <a href="/hobby-cluster/">Production Hobby Cluster</a> configuration but should be entirely useful on its own.</p>
 <blockquote>
-<p>From <a href="https://github.com/kubernetes/helm">https://github.com/kubernetes/helm</a>
-- Helm has two parts: a client (helm) and a server (tiller)
-- Tiller runs inside of your Kubernetes cluster and manages releases (installations) of your charts.
- - Helm runs on your laptop, CI/CD, or wherever you want it to run.
- - Charts are Helm packages that contain at least two things:
- - A description of the package (Chart.yaml)
- - One or more templates, which contain Kubernetes manifest files
- - Charts can be stored on disk, or fetched from remote chart repositories (like Debian or RedHat packages)</p>
+<p>From <a href="https://github.com/kubernetes/helm">https://github.com/kubernetes/helm</a></p>
+<ul>
+<li>Helm has two parts: a client (helm) and a server (tiller)</li>
+<li>Tiller runs inside of your Kubernetes cluster and manages releases (installations) of your charts.</li>
+<li>Helm runs on your laptop, CI/CD, or wherever you want it to run.</li>
+<li>Charts are Helm packages that contain at least two things:</li>
+<li>A description of the package (Chart.yaml)</li>
+<li>One or more templates, which contain Kubernetes manifest files</li>
+<li>Charts can be stored on disk, or fetched from remote chart repositories (like Debian or RedHat packages)</li>
+</ul>
 </blockquote>
-
 <p>Start with installing <a href="https://helm.sh/">Helm</a> on your local workstation. Read the <a href="https://github.com/kubernetes/helm/blob/master/docs/install.md">Helm installation instructions</a> or merely follow along below.</p>
-
-<pre><code class="language-bash"># on MacOS using homebrew (http://brew.sh)
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># on MacOS using homebrew (http://brew.sh)</span>
 brew install kubernetes-helm
 
-# on windows using https://chocolatey.org/
+<span style="color:#75715e"># on windows using https://chocolatey.org/</span>
 choco install kubernetes-helm
-</code></pre>
-
-<p>Since our <a href="/hobby-cluster/">Production Hobby Cluster</a> uses <a href="https://kubernetes.io/docs/admin/authorization/rbac/">RBAC</a> Roles, we start by adding a <a href="https://kubernetes.io/docs/admin/service-accounts-admin/">ServiceAccount</a> called <strong>tiller</strong>. Tiller is Kubernetes service that manages <a href="https://helm.sh/">Helm</a> installs on the cluster.</p>
-
+</code></pre></div><p>Since our <a href="/hobby-cluster/">Production Hobby Cluster</a> uses <a href="https://kubernetes.io/docs/admin/authorization/rbac/">RBAC</a> Roles, we start by adding a <a href="https://kubernetes.io/docs/admin/service-accounts-admin/">ServiceAccount</a> called <strong>tiller</strong>. Tiller is Kubernetes service that manages <a href="https://helm.sh/">Helm</a> installs on the cluster.</p>
 <p>The following configuration creates a <a href="https://kubernetes.io/docs/admin/service-accounts-admin/">ServiceAccount</a> named <strong>tiller</strong> and a <a href="https://kubernetes.io/docs/admin/authorization/rbac/#rolebinding-and-clusterrolebinding">ClusterRoleBinding</a> between the new <strong>tiller</strong> account and the <strong>cluster-admin</strong> role. Of course, you can define your own <a href="https://kubernetes.io/docs/admin/authorization/rbac/#role-and-clusterrole">Role</a> and permissions, however, the <strong>cluster-admin</strong> role has admin access, and that is what we want for a <a href="/hobby-cluster/">Production Hobby Cluster</a>. Permissions can always become more restrictive in the future should our hobby become more sophisticated.</p>
-
-<script src="https://gist.github.com/cjimti/9fab60c0b21a97cbe15688f5e28d940f.js"></script>
-
+<!-- raw HTML omitted -->
 <p>You can apply the configuration with the following command:</p>
-
-<pre><code class="language-bash">kubectl create -f https://gist.githubusercontent.com/cjimti/9fab60c0b21a97cbe15688f5e28d940f/raw/29cbeff70bc528e5212ebc3f63e08fb5a24d5ecd/00-tiller-rbac.yml
-</code></pre>
-
-<p>Next initialize <a href="https://helm.sh/">Helm</a> while specifying the <a href="https://kubernetes.io/docs/admin/service-accounts-admin/">ServiceAccount</a> to use. Use the new <strong>tiller</strong>  <a href="https://kubernetes.io/docs/admin/service-accounts-admin/">ServiceAccount</a> we setup above.</p>
-
-<pre><code class="language-bash">helm init --service-account tiller
-</code></pre>
-
-<p>To see what <a href="https://helm.sh/">Helm</a> just installed on your cluster run:</p>
-
-<pre><code class="language-bash">kubectl get all -l app=helm -n kube-system
-</code></pre>
-
-<p>As this point you can see a <a href="https://kubernetes.io/docs/concepts/workloads/controllers/deployment/">Deployment</a>, a <a href="https://kubernetes.io/docs/concepts/workloads/controllers/replicaset/">ReplicaSet</a>, a <a href="https://kubernetes.io/docs/concepts/workloads/pods/pod/">Pod</a> and a <a href="https://kubernetes.io/docs/concepts/services-networking/service/">Service</a> named <strong>tiller-deploy</strong> in the <strong>kube-system</strong> namespace.</p>
-
-<hr />
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl create -f https://gist.githubusercontent.com/cjimti/9fab60c0b21a97cbe15688f5e28d940f/raw/29cbeff70bc528e5212ebc3f63e08fb5a24d5ecd/00-tiller-rbac.yml
+</code></pre></div><p>Next initialize <a href="https://helm.sh/">Helm</a> while specifying the <a href="https://kubernetes.io/docs/admin/service-accounts-admin/">ServiceAccount</a> to use. Use the new <strong>tiller</strong>  <a href="https://kubernetes.io/docs/admin/service-accounts-admin/">ServiceAccount</a> we setup above.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">helm init --service-account tiller
+</code></pre></div><p>To see what <a href="https://helm.sh/">Helm</a> just installed on your cluster run:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl get all -l app<span style="color:#f92672">=</span>helm -n kube-system
+</code></pre></div><p>As this point you can see a <a href="https://kubernetes.io/docs/concepts/workloads/controllers/deployment/">Deployment</a>, a <a href="https://kubernetes.io/docs/concepts/workloads/controllers/replicaset/">ReplicaSet</a>, a <a href="https://kubernetes.io/docs/concepts/workloads/pods/pod/">Pod</a> and a <a href="https://kubernetes.io/docs/concepts/services-networking/service/">Service</a> named <strong>tiller-deploy</strong> in the <strong>kube-system</strong> namespace.</p>
+<hr>
 <p>If in a few days you find yourself setting up a cluster in Japan or Germany on <a href="https://www.linode.com/?r=848a6b0b21dc8edd33124f05ec8f99207ccddfde">Linode</a>, and another two in Australia and France on <a href="https://www.vultr.com/?ref=7418713">vultr</a>, then you may have just joined the PHC (Performance <a href="/hobby-cluster/">Hobby Cluster</a>s) club. Some people tinker late at night on their truck, we benchmark and test the resilience of node failures on our overseas, budget kubernetes clusters. It&rsquo;s all about going big, on the cheap.</p>
-
-<p><a href="https://amzn.to/2IOe8Yu"><img src="https://github.com/cjimti/mk/raw/master/images/content/k8s-tshirt-banner.jpg" alt="k8s performance hobby clusters" /></a></p>
-
-<h2 id="port-forwarding-local-development">Port Forwarding / Local Development</h2>
-
+<p><a href="https://amzn.to/2IOe8Yu"><img src="https://github.com/cjimti/mk/raw/master/images/content/k8s-tshirt-banner.jpg" alt="k8s performance hobby clusters"></a></p>
+<h2 id="port-forwarding--local-development">Port Forwarding / Local Development</h2>
 <p>Check out <a href="https://github.com/txn2/kubefwd">kubefwd</a> for a simple command line utility that bulk forwards services of one or more namespaces to your local workstation.</p>
-
 <h2 id="resources">Resources</h2>
-
 <ul>
 <li><a href="https://www.linode.com/?r=848a6b0b21dc8edd33124f05ec8f99207ccddfde">Linode</a> hosting.</li>
 <li><a href="https://m.do.co/c/97b733e7eba4">Digital Ocean</a> hosting.</li>
@@ -282,6 +253,23 @@ choco install kubernetes-helm
                    <span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">Helm on Custom Kubernetes: Kubernetes package management.</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="https://imti.co/" property="cc:attributionName" rel="cc:attributionURL">Craig Johnston</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
                     <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a>
                 </p>
+
+                <h5>SUPPORT</h5>
+                <p>
+                    Order my new Kubernetes book: <a href="https://amzn.to/34D56v6">Advanced Platform Development with Kubernetes: Enabling Data Management, the Internet of Things, Blockchain, and Machine Learning</a>
+                </p>
+                <script type="text/javascript">
+                  amzn_assoc_tracking_id = "imti-20";
+                  amzn_assoc_ad_mode = "manual";
+                  amzn_assoc_ad_type = "smart";
+                  amzn_assoc_marketplace = "amazon";
+                  amzn_assoc_region = "US";
+                  amzn_assoc_design = "enhanced_links";
+                  amzn_assoc_asins = "1484256107";
+                  amzn_assoc_placement = "adunit";
+                  amzn_assoc_linkid = "14a9d8b8d1b0bd44e9256e0e0a948015";
+                </script>
+                <script src="//z-na.amazon-adsystem.com/widgets/onejs?MarketPlace=US"></script>
 
                 
                 <hr>

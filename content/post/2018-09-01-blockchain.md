@@ -16,6 +16,8 @@ series:
 ### The Internet of Transactions
 Blockchain may be a recent entry to the technology landscape. However, it has quickly become an essential iteration in the evolution of peer-to-peer communication and distributed computing. Originally developed as a way to protect digital currency, Blockchain technologies now support any digital asset, from signal data to complex messaging, to the execution of business logic through code. Blockchain technologies are rapidly forming a new decentralized internet of transactions.
 
+{{< content-ad >}}
+
 ### Transactional Integrity and Security
 Blockchain provides the ability to ensure the integrity and immutability of data; it's origin, destination, and occurrence, as well as computational logic.  Blockchain delivers mathematically-sound proof, through consensus-based validation of public or privately shared ledgers. Defined protocols allow consensus to replace central trust, rejecting compromised nodes and data that is incompatible with the agreement of the majority.
 

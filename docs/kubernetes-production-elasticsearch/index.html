@@ -87,7 +87,7 @@
       "url": "https:\/\/imti.co\/img\/craig_johnston_cjimti.jpg"
     }
   },
-  "description": "Installing production ready, Elasticsearch 6.2 on Kubernetes requires a hand full of simple configurations. The following guide is a high-level overview of an installation process using Elastic\x26rsquo;s recommendations for best practices. The Github project kubernetes-elasticsearch-cluster is used for the Elastic Docker container and built to operate Elasticsearch with nodes dedicated as Master, Data, and Client\/Ingest.\nThe Docker container docker-elasticsearch, a \x26ldquo;Ready to use, lean and highly configurable Elasticsearch container image."
+  "description": "Installing production ready, Elasticsearch 6.2 on Kubernetes requires a hand full of simple configurations. The following guide is a high-level overview of an installation process using Elastic\u0026rsquo;s recommendations for best practices. The Github project kubernetes-elasticsearch-cluster is used for the Elastic Docker container and built to operate Elasticsearch with nodes dedicated as Master, Data, and Client\/Ingest.\nThe Docker container docker-elasticsearch, a \u0026ldquo;Ready to use, lean and highly configurable Elasticsearch container image.\u0026rdquo; by pires is sufficient for use in this guide."
 }
 </script>
 
@@ -211,605 +211,548 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h5>SHARE</h5>
-                <ul class="list-inline">
-                    <li><div class="addthis_inline_share_toolbox"></div></li>
-                </ul>
-
-                
-
-<p>Installing production ready, Elasticsearch 6.2 on Kubernetes requires a hand full of simple configurations. The following guide is a high-level overview of an installation process using Elastic&rsquo;s <a href="https://www.elastic.co/guide/en/elasticsearch/reference/6.2/modules-node.html">recommendations for best practices</a>. The Github project <a href="https://github.com/pires/kubernetes-elasticsearch-cluster">kubernetes-elasticsearch-cluster</a> is used for the Elastic Docker container and built to operate Elasticsearch with nodes dedicated as Master, Data, and Client/Ingest.</p>
-
+                <p>Installing production ready, Elasticsearch 6.2 on Kubernetes requires a hand full of simple configurations. The following guide is a high-level overview of an installation process using Elastic&rsquo;s <a href="https://www.elastic.co/guide/en/elasticsearch/reference/6.2/modules-node.html">recommendations for best practices</a>. The Github project <a href="https://github.com/pires/kubernetes-elasticsearch-cluster">kubernetes-elasticsearch-cluster</a> is used for the Elastic Docker container and built to operate Elasticsearch with nodes dedicated as Master, Data, and Client/Ingest.</p>
 <p>The Docker container <a href="https://github.com/pires/docker-elasticsearch">docker-elasticsearch</a>, a &ldquo;Ready to use, lean and highly configurable Elasticsearch container image.&rdquo; by <a href="https://github.com/pires">pires</a> is sufficient for use in this guide. However, the <a href="https://github.com/txn2/k8s-es">txn2/k8s-es</a> wraps it with a few minor preset environment variables to simplify configuration. I use the docker image <a href="https://hub.docker.com/r/txn2/k8s-es/tags/">txn2/k8s-es:v6.2.3</a> in the examples below.</p>
-
 <p>The Github repository <a href="https://github.com/pires/kubernetes-elasticsearch-cluster">kubernetes-elasticsearch-cluster</a> contains detailed documentation and configuration for using <a href="https://github.com/pires/docker-elasticsearch">docker-elasticsearch</a> with Kubernetes.</p>
-
 <p>If you need to set up a quick, yet custom production grade cluster, check out my article <a href="/hobby-cluster/">Production Hobby Cluster</a> to get you started.</p>
-
 <aside class="toc">
     <header>
         <h2>Contents</h2>
     </header>
     <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li>
-<ul>
-<li><a href="#project-namespace">Project <a href="https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/">Namespace</a></a></li>
-<li><a href="#rbac-for-access-and-security"><a href="https://kubernetes.io/docs/reference/access-authn-authz/rbac/">RBAC</a> for Access and Security</a></li>
-<li><a href="#services-for-communication"><a href="https://kubernetes.io/docs/concepts/services-networking/service/">Services</a> for Communication</a></li>
-<li><a href="#statefulset-for-data-nodes"><a href="https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/">StatefulSet</a> for <a href="https://www.elastic.co/guide/en/elasticsearch/reference/6.2/modules-node.html#data-node">Data</a> nodes</a></li>
-<li><a href="#deployment-for-master-nodes"><a href="https://kubernetes.io/docs/concepts/workloads/controllers/deployment/">Deployment</a> for <a href="https://www.elastic.co/guide/en/elasticsearch/reference/6.2/modules-node.html#master-node">Master</a> Nodes</a></li>
-<li><a href="#deployment-for-client-and-ingest-nodes"><a href="https://kubernetes.io/docs/concepts/workloads/controllers/deployment/">Deployment</a> for Client and <a href="https://www.elastic.co/guide/en/elasticsearch/reference/6.2/ingest.html">Ingest</a> Nodes</a></li>
-<li><a href="#testing">Testing</a></li>
-</ul></li>
-<li><a href="#port-forwarding-local-development">Port Forwarding / Local Development</a>
-<ul>
-<li><a href="#next">Next</a></li>
-</ul></li>
-</ul></li>
-</ul>
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#project-namespace">Project <a href="https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/">Namespace</a></a></li>
+        <li><a href="#rbac-for-access-and-security"><a href="https://kubernetes.io/docs/reference/access-authn-authz/rbac/">RBAC</a> for Access and Security</a></li>
+        <li><a href="#services-for-communication"><a href="https://kubernetes.io/docs/concepts/services-networking/service/">Services</a> for Communication</a></li>
+        <li><a href="#statefulset-for-data-nodes"><a href="https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/">StatefulSet</a> for <a href="https://www.elastic.co/guide/en/elasticsearch/reference/6.2/modules-node.html#data-node">Data</a> nodes</a></li>
+        <li><a href="#deployment-for-master-nodes"><a href="https://kubernetes.io/docs/concepts/workloads/controllers/deployment/">Deployment</a> for <a href="https://www.elastic.co/guide/en/elasticsearch/reference/6.2/modules-node.html#master-node">Master</a> Nodes</a></li>
+        <li><a href="#deployment-for-client-and-ingest-nodes"><a href="https://kubernetes.io/docs/concepts/workloads/controllers/deployment/">Deployment</a> for Client and <a href="https://www.elastic.co/guide/en/elasticsearch/reference/6.2/ingest.html">Ingest</a> Nodes</a></li>
+        <li><a href="#testing">Testing</a></li>
+      </ul>
+    </li>
+    <li><a href="#port-forwarding--local-development">Port Forwarding / Local Development</a>
+      <ul>
+        <li><a href="#next">Next</a></li>
+      </ul>
+    </li>
+  </ul>
 </nav>
 </aside>
 
-<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<ins class="adsbygoogle"
-     style="display:block; text-align:center;"
-     data-ad-layout="in-article"
-     data-ad-format="fluid"
-     data-ad-client="ca-pub-5984764595236029"
-     data-ad-slot="7730310582"></ins>
-<script>
-    (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-
+<table>
+    <tr><td colspan="2" style="text-align: center"><b>Please support my new book!</b></td></tr>
+    <tr>
+        <td>
+            <a href="https://amzn.to/3hAZUvx">
+                <img src="/img/kubernetes_platform_development.jpg" style="padding:0; margin: 0"/>
+            </a>
+        </td>
+        <td>
+            <b><a href="https://amzn.to/3hAZUvx">Advanced Platform Development with Kubernetes: Enabling Data Management, the Internet of Things, Blockchain, and Machine Learning</a></b>
+            <h4>What You'll Learn</h4>
+            <ul style="padding-bottom: 0; margin: 0">
+                <li>Use data pipelines with <b>MQTT, NiFi, Logstash, Kafka and Elasticsearch</b></li>
+                <li>Install a serverless platform with <b>OpenFaaS</b></li>
+                <li>Explore <b>blockchain</b> network capabilities with <b>Ethereum</b></li>
+                <li>Support a multi-tenant <b>data science</b> platform and web IDE with <b>JupyterHub, MLflow and Seldon Core</b></li>
+                <li>Build a <b>hybrid cluster</b>, securely bridging <b>on-premise</b> and cloud-based Kubernetes nodes</li>
+                <li>Implement an integrated development toolchain for continuous integration and deployment</li>
+            </ul>
+        </td>
+    </tr>
+</table>
 <h3 id="project-namespace">Project <a href="https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/">Namespace</a></h3>
-
 <p>In the examples below I&rsquo;ll use the namespace <strong>the-project</strong> for all the configurations. The file names are suggestions and may be adjusted to your standards.</p>
-
 <p><code>00-namespace.yml</code>:</p>
-
-<pre><code class="language-yaml">apiVersion: v1
-kind: Namespace
-metadata:
-  name: the-project
-  labels:
-    env: dev
-</code></pre>
-
-<p>Create the namespace:</p>
-
-<pre><code class="language-bash">kubectl create -f 00-namespace.yml
-</code></pre>
-
-<h3 id="rbac-for-access-and-security"><a href="https://kubernetes.io/docs/reference/access-authn-authz/rbac/">RBAC</a> for Access and Security</h3>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">apiVersion</span>: v1
+<span style="color:#66d9ef">kind</span>: Namespace
+<span style="color:#66d9ef">metadata</span>:
+  <span style="color:#66d9ef">name</span>: the-project
+  <span style="color:#66d9ef">labels</span>:
+    <span style="color:#66d9ef">env</span>: dev
+</code></pre></div><p>Create the namespace:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl create -f 00-namespace.yml
+</code></pre></div><h3 id="rbac-for-access-and-security"><a href="https://kubernetes.io/docs/reference/access-authn-authz/rbac/">RBAC</a> for Access and Security</h3>
 <p>Your Kubernetes cluster should be set up to use <a href="https://kubernetes.io/docs/reference/access-authn-authz/rbac/">RBAC</a>. If you are just getting started, you may want to set up a <a href="/hobby-cluster/#permissions-rbac-role-based-access-control">permissive RBAC</a> implementation for your development cluster.</p>
-
 <p>This <a href="https://kubernetes.io/docs/reference/access-authn-authz/rbac/">RBAC</a> step is optional and only intended as a suggestion for tighter security. If you have <a href="/hobby-cluster/#permissions-rbac-role-based-access-control">permissive RBAC</a> there is no need to create this configuration now, as the following steps do not require it.</p>
-
 <p>Creating a <a href="/team-kubernetes-remote-access/#serviceaccount">ServiceAccount</a> called <code>sa-elasticsearch</code> for Elasticsearch in <code>the-project</code> namespace.</p>
-
-<pre><code class="language-bash">kubectl create serviceaccount sa-elasticsearch -n the-project
-</code></pre>
-
-<p>Next, create a <a href="/team-kubernetes-remote-access/#role-and-rolebinding">Role and RoleBinding</a> for the new <code>sa-elasticsearch</code> <a href="/team-kubernetes-remote-access/#serviceaccount">ServiceAccount</a>, it makes sense to group tease in the same configuration file.</p>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl create serviceaccount sa-elasticsearch -n the-project
+</code></pre></div><p>Next, create a <a href="/team-kubernetes-remote-access/#role-and-rolebinding">Role and RoleBinding</a> for the new <code>sa-elasticsearch</code> <a href="/team-kubernetes-remote-access/#serviceaccount">ServiceAccount</a>, it makes sense to group tease in the same configuration file.</p>
 <p><code>10-rbac.yml</code></p>
-
-<pre><code class="language-yaml">---
-apiVersion: rbac.authorization.k8s.io/v1
-kind: Role
-metadata:
-  name: elasticsearch
-  namespace: the-project
-  labels:
-    env: dev
-rules:
-- apiGroups:
-  - &quot;&quot;
-  resources:
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">---
+<span style="color:#66d9ef">apiVersion</span>: rbac.authorization.k8s.io/v1
+<span style="color:#66d9ef">kind</span>: Role
+<span style="color:#66d9ef">metadata</span>:
+  <span style="color:#66d9ef">name</span>: elasticsearch
+  <span style="color:#66d9ef">namespace</span>: the-project
+  <span style="color:#66d9ef">labels</span>:
+    <span style="color:#66d9ef">env</span>: dev
+<span style="color:#66d9ef">rules</span>:
+- <span style="color:#66d9ef">apiGroups</span>:
+  - <span style="color:#e6db74">&#34;&#34;</span>
+  <span style="color:#66d9ef">resources</span>:
   - endpoints
-  verbs:
+  <span style="color:#66d9ef">verbs</span>:
   - get
 ---
-apiVersion: rbac.authorization.k8s.io/v1
-kind: RoleBinding
-metadata:
-  name: elasticsearch
-  namespace: the-project
-roleRef:
-  apiGroup: rbac.authorization.k8s.io
-  kind: Role
-  name: elasticsearch
-subjects:
-- kind: ServiceAccount
-  name: sa-elasticsearch
-  namespace: the-project
-</code></pre>
-
-<p>Create the <a href="/team-kubernetes-remote-access/#role-and-rolebinding">Role and RoleBinding</a>:</p>
-
-<pre><code class="language-bash">kubectl create -f 10-rbac.yml
-</code></pre>
-
-<h3 id="services-for-communication"><a href="https://kubernetes.io/docs/concepts/services-networking/service/">Services</a> for Communication</h3>
-
+<span style="color:#66d9ef">apiVersion</span>: rbac.authorization.k8s.io/v1
+<span style="color:#66d9ef">kind</span>: RoleBinding
+<span style="color:#66d9ef">metadata</span>:
+  <span style="color:#66d9ef">name</span>: elasticsearch
+  <span style="color:#66d9ef">namespace</span>: the-project
+<span style="color:#66d9ef">roleRef</span>:
+  <span style="color:#66d9ef">apiGroup</span>: rbac.authorization.k8s.io
+  <span style="color:#66d9ef">kind</span>: Role
+  <span style="color:#66d9ef">name</span>: elasticsearch
+<span style="color:#66d9ef">subjects</span>:
+- <span style="color:#66d9ef">kind</span>: ServiceAccount
+  <span style="color:#66d9ef">name</span>: sa-elasticsearch
+  <span style="color:#66d9ef">namespace</span>: the-project
+</code></pre></div><p>Create the <a href="/team-kubernetes-remote-access/#role-and-rolebinding">Role and RoleBinding</a>:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl create -f 10-rbac.yml
+</code></pre></div><h3 id="services-for-communication"><a href="https://kubernetes.io/docs/concepts/services-networking/service/">Services</a> for Communication</h3>
 <p>You need  Kubernetes <a href="https://kubernetes.io/docs/concepts/services-networking/service/">Services</a> for each of the Elasticsearch node types, Master, Data and Ingest. <a href="https://kubernetes.io/docs/concepts/services-networking/service/">Services</a> are a persistent communication bridge to a <a href="https://kubernetes.io/docs/concepts/workloads/pods/pod/">Pod</a>. Because Services use <a href="https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/">selectors</a> to find the appropriate <a href="https://kubernetes.io/docs/concepts/workloads/pods/pod/">Pod</a>, they are up first. <a href="https://kubernetes.io/docs/concepts/services-networking/service/">Services</a> are accustomed to Pods coming and going, and route to them when they are available, this happens once we add Deployments further down.</p>
-
 <p>Combine all three Services in the same configuration file to keep things simple.</p>
-
 <p><code>20-services.yml</code>:</p>
-
-<pre><code class="language-yaml">---
-apiVersion: v1
-kind: Service
-metadata:
-  namespace: the-project 
-  name: elasticsearch
-  labels:
-    env: dev
-spec:
-  type: ClusterIP
-  selector:
-    app: elasticsearch-client
-  ports:
-  - name: http
-    port: 9200
-    protocol: TCP
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">---
+<span style="color:#66d9ef">apiVersion</span>: v1
+<span style="color:#66d9ef">kind</span>: Service
+<span style="color:#66d9ef">metadata</span>:
+  <span style="color:#66d9ef">namespace</span>: the-project 
+  <span style="color:#66d9ef">name</span>: elasticsearch
+  <span style="color:#66d9ef">labels</span>:
+    <span style="color:#66d9ef">env</span>: dev
+<span style="color:#66d9ef">spec</span>:
+  <span style="color:#66d9ef">type</span>: ClusterIP
+  <span style="color:#66d9ef">selector</span>:
+    <span style="color:#66d9ef">app</span>: elasticsearch-client
+  <span style="color:#66d9ef">ports</span>:
+  - <span style="color:#66d9ef">name</span>: http
+    <span style="color:#66d9ef">port</span>: <span style="color:#ae81ff">9200</span>
+    <span style="color:#66d9ef">protocol</span>: TCP
 ---
-apiVersion: v1
-kind: Service
-metadata:
-  namespace: the-project 
-  name: elasticsearch-data
-  labels:
-    env: dev
-spec:
-  clusterIP: None
-  selector:
-    app: elasticsearch-data
-  ports:
-  - port: 9300
-    name: transport
+<span style="color:#66d9ef">apiVersion</span>: v1
+<span style="color:#66d9ef">kind</span>: Service
+<span style="color:#66d9ef">metadata</span>:
+  <span style="color:#66d9ef">namespace</span>: the-project 
+  <span style="color:#66d9ef">name</span>: elasticsearch-data
+  <span style="color:#66d9ef">labels</span>:
+    <span style="color:#66d9ef">env</span>: dev
+<span style="color:#66d9ef">spec</span>:
+  <span style="color:#66d9ef">clusterIP</span>: None
+  <span style="color:#66d9ef">selector</span>:
+    <span style="color:#66d9ef">app</span>: elasticsearch-data
+  <span style="color:#66d9ef">ports</span>:
+  - <span style="color:#66d9ef">port</span>: <span style="color:#ae81ff">9300</span>
+    <span style="color:#66d9ef">name</span>: transport
 ---
-apiVersion: v1
-kind: Service
-metadata:
-  namespace: the-project 
-  name: elasticsearch-discovery
-  labels:
-    env: dev
-spec:
-  selector:
-    app: elasticsearch-master
-  ports:
-  - name: transport
-    port: 9300
-    protocol: TCP
-</code></pre>
-
-<h3 id="statefulset-for-data-nodes"><a href="https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/">StatefulSet</a> for <a href="https://www.elastic.co/guide/en/elasticsearch/reference/6.2/modules-node.html#data-node">Data</a> nodes</h3>
-
+<span style="color:#66d9ef">apiVersion</span>: v1
+<span style="color:#66d9ef">kind</span>: Service
+<span style="color:#66d9ef">metadata</span>:
+  <span style="color:#66d9ef">namespace</span>: the-project 
+  <span style="color:#66d9ef">name</span>: elasticsearch-discovery
+  <span style="color:#66d9ef">labels</span>:
+    <span style="color:#66d9ef">env</span>: dev
+<span style="color:#66d9ef">spec</span>:
+  <span style="color:#66d9ef">selector</span>:
+    <span style="color:#66d9ef">app</span>: elasticsearch-master
+  <span style="color:#66d9ef">ports</span>:
+  - <span style="color:#66d9ef">name</span>: transport
+    <span style="color:#66d9ef">port</span>: <span style="color:#ae81ff">9300</span>
+    <span style="color:#66d9ef">protocol</span>: TCP
+</code></pre></div><h3 id="statefulset-for-data-nodes"><a href="https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/">StatefulSet</a> for <a href="https://www.elastic.co/guide/en/elasticsearch/reference/6.2/modules-node.html#data-node">Data</a> nodes</h3>
 <p>Next, we configure a Kubernetes <a href="https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/">StatefulSet</a> to manage our Elasticsearch <strong><a href="https://www.elastic.co/guide/en/elasticsearch/reference/6.2/modules-node.html#data-node">Data</a></strong> nodes (<a href="https://kubernetes.io/docs/concepts/workloads/pods/pod/">Pods</a>). A <a href="https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/">StatefulSet</a> &ldquo;manages the deployment and scaling of a set of Pods, and provides guarantees about the ordering and uniqueness of these Pods.&rdquo;</p>
-
 <p>Since a Kubernetes <a href="https://kubernetes.io/docs/concepts/workloads/controllers/deployment/">Deployment</a> creates <a href="https://kubernetes.io/docs/concepts/workloads/controllers/replicaset/">ReplicaSets</a> and not <a href="https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/">StatefulSet</a>, we need to create a <a href="https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/">StatefulSet</a> directly for the Elasticsearch <strong><a href="https://www.elastic.co/guide/en/elasticsearch/reference/6.2/modules-node.html#data-node">data</a></strong> nodes. The <strong><a href="https://www.elastic.co/guide/en/elasticsearch/reference/6.2/modules-node.html#master-node">Master</a></strong> and <strong><a href="https://www.elastic.co/guide/en/elasticsearch/reference/6.2/ingest.html">Ingest</a></strong> nodes use <a href="https://kubernetes.io/docs/concepts/workloads/controllers/deployment/">Deployment</a>s which automatically generate <a href="https://kubernetes.io/docs/concepts/workloads/controllers/replicaset/">ReplicaSets</a> for them.</p>
-
 <p><code>30-statefulset-data.yml</code>:</p>
-
-<pre><code class="language-yaml">apiVersion: apps/v1
-kind: StatefulSet
-metadata:
-  name: elasticsearch-data
-  namespace: the-project
-  labels:
-    app: elasticsearch-data
-    env: dev
-spec:
-  serviceName: elasticsearch-data
-  replicas: 1 # scale when desired
-  selector:
-    matchLabels:
-      app: elasticsearch-data
-  template:
-    metadata:
-      labels:
-        app: elasticsearch-data
-    spec:
-      initContainers:
-      - name: init-sysctl
-        image: busybox:1.27.2
-        command:
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">apiVersion</span>: apps/v1
+<span style="color:#66d9ef">kind</span>: StatefulSet
+<span style="color:#66d9ef">metadata</span>:
+  <span style="color:#66d9ef">name</span>: elasticsearch-data
+  <span style="color:#66d9ef">namespace</span>: the-project
+  <span style="color:#66d9ef">labels</span>:
+    <span style="color:#66d9ef">app</span>: elasticsearch-data
+    <span style="color:#66d9ef">env</span>: dev
+<span style="color:#66d9ef">spec</span>:
+  <span style="color:#66d9ef">serviceName</span>: elasticsearch-data
+  <span style="color:#66d9ef">replicas</span>: <span style="color:#ae81ff">1</span> <span style="color:#75715e"># scale when desired</span>
+  <span style="color:#66d9ef">selector</span>:
+    <span style="color:#66d9ef">matchLabels</span>:
+      <span style="color:#66d9ef">app</span>: elasticsearch-data
+  <span style="color:#66d9ef">template</span>:
+    <span style="color:#66d9ef">metadata</span>:
+      <span style="color:#66d9ef">labels</span>:
+        <span style="color:#66d9ef">app</span>: elasticsearch-data
+    <span style="color:#66d9ef">spec</span>:
+      <span style="color:#66d9ef">initContainers</span>:
+      - <span style="color:#66d9ef">name</span>: init-sysctl
+        <span style="color:#66d9ef">image</span>: busybox:<span style="color:#ae81ff">1.27.2</span>
+        <span style="color:#66d9ef">command</span>:
         - sysctl
         - -w
-        - vm.max_map_count=262144
-        securityContext:
-          privileged: true
-      containers:
-      - name: elasticsearch-data
-        image: txn2/k8s-es:v6.2.3
-        imagePullPolicy: Always
-        env:
-        - name: NAMESPACE
-          valueFrom:
-            fieldRef:
-              fieldPath: metadata.namespace
-        - name: DISCOVERY_SERVICE
-          value: elasticsearch-discovery
-        - name: NODE_NAME
-          valueFrom:
-            fieldRef:
-              fieldPath: metadata.name
-        - name: CLUSTER_NAME
-          value: elasticsearch
-        - name: NODE_DATA
-          value: &quot;true&quot;
-        - name: NODE_MASTER
-          value: &quot;false&quot;
-        - name: NODE_INGEST
-          value: &quot;false&quot;
-        - name: HTTP_ENABLE
-          value: &quot;false&quot;
-        - name: ES_JAVA_OPTS
-          value: -Xms256m -Xmx256m
-        - name: PROCESSORS
-          valueFrom:
-            resourceFieldRef:
-              resource: limits.cpu
-        resources:
-          limits:
-            cpu: 1
-        ports:
-        - containerPort: 9300
-          name: transport
-        volumeMounts:
-        - name: elasticsearch-data-storage
-          mountPath: /data
-  volumeClaimTemplates:
-  - metadata:
-      name: elasticsearch-data-storage
-    spec:
-      storageClassName: rook-block
-      accessModes: [ ReadWriteOnce ]
-      resources:
-        requests:
-          storage: 2Gi # small for dev / testing
-</code></pre>
-
-<h3 id="deployment-for-master-nodes"><a href="https://kubernetes.io/docs/concepts/workloads/controllers/deployment/">Deployment</a> for <a href="https://www.elastic.co/guide/en/elasticsearch/reference/6.2/modules-node.html#master-node">Master</a> Nodes</h3>
-
+        - vm.max_map_count=<span style="color:#ae81ff">262144</span>
+        <span style="color:#66d9ef">securityContext</span>:
+          <span style="color:#66d9ef">privileged</span>: <span style="color:#66d9ef">true</span>
+      <span style="color:#66d9ef">containers</span>:
+      - <span style="color:#66d9ef">name</span>: elasticsearch-data
+        <span style="color:#66d9ef">image</span>: txn2/k8s-es:v6<span style="color:#ae81ff">.2.3</span>
+        <span style="color:#66d9ef">imagePullPolicy</span>: Always
+        <span style="color:#66d9ef">env</span>:
+        - <span style="color:#66d9ef">name</span>: NAMESPACE
+          <span style="color:#66d9ef">valueFrom</span>:
+            <span style="color:#66d9ef">fieldRef</span>:
+              <span style="color:#66d9ef">fieldPath</span>: metadata.namespace
+        - <span style="color:#66d9ef">name</span>: DISCOVERY_SERVICE
+          <span style="color:#66d9ef">value</span>: elasticsearch-discovery
+        - <span style="color:#66d9ef">name</span>: NODE_NAME
+          <span style="color:#66d9ef">valueFrom</span>:
+            <span style="color:#66d9ef">fieldRef</span>:
+              <span style="color:#66d9ef">fieldPath</span>: metadata.name
+        - <span style="color:#66d9ef">name</span>: CLUSTER_NAME
+          <span style="color:#66d9ef">value</span>: elasticsearch
+        - <span style="color:#66d9ef">name</span>: NODE_DATA
+          <span style="color:#66d9ef">value</span>: <span style="color:#e6db74">&#34;true&#34;</span>
+        - <span style="color:#66d9ef">name</span>: NODE_MASTER
+          <span style="color:#66d9ef">value</span>: <span style="color:#e6db74">&#34;false&#34;</span>
+        - <span style="color:#66d9ef">name</span>: NODE_INGEST
+          <span style="color:#66d9ef">value</span>: <span style="color:#e6db74">&#34;false&#34;</span>
+        - <span style="color:#66d9ef">name</span>: HTTP_ENABLE
+          <span style="color:#66d9ef">value</span>: <span style="color:#e6db74">&#34;false&#34;</span>
+        - <span style="color:#66d9ef">name</span>: ES_JAVA_OPTS
+          <span style="color:#66d9ef">value</span>: -Xms256m -Xmx256m
+        - <span style="color:#66d9ef">name</span>: PROCESSORS
+          <span style="color:#66d9ef">valueFrom</span>:
+            <span style="color:#66d9ef">resourceFieldRef</span>:
+              <span style="color:#66d9ef">resource</span>: limits.cpu
+        <span style="color:#66d9ef">resources</span>:
+          <span style="color:#66d9ef">limits</span>:
+            <span style="color:#66d9ef">cpu</span>: <span style="color:#ae81ff">1</span>
+        <span style="color:#66d9ef">ports</span>:
+        - <span style="color:#66d9ef">containerPort</span>: <span style="color:#ae81ff">9300</span>
+          <span style="color:#66d9ef">name</span>: transport
+        <span style="color:#66d9ef">volumeMounts</span>:
+        - <span style="color:#66d9ef">name</span>: elasticsearch-data-storage
+          <span style="color:#66d9ef">mountPath</span>: /data
+  <span style="color:#66d9ef">volumeClaimTemplates</span>:
+  - <span style="color:#66d9ef">metadata</span>:
+      <span style="color:#66d9ef">name</span>: elasticsearch-data-storage
+    <span style="color:#66d9ef">spec</span>:
+      <span style="color:#66d9ef">storageClassName</span>: rook-block
+      <span style="color:#66d9ef">accessModes</span>: [ ReadWriteOnce ]
+      <span style="color:#66d9ef">resources</span>:
+        <span style="color:#66d9ef">requests</span>:
+          <span style="color:#66d9ef">storage</span>: 2Gi <span style="color:#75715e"># small for dev / testing</span>
+</code></pre></div><h3 id="deployment-for-master-nodes"><a href="https://kubernetes.io/docs/concepts/workloads/controllers/deployment/">Deployment</a> for <a href="https://www.elastic.co/guide/en/elasticsearch/reference/6.2/modules-node.html#master-node">Master</a> Nodes</h3>
 <p>The <strong><a href="https://www.elastic.co/guide/en/elasticsearch/reference/6.2/modules-node.html#master-node">Master</a></strong> Elasticsearch nodes are &ldquo;responsible for lightweight cluster-wide actions such as creating or deleting an index, tracking which nodes are part of the cluster, and deciding which shards to allocate to which nodes. It is important for cluster health to have a stable master node.&rdquo;</p>
-
 <p><code>40-deployment-master.yml</code>:</p>
-
-<pre><code class="language-yaml">apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: elasticsearch-master
-  namespace: the-project
-  labels:
-    app: elasticsearch-master
-    env: dev
-spec:
-  replicas: 2 # scale as desired (see NUMBER_OF_MASTERS below)
-  selector:
-    matchLabels:
-      app: elasticsearch-master
-  template:
-    metadata:
-      labels:
-        app: elasticsearch-master
-        env: dev
-    spec:
-      initContainers:
-      - name: init-sysctl
-        image: busybox:1.27.2
-        command:
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">apiVersion</span>: apps/v1
+<span style="color:#66d9ef">kind</span>: Deployment
+<span style="color:#66d9ef">metadata</span>:
+  <span style="color:#66d9ef">name</span>: elasticsearch-master
+  <span style="color:#66d9ef">namespace</span>: the-project
+  <span style="color:#66d9ef">labels</span>:
+    <span style="color:#66d9ef">app</span>: elasticsearch-master
+    <span style="color:#66d9ef">env</span>: dev
+<span style="color:#66d9ef">spec</span>:
+  <span style="color:#66d9ef">replicas</span>: <span style="color:#ae81ff">2</span> <span style="color:#75715e"># scale as desired (see NUMBER_OF_MASTERS below)</span>
+  <span style="color:#66d9ef">selector</span>:
+    <span style="color:#66d9ef">matchLabels</span>:
+      <span style="color:#66d9ef">app</span>: elasticsearch-master
+  <span style="color:#66d9ef">template</span>:
+    <span style="color:#66d9ef">metadata</span>:
+      <span style="color:#66d9ef">labels</span>:
+        <span style="color:#66d9ef">app</span>: elasticsearch-master
+        <span style="color:#66d9ef">env</span>: dev
+    <span style="color:#66d9ef">spec</span>:
+      <span style="color:#66d9ef">initContainers</span>:
+      - <span style="color:#66d9ef">name</span>: init-sysctl
+        <span style="color:#66d9ef">image</span>: busybox:<span style="color:#ae81ff">1.27.2</span>
+        <span style="color:#66d9ef">command</span>:
         - sysctl
         - -w
-        - vm.max_map_count=262144
-        securityContext:
-          privileged: true
-      containers:
-      - name: elasticsearch-master
-        image: txn2/k8s-es:v6.2.3
-        imagePullPolicy: Always
-        env:
-        - name: NAMESPACE
-          valueFrom:
-            fieldRef:
-              fieldPath: metadata.namespace
-        - name: NODE_NAME
-          valueFrom:
-            fieldRef:
-              fieldPath: metadata.name
-        - name: DISCOVERY_SERVICE
-          value: elasticsearch-discovery
-        - name: CLUSTER_NAME
-          value: elasticsearch
-        - name: NUMBER_OF_MASTERS
-          value: &quot;2&quot;
-        - name: NODE_MASTER
-          value: &quot;true&quot;
-        - name: NODE_INGEST
-          value: &quot;false&quot;
-        - name: NODE_DATA
-          value: &quot;false&quot;
-        - name: HTTP_ENABLE
-          value: &quot;false&quot;
-        - name: ES_JAVA_OPTS
-          value: -Xms256m -Xmx256m
-        - name: PROCESSORS
-          valueFrom:
-            resourceFieldRef:
-              resource: limits.cpu
-        resources:
-          limits:
-            cpu: 1
-        ports:
-        - containerPort: 9300
-          name: transport
-        volumeMounts:
-        - name: storage
-          mountPath: /data
-      volumes:
-      - emptyDir:
-          medium: &quot;&quot;
-        name: &quot;storage&quot;
-</code></pre>
-
-<h3 id="deployment-for-client-and-ingest-nodes"><a href="https://kubernetes.io/docs/concepts/workloads/controllers/deployment/">Deployment</a> for Client and <a href="https://www.elastic.co/guide/en/elasticsearch/reference/6.2/ingest.html">Ingest</a> Nodes</h3>
-
+        - vm.max_map_count=<span style="color:#ae81ff">262144</span>
+        <span style="color:#66d9ef">securityContext</span>:
+          <span style="color:#66d9ef">privileged</span>: <span style="color:#66d9ef">true</span>
+      <span style="color:#66d9ef">containers</span>:
+      - <span style="color:#66d9ef">name</span>: elasticsearch-master
+        <span style="color:#66d9ef">image</span>: txn2/k8s-es:v6<span style="color:#ae81ff">.2.3</span>
+        <span style="color:#66d9ef">imagePullPolicy</span>: Always
+        <span style="color:#66d9ef">env</span>:
+        - <span style="color:#66d9ef">name</span>: NAMESPACE
+          <span style="color:#66d9ef">valueFrom</span>:
+            <span style="color:#66d9ef">fieldRef</span>:
+              <span style="color:#66d9ef">fieldPath</span>: metadata.namespace
+        - <span style="color:#66d9ef">name</span>: NODE_NAME
+          <span style="color:#66d9ef">valueFrom</span>:
+            <span style="color:#66d9ef">fieldRef</span>:
+              <span style="color:#66d9ef">fieldPath</span>: metadata.name
+        - <span style="color:#66d9ef">name</span>: DISCOVERY_SERVICE
+          <span style="color:#66d9ef">value</span>: elasticsearch-discovery
+        - <span style="color:#66d9ef">name</span>: CLUSTER_NAME
+          <span style="color:#66d9ef">value</span>: elasticsearch
+        - <span style="color:#66d9ef">name</span>: NUMBER_OF_MASTERS
+          <span style="color:#66d9ef">value</span>: <span style="color:#e6db74">&#34;2&#34;</span>
+        - <span style="color:#66d9ef">name</span>: NODE_MASTER
+          <span style="color:#66d9ef">value</span>: <span style="color:#e6db74">&#34;true&#34;</span>
+        - <span style="color:#66d9ef">name</span>: NODE_INGEST
+          <span style="color:#66d9ef">value</span>: <span style="color:#e6db74">&#34;false&#34;</span>
+        - <span style="color:#66d9ef">name</span>: NODE_DATA
+          <span style="color:#66d9ef">value</span>: <span style="color:#e6db74">&#34;false&#34;</span>
+        - <span style="color:#66d9ef">name</span>: HTTP_ENABLE
+          <span style="color:#66d9ef">value</span>: <span style="color:#e6db74">&#34;false&#34;</span>
+        - <span style="color:#66d9ef">name</span>: ES_JAVA_OPTS
+          <span style="color:#66d9ef">value</span>: -Xms256m -Xmx256m
+        - <span style="color:#66d9ef">name</span>: PROCESSORS
+          <span style="color:#66d9ef">valueFrom</span>:
+            <span style="color:#66d9ef">resourceFieldRef</span>:
+              <span style="color:#66d9ef">resource</span>: limits.cpu
+        <span style="color:#66d9ef">resources</span>:
+          <span style="color:#66d9ef">limits</span>:
+            <span style="color:#66d9ef">cpu</span>: <span style="color:#ae81ff">1</span>
+        <span style="color:#66d9ef">ports</span>:
+        - <span style="color:#66d9ef">containerPort</span>: <span style="color:#ae81ff">9300</span>
+          <span style="color:#66d9ef">name</span>: transport
+        <span style="color:#66d9ef">volumeMounts</span>:
+        - <span style="color:#66d9ef">name</span>: storage
+          <span style="color:#66d9ef">mountPath</span>: /data
+      <span style="color:#66d9ef">volumes</span>:
+      - <span style="color:#66d9ef">emptyDir</span>:
+          <span style="color:#66d9ef">medium</span>: <span style="color:#e6db74">&#34;&#34;</span>
+        <span style="color:#66d9ef">name</span>: <span style="color:#e6db74">&#34;storage&#34;</span>
+</code></pre></div><h3 id="deployment-for-client-and-ingest-nodes"><a href="https://kubernetes.io/docs/concepts/workloads/controllers/deployment/">Deployment</a> for Client and <a href="https://www.elastic.co/guide/en/elasticsearch/reference/6.2/ingest.html">Ingest</a> Nodes</h3>
 <p>For the sake of simplicity, we use our <strong>client</strong> nodes for <a href="https://www.elastic.co/guide/en/elasticsearch/reference/6.2/ingest.html">ingest</a> and queries. These can easily be separated out once you have determined your load model. Separate <strong><a href="https://www.elastic.co/guide/en/elasticsearch/reference/6.2/ingest.html">Ingest</a></strong> nodes allow you to &ldquo;pre-process documents before the actual document indexing happens. The ingest node intercepts bulk and index requests, it applies transformations, and it then passes the documents back to the index or bulk APIs.&rdquo; By default, Elasticsearch nodes allow <a href="https://www.elastic.co/guide/en/elasticsearch/reference/6.2/ingest.html">ingest</a>, so clients remain in this default mode.</p>
-
 <p><code>60-deployment-client.yml</code>:</p>
-
-<pre><code class="language-yaml">apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: elasticsearch-client
-  namespace: the-project
-  labels:
-    app: elasticsearch-client
-    env: dev
-spec:
-  replicas: 1 # scale as desired
-  selector:
-    matchLabels:
-      app: elasticsearch-client
-  template:
-    metadata:
-      labels:
-        app: elasticsearch-client
-        env: dev
-    spec:
-      initContainers:
-      - name: init-sysctl
-        image: busybox:1.27.2
-        command:
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">apiVersion</span>: apps/v1
+<span style="color:#66d9ef">kind</span>: Deployment
+<span style="color:#66d9ef">metadata</span>:
+  <span style="color:#66d9ef">name</span>: elasticsearch-client
+  <span style="color:#66d9ef">namespace</span>: the-project
+  <span style="color:#66d9ef">labels</span>:
+    <span style="color:#66d9ef">app</span>: elasticsearch-client
+    <span style="color:#66d9ef">env</span>: dev
+<span style="color:#66d9ef">spec</span>:
+  <span style="color:#66d9ef">replicas</span>: <span style="color:#ae81ff">1</span> <span style="color:#75715e"># scale as desired</span>
+  <span style="color:#66d9ef">selector</span>:
+    <span style="color:#66d9ef">matchLabels</span>:
+      <span style="color:#66d9ef">app</span>: elasticsearch-client
+  <span style="color:#66d9ef">template</span>:
+    <span style="color:#66d9ef">metadata</span>:
+      <span style="color:#66d9ef">labels</span>:
+        <span style="color:#66d9ef">app</span>: elasticsearch-client
+        <span style="color:#66d9ef">env</span>: dev
+    <span style="color:#66d9ef">spec</span>:
+      <span style="color:#66d9ef">initContainers</span>:
+      - <span style="color:#66d9ef">name</span>: init-sysctl
+        <span style="color:#66d9ef">image</span>: busybox:<span style="color:#ae81ff">1.27.2</span>
+        <span style="color:#66d9ef">command</span>:
         - sysctl
         - -w
-        - vm.max_map_count=262144
-        securityContext:
-          privileged: true
-      containers:
-      - name: elasticsearch-client
-        image: txn2/k8s-es:v6.2.3
-        imagePullPolicy: Always
-        env:
-        - name: NAMESPACE
-          valueFrom:
-            fieldRef:
-              fieldPath: metadata.namespace
-        - name: NODE_NAME
-          valueFrom:
-            fieldRef:
-              fieldPath: metadata.name
-        - name: DISCOVERY_SERVICE
-          value: elasticsearch-discovery
-        - name: CLUSTER_NAME
-          value: elasticsearch
-        - name: NODE_MASTER
-          value: &quot;false&quot;
-        - name: NETWORK_HOST
-          value: &quot;0.0.0.0&quot;
-        - name: NODE_INGEST
-          value: &quot;true&quot;
-        - name: NODE_DATA
-          value: &quot;false&quot;
-        - name: HTTP_ENABLE
-          value: &quot;true&quot;
-        - name: ES_JAVA_OPTS
-          value: -Xms256m -Xmx256m
-        - name: PROCESSORS
-          valueFrom:
-            resourceFieldRef:
-              resource: limits.cpu
-        resources:
-          limits:
-            cpu: 1
-        ports:
-        - containerPort: 9200
-          name: http
-        - containerPort: 9300
-          name: transport
-        volumeMounts:
-        - name: storage
-          mountPath: /data
-      volumes:
-      - emptyDir:
-          medium: &quot;&quot;
-        name: &quot;storage&quot;
-</code></pre>
-
-<h3 id="testing">Testing</h3>
-
+        - vm.max_map_count=<span style="color:#ae81ff">262144</span>
+        <span style="color:#66d9ef">securityContext</span>:
+          <span style="color:#66d9ef">privileged</span>: <span style="color:#66d9ef">true</span>
+      <span style="color:#66d9ef">containers</span>:
+      - <span style="color:#66d9ef">name</span>: elasticsearch-client
+        <span style="color:#66d9ef">image</span>: txn2/k8s-es:v6<span style="color:#ae81ff">.2.3</span>
+        <span style="color:#66d9ef">imagePullPolicy</span>: Always
+        <span style="color:#66d9ef">env</span>:
+        - <span style="color:#66d9ef">name</span>: NAMESPACE
+          <span style="color:#66d9ef">valueFrom</span>:
+            <span style="color:#66d9ef">fieldRef</span>:
+              <span style="color:#66d9ef">fieldPath</span>: metadata.namespace
+        - <span style="color:#66d9ef">name</span>: NODE_NAME
+          <span style="color:#66d9ef">valueFrom</span>:
+            <span style="color:#66d9ef">fieldRef</span>:
+              <span style="color:#66d9ef">fieldPath</span>: metadata.name
+        - <span style="color:#66d9ef">name</span>: DISCOVERY_SERVICE
+          <span style="color:#66d9ef">value</span>: elasticsearch-discovery
+        - <span style="color:#66d9ef">name</span>: CLUSTER_NAME
+          <span style="color:#66d9ef">value</span>: elasticsearch
+        - <span style="color:#66d9ef">name</span>: NODE_MASTER
+          <span style="color:#66d9ef">value</span>: <span style="color:#e6db74">&#34;false&#34;</span>
+        - <span style="color:#66d9ef">name</span>: NETWORK_HOST
+          <span style="color:#66d9ef">value</span>: <span style="color:#e6db74">&#34;0.0.0.0&#34;</span>
+        - <span style="color:#66d9ef">name</span>: NODE_INGEST
+          <span style="color:#66d9ef">value</span>: <span style="color:#e6db74">&#34;true&#34;</span>
+        - <span style="color:#66d9ef">name</span>: NODE_DATA
+          <span style="color:#66d9ef">value</span>: <span style="color:#e6db74">&#34;false&#34;</span>
+        - <span style="color:#66d9ef">name</span>: HTTP_ENABLE
+          <span style="color:#66d9ef">value</span>: <span style="color:#e6db74">&#34;true&#34;</span>
+        - <span style="color:#66d9ef">name</span>: ES_JAVA_OPTS
+          <span style="color:#66d9ef">value</span>: -Xms256m -Xmx256m
+        - <span style="color:#66d9ef">name</span>: PROCESSORS
+          <span style="color:#66d9ef">valueFrom</span>:
+            <span style="color:#66d9ef">resourceFieldRef</span>:
+              <span style="color:#66d9ef">resource</span>: limits.cpu
+        <span style="color:#66d9ef">resources</span>:
+          <span style="color:#66d9ef">limits</span>:
+            <span style="color:#66d9ef">cpu</span>: <span style="color:#ae81ff">1</span>
+        <span style="color:#66d9ef">ports</span>:
+        - <span style="color:#66d9ef">containerPort</span>: <span style="color:#ae81ff">9200</span>
+          <span style="color:#66d9ef">name</span>: http
+        - <span style="color:#66d9ef">containerPort</span>: <span style="color:#ae81ff">9300</span>
+          <span style="color:#66d9ef">name</span>: transport
+        <span style="color:#66d9ef">volumeMounts</span>:
+        - <span style="color:#66d9ef">name</span>: storage
+          <span style="color:#66d9ef">mountPath</span>: /data
+      <span style="color:#66d9ef">volumes</span>:
+      - <span style="color:#66d9ef">emptyDir</span>:
+          <span style="color:#66d9ef">medium</span>: <span style="color:#e6db74">&#34;&#34;</span>
+        <span style="color:#66d9ef">name</span>: <span style="color:#e6db74">&#34;storage&#34;</span>
+</code></pre></div><h3 id="testing">Testing</h3>
 <p>Use <code>kubectl exec</code> to open a terminal into a Pod in <code>the-project</code> namespace and use <code>curl</code> to test the new Elasticsearch cluster.</p>
-
-<pre><code class="language-bash">kubectl exec -it SOME_POD sh -n the-project 
-</code></pre>
-
-<p>Retrieve Elasticsearch cluster stats:</p>
-
-<pre><code class="language-bash">curl -X GET &quot;elasticsearch:9200/_cluster/stats?human&amp;pretty&quot;
-</code></pre>
-
-<p>Example output:</p>
-
-<pre><code class="language-json">{
-  &quot;_nodes&quot; : {
-    &quot;total&quot; : 4,
-    &quot;successful&quot; : 4,
-    &quot;failed&quot; : 0
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl exec -it SOME_POD sh -n the-project 
+</code></pre></div><p>Retrieve Elasticsearch cluster stats:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">curl -X GET <span style="color:#e6db74">&#34;elasticsearch:9200/_cluster/stats?human&amp;pretty&#34;</span>
+</code></pre></div><p>Example output:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
+  <span style="color:#f92672">&#34;_nodes&#34;</span> : {
+    <span style="color:#f92672">&#34;total&#34;</span> : <span style="color:#ae81ff">4</span>,
+    <span style="color:#f92672">&#34;successful&#34;</span> : <span style="color:#ae81ff">4</span>,
+    <span style="color:#f92672">&#34;failed&#34;</span> : <span style="color:#ae81ff">0</span>
   },
-  &quot;cluster_name&quot; : &quot;elasticsearch&quot;,
-  &quot;timestamp&quot; : 1531724609367,
-  &quot;status&quot; : &quot;green&quot;,
-  &quot;indices&quot; : {
-    &quot;count&quot; : 0,
-    &quot;shards&quot; : { },
-    &quot;docs&quot; : {
-      &quot;count&quot; : 0,
-      &quot;deleted&quot; : 0
+  <span style="color:#f92672">&#34;cluster_name&#34;</span> : <span style="color:#e6db74">&#34;elasticsearch&#34;</span>,
+  <span style="color:#f92672">&#34;timestamp&#34;</span> : <span style="color:#ae81ff">1531724609367</span>,
+  <span style="color:#f92672">&#34;status&#34;</span> : <span style="color:#e6db74">&#34;green&#34;</span>,
+  <span style="color:#f92672">&#34;indices&#34;</span> : {
+    <span style="color:#f92672">&#34;count&#34;</span> : <span style="color:#ae81ff">0</span>,
+    <span style="color:#f92672">&#34;shards&#34;</span> : { },
+    <span style="color:#f92672">&#34;docs&#34;</span> : {
+      <span style="color:#f92672">&#34;count&#34;</span> : <span style="color:#ae81ff">0</span>,
+      <span style="color:#f92672">&#34;deleted&#34;</span> : <span style="color:#ae81ff">0</span>
     },
-    &quot;store&quot; : {
-      &quot;size&quot; : &quot;0b&quot;,
-      &quot;size_in_bytes&quot; : 0
+    <span style="color:#f92672">&#34;store&#34;</span> : {
+      <span style="color:#f92672">&#34;size&#34;</span> : <span style="color:#e6db74">&#34;0b&#34;</span>,
+      <span style="color:#f92672">&#34;size_in_bytes&#34;</span> : <span style="color:#ae81ff">0</span>
     },
-    &quot;fielddata&quot; : {
-      &quot;memory_size&quot; : &quot;0b&quot;,
-      &quot;memory_size_in_bytes&quot; : 0,
-      &quot;evictions&quot; : 0
+    <span style="color:#f92672">&#34;fielddata&#34;</span> : {
+      <span style="color:#f92672">&#34;memory_size&#34;</span> : <span style="color:#e6db74">&#34;0b&#34;</span>,
+      <span style="color:#f92672">&#34;memory_size_in_bytes&#34;</span> : <span style="color:#ae81ff">0</span>,
+      <span style="color:#f92672">&#34;evictions&#34;</span> : <span style="color:#ae81ff">0</span>
     },
-    &quot;query_cache&quot; : {
-      &quot;memory_size&quot; : &quot;0b&quot;,
-      &quot;memory_size_in_bytes&quot; : 0,
-      &quot;total_count&quot; : 0,
-      &quot;hit_count&quot; : 0,
-      &quot;miss_count&quot; : 0,
-      &quot;cache_size&quot; : 0,
-      &quot;cache_count&quot; : 0,
-      &quot;evictions&quot; : 0
+    <span style="color:#f92672">&#34;query_cache&#34;</span> : {
+      <span style="color:#f92672">&#34;memory_size&#34;</span> : <span style="color:#e6db74">&#34;0b&#34;</span>,
+      <span style="color:#f92672">&#34;memory_size_in_bytes&#34;</span> : <span style="color:#ae81ff">0</span>,
+      <span style="color:#f92672">&#34;total_count&#34;</span> : <span style="color:#ae81ff">0</span>,
+      <span style="color:#f92672">&#34;hit_count&#34;</span> : <span style="color:#ae81ff">0</span>,
+      <span style="color:#f92672">&#34;miss_count&#34;</span> : <span style="color:#ae81ff">0</span>,
+      <span style="color:#f92672">&#34;cache_size&#34;</span> : <span style="color:#ae81ff">0</span>,
+      <span style="color:#f92672">&#34;cache_count&#34;</span> : <span style="color:#ae81ff">0</span>,
+      <span style="color:#f92672">&#34;evictions&#34;</span> : <span style="color:#ae81ff">0</span>
     },
-    &quot;completion&quot; : {
-      &quot;size&quot; : &quot;0b&quot;,
-      &quot;size_in_bytes&quot; : 0
+    <span style="color:#f92672">&#34;completion&#34;</span> : {
+      <span style="color:#f92672">&#34;size&#34;</span> : <span style="color:#e6db74">&#34;0b&#34;</span>,
+      <span style="color:#f92672">&#34;size_in_bytes&#34;</span> : <span style="color:#ae81ff">0</span>
     },
-    &quot;segments&quot; : {
-      &quot;count&quot; : 0,
-      &quot;memory&quot; : &quot;0b&quot;,
-      &quot;memory_in_bytes&quot; : 0,
-      &quot;terms_memory&quot; : &quot;0b&quot;,
-      &quot;terms_memory_in_bytes&quot; : 0,
-      &quot;stored_fields_memory&quot; : &quot;0b&quot;,
-      &quot;stored_fields_memory_in_bytes&quot; : 0,
-      &quot;term_vectors_memory&quot; : &quot;0b&quot;,
-      &quot;term_vectors_memory_in_bytes&quot; : 0,
-      &quot;norms_memory&quot; : &quot;0b&quot;,
-      &quot;norms_memory_in_bytes&quot; : 0,
-      &quot;points_memory&quot; : &quot;0b&quot;,
-      &quot;points_memory_in_bytes&quot; : 0,
-      &quot;doc_values_memory&quot; : &quot;0b&quot;,
-      &quot;doc_values_memory_in_bytes&quot; : 0,
-      &quot;index_writer_memory&quot; : &quot;0b&quot;,
-      &quot;index_writer_memory_in_bytes&quot; : 0,
-      &quot;version_map_memory&quot; : &quot;0b&quot;,
-      &quot;version_map_memory_in_bytes&quot; : 0,
-      &quot;fixed_bit_set&quot; : &quot;0b&quot;,
-      &quot;fixed_bit_set_memory_in_bytes&quot; : 0,
-      &quot;max_unsafe_auto_id_timestamp&quot; : -9223372036854775808,
-      &quot;file_sizes&quot; : { }
+    <span style="color:#f92672">&#34;segments&#34;</span> : {
+      <span style="color:#f92672">&#34;count&#34;</span> : <span style="color:#ae81ff">0</span>,
+      <span style="color:#f92672">&#34;memory&#34;</span> : <span style="color:#e6db74">&#34;0b&#34;</span>,
+      <span style="color:#f92672">&#34;memory_in_bytes&#34;</span> : <span style="color:#ae81ff">0</span>,
+      <span style="color:#f92672">&#34;terms_memory&#34;</span> : <span style="color:#e6db74">&#34;0b&#34;</span>,
+      <span style="color:#f92672">&#34;terms_memory_in_bytes&#34;</span> : <span style="color:#ae81ff">0</span>,
+      <span style="color:#f92672">&#34;stored_fields_memory&#34;</span> : <span style="color:#e6db74">&#34;0b&#34;</span>,
+      <span style="color:#f92672">&#34;stored_fields_memory_in_bytes&#34;</span> : <span style="color:#ae81ff">0</span>,
+      <span style="color:#f92672">&#34;term_vectors_memory&#34;</span> : <span style="color:#e6db74">&#34;0b&#34;</span>,
+      <span style="color:#f92672">&#34;term_vectors_memory_in_bytes&#34;</span> : <span style="color:#ae81ff">0</span>,
+      <span style="color:#f92672">&#34;norms_memory&#34;</span> : <span style="color:#e6db74">&#34;0b&#34;</span>,
+      <span style="color:#f92672">&#34;norms_memory_in_bytes&#34;</span> : <span style="color:#ae81ff">0</span>,
+      <span style="color:#f92672">&#34;points_memory&#34;</span> : <span style="color:#e6db74">&#34;0b&#34;</span>,
+      <span style="color:#f92672">&#34;points_memory_in_bytes&#34;</span> : <span style="color:#ae81ff">0</span>,
+      <span style="color:#f92672">&#34;doc_values_memory&#34;</span> : <span style="color:#e6db74">&#34;0b&#34;</span>,
+      <span style="color:#f92672">&#34;doc_values_memory_in_bytes&#34;</span> : <span style="color:#ae81ff">0</span>,
+      <span style="color:#f92672">&#34;index_writer_memory&#34;</span> : <span style="color:#e6db74">&#34;0b&#34;</span>,
+      <span style="color:#f92672">&#34;index_writer_memory_in_bytes&#34;</span> : <span style="color:#ae81ff">0</span>,
+      <span style="color:#f92672">&#34;version_map_memory&#34;</span> : <span style="color:#e6db74">&#34;0b&#34;</span>,
+      <span style="color:#f92672">&#34;version_map_memory_in_bytes&#34;</span> : <span style="color:#ae81ff">0</span>,
+      <span style="color:#f92672">&#34;fixed_bit_set&#34;</span> : <span style="color:#e6db74">&#34;0b&#34;</span>,
+      <span style="color:#f92672">&#34;fixed_bit_set_memory_in_bytes&#34;</span> : <span style="color:#ae81ff">0</span>,
+      <span style="color:#f92672">&#34;max_unsafe_auto_id_timestamp&#34;</span> : <span style="color:#ae81ff">-9223372036854775808</span>,
+      <span style="color:#f92672">&#34;file_sizes&#34;</span> : { }
     }
   },
-  &quot;nodes&quot; : {
-    &quot;count&quot; : {
-      &quot;total&quot; : 4,
-      &quot;data&quot; : 1,
-      &quot;coordinating_only&quot; : 0,
-      &quot;master&quot; : 2,
-      &quot;ingest&quot; : 1
+  <span style="color:#f92672">&#34;nodes&#34;</span> : {
+    <span style="color:#f92672">&#34;count&#34;</span> : {
+      <span style="color:#f92672">&#34;total&#34;</span> : <span style="color:#ae81ff">4</span>,
+      <span style="color:#f92672">&#34;data&#34;</span> : <span style="color:#ae81ff">1</span>,
+      <span style="color:#f92672">&#34;coordinating_only&#34;</span> : <span style="color:#ae81ff">0</span>,
+      <span style="color:#f92672">&#34;master&#34;</span> : <span style="color:#ae81ff">2</span>,
+      <span style="color:#f92672">&#34;ingest&#34;</span> : <span style="color:#ae81ff">1</span>
     },
-    &quot;versions&quot; : [
-      &quot;6.2.3&quot;
+    <span style="color:#f92672">&#34;versions&#34;</span> : [
+      <span style="color:#e6db74">&#34;6.2.3&#34;</span>
     ],
-    &quot;os&quot; : {
-      &quot;available_processors&quot; : 22,
-      &quot;allocated_processors&quot; : 4,
-      &quot;names&quot; : [
+    <span style="color:#f92672">&#34;os&#34;</span> : {
+      <span style="color:#f92672">&#34;available_processors&#34;</span> : <span style="color:#ae81ff">22</span>,
+      <span style="color:#f92672">&#34;allocated_processors&#34;</span> : <span style="color:#ae81ff">4</span>,
+      <span style="color:#f92672">&#34;names&#34;</span> : [
         {
-          &quot;name&quot; : &quot;Linux&quot;,
-          &quot;count&quot; : 4
+          <span style="color:#f92672">&#34;name&#34;</span> : <span style="color:#e6db74">&#34;Linux&#34;</span>,
+          <span style="color:#f92672">&#34;count&#34;</span> : <span style="color:#ae81ff">4</span>
         }
       ],
-      &quot;mem&quot; : {
-        &quot;total&quot; : &quot;37.1gb&quot;,
-        &quot;total_in_bytes&quot; : 39837057024,
-        &quot;free&quot; : &quot;8.4gb&quot;,
-        &quot;free_in_bytes&quot; : 9092431872,
-        &quot;used&quot; : &quot;28.6gb&quot;,
-        &quot;used_in_bytes&quot; : 30744625152,
-        &quot;free_percent&quot; : 23,
-        &quot;used_percent&quot; : 77
+      <span style="color:#f92672">&#34;mem&#34;</span> : {
+        <span style="color:#f92672">&#34;total&#34;</span> : <span style="color:#e6db74">&#34;37.1gb&#34;</span>,
+        <span style="color:#f92672">&#34;total_in_bytes&#34;</span> : <span style="color:#ae81ff">39837057024</span>,
+        <span style="color:#f92672">&#34;free&#34;</span> : <span style="color:#e6db74">&#34;8.4gb&#34;</span>,
+        <span style="color:#f92672">&#34;free_in_bytes&#34;</span> : <span style="color:#ae81ff">9092431872</span>,
+        <span style="color:#f92672">&#34;used&#34;</span> : <span style="color:#e6db74">&#34;28.6gb&#34;</span>,
+        <span style="color:#f92672">&#34;used_in_bytes&#34;</span> : <span style="color:#ae81ff">30744625152</span>,
+        <span style="color:#f92672">&#34;free_percent&#34;</span> : <span style="color:#ae81ff">23</span>,
+        <span style="color:#f92672">&#34;used_percent&#34;</span> : <span style="color:#ae81ff">77</span>
       }
     },
-    &quot;process&quot; : {
-      &quot;cpu&quot; : {
-        &quot;percent&quot; : 0
+    <span style="color:#f92672">&#34;process&#34;</span> : {
+      <span style="color:#f92672">&#34;cpu&#34;</span> : {
+        <span style="color:#f92672">&#34;percent&#34;</span> : <span style="color:#ae81ff">0</span>
       },
-      &quot;open_file_descriptors&quot; : {
-        &quot;min&quot; : 173,
-        &quot;max&quot; : 179,
-        &quot;avg&quot; : 175
+      <span style="color:#f92672">&#34;open_file_descriptors&#34;</span> : {
+        <span style="color:#f92672">&#34;min&#34;</span> : <span style="color:#ae81ff">173</span>,
+        <span style="color:#f92672">&#34;max&#34;</span> : <span style="color:#ae81ff">179</span>,
+        <span style="color:#f92672">&#34;avg&#34;</span> : <span style="color:#ae81ff">175</span>
       }
     },
-    &quot;jvm&quot; : {
-      &quot;max_uptime&quot; : &quot;1.7h&quot;,
-      &quot;max_uptime_in_millis&quot; : 6414192,
-      &quot;versions&quot; : [
+    <span style="color:#f92672">&#34;jvm&#34;</span> : {
+      <span style="color:#f92672">&#34;max_uptime&#34;</span> : <span style="color:#e6db74">&#34;1.7h&#34;</span>,
+      <span style="color:#f92672">&#34;max_uptime_in_millis&#34;</span> : <span style="color:#ae81ff">6414192</span>,
+      <span style="color:#f92672">&#34;versions&#34;</span> : [
         {
-          &quot;version&quot; : &quot;1.8.0_151&quot;,
-          &quot;vm_name&quot; : &quot;OpenJDK 64-Bit Server VM&quot;,
-          &quot;vm_version&quot; : &quot;25.151-b12&quot;,
-          &quot;vm_vendor&quot; : &quot;Oracle Corporation&quot;,
-          &quot;count&quot; : 4
+          <span style="color:#f92672">&#34;version&#34;</span> : <span style="color:#e6db74">&#34;1.8.0_151&#34;</span>,
+          <span style="color:#f92672">&#34;vm_name&#34;</span> : <span style="color:#e6db74">&#34;OpenJDK 64-Bit Server VM&#34;</span>,
+          <span style="color:#f92672">&#34;vm_version&#34;</span> : <span style="color:#e6db74">&#34;25.151-b12&#34;</span>,
+          <span style="color:#f92672">&#34;vm_vendor&#34;</span> : <span style="color:#e6db74">&#34;Oracle Corporation&#34;</span>,
+          <span style="color:#f92672">&#34;count&#34;</span> : <span style="color:#ae81ff">4</span>
         }
       ],
-      &quot;mem&quot; : {
-        &quot;heap_used&quot; : &quot;418.3mb&quot;,
-        &quot;heap_used_in_bytes&quot; : 438676024,
-        &quot;heap_max&quot; : &quot;990mb&quot;,
-        &quot;heap_max_in_bytes&quot; : 1038090240
+      <span style="color:#f92672">&#34;mem&#34;</span> : {
+        <span style="color:#f92672">&#34;heap_used&#34;</span> : <span style="color:#e6db74">&#34;418.3mb&#34;</span>,
+        <span style="color:#f92672">&#34;heap_used_in_bytes&#34;</span> : <span style="color:#ae81ff">438676024</span>,
+        <span style="color:#f92672">&#34;heap_max&#34;</span> : <span style="color:#e6db74">&#34;990mb&#34;</span>,
+        <span style="color:#f92672">&#34;heap_max_in_bytes&#34;</span> : <span style="color:#ae81ff">1038090240</span>
       },
-      &quot;threads&quot; : 79
+      <span style="color:#f92672">&#34;threads&#34;</span> : <span style="color:#ae81ff">79</span>
     },
-    &quot;fs&quot; : {
-      &quot;total&quot; : &quot;533gb&quot;,
-      &quot;total_in_bytes&quot; : 572367089664,
-      &quot;free&quot; : &quot;498.7gb&quot;,
-      &quot;free_in_bytes&quot; : 535527632896,
-      &quot;available&quot; : &quot;471.5gb&quot;,
-      &quot;available_in_bytes&quot; : 506362122240
+    <span style="color:#f92672">&#34;fs&#34;</span> : {
+      <span style="color:#f92672">&#34;total&#34;</span> : <span style="color:#e6db74">&#34;533gb&#34;</span>,
+      <span style="color:#f92672">&#34;total_in_bytes&#34;</span> : <span style="color:#ae81ff">572367089664</span>,
+      <span style="color:#f92672">&#34;free&#34;</span> : <span style="color:#e6db74">&#34;498.7gb&#34;</span>,
+      <span style="color:#f92672">&#34;free_in_bytes&#34;</span> : <span style="color:#ae81ff">535527632896</span>,
+      <span style="color:#f92672">&#34;available&#34;</span> : <span style="color:#e6db74">&#34;471.5gb&#34;</span>,
+      <span style="color:#f92672">&#34;available_in_bytes&#34;</span> : <span style="color:#ae81ff">506362122240</span>
     },
-    &quot;plugins&quot; : [ ],
-    &quot;network_types&quot; : {
-      &quot;transport_types&quot; : {
-        &quot;netty4&quot; : 4
+    <span style="color:#f92672">&#34;plugins&#34;</span> : [ ],
+    <span style="color:#f92672">&#34;network_types&#34;</span> : {
+      <span style="color:#f92672">&#34;transport_types&#34;</span> : {
+        <span style="color:#f92672">&#34;netty4&#34;</span> : <span style="color:#ae81ff">4</span>
       },
-      &quot;http_types&quot; : {
-        &quot;netty4&quot; : 4
+      <span style="color:#f92672">&#34;http_types&#34;</span> : {
+        <span style="color:#f92672">&#34;netty4&#34;</span> : <span style="color:#ae81ff">4</span>
       }
     }
   }
 }
-</code></pre>
-
-<h2 id="port-forwarding-local-development">Port Forwarding / Local Development</h2>
-
+</code></pre></div><h2 id="port-forwarding--local-development">Port Forwarding / Local Development</h2>
 <p>Check out <a href="https://github.com/txn2/kubefwd">kubefwd</a> for a simple command line utility that bulk forwards services of one or more namespaces to your local workstation.</p>
-
 <h3 id="next">Next</h3>
-
 <ul>
 <li>Setup <a href="/kibana-kubernetes/">Kibana on Kubernetes</a> for data exploration and visualization.</li>
 <li>Process <a href="/post-json-elasticsearch-kubernetes/">High Traffic JSON Data into Elasticsearch on Kubernetes</a>.</li>
@@ -820,6 +763,23 @@ spec:
                    <span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">Production Grade Elasticsearch on Kubernetes: Setup a fast, custom production grade Elasticsearch cluster.</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="https://imti.co/" property="cc:attributionName" rel="cc:attributionURL">Craig Johnston</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
                     <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a>
                 </p>
+
+                <h5>SUPPORT</h5>
+                <p>
+                    Order my new Kubernetes book: <a href="https://amzn.to/34D56v6">Advanced Platform Development with Kubernetes: Enabling Data Management, the Internet of Things, Blockchain, and Machine Learning</a>
+                </p>
+                <script type="text/javascript">
+                  amzn_assoc_tracking_id = "imti-20";
+                  amzn_assoc_ad_mode = "manual";
+                  amzn_assoc_ad_type = "smart";
+                  amzn_assoc_marketplace = "amazon";
+                  amzn_assoc_region = "US";
+                  amzn_assoc_design = "enhanced_links";
+                  amzn_assoc_asins = "1484256107";
+                  amzn_assoc_placement = "adunit";
+                  amzn_assoc_linkid = "14a9d8b8d1b0bd44e9256e0e0a948015";
+                </script>
+                <script src="//z-na.amazon-adsystem.com/widgets/onejs?MarketPlace=US"></script>
 
                 
                 <hr>

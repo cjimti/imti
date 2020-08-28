@@ -87,7 +87,7 @@
       "url": "https:\/\/imti.co\/img\/craig_johnston_cjimti.jpg"
     }
   },
-  "description": "Jupyter Notbooks have been a popular technology in the Python data science community for a while now, especially in academics. Jupyter Notebooks are a way to mix inline, executable code with documentation in a presentation format. Best practices in organizing source code are not always the most efficient at communicating it\x26rsquo;s functionality to a user.\nWhile the intention of a programming language is the abstraction of computational complexity into a simplified language humans can read and write, they must always weigh toward the efficiency of the primary interpreter, the computer."
+  "description": "Jupyter Notbooks have been a popular technology in the Python data science community for a while now, especially in academics. Jupyter Notebooks are a way to mix inline, executable code with documentation in a presentation format. Best practices in organizing source code are not always the most efficient at communicating it\u0026rsquo;s functionality to a user.\nWhile the intention of a programming language is the abstraction of computational complexity into a simplified language humans can read and write, they must always weigh toward the efficiency of the primary interpreter, the computer."
 }
 </script>
 
@@ -207,78 +207,68 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h5>SHARE</h5>
-                <ul class="list-inline">
-                    <li><div class="addthis_inline_share_toolbox"></div></li>
-                </ul>
-
-                
-
-<p><a href="http://jupyter.org/">Jupyter Notbooks</a> have been a popular technology in the Python data science community for a while now, especially in academics. Jupyter Notebooks are a way to mix inline, executable code with documentation in a presentation format. Best practices in organizing source code are not always the most efficient at communicating it&rsquo;s functionality to a user.</p>
-
+                <p><a href="http://jupyter.org/">Jupyter Notbooks</a> have been a popular technology in the Python data science community for a while now, especially in academics. Jupyter Notebooks are a way to mix inline, executable code with documentation in a presentation format. Best practices in organizing source code are not always the most efficient at communicating it&rsquo;s functionality to a user.</p>
 <p>While the intention of a programming language is the abstraction of computational complexity into a simplified language humans can read and write, they must always weigh toward the efficiency of the primary interpreter, the computer. Jupyter Notebooks are intended to communicate source code to humans first and computers second. We can use Jupyter Notebooks to communicate to humans not only the source but the interpreted result.</p>
-
 <p>Jupyter can use a growing number of interpreters (called <a href="https://github.com/jupyter/jupyter/wiki/Jupyter-kernels">kernels</a>) to run and render output, including my favorite, <a href="https://github.com/gopherdata/gophernotes#examples">Golang</a>.</p>
-
 <p>Although data science expressed in Python is the first and most popular use of Jupyter Notebooks, I see a lot of other beneficial applications, including:</p>
-
 <ul>
 <li>Programming tutorials in a variety of languages.</li>
 <li>Coding Best practices and style guides.</li>
 <li>Technical articles and blogs.</li>
 <li>Leveraging static site generators like <a href="https://jekyllrb.com/">Jekyll</a> and <a href="https://gohugo.io/">Hugo</a></li>
 </ul>
-
 <p>Beyond the ability to execute code in-line, the most useful features to me are exporting these notebooks as Markdown. Site builders like <a href="https://jekyllrb.com/">Jekyll</a> and <a href="https://gohugo.io/">Hugo</a> use <a href="https://daringfireball.net/projects/markdown/syntax">Markdown</a> to generate <a href="https://gohugo.io/showcase/">beautiful static websites and blogs</a>.</p>
+<p><img src="/images/content/GolangToJupyter-screen.png" alt="Notebook Screenshot"></p>
 
-<p><img src="/images/content/GolangToJupyter-screen.png" alt="Notebook Screenshot" /></p>
-
-<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<ins class="adsbygoogle"
-     style="display:block; text-align:center;"
-     data-ad-layout="in-article"
-     data-ad-format="fluid"
-     data-ad-client="ca-pub-5984764595236029"
-     data-ad-slot="7730310582"></ins>
-<script>
-    (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-
+<table>
+    <tr><td colspan="2" style="text-align: center"><b>Please support my new book!</b></td></tr>
+    <tr>
+        <td>
+            <a href="https://amzn.to/3hAZUvx">
+                <img src="/img/kubernetes_platform_development.jpg" style="padding:0; margin: 0"/>
+            </a>
+        </td>
+        <td>
+            <b><a href="https://amzn.to/3hAZUvx">Advanced Platform Development with Kubernetes: Enabling Data Management, the Internet of Things, Blockchain, and Machine Learning</a></b>
+            <h4>What You'll Learn</h4>
+            <ul style="padding-bottom: 0; margin: 0">
+                <li>Use data pipelines with <b>MQTT, NiFi, Logstash, Kafka and Elasticsearch</b></li>
+                <li>Install a serverless platform with <b>OpenFaaS</b></li>
+                <li>Explore <b>blockchain</b> network capabilities with <b>Ethereum</b></li>
+                <li>Support a multi-tenant <b>data science</b> platform and web IDE with <b>JupyterHub, MLflow and Seldon Core</b></li>
+                <li>Build a <b>hybrid cluster</b>, securely bridging <b>on-premise</b> and cloud-based Kubernetes nodes</li>
+                <li>Implement an integrated development toolchain for continuous integration and deployment</li>
+            </ul>
+        </td>
+    </tr>
+</table>
 <h2 id="example">Example</h2>
-
 <p>In the sections below I demonstrate simple HTTP client call in Golang with Golang code executed directly in the Jupyter Notebook.</p>
-
-<p>First I&rsquo;ll set a variable using Golang&rsquo;s implicit assignment operator &ldquo;:=&ldquo;.</p>
-
-<pre><code class="language-go">post := &quot;2&quot;
-</code></pre>
-
-<p>Next, I&rsquo;ll use the new <strong>post</strong> variable in the call below.</p>
-
-<pre><code class="language-go">import (
-    &quot;net/http&quot;
-    &quot;io/ioutil&quot;
-    &quot;fmt&quot;
+<p>First I&rsquo;ll set a variable using Golang&rsquo;s implicit assignment operator &ldquo;:=&rdquo;.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#a6e22e">post</span> <span style="color:#f92672">:=</span> <span style="color:#e6db74">&#34;2&#34;</span>
+</code></pre></div><p>Next, I&rsquo;ll use the new <strong>post</strong> variable in the call below.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">import</span> (
+    <span style="color:#e6db74">&#34;net/http&#34;</span>
+    <span style="color:#e6db74">&#34;io/ioutil&#34;</span>
+    <span style="color:#e6db74">&#34;fmt&#34;</span>
 )
 
-// append the post variable assigned earlier in the notebook
-// try changing post := &quot;2&quot; to post := &quot;1&quot; or overwriting it
-// remember to re-execute the code block after any changes.
-resp, err := http.Get(&quot;https://jsonplaceholder.typicode.com/posts/&quot; + post)
-if err != nil {
-    panic(err)
+<span style="color:#75715e">// append the post variable assigned earlier in the notebook
+</span><span style="color:#75715e">// try changing post := &#34;2&#34; to post := &#34;1&#34; or overwriting it
+</span><span style="color:#75715e">// remember to re-execute the code block after any changes.
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">resp</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">Get</span>(<span style="color:#e6db74">&#34;https://jsonplaceholder.typicode.com/posts/&#34;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">post</span>)
+<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+    panic(<span style="color:#a6e22e">err</span>)
 }
 
-body, err := ioutil.ReadAll(resp.Body)
-if err != nil {
-    panic(err)
+<span style="color:#a6e22e">body</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">ioutil</span>.<span style="color:#a6e22e">ReadAll</span>(<span style="color:#a6e22e">resp</span>.<span style="color:#a6e22e">Body</span>)
+<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+    panic(<span style="color:#a6e22e">err</span>)
 }
 
-fmt.Printf(&quot;Getting Post #%s\n&quot;, post)
-fmt.Printf(&quot;Raw JSON: %s\n&quot;, body)
-</code></pre>
-
-<pre><code>Getting Post #2
+<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;Getting Post #%s\n&#34;</span>, <span style="color:#a6e22e">post</span>)
+<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;Raw JSON: %s\n&#34;</span>, <span style="color:#a6e22e">body</span>)
+</code></pre></div><pre><code>Getting Post #2
 Raw JSON: {
   &quot;userId&quot;: 1,
   &quot;id&quot;: 2,
@@ -292,56 +282,40 @@ Raw JSON: {
 
 289 &lt;nil&gt;
 </code></pre>
-
 <p>If you are reading this article on <a href="https://mk.imti.co">https://mk.imti.co</a> then what you see here was exported from Jupyter Notebooks on my Mac in the Markdown format and saved to Github repository for this site. <a href="https://mk.imti.co">https://mk.imti.co</a> is a static website <a href="https://pages.github.com/">automatically generated by Github</a> using <a href="https://jekyllrb.com/">Jekyll</a>.</p>
-
-<p><img src="/images/content/GolangToJupyter-markdown.png" alt="Notebook Screenshot Markdown" /></p>
-
+<p><img src="/images/content/GolangToJupyter-markdown.png" alt="Notebook Screenshot Markdown"></p>
 <p>Although I could easily save this Notebook as HTML, site builders like <a href="https://jekyllrb.com/">Jekyll</a> and <a href="https://gohugo.io/">Hugo</a> use Markdown to transform the content into the structure and style of my site. Markdown along with a sitebuilder allows me to present the notebook in a format that fits my site. Other options include:</p>
-
 <ul>
 <li><a href="https://raw.githubusercontent.com/cjimti/mk/master/notebooks/GolangToJupyter.ipynb">providing the Notebook for download</a>.</li>
 <li>linking to Jupyter&rsquo;s <a href="https://nbviewer.jupyter.org/github/cjimti/mk/blob/master/notebooks/GolangToJupyter.ipynb">nbviewer</a></li>
 <li>exported Markdown: <a href="https://github.com/cjimti/mk/blob/master/_posts/2018-06-10-golang-to-jupyter.md">2018-06-10-golang-to-jupyter.md</a></li>
 <li>&hellip;and of course <a href="/golang-to-jupyter/">the page you are reading</a>.</li>
 </ul>
-
 <p>You can run, modify or extend <a href="/notebooks/GolangToJupyter.ipynb">this article</a> in a Jupyter Notebook server on your local workstation.</p>
-
 <h2 id="getting-started-with-go-in-jupyter-notebooks">Getting Started with GO in Jupyter Notebooks</h2>
-
 <ol>
 <li>Install the <a href="https://www.anaconda.com/download/#macos">Anaconda</a> package manager.
-
 <ul>
 <li>Download <a href="https://repo.anaconda.com/archive/Anaconda3-5.2.0-MacOSX-x86_64.pkg">Anaconda for Python 3.6 on Mac</a></li>
-</ul></li>
+</ul>
+</li>
 <li>Install the <a href="https://github.com/gopherdata/gophernotes">gophernotes</a> golang kernel.
-
 <ul>
 <li><code>go get github.com/gopherdata/gophernotes</code></li>
 <li><code>mkdir -p ~/Library/Jupyter/kernels/gophernotes</code></li>
 <li><code>~/src/github.com/gopherdata/gophernotes/kernel/* ~/Library/Jupyter/kernels/gophernotes</code></li>
-</ul></li>
+</ul>
+</li>
 </ol>
-
 <p><strong>NOTE:</strong> Your path to Go source may be $GOPATH/src and not ~/src/.</p>
-
 <p>From a directory containing (or will contain) your notebooks, run:</p>
-
-<pre><code class="language-bash">jupyter notebook
-</code></pre>
-
-<p>This will fire up a Jupyter Notebooks server running on port 8888. You should be able to browse to <a href="http://localhost:8888/">http://localhost:8888/</a></p>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">jupyter notebook
+</code></pre></div><p>This will fire up a Jupyter Notebooks server running on port 8888. You should be able to browse to <a href="http://localhost:8888/">http://localhost:8888/</a></p>
 <p>You can test out the <a href="https://github.com/gopherdata/gophernotes">gophernotes</a> Golang kernel by <a href="https://raw.githubusercontent.com/cjimti/mk/master/notebooks/GolangToJupyter.ipynb">downloading and altering this article here.</a></p>
-
 <ul>
 <li><a href="https://raw.githubusercontent.com/cjimti/mk/master/notebooks/GolangToJupyter.ipynb">https://raw.githubusercontent.com/cjimti/mk/master/notebooks/GolangToJupyter.ipynb</a></li>
 </ul>
-
 <h2 id="resources">Resources</h2>
-
 <ul>
 <li>Jupyter Notbooks golang kernel: <a href="https://github.com/gopherdata/gophernotes">gophernotes</a></li>
 <li><a href="http://jupyter.readthedocs.io/en/latest/install.html">Installing</a> Jupyter Notbooks</li>
@@ -350,22 +324,51 @@ Raw JSON: {
 <li><a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet">Markdown-Cheatsheet</a></li>
 </ul>
 
-<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<ins class="adsbygoogle"
-     style="display:block; text-align:center;"
-     data-ad-layout="in-article"
-     data-ad-format="fluid"
-     data-ad-client="ca-pub-5984764595236029"
-     data-ad-slot="7730310582"></ins>
-<script>
-    (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
+<table>
+    <tr><td colspan="2" style="text-align: center"><b>Please support my new book!</b></td></tr>
+    <tr>
+        <td>
+            <a href="https://amzn.to/3hAZUvx">
+                <img src="/img/kubernetes_platform_development.jpg" style="padding:0; margin: 0"/>
+            </a>
+        </td>
+        <td>
+            <b><a href="https://amzn.to/3hAZUvx">Advanced Platform Development with Kubernetes: Enabling Data Management, the Internet of Things, Blockchain, and Machine Learning</a></b>
+            <h4>What You'll Learn</h4>
+            <ul style="padding-bottom: 0; margin: 0">
+                <li>Use data pipelines with <b>MQTT, NiFi, Logstash, Kafka and Elasticsearch</b></li>
+                <li>Install a serverless platform with <b>OpenFaaS</b></li>
+                <li>Explore <b>blockchain</b> network capabilities with <b>Ethereum</b></li>
+                <li>Support a multi-tenant <b>data science</b> platform and web IDE with <b>JupyterHub, MLflow and Seldon Core</b></li>
+                <li>Build a <b>hybrid cluster</b>, securely bridging <b>on-premise</b> and cloud-based Kubernetes nodes</li>
+                <li>Implement an integrated development toolchain for continuous integration and deployment</li>
+            </ul>
+        </td>
+    </tr>
+</table>
 
 
                 <p>
                    <span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">Golang to Jupyter: Golang with Jupyter Notebooks</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="https://imti.co/" property="cc:attributionName" rel="cc:attributionURL">Craig Johnston</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
                     <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a>
                 </p>
+
+                <h5>SUPPORT</h5>
+                <p>
+                    Order my new Kubernetes book: <a href="https://amzn.to/34D56v6">Advanced Platform Development with Kubernetes: Enabling Data Management, the Internet of Things, Blockchain, and Machine Learning</a>
+                </p>
+                <script type="text/javascript">
+                  amzn_assoc_tracking_id = "imti-20";
+                  amzn_assoc_ad_mode = "manual";
+                  amzn_assoc_ad_type = "smart";
+                  amzn_assoc_marketplace = "amazon";
+                  amzn_assoc_region = "US";
+                  amzn_assoc_design = "enhanced_links";
+                  amzn_assoc_asins = "1484256107";
+                  amzn_assoc_placement = "adunit";
+                  amzn_assoc_linkid = "14a9d8b8d1b0bd44e9256e0e0a948015";
+                </script>
+                <script src="//z-na.amazon-adsystem.com/widgets/onejs?MarketPlace=US"></script>
 
                 
                 <hr>

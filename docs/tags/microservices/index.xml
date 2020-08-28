@@ -26,7 +26,7 @@
       <pubDate>Sat, 24 Mar 2018 00:00:00 +0000</pubDate>
       
       <guid>https://imti.co/microservices/</guid>
-      <description>The following is a collection of articles, videos, and notes on Microservices. The Microservices architecture is a variant of the service-oriented architecture, a collection of loosely coupled services.
+      <description>The following is a collection of articles, videos, and notes on Microservices. The Microservices architecture is a variant of the service-oriented architecture (SOA), a collection of loosely coupled services.
 Articles  Background concept - &amp;ldquo;Open Data: Small Pieces Loosely Joined&amp;rdquo;, Tim O’Reilly Modern software design problems and solutions - &amp;ldquo;12-Fractured Apps&amp;rdquo;, Kelsey Hightower (SysAdmin @ Google) 12-Factor Defined - &amp;ldquo;The 12-Factor App&amp;rdquo;, Adam Wiggins Pros and Cons of Microservices - &amp;ldquo;Microservices&amp;rdquo; and Microservice Trade-Offs, Martin Fowler &amp;ldquo;What are containers and why do you need them?</description>
     </item>
     
@@ -37,7 +37,8 @@ Articles  Background concept - &amp;ldquo;Open Data: Small Pieces Loosely Joined
       
       <guid>https://imti.co/kubernetes/</guid>
       <description>Getting started with Kubernetes for local development. I develop on a Mac however much of this is easily translated to windows.
-The following is primarily a getting started guide wrapped around my personal development notes. This set of notes are specifically for my co-workers in helping them get up to speed quickly. If you see an error feel free to make a pull request or just add an issue.</description>
+The following is primarily a getting started guide wrapped around my personal development notes. This set of notes are specifically for my co-workers in helping them get up to speed quickly. If you see an error feel free to make a pull request or just add an issue.
+Contents  Deeper Reading and Resources  Free Courses Paid Courses   Prerequisites Test Installation Get some status  Architecture   Create a Deployment Useful Commands  Deeper Reading and Resources Free Courses  Official Kubernetes Tutorials Udacity: Scalable Microservices with Kubernetes Kubernetes The Hard Way For anyone planning to support a production Kubernetes cluster and wants to understand how everything fits together.</description>
     </item>
     
   </channel>

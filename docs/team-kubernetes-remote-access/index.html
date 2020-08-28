@@ -215,438 +215,317 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h5>SHARE</h5>
-                <ul class="list-inline">
-                    <li><div class="addthis_inline_share_toolbox"></div></li>
-                </ul>
-
-                
-
-<p>RBAC (Role Based Access Control) allows our Kubernetes clusters to provide the development team better visibility and access into the development, staging and production environments than it has have ever had in the past. Developers using the command line tool <strong><a href="https://kubernetes.io/docs/reference/kubectl/kubectl/">kubectl</a></strong>, can explore the network topology of running <a href="/microservices/">microservices</a>, tail live server logs, proxy local ports directly to services or even execute shells into running pods.</p>
-
+                <p>RBAC (Role Based Access Control) allows our Kubernetes clusters to provide the development team better visibility and access into the development, staging and production environments than it has have ever had in the past. Developers using the command line tool <strong><a href="https://kubernetes.io/docs/reference/kubectl/kubectl/">kubectl</a></strong>, can explore the network topology of running <a href="/microservices/">microservices</a>, tail live server logs, proxy local ports directly to services or even execute shells into running pods.</p>
 <p><a href="/gitlabci-golang-microservices/">Kubernetes and GitlabCI</a> are the central components of our DevOps toolchain and have increased our productivity by many multiples over the traditional approaches of the past.</p>
-
 <p>If you don&rsquo;t already have a Kubernetes cluster up and running, then I highly suggest you read my article <a href="/hobby-cluster/">Production Hobby Cluster</a> to get you up and running in a custom, vendor-neutral production capable cluster.</p>
-
 <blockquote>
 <p>TLDR: If you are reading this article because you received a <strong>token</strong> and the URL of a cluster from your Kubernetes administrator, you can skip ahead to the section <a href="#accessing-a-remote-kubernetes-cluster">Accessing a Remote Kubernetes Cluster</a>.</p>
 </blockquote>
-
 <aside class="toc">
     <header>
         <h2>Contents</h2>
     </header>
     <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#our-clusters-overview">Our Clusters (Overview)</a></li>
-<li><a href="#cluster-setup">Cluster Setup</a>
-<ul>
-<li><a href="#example-microservice">Example Microservice</a>
-<ul>
-<li><a href="#namespace">Namespace</a></li>
-<li><a href="#deployment">Deployment</a></li>
-<li><a href="#service">Service</a></li>
-<li><a href="#ingress">Ingress</a></li>
-</ul></li>
-<li><a href="#setup-remote-access">Setup Remote Access</a>
-<ul>
-<li><a href="#serviceaccount">ServiceAccount</a></li>
-<li><a href="#role-and-rolebinding">Role and RoleBinding</a></li>
-</ul></li>
-</ul></li>
-<li><a href="#accessing-a-remote-kubernetes-cluster">Accessing a Remote Kubernetes Cluster</a>
-<ul>
-<li><a href="#add-a-cluster-to-kubectl">Add a Cluster to <code>kubectl</code></a></li>
-<li><a href="#add-user-credentials-to-kubectl">Add User (credentials) to <code>kubectl</code></a></li>
-<li><a href="#add-a-context-to-kubectl">Add a Context to <code>kubectl</code></a></li>
-</ul></li>
-<li><a href="#port-forwarding-local-development">Port Forwarding / Local Development</a></li>
-<li><a href="#resources">Resources</a></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#our-clusters-overview">Our Clusters (Overview)</a></li>
+    <li><a href="#cluster-setup">Cluster Setup</a>
+      <ul>
+        <li><a href="#example-microservice">Example Microservice</a></li>
+        <li><a href="#setup-remote-access">Setup Remote Access</a></li>
+      </ul>
+    </li>
+    <li><a href="#accessing-a-remote-kubernetes-cluster">Accessing a Remote Kubernetes Cluster</a>
+      <ul>
+        <li><a href="#add-a-cluster-to-kubectl">Add a Cluster to <code>kubectl</code></a></li>
+        <li><a href="#add-user-credentials-to-kubectl">Add User (credentials) to <code>kubectl</code></a></li>
+        <li><a href="#add-a-context-to-kubectl">Add a Context to <code>kubectl</code></a></li>
+      </ul>
+    </li>
+    <li><a href="#port-forwarding--local-development">Port Forwarding / Local Development</a></li>
+    <li><a href="#resources">Resources</a></li>
+  </ul>
 </nav>
 </aside>
 
-<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<ins class="adsbygoogle"
-     style="display:block; text-align:center;"
-     data-ad-layout="in-article"
-     data-ad-format="fluid"
-     data-ad-client="ca-pub-5984764595236029"
-     data-ad-slot="7730310582"></ins>
-<script>
-    (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-
+<table>
+    <tr><td colspan="2" style="text-align: center"><b>Please support my new book!</b></td></tr>
+    <tr>
+        <td>
+            <a href="https://amzn.to/3hAZUvx">
+                <img src="/img/kubernetes_platform_development.jpg" style="padding:0; margin: 0"/>
+            </a>
+        </td>
+        <td>
+            <b><a href="https://amzn.to/3hAZUvx">Advanced Platform Development with Kubernetes: Enabling Data Management, the Internet of Things, Blockchain, and Machine Learning</a></b>
+            <h4>What You'll Learn</h4>
+            <ul style="padding-bottom: 0; margin: 0">
+                <li>Use data pipelines with <b>MQTT, NiFi, Logstash, Kafka and Elasticsearch</b></li>
+                <li>Install a serverless platform with <b>OpenFaaS</b></li>
+                <li>Explore <b>blockchain</b> network capabilities with <b>Ethereum</b></li>
+                <li>Support a multi-tenant <b>data science</b> platform and web IDE with <b>JupyterHub, MLflow and Seldon Core</b></li>
+                <li>Build a <b>hybrid cluster</b>, securely bridging <b>on-premise</b> and cloud-based Kubernetes nodes</li>
+                <li>Implement an integrated development toolchain for continuous integration and deployment</li>
+            </ul>
+        </td>
+    </tr>
+</table>
 <h2 id="our-clusters-overview">Our Clusters (Overview)</h2>
-
 <p>Development and staging environments share a cluster across many clients and projects. On the production front, more extensive projects and clients get a dedicated cluster, and smaller projects might share a cluster.</p>
-
 <p>We use Kubernetes <a href="https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/">namespaces</a> to separate clients. All of our security revolves around <a href="https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/">namespaces</a>, and when <a href="https://kubernetes.io/docs/reference/access-authn-authz/rbac/">RBAC</a> is set up correctly, a context in which access granted to a developer can only operate and view within the assigned namespace.</p>
-
 <p>We grant developers read-level access to one common developer account per <a href="https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/">namespace</a> on the development cluster. We tighten access to some resources on production.</p>
-
 <p>We create a separate deployment account for our continuous integration/deployment solution, see my article, <a href="/gitlabci-golang-microservices/">A Microservices Workflow with Golang and Gitlab CI</a> to get a high-level view of our toolchain and how it integrates cleanly with Kubernetes <a href="https://kubernetes.io/docs/reference/access-authn-authz/rbac/">RBAC</a> security model.</p>
-
 <h2 id="cluster-setup">Cluster Setup</h2>
-
 <p>These cluster setup steps assume you are a cluster administrator if you are only looking to set up <a href="https://kubernetes.io/docs/reference/kubectl/kubectl/">kubectl</a> access on your local workstation to an existing cluster skip ahead to the section: <a href="#accessing-a-remote-kubernetes-cluster">Accessing a Remote Kubernetes Cluster</a>, otherwise I suggestion that you set up a <a href="/hobby-cluster/">Production Hobby Cluster</a> to help you follow along.</p>
-
 <h3 id="example-microservice">Example Microservice</h3>
-
 <p>You can skip the following steps and head directly to <a href="#setup-remote-access">Setup Remote Access</a> if you already have a <a href="https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/">namespace</a> with projects you plan to provide remote access <a href="https://kubernetes.io/docs/reference/kubectl/kubectl/">kubectl</a>.</p>
-
 <p>To demonstrate team access control we need some pods running in the namespace <code>the-project</code>. The example below uses a pre-built Docker container designed specifically for testing called <a href="https://github.com/txn2/ok">txn2/ok</a>. If you are curious about how to automate subsequent deployments using the free and open source <a href="https://about.gitlab.com/features/gitlab-ci-cd/">GitlabCI</a>, check out <a href="/gitlabci-golang-microservices/">A Microservices Workflow with Golang and Gitlab CI</a>.</p>
-
 <p>We don&rsquo;t automate the initial configuration, and so the following steps are part of the setup stage of any new project. It is easy to automate this process with the Kubernetes package manager <a href="https://helm.sh/">Helm</a>, but that would be overkill for most of our projects and abstract away some welcome verbosity. <a href="https://helm.sh/">Helm</a> is a great tool but better-used adjacent to our initial development process. In fact, we use <a href="https://helm.sh/">Helm</a> to create charts from our initial development configurations, but that is outside the scope of this article.</p>
-
 <h4 id="namespace">Namespace</h4>
-
 <p>I use the term <code>the-project</code> as a fictional <a href="https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/">namespace</a> for the examples going forward. If you want to follow along, use the following configuration to create the example <a href="https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/">namespace</a>.</p>
-
 <p><code>00-namespace.yml</code>:</p>
-
-<pre><code class="language-yaml">apiVersion: v1
-kind: Namespace
-metadata:
-  name: the-project
-  labels:
-    client: mk.imti.co
-    env: dev
-</code></pre>
-
-<p>The filename is not important. I use a numeric value to represent a suggested order in which to apply the configuration, followed by the <code>kind</code> of the kubernetes object to create. However, this is not a rigid rule across all projects and only the [namespace[</p>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">apiVersion</span>: v1
+<span style="color:#66d9ef">kind</span>: Namespace
+<span style="color:#66d9ef">metadata</span>:
+  <span style="color:#66d9ef">name</span>: the-project
+  <span style="color:#66d9ef">labels</span>:
+    <span style="color:#66d9ef">client</span>: mk.imti.co
+    <span style="color:#66d9ef">env</span>: dev
+</code></pre></div><p>The filename is not important. I use a numeric value to represent a suggested order in which to apply the configuration, followed by the <code>kind</code> of the kubernetes object to create. However, this is not a rigid rule across all projects and only the [namespace[</p>
 <p>The <code>labels</code> section is optional and only used to give additional sections capabilities to command-line and automated tools.</p>
-
 <p>Create the <a href="https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/">namespace</a> kubernetes object:</p>
-
-<pre><code class="language-bash">kubectl create -f 00-namespace.yml
-</code></pre>
-
-<h4 id="deployment">Deployment</h4>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl create -f 00-namespace.yml
+</code></pre></div><h4 id="deployment">Deployment</h4>
 <p>After adding the <code>the-project</code> <a href="https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/">namespace</a> above, create a Kubernetes <a href="https://kubernetes.io/docs/concepts/workloads/controllers/deployment/">Deployment</a> in <code>the-project</code> to manage <a href="https://kubernetes.io/docs/concepts/workloads/pods/pod/">pods</a> running <a href="https://github.com/txn2/ok">txn2/ok</a> Docker containers.</p>
-
 <p><code>10-deployment-ok.yml</code>:</p>
-
-<pre><code class="language-yaml">apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: ok
-  namespace: the-project
-  labels:
-    app: ok
-    client: mk.imti.co
-    env: dev
-spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: ok
-  template:
-    metadata:
-      namespace: the-project
-      labels:
-        app: ok
-        client: mk.imti.co
-        env: dev
-    spec:
-      containers:
-        - name: ok
-          image: txn2/ok
-          imagePullPolicy: Always
-          env:
-            - name: NODE_NAME
-              valueFrom:
-                fieldRef:
-                  fieldPath: spec.nodeName
-            - name: POD_NAME
-              valueFrom:
-                fieldRef:
-                  fieldPath: metadata.name
-            - name: POD_NAMESPACE
-              valueFrom:
-                fieldRef:
-                  fieldPath: metadata.namespace
-            - name: POD_IP
-              valueFrom:
-                fieldRef:
-                  fieldPath: status.podIP
-            - name: SERVICE_ACCOUNT
-              valueFrom:
-                fieldRef:
-                  fieldPath: spec.serviceAccountName
-          ports:
-            - name: ok-port
-              containerPort: 8080
-</code></pre>
-
-<p>Create the Kubernetes <a href="https://kubernetes.io/docs/concepts/workloads/controllers/deployment/">Deployment</a> object:</p>
-
-<pre><code class="language-bash">kubectl create -f 10-deployment-ok.yml
-</code></pre>
-
-<h4 id="service">Service</h4>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">apiVersion</span>: apps/v1
+<span style="color:#66d9ef">kind</span>: Deployment
+<span style="color:#66d9ef">metadata</span>:
+  <span style="color:#66d9ef">name</span>: ok
+  <span style="color:#66d9ef">namespace</span>: the-project
+  <span style="color:#66d9ef">labels</span>:
+    <span style="color:#66d9ef">app</span>: ok
+    <span style="color:#66d9ef">client</span>: mk.imti.co
+    <span style="color:#66d9ef">env</span>: dev
+<span style="color:#66d9ef">spec</span>:
+  <span style="color:#66d9ef">replicas</span>: <span style="color:#ae81ff">1</span>
+  <span style="color:#66d9ef">selector</span>:
+    <span style="color:#66d9ef">matchLabels</span>:
+      <span style="color:#66d9ef">app</span>: ok
+  <span style="color:#66d9ef">template</span>:
+    <span style="color:#66d9ef">metadata</span>:
+      <span style="color:#66d9ef">namespace</span>: the-project
+      <span style="color:#66d9ef">labels</span>:
+        <span style="color:#66d9ef">app</span>: ok
+        <span style="color:#66d9ef">client</span>: mk.imti.co
+        <span style="color:#66d9ef">env</span>: dev
+    <span style="color:#66d9ef">spec</span>:
+      <span style="color:#66d9ef">containers</span>:
+        - <span style="color:#66d9ef">name</span>: ok
+          <span style="color:#66d9ef">image</span>: txn2/ok
+          <span style="color:#66d9ef">imagePullPolicy</span>: Always
+          <span style="color:#66d9ef">env</span>:
+            - <span style="color:#66d9ef">name</span>: NODE_NAME
+              <span style="color:#66d9ef">valueFrom</span>:
+                <span style="color:#66d9ef">fieldRef</span>:
+                  <span style="color:#66d9ef">fieldPath</span>: spec.nodeName
+            - <span style="color:#66d9ef">name</span>: POD_NAME
+              <span style="color:#66d9ef">valueFrom</span>:
+                <span style="color:#66d9ef">fieldRef</span>:
+                  <span style="color:#66d9ef">fieldPath</span>: metadata.name
+            - <span style="color:#66d9ef">name</span>: POD_NAMESPACE
+              <span style="color:#66d9ef">valueFrom</span>:
+                <span style="color:#66d9ef">fieldRef</span>:
+                  <span style="color:#66d9ef">fieldPath</span>: metadata.namespace
+            - <span style="color:#66d9ef">name</span>: POD_IP
+              <span style="color:#66d9ef">valueFrom</span>:
+                <span style="color:#66d9ef">fieldRef</span>:
+                  <span style="color:#66d9ef">fieldPath</span>: status.podIP
+            - <span style="color:#66d9ef">name</span>: SERVICE_ACCOUNT
+              <span style="color:#66d9ef">valueFrom</span>:
+                <span style="color:#66d9ef">fieldRef</span>:
+                  <span style="color:#66d9ef">fieldPath</span>: spec.serviceAccountName
+          <span style="color:#66d9ef">ports</span>:
+            - <span style="color:#66d9ef">name</span>: ok-port
+              <span style="color:#66d9ef">containerPort</span>: <span style="color:#ae81ff">8080</span>
+</code></pre></div><p>Create the Kubernetes <a href="https://kubernetes.io/docs/concepts/workloads/controllers/deployment/">Deployment</a> object:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl create -f 10-deployment-ok.yml
+</code></pre></div><h4 id="service">Service</h4>
 <p>Kubernetes <a href="https://kubernetes.io/docs/concepts/workloads/controllers/deployment/">Deployment</a>s manage <a href="https://kubernetes.io/docs/concepts/workloads/pods/pod/">Pods</a>. Consider <a href="https://kubernetes.io/docs/concepts/workloads/pods/pod/">Pods</a> ephemeral, being moved from one node to another, destroyed or re-created at any time. <a href="https://kubernetes.io/docs/concepts/services-networking/service/">Service</a>s are persistent and give us a point to attach our network <a href="https://kubernetes.io/docs/concepts/services-networking/ingress/">ingress</a>. If you don&rsquo;t already have ingress setup, you might want to read my article <a href="/web-cluster-ingress/">Ingress on Custom Kubernetes</a> to get started. <a href="https://kubernetes.io/docs/concepts/services-networking/ingress/">Ingress</a> needs a <a href="https://kubernetes.io/docs/concepts/services-networking/service/">service</a> to attach to; however you don&rsquo;t need ingress to set up a service.</p>
-
 <p><code>50-service-ok.yml</code>:</p>
-
-<pre><code class="language-yaml">apiVersion: v1
-kind: Service
-metadata:
-  name: ok
-  namespace: the-project
-  labels:
-    app: ok
-    client: mk.imti.co
-    env: dev
-spec:
-  selector:
-    app: ok
-  ports:
-    - protocol: &quot;TCP&quot;
-      port: 8080
-      targetPort: 8080
-  type: ClusterIP
-</code></pre>
-
-<p>Create the Kubernetes <a href="https://kubernetes.io/docs/concepts/services-networking/service/">Service</a> object:</p>
-
-<pre><code class="language-bash">kubectl create -f 50-service-ok.yml
-</code></pre>
-
-<h4 id="ingress">Ingress</h4>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">apiVersion</span>: v1
+<span style="color:#66d9ef">kind</span>: Service
+<span style="color:#66d9ef">metadata</span>:
+  <span style="color:#66d9ef">name</span>: ok
+  <span style="color:#66d9ef">namespace</span>: the-project
+  <span style="color:#66d9ef">labels</span>:
+    <span style="color:#66d9ef">app</span>: ok
+    <span style="color:#66d9ef">client</span>: mk.imti.co
+    <span style="color:#66d9ef">env</span>: dev
+<span style="color:#66d9ef">spec</span>:
+  <span style="color:#66d9ef">selector</span>:
+    <span style="color:#66d9ef">app</span>: ok
+  <span style="color:#66d9ef">ports</span>:
+    - <span style="color:#66d9ef">protocol</span>: <span style="color:#e6db74">&#34;TCP&#34;</span>
+      <span style="color:#66d9ef">port</span>: <span style="color:#ae81ff">8080</span>
+      <span style="color:#66d9ef">targetPort</span>: <span style="color:#ae81ff">8080</span>
+  <span style="color:#66d9ef">type</span>: ClusterIP
+</code></pre></div><p>Create the Kubernetes <a href="https://kubernetes.io/docs/concepts/services-networking/service/">Service</a> object:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl create -f 50-service-ok.yml
+</code></pre></div><h4 id="ingress">Ingress</h4>
 <p>Setting up <a href="https://kubernetes.io/docs/concepts/services-networking/ingress/">ingress</a> for the <a href="https://github.com/txn2/ok">txn2/ok</a> service for the sake of completeness. We will configure <a href="https://kubernetes.io/docs/concepts/services-networking/ingress/">ingress</a> to send HTTP requests for the domain <a href="http://ok.d4ldev.txn2.com/">ok.d4ldev.txn2.com</a> to the <a href="https://github.com/txn2/ok">txn2/ok</a> service running in <code>the-project</code> <a href="https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/">namespace</a>.</p>
-
 <p><code>80-ingress-ok.yml</code>:</p>
-
-<pre><code class="language-yaml">apiVersion: extensions/v1beta1
-kind: Ingress
-metadata:
-  name: ok
-  namespace: the-project
-  labels:
-    app: ok
-    client: mk.imti.co
-    env: dev
-spec:
-  rules:
-  - host: ok.d4ldev.txn2.com
-    http:
-      paths:
-      - backend:
-          serviceName: ok
-          servicePort: 8080
-        path: /
-</code></pre>
-
-<p>Create the <a href="https://kubernetes.io/docs/concepts/services-networking/ingress/">ingress</a>:</p>
-
-<pre><code class="language-bash">kubectl create -f 80-ingress-ok.yml
-</code></pre>
-
-<p>Adding TLS support is easy but out the scope of this article. If you are interested in setting up free, automated TLS certificate using <a href="https://letsencrypt.org/">Let&rsquo;s Encrypt</a> on Kubernetes, check out my article: <a href="/lets-encrypt-kubernetes/">Let&rsquo;s Encrypt, Kubernetes</a>. Setting up <a href="/lets-encrypt-kubernetes/">Let&rsquo;s Encrypt, Kubernetes</a> should only have to be done once and take only about twenty minutes.</p>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">apiVersion</span>: extensions/v1beta1
+<span style="color:#66d9ef">kind</span>: Ingress
+<span style="color:#66d9ef">metadata</span>:
+  <span style="color:#66d9ef">name</span>: ok
+  <span style="color:#66d9ef">namespace</span>: the-project
+  <span style="color:#66d9ef">labels</span>:
+    <span style="color:#66d9ef">app</span>: ok
+    <span style="color:#66d9ef">client</span>: mk.imti.co
+    <span style="color:#66d9ef">env</span>: dev
+<span style="color:#66d9ef">spec</span>:
+  <span style="color:#66d9ef">rules</span>:
+  - <span style="color:#66d9ef">host</span>: ok.d4ldev.txn2.com
+    <span style="color:#66d9ef">http</span>:
+      <span style="color:#66d9ef">paths</span>:
+      - <span style="color:#66d9ef">backend</span>:
+          <span style="color:#66d9ef">serviceName</span>: ok
+          <span style="color:#66d9ef">servicePort</span>: <span style="color:#ae81ff">8080</span>
+        <span style="color:#66d9ef">path</span>: /
+</code></pre></div><p>Create the <a href="https://kubernetes.io/docs/concepts/services-networking/ingress/">ingress</a>:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl create -f 80-ingress-ok.yml
+</code></pre></div><p>Adding TLS support is easy but out the scope of this article. If you are interested in setting up free, automated TLS certificate using <a href="https://letsencrypt.org/">Let&rsquo;s Encrypt</a> on Kubernetes, check out my article: <a href="/lets-encrypt-kubernetes/">Let&rsquo;s Encrypt, Kubernetes</a>. Setting up <a href="/lets-encrypt-kubernetes/">Let&rsquo;s Encrypt, Kubernetes</a> should only have to be done once and take only about twenty minutes.</p>
 <p>We now have a fully functional test API service answering at <a href="http://ok.d4ldev.txn2.com/">http://ok.d4ldev.txn2.com/</a>. In the next few steps, we create Kubernetes <a href="https://kubernetes.io/docs/reference/access-authn-authz/rbac/">RBAC</a> tokens for deployment and ready-only developer access.</p>
-
 <h3 id="setup-remote-access">Setup Remote Access</h3>
-
 <p>If you skipped setting up the <a href="#example-microservice">Example Microservice</a> this example limits access to the namespace <code>the-project</code> exclusively, you could do the same with the <code>default</code> <a href="https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/">namespace</a> by simply not providing a <code>namespace</code> key in the configuration or setting it to <code>default</code>.</p>
-
 <h4 id="serviceaccount">ServiceAccount</h4>
-
 <p>Namespaces are the principal delimiter for our security model. We create deployer and developer <a href="https://kubernetes.io/docs/reference/access-authn-authz/service-accounts-admin/">ServiceAccount</a> for each <a href="https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/">namespace</a>, along with <a href="https://kubernetes.io/docs/reference/access-authn-authz/rbac/#default-roles-and-role-bindings">Role</a> and <a href="https://kubernetes.io/docs/reference/access-authn-authz/rbac/#default-roles-and-role-bindings">RoleBinding</a> objects used by them. <strong>Deployer</strong> has write access and used for a <a href="https://kubernetes.io/docs/reference/kubectl/kubectl/">kubectl</a> executed from a Docker container operating GitlabCI <a href="https://docs.gitlab.com/runner/">runner</a>. <strong>Developer</strong> has read access to the namespace.</p>
-
 <p>Use <a href="https://kubernetes.io/docs/reference/kubectl/kubectl/">kubectl</a> to create a <a href="https://kubernetes.io/docs/reference/access-authn-authz/service-accounts-admin/">ServiceAccount</a>; this will not only configure the ServiceAccount object but also generate the Kubernetes <a href="https://kubernetes.io/docs/concepts/configuration/secret/">Secret</a> containing a <strong>token</strong> used to setup <a href="https://kubernetes.io/docs/reference/kubectl/kubectl/">kubectl</a> with remote access.</p>
-
-<pre><code class="language-bash"># create the deployer ServiceAccount
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># create the deployer ServiceAccount</span>
 kubectl create serviceaccount sa-deployer -n the-project
 
-# create the developer ServiceAccount
+<span style="color:#75715e"># create the developer ServiceAccount</span>
 kubectl create serviceaccount sa-developer -n the-project
-</code></pre>
-
-<p>You should see three service accounts, default, sa-deployer and sa-developer. Kubernetes automatically created the default ServiceAccount when we created the namespace.</p>
-
-<pre><code class="language-bash">kubectl get serviceaccounts -n the-project
+</code></pre></div><p>You should see three service accounts, default, sa-deployer and sa-developer. Kubernetes automatically created the default ServiceAccount when we created the namespace.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl get serviceaccounts -n the-project
 
 NAME           SECRETS   AGE
-default        1         30m
-sa-deployer    1         3m
-sa-developer   1         2m
-</code></pre>
-
-<p>You now have three secrets, assuming this is the new <code>the-project</code> namespace.</p>
-
-<pre><code class="language-bash">kubectl get secrets -n the-project
+default        <span style="color:#ae81ff">1</span>         30m
+sa-deployer    <span style="color:#ae81ff">1</span>         3m
+sa-developer   <span style="color:#ae81ff">1</span>         2m
+</code></pre></div><p>You now have three secrets, assuming this is the new <code>the-project</code> namespace.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl get secrets -n the-project
 
 NAME                       TYPE                                  DATA      AGE
-default-token-8t2z6        kubernetes.io/service-account-token   3         30m
-sa-deployer-token-qxfsq    kubernetes.io/service-account-token   3         3m
-sa-developer-token-pg7m7   kubernetes.io/service-account-token   3         3m
-</code></pre>
-
-<p>You need the tokens generated for <code>sa-deployer-token-qxfsq</code> and <code>sa-developer-token-pg7m7</code>, of course, your secrets end in different random characters.</p>
-
-<pre><code class="language-bash">kubectl describe secret sa-deployer-token-qxfsq -n the-project
+default-token-8t2z6        kubernetes.io/service-account-token   <span style="color:#ae81ff">3</span>         30m
+sa-deployer-token-qxfsq    kubernetes.io/service-account-token   <span style="color:#ae81ff">3</span>         3m
+sa-developer-token-pg7m7   kubernetes.io/service-account-token   <span style="color:#ae81ff">3</span>         3m
+</code></pre></div><p>You need the tokens generated for <code>sa-deployer-token-qxfsq</code> and <code>sa-developer-token-pg7m7</code>, of course, your secrets end in different random characters.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl describe secret sa-deployer-token-qxfsq -n the-project
 Name:         sa-deployer-token-qxfsq
 Namespace:    the-project
 Labels:       &lt;none&gt;
-Annotations:  kubernetes.io/service-account.name=sa-deployer
-              kubernetes.io/service-account.uid=c2bb12cc-84b5-11e8-9c96-00163ec25389
+Annotations:  kubernetes.io/service-account.name<span style="color:#f92672">=</span>sa-deployer
+              kubernetes.io/service-account.uid<span style="color:#f92672">=</span>c2bb12cc-84b5-11e8-9c96-00163ec25389
 
 Type:  kubernetes.io/service-account-token
 
 Data
-====
-ca.crt:     1025 bytes
-namespace:  11 bytes
+<span style="color:#f92672">====</span>
+ca.crt:     <span style="color:#ae81ff">1025</span> bytes
+namespace:  <span style="color:#ae81ff">11</span> bytes
 token:      eyYhbfEf7XaMa...REDACTED...
-</code></pre>
-
-<p>In the result above I truncated the token for security and brevity, the unedited token is much longer. Copy this token someplace safe as it is needed later; however you can always fetch it again with <code>kubectl describe secret</code>. Retrieve the tokens from sa-deployer-token-&hellip; and sa-developer-token-&hellip;</p>
-
+</code></pre></div><p>In the result above I truncated the token for security and brevity, the unedited token is much longer. Copy this token someplace safe as it is needed later; however you can always fetch it again with <code>kubectl describe secret</code>. Retrieve the tokens from sa-deployer-token-&hellip; and sa-developer-token-&hellip;</p>
 <h4 id="role-and-rolebinding">Role and RoleBinding</h4>
-
 <p>Next, we create four Kubernetes objects at one time, two <a href="https://kubernetes.io/docs/reference/access-authn-authz/rbac/#default-roles-and-role-bindings">Role</a>s and two <a href="https://kubernetes.io/docs/reference/access-authn-authz/rbac/#default-roles-and-role-bindings">RoleBinding</a>s. One Role and RoleBinding set for <strong>deployer</strong> and one set for <strong>developer</strong>.</p>
-
 <p><code>90-RBAC.yml</code>:</p>
-
-<pre><code class="language-yaml">apiVersion: rbac.authorization.k8s.io/v1beta1
-kind: Role
-metadata:
-  namespace: the-project
-  name: deployer
-rules:
-- apiGroups: [&quot;apps&quot;,&quot;extensions&quot;]
-  resources: [&quot;deployments&quot;,&quot;configmaps&quot;,&quot;pods&quot;,&quot;secrets&quot;,&quot;ingresses&quot;]
-  verbs: [&quot;create&quot;,&quot;get&quot;,&quot;delete&quot;,&quot;list&quot;,&quot;update&quot;,&quot;edit&quot;,&quot;watch&quot;,&quot;exec&quot;,&quot;patch&quot;]
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">apiVersion</span>: rbac.authorization.k8s.io/v1beta1
+<span style="color:#66d9ef">kind</span>: Role
+<span style="color:#66d9ef">metadata</span>:
+  <span style="color:#66d9ef">namespace</span>: the-project
+  <span style="color:#66d9ef">name</span>: deployer
+<span style="color:#66d9ef">rules</span>:
+- <span style="color:#66d9ef">apiGroups</span>: [<span style="color:#e6db74">&#34;apps&#34;</span>,<span style="color:#e6db74">&#34;extensions&#34;</span>]
+  <span style="color:#66d9ef">resources</span>: [<span style="color:#e6db74">&#34;deployments&#34;</span>,<span style="color:#e6db74">&#34;configmaps&#34;</span>,<span style="color:#e6db74">&#34;pods&#34;</span>,<span style="color:#e6db74">&#34;secrets&#34;</span>,<span style="color:#e6db74">&#34;ingresses&#34;</span>]
+  <span style="color:#66d9ef">verbs</span>: [<span style="color:#e6db74">&#34;create&#34;</span>,<span style="color:#e6db74">&#34;get&#34;</span>,<span style="color:#e6db74">&#34;delete&#34;</span>,<span style="color:#e6db74">&#34;list&#34;</span>,<span style="color:#e6db74">&#34;update&#34;</span>,<span style="color:#e6db74">&#34;edit&#34;</span>,<span style="color:#e6db74">&#34;watch&#34;</span>,<span style="color:#e6db74">&#34;exec&#34;</span>,<span style="color:#e6db74">&#34;patch&#34;</span>]
 ---
-apiVersion: rbac.authorization.k8s.io/v1beta1
-kind: Role
-metadata:
-  namespace: the-project
-  name: developer
-rules:
-- apiGroups: [&quot;*&quot;]
-  resources: [&quot;*&quot;]
-  verbs: [&quot;get&quot;,&quot;describe&quot;,&quot;list&quot;,&quot;watch&quot;,&quot;exec&quot;]
+<span style="color:#66d9ef">apiVersion</span>: rbac.authorization.k8s.io/v1beta1
+<span style="color:#66d9ef">kind</span>: Role
+<span style="color:#66d9ef">metadata</span>:
+  <span style="color:#66d9ef">namespace</span>: the-project
+  <span style="color:#66d9ef">name</span>: developer
+<span style="color:#66d9ef">rules</span>:
+- <span style="color:#66d9ef">apiGroups</span>: [<span style="color:#e6db74">&#34;*&#34;</span>]
+  <span style="color:#66d9ef">resources</span>: [<span style="color:#e6db74">&#34;*&#34;</span>]
+  <span style="color:#66d9ef">verbs</span>: [<span style="color:#e6db74">&#34;get&#34;</span>,<span style="color:#e6db74">&#34;describe&#34;</span>,<span style="color:#e6db74">&#34;list&#34;</span>,<span style="color:#e6db74">&#34;watch&#34;</span>,<span style="color:#e6db74">&#34;exec&#34;</span>]
 ---
-apiVersion: rbac.authorization.k8s.io/v1
-kind: RoleBinding
-metadata:
-  name: deployer
-  namespace: the-project
-roleRef:
-  kind: Role
-  name: deployer
-  apiGroup: rbac.authorization.k8s.io
-subjects:
-- kind: ServiceAccount
-  namespace: the-project
-  name: sa-deployer
+<span style="color:#66d9ef">apiVersion</span>: rbac.authorization.k8s.io/v1
+<span style="color:#66d9ef">kind</span>: RoleBinding
+<span style="color:#66d9ef">metadata</span>:
+  <span style="color:#66d9ef">name</span>: deployer
+  <span style="color:#66d9ef">namespace</span>: the-project
+<span style="color:#66d9ef">roleRef</span>:
+  <span style="color:#66d9ef">kind</span>: Role
+  <span style="color:#66d9ef">name</span>: deployer
+  <span style="color:#66d9ef">apiGroup</span>: rbac.authorization.k8s.io
+<span style="color:#66d9ef">subjects</span>:
+- <span style="color:#66d9ef">kind</span>: ServiceAccount
+  <span style="color:#66d9ef">namespace</span>: the-project
+  <span style="color:#66d9ef">name</span>: sa-deployer
 ---
-apiVersion: rbac.authorization.k8s.io/v1
-kind: RoleBinding
-metadata:
-  name: developer
-  namespace: the-project
-roleRef:
-  kind: Role
-  name: developer
-  apiGroup: rbac.authorization.k8s.io
-subjects:
-- kind: ServiceAccount
-  namespace: the-project
-  name: sa-developer
+<span style="color:#66d9ef">apiVersion</span>: rbac.authorization.k8s.io/v1
+<span style="color:#66d9ef">kind</span>: RoleBinding
+<span style="color:#66d9ef">metadata</span>:
+  <span style="color:#66d9ef">name</span>: developer
+  <span style="color:#66d9ef">namespace</span>: the-project
+<span style="color:#66d9ef">roleRef</span>:
+  <span style="color:#66d9ef">kind</span>: Role
+  <span style="color:#66d9ef">name</span>: developer
+  <span style="color:#66d9ef">apiGroup</span>: rbac.authorization.k8s.io
+<span style="color:#66d9ef">subjects</span>:
+- <span style="color:#66d9ef">kind</span>: ServiceAccount
+  <span style="color:#66d9ef">namespace</span>: the-project
+  <span style="color:#66d9ef">name</span>: sa-developer
 
-</code></pre>
-
-<p>If you want to give your team even more access, you can enable the ability to port-forward a service or pod directly to their local workstation. Add the following to the end of the <strong>developer</strong> role.</p>
-
-<pre><code class="language-yaml">- apiGroups:
-  - '*'
-  resources:
-  - 'pods/exec'
-  - 'pods/portforward'
-  - 'services/portforward'
-  verbs:
+</code></pre></div><p>If you want to give your team even more access, you can enable the ability to port-forward a service or pod directly to their local workstation. Add the following to the end of the <strong>developer</strong> role.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">- <span style="color:#66d9ef">apiGroups</span>:
+  - <span style="color:#e6db74">&#39;*&#39;</span>
+  <span style="color:#66d9ef">resources</span>:
+  - <span style="color:#e6db74">&#39;pods/exec&#39;</span>
+  - <span style="color:#e6db74">&#39;pods/portforward&#39;</span>
+  - <span style="color:#e6db74">&#39;services/portforward&#39;</span>
+  <span style="color:#66d9ef">verbs</span>:
   - create
-</code></pre>
-
-<p>Example <code>kubectl port-forward</code> to an <code>elasticsearch</code> service running in <code>the-project</code> namespace:</p>
-
-<pre><code class="language-bash">kubectl port-forward svc/elasticsearch 9200:9200 -n the-project
-</code></pre>
-
-<p>Create the new <a href="https://kubernetes.io/docs/reference/access-authn-authz/rbac/#default-roles-and-role-bindings">Role</a>s and the RoleBindings that connect them to the ServiceAccounts <a href="#serviceaccount">created with kubectl a bit earlier</a>.</p>
-
+</code></pre></div><p>Example <code>kubectl port-forward</code> to an <code>elasticsearch</code> service running in <code>the-project</code> namespace:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl port-forward svc/elasticsearch 9200:9200 -n the-project
+</code></pre></div><p>Create the new <a href="https://kubernetes.io/docs/reference/access-authn-authz/rbac/#default-roles-and-role-bindings">Role</a>s and the RoleBindings that connect them to the ServiceAccounts <a href="#serviceaccount">created with kubectl a bit earlier</a>.</p>
 <p>Create the <a href="https://kubernetes.io/docs/reference/access-authn-authz/rbac/#default-roles-and-role-bindings">Role</a>s and RoleBindings:</p>
-
-<pre><code class="language-bash">kubectl create -f 90-RBAC.yml
-</code></pre>
-
-<h2 id="accessing-a-remote-kubernetes-cluster">Accessing a Remote Kubernetes Cluster</h2>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl create -f 90-RBAC.yml
+</code></pre></div><h2 id="accessing-a-remote-kubernetes-cluster">Accessing a Remote Kubernetes Cluster</h2>
 <p><code>kubectl</code> is a command-line tool for interacting with Kubernetes. If you work on MacOs and use <a href="https://brew.sh/">homebrew</a>, issue the following command:</p>
-
-<pre><code class="language-bash">brew install kubernetes-cli
-</code></pre>
-
-<p>Once installed you have the command <code>kubectl</code>. If you are on another platform, you need to follow the official documentation, <a href="https://kubernetes.io/docs/tasks/tools/install-kubectl/">Install and Set Up kubectl</a>.</p>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">brew install kubernetes-cli
+</code></pre></div><p>Once installed you have the command <code>kubectl</code>. If you are on another platform, you need to follow the official documentation, <a href="https://kubernetes.io/docs/tasks/tools/install-kubectl/">Install and Set Up kubectl</a>.</p>
 <p>Configuring remote access requires a <strong>token</strong>. If you followed along with the <a href="#example-microservice">Example Microservice</a> or <a href="#setup-remote-access">Setup Remote Access</a> for an existing Kubernetes <a href="https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/">namespace</a> you find the <strong>token</strong> by running <code>kubectl describe</code> on the <a href="https://kubernetes.io/docs/concepts/configuration/secret/">Secret</a> associated an appropriate ServiceAccount.</p>
-
 <p>You also need the IP address of a server running Kubernetes, and the ability to communicate to that IP. Some networks require remote users to first connect to a VPN.</p>
-
 <p>Next, you create a <strong>context</strong>. A <code>kubectl</code> <strong>context</strong> is an association between a user and a cluster. Start with setting up the user and cluster in the steps below.</p>
-
 <h3 id="add-a-cluster-to-kubectl">Add a Cluster to <code>kubectl</code></h3>
-
 <p>Give your cluster a descriptive name; this cluster configuration is available for use in multiple contexts, so it&rsquo;s best to name it after it&rsquo;s purpose. In this fictional example world the IP 1.1.1.1 is a development cluster, so <strong>dev</strong> is a pretty good name.</p>
-
-<pre><code class="language-bash">kubectl config set-cluster dev --server=https://1.1.1.1:6443 --insecure-skip-tls-verify=true
-</code></pre>
-
-<h3 id="add-user-credentials-to-kubectl">Add User (credentials) to <code>kubectl</code></h3>
-
-<p>The user configuration holds the <strong>token</strong> and therefore should have a name descriptive of the access provided by the token. In the case of instructions above to <a href="#setup-remote-access">Setup Remote Access</a>, this token is for a namespace on dev called <code>the-project</code> so a good descriptive name would be <strong>the-project-dev</strong>*. In the example below replace <strong>THETOKEN</strong> with the one retrieved in the example above or received from your administrator.</p>
-
-<pre><code class="language-bash">kubectl config set-credentials the-project-dev --token=THETOKEN
-</code></pre>
-
-<h3 id="add-a-context-to-kubectl">Add a Context to <code>kubectl</code></h3>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl config set-cluster dev --server<span style="color:#f92672">=</span>https://1.1.1.1:6443 --insecure-skip-tls-verify<span style="color:#f92672">=</span>true
+</code></pre></div><h3 id="add-user-credentials-to-kubectl">Add User (credentials) to <code>kubectl</code></h3>
+<p>The user configuration holds the <strong>token</strong> and therefore should have a name descriptive of the access provided by the token. In the case of instructions above to <a href="#setup-remote-access">Setup Remote Access</a>, this token is for a namespace on dev called <code>the-project</code> so a good descriptive name would be <strong>the-project-dev</strong>*. In the example below replace **THETOKEN** with the one retrieved in the example above or received from your administrator.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl config set-credentials the-project-dev --token<span style="color:#f92672">=</span>THETOKEN
+</code></pre></div><h3 id="add-a-context-to-kubectl">Add a Context to <code>kubectl</code></h3>
 <p>Finally, you tie the new <strong>dev</strong> cluster with the new <strong>the-project-dev</strong> user (credentials.) In the case of our example, the token is joined to a <a href="https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/">namespace</a>, specifically <code>the-project</code>, so it makes sense here to use the <strong>&ndash;namespace</strong> flag to tell <code>kubectl</code> to always use that namespace with this new context. However, providing a namespace is optional.</p>
-
 <p>Name the context with the cluster and access it provides. I find it useful to give it the same name as the user (credentials.)</p>
-
-<pre><code class="language-bash">kubectl config set-context the-project-dev --cluster=dev --user=the-project-dev --namespace the-project
-</code></pre>
-
-<p>To use the new context, issue the command:</p>
-
-<pre><code class="language-bash">kubectl config use-context the-project-dev
-</code></pre>
-
-<p>Get a list of all your configured contexts along with an indicator of the current context you are in:</p>
-
-<pre><code class="language-bash">kubectl config get-contexts
-</code></pre>
-
-<p>You now have access to <strong>the-project</strong> namespace on the <strong>dev</strong> cluster. Check out the <a href="https://kubernetes.io/docs/reference/kubectl/cheatsheet/#viewing-finding-resources">kubectl Cheat Sheet</a> for a quick list of useful commands.</p>
-
-<h2 id="port-forwarding-local-development">Port Forwarding / Local Development</h2>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl config set-context the-project-dev --cluster<span style="color:#f92672">=</span>dev --user<span style="color:#f92672">=</span>the-project-dev --namespace the-project
+</code></pre></div><p>To use the new context, issue the command:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl config use-context the-project-dev
+</code></pre></div><p>Get a list of all your configured contexts along with an indicator of the current context you are in:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl config get-contexts
+</code></pre></div><p>You now have access to <strong>the-project</strong> namespace on the <strong>dev</strong> cluster. Check out the <a href="https://kubernetes.io/docs/reference/kubectl/cheatsheet/#viewing-finding-resources">kubectl Cheat Sheet</a> for a quick list of useful commands.</p>
+<h2 id="port-forwarding--local-development">Port Forwarding / Local Development</h2>
 <p>Check out <a href="https://github.com/txn2/kubefwd">kubefwd</a> for a simple command line utility that bulk forwards services of one or more namespaces to your local workstation.</p>
-
 <h2 id="resources">Resources</h2>
-
 <ul>
 <li><a href="https://kubernetes.io/docs/reference/kubectl/kubectl/">kubectl</a> is the essential Kubernetes command line administration utility.</li>
 <li><a href="https://kubernetes.io/docs/reference/kubectl/cheatsheet/#viewing-finding-resources">kubectl Cheat Sheet</a></li>
@@ -661,6 +540,23 @@ subjects:
                    <span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">Kubernetes Team Access - RBAC for developers and QA: Role Based Access Control</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="https://imti.co/" property="cc:attributionName" rel="cc:attributionURL">Craig Johnston</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
                     <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a>
                 </p>
+
+                <h5>SUPPORT</h5>
+                <p>
+                    Order my new Kubernetes book: <a href="https://amzn.to/34D56v6">Advanced Platform Development with Kubernetes: Enabling Data Management, the Internet of Things, Blockchain, and Machine Learning</a>
+                </p>
+                <script type="text/javascript">
+                  amzn_assoc_tracking_id = "imti-20";
+                  amzn_assoc_ad_mode = "manual";
+                  amzn_assoc_ad_type = "smart";
+                  amzn_assoc_marketplace = "amazon";
+                  amzn_assoc_region = "US";
+                  amzn_assoc_design = "enhanced_links";
+                  amzn_assoc_asins = "1484256107";
+                  amzn_assoc_placement = "adunit";
+                  amzn_assoc_linkid = "14a9d8b8d1b0bd44e9256e0e0a948015";
+                </script>
+                <script src="//z-na.amazon-adsystem.com/widgets/onejs?MarketPlace=US"></script>
 
                 
                 <hr>

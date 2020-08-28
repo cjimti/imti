@@ -219,21 +219,11 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h5>SHARE</h5>
-                <ul class="list-inline">
-                    <li><div class="addthis_inline_share_toolbox"></div></li>
-                </ul>
-
-                
-
-<p>This article on <strong>vectors</strong> is part of an ongoing crash course on linear algebra programming, demonstrating concepts and implementations in Python. The following examples will demonstrate some of the algebraic and geometric interpretations of a vector using Python. A vector is an ordered list of numbers, represented in row or column form.</p>
-
+                <p>This article on <strong>vectors</strong> is part of an ongoing crash course on linear algebra programming, demonstrating concepts and implementations in Python. The following examples will demonstrate some of the algebraic and geometric interpretations of a vector using Python. A vector is an ordered list of numbers, represented in row or column form.</p>
 <p>This small series of articles on linear algebra is meant to help you prepare for learning the deeper concepts related to Machine Learning and math that drives the higher level abstractions provided by many of the libraries available today.</p>
-
 <blockquote>
 <p>Python examples in this article make use of the <a href="https://imti.co/python-data-essentials-numpy/">Numpy</a> library. Read my article <a href="https://imti.co/python-data-essentials-numpy/">Python Data Essentials - Numpy</a> if you want a quick overview on this important Python library. Visualizations are accomplished with the <a href="https://imti.co/python-data-essentials-matplotlib-seaborn/">Matplotlib</a> Python library. For a beginners guide to <a href="https://imti.co/python-data-essentials-matplotlib-seaborn/">Matplotlib</a> might try my article <a href="https://imti.co/python-data-essentials-matplotlib-seaborn/">Python Data Essentials - Matplotlib and Seaborn</a></p>
 </blockquote>
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS_HTML" type="text/javascript">
 </script>
 <script type="text/javascript">
@@ -265,393 +255,273 @@
     init_mathjax();
 </script>
 
-
-<pre><code class="language-python">import numpy as np
-import matplotlib.pyplot as plt
-from mpl_toolkits.mplot3d import Axes3D
-</code></pre>
-
-<aside class="toc">
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> numpy <span style="color:#f92672">as</span> np
+<span style="color:#f92672">import</span> matplotlib.pyplot <span style="color:#f92672">as</span> plt
+<span style="color:#f92672">from</span> mpl_toolkits.mplot3d <span style="color:#f92672">import</span> Axes3D
+</code></pre></div><p><aside class="toc">
     <header>
         <h2>Contents</h2>
     </header>
     <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#algebraic-vs-geometric-interpretations">Algebraic vs Geometric Interpretations</a>
-<ul>
-<li><a href="#an-mathbb-r-2-row-vector">An $\mathbb{R}^2$ row vector</a>
-<ul>
-<li><a href="#a-3-dimensional-row-vector">A 3-dimensional row vector</a></li>
-<li><a href="#a-3-dimensional-column-vector">A 3-dimensional column vector</a></li>
-</ul></li>
-</ul></li>
-<li><a href="#addition-and-subtraction">Addition and Subtraction</a></li>
-<li><a href="#scalar-multiplication">Scalar Multiplication</a></li>
-</ul></li>
-<li><a href="#vector-multiplication-dot-product">Vector multiplication (dot product)</a>
-<ul>
-<li><a href="#next-matrices">Next: Matrices</a></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#algebraic-vs-geometric-interpretations">Algebraic vs Geometric Interpretations</a>
+      <ul>
+        <li><a href="#an-mathbbr2-row-vector">An $\mathbb{R}^2$ row vector</a></li>
+      </ul>
+    </li>
+    <li><a href="#addition-and-subtraction">Addition and Subtraction</a></li>
+    <li><a href="#scalar-multiplication">Scalar Multiplication</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#next-matrices">Next: Matrices</a></li>
+  </ul>
 </nav>
 </aside>
 
-<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<ins class="adsbygoogle"
-     style="display:block; text-align:center;"
-     data-ad-layout="in-article"
-     data-ad-format="fluid"
-     data-ad-client="ca-pub-5984764595236029"
-     data-ad-slot="7730310582"></ins>
-<script>
-    (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-
+<table>
+    <tr><td colspan="2" style="text-align: center"><b>Please support my new book!</b></td></tr>
+    <tr>
+        <td>
+            <a href="https://amzn.to/3hAZUvx">
+                <img src="/img/kubernetes_platform_development.jpg" style="padding:0; margin: 0"/>
+            </a>
+        </td>
+        <td>
+            <b><a href="https://amzn.to/3hAZUvx">Advanced Platform Development with Kubernetes: Enabling Data Management, the Internet of Things, Blockchain, and Machine Learning</a></b>
+            <h4>What You'll Learn</h4>
+            <ul style="padding-bottom: 0; margin: 0">
+                <li>Use data pipelines with <b>MQTT, NiFi, Logstash, Kafka and Elasticsearch</b></li>
+                <li>Install a serverless platform with <b>OpenFaaS</b></li>
+                <li>Explore <b>blockchain</b> network capabilities with <b>Ethereum</b></li>
+                <li>Support a multi-tenant <b>data science</b> platform and web IDE with <b>JupyterHub, MLflow and Seldon Core</b></li>
+                <li>Build a <b>hybrid cluster</b>, securely bridging <b>on-premise</b> and cloud-based Kubernetes nodes</li>
+                <li>Implement an integrated development toolchain for continuous integration and deployment</li>
+            </ul>
+        </td>
+    </tr>
+</table></p>
 <h2 id="algebraic-vs-geometric-interpretations">Algebraic vs Geometric Interpretations</h2>
-
 <p>Vectors are a list of numbers containing metrics or coordinates. Both algebraic or geometric intuitions may be used to represent vectors. Each number inside a vector is considered an <strong>element</strong> and the order of elements in a vector is important. The $\mathbb{R}$ symbol denotes a <a href="https://en.wikipedia.org/wiki/Real_number">Real number</a>, and in this example, two real numbers are created with a row vector.</p>
-
-<h3 id="an-mathbb-r-2-row-vector">An $\mathbb{R}^2$ row vector</h3>
-
+<h3 id="an-mathbbr2-row-vector">An $\mathbb{R}^2$ row vector</h3>
 <p>$
 \vec{va} =
 \left[
 \begin{array}{ccc}
-    10 &amp; -20 <br />
+10 &amp; -20 \<br>
 \end{array}
 \right]
 $</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># a 2-dimensional row vector</span>
+va <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array([ <span style="color:#ae81ff">10</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">20</span> ])
 
-<pre><code class="language-python"># a 2-dimensional row vector
-va = np.array([ 10, -20 ])
-
-print(f'\n{va}\n')
-print(f' type: {type(va)}')
-print(f' size: {va.size}')
-print(f'shape: {va.shape}')
-</code></pre>
-
-<pre><code>[ 10 -20]
+<span style="color:#66d9ef">print</span>(f<span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">{va}</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#39;</span>)
+<span style="color:#66d9ef">print</span>(f<span style="color:#e6db74">&#39; type: {type(va)}&#39;</span>)
+<span style="color:#66d9ef">print</span>(f<span style="color:#e6db74">&#39; size: {va.size}&#39;</span>)
+<span style="color:#66d9ef">print</span>(f<span style="color:#e6db74">&#39;shape: {va.shape}&#39;</span>)
+</code></pre></div><pre><code>[ 10 -20]
 
  type: &lt;class 'numpy.ndarray'&gt;
  size: 2
 shape: (2,)
 </code></pre>
-
 <p>Geometric vectors describe a length and direction. The origin (0,0) is a common starting point for most vectors. However, they may begin anywhere.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># plot the vector in &#34;standard position&#34;</span>
+plt<span style="color:#f92672">.</span>plot([<span style="color:#ae81ff">0</span>,va[<span style="color:#ae81ff">0</span>]],[<span style="color:#ae81ff">0</span>,va[<span style="color:#ae81ff">1</span>]])
 
-<pre><code class="language-python"># plot the vector in &quot;standard position&quot;
-plt.plot([0,va[0]],[0,va[1]])
+<span style="color:#75715e"># create a dotted line from -20 to 20 on 0 x axis</span>
+plt<span style="color:#f92672">.</span>plot([<span style="color:#f92672">-</span><span style="color:#ae81ff">30</span>, <span style="color:#ae81ff">30</span>],[<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>],<span style="color:#e6db74">&#39;k--&#39;</span>)
 
-# create a dotted line from -20 to 20 on 0 x axis
-plt.plot([-30, 30],[0, 0],'k--')
+<span style="color:#75715e"># create a dotted line from -20 to 20 on 0 y axis</span>
+plt<span style="color:#f92672">.</span>plot([<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>],[<span style="color:#f92672">-</span><span style="color:#ae81ff">30</span>, <span style="color:#ae81ff">30</span>],<span style="color:#e6db74">&#39;k--&#39;</span>)
 
-# create a dotted line from -20 to 20 on 0 y axis
-plt.plot([0, 0],[-30, 30],'k--')
+<span style="color:#75715e"># add some grid lines</span>
+plt<span style="color:#f92672">.</span>grid()
 
-# add some grid lines
-plt.grid()
-
-# fit the axis
-plt.axis((-30, 30, -30, 30))
-plt.show()
-</code></pre>
-
-<p><img src="/images/content/la-1/output_6_0.png" alt="png" /></p>
-
+<span style="color:#75715e"># fit the axis</span>
+plt<span style="color:#f92672">.</span>axis((<span style="color:#f92672">-</span><span style="color:#ae81ff">30</span>, <span style="color:#ae81ff">30</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">30</span>, <span style="color:#ae81ff">30</span>))
+plt<span style="color:#f92672">.</span>show()
+</code></pre></div><p><img src="/images/content/la-1/output_6_0.png" alt="png"></p>
 <p>Vectors are robust to translation, meaning that there can be many [ 10 -20] vectors all with different origins. A geometric vector begins at an origin, whereas a coordinate may exist anywhere.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># standard position</span>
+sp <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array([ <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span> ])
 
-<pre><code class="language-python"># standard position
-sp = np.array([ 0, 0 ])
+<span style="color:#75715e"># position a</span>
+pa <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array([ <span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">5</span> ])
 
-# position a
-pa = np.array([ 5, 5 ])
+<span style="color:#75715e"># position b</span>
+pb <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array([ <span style="color:#f92672">-</span><span style="color:#ae81ff">20</span>, <span style="color:#ae81ff">15</span> ])
 
-# position b
-pb = np.array([ -20, 15 ])
+plt<span style="color:#f92672">.</span>plot([sp[<span style="color:#ae81ff">0</span>],va[<span style="color:#ae81ff">0</span>]],[sp[<span style="color:#ae81ff">0</span>],va[<span style="color:#ae81ff">1</span>]])
+plt<span style="color:#f92672">.</span>plot([pa[<span style="color:#ae81ff">0</span>],va[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">+</span>pa[<span style="color:#ae81ff">0</span>]],[pa[<span style="color:#ae81ff">1</span>],va[<span style="color:#ae81ff">1</span>]<span style="color:#f92672">+</span>pa[<span style="color:#ae81ff">1</span>]])
+plt<span style="color:#f92672">.</span>plot([pb[<span style="color:#ae81ff">0</span>],va[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">+</span>pb[<span style="color:#ae81ff">0</span>]],[pb[<span style="color:#ae81ff">1</span>],va[<span style="color:#ae81ff">1</span>]<span style="color:#f92672">+</span>pb[<span style="color:#ae81ff">1</span>]])
 
-plt.plot([sp[0],va[0]],[sp[0],va[1]])
-plt.plot([pa[0],va[0]+pa[0]],[pa[1],va[1]+pa[1]])
-plt.plot([pb[0],va[0]+pb[0]],[pb[1],va[1]+pb[1]])
+<span style="color:#75715e"># create a dotted line from -20 to 20 on 0 x axis</span>
+plt<span style="color:#f92672">.</span>plot([<span style="color:#f92672">-</span><span style="color:#ae81ff">30</span>, <span style="color:#ae81ff">30</span>],[<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>],<span style="color:#e6db74">&#39;k--&#39;</span>)
 
-# create a dotted line from -20 to 20 on 0 x axis
-plt.plot([-30, 30],[0, 0],'k--')
+<span style="color:#75715e"># create a dotted line from -20 to 20 on 0 y axis</span>
+plt<span style="color:#f92672">.</span>plot([<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>],[<span style="color:#f92672">-</span><span style="color:#ae81ff">30</span>, <span style="color:#ae81ff">30</span>],<span style="color:#e6db74">&#39;k--&#39;</span>)
 
-# create a dotted line from -20 to 20 on 0 y axis
-plt.plot([0, 0],[-30, 30],'k--')
+<span style="color:#75715e"># add some grid lines</span>
+plt<span style="color:#f92672">.</span>grid()
 
-# add some grid lines
-plt.grid()
+plt<span style="color:#f92672">.</span>xlabel(<span style="color:#e6db74">&#39;x (0)&#39;</span>)
+plt<span style="color:#f92672">.</span>ylabel(<span style="color:#e6db74">&#39;y (1)&#39;</span>)
 
-plt.xlabel('x (0)')
-plt.ylabel('y (1)')
-
-# fit the axis
-plt.axis((-30, 30, -30, 30))
-plt.show()
-</code></pre>
-
-<p><img src="/images/content/la-1/output_8_0.png" alt="png" /></p>
-
+<span style="color:#75715e"># fit the axis</span>
+plt<span style="color:#f92672">.</span>axis((<span style="color:#f92672">-</span><span style="color:#ae81ff">30</span>, <span style="color:#ae81ff">30</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">30</span>, <span style="color:#ae81ff">30</span>))
+plt<span style="color:#f92672">.</span>show()
+</code></pre></div><p><img src="/images/content/la-1/output_8_0.png" alt="png"></p>
 <h4 id="a-3-dimensional-row-vector">A 3-dimensional row vector</h4>
-
 <p>$
 \vec{vb} =
 \left[
 \begin{array}{ccc}
-    10 &amp; -20 &amp; \pi <br />
+10 &amp; -20 &amp; \pi \<br>
 \end{array}
 \right]
 $</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># a 3-dimensional row vector</span>
+vb <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array([ <span style="color:#ae81ff">10</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">20</span>, np<span style="color:#f92672">.</span>pi ])
 
-<pre><code class="language-python"># a 3-dimensional row vector
-vb = np.array([ 10, -20, np.pi ])
-
-print(f'\n{vectb}\n')
-print(f' type: {type(vectb)}')
-print(f' size: {vb.size}')
-print(f'shape: {vb.shape}')
-</code></pre>
-
-<pre><code>[ 10.         -20.           3.14159265]
+<span style="color:#66d9ef">print</span>(f<span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">{vectb}</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#39;</span>)
+<span style="color:#66d9ef">print</span>(f<span style="color:#e6db74">&#39; type: {type(vectb)}&#39;</span>)
+<span style="color:#66d9ef">print</span>(f<span style="color:#e6db74">&#39; size: {vb.size}&#39;</span>)
+<span style="color:#66d9ef">print</span>(f<span style="color:#e6db74">&#39;shape: {vb.shape}&#39;</span>)
+</code></pre></div><pre><code>[ 10.         -20.           3.14159265]
 
  type: &lt;class 'numpy.ndarray'&gt;
  size: 3
 shape: (3,)
 </code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># plotting the 3-dimensional vb</span>
+fig <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>figure()
+ax <span style="color:#f92672">=</span> fig<span style="color:#f92672">.</span>gca(projection<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;3d&#39;</span>)
+ax<span style="color:#f92672">.</span>plot([<span style="color:#ae81ff">0</span>, vb[<span style="color:#ae81ff">0</span>]],[<span style="color:#ae81ff">0</span>, vb[<span style="color:#ae81ff">1</span>]],[<span style="color:#ae81ff">0</span>, vb[<span style="color:#ae81ff">2</span>]])
 
-<pre><code class="language-python"># plotting the 3-dimensional vb
-fig = plt.figure()
-ax = fig.gca(projection='3d')
-ax.plot([0, vb[0]],[0, vb[1]],[0, vb[2]])
-
-# add some dashed lines across the x, y and z axis
-ax.plot([0, 0],[0, 0],[-20, 20],'k--')
-ax.plot([0, 0],[-20, 20],[0, 0],'k--')
-ax.plot([-20, 20],[0, 0],[0, 0],'k--')
-plt.show()
-</code></pre>
-
-<p><img src="/images/content/la-1/output_11_0.png" alt="png" /></p>
-
+<span style="color:#75715e"># add some dashed lines across the x, y and z axis</span>
+ax<span style="color:#f92672">.</span>plot([<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>],[<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>],[<span style="color:#f92672">-</span><span style="color:#ae81ff">20</span>, <span style="color:#ae81ff">20</span>],<span style="color:#e6db74">&#39;k--&#39;</span>)
+ax<span style="color:#f92672">.</span>plot([<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>],[<span style="color:#f92672">-</span><span style="color:#ae81ff">20</span>, <span style="color:#ae81ff">20</span>],[<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>],<span style="color:#e6db74">&#39;k--&#39;</span>)
+ax<span style="color:#f92672">.</span>plot([<span style="color:#f92672">-</span><span style="color:#ae81ff">20</span>, <span style="color:#ae81ff">20</span>],[<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>],[<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>],<span style="color:#e6db74">&#39;k--&#39;</span>)
+plt<span style="color:#f92672">.</span>show()
+</code></pre></div><p><img src="/images/content/la-1/output_11_0.png" alt="png"></p>
 <h4 id="a-3-dimensional-column-vector">A 3-dimensional column vector</h4>
-
 <p>$\vec{vectb}$ can be transposed $\vec{vectb} = \vec{vectb}^{T}$ to form a 3-dimensional column vector.</p>
-
-<p><div>
-$
-\vec{vectb} =
-\left[
-\begin{array}{ccc}
-    10 \\ 
-    -20 \\ 
-    \pi \\
-\end{array}
-\right]
-= \mathbb{R}^{3\times1}
-$
-</div></p>
-
-<pre><code class="language-python"># transposing 1-d vectores is not typically needed 
-# with numpy as it will automatically broadcast a 
-# 1D array when doing various calculations
-np.vstack(vect_b) 
-</code></pre>
-
-<pre><code>array([[ 10.  ],
+<!-- raw HTML omitted -->
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># transposing 1-d vectores is not typically needed </span>
+<span style="color:#75715e"># with numpy as it will automatically broadcast a </span>
+<span style="color:#75715e"># 1D array when doing various calculations</span>
+np<span style="color:#f92672">.</span>vstack(vect_b) 
+</code></pre></div><pre><code>array([[ 10.  ],
        [-20.  ],
        [  3.14]])
 </code></pre>
-
 <h2 id="addition-and-subtraction">Addition and Subtraction</h2>
-
 <p>Vector addition and subtraction requires vectors of equal length. Create two $\mathbb{R}2$ (<a href="https://en.wikipedia.org/wiki/Real_number">Real number</a>) vectors $\vec{vectc}$ and $\vec{vectd}$.</p>
-
 <ul>
 <li>Add the vectors together $\vec{vecte} = \vec{vectc} + \vec{vectd}$</li>
-
-<li><p>Subtract c from d, $\vec{vectf} = \vec{vectc} - \vec{vectd}$</p>
-
-<pre><code class="language-python"># two R2 vectors
-vectc = np.array([ 15, 8 ])
-vectd = np.array([ 1,  -11 ])
-
-# add the vectors
-vecte = vectc + vectd
-vecte
-</code></pre>
-
-<p>array([16, -3])</p>
-
-<pre><code class="language-python"># geometric intuition
-fig, ax = plt.subplots()
-
-ax.annotate([0,0], (0,0))
-ax.annotate(vectc, vectc)
-ax.annotate(vecte, vecte)
-
-ax.plot([0, vectc[0]],[0, vectc[1]],'b',label='vectc')
-ax.plot([0, vectd[0]]+vectc[0],[0, vectd[1]]+vectc[1],'g',label='vectd')
-ax.plot([0, vecte[0]],[0, vecte[1]],'r',label='vecte')
-
-ax.axis('square')
-ax.axis((-10, 25, -15, 20 ))
-ax.grid()
-plt.legend()
-plt.xlabel('vecte = vectc + vectd')
-plt.show()
-</code></pre></li>
+<li>Subtract c from d, $\vec{vectf} = \vec{vectc} - \vec{vectd}$</li>
 </ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># two R2 vectors</span>
+vectc <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array([ <span style="color:#ae81ff">15</span>, <span style="color:#ae81ff">8</span> ])
+vectd <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array([ <span style="color:#ae81ff">1</span>,  <span style="color:#f92672">-</span><span style="color:#ae81ff">11</span> ])
 
-<p><img src="/images/content/la-1/output_16_0.png" alt="png" /></p>
+<span style="color:#75715e"># add the vectors</span>
+vecte <span style="color:#f92672">=</span> vectc <span style="color:#f92672">+</span> vectd
+vecte
+</code></pre></div><pre><code>array([16, -3])
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># geometric intuition</span>
+fig, ax <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>subplots()
 
+ax<span style="color:#f92672">.</span>annotate([<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">0</span>], (<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">0</span>))
+ax<span style="color:#f92672">.</span>annotate(vectc, vectc)
+ax<span style="color:#f92672">.</span>annotate(vecte, vecte)
+
+ax<span style="color:#f92672">.</span>plot([<span style="color:#ae81ff">0</span>, vectc[<span style="color:#ae81ff">0</span>]],[<span style="color:#ae81ff">0</span>, vectc[<span style="color:#ae81ff">1</span>]],<span style="color:#e6db74">&#39;b&#39;</span>,label<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;vectc&#39;</span>)
+ax<span style="color:#f92672">.</span>plot([<span style="color:#ae81ff">0</span>, vectd[<span style="color:#ae81ff">0</span>]]<span style="color:#f92672">+</span>vectc[<span style="color:#ae81ff">0</span>],[<span style="color:#ae81ff">0</span>, vectd[<span style="color:#ae81ff">1</span>]]<span style="color:#f92672">+</span>vectc[<span style="color:#ae81ff">1</span>],<span style="color:#e6db74">&#39;g&#39;</span>,label<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;vectd&#39;</span>)
+ax<span style="color:#f92672">.</span>plot([<span style="color:#ae81ff">0</span>, vecte[<span style="color:#ae81ff">0</span>]],[<span style="color:#ae81ff">0</span>, vecte[<span style="color:#ae81ff">1</span>]],<span style="color:#e6db74">&#39;r&#39;</span>,label<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;vecte&#39;</span>)
+
+ax<span style="color:#f92672">.</span>axis(<span style="color:#e6db74">&#39;square&#39;</span>)
+ax<span style="color:#f92672">.</span>axis((<span style="color:#f92672">-</span><span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">25</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">15</span>, <span style="color:#ae81ff">20</span> ))
+ax<span style="color:#f92672">.</span>grid()
+plt<span style="color:#f92672">.</span>legend()
+plt<span style="color:#f92672">.</span>xlabel(<span style="color:#e6db74">&#39;vecte = vectc + vectd&#39;</span>)
+plt<span style="color:#f92672">.</span>show()
+</code></pre></div><p><img src="/images/content/la-1/output_16_0.png" alt="png"></p>
 <p>An algebeaiac interpretation:</p>
-
-<p><div>
-$
-\left[
-\begin{array}{ccc}
-    15 \\ 
-    8 \\ 
-\end{array}
-\right]
-+
-\left[
-\begin{array}{ccc}
-    1 \\ 
-    -11 \\ 
-\end{array}
-\right]
-=
-\left[
-\begin{array}{ccc}
-    16 \\ 
-    -3 \\ 
-\end{array}
-\right]
-$
-</div></p>
-
-<pre><code class="language-python"># subtract d from c
-vectf = vectc - vectd
+<!-- raw HTML omitted -->
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># subtract d from c</span>
+vectf <span style="color:#f92672">=</span> vectc <span style="color:#f92672">-</span> vectd
 vectf
+</code></pre></div><pre><code>array([14, 19])
 </code></pre>
-
-<pre><code>array([14, 19])
-</code></pre>
-
 <h2 id="scalar-multiplication">Scalar Multiplication</h2>
-
 <p>Create $\vec{vectg}$ as an $\mathbb{R}2$ array with coordinates [ 2, 5 ]</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">vectg <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array([ <span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">2</span> ])
 
-<pre><code class="language-python">vectg = np.array([ 5, 2 ])
-
-# geometric intuition
-fig, ax = plt.subplots()
-ax.plot([0, vectg[0]],[0, vectg[1]],'b',label='vectg')
-ax.grid()
-ax.axis('square')
-ax.axis((-10, 10, -10, 10 ))
-plt.legend()
-plt.show()
-</code></pre>
-
-<p><img src="/images/content/la-1/output_20_0.png" alt="png" /></p>
-
+<span style="color:#75715e"># geometric intuition</span>
+fig, ax <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>subplots()
+ax<span style="color:#f92672">.</span>plot([<span style="color:#ae81ff">0</span>, vectg[<span style="color:#ae81ff">0</span>]],[<span style="color:#ae81ff">0</span>, vectg[<span style="color:#ae81ff">1</span>]],<span style="color:#e6db74">&#39;b&#39;</span>,label<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;vectg&#39;</span>)
+ax<span style="color:#f92672">.</span>grid()
+ax<span style="color:#f92672">.</span>axis(<span style="color:#e6db74">&#39;square&#39;</span>)
+ax<span style="color:#f92672">.</span>axis((<span style="color:#f92672">-</span><span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">10</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">10</span> ))
+plt<span style="color:#f92672">.</span>legend()
+plt<span style="color:#f92672">.</span>show()
+</code></pre></div><p><img src="/images/content/la-1/output_20_0.png" alt="png"></p>
 <p>Scalars are often noted with lowercase greek symbols like alpha: $\alpha$, beta: $\beta$, and theta: $\theta$</p>
-
 <p>$\vec{vecth} = \theta\vec{vectg}$</p>
-
-<p><div>
-$
-1.5
-\left[
-\begin{array}{ccc}
-    5 \\ 
-    2 \\ 
-\end{array}
-\right]
-=
-\left[
-\begin{array}{ccc}
-    7.5 \\ 
-    3 \\ 
-\end{array}
-\right]
-$
-</div></p>
-
-<pre><code class="language-python">m = 1.5
-vecth = vectg * m
+<!-- raw HTML omitted -->
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">m <span style="color:#f92672">=</span> <span style="color:#ae81ff">1.5</span>
+vecth <span style="color:#f92672">=</span> vectg <span style="color:#f92672">*</span> m
 vecth
+</code></pre></div><pre><code>array([ 7.5,  3. ])
 </code></pre>
-
-<pre><code>array([ 7.5,  3. ])
-</code></pre>
-
 <p>A geometric intrepretation shows the scaling of the vector through multiplication, changing it&rsquo;s lenth while it&rsquo;s orgin remains constant.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># geometric intuition</span>
+fig, ax <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>subplots()
+ax<span style="color:#f92672">.</span>plot([<span style="color:#ae81ff">0</span>, vectg[<span style="color:#ae81ff">0</span>]],[<span style="color:#ae81ff">0</span>, vectg[<span style="color:#ae81ff">1</span>]],<span style="color:#e6db74">&#39;b&#39;</span>,label<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;vect_g&#39;</span>)
+ax<span style="color:#f92672">.</span>plot([<span style="color:#ae81ff">0</span>, vecth[<span style="color:#ae81ff">0</span>]],[<span style="color:#ae81ff">0</span>, vecth[<span style="color:#ae81ff">1</span>]],<span style="color:#e6db74">&#39;g:&#39;</span>,label<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;vect_h&#39;</span>)
+ax<span style="color:#f92672">.</span>grid()
+ax<span style="color:#f92672">.</span>axis(<span style="color:#e6db74">&#39;square&#39;</span>)
+ax<span style="color:#f92672">.</span>axis((<span style="color:#f92672">-</span><span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">10</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">10</span> ))
+plt<span style="color:#f92672">.</span>legend()
+plt<span style="color:#f92672">.</span>show()
 
-<pre><code class="language-python"># geometric intuition
-fig, ax = plt.subplots()
-ax.plot([0, vectg[0]],[0, vectg[1]],'b',label='vect_g')
-ax.plot([0, vecth[0]],[0, vecth[1]],'g:',label='vect_h')
-ax.grid()
-ax.axis('square')
-ax.axis((-10, 10, -10, 10 ))
-plt.legend()
-plt.show()
-
-</code></pre>
-
-<p><img src="/images/content/la-1/output_24_0.png" alt="png" /></p>
-
+</code></pre></div><p><img src="/images/content/la-1/output_24_0.png" alt="png"></p>
 <p>Multiply $\vec{vectg}$ by the scalar m2.</p>
-
 <p>$\vec{vecti} = \vec{vectg}\alpha$</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">alpha <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1.5</span>
 
-<pre><code class="language-python">alpha = -1.5
+vecti <span style="color:#f92672">=</span> vectg <span style="color:#f92672">*</span> alpha
 
-vecti = vectg * alpha
-
-# geometric intuition
-fig, ax = plt.subplots()
-ax.plot([0, vectg[0]],[0, vectg[1]],'b',label='vect_g')
-ax.plot([0, vecti[0]],[0, vecti[1]],'r:',label='vect_i')
-ax.grid()
-ax.axis('square')
-ax.axis((-10, 10, -10, 10 ))
-plt.legend()
-plt.show()
-</code></pre>
-
-<p><img src="/images/content/la-1/output_26_0.png" alt="png" /></p>
-
+<span style="color:#75715e"># geometric intuition</span>
+fig, ax <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>subplots()
+ax<span style="color:#f92672">.</span>plot([<span style="color:#ae81ff">0</span>, vectg[<span style="color:#ae81ff">0</span>]],[<span style="color:#ae81ff">0</span>, vectg[<span style="color:#ae81ff">1</span>]],<span style="color:#e6db74">&#39;b&#39;</span>,label<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;vect_g&#39;</span>)
+ax<span style="color:#f92672">.</span>plot([<span style="color:#ae81ff">0</span>, vecti[<span style="color:#ae81ff">0</span>]],[<span style="color:#ae81ff">0</span>, vecti[<span style="color:#ae81ff">1</span>]],<span style="color:#e6db74">&#39;r:&#39;</span>,label<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;vect_i&#39;</span>)
+ax<span style="color:#f92672">.</span>grid()
+ax<span style="color:#f92672">.</span>axis(<span style="color:#e6db74">&#39;square&#39;</span>)
+ax<span style="color:#f92672">.</span>axis((<span style="color:#f92672">-</span><span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">10</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">10</span> ))
+plt<span style="color:#f92672">.</span>legend()
+plt<span style="color:#f92672">.</span>show()
+</code></pre></div><p><img src="/images/content/la-1/output_26_0.png" alt="png"></p>
 <h1 id="vector-multiplication-dot-product">Vector multiplication (dot product)</h1>
-
 <p>The dot product (or scalar product) is a single number representing the relationship between two vectors.</p>
-
 <ul>
 <li>$\vec{vectr}$ is an $\mathbb{R}3$ array with coordinates [ 2, 5, -7 ]</li>
 <li>$\vec{vects}$ is an $\mathbb{R}3$ array with coordinates [ 1.5, 4, -1 ]</li>
 <li>The dot product of $\vec{vectr}$ and $\vec{vects}$ is 30.</li>
-
-<li><p>$\vec{vectr}\cdot\vec{vects} = \vec{vectr}^T\vec{vects} = \sum_{i=1}^n\vec{vectr_i}\vec{vects_i}$</p>
-
-<pre><code class="language-python">vectr = np.array([ 2, 5, -7])
-vects = np.array([ 1.5, 4, -1])
-
-# the dot product is the sum of products
-rs = np.dot(vectr,vects)
-rs
-</code></pre>
-
-<p>30.0</p></li>
+<li>$\vec{vectr}\cdot\vec{vects} = \vec{vectr}^T\vec{vects} = \sum_{i=1}^n\vec{vectr_i}\vec{vects_i}$</li>
 </ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">vectr <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array([ <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">5</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">7</span>])
+vects <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array([ <span style="color:#ae81ff">1.5</span>, <span style="color:#ae81ff">4</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>])
 
+<span style="color:#75715e"># the dot product is the sum of products</span>
+rs <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>dot(vectr,vects)
+rs
+</code></pre></div><pre><code>30.0
+</code></pre>
 <h2 id="next-matrices">Next: Matrices</h2>
-
 <p>Check out the next article in this series, <a href="https://imti.co/linear-algebra-matrices/">Linear Algebra: Matrices 1: Linear Algebra Crash Course for Programmers Part 2a</a>.</p>
 
 
@@ -659,6 +529,23 @@ rs
                    <span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">Linear Algebra: Vectors: Crash Course for Python Programmers Part 1</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="https://imti.co/" property="cc:attributionName" rel="cc:attributionURL">Craig Johnston</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
                     <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a>
                 </p>
+
+                <h5>SUPPORT</h5>
+                <p>
+                    Order my new Kubernetes book: <a href="https://amzn.to/34D56v6">Advanced Platform Development with Kubernetes: Enabling Data Management, the Internet of Things, Blockchain, and Machine Learning</a>
+                </p>
+                <script type="text/javascript">
+                  amzn_assoc_tracking_id = "imti-20";
+                  amzn_assoc_ad_mode = "manual";
+                  amzn_assoc_ad_type = "smart";
+                  amzn_assoc_marketplace = "amazon";
+                  amzn_assoc_region = "US";
+                  amzn_assoc_design = "enhanced_links";
+                  amzn_assoc_asins = "1484256107";
+                  amzn_assoc_placement = "adunit";
+                  amzn_assoc_linkid = "14a9d8b8d1b0bd44e9256e0e0a948015";
+                </script>
+                <script src="//z-na.amazon-adsystem.com/widgets/onejs?MarketPlace=US"></script>
 
                 
                 <hr>

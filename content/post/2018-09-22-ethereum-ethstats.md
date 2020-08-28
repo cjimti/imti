@@ -23,7 +23,7 @@ In this article, I review each of the metrics displayed by [eth-netstats], as bo
 
 [![Ethstats Dashboard](/img/post/ethstats.jpg)](https://ethstats.net/)
 
-{{<amazon-eth>}}
+{{< content-ad >}}
 
 See Ethstats in action at [https://ethstats.net/](https://ethstats.net/) for a live example of Ethereum Blockchain metrics from miners on the public Ethereum blockchain.
 

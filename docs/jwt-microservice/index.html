@@ -219,124 +219,85 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h5>SHARE</h5>
-                <ul class="list-inline">
-                    <li><div class="addthis_inline_share_toolbox"></div></li>
-                </ul>
-
-                
-
-<p><a href="https://github.com/txn2/txtoken">txToken</a> is a small high performance <a href="http://microservices.io/">microservice</a> utility container. <a href="https://github.com/txn2/txtoken">txToken</a> is used for adding <a href="https://jwt.io/">JSON Web Token</a> based security to existing or new API development. <a href="https://github.com/txn2/txtoken">txToken</a> is specifically for systems that communicate in JSON over HTTP. <a href="https://github.com/txn2/txtoken">txToken</a> is called from a client with a JSON post body and passes received JSON to a remote endpoint. JSON retrieved from a remote endpoint is used to create a <a href="https://jwt.io/">JWT</a> token with an <a href="https://community.auth0.com/t/jwt-signing-algorithms-rs256-vs-hs256/7720">HS256</a> symmetrically encrypted signature.</p>
-
+                <p><a href="https://github.com/txn2/txtoken">txToken</a> is a small high performance <a href="http://microservices.io/">microservice</a> utility container. <a href="https://github.com/txn2/txtoken">txToken</a> is used for adding <a href="https://jwt.io/">JSON Web Token</a> based security to existing or new API development. <a href="https://github.com/txn2/txtoken">txToken</a> is specifically for systems that communicate in JSON over HTTP. <a href="https://github.com/txn2/txtoken">txToken</a> is called from a client with a JSON post body and passes received JSON to a remote endpoint. JSON retrieved from a remote endpoint is used to create a <a href="https://jwt.io/">JWT</a> token with an <a href="https://community.auth0.com/t/jwt-signing-algorithms-rs256-vs-hs256/7720">HS256</a> symmetrically encrypted signature.</p>
 <h3 id="overview">Overview</h3>
-
-<p><img src="/images/content/txToken-00.png" alt="txToken Proxy" /></p>
-
+<p><img src="/images/content/txToken-00.png" alt="txToken Proxy"></p>
 <p><a href="https://github.com/txn2/txtoken">txToken</a> exposes an HTTP POST endpoint accepting JSON data, used to make a proxied POST to a remote server along with a preset bearer token. Validation of this token on the remote side is optional and only needed if the remote wishes to authenticate the <a href="https://github.com/txn2/txtoken">txToken</a> call using the shared key.</p>
-
 <p><a href="https://github.com/txn2/txtoken">txToken</a> can be run as a standalone binary on amd64 or arm6/7 based systems, however <a href="https://github.com/txn2/txtoken">txToken</a> is most at home in it&rsquo;s <a href="https://hub.docker.com/r/txn2/txtoken/">Docker container</a> within a <a href="https://kubernetes.io/">Kubernetes</a> cluster.</p>
 
-<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<ins class="adsbygoogle"
-     style="display:block; text-align:center;"
-     data-ad-layout="in-article"
-     data-ad-format="fluid"
-     data-ad-client="ca-pub-5984764595236029"
-     data-ad-slot="7730310582"></ins>
-<script>
-    (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-
+<table>
+    <tr><td colspan="2" style="text-align: center"><b>Please support my new book!</b></td></tr>
+    <tr>
+        <td>
+            <a href="https://amzn.to/3hAZUvx">
+                <img src="/img/kubernetes_platform_development.jpg" style="padding:0; margin: 0"/>
+            </a>
+        </td>
+        <td>
+            <b><a href="https://amzn.to/3hAZUvx">Advanced Platform Development with Kubernetes: Enabling Data Management, the Internet of Things, Blockchain, and Machine Learning</a></b>
+            <h4>What You'll Learn</h4>
+            <ul style="padding-bottom: 0; margin: 0">
+                <li>Use data pipelines with <b>MQTT, NiFi, Logstash, Kafka and Elasticsearch</b></li>
+                <li>Install a serverless platform with <b>OpenFaaS</b></li>
+                <li>Explore <b>blockchain</b> network capabilities with <b>Ethereum</b></li>
+                <li>Support a multi-tenant <b>data science</b> platform and web IDE with <b>JupyterHub, MLflow and Seldon Core</b></li>
+                <li>Build a <b>hybrid cluster</b>, securely bridging <b>on-premise</b> and cloud-based Kubernetes nodes</li>
+                <li>Implement an integrated development toolchain for continuous integration and deployment</li>
+            </ul>
+        </td>
+    </tr>
+</table>
 <h3 id="implementation">Implementation</h3>
-
 <p>For demonstration, assume the existence of a fictional API endpoint, something like <code>https://auth.exmaple.com/login</code>. <strong>login</strong> excepts POST body data in the form of JSON.</p>
-
 <p>Example login:</p>
-
-<pre><code class="language-bash">curl -X POST \
-  https://auth.examle.com/login \
-  -d '{&quot;email&quot;:&quot;john.d@example.com&quot;,&quot;password&quot;:&quot;12345&quot;}'
-</code></pre>
-
-<p>Assuming verified credentials, our fictional <strong>login</strong> API returns an HTTP 200 status along with a JSON string containing info about the user.</p>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">curl -X POST <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>  https://auth.examle.com/login <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>  -d <span style="color:#e6db74">&#39;{&#34;email&#34;:&#34;john.d@example.com&#34;,&#34;password&#34;:&#34;12345&#34;}&#39;</span>
+</code></pre></div><p>Assuming verified credentials, our fictional <strong>login</strong> API returns an HTTP 200 status along with a JSON string containing info about the user.</p>
 <p>Example login return data:</p>
-
-<pre><code class="language-json">{
-  &quot;status&quot;: &quot;active&quot;,
-  &quot;first_name&quot;: &quot;John&quot;,
-  &quot;last_name&quot;: &quot;Doe&quot;
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
+  <span style="color:#f92672">&#34;status&#34;</span>: <span style="color:#e6db74">&#34;active&#34;</span>,
+  <span style="color:#f92672">&#34;first_name&#34;</span>: <span style="color:#e6db74">&#34;John&#34;</span>,
+  <span style="color:#f92672">&#34;last_name&#34;</span>: <span style="color:#e6db74">&#34;Doe&#34;</span>
 }
-</code></pre>
-
-<p>If this were a real login service, we might also include an access control list, preferences or anything else we want a client to provide in subsequent calls to our broader system.</p>
-
+</code></pre></div><p>If this were a real login service, we might also include an access control list, preferences or anything else we want a client to provide in subsequent calls to our broader system.</p>
 <p>This fictional login service is secure, we POSTed credentials over SSL and although our example uses a password value of <code>12345</code> a real-world user would be required to have a more complex password, or even a public key or certificate, whatever the <strong>login</strong> service requires to authenticate the caller and send back relevant, trusted data. As long as this remote endpoint sends back JSON with an HTTP 200 status code <a href="https://github.com/txn2/txtoken">txToken</a> accepts it.</p>
-
 <h3 id="architecture-considerations">Architecture Considerations</h3>
-
 <p>In a <a href="https://en.wikipedia.org/wiki/Monolithic_application">monolithic</a> system this <strong>login</strong> endpoint would generate a <a href="https://jwt.io/">JWT</a> token, and no further action is needed. However, in our <a href="http://microservices.io/">microservice</a> architecture the <strong>login</strong> endpoint is designed to be generic and only provide user data after validating credentials. Our example <strong>login</strong> service validates an email and password combination from a JSON payload and provides user details; <strong>logic</strong> is agnostic to higher level implementors.</p>
-
 <p>As a <a href="http://microservices.io/">microservice</a>, this <strong>login</strong> endpoint is a generic user object <strong>getter</strong>, therefore implicitly supporting any number of authentication and ACL services above it.</p>
-
 <p>In <a href="http://microservices.io/">microservice</a> architectures the system is a heavy user of its own API endpoints. Instead of using distributed libraries to share functionality among components <a href="http://microservices.io/">microservices</a> share API endpoints.</p>
-
 <h3 id="cryptographically-signed-data">Cryptographically Signed Data</h3>
-
 <p>Our fictional <strong>login</strong> service returns a user object to its caller. However, the caller may be an untrusted user or system out of the scope and control of our system. <a href="https://github.com/txn2/txtoken">txToken</a> allows us to sign the object cryptographically, this allows other services within our system to verify the contents of the token.</p>
-
 <p><a href="https://github.com/txn2/txtoken">txToken</a> is easy to setup, it runs as a single binary or docker container. <a href="https://github.com/txn2/txtoken">txToken</a> reads a yaml configuration file from a path specified by the environment variable <strong>CFG_FILE</strong>.</p>
-
 <p>Example <code>txtoken-config.yml</code></p>
-
-<pre><code class="language-yaml"># Example configuration
-port: 8888
-debug: true
-encKey: &quot;xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx&quot; # 32-64 character string
-remote: https://auth.example.com/login
-expHours: 1
-getTokenRoute: &quot;/getToken&quot;
-checkTokenRoute: &quot;/checkToken&quot;
-requestTokenData:
-  authorization: &quot;internal&quot;
-</code></pre>
-
-<p>In this example <a href="https://github.com/txn2/txtoken">txToken</a> services any HTTP POST to <code>/getToken</code> and <code>/checkToken</code> on port <code>8888</code> of the localhost. Securing <a href="https://github.com/txn2/txtoken">txToken</a> communication over SSL is the responsibility of the network layer; I use <a href="/web-cluster-ingress/">kubernetes ingress</a> for this.</p>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#75715e"># Example configuration</span>
+<span style="color:#66d9ef">port</span>: <span style="color:#ae81ff">8888</span>
+<span style="color:#66d9ef">debug</span>: <span style="color:#66d9ef">true</span>
+<span style="color:#66d9ef">encKey</span>: <span style="color:#e6db74">&#34;xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx&#34;</span> <span style="color:#75715e"># 32-64 character string</span>
+<span style="color:#66d9ef">remote</span>: https://auth.example.com/login
+<span style="color:#66d9ef">expHours</span>: <span style="color:#ae81ff">1</span>
+<span style="color:#66d9ef">getTokenRoute</span>: <span style="color:#e6db74">&#34;/getToken&#34;</span>
+<span style="color:#66d9ef">checkTokenRoute</span>: <span style="color:#e6db74">&#34;/checkToken&#34;</span>
+<span style="color:#66d9ef">requestTokenData</span>:
+  <span style="color:#66d9ef">authorization</span>: <span style="color:#e6db74">&#34;internal&#34;</span>
+</code></pre></div><p>In this example <a href="https://github.com/txn2/txtoken">txToken</a> services any HTTP POST to <code>/getToken</code> and <code>/checkToken</code> on port <code>8888</code> of the localhost. Securing <a href="https://github.com/txn2/txtoken">txToken</a> communication over SSL is the responsibility of the network layer; I use <a href="/web-cluster-ingress/">kubernetes ingress</a> for this.</p>
 <p>In the example configuration above, a client posts JSON to <code>/getToken</code> just as it would have to the <strong>login</strong> endpoint (fictional example above). <a href="https://github.com/txn2/txtoken">txToken</a> then issues a POST call to endpoint specified in the <code>remote</code> key of the yaml config using the JSON it received from the client.</p>
-
 <p><a href="https://github.com/txn2/txtoken">txToken</a> expects the <code>remote</code> endpoint to return an HTTP 200 status code along with JSON data.</p>
-
 <p>If the <code>remote</code> endpoint does not return an HTTP 200 status code <a href="https://github.com/txn2/txtoken">txToken</a> will return an HTTP 500 status code and a message reflective of the failure:</p>
-
-<pre><code class="language-json">{
-    &quot;message&quot;: &quot;Remote post status failure.&quot;,
-    &quot;status&quot;: 500
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
+    <span style="color:#f92672">&#34;message&#34;</span>: <span style="color:#e6db74">&#34;Remote post status failure.&#34;</span>,
+    <span style="color:#f92672">&#34;status&#34;</span>: <span style="color:#ae81ff">500</span>
 }
-</code></pre>
-
-<p>If <a href="https://github.com/txn2/txtoken">txToken</a> receives an HTTP 200 along with valid JSON data the data is encoded and signed as a <a href="https://jwt.io/">JWT</a> token.</p>
-
+</code></pre></div><p>If <a href="https://github.com/txn2/txtoken">txToken</a> receives an HTTP 200 along with valid JSON data the data is encoded and signed as a <a href="https://jwt.io/">JWT</a> token.</p>
 <p>Example response (truncated):</p>
-
-<pre><code class="language-json">{ &quot;token&quot;: &quot;eyJhbGciOiJIUzI1NiIsInR5cCI6...&quot; }
-</code></pre>
-
-<h3 id="configuration-and-implementation">Configuration and Implementation</h3>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{ <span style="color:#f92672">&#34;token&#34;</span>: <span style="color:#e6db74">&#34;eyJhbGciOiJIUzI1NiIsInR5cCI6...&#34;</span> }
+</code></pre></div><h3 id="configuration-and-implementation">Configuration and Implementation</h3>
 <p>The following provides examples of a simple <a href="https://hub.docker.com/r/txn2/txtoken/">Docker</a> run command, a <code>docker-compose</code> configuration and a sample <a href="https://kubernetes.io/">kubernetes</a> configuration:</p>
-
 <p>In each of the following implementations, I use the same configuration yaml.</p>
-
 <p>Download and edit the example configuration to your meet your needs. The following <a href="https://curl.haxx.se/">curl</a> command pulls the contents of the official example file <code>example_cfg.yml</code> and populates a new file called <code>txtoken.yml</code>. You can customize the config file name; however, I&rsquo;ll stick with <code>txtoken.yml</code> for the examples below.</p>
-
-<pre><code class="language-bash">curl https://raw.githubusercontent.com/txn2/txtoken/master/example_cfg.yml &gt;txtoken.yml
-</code></pre>
-
-<p>The config file consists of the following directives:</p>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">curl https://raw.githubusercontent.com/txn2/txtoken/master/example_cfg.yml &gt;txtoken.yml
+</code></pre></div><p>The config file consists of the following directives:</p>
 <h4 id="config-yaml">Config YAML</h4>
-
 <table>
 <thead>
 <tr>
@@ -344,120 +305,103 @@ requestTokenData:
 <th>description</th>
 </tr>
 </thead>
-
 <tbody>
 <tr>
 <td><code>port:</code></td>
 <td>TCP port to listen on. Port 80 is a reasonable choice when using it for standalone Docker containers or in Kubernetes.</td>
 </tr>
-
 <tr>
 <td><code>debug:</code></td>
 <td>Debug mode increases the verbosity of log output.</td>
 </tr>
-
 <tr>
 <td><code>encKey</code></td>
 <td>The encryption key is a text string between 32 and 64 characters long used for <a href="https://community.auth0.com/t/jwt-signing-algorithms-rs256-vs-hs256/7720">HS256</a> symmetrical encryption of the <a href="https://jwt.io/">JWT</a> signature.</td>
 </tr>
-
 <tr>
 <td><code>remote</code></td>
 <td>The remote endpoint accepting JSON POST data and returning an HTTP 200 status code with JSON data.</td>
 </tr>
-
 <tr>
 <td><code>expHours</code></td>
 <td>expHours defines the number of hours a token is valid by setting the <a href="https://jwt.io/">JWT</a> token expiration date. Clients can use a token indefinitely, or request new tokens any time, however, a token older than the specified hours should not be considered valid be a system consuming the token.</td>
 </tr>
-
 <tr>
 <td><code>getTokenRoute:</code></td>
 <td>Customize the internal POST route for token generation.</td>
 </tr>
-
 <tr>
 <td><code>checkTokenRoute:</code></td>
 <td>Customize the internal POST route for token validation.</td>
 </tr>
-
 <tr>
 <td><code>requestTokenData</code></td>
 <td>The default here produces the following JSON <code>{&quot;authorization&quot;: &quot;internal&quot;}</code>. You can add any JSON string to <code>requestTokenData</code>, however, since <a href="https://medium.com/@williamhayes/yaml-is-a-superset-of-json-it-is-explained-in-more-detail-here-1d758a069508">YAML is a superset of JSON</a> you can add a YAML formatted key/value tree as you would a plain-text JSON string.  <strong>Read more on <code>requestTokenData</code> below.</strong></td>
 </tr>
 </tbody>
 </table>
-
 <h4 id="requesttokendata">requestTokenData</h4>
-
 <p><a href="https://github.com/txn2/txtoken">txToken</a> proxies JSON POST data to an endpoint defined in <code>remote:</code> along with a with a <a href="https://oauth.net/2/bearer-tokens/">Bearer Token</a> in the request header. The <code>remote:</code> endpoint can use this for internal authentication. Utilization of the <a href="https://oauth.net/2/bearer-tokens/">Bearer Token</a> supplied by <a href="https://github.com/txn2/txtoken">txToken</a> to the <code>remote:</code> endpoint is optional. However, this may be useful as a secure and fast means of authenticating requests to the <code>remote:</code> API endpoint.</p>
-
 <h5 id="docker-run">Docker Run</h5>
-
 <p>Run the following command to fire up <a href="https://github.com/txn2/txtoken">txToken</a> in the foreground and watch the logs:</p>
-
-<pre><code class="language-bash">docker run --rm \
-    -e CFG_FILE=/config/txtoken.yml \
-    -v $(pwd)/cfg.yml:/config/txtoken.yml \
-    -p 8888:8888 \
-    txn2/txtoken
-</code></pre>
-
-<p>In a separate terminal issue a <a href="https://curl.haxx.se/">curl</a> call to <a href="https://github.com/txn2/txtoken">txToken</a>:</p>
-
-<pre><code class="language-bash">curl -X POST \
-  http:/localhost:8888/getToken \
-  -d '{&quot;email&quot;:&quot;john.d@example.com&quot;,&quot;password&quot;:&quot;12345&quot;}'
-</code></pre>
-
-<h5 id="docker-compose">Docker Compose</h5>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">docker run --rm <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    -e CFG_FILE<span style="color:#f92672">=</span>/config/txtoken.yml <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    -v <span style="color:#66d9ef">$(</span>pwd<span style="color:#66d9ef">)</span>/cfg.yml:/config/txtoken.yml <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    -p 8888:8888 <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    txn2/txtoken
+</code></pre></div><p>In a separate terminal issue a <a href="https://curl.haxx.se/">curl</a> call to <a href="https://github.com/txn2/txtoken">txToken</a>:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">curl -X POST <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>  http:/localhost:8888/getToken <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>  -d <span style="color:#e6db74">&#39;{&#34;email&#34;:&#34;john.d@example.com&#34;,&#34;password&#34;:&#34;12345&#34;}&#39;</span>
+</code></pre></div><h5 id="docker-compose">Docker Compose</h5>
 <p>Create <code>docker-compose.yml</code> consisting of:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">version</span>: <span style="color:#e6db74">&#34;3.2&#34;</span>
 
-<pre><code class="language-yaml">version: &quot;3.2&quot;
-
-services:
-  txtoken:
-    image: txn2/txtoken:latest
-    volumes:
+<span style="color:#66d9ef">services</span>:
+  <span style="color:#66d9ef">txtoken</span>:
+    <span style="color:#66d9ef">image</span>: txn2/txtoken:latest
+    <span style="color:#66d9ef">volumes</span>:
       - ./txtoken.yml:/config/txtoken.yml
-    environment:
-        CFG_FILE: /config/txtoken.yml
-    ports:
-      - &quot;8888:8888&quot;
-</code></pre>
-
-<p>Run <code>docker-compose</code> in the foreground to watch the logs:</p>
-
-<pre><code class="language-bash">docker-compose up
-</code></pre>
-
-<p>In a separate terminal issue a <a href="https://curl.haxx.se/">curl</a> call to <a href="https://github.com/txn2/txtoken">txToken</a>:</p>
-
-<pre><code class="language-bash">curl -X POST \
-  https://auth.examle.com/login \
-  -d '{&quot;email&quot;:&quot;john.d@example.com&quot;,&quot;password&quot;:&quot;12345&quot;}'
-</code></pre>
-
-<h5 id="kubernetes">Kubernetes</h5>
-
+    <span style="color:#66d9ef">environment</span>:
+        <span style="color:#66d9ef">CFG_FILE</span>: /config/txtoken.yml
+    <span style="color:#66d9ef">ports</span>:
+      - <span style="color:#e6db74">&#34;8888:8888&#34;</span>
+</code></pre></div><p>Run <code>docker-compose</code> in the foreground to watch the logs:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">docker-compose up
+</code></pre></div><p>In a separate terminal issue a <a href="https://curl.haxx.se/">curl</a> call to <a href="https://github.com/txn2/txtoken">txToken</a>:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">curl -X POST <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>  https://auth.examle.com/login <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>  -d <span style="color:#e6db74">&#39;{&#34;email&#34;:&#34;john.d@example.com&#34;,&#34;password&#34;:&#34;12345&#34;}&#39;</span>
+</code></pre></div><h5 id="kubernetes">Kubernetes</h5>
 <p>The following is an example of a <a href="https://kubernetes.io/docs/concepts/services-networking/service/">Service</a>, <a href="https://kubernetes.io/docs/tasks/configure-pod-container/configure-pod-configmap/">ConfigMap</a>, <a href="https://kubernetes.io/docs/concepts/workloads/controllers/deployment/">Deployment</a>, and <a href="/web-cluster-ingress/">Ingress</a> combined into one file:</p>
-
-<script src="https://gist.github.com/cjimti/f006a4f57dd2ef6245866bf5ba0250fd.js"></script>
-
+<!-- raw HTML omitted -->
 <h2 id="resources">Resources</h2>
-
 <p>If you found this article useful, you may want to check out <a href="http://localhost:4000/tag/phc.txn2.net/">all my articles on Kubernetes</a>, used to build on the <a href="/hobby-cluster/">Production Hobby Cluster</a>, an excellent environment for developing and testing cloud-native microservices like <a href="https://github.com/txn2/txtoken">txToken</a>. While using Minikube or similar environments for testing and developing cloud-native <a href="http://microservices.io/">microservice</a>s, I find it a much better experience to use a more true-to-production cluster.</p>
-
 <p>If in a few days you find yourself setting up a <a href="/hobby-cluster/">Production Hobby Cluster</a> in Japan or Germany on <a href="https://www.linode.com/?r=848a6b0b21dc8edd33124f05ec8f99207ccddfde">Linode</a>, and another two in Australia and France on <a href="https://www.vultr.com/?ref=7418713">vultr</a>, then you may have just joined the PHC (Performance <a href="/hobby-cluster/">Hobby Cluster</a>s) club. Some people tinker late at night on their truck, we benchmark and test the resilience of node failures on our overseas, budget kubernetes clusters. It&rsquo;s all about going big, on the cheap.</p>
-
-<p><a href="https://amzn.to/2IOe8Yu"><img src="https://github.com/cjimti/mk/raw/master/images/content/k8s-tshirt-banner.jpg" alt="k8s performance hobby clusters" /></a></p>
+<p><a href="https://amzn.to/2IOe8Yu"><img src="https://github.com/cjimti/mk/raw/master/images/content/k8s-tshirt-banner.jpg" alt="k8s performance hobby clusters"></a></p>
 
 
                 <p>
                    <span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">JWT Microservice, Tokenize Remote APIs: Using txToken to create JWT Tokens from JSON POST data.</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="https://imti.co/" property="cc:attributionName" rel="cc:attributionURL">Craig Johnston</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
                     <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a>
                 </p>
+
+                <h5>SUPPORT</h5>
+                <p>
+                    Order my new Kubernetes book: <a href="https://amzn.to/34D56v6">Advanced Platform Development with Kubernetes: Enabling Data Management, the Internet of Things, Blockchain, and Machine Learning</a>
+                </p>
+                <script type="text/javascript">
+                  amzn_assoc_tracking_id = "imti-20";
+                  amzn_assoc_ad_mode = "manual";
+                  amzn_assoc_ad_type = "smart";
+                  amzn_assoc_marketplace = "amazon";
+                  amzn_assoc_region = "US";
+                  amzn_assoc_design = "enhanced_links";
+                  amzn_assoc_asins = "1484256107";
+                  amzn_assoc_placement = "adunit";
+                  amzn_assoc_linkid = "14a9d8b8d1b0bd44e9256e0e0a948015";
+                </script>
+                <script src="//z-na.amazon-adsystem.com/widgets/onejs?MarketPlace=US"></script>
 
                 
                 <hr>

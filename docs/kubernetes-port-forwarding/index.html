@@ -87,7 +87,7 @@
       "url": "https:\/\/imti.co\/img\/craig_johnston_cjimti.jpg"
     }
   },
-  "description": "kubefwd helps to enable a seamless and efficient way to develop applications and services on a local workstation. Locally develop applications that intend to interact with other services in a Kubernetes cluster. kubefwd allows applications with connection strings like http:\/\/elasticsearch:9200\/ or tcp:\/\/db:3306 to communicate into the remote cluster. kubefwd can be used to reduce or eliminate the need for local environment specific connection configurations.\nI don\x26#39;t run Kubernetes locally, but I do depend on services running in remote clusters."
+  "description": "kubefwd helps to enable a seamless and efficient way to develop applications and services on a local workstation. Locally develop applications that intend to interact with other services in a Kubernetes cluster. kubefwd allows applications with connection strings like http:\/\/elasticsearch:9200\/ or tcp:\/\/db:3306 to communicate into the remote cluster. kubefwd can be used to reduce or eliminate the need for local environment specific connection configurations.\nI don\u0026#39;t run Kubernetes locally, but I do depend on services running in remote clusters."
 }
 </script>
 
@@ -211,117 +211,74 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h5>SHARE</h5>
-                <ul class="list-inline">
-                    <li><div class="addthis_inline_share_toolbox"></div></li>
-                </ul>
-
-                
-
-<p><a href="https://github.com/txn2/kubefwd">kubefwd</a> helps to enable a seamless and efficient way to develop applications and services on a local workstation. Locally develop applications that intend to interact with other services in a Kubernetes cluster. <a href="https://github.com/txn2/kubefwd">kubefwd</a> allows applications with connection strings like <a href="http://elasticsearch:9200/">http://elasticsearch:9200/</a> or tcp://db:3306 to communicate into the remote cluster. <a href="https://github.com/txn2/kubefwd">kubefwd</a> can be used to reduce or eliminate the need for local environment specific connection configurations.</p>
-
+                <p><a href="https://github.com/txn2/kubefwd">kubefwd</a> helps to enable a seamless and efficient way to develop applications and services on a local workstation. Locally develop applications that intend to interact with other services in a Kubernetes cluster. <a href="https://github.com/txn2/kubefwd">kubefwd</a> allows applications with connection strings like http://elasticsearch:9200/ or tcp://db:3306 to communicate into the remote cluster. <a href="https://github.com/txn2/kubefwd">kubefwd</a> can be used to reduce or eliminate the need for local environment specific connection configurations.</p>
 <blockquote class="twitter-tweet"><p lang="en" dir="ltr">I don&#39;t run Kubernetes locally, but I do depend on services running in remote clusters. I either extract service IPs, or set up port forwarding, and keep my existing workflow. kubefwd is the tool I&#39;ve been missing. <a href="https://t.co/SCMZfl4eZn">https://t.co/SCMZfl4eZn</a> <a href="https://t.co/7j6EpevHN1">pic.twitter.com/7j6EpevHN1</a></p>&mdash; Kelsey Hightower (@kelseyhightower) <a href="https://twitter.com/kelseyhightower/status/1059519420064706579?ref_src=twsrc%5Etfw">November 5, 2018</a></blockquote>
 <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
-
 <p>Developing services in a <a href="https://microservices.io/">Microservices</a> architecture presents local development challenges, especially when the service you are developing needs to interact with a mixture of other services. <a href="https://microservices.io/">Microservices</a>, like any other applications are rarely ever self-contained and often need access to databases, authentication services, and other public or private APIs. Loosely-coupled applications still have couplings, they happen on a higher layer of the application stack and often through TCP networking.</p>
-
-<h2 id="kubectl-port-forward-port-forward"><a href="https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#port-forward">kubectl port-forward</a></h2>
-
-<p>The <a href="https://kubernetes.io/docs/reference/kubectl/overview/">kubectl</a> command offers a vast array of features for working with a <a href="https://kubernetes.io/">Kubernetes</a> cluster, one of which is the <a href="https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#port-forward">port-forward</a> command. Forwarding one or more ports on your local workstation to a Kubernetes service, deployment or individual pod is a simple command. The <a href="https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#port-forward">kubectl</a> was likely developed as a debugging utility and works great for that.</p>
-
+<h2 id="kubectl-port-forwardport-forward"><a href="https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#port-forward">kubectl port-forward</a></h2>
+<p>The <a href="https://kubernetes.io/docs/reference/kubectl/overview/">kubectl</a> command offers a vast array of features for working with a <a href="https://kubernetes.io/">Kubernetes</a> cluster, one of which is the <a href="https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#port-forward">port-forward</a> command. Forwarding one or more ports on your local workstation to a Kubernetes service, deployment or individual pod is a simple command. The <a href="https://kubernetes.io/docs/reference/kubectl/overview/">kubectl</a> <a href="https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#port-forward">port-forward</a> was likely developed as a debugging utility and works great for that.</p>
 <p>In most cases, it makes sense to port forward a Kubernetes <a href="https://kubernetes.io/docs/concepts/services-networking/service/">Service</a>. A Kubernetes Service can listen-on and forward to one or more ports of an associated <a href="https://kubernetes.io/docs/concepts/workloads/pods/pod/">Pod</a>. Services are a persistent resource, as they provide a consistent way to reach a Pod. Pods can come and go, where Services persist and find the appropriate Pod when one is available.</p>
-
 <p>The following is an example of a Kubectl <a href="https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#port-forward">port-forward</a> command, forwarding port 8080 on the local workstation to 8080 for the service <code>ok</code>, additionally port 8081 on the local workstation to port 80 on <code>ok</code> service, in the <a href="https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/">Namespace</a> <code>the-project</code>:</p>
-
-<pre><code class="language-bash">kubectl port-forward service/ok 8080:8080 8081:80 -n the-project
-</code></pre>
-
-<p>Access the Service through <code>http://localhost:8081/</code> and <code>http://localhost:8080/</code>. Additional services can be port forwarded by back-grounding the command or opening new terminals and issuing more kubectl port-forward commands.</p>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl port-forward service/ok 8080:8080 8081:80 -n the-project
+</code></pre></div><p>Access the Service through <code>http://localhost:8081/</code> and <code>http://localhost:8080/</code>. Additional services can be port forwarded by back-grounding the command or opening new terminals and issuing more kubectl port-forward commands.</p>
 <p><a href="https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#port-forward">kubectl port-forward</a> is convenient for quick one-off port forward access to a Services, Deployments or directly to Pods in your cluster. Your application can use environment variables or configuration files along with scripts that set up all the required forwards to bootstrap your local app. However, I find this cumbersome. <a href="https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#port-forward">kubectl port-forward</a> is great for debugging but falls a bit short for a development utility.</p>
 
-<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<ins class="adsbygoogle"
-     style="display:block; text-align:center;"
-     data-ad-layout="in-article"
-     data-ad-format="fluid"
-     data-ad-client="ca-pub-5984764595236029"
-     data-ad-slot="7730310582"></ins>
-<script>
-    (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-
+<table>
+    <tr><td colspan="2" style="text-align: center"><b>Please support my new book!</b></td></tr>
+    <tr>
+        <td>
+            <a href="https://amzn.to/3hAZUvx">
+                <img src="/img/kubernetes_platform_development.jpg" style="padding:0; margin: 0"/>
+            </a>
+        </td>
+        <td>
+            <b><a href="https://amzn.to/3hAZUvx">Advanced Platform Development with Kubernetes: Enabling Data Management, the Internet of Things, Blockchain, and Machine Learning</a></b>
+            <h4>What You'll Learn</h4>
+            <ul style="padding-bottom: 0; margin: 0">
+                <li>Use data pipelines with <b>MQTT, NiFi, Logstash, Kafka and Elasticsearch</b></li>
+                <li>Install a serverless platform with <b>OpenFaaS</b></li>
+                <li>Explore <b>blockchain</b> network capabilities with <b>Ethereum</b></li>
+                <li>Support a multi-tenant <b>data science</b> platform and web IDE with <b>JupyterHub, MLflow and Seldon Core</b></li>
+                <li>Build a <b>hybrid cluster</b>, securely bridging <b>on-premise</b> and cloud-based Kubernetes nodes</li>
+                <li>Implement an integrated development toolchain for continuous integration and deployment</li>
+            </ul>
+        </td>
+    </tr>
+</table>
 <h2 id="kubefwd"><a href="https://github.com/txn2/kubefwd">kubefwd</a></h2>
-
 <p><a href="https://github.com/txn2/kubefwd">kubefwd</a> was developed as a command line utility to forward Kubernetes <a href="https://kubernetes.io/docs/concepts/services-networking/service/">Service</a>s as they appear from within a <a href="https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/">Namespace</a>. Running <a href="https://github.com/txn2/kubefwd">kubefwd</a> allows you to access any <a href="https://kubernetes.io/docs/concepts/services-networking/service/">Service</a> from your local workstation just as you would from within another <a href="https://kubernetes.io/docs/concepts/workloads/pods/pod/">Pod</a> in the same Namespace on the cluster.</p>
-
-<p><img src="/images/content/kubefwd-net.png" alt="kubefwd - Kubernetes port forwarding" /></p>
-
+<p><img src="/images/content/kubefwd-net.png" alt="kubefwd - Kubernetes port forwarding"></p>
 <p>In the following example I forward services from <code>the-project</code> namespace:</p>
-
-<p><img src="https://raw.githubusercontent.com/txn2/kubefwd/master/kubefwd_ani.gif" alt="ubefwd - example" /></p>
-
+<p><img src="https://raw.githubusercontent.com/txn2/kubefwd/master/kubefwd_ani.gif" alt="ubefwd - example"></p>
 <p>The example above issues the following command:</p>
-
-<pre><code class="language-bash">sudo kubefwd services -n the-project
-</code></pre>
-
-<p><strong>sudo</strong> is required to allow <a href="https://github.com/txn2/kubefwd">kubefwd</a> access to <code>/etc/hosts</code> on the local workstation. While <a href="https://github.com/txn2/kubefwd">kubefwd</a> is running, DNS entries are temporarily placed in <code>/etc/hosts</code>, pointing all Service names found in the Namespace to the loopback network interface on the local workstation. <strong>sudo</strong> is also required to allow the binding of low port numbers, like port 80 on IP address assigned to the local on the workstation. If you don&rsquo;t have administrator access to the local workstation or don&rsquo;t wish to use <strong>sudo</strong> you can run <a href="https://github.com/txn2/kubefwd">kubefwd</a> in a docker container. I go over specifics for Docker further down in this article.</p>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo kubefwd services -n the-project
+</code></pre></div><p><strong>sudo</strong> is required to allow <a href="https://github.com/txn2/kubefwd">kubefwd</a> access to <code>/etc/hosts</code> on the local workstation. While <a href="https://github.com/txn2/kubefwd">kubefwd</a> is running, DNS entries are temporarily placed in <code>/etc/hosts</code>, pointing all Service names found in the Namespace to the loopback network interface on the local workstation. <strong>sudo</strong> is also required to allow the binding of low port numbers, like port 80 on IP address assigned to the local on the workstation. If you don&rsquo;t have administrator access to the local workstation or don&rsquo;t wish to use <strong>sudo</strong> you can run <a href="https://github.com/txn2/kubefwd">kubefwd</a> in a docker container. I go over specifics for Docker further down in this article.</p>
 <p>After <a href="https://github.com/txn2/kubefwd">kubefwd</a> begins forwarding Services from a Namespace they can be accessed directly on the local workstation. The example above illustrates using <strong>curl</strong> to call an HTTP Service called <strong>ok</strong> on port 80 followed Elasticsearch on port 9200.</p>
-
 <p>Local access to a Service named <code>ok</code> listening on port 80 in <code>the-project</code> Namespace on a remote Kubernetes cluster:</p>
-
-<pre><code class="language-bash">curl http://ok:80
-</code></pre>
-
-<p>Local access to a Service named <code>elasticsearch</code> listening on port 9200 in <code>the-project</code> Namespace on a remote Kubernetes cluster:</p>
-
-<pre><code class="language-bash">curl http://elasticsearch:9200
-</code></pre>
-
-<p><a href="https://github.com/txn2/kubefwd">kubefwd</a> gives each Service forward its own IP address, allowing multiple services to use the same port just as they may in the cluster. You might have a few services responding to port 80 or 8080 or have multiple databases like <code>db-customer:3306</code> and <code>db-auth:3306</code>.</p>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">curl http://ok:80
+</code></pre></div><p>Local access to a Service named <code>elasticsearch</code> listening on port 9200 in <code>the-project</code> Namespace on a remote Kubernetes cluster:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">curl http://elasticsearch:9200
+</code></pre></div><p><a href="https://github.com/txn2/kubefwd">kubefwd</a> gives each Service forward its own IP address, allowing multiple services to use the same port just as they may in the cluster. You might have a few services responding to port 80 or 8080 or have multiple databases like <code>db-customer:3306</code> and <code>db-auth:3306</code>.</p>
 <h2 id="install-kubefwd">Install <a href="https://github.com/txn2/kubefwd">kubefwd</a></h2>
-
 <h3 id="macos">MacOs</h3>
-
 <p>Installing <a href="https://github.com/txn2/kubefwd">kubefwd</a> on MacOs is simple with <a href="http://brew.sh/">homebrew</a>:</p>
-
-<pre><code class="language-bash">brew install txn2/tap/kubefwd
-</code></pre>
-
-<h3 id="linux">Linux</h3>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">brew install txn2/tap/kubefwd
+</code></pre></div><h3 id="linux">Linux</h3>
 <p>Check the <a href="https://github.com/txn2/kubefwd/releases">kubefwd releases</a> section on <a href="https://github.com/txn2/kubefwd">Github</a> for pre-compiled binary distributions as <strong>.deb</strong>, <strong>.rpm</strong>, <strong>.snap</strong> and <strong>.tar.gz</strong> for Linux based operating systems or Docker containers.</p>
-
 <h3 id="windows">Windows</h3>
-
-<p><a href="https://github.com/txn2/kubefwd">kubefwd</a> is not tested on Windows. If you are interested in testing and developing <a href="https://github.com/txn2/kubefwd">kubefwd</a> for windows, please contact me on <a href="https://twitter.com/cjimti">twitter</a>.</p>
-
+<p><a href="https://github.com/txn2/kubefwd">kubefwd</a> is not tested on Windows. If you are interested in testing and developing <a href="https://github.com/txn2/kubefwd">kubefwd</a> for windows, please contact me on <a href="https://twitter.com/cjimti">twitter</a> <a href="https://twitter.com/cjimti">@cjimti</a>.</p>
 <h2 id="kubefwd-in-docker"><a href="https://github.com/txn2/kubefwd">kubefwd</a> in Docker</h2>
-
 <p>Add <a href="https://github.com/txn2/kubefwd">kubefwd</a> to an existing docker container by installing it with one of the binary distributions found in the <a href="https://github.com/txn2/kubefwd/releases">kubefwd releases</a> on Github. You may also use the container <a href="https://hub.docker.com/r/txn2/kubefwd/">txn2/kubefwd</a> as the base container for another project.</p>
-
 <p>The <a href="https://hub.docker.com/r/txn2/kubefwd/">txn2/kubefwd</a> is based on Alpine linux 3.7 and only contains the <a href="https://github.com/txn2/kubefwd">kubefwd</a> linux binary and the <code>curl</code> utility (optional).  See the <a href="https://hub.docker.com/r/txn2/kubefwd/">txn2/kubefwd</a> source <a href="https://github.com/txn2/kubefwd/blob/master/Dockerfile">Dockerfile</a> if you are curious.</p>
-
 <p><a href="https://github.com/txn2/kubefwd">kubefwd</a> does not require <a href="https://kubernetes.io/docs/reference/kubectl/overview/">kubectl</a> to run. However <a href="https://github.com/txn2/kubefwd">kubefwd</a> does require the <a href="https://kubernetes.io/docs/reference/kubectl/overview/">kubectl</a> configuration to connect to the cluster.</p>
-
-<pre><code class="language-bash">docker run --name fwd -it --rm \
-    -v $HOME/.kube/config:/root/.kube/config \
-    txn2/kubefwd services -n the-project
-</code></pre>
-
-<p>Test the running Docker container with its built-in curl command:</p>
-
-<pre><code class="language-bash">docker exec fwd curl -s http://ok
-</code></pre>
-
-<h2 id="resources">Resources</h2>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">docker run --name fwd -it --rm <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    -v $HOME/.kube/config:/root/.kube/config <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    txn2/kubefwd services -n the-project
+</code></pre></div><p>Test the running Docker container with its built-in curl command:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">docker exec fwd curl -s http://ok
+</code></pre></div><h2 id="resources">Resources</h2>
 <p><a href="https://github.com/txn2/kubefwd">kubefwd</a> is an independent project not affiliated or endorsed by Kubernetes. I welcome any contributions to its development.</p>
-
 <ul>
 <li><a href="https://github.com/txn2/kubefwd">kubefwd</a> on <a href="https://github.com/txn2/kubefwd">Github</a></li>
 <li>kubectl <a href="https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#port-forward">port-forward</a> command</li>
@@ -330,14 +287,30 @@
 <li><a href="/gitlabci-golang-microservices/">A Microservices Workflow with Golang and Gitlab CI</a></li>
 <li><a href="/fass-kubeless-kubernetes/">Kubernetes FaaS - Kubeless Python and Elasticsearch</a></li>
 </ul>
-
-<p><a href="https://amzn.to/2IOe8Yu"><img src="https://github.com/cjimti/mk/raw/master/images/content/k8s-tshirt-banner.jpg" alt="k8s performance hobby clusters" /></a></p>
+<p><a href="https://amzn.to/2IOe8Yu"><img src="https://github.com/cjimti/mk/raw/master/images/content/k8s-tshirt-banner.jpg" alt="k8s performance hobby clusters"></a></p>
 
 
                 <p>
                    <span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">Kubernetes Port Forwarding for Local Development: Using kubefwd</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="https://imti.co/" property="cc:attributionName" rel="cc:attributionURL">Craig Johnston</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
                     <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a>
                 </p>
+
+                <h5>SUPPORT</h5>
+                <p>
+                    Order my new Kubernetes book: <a href="https://amzn.to/34D56v6">Advanced Platform Development with Kubernetes: Enabling Data Management, the Internet of Things, Blockchain, and Machine Learning</a>
+                </p>
+                <script type="text/javascript">
+                  amzn_assoc_tracking_id = "imti-20";
+                  amzn_assoc_ad_mode = "manual";
+                  amzn_assoc_ad_type = "smart";
+                  amzn_assoc_marketplace = "amazon";
+                  amzn_assoc_region = "US";
+                  amzn_assoc_design = "enhanced_links";
+                  amzn_assoc_asins = "1484256107";
+                  amzn_assoc_placement = "adunit";
+                  amzn_assoc_linkid = "14a9d8b8d1b0bd44e9256e0e0a948015";
+                </script>
+                <script src="//z-na.amazon-adsystem.com/widgets/onejs?MarketPlace=US"></script>
 
                 
                 <hr>

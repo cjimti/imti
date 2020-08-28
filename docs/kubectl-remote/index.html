@@ -87,7 +87,7 @@
       "url": "https:\/\/imti.co\/img\/craig_johnston_cjimti.jpg"
     }
   },
-  "description": "I use Minikube to run a local Kubernetes single node cluster (cluster?). However, I also work with a custom production cluster for work. This cluster consists of development and production nodes. I often need to switch between working on my local Minikube and the online Kubernetes cluster.\nTIP: Visit the kubectl Cheat Sheet often.\n   (adsbygoogle = window.adsbygoogle || []).push({});  The default configuration kubectl is stored in ~\/."
+  "description": "I use Minikube to run a local Kubernetes single node cluster (cluster?). However, I also work with a custom production cluster for work. This cluster consists of development and production nodes. I often need to switch between working on my local Minikube and the online Kubernetes cluster.\nTIP: Visit the kubectl Cheat Sheet often.\n Please support my new book!      Advanced Platform Development with Kubernetes: Enabling Data Management, the Internet of Things, Blockchain, and Machine Learning What You\u0027ll Learn Use data pipelines with MQTT, NiFi, Logstash, Kafka and Elasticsearch Install a serverless platform with OpenFaaS Explore blockchain network capabilities with Ethereum Support a multi-tenant data science platform and web IDE with JupyterHub, MLflow and Seldon Core Build a hybrid cluster, securely bridging on-premise and cloud-based Kubernetes nodes Implement an integrated development toolchain for continuous integration and deployment     The default configuration kubectl is stored in ~\/."
 }
 </script>
 
@@ -207,126 +207,95 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h5>SHARE</h5>
-                <ul class="list-inline">
-                    <li><div class="addthis_inline_share_toolbox"></div></li>
-                </ul>
-
-                
-
-<p>I use <a href="https://kubernetes.io/docs/getting-started-guides/minikube/">Minikube</a> to run a local <a href="https://kubernetes.io/">Kubernetes</a> single node cluster (cluster?). However, I also work with a custom production cluster for work. This cluster consists of development and production nodes. I often need to switch between working on my local <a href="https://kubernetes.io/docs/getting-started-guides/minikube/">Minikube</a> and the online <a href="https://kubernetes.io/">Kubernetes</a> cluster.</p>
-
+                <p>I use <a href="https://kubernetes.io/docs/getting-started-guides/minikube/">Minikube</a> to run a local <a href="https://kubernetes.io/">Kubernetes</a> single node cluster (cluster?). However, I also work with a custom production cluster for work. This cluster consists of development and production nodes. I often need to switch between working on my local <a href="https://kubernetes.io/docs/getting-started-guides/minikube/">Minikube</a> and the online <a href="https://kubernetes.io/">Kubernetes</a> cluster.</p>
 <p>TIP: Visit the <a href="https://kubernetes.io/docs/reference/kubectl/cheatsheet/">kubectl Cheat Sheet</a> often.</p>
 
-<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<ins class="adsbygoogle"
-     style="display:block; text-align:center;"
-     data-ad-layout="in-article"
-     data-ad-format="fluid"
-     data-ad-client="ca-pub-5984764595236029"
-     data-ad-slot="7730310582"></ins>
-<script>
-    (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-
+<table>
+    <tr><td colspan="2" style="text-align: center"><b>Please support my new book!</b></td></tr>
+    <tr>
+        <td>
+            <a href="https://amzn.to/3hAZUvx">
+                <img src="/img/kubernetes_platform_development.jpg" style="padding:0; margin: 0"/>
+            </a>
+        </td>
+        <td>
+            <b><a href="https://amzn.to/3hAZUvx">Advanced Platform Development with Kubernetes: Enabling Data Management, the Internet of Things, Blockchain, and Machine Learning</a></b>
+            <h4>What You'll Learn</h4>
+            <ul style="padding-bottom: 0; margin: 0">
+                <li>Use data pipelines with <b>MQTT, NiFi, Logstash, Kafka and Elasticsearch</b></li>
+                <li>Install a serverless platform with <b>OpenFaaS</b></li>
+                <li>Explore <b>blockchain</b> network capabilities with <b>Ethereum</b></li>
+                <li>Support a multi-tenant <b>data science</b> platform and web IDE with <b>JupyterHub, MLflow and Seldon Core</b></li>
+                <li>Build a <b>hybrid cluster</b>, securely bridging <b>on-premise</b> and cloud-based Kubernetes nodes</li>
+                <li>Implement an integrated development toolchain for continuous integration and deployment</li>
+            </ul>
+        </td>
+    </tr>
+</table>
 <p>The default configuration <code>kubectl</code> is stored in <code>~/.kube/config</code> and
 if you have <a href="https://kubernetes.io/docs/getting-started-guides/minikube/">Minikube</a> installed, it added the context <strong>minikube</strong> to your config.</p>
-
 <p>With <code>kubectl</code> you can specify a config to use with the command flag <code>--kubeconfig</code>.</p>
-
 <p>Below I am just pointing to default config. However, you can replace that with a different config to test.</p>
-
-<pre><code class="language-bash">kubectl --kubeconfig=/Users/enochroot/.kube/config config view
-</code></pre>
-
-<p>In addition to specifying a configuration file to use, <code>kubectl</code> configs also contain <strong>contexts</strong>. Each configuration file can have multiple contexts.</p>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl --kubeconfig<span style="color:#f92672">=</span>/Users/enochroot/.kube/config config view
+</code></pre></div><p>In addition to specifying a configuration file to use, <code>kubectl</code> configs also contain <strong>contexts</strong>. Each configuration file can have multiple contexts.</p>
 <h2 id="current-context">Current Context</h2>
-
 <p>A context is a combination of <strong>cluster</strong>, <strong>namespace</strong> and <strong>user</strong>.</p>
-
 <p>View the current context:</p>
-
-<pre><code class="language-bash">kubectl config view
-</code></pre>
-
-<p>You should now see the output the default configuration file.</p>
-
-<script src="https://gist.github.com/cjimti/907264f486f2f4118b33969ce184e20d.js"></script>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl config view
+</code></pre></div><p>You should now see the output the default configuration file.</p>
+<!-- raw HTML omitted -->
 <p>You can see we have only one context by default on a workstation that just installed <a href="https://kubernetes.io/docs/getting-started-guides/minikube/">Minikube</a>. You can also see the key <code>current-context:</code> is set to  <code>minikube</code>.</p>
-
 <p>Check the current config context:</p>
-
-<pre><code class="language-bash">kubectl config current-context
-</code></pre>
-
-<p>Output:</p>
-
-<pre><code class="language-bash">minikube
-</code></pre>
-
-<h2 id="add-a-cluster">Add a Cluster</h2>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl config current-context
+</code></pre></div><p>Output:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">minikube
+</code></pre></div><h2 id="add-a-cluster">Add a Cluster</h2>
 <p>Get the public certificate from your cluster or use <code>--insecure-skip-tls-verify</code>:</p>
-
-<pre><code class="language-bash">kubectl config set-cluster example --server https://example.com:6443 --certificate-authority=example.ca
-</code></pre>
-
-<p>Output</p>
-
-<pre><code class="language-bash">Cluster &quot;example&quot; set.
-</code></pre>
-
-<h2 id="add-a-user">Add a User</h2>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl config set-cluster example --server https://example.com:6443 --certificate-authority<span style="color:#f92672">=</span>example.ca
+</code></pre></div><p>Output</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">Cluster <span style="color:#e6db74">&#34;example&#34;</span> set.
+</code></pre></div><h2 id="add-a-user">Add a User</h2>
 <p>Users in the configuration can use a path to a certificate <code>--client-certificate</code> or use the certificate data directly <code>--client-certificate-data</code></p>
-
-<pre><code class="language-bash">kubectl config set-credentials example \
-    --client-certificate=/some/path/example.crt \
-    --client-key=/some/path/example.key
-</code></pre>
-
-<h2 id="add-a-context">Add a Context</h2>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl config set-credentials example <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    --client-certificate<span style="color:#f92672">=</span>/some/path/example.crt <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    --client-key<span style="color:#f92672">=</span>/some/path/example.key
+</code></pre></div><h2 id="add-a-context">Add a Context</h2>
 <p>Add a context to tie a user and cluster together.</p>
-
-<pre><code class="language-bash">kubectl config set-context deasil --cluster=example \
-    --namespace=default --user=example-admin
-</code></pre>
-
-<h2 id="change-current-context">Change Current Context</h2>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl config set-context deasil --cluster<span style="color:#f92672">=</span>example <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    --namespace<span style="color:#f92672">=</span>default --user<span style="color:#f92672">=</span>example-admin
+</code></pre></div><h2 id="change-current-context">Change Current Context</h2>
 <p>At this point you can change your current context from <code>minikube</code> to example:</p>
-
-<pre><code class="language-bash">kubectl config use-context example
-</code></pre>
-
-<p>Output:</p>
-
-<pre><code class="language-bash">example
-</code></pre>
-
-<p>Of course, <code>kubectl config use-context minikube</code> will put you back
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl config use-context example
+</code></pre></div><p>Output:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">example
+</code></pre></div><p>Of course, <code>kubectl config use-context minikube</code> will put you back
 to managing your local <a href="https://kubernetes.io/docs/getting-started-guides/minikube/">Minikube</a>.</p>
-
-<h2 id="port-forwarding-local-development">Port Forwarding / Local Development</h2>
-
+<h2 id="port-forwarding--local-development">Port Forwarding / Local Development</h2>
 <p>Check out <a href="https://github.com/txn2/kubefwd">kubefwd</a> for a simple command line utility that bulk forwards services of one or more namespaces to your local workstation.</p>
 
-<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<ins class="adsbygoogle"
-     style="display:block; text-align:center;"
-     data-ad-layout="in-article"
-     data-ad-format="fluid"
-     data-ad-client="ca-pub-5984764595236029"
-     data-ad-slot="7730310582"></ins>
-<script>
-    (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-
+<table>
+    <tr><td colspan="2" style="text-align: center"><b>Please support my new book!</b></td></tr>
+    <tr>
+        <td>
+            <a href="https://amzn.to/3hAZUvx">
+                <img src="/img/kubernetes_platform_development.jpg" style="padding:0; margin: 0"/>
+            </a>
+        </td>
+        <td>
+            <b><a href="https://amzn.to/3hAZUvx">Advanced Platform Development with Kubernetes: Enabling Data Management, the Internet of Things, Blockchain, and Machine Learning</a></b>
+            <h4>What You'll Learn</h4>
+            <ul style="padding-bottom: 0; margin: 0">
+                <li>Use data pipelines with <b>MQTT, NiFi, Logstash, Kafka and Elasticsearch</b></li>
+                <li>Install a serverless platform with <b>OpenFaaS</b></li>
+                <li>Explore <b>blockchain</b> network capabilities with <b>Ethereum</b></li>
+                <li>Support a multi-tenant <b>data science</b> platform and web IDE with <b>JupyterHub, MLflow and Seldon Core</b></li>
+                <li>Build a <b>hybrid cluster</b>, securely bridging <b>on-premise</b> and cloud-based Kubernetes nodes</li>
+                <li>Implement an integrated development toolchain for continuous integration and deployment</li>
+            </ul>
+        </td>
+    </tr>
+</table>
 <h2 id="resources">Resources</h2>
-
 <ul>
 <li><a href="https://kubernetes.io/docs/tasks/access-application-cluster/configure-access-multiple-clusters/">Configure Access to Multiple Clusters</a></li>
 <li><a href="https://stackoverflow.com/questions/36306904/configure-kubectl-command-to-access-remote-kubernetes-cluster-on-azure">stackoverflow</a></li>
@@ -338,6 +307,23 @@ to managing your local <a href="https://kubernetes.io/docs/getting-started-guide
                    <span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">Kubernetes Remote Control: Using kubectl to Control a Remote Kubernetes Cluster</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="https://imti.co/" property="cc:attributionName" rel="cc:attributionURL">Craig Johnston</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
                     <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a>
                 </p>
+
+                <h5>SUPPORT</h5>
+                <p>
+                    Order my new Kubernetes book: <a href="https://amzn.to/34D56v6">Advanced Platform Development with Kubernetes: Enabling Data Management, the Internet of Things, Blockchain, and Machine Learning</a>
+                </p>
+                <script type="text/javascript">
+                  amzn_assoc_tracking_id = "imti-20";
+                  amzn_assoc_ad_mode = "manual";
+                  amzn_assoc_ad_type = "smart";
+                  amzn_assoc_marketplace = "amazon";
+                  amzn_assoc_region = "US";
+                  amzn_assoc_design = "enhanced_links";
+                  amzn_assoc_asins = "1484256107";
+                  amzn_assoc_placement = "adunit";
+                  amzn_assoc_linkid = "14a9d8b8d1b0bd44e9256e0e0a948015";
+                </script>
+                <script src="//z-na.amazon-adsystem.com/widgets/onejs?MarketPlace=US"></script>
 
                 
                 <hr>

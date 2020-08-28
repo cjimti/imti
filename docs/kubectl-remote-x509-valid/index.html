@@ -87,7 +87,7 @@
       "url": "https:\/\/imti.co\/img\/craig_johnston_cjimti.jpg"
     }
   },
-  "description": "Just set up a brand new cluster? Changed the domain or IP of your admin node? Then you may have encountered the error Unable to connect to the server: x509: certificate is valid for \x26hellip;. The following is a fix for this common issue. However, there are often other reasons to rebuild your cluster cert, and it\x26rsquo;s relatively easy.\nTL;DR: \x26ldquo;I don\x26rsquo;t care about the fix I need to remote control my cluster."
+  "description": "Just set up a brand new cluster? Changed the domain or IP of your admin node? Then you may have encountered the error Unable to connect to the server: x509: certificate is valid for \u0026hellip;. The following is a fix for this common issue. However, there are often other reasons to rebuild your cluster cert, and it\u0026rsquo;s relatively easy.\nTL;DR: \u0026ldquo;I don\u0026rsquo;t care about the fix I need to remote control my cluster."
 }
 </script>
 
@@ -211,54 +211,49 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h5>SHARE</h5>
-                <ul class="list-inline">
-                    <li><div class="addthis_inline_share_toolbox"></div></li>
-                </ul>
-
-                
-
-<p>Just set up a brand new cluster? Changed the domain or IP of your admin node? Then you may have encountered the error
+                <p>Just set up a brand new cluster? Changed the domain or IP of your admin node? Then you may have encountered the error
 <strong>Unable to connect to the server: x509: certificate is valid for &hellip;</strong>. The following is a fix for this common issue. However, there are often other reasons to rebuild your cluster cert, and it&rsquo;s relatively easy.</p>
-
-<p>TL;DR: &ldquo;I don&rsquo;t care about the fix I need to remote control my cluster. Security? Whats that?&rdquo;:</p>
-
-<pre><code class="language-bash">kubectl --insecure-skip-tls-verify --context=some-context get pods
-</code></pre>
-
-<p>Let&rsquo;s say you want to fix the issue and not just <strong>skip-tls-verify</strong>. Ssh to the admin node and run the following
+<p>TL;DR: &ldquo;I don&rsquo;t care about the fix I need to remote control my cluster. Security? Whats that?&quot;:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl --insecure-skip-tls-verify --context<span style="color:#f92672">=</span>some-context get pods
+</code></pre></div><p>Let&rsquo;s say you want to fix the issue and not just <strong>skip-tls-verify</strong>. Ssh to the admin node and run the following
 (assuming Kubernetes 1.8 or greater):</p>
-
-<pre><code class="language-bash"># remove the certs
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># remove the certs</span>
 rm /etc/kubernetes/pki/apiserver.*
 
-# re-create with updated --apiserver-cert-extra-sans
-kubeadm alpha phase certs all --apiserver-advertise-address=0.0.0.0 --apiserver-cert-extra-sans=new.example.com
+<span style="color:#75715e"># re-create with updated --apiserver-cert-extra-sans</span>
+kubeadm alpha phase certs all --apiserver-advertise-address<span style="color:#f92672">=</span>0.0.0.0 --apiserver-cert-extra-sans<span style="color:#f92672">=</span>new.example.com
 
-# remove the kubernetes api server container
-docker rm -f `docker ps -q -f 'name=k8s_kube-apiserver*'`
+<span style="color:#75715e"># remove the kubernetes api server container</span>
+docker rm -f <span style="color:#e6db74">`</span>docker ps -q -f <span style="color:#e6db74">&#39;name=k8s_kube-apiserver*&#39;</span><span style="color:#e6db74">`</span>
 
-# restart the kublet
+<span style="color:#75715e"># restart the kublet</span>
 systemctl restart kubelet
-</code></pre>
-
-<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<ins class="adsbygoogle"
-     style="display:block; text-align:center;"
-     data-ad-layout="in-article"
-     data-ad-format="fluid"
-     data-ad-client="ca-pub-5984764595236029"
-     data-ad-slot="7730310582"></ins>
-<script>
-    (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-
-<h2 id="port-forwarding-local-development">Port Forwarding / Local Development</h2>
-
+</code></pre></div>
+<table>
+    <tr><td colspan="2" style="text-align: center"><b>Please support my new book!</b></td></tr>
+    <tr>
+        <td>
+            <a href="https://amzn.to/3hAZUvx">
+                <img src="/img/kubernetes_platform_development.jpg" style="padding:0; margin: 0"/>
+            </a>
+        </td>
+        <td>
+            <b><a href="https://amzn.to/3hAZUvx">Advanced Platform Development with Kubernetes: Enabling Data Management, the Internet of Things, Blockchain, and Machine Learning</a></b>
+            <h4>What You'll Learn</h4>
+            <ul style="padding-bottom: 0; margin: 0">
+                <li>Use data pipelines with <b>MQTT, NiFi, Logstash, Kafka and Elasticsearch</b></li>
+                <li>Install a serverless platform with <b>OpenFaaS</b></li>
+                <li>Explore <b>blockchain</b> network capabilities with <b>Ethereum</b></li>
+                <li>Support a multi-tenant <b>data science</b> platform and web IDE with <b>JupyterHub, MLflow and Seldon Core</b></li>
+                <li>Build a <b>hybrid cluster</b>, securely bridging <b>on-premise</b> and cloud-based Kubernetes nodes</li>
+                <li>Implement an integrated development toolchain for continuous integration and deployment</li>
+            </ul>
+        </td>
+    </tr>
+</table>
+<h2 id="port-forwarding--local-development">Port Forwarding / Local Development</h2>
 <p>Check out <a href="https://github.com/txn2/kubefwd">kubefwd</a> for a simple command line utility that bulk forwards services of one or more namespaces to your local workstation.</p>
-
 <h3 id="resources">Resources</h3>
-
 <ul>
 <li><a href="https://www.digitalocean.com/community/tutorials/how-to-use-systemctl-to-manage-systemd-services-and-units">systemctl</a> - How To Use Systemctl to Manage Systemd Services and Units</li>
 <li><a href="https://kubernetes.io/">Kubernetes</a></li>
@@ -271,6 +266,23 @@ systemctl restart kubelet
                    <span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">Kubectl x509 Unable to Connect: Kubernetes remote access and TLS certs.</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="https://imti.co/" property="cc:attributionName" rel="cc:attributionURL">Craig Johnston</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
                     <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a>
                 </p>
+
+                <h5>SUPPORT</h5>
+                <p>
+                    Order my new Kubernetes book: <a href="https://amzn.to/34D56v6">Advanced Platform Development with Kubernetes: Enabling Data Management, the Internet of Things, Blockchain, and Machine Learning</a>
+                </p>
+                <script type="text/javascript">
+                  amzn_assoc_tracking_id = "imti-20";
+                  amzn_assoc_ad_mode = "manual";
+                  amzn_assoc_ad_type = "smart";
+                  amzn_assoc_marketplace = "amazon";
+                  amzn_assoc_region = "US";
+                  amzn_assoc_design = "enhanced_links";
+                  amzn_assoc_asins = "1484256107";
+                  amzn_assoc_placement = "adunit";
+                  amzn_assoc_linkid = "14a9d8b8d1b0bd44e9256e0e0a948015";
+                </script>
+                <script src="//z-na.amazon-adsystem.com/widgets/onejs?MarketPlace=US"></script>
 
                 
                 <hr>

@@ -219,167 +219,122 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h5>SHARE</h5>
-                <ul class="list-inline">
-                    <li><div class="addthis_inline_share_toolbox"></div></li>
-                </ul>
-
-                
-
-<p>I create a lot of data visualizations for clients, many of which are internal, portal-style websites that present data in real time, as well as give options for viewing reports from previous time-frames. PDFs are useful for data such as bank statements or any form of time-snapshot progress reporting. It is common for clients to want PDF versions generated on a regular basis for sharing through email or other technologies.</p>
-
-<p><a href="https://github.com/txn2/txpdf"><img src="https://raw.githubusercontent.com/txn2/txpdf/master/assets/mast.jpg" alt="txn2/txpdf" /></a></p>
-
+                <p>I create a lot of data visualizations for clients, many of which are internal, portal-style websites that present data in real time, as well as give options for viewing reports from previous time-frames. PDFs are useful for data such as bank statements or any form of time-snapshot progress reporting. It is common for clients to want PDF versions generated on a regular basis for sharing through email or other technologies.</p>
+<p><a href="https://github.com/txn2/txpdf"><img src="https://raw.githubusercontent.com/txn2/txpdf/master/assets/mast.jpg" alt="txn2/txpdf"></a></p>
 <h2 id="background-html-to-pdf">Background (HTML to PDF)</h2>
-
 <p>The <a href="https://wkhtmltopdf.org/">wkhtmltopdf</a> utility has been around awhile and works great when you get it working correctly on your platform. However, the newest version as of this writing <strong>0.12.5</strong> has a <a href="https://github.com/wkhtmltopdf/wkhtmltopdf/issues">bug</a> prevening TOC generation on some platforms. Some Linux platforms require the installation of Microsoft font packs, and compiling from <a href="https://github.com/wkhtmltopdf/wkhtmltopdf">source</a> leads you down a rabbit hole of dependency hell.</p>
-
 <p><a href="https://github.com/txn2/txpdf">txpdf</a> is a web server written in <a href="https://golang.org">golang</a> and utilizes the go library <a href="https://github.com/SebastiaanKlippert/go-wkhtmltopdf">go-wkhtmltopdf</a> interact with a custom <a href="https://wkhtmltopdf.org/">wkhtmltopdf</a> binary explicitly compiled for an <a href="https://alpinelinux.org/">Alpine Linux</a> container with all the necessary dependencies. With <a href="https://github.com/txn2/txpdf">txpdf</a>, <a href="https://docs.docker.com/install/">Docker</a> is the only dependency, and therefore running web (html) to PDF conversion service.</p>
 
-<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<ins class="adsbygoogle"
-     style="display:block; text-align:center;"
-     data-ad-layout="in-article"
-     data-ad-format="fluid"
-     data-ad-client="ca-pub-5984764595236029"
-     data-ad-slot="7730310582"></ins>
-<script>
-    (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-
+<table>
+    <tr><td colspan="2" style="text-align: center"><b>Please support my new book!</b></td></tr>
+    <tr>
+        <td>
+            <a href="https://amzn.to/3hAZUvx">
+                <img src="/img/kubernetes_platform_development.jpg" style="padding:0; margin: 0"/>
+            </a>
+        </td>
+        <td>
+            <b><a href="https://amzn.to/3hAZUvx">Advanced Platform Development with Kubernetes: Enabling Data Management, the Internet of Things, Blockchain, and Machine Learning</a></b>
+            <h4>What You'll Learn</h4>
+            <ul style="padding-bottom: 0; margin: 0">
+                <li>Use data pipelines with <b>MQTT, NiFi, Logstash, Kafka and Elasticsearch</b></li>
+                <li>Install a serverless platform with <b>OpenFaaS</b></li>
+                <li>Explore <b>blockchain</b> network capabilities with <b>Ethereum</b></li>
+                <li>Support a multi-tenant <b>data science</b> platform and web IDE with <b>JupyterHub, MLflow and Seldon Core</b></li>
+                <li>Build a <b>hybrid cluster</b>, securely bridging <b>on-premise</b> and cloud-based Kubernetes nodes</li>
+                <li>Implement an integrated development toolchain for continuous integration and deployment</li>
+            </ul>
+        </td>
+    </tr>
+</table>
 <h2 id="docker-and-microservices">Docker and Microservices</h2>
-
 <p><a href="https://github.com/txn2/txpdf">txpdf</a> wraps <a href="https://wkhtmltopdf.org/">wkhtmltopdf</a> in a small <a href="https://alpinelinux.org/">Alpine Linux</a> container and exposes an API endpoint (/getPdf) on port 8080 by default.</p>
-
-<h3 id="run-txn2-txpdf">Run <a href="https://hub.docker.com/r/txn2/txpdf/">txn2/txpdf</a></h3>
-
+<h3 id="run-txn2txpdf">Run <a href="https://hub.docker.com/r/txn2/txpdf/">txn2/txpdf</a></h3>
 <p>To test it out make sure you have <a href="https://docs.docker.com/install/">Docker</a> installed. Open a terminal and run the following command:</p>
-
-<pre><code class="language-bash">docker run --rm -p 8080:8080 -e DEBUG=true txn2/txpdf
-</code></pre>
-
-<p>Docker pulls the latest <a href="https://hub.docker.com/r/txn2/txpdf/">txn2/txpdf</a> container, and forwards the port <strong>8080</strong> on your host machine to <strong>8080</strong> on the container. The <code>-e DEBUG=true</code> sets the environment variable <code>DEBUG</code> to <code>true</code>, which produces additional log data while you are testing.</p>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">docker run --rm -p 8080:8080 -e DEBUG<span style="color:#f92672">=</span>true txn2/txpdf
+</code></pre></div><p>Docker pulls the latest <a href="https://hub.docker.com/r/txn2/txpdf/">txn2/txpdf</a> container, and forwards the port <strong>8080</strong> on your host machine to <strong>8080</strong> on the container. The <code>-e DEBUG=true</code> sets the environment variable <code>DEBUG</code> to <code>true</code>, which produces additional log data while you are testing.</p>
 <h3 id="configuration">Configuration</h3>
-
 <p><a href="https://github.com/txn2/txpdf">txpdf</a> is configured on each call to it by posting JSON data. The easiest way to test is by using <a href="https://curl.haxx.se/">curl</a>. If you use MacOs and don&rsquo;t already have it, I recommend installing it with <a href="https://brew.sh/">homebrew</a> by typing <code>brew install curl</code>.</p>
-
 <p>Download or create a sample JSON configuration and use <a href="https://curl.haxx.se/">curl</a> to POST this configuration to the API running on the Docker container. You can download the and browse <a href="https://github.com/txn2/txpdf/tree/master/examples">example JSON</a> configurations from the example folder in the <a href="https://github.com/txn2/txpdf">txpdf</a> project. I routinely use <a href="https://www.gnu.org/software/wget/">wget</a> to download single files onto my mac; another easy <a href="https://brew.sh/">homebrew</a> install: <code>brew install wget</code>.</p>
-
-<pre><code class="language-bash">wget https://raw.githubusercontent.com/txn2/txpdf/master/examples/simple.json
-</code></pre>
-
-<p>You can download the <code>simple.json</code> with the command above, or create it in a text editor.</p>
-
-<pre><code class="language-json">{
-  &quot;options&quot;: {
-    &quot;print_media_type&quot;: true
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">wget https://raw.githubusercontent.com/txn2/txpdf/master/examples/simple.json
+</code></pre></div><p>You can download the <code>simple.json</code> with the command above, or create it in a text editor.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
+  <span style="color:#f92672">&#34;options&#34;</span>: {
+    <span style="color:#f92672">&#34;print_media_type&#34;</span>: <span style="color:#66d9ef">true</span>
   },
-  &quot;pages&quot;: [
+  <span style="color:#f92672">&#34;pages&#34;</span>: [
     {
-      &quot;Location&quot;: &quot;https://www.example.com&quot;
+      <span style="color:#f92672">&#34;Location&#34;</span>: <span style="color:#e6db74">&#34;https://www.example.com&#34;</span>
     }
   ]
 }
-</code></pre>
-
-<p>If you are not accustomed to working with JSON data then I recommend using an editor that checks for proper syntax, any errors prevent it from being parsed by the service. Sites like <a href="https://jsoneditoronline.org/">jsoneditoronline.org</a> are great for testing.</p>
-
+</code></pre></div><p>If you are not accustomed to working with JSON data then I recommend using an editor that checks for proper syntax, any errors prevent it from being parsed by the service. Sites like <a href="https://jsoneditoronline.org/">jsoneditoronline.org</a> are great for testing.</p>
 <h3 id="post">POST</h3>
-
 <p>Issue an HTTP POST request to the container with the following <code>curl</code> command:</p>
-
-<pre><code class="language-bash">curl -d &quot;@simple.json&quot; -X POST http://localhost:8080/getPdf --output test.pd
-</code></pre>
-
-<p><code>curl</code> POSTs the contents of <code>simple.json</code> to the path <code>/getPdf</code> on <code>localhost:8080</code>.</p>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">curl -d <span style="color:#e6db74">&#34;@simple.json&#34;</span> -X POST http://localhost:8080/getPdf --output test.pd
+</code></pre></div><p><code>curl</code> POSTs the contents of <code>simple.json</code> to the path <code>/getPdf</code> on <code>localhost:8080</code>.</p>
 <p><strong>Example:</strong></p>
-
 <p>In the terminal on top, I issue the Docker run command. The container runs a server and remains running until I stop the container. I could, of course, specify the <code>-d</code> flag to docker and run this in the background; however we are just testing. The end goal would be to run this container in a <a href="/hobby-cluster/">Custom Kubernetes Cluster</a> or a hosting provider capable of running Docker images.</p>
-
-<p><img src="/images/content/docker_run_example.gif" alt="Docker Run Example" /></p>
-
+<p><img src="/images/content/docker_run_example.gif" alt="Docker Run Example"></p>
 <p>You now have a file called <code>test.pdf</code> in the current directory. The directory in which you ran the <code>curl</code> command. The PDF should have the contents of the site <a href="https://example.com">https://example.com</a>.</p>
-
 <p><strong>simple.json</strong> contains a simple example of a single page site with no cover page or table of contents.</p>
-
 <h2 id="advanced-options-and-templating">Advanced Options and Templating</h2>
-
 <p><a href="https://github.com/txn2/txpdf">txpdf</a> treats the inbound JSON data as a <a href="https://golang.org/pkg/text/template/">go template</a> before being processed as configuration. This template pre-processing allows you to add dynamic content to the configuration and is useful for situations where you have a cron job or another automated process issue the same post on a particular interval, consider the example below. <a href="https://github.com/txn2/txpdf">txpdf</a> also includes the <a href="http://masterminds.github.io/sprig/">sprig</a> library to extend the basic functionality of <a href="https://golang.org/pkg/text/template/">go template</a>s.</p>
-
 <p>The following pulls a week of blog posts from <a href="https://hackaday.com/">hackaday</a> and starts with a <strong>Table of Contents</strong>, demonstrating multiple pages and <strong>date commands</strong> provided by <a href="http://masterminds.github.io/sprig/">sprig</a>:</p>
-
-<pre><code class="language-json">{% raw %}
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{<span style="color:#960050;background-color:#1e0010">%</span> <span style="color:#960050;background-color:#1e0010">raw</span> <span style="color:#960050;background-color:#1e0010">%</span>}
 {
-  &quot;options&quot;: {
-    &quot;toc_xsl_skip&quot;: true,
-    &quot;toc_header_text&quot;: &quot;Week of Hackaday {{now | date `2006/1/2` }}&quot;,
-    &quot;footer_left&quot;: &quot;[section]&quot;,
-    &quot;footer_right&quot;: &quot;Page [page] of [topage]&quot;,
-    &quot;custom_headers&quot;: {
-      &quot;User-Agent&quot;: &quot;txpdf&quot;
+  <span style="color:#f92672">&#34;options&#34;</span>: {
+    <span style="color:#f92672">&#34;toc_xsl_skip&#34;</span>: <span style="color:#66d9ef">true</span>,
+    <span style="color:#f92672">&#34;toc_header_text&#34;</span>: <span style="color:#e6db74">&#34;Week of Hackaday {{now | date `2006/1/2` }}&#34;</span>,
+    <span style="color:#f92672">&#34;footer_left&#34;</span>: <span style="color:#e6db74">&#34;[section]&#34;</span>,
+    <span style="color:#f92672">&#34;footer_right&#34;</span>: <span style="color:#e6db74">&#34;Page [page] of [topage]&#34;</span>,
+    <span style="color:#f92672">&#34;custom_headers&#34;</span>: {
+      <span style="color:#f92672">&#34;User-Agent&#34;</span>: <span style="color:#e6db74">&#34;txpdf&#34;</span>
     },
-    &quot;custom_header_propagation&quot;: true,
-    &quot;print_media_type&quot;: true,
-    &quot;no_background&quot;: true,
-    &quot;disable_javascript&quot;: true,
-    &quot;javascript_delay&quot;: 2000
+    <span style="color:#f92672">&#34;custom_header_propagation&#34;</span>: <span style="color:#66d9ef">true</span>,
+    <span style="color:#f92672">&#34;print_media_type&#34;</span>: <span style="color:#66d9ef">true</span>,
+    <span style="color:#f92672">&#34;no_background&#34;</span>: <span style="color:#66d9ef">true</span>,
+    <span style="color:#f92672">&#34;disable_javascript&#34;</span>: <span style="color:#66d9ef">true</span>,
+    <span style="color:#f92672">&#34;javascript_delay&#34;</span>: <span style="color:#ae81ff">2000</span>
   },
-  &quot;toc&quot;: true,
-  &quot;pages&quot;: [
+  <span style="color:#f92672">&#34;toc&#34;</span>: <span style="color:#66d9ef">true</span>,
+  <span style="color:#f92672">&#34;pages&#34;</span>: [
     {
-      &quot;Location&quot;: &quot;https://hackaday.com/{{now | date `2006/1/2` }}/&quot;
+      <span style="color:#f92672">&#34;Location&#34;</span>: <span style="color:#e6db74">&#34;https://hackaday.com/{{now | date `2006/1/2` }}/&#34;</span>
     },
     {
-      &quot;Location&quot;: &quot;https://hackaday.com/{{now | date_modify `-24h` | date `2006/1/2` }}/&quot;
+      <span style="color:#f92672">&#34;Location&#34;</span>: <span style="color:#e6db74">&#34;https://hackaday.com/{{now | date_modify `-24h` | date `2006/1/2` }}/&#34;</span>
     },
     {
-      &quot;Location&quot;: &quot;https://hackaday.com/{{now | date_modify `-48h` | date `2006/1/2` }}/&quot;
+      <span style="color:#f92672">&#34;Location&#34;</span>: <span style="color:#e6db74">&#34;https://hackaday.com/{{now | date_modify `-48h` | date `2006/1/2` }}/&#34;</span>
     },
     {
-      &quot;Location&quot;: &quot;https://hackaday.com/{{now | date_modify `-72h` | date `2006/1/2` }}/&quot;
+      <span style="color:#f92672">&#34;Location&#34;</span>: <span style="color:#e6db74">&#34;https://hackaday.com/{{now | date_modify `-72h` | date `2006/1/2` }}/&#34;</span>
     },
     {
-      &quot;Location&quot;: &quot;https://hackaday.com/{{now | date_modify `-96h` | date `2006/1/2` }}/&quot;
+      <span style="color:#f92672">&#34;Location&#34;</span>: <span style="color:#e6db74">&#34;https://hackaday.com/{{now | date_modify `-96h` | date `2006/1/2` }}/&#34;</span>
     },
     {
-      &quot;Location&quot;: &quot;https://hackaday.com/{{now | date_modify `-96h` | date `2006/1/2` }}/&quot;
+      <span style="color:#f92672">&#34;Location&#34;</span>: <span style="color:#e6db74">&#34;https://hackaday.com/{{now | date_modify `-96h` | date `2006/1/2` }}/&#34;</span>
     },
     {
-      &quot;Location&quot;: &quot;https://hackaday.com/{{now | date_modify `-120h` | date `2006/1/2` }}/&quot;
+      <span style="color:#f92672">&#34;Location&#34;</span>: <span style="color:#e6db74">&#34;https://hackaday.com/{{now | date_modify `-120h` | date `2006/1/2` }}/&#34;</span>
     }
   ]
 }
-{% endraw %}
-</code></pre>
-
-<p>To test this out, grab the JSON directly from the examples on Github with <code>wget</code>:</p>
-
-<pre><code class="language-bash">wget https://raw.githubusercontent.com/txn2/txpdf/master/examples/days.json
-</code></pre>
-
-<p>Make a call to the <a href="https://github.com/txn2/txpdf">txpdf</a> container with <code>curl</code> using the new <code>days.json</code> downloaded above:</p>
-
-<pre><code class="language-bash">curl -d &quot;@days.json&quot; -X POST http://localhost:8080/getPdf --output had.pdf
-</code></pre>
-
-<p>Check out the new file <strong>had.pdf</strong> with a <strong>Table of Contents</strong> and about a week&rsquo;s worth of <a href="https://hackaday.com/">hackaday</a>. It&rsquo;s not a great looking PDF, and the <a href="https://hackaday.com/">hackaday</a> site is probably not designed for PDFs or printers, but it&rsquo;s a good example to get the point. A week of hackaday is 55 pages. However, I have generated reports with over 200 pages and a cover sheet.</p>
-
-<p><img src="/images/content/hackaday.png" alt="hackaday pdf" /></p>
-
+{<span style="color:#960050;background-color:#1e0010">%</span> <span style="color:#960050;background-color:#1e0010">endraw</span> <span style="color:#960050;background-color:#1e0010">%</span>}
+</code></pre></div><p>To test this out, grab the JSON directly from the examples on Github with <code>wget</code>:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">wget https://raw.githubusercontent.com/txn2/txpdf/master/examples/days.json
+</code></pre></div><p>Make a call to the <a href="https://github.com/txn2/txpdf">txpdf</a> container with <code>curl</code> using the new <code>days.json</code> downloaded above:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">curl -d <span style="color:#e6db74">&#34;@days.json&#34;</span> -X POST http://localhost:8080/getPdf --output had.pdf
+</code></pre></div><p>Check out the new file <strong>had.pdf</strong> with a <strong>Table of Contents</strong> and about a week&rsquo;s worth of <a href="https://hackaday.com/">hackaday</a>. It&rsquo;s not a great looking PDF, and the <a href="https://hackaday.com/">hackaday</a> site is probably not designed for PDFs or printers, but it&rsquo;s a good example to get the point. A week of hackaday is 55 pages. However, I have generated reports with over 200 pages and a cover sheet.</p>
+<p><img src="/images/content/hackaday.png" alt="hackaday pdf"></p>
 <h3 id="conclusion">Conclusion</h3>
-
 <p>If you develop pages that you intend to convert to PDF you should design them with additional CSS for the print <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/@media">@media</a> type. CSS @media types allow you to have a separate layout for screen and print, along with hiding elements like navigation or any interactive component.</p>
-
 <p>Check out <a href="https://www.smashingmagazine.com/2015/01/designing-for-print-with-css/">Designing For Print With CSS</a> by Rachel Andrew on SmashingMag for an excellent introduction.</p>
-
 <h3 id="security">Security</h3>
-
 <p><a href="https://github.com/txn2/txpdf">txpdf</a> is not intended to be run on the public internet without some form of security. <a href="https://github.com/txn2/txpdf">txpdf</a> is intended as a backend <a href="/microservices/">Microservice</a>, a component of a more extensive system of services and therefore is intentionally limited in its scope as a standalone application.</p>
-
 <h3 id="resources">Resources</h3>
-
 <ul>
 <li><a href="https://github.com/txn2/n2pdf">n2pdf</a> container wrapped <a href="https://wkhtmltopdf.org/">wkhtmltopdf</a></li>
 <li><a href="https://github.com/txn2/txpdf">txpdf</a> web service</li>
@@ -391,6 +346,23 @@
                    <span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">Webpage to PDF Microservice: Automate PDF Report Generation</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="https://imti.co/" property="cc:attributionName" rel="cc:attributionURL">Craig Johnston</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
                     <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a>
                 </p>
+
+                <h5>SUPPORT</h5>
+                <p>
+                    Order my new Kubernetes book: <a href="https://amzn.to/34D56v6">Advanced Platform Development with Kubernetes: Enabling Data Management, the Internet of Things, Blockchain, and Machine Learning</a>
+                </p>
+                <script type="text/javascript">
+                  amzn_assoc_tracking_id = "imti-20";
+                  amzn_assoc_ad_mode = "manual";
+                  amzn_assoc_ad_type = "smart";
+                  amzn_assoc_marketplace = "amazon";
+                  amzn_assoc_region = "US";
+                  amzn_assoc_design = "enhanced_links";
+                  amzn_assoc_asins = "1484256107";
+                  amzn_assoc_placement = "adunit";
+                  amzn_assoc_linkid = "14a9d8b8d1b0bd44e9256e0e0a948015";
+                </script>
+                <script src="//z-na.amazon-adsystem.com/widgets/onejs?MarketPlace=US"></script>
 
                 
                 <hr>

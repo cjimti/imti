@@ -13,7 +13,7 @@
     <meta name="keyword"  content="Go, Kubernetes, Elasticsearch, Python, Docker, Big Data, Artificial Intelligence, Machine Learning, Blockchain">
     <link rel="shortcut icon" href="https://imti.co/img/favicon.ico">
 
-    <title>Security - IMTI - Craig Johnston</title>
+    <title>security - IMTI - Craig Johnston</title>
 
     <link rel="canonical" href="https://imti.co/tags/security/">
 	
@@ -216,7 +216,7 @@ Kubernetes and GitlabCI are the central components of our DevOps toolchain and h
 	
             Using ingress-nginx on Kubernetes makes adding CORS headers painless. Kubernetes ingress-nginx uses annotations as a quick way to allow you to specify the automatic generation of an extensive list of common nginx configuration options.
 Example ingress configuration enabling CORS:
-apiVersion: extensions/v1beta1 kind: Ingress metadata: name: api namespace: fuse labels: app: api annotations: nginx.ingress.kubernetes.io/enable-cors: &quot;true&quot; nginx.ingress.kubernetes.io/cors-allow-methods: &quot;PUT, GET, POST, OPTIONS&quot; nginx.ingress.kubernetes.io/cors-allow-origin: &quot;https://admin.example.com&quot; nginx.ingress.kubernetes.io/cors-allow-credentials: &quot;true&quot; spec: rules: - host: api.example.com http: paths: - backend: serviceName: api-example servicePort: 80 path: /api tls: - hosts: - api.
+apiVersion: extensions/v1beta1 kind: Ingress metadata: name: api namespace: fuse labels: app: api annotations: nginx.ingress.kubernetes.io/enable-cors: &#34;true&#34; nginx.ingress.kubernetes.io/cors-allow-methods: &#34;PUT, GET, POST, OPTIONS&#34; nginx.ingress.kubernetes.io/cors-allow-origin: &#34;https://admin.example.com&#34; nginx.ingress.kubernetes.io/cors-allow-credentials: &#34;true&#34; spec: rules: - host: api.example.com http: paths: - backend: serviceName: api-example servicePort: 80 path: /api tls: - hosts: - api.
        
         </div>
     </a>

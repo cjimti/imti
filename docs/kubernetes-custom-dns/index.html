@@ -87,7 +87,7 @@
       "url": "https:\/\/imti.co\/img\/craig_johnston_cjimti.jpg"
     }
   },
-  "description": "Customize the Upstream Nameservers used by kube-dns by Pods when looking up external hostnames from within a Kubernetes cluster. I found that adding custom Upstream Nameservers to my kube-dns solved many issues encountered in in the past with external hostname resolution on individual Pods.\nIf you want to experiment on a production-like cluster, I suggest reading my article \x26ldquo;Production Hobby Cluster\x26rdquo; for a guide on setting up a fun, cheap-yet-robust experimental cluster."
+  "description": "Customize the Upstream Nameservers used by kube-dns by Pods when looking up external hostnames from within a Kubernetes cluster. I found that adding custom Upstream Nameservers to my kube-dns solved many issues encountered in in the past with external hostname resolution on individual Pods.\nIf you want to experiment on a production-like cluster, I suggest reading my article \u0026ldquo;Production Hobby Cluster\u0026rdquo; for a guide on setting up a fun, cheap-yet-robust experimental cluster."
 }
 </script>
 
@@ -207,43 +207,41 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h5>SHARE</h5>
-                <ul class="list-inline">
-                    <li><div class="addthis_inline_share_toolbox"></div></li>
-                </ul>
-
-                
-
-<p>Customize the <a href="https://kubernetes.io/docs/tasks/administer-cluster/dns-custom-nameservers/">Upstream Nameservers</a> used by <a href="https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/">kube-dns</a> by <a href="https://kubernetes.io/docs/concepts/workloads/pods/pod/">Pods</a> when looking up external hostnames from within a Kubernetes cluster. I found that adding custom <a href="https://kubernetes.io/docs/tasks/administer-cluster/dns-custom-nameservers/">Upstream Nameservers</a> to my <a href="https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/">kube-dns</a> solved many issues encountered in in the past with external hostname resolution on individual <a href="https://kubernetes.io/docs/concepts/workloads/pods/pod/">Pods</a>.</p>
-
+                <p>Customize the <a href="https://kubernetes.io/docs/tasks/administer-cluster/dns-custom-nameservers/">Upstream Nameservers</a> used by <a href="https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/">kube-dns</a> by <a href="https://kubernetes.io/docs/concepts/workloads/pods/pod/">Pods</a> when looking up external hostnames from within a Kubernetes cluster. I found that adding custom <a href="https://kubernetes.io/docs/tasks/administer-cluster/dns-custom-nameservers/">Upstream Nameservers</a> to my <a href="https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/">kube-dns</a> solved many issues encountered in in the past with external hostname resolution on individual <a href="https://kubernetes.io/docs/concepts/workloads/pods/pod/">Pods</a>.</p>
 <p>If you want to experiment on a production-like cluster, I suggest reading my article &ldquo;<a href="/hobby-cluster/">Production Hobby Cluster</a>&rdquo; for a guide on setting up a fun, cheap-yet-robust experimental cluster.</p>
-
 <p>The following configuration sets the <a href="https://kubernetes.io/docs/tasks/administer-cluster/dns-custom-nameservers/">Upstream Nameservers</a> to use Google&rsquo;s <a href="https://developers.google.com/speed/public-dns/">DNS servers</a> 8.8.8.8 and 8.8.4.4.</p>
-
-<script src="https://gist.github.com/cjimti/3a500e8efffa1fcaedda8b844c7d6aa7.js"></script>
-
+<!-- raw HTML omitted -->
 <p>You can apply the above configuration with the following command:</p>
-
-<pre><code class="language-bash">kubectl apply -f https://gist.githubusercontent.com/cjimti/3a500e8efffa1fcaedda8b844c7d6aa7/raw/ae7329733452dda8cce573fb78f33c22c65cb3fa/00-kube-dns-upstream.yml
-</code></pre>
-
-<p>If you are having trouble with DNS on your Kubernetes cluster, you may want to read the official documentation on <a href="https://kubernetes.io/docs/tasks/administer-cluster/dns-debugging-resolution/">Debugging DNS Resolution</a>.</p>
-
-<h2 id="port-forwarding-local-development">Port Forwarding / Local Development</h2>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl apply -f https://gist.githubusercontent.com/cjimti/3a500e8efffa1fcaedda8b844c7d6aa7/raw/ae7329733452dda8cce573fb78f33c22c65cb3fa/00-kube-dns-upstream.yml
+</code></pre></div><p>If you are having trouble with DNS on your Kubernetes cluster, you may want to read the official documentation on <a href="https://kubernetes.io/docs/tasks/administer-cluster/dns-debugging-resolution/">Debugging DNS Resolution</a>.</p>
+<h2 id="port-forwarding--local-development">Port Forwarding / Local Development</h2>
 <p>Check out <a href="https://github.com/txn2/kubefwd">kubefwd</a> for a simple command line utility that bulk forwards services of one or more namespaces to your local workstation.</p>
-
-<hr />
-
+<hr>
 <p>If in a few days you find yourself setting up a cluster in Japan or Germany on <a href="https://www.linode.com/?r=848a6b0b21dc8edd33124f05ec8f99207ccddfde">Linode</a>, and another two in Australia and France on <a href="https://www.vultr.com/?ref=7418713">vultr</a>, then you may have just joined the PHC (Performance <a href="/hobby-cluster/">Hobby Cluster</a>s) club. Some people tinker late at night on their truck, we benchmark and test the resilience of node failures on our overseas, budget kubernetes clusters. It&rsquo;s all about going big, on the cheap.</p>
-
-<p><a href="https://amzn.to/2IOe8Yu"><img src="https://github.com/cjimti/mk/raw/master/images/content/k8s-tshirt-banner.jpg" alt="k8s performance hobby clusters" /></a></p>
+<p><a href="https://amzn.to/2IOe8Yu"><img src="https://github.com/cjimti/mk/raw/master/images/content/k8s-tshirt-banner.jpg" alt="k8s performance hobby clusters"></a></p>
 
 
                 <p>
                    <span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">Kubernetes Custom Upstream DNS: Customize upstream DNS resolution.</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="https://imti.co/" property="cc:attributionName" rel="cc:attributionURL">Craig Johnston</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
                     <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a>
                 </p>
+
+                <h5>SUPPORT</h5>
+                <p>
+                    Order my new Kubernetes book: <a href="https://amzn.to/34D56v6">Advanced Platform Development with Kubernetes: Enabling Data Management, the Internet of Things, Blockchain, and Machine Learning</a>
+                </p>
+                <script type="text/javascript">
+                  amzn_assoc_tracking_id = "imti-20";
+                  amzn_assoc_ad_mode = "manual";
+                  amzn_assoc_ad_type = "smart";
+                  amzn_assoc_marketplace = "amazon";
+                  amzn_assoc_region = "US";
+                  amzn_assoc_design = "enhanced_links";
+                  amzn_assoc_asins = "1484256107";
+                  amzn_assoc_placement = "adunit";
+                  amzn_assoc_linkid = "14a9d8b8d1b0bd44e9256e0e0a948015";
+                </script>
+                <script src="//z-na.amazon-adsystem.com/widgets/onejs?MarketPlace=US"></script>
 
                 
                 <hr>

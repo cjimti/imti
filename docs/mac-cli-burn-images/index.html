@@ -87,7 +87,7 @@
       "url": "https:\/\/imti.co\/img\/craig_johnston_cjimti.jpg"
     }
   },
-  "description": "Use your terminal to burn images fast and easy with dd. I do a lot of professional and hobby development for projects using devices such as Raspberry Pi, Orange Pi, Libre Computer, Tinker Board, etc. I run across a lot of tutorials with people downloading and using big GUI apps with clunky drag and drop interfaces to burn images.\nIt\x26rsquo;s one command in your terminal. Technically, it\x26rsquo;s three, but I don\x26rsquo;t count listing and unmounting as the final act of burning."
+  "description": "Use your terminal to burn images fast and easy with dd. I do a lot of professional and hobby development for projects using devices such as Raspberry Pi, Orange Pi, Libre Computer, Tinker Board, etc. I run across a lot of tutorials with people downloading and using big GUI apps with clunky drag and drop interfaces to burn images.\nIt\u0026rsquo;s one command in your terminal. Technically, it\u0026rsquo;s three, but I don\u0026rsquo;t count listing and unmounting as the final act of burning."
 }
 </script>
 
@@ -207,39 +207,18 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h5>SHARE</h5>
-                <ul class="list-inline">
-                    <li><div class="addthis_inline_share_toolbox"></div></li>
-                </ul>
-
-                
-
-<p>Use your terminal to burn images fast and easy with <strong><a href="https://en.wikipedia.org/wiki/Dd_(Unix)">dd</a></strong>. I do a lot of professional and hobby development for projects using devices such as <a href="https://amzn.to/2JwJeEu">Raspberry Pi</a>, <a href="https://amzn.to/2H5DL9v">Orange Pi</a>, <a href="https://amzn.to/2GLp8Vg">Libre Computer</a>, <a href="https://amzn.to/2HiX9NZ">Tinker Board</a>, etc. I run across a lot of tutorials with people downloading and using big GUI apps with clunky drag and drop interfaces to burn images.</p>
-
+                <p>Use your terminal to burn images fast and easy with <strong><a href="https://en.wikipedia.org/wiki/Dd_(Unix)">dd</a></strong>. I do a lot of professional and hobby development for projects using devices such as <a href="https://amzn.to/2JwJeEu">Raspberry Pi</a>, <a href="https://amzn.to/2H5DL9v">Orange Pi</a>, <a href="https://amzn.to/2GLp8Vg">Libre Computer</a>, <a href="https://amzn.to/2HiX9NZ">Tinker Board</a>, etc. I run across a lot of tutorials with people downloading and using big GUI apps with clunky drag and drop interfaces to burn images.</p>
 <p>It&rsquo;s one command in your terminal. Technically, it&rsquo;s three, but I don&rsquo;t count listing and unmounting as the final act of burning.</p>
-
-<h2 id="1-list-disks">1 - List Disks</h2>
-
+<h2 id="1---list-disks">1 - List Disks</h2>
 <p>Insert your SD card and from the command line use <a href="https://developer.apple.com/legacy/library/documentation/Darwin/Reference/ManPages/man8/diskutil.8.html">diskUtil</a> to lists all your drives.</p>
-
-<pre><code class="language-bash">diskUtil list
-</code></pre>
-
-<script src="https://gist.github.com/cjimti/059b841f492506936f2950c463b46d50.js"></script>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">diskUtil list
+</code></pre></div><!-- raw HTML omitted -->
 <p>You are going to want to stay away from disk0 and disk1. You don&rsquo;t want to kill your hard drive. Also, watch out for other attached storage. I can see my 32g mounted as <strong>/dev/disk3</strong>.</p>
-
-<h2 id="2-unmount-disks">2 - Unmount Disks</h2>
-
+<h2 id="2---unmount-disks">2 - Unmount Disks</h2>
 <p>Unmount the SD card. In my case, it&rsquo;s <strong>/dev/disk3</strong>. If you have additional attached storage, your SD card might be disk 4, 5, or higher.</p>
-
-<pre><code class="language-bash">diskUtil unmounDisk /dev/disk3
-</code></pre>
-
-<h2 id="3-burn-image">3 - Burn Image</h2>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">diskUtil unmounDisk /dev/disk3
+</code></pre></div><h2 id="3---burn-image">3 - Burn Image</h2>
 <p>The last step is the fantastic little utility <strong><a href="https://en.wikipedia.org/wiki/Dd_(Unix)">dd</a></strong>. <a href="https://en.wikipedia.org/wiki/Dd_(Unix)">dd</a> copies any file to almost anywhere. We can use dd to stream the raw bytes from the image directed to our unmounted disk. On a Mac, the raw disk is accessed with an <strong>r</strong> in front of the device name. Raw access to my /dev/disk3 is /dev/<strong>r</strong>disk3. Give three arguments.</p>
-
 <table>
 <thead>
 <tr>
@@ -247,42 +226,29 @@
 <th>Description / Value</th>
 </tr>
 </thead>
-
 <tbody>
 <tr>
 <td>if=</td>
 <td><strong>In file</strong>: Specify the path to the file you want to send</td>
 </tr>
-
 <tr>
 <td>of=</td>
 <td><strong>Out file</strong>: Specify the path to the file to be written. Yes, the device is a file. Remember in Unil/Linux/Max everything is a file. So /dev/rdisk99 is a file (it&rsquo;s a device, but we operate on it as a file)</td>
 </tr>
-
 <tr>
 <td>bs=</td>
 <td><strong>Block size</strong>: dd streams the data it reads from if= in chunks. Depending on the capabilities of the device writing larger chunks will speed up the write.</td>
 </tr>
 </tbody>
 </table>
-
 <p>Example dd command to burn images:</p>
-
-<pre><code class="language-bash">sudo dd if=Armbian.img of=/dev/rdisk3 bs=5m
-</code></pre>
-
-<p>I find that a block size of 5m is the sweet spot for my card reader and the SD cards I use (SanDisk Ultra 32G).</p>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo dd <span style="color:#66d9ef">if</span><span style="color:#f92672">=</span>Armbian.img of<span style="color:#f92672">=</span>/dev/rdisk3 bs<span style="color:#f92672">=</span>5m
+</code></pre></div><p>I find that a block size of 5m is the sweet spot for my card reader and the SD cards I use (SanDisk Ultra 32G).</p>
 <p>You need to use <strong>sudo</strong> as only a privileged user can write directly to a device in this manner, which is good since you can easily overwrite your hard drive on disk 0 or 1.</p>
-
 <p>Wait for <strong>dd</strong> to finish or hit Control-T from time-to-time for some status.</p>
-
 <p>An 8GB image takes about 10-15 minutes on my workstation depending on the quality of the SD card. Cheap or damaged cards will take a very long time to write.</p>
-
 <p>I have tried a few of the full GUI apps for burning but don&rsquo;t seem to get the speed and control of just typing a few commands.</p>
-
 <h3 id="resources">Resources</h3>
-
 <ul>
 <li><a href="https://en.wikipedia.org/wiki/Dd_(Unix)">dd</a> on Wikipedia</li>
 <li><a href="https://developer.apple.com/legacy/library/documentation/Darwin/Reference/ManPages/man8/diskutil.8.html">diskUtil</a> official Manpage</li>
@@ -298,6 +264,23 @@
                    <span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">Burn SD Images on MacOs: Use the command line to burn SD cards, easy and fast.</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="https://imti.co/" property="cc:attributionName" rel="cc:attributionURL">Craig Johnston</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
                     <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a>
                 </p>
+
+                <h5>SUPPORT</h5>
+                <p>
+                    Order my new Kubernetes book: <a href="https://amzn.to/34D56v6">Advanced Platform Development with Kubernetes: Enabling Data Management, the Internet of Things, Blockchain, and Machine Learning</a>
+                </p>
+                <script type="text/javascript">
+                  amzn_assoc_tracking_id = "imti-20";
+                  amzn_assoc_ad_mode = "manual";
+                  amzn_assoc_ad_type = "smart";
+                  amzn_assoc_marketplace = "amazon";
+                  amzn_assoc_region = "US";
+                  amzn_assoc_design = "enhanced_links";
+                  amzn_assoc_asins = "1484256107";
+                  amzn_assoc_placement = "adunit";
+                  amzn_assoc_linkid = "14a9d8b8d1b0bd44e9256e0e0a948015";
+                </script>
+                <script src="//z-na.amazon-adsystem.com/widgets/onejs?MarketPlace=US"></script>
 
                 
                 <hr>

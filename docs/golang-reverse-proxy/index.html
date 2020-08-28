@@ -87,7 +87,7 @@
       "url": "https:\/\/imti.co\/img\/craig_johnston_cjimti.jpg"
     }
   },
-  "description": "Reverse proxies are standard components in many web architectures, from Nginx in front of php-fpm serving Drupal or Wordpress, to endless mixtures of load balancers, security appliances, and popular firewall applications. Reverse proxies differ from forward proxies in little but their intended implementation, be it service-side or client side. The following information is useful in either context. However, I focus on a service-side architecture. Further down this article, I\x26rsquo;ll be going over the reasonably simple go code needed to develop a basic, yet production quality proxy, but first I\x26rsquo;ll give you my take on why they solve so many problems and offer up my little workhorse, n2proxy."
+  "description": "Reverse proxies are standard components in many web architectures, from Nginx in front of php-fpm serving Drupal or Wordpress, to endless mixtures of load balancers, security appliances, and popular firewall applications. Reverse proxies differ from forward proxies in little but their intended implementation, be it service-side or client side. The following information is useful in either context. However, I focus on a service-side architecture. Further down this article, I\u0026rsquo;ll be going over the reasonably simple go code needed to develop a basic, yet production quality proxy, but first I\u0026rsquo;ll give you my take on why they solve so many problems and offer up my little workhorse, n2proxy."
 }
 </script>
 
@@ -211,285 +211,197 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h5>SHARE</h5>
-                <ul class="list-inline">
-                    <li><div class="addthis_inline_share_toolbox"></div></li>
-                </ul>
-
-                
-
-<p>Reverse proxies are standard components in many web architectures, from <a href="https://www.nginx.com/">Nginx</a> in front of <a href="https://php-fpm.org/">php-fpm</a> serving <a href="http://www.drupal.com/">Drupal</a> or <a href="https://wordpress.org/">Wordpress</a>, to endless mixtures of load balancers, security appliances, and popular firewall applications. <a href="https://www.jscape.com/blog/bid/87783/Forward-Proxy-vs-Reverse-Proxy">Reverse proxies differ from forward proxies</a> in little but their intended implementation, be it service-side or client side. The following information is useful in either context. However, I focus on a service-side architecture. Further down this article, I&rsquo;ll be going over the reasonably simple <a href="https://golang.org/">go</a> code needed to develop a basic, yet production quality proxy, but first I&rsquo;ll give you my take on why they solve so many problems and offer up my little workhorse, <a href="https://github.com/txn2/n2proxy">n2proxy</a>.</p>
-
+                <p>Reverse proxies are standard components in many web architectures, from <a href="https://www.nginx.com/">Nginx</a> in front of <a href="https://php-fpm.org/">php-fpm</a> serving <a href="http://www.drupal.com/">Drupal</a> or <a href="https://wordpress.org/">Wordpress</a>, to endless mixtures of load balancers, security appliances, and popular firewall applications. <a href="https://www.jscape.com/blog/bid/87783/Forward-Proxy-vs-Reverse-Proxy">Reverse proxies differ from forward proxies</a> in little but their intended implementation, be it service-side or client side. The following information is useful in either context. However, I focus on a service-side architecture. Further down this article, I&rsquo;ll be going over the reasonably simple <a href="https://golang.org/">go</a> code needed to develop a basic, yet production quality proxy, but first I&rsquo;ll give you my take on why they solve so many problems and offer up my little workhorse, <a href="https://github.com/txn2/n2proxy">n2proxy</a>.</p>
 <h2 id="reverse-proxies">Reverse Proxies</h2>
-
 <p>So why do we write custom Reverse Proxies? We don&rsquo;t need to write another <a href="https://www.nginx.com/">Nginx</a> or <a href="http://www.haproxy.org/">HAProxy</a> unless we are directly in the business to do so. Reverse Proxies have the capability of providing a variety solutions beyond their common usage. Custom reverse proxies are great solutions for:</p>
-
 <ul>
 <li>Middleware logging into message queues</li>
 <li>Event triggering</li>
 <li>API adaptors and translators</li>
 <li>Message Buffering</li>
 </ul>
-
 <p>Proxies give you complete control over the communication between a client and a service, without needing to modify either, whether it be impractical or impossible. It&rsquo;s like tapping a phone line where you don&rsquo;t just get to listen but modify the conversation itself.</p>
-
 <h2 id="n2proxy">n2proxy</h2>
-
-<p><img src="https://raw.githubusercontent.com/txn2/n2proxy/master/mast.jpg" alt="n2proxy" /></p>
-
+<p><img src="https://raw.githubusercontent.com/txn2/n2proxy/master/mast.jpg" alt="n2proxy"></p>
 <p>I put <a href="https://github.com/txn2/n2proxy">n2proxy</a> together from a few different projects that had very different needs but the same underpinning solution. A common problem, are older or proprietary systems that lack reasonable security standards, these older sites and web apps suffer routinely from <a href="https://www.owasp.org/index.php/Cross-site_Scripting_(XSS)">XSS</a>, <a href="https://www.owasp.org/index.php/SQL_Injection">SQL injection</a> and many vulnerabilities to malicious data, some legacy systems very architecture prevents a fix at the source.</p>
-
 <p><a href="https://github.com/txn2/n2proxy">n2proxy</a> is open source, so you can fork it, contribute to it or write your own just like it, or better. If you want to write your own, I&rsquo;ll be going over the source further down.</p>
-
 <p><a href="https://github.com/txn2/n2proxy">n2proxy</a> was built to:</p>
-
 <ul>
 <li>Inspect requested URLs and ban them if they match a set of patterns</li>
 <li>Inspect HTTP Post data and nullify it for any data matching a set of patterns.</li>
 <li>Inspect HTTP Post and make modifications based on matched patterns.</li>
 </ul>
-
 <p><a href="https://github.com/txn2/n2proxy">n2proxy</a> is compiled and tested for Linux, MaxOs and Arm based systems (Raspberry Pi, Tinkerboard, and so on) as well as stand-alone <a href="https://www.docker.com/">Docker</a> implementations or <a href="/tag/kubernetes/">Kubernetes</a>.</p>
-
 <p>If you are using a Mac I recommend installing <a href="https://github.com/txn2/n2proxy">n2proxy</a> with <a href="https://brew.sh/">brew</a>:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">brew install txn2/tap/n2proxy
 
-<pre><code class="language-bash">brew install txn2/tap/n2proxy
-
-# upgrade later with
+<span style="color:#75715e"># upgrade later with</span>
 brew upgrade n2proxy
-</code></pre>
-
-<p>You need a configuration file to get started:</p>
-
-<pre><code class="language-bash">wget https://raw.githubusercontent.com/txn2/n2proxy/master/cfg.yml
-</code></pre>
-
-<p>I&rsquo;ll be focusing on three main sections of the configuration. <strong>postBan</strong> for nullifying all post data when the system discovers a match, <strong>urlBan</strong> rewrites the path to &ldquo;/&rdquo; (slash) when the system discovers a match, and <strong>postFilter</strong> uses the powerful and fast <a href="https://blog.gopheracademy.com/advent-2017/using-go-templates/">go templates</a> for modifying post data in-line when the system discovers a match. <strong>postFilter</strong> uses <a href="http://masterminds.github.io/sprig/">sprig</a> with <a href="https://blog.gopheracademy.com/advent-2017/using-go-templates/">go templates</a> to provide over 70 template functions in additional to built-in functions. <strong>postFilter</strong> allows you to make nearly any type of mutation to HTTP post body data, all in the confines of a configuration file.</p>
-
-<p><strong>Sample Configuration</strong>
-<script src="https://gist.github.com/cjimti/e664ad48b7f356f9d5b6e66117d6b9ab.js"></script></p>
-
+</code></pre></div><p>You need a configuration file to get started:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">wget https://raw.githubusercontent.com/txn2/n2proxy/master/cfg.yml
+</code></pre></div><p>I&rsquo;ll be focusing on three main sections of the configuration. <strong>postBan</strong> for nullifying all post data when the system discovers a match, <strong>urlBan</strong> rewrites the path to &ldquo;/&rdquo; (slash) when the system discovers a match, and <strong>postFilter</strong> uses the powerful and fast <a href="https://blog.gopheracademy.com/advent-2017/using-go-templates/">go templates</a> for modifying post data in-line when the system discovers a match. <strong>postFilter</strong> uses <a href="http://masterminds.github.io/sprig/">sprig</a> with <a href="https://blog.gopheracademy.com/advent-2017/using-go-templates/">go templates</a> to provide over 70 template functions in additional to built-in functions. <strong>postFilter</strong> allows you to make nearly any type of mutation to HTTP post body data, all in the confines of a configuration file.</p>
+<p><strong>Sample Configuration</strong></p>
+<!-- raw HTML omitted -->
 <p>Unfortunately <strong>postBan</strong> and <strong>urlBan</strong> might look like alien code, or someone punched their keyboard, however <a href="https://en.wikipedia.org/wiki/Regular_expression">regular expressions</a> are an implementation of highly efficient search patterns common to most programming languages. The example set is taken primarily from K. K. Mookhey, and Nilesh Burghate&rsquo;s 2004 article, <a href="https://www.symantec.com/connect/articles/detection-sql-injection-and-cross-site-scripting-attacks">Detection of SQL Injection and Cross-site Scripting Attacks</a>. This list is far from inclusive but get the point across.</p>
-
 <p>Harmful post data and URLs can damage many legacy systems (and even Wordpress and Drupal sites that lack their monthly updates). Since <a href="https://github.com/txn2/n2proxy">n2proxy</a> is a proxy, it exists outside the application layer, there is not much it can do elegantly for the end-user on that layer, but then again an elegant response is not entirely necessary when dealing with an attacker.</p>
-
 <p><strong>postFilter</strong> is the fun section, and if you are interested building API adaptors and translators, or rewiring the messages of that closed source <a href="https://en.wikipedia.org/wiki/Internet_of_things">IOT</a> device so it can post data conforming to the interface of some distant web server, this is the section. Although the examples show how to shuffle the letters in the word &ldquo;taco&rdquo; and uppercase any instance of &ldquo;good times&rdquo;, with <a href="https://blog.gopheracademy.com/advent-2017/using-go-templates/">go templates</a> and <a href="http://masterminds.github.io/sprig/">sprig</a> you have a clear jumping off point for considerable number of possibilities.</p>
-
 <h2 id="running-n2proxy">Running <a href="https://github.com/txn2/n2proxy">n2proxy</a></h2>
-
 <p>I use the command line <code>n2proxy</code> when working and testing patterns locally, however in production use I prefer using the docker container (<code>docker pull txn2/n2proxy</code>). See the following examples:</p>
-
 <p><strong>Command Version</strong></p>
-
-<pre><code class="language-bash">n2proxy --port=9099 --backend=https://www.google.com/ --cfg=./cfg.yml
-</code></pre>
-
-<p><strong>Docker Version</strong></p>
-
-<pre><code class="language-bash">docker run --rm -t -v &quot;$(pwd)&quot;:/n2p/ -p 9099:9099 \
-    txn2/n2proxy --port=9099 --cfg=/n2p/cfg.yml \
-    --backend=https://www.google.com/
-</code></pre>
-
-<p>The <a href="https://www.docker.com/">Docker</a> method is preferred when you need it to run in the background or survive reboots.</p>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">n2proxy --port<span style="color:#f92672">=</span><span style="color:#ae81ff">9099</span> --backend<span style="color:#f92672">=</span>https://www.google.com/ --cfg<span style="color:#f92672">=</span>./cfg.yml
+</code></pre></div><p><strong>Docker Version</strong></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">docker run --rm -t -v <span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">$(</span>pwd<span style="color:#66d9ef">)</span><span style="color:#e6db74">&#34;</span>:/n2p/ -p 9099:9099 <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    txn2/n2proxy --port<span style="color:#f92672">=</span><span style="color:#ae81ff">9099</span> --cfg<span style="color:#f92672">=</span>/n2p/cfg.yml <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    --backend<span style="color:#f92672">=</span>https://www.google.com/
+</code></pre></div><p>The <a href="https://www.docker.com/">Docker</a> method is preferred when you need it to run in the background or survive reboots.</p>
 <p><strong>Background Docker</strong></p>
-
 <p>Naming your <a href="https://www.docker.com/">Docker</a> container is a good idea if you plan to run more than one proxy (be sure they each get their own port on the host).</p>
-
-<pre><code class="language-bash">docker run --name n2p-google -d \
-    -v &quot;$(pwd)&quot;:/n2p/ \
-    -p 9099:9099 \
-    --restart=unless-stopped \
-    txn2/n2proxy \
-    --port=9099 \
-    --cfg=/n2p/cfg.yml \
-    --backend=https://www.google.com/
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">docker run --name n2p-google -d <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    -v <span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">$(</span>pwd<span style="color:#66d9ef">)</span><span style="color:#e6db74">&#34;</span>:/n2p/ <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    -p 9099:9099 <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    --restart<span style="color:#f92672">=</span>unless-stopped <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    txn2/n2proxy <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    --port<span style="color:#f92672">=</span><span style="color:#ae81ff">9099</span> <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    --cfg<span style="color:#f92672">=</span>/n2p/cfg.yml <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    --backend<span style="color:#f92672">=</span>https://www.google.com/
     
-# tail the logs
+<span style="color:#75715e"># tail the logs</span>
 docker logs -f n2p-google
-</code></pre>
-
-<p>You now have <a href="https://www.google.com">https://www.google.com</a> served through <a href="https://github.com/txn2/n2proxy">n2proxy</a> to <a href="http://localhost:9099">http://localhost:9099</a> on your local workstation.</p>
-
+</code></pre></div><p>You now have <a href="https://www.google.com">https://www.google.com</a> served through <a href="https://github.com/txn2/n2proxy">n2proxy</a> to <a href="http://localhost:9099">http://localhost:9099</a> on your local workstation.</p>
 <p>A Google.com proxy is a sound proof of concept, however, unless we run another HTTP proxy like <a href="https://www.charlesproxy.com/">Charles</a>. We can&rsquo;t see what Google is receiving from us. Only it&rsquo;s response.</p>
-
 <p>Now is a good time switch over to using <a href="https://docs.postman-echo.com/">postman-echo.com</a> since it&rsquo;s very purpose is to send us back what we sent it. <a href="https://docs.postman-echo.com/">postman-echo.com</a> returns <a href="https://www.json.org/">json</a> data and therefore I highly recommend installing <strong><a href="https://www.google.com/search?q=jsonpp">jsonpp</a></strong> or <strong><a href="https://www.google.com/search?q=json_pp">json_pp</a></strong> or a number of variations, on MacOs you can use brew:</p>
-
-<pre><code class="language-bash">brew install jsonpp
-</code></pre>
-
-<p>Now start up a new proxy pointed to <a href="https://docs.postman-echo.com/">postman-echo.com</a> as the backend.</p>
-
-<pre><code class="language-bash"># get a config if you don't already have one
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">brew install jsonpp
+</code></pre></div><p>Now start up a new proxy pointed to <a href="https://docs.postman-echo.com/">postman-echo.com</a> as the backend.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># get a config if you don&#39;t already have one</span>
 wget https://github.com/txn2/n2proxy/blob/master/cfg.yml
 
-# open a proxy to postman-echo.com on port 9090
-n2proxy --port=9090 --backend=https://postman-echo.com/ --cfg=./cfg.yml
-</code></pre>
-
-<p>In a separate terminal window use <a href="https://curl.haxx.se/docs/manpage.html">curl</a> to make an HTTP post request:</p>
-
-<pre><code class="language-bash">curl -s --request POST --url http://localhost:9090/post \
---data 'This taco is expected to be sent back, good   times.' \
-| jsonpp
-</code></pre>
-
-<p>Postman sends back what is received, and with this, we can see the correct filtering was performed:</p>
-
-<pre><code class="language-json">{
-  &quot;args&quot;: {},
-  &quot;data&quot;: &quot;&quot;,
-  &quot;files&quot;: {},
-  &quot;form&quot;: {
-    &quot;This cato is expected to be sent back, GOODTIMES.&quot;: &quot;&quot;
+<span style="color:#75715e"># open a proxy to postman-echo.com on port 9090</span>
+n2proxy --port<span style="color:#f92672">=</span><span style="color:#ae81ff">9090</span> --backend<span style="color:#f92672">=</span>https://postman-echo.com/ --cfg<span style="color:#f92672">=</span>./cfg.yml
+</code></pre></div><p>In a separate terminal window use <a href="https://curl.haxx.se/docs/manpage.html">curl</a> to make an HTTP post request:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">curl -s --request POST --url http://localhost:9090/post <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>--data <span style="color:#e6db74">&#39;This taco is expected to be sent back, good   times.&#39;</span> <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>| jsonpp
+</code></pre></div><p>Postman sends back what is received, and with this, we can see the correct filtering was performed:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
+  <span style="color:#f92672">&#34;args&#34;</span>: {},
+  <span style="color:#f92672">&#34;data&#34;</span>: <span style="color:#e6db74">&#34;&#34;</span>,
+  <span style="color:#f92672">&#34;files&#34;</span>: {},
+  <span style="color:#f92672">&#34;form&#34;</span>: {
+    <span style="color:#f92672">&#34;This cato is expected to be sent back, GOODTIMES.&#34;</span>: <span style="color:#e6db74">&#34;&#34;</span>
   },
-  &quot;headers&quot;: {
-    &quot;host&quot;: &quot;postman-echo.com&quot;,
-    &quot;content-length&quot;: &quot;49&quot;,
-    &quot;accept&quot;: &quot;*/*&quot;,
-    &quot;accept-encoding&quot;: &quot;gzip&quot;,
-    &quot;content-type&quot;: &quot;application/x-www-form-urlencoded&quot;,
-    &quot;user-agent&quot;: &quot;curl/7.60.0&quot;,
-    &quot;x-forwarded-port&quot;: &quot;443&quot;,
-    &quot;x-forwarded-proto&quot;: &quot;https&quot;
+  <span style="color:#f92672">&#34;headers&#34;</span>: {
+    <span style="color:#f92672">&#34;host&#34;</span>: <span style="color:#e6db74">&#34;postman-echo.com&#34;</span>,
+    <span style="color:#f92672">&#34;content-length&#34;</span>: <span style="color:#e6db74">&#34;49&#34;</span>,
+    <span style="color:#f92672">&#34;accept&#34;</span>: <span style="color:#e6db74">&#34;*/*&#34;</span>,
+    <span style="color:#f92672">&#34;accept-encoding&#34;</span>: <span style="color:#e6db74">&#34;gzip&#34;</span>,
+    <span style="color:#f92672">&#34;content-type&#34;</span>: <span style="color:#e6db74">&#34;application/x-www-form-urlencoded&#34;</span>,
+    <span style="color:#f92672">&#34;user-agent&#34;</span>: <span style="color:#e6db74">&#34;curl/7.60.0&#34;</span>,
+    <span style="color:#f92672">&#34;x-forwarded-port&#34;</span>: <span style="color:#e6db74">&#34;443&#34;</span>,
+    <span style="color:#f92672">&#34;x-forwarded-proto&#34;</span>: <span style="color:#e6db74">&#34;https&#34;</span>
   },
-  &quot;json&quot;: {
-    &quot;This cato is expected to be sent back, GOODTIMES.&quot;: &quot;&quot;
+  <span style="color:#f92672">&#34;json&#34;</span>: {
+    <span style="color:#f92672">&#34;This cato is expected to be sent back, GOODTIMES.&#34;</span>: <span style="color:#e6db74">&#34;&#34;</span>
   },
-  &quot;url&quot;: &quot;https://postman-echo.com/post&quot;
+  <span style="color:#f92672">&#34;url&#34;</span>: <span style="color:#e6db74">&#34;https://postman-echo.com/post&#34;</span>
 }
-</code></pre>
-
-<p>In the <strong>form</strong> and <strong>json</strong> sections we see the word <strong>taco</strong> became <strong>cato</strong> as a result of the <code>shuffle</code> function in the first <strong>postFilter</strong>  <code>.Match | shuffle</code> and <strong>good    times</strong> became <strong>GOODTIMES</strong> from the from the <code>upper</code> and <code>nospace</code> functions in the second <strong>postFilter</strong> <code>.Match | upper | nospace</code></p>
-
+</code></pre></div><p>In the <strong>form</strong> and <strong>json</strong> sections we see the word <strong>taco</strong> became <strong>cato</strong> as a result of the <code>shuffle</code> function in the first <strong>postFilter</strong>  <code>.Match | shuffle</code> and <strong>good    times</strong> became <strong>GOODTIMES</strong> from the from the <code>upper</code> and <code>nospace</code> functions in the second <strong>postFilter</strong> <code>.Match | upper | nospace</code></p>
 <p>The response from <a href="https://docs.postman-echo.com/">postman-echo.com</a> is a clear indication that rules in <strong>postFilter</strong> are functioning as intended.</p>
-
 <p>For the remainder of this article, I&rsquo;ll be going over the essential pieces of <a href="https://golang.org/">go</a> code that are used to create <a href="https://github.com/txn2/n2proxy">n2proxy</a>.</p>
-
 <h2 id="proxy-with-golang">Proxy with Golang</h2>
-
 <p>The <a href="https://golang.org/">go</a> standard libraries <a href="https://golang.org/pkg/net/http/">net/http</a> and <a href="https://golang.org/pkg/net/http/httputil/">net/http/httputil</a> come with all the functionality needed for the proxy.</p>
-
 <p>The following source code is an abstract from the file <a href="https://github.com/txn2/n2proxy/blob/master/server.go">server.go</a>, which contains the main application <a href="https://thenewstack.io/understanding-golang-packages/">package</a>.</p>
-
 <p><strong>HTTP Server</strong></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#75715e">// server
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">HandleFunc</span>(<span style="color:#e6db74">&#34;/&#34;</span>, <span style="color:#a6e22e">proxy</span>.<span style="color:#a6e22e">handle</span>)
 
-<pre><code class="language-go">// server
-http.HandleFunc(&quot;/&quot;, proxy.handle)
-
-if *tls != true {
-    logger.Info(&quot;Starting proxy in plain HTTP mode.&quot;)
-    err = http.ListenAndServe(&quot;:&quot;+*port, nil)
-    if err != nil {
-        fmt.Printf(&quot;Error starting proxy: %s\n&quot;, err.Error())
+<span style="color:#66d9ef">if</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">tls</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">true</span> {
+    <span style="color:#a6e22e">logger</span>.<span style="color:#a6e22e">Info</span>(<span style="color:#e6db74">&#34;Starting proxy in plain HTTP mode.&#34;</span>)
+    <span style="color:#a6e22e">err</span> = <span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">ListenAndServe</span>(<span style="color:#e6db74">&#34;:&#34;</span><span style="color:#f92672">+*</span><span style="color:#a6e22e">port</span>, <span style="color:#66d9ef">nil</span>)
+    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+        <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;Error starting proxy: %s\n&#34;</span>, <span style="color:#a6e22e">err</span>.<span style="color:#a6e22e">Error</span>())
     }
-    os.Exit(0)
+    <span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">Exit</span>(<span style="color:#ae81ff">0</span>)
 }
 
-logger.Info(&quot;Starting proxy in TLS mode.&quot;)
-err = http.ListenAndServeTLS(&quot;:&quot;+*port, *crt, *key, nil)
-if err != nil {
-    fmt.Printf(&quot;Error starting proxyin TLS mode: %s\n&quot;, err.Error())
+<span style="color:#a6e22e">logger</span>.<span style="color:#a6e22e">Info</span>(<span style="color:#e6db74">&#34;Starting proxy in TLS mode.&#34;</span>)
+<span style="color:#a6e22e">err</span> = <span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">ListenAndServeTLS</span>(<span style="color:#e6db74">&#34;:&#34;</span><span style="color:#f92672">+*</span><span style="color:#a6e22e">port</span>, <span style="color:#f92672">*</span><span style="color:#a6e22e">crt</span>, <span style="color:#f92672">*</span><span style="color:#a6e22e">key</span>, <span style="color:#66d9ef">nil</span>)
+<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+    <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;Error starting proxyin TLS mode: %s\n&#34;</span>, <span style="color:#a6e22e">err</span>.<span style="color:#a6e22e">Error</span>())
 }
-</code></pre>
-
-<p>Starting at the implementation, we see that the proxy is merely a path handler on the standard <a href="https://golang.org/">go</a> HTTP server.  The <strong>handle</strong> method on the <strong>proxy</strong> object passed all HTTP requests sent to the server beginning with <code>/</code>.</p>
-
+</code></pre></div><p>Starting at the implementation, we see that the proxy is merely a path handler on the standard <a href="https://golang.org/">go</a> HTTP server.  The <strong>handle</strong> method on the <strong>proxy</strong> object passed all HTTP requests sent to the server beginning with <code>/</code>.</p>
 <p>Using an environment variable or flag (<code>if *tls != true {</code>) we can choose between serving plain HTTP with <a href="https://golang.org/pkg/net/http/#ListenAndServe">http.ListenAndServe</a> or encrypted HTTP over TLS (HTTPS) with <a href="https://golang.org/pkg/net/http/#ListenAndServeTLS">http.ListenAndServeTLS</a>.</p>
-
 <p>Working from the implementation up, we see the <strong>proxy</strong> object is created with three arguments: <strong>backend</strong>, <strong>cfg</strong> and <strong>logger</strong>*:</p>
-
-<pre><code class="language-bash">proxy := NewProxy(*backend, *cfg, logger)
-</code></pre>
-
-<p>Because I am using the command line <a href="https://golang.org/pkg/flag/">flag</a> package from <a href="https://golang.org/">go</a>, I must dereference pointers to values with a <code>*</code>, since the <code>NewProxy</code> function is expecting values.</p>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">proxy :<span style="color:#f92672">=</span> NewProxy<span style="color:#f92672">(</span>*backend, *cfg, logger<span style="color:#f92672">)</span>
+</code></pre></div><p>Because I am using the command line <a href="https://golang.org/pkg/flag/">flag</a> package from <a href="https://golang.org/">go</a>, I must dereference pointers to values with a <code>*</code>, since the <code>NewProxy</code> function is expecting values.</p>
 <ul>
 <li><strong>backend</strong> - example: <a href="https://postman-echo.com/">https://postman-echo.com/</a></li>
 <li><strong>cfg</strong> - example: ./cfg.yml</li>
 <li><strong>logger</strong> - a configured <a href="https://github.com/uber-go/zap">zap</a> logger (speed is essential)</li>
 </ul>
-
 <h3 id="new-proxy">New Proxy</h3>
-
 <p>The <code>NewProxy</code> function returns an object with a <code>handle</code> method we passed to the <a href="https://golang.org/pkg/net/http/#HandleFunc">http.HandleFunc</a> in the implementation above. Since <code>handle</code> is a method of the new proxy object created by <code>NewProxy</code> it has access to its configuration. The <code>proxy</code> object is a <a href="https://golang.org/">go</a> struct with a method called <code>handle</code>:</p>
-
-<pre><code class="language-go">type Proxy struct {
-    target  *url.URL
-    proxy   *httputil.ReverseProxy
-    cfgFile string
-    logger  *zap.Logger
-    eng     *rweng.Eng
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Proxy</span> <span style="color:#66d9ef">struct</span> {
+    <span style="color:#a6e22e">target</span>  <span style="color:#f92672">*</span><span style="color:#a6e22e">url</span>.<span style="color:#a6e22e">URL</span>
+    <span style="color:#a6e22e">proxy</span>   <span style="color:#f92672">*</span><span style="color:#a6e22e">httputil</span>.<span style="color:#a6e22e">ReverseProxy</span>
+    <span style="color:#a6e22e">cfgFile</span> <span style="color:#66d9ef">string</span>
+    <span style="color:#a6e22e">logger</span>  <span style="color:#f92672">*</span><span style="color:#a6e22e">zap</span>.<span style="color:#a6e22e">Logger</span>
+    <span style="color:#a6e22e">eng</span>     <span style="color:#f92672">*</span><span style="color:#a6e22e">rweng</span>.<span style="color:#a6e22e">Eng</span>
 }
-</code></pre>
-
-<p>The core component of this proxy object is a pointer to a <a href="https://golang.org/pkg/net/http/httputil/#ReverseProxy">ReverseProxy</a> object created by the <a href="https://golang.org/pkg/net/http/httputil/">httputil</a> package&rsquo;s <a href="https://golang.org/pkg/net/http/httputil/#NewSingleHostReverseProxy">NewSingleHostReverseProxy</a> function:</p>
-
-<pre><code class="language-go">func NewProxy(target string, cfgFile string, logger *zap.Logger) *Proxy {
-    targetUrl, err := url.Parse(target)
-    if err != nil {
-        fmt.Printf(&quot;Unable to parse URL: %s\n&quot;, err.Error())
-        os.Exit(1)
+</code></pre></div><p>The core component of this proxy object is a pointer to a <a href="https://golang.org/pkg/net/http/httputil/#ReverseProxy">ReverseProxy</a> object created by the <a href="https://golang.org/pkg/net/http/httputil/">httputil</a> package&rsquo;s <a href="https://golang.org/pkg/net/http/httputil/#NewSingleHostReverseProxy">NewSingleHostReverseProxy</a> function:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">NewProxy</span>(<span style="color:#a6e22e">target</span> <span style="color:#66d9ef">string</span>, <span style="color:#a6e22e">cfgFile</span> <span style="color:#66d9ef">string</span>, <span style="color:#a6e22e">logger</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">zap</span>.<span style="color:#a6e22e">Logger</span>) <span style="color:#f92672">*</span><span style="color:#a6e22e">Proxy</span> {
+    <span style="color:#a6e22e">targetUrl</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">url</span>.<span style="color:#a6e22e">Parse</span>(<span style="color:#a6e22e">target</span>)
+    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+        <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;Unable to parse URL: %s\n&#34;</span>, <span style="color:#a6e22e">err</span>.<span style="color:#a6e22e">Error</span>())
+        <span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">Exit</span>(<span style="color:#ae81ff">1</span>)
     }
 
-    // create an rweng engine from a yaml configuration
-    eng, err := rweng.NewEngFromYml(cfgFile, logger)
-    if err != nil {
-        fmt.Printf(&quot;Engine failure: %s\n&quot;, err.Error())
-        os.Exit(1)
+    <span style="color:#75715e">// create an rweng engine from a yaml configuration
+</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">eng</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">rweng</span>.<span style="color:#a6e22e">NewEngFromYml</span>(<span style="color:#a6e22e">cfgFile</span>, <span style="color:#a6e22e">logger</span>)
+    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+        <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;Engine failure: %s\n&#34;</span>, <span style="color:#a6e22e">err</span>.<span style="color:#a6e22e">Error</span>())
+        <span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">Exit</span>(<span style="color:#ae81ff">1</span>)
     }
 
-    pxy := httputil.NewSingleHostReverseProxy(targetUrl)
+    <span style="color:#a6e22e">pxy</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">httputil</span>.<span style="color:#a6e22e">NewSingleHostReverseProxy</span>(<span style="color:#a6e22e">targetUrl</span>)
 
-    proxy := &amp;Proxy{
-        target: targetUrl,
-        proxy:  pxy,
-        logger: logger,
-        eng:    eng,
+    <span style="color:#a6e22e">proxy</span> <span style="color:#f92672">:=</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">Proxy</span>{
+        <span style="color:#a6e22e">target</span>: <span style="color:#a6e22e">targetUrl</span>,
+        <span style="color:#a6e22e">proxy</span>:  <span style="color:#a6e22e">pxy</span>,
+        <span style="color:#a6e22e">logger</span>: <span style="color:#a6e22e">logger</span>,
+        <span style="color:#a6e22e">eng</span>:    <span style="color:#a6e22e">eng</span>,
     }
 
-    return proxy
+    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">proxy</span>
 }
-</code></pre>
+</code></pre></div><p>Filtering and blocking is the central purpose of this proxy. The <code>handle</code> method below has access to <code>eng</code> where a method called <code>ProcessRequest</code> gets a shot at modifying the response and request data. You can think of it as a proxy within a proxy. The following code shows <strong>http.ResponseWriter</strong> and <strong>http.Request</strong> objects are sent first to <code>p.eng.ProcessRequest(w, r)</code> and finally handled by <code>p.proxy.ServeHTTP(w, r)</code>:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">p</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">Proxy</span>) <span style="color:#a6e22e">handle</span>(<span style="color:#a6e22e">w</span> <span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">ResponseWriter</span>, <span style="color:#a6e22e">r</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">Request</span>) {
 
-<p>Filtering and blocking is the central purpose of this proxy. The <code>handle</code> method below has access to <code>eng</code> where a method called <code>ProcessRequest</code> gets a shot at modifying the response and request data. You can think of it as a proxy within a proxy. The following code shows <strong>http.ResponseWriter</strong> and <strong>http.Request</strong> objects are sent first to <code>p.eng.ProcessRequest(w, r)</code> and finally handled by <code>p.proxy.ServeHTTP(w, r)</code>:</p>
+    <span style="color:#a6e22e">start</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Now</span>()
+    <span style="color:#a6e22e">reqPath</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">r</span>.<span style="color:#a6e22e">URL</span>.<span style="color:#a6e22e">Path</span>
+    <span style="color:#a6e22e">reqMethod</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">r</span>.<span style="color:#a6e22e">Method</span>
 
-<pre><code class="language-go">func (p *Proxy) handle(w http.ResponseWriter, r *http.Request) {
+    <span style="color:#a6e22e">end</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Now</span>()
+    <span style="color:#a6e22e">latency</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">end</span>.<span style="color:#a6e22e">Sub</span>(<span style="color:#a6e22e">start</span>)
 
-    start := time.Now()
-    reqPath := r.URL.Path
-    reqMethod := r.Method
-
-    end := time.Now()
-    latency := end.Sub(start)
-
-    p.logger.Info(reqPath,
-        zap.String(&quot;method&quot;, reqMethod),
-        zap.String(&quot;path&quot;, reqPath),
-        zap.String(&quot;time&quot;, end.Format(time.RFC3339)),
-        zap.Duration(&quot;latency&quot;, latency),
+    <span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">logger</span>.<span style="color:#a6e22e">Info</span>(<span style="color:#a6e22e">reqPath</span>,
+        <span style="color:#a6e22e">zap</span>.<span style="color:#a6e22e">String</span>(<span style="color:#e6db74">&#34;method&#34;</span>, <span style="color:#a6e22e">reqMethod</span>),
+        <span style="color:#a6e22e">zap</span>.<span style="color:#a6e22e">String</span>(<span style="color:#e6db74">&#34;path&#34;</span>, <span style="color:#a6e22e">reqPath</span>),
+        <span style="color:#a6e22e">zap</span>.<span style="color:#a6e22e">String</span>(<span style="color:#e6db74">&#34;time&#34;</span>, <span style="color:#a6e22e">end</span>.<span style="color:#a6e22e">Format</span>(<span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">RFC3339</span>)),
+        <span style="color:#a6e22e">zap</span>.<span style="color:#a6e22e">Duration</span>(<span style="color:#e6db74">&#34;latency&#34;</span>, <span style="color:#a6e22e">latency</span>),
     )
 
-    r.Host = p.target.Host
+    <span style="color:#a6e22e">r</span>.<span style="color:#a6e22e">Host</span> = <span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">target</span>.<span style="color:#a6e22e">Host</span>
 
-    // process request
-    p.eng.ProcessRequest(w, r)
+    <span style="color:#75715e">// process request
+</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">eng</span>.<span style="color:#a6e22e">ProcessRequest</span>(<span style="color:#a6e22e">w</span>, <span style="color:#a6e22e">r</span>)
 
-    p.proxy.ServeHTTP(w, r)
+    <span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">proxy</span>.<span style="color:#a6e22e">ServeHTTP</span>(<span style="color:#a6e22e">w</span>, <span style="color:#a6e22e">r</span>)
 }
-</code></pre>
-
-<p>If you are curious how <code>p.eng.ProcessRequest(w, r)</code> filters data check out the method <code>ProcessRequest</code> in the <a href="https://github.com/txn2/n2proxy/blob/master/rweng/rweng.go">rweng</a> source code (read/write engine). In <a href="https://github.com/txn2/n2proxy/blob/master/rweng/rweng.go">rweng</a> the function <strong>NewEngFromYml</strong> is where the <a href="https://github.com/txn2/n2proxy/blob/master/cfg.yml">yaml configuration</a> file is Unmarshaled into a configuration struct after which all <a href="http://www.rexegg.com/regex-quickstart.html">regex patterns</a> and <a href="https://blog.gopheracademy.com/advent-2017/using-go-templates/">go templates</a> are pre-compiled.</p>
-
+</code></pre></div><p>If you are curious how <code>p.eng.ProcessRequest(w, r)</code> filters data check out the method <code>ProcessRequest</code> in the <a href="https://github.com/txn2/n2proxy/blob/master/rweng/rweng.go">rweng</a> source code (read/write engine). In <a href="https://github.com/txn2/n2proxy/blob/master/rweng/rweng.go">rweng</a> the function <strong>NewEngFromYml</strong> is where the <a href="https://github.com/txn2/n2proxy/blob/master/cfg.yml">yaml configuration</a> file is Unmarshaled into a configuration struct after which all <a href="http://www.rexegg.com/regex-quickstart.html">regex patterns</a> and <a href="https://blog.gopheracademy.com/advent-2017/using-go-templates/">go templates</a> are pre-compiled.</p>
 <h3 id="next-steps">Next Steps</h3>
-
 <p><strong>Middleware</strong>: The method <code>p.eng.ProcessRequest(w, r)</code> is called before <code>p.proxy.ServeHTTP(w, r)</code> and of course this would be a great place to call dynamically any number of handler middlewares. We can also inject middleware higher up in the <a href="https://golang.org/pkg/net/http/">net/http</a> package.</p>
-
 <p><strong>Concurrency</strong>: In the <a href="https://github.com/txn2/n2proxy/blob/master/rweng/rweng.go">rweng</a> method <code>ProcessRequest</code> filters run serially, however, if dealing with a vast number of rules, a more sophisticated Fan-out, fan-in solution can chunk the rules and process them concurrently (assuming you are working on copies of data). See <a href="https://blog.golang.org/pipelines">Go Concurrency Patterns: Pipelines and cancellation</a>.</p>
-
 <h2 id="resources">Resources</h2>
-
 <ul>
 <li><a href="https://www.charlesproxy.com/">Charles</a> HTTP proxy</li>
 <li><a href="https://brew.sh/">brew</a> is the missing package manager for macOS</li>
@@ -511,6 +423,23 @@ if err != nil {
                    <span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">Reverse Proxy in Golang: Retrofit security proxy to prevent XSS and code injection.</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="https://imti.co/" property="cc:attributionName" rel="cc:attributionURL">Craig Johnston</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
                     <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a>
                 </p>
+
+                <h5>SUPPORT</h5>
+                <p>
+                    Order my new Kubernetes book: <a href="https://amzn.to/34D56v6">Advanced Platform Development with Kubernetes: Enabling Data Management, the Internet of Things, Blockchain, and Machine Learning</a>
+                </p>
+                <script type="text/javascript">
+                  amzn_assoc_tracking_id = "imti-20";
+                  amzn_assoc_ad_mode = "manual";
+                  amzn_assoc_ad_type = "smart";
+                  amzn_assoc_marketplace = "amazon";
+                  amzn_assoc_region = "US";
+                  amzn_assoc_design = "enhanced_links";
+                  amzn_assoc_asins = "1484256107";
+                  amzn_assoc_placement = "adunit";
+                  amzn_assoc_linkid = "14a9d8b8d1b0bd44e9256e0e0a948015";
+                </script>
+                <script src="//z-na.amazon-adsystem.com/widgets/onejs?MarketPlace=US"></script>
 
                 
                 <hr>

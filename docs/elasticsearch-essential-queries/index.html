@@ -87,7 +87,7 @@
       "url": "https:\/\/imti.co\/img\/craig_johnston_cjimti.jpg"
     }
   },
-  "description": "The following is an overview for querying Elasticsearch. Over the years I have tried to assemble developer notes for myself and my team on a variety of platforms, languages and frameworks, a type of cheat-sheet but with context, not a comprehensive how-to, but a decent 15-minute overview of the features we are most likely to implement in a given iteration.\nExplore the Elasticsearch official documentation: Search in Depth.\n Contents     Motivation Following Along with Elasticsearch and Kubernetes Vocabulary Basic CRUD API  Delete an Index Create an Index Create or Update a Document (Upsert) Get a Document  Mappings, Types and Metadata  Get Mapping Create a Mapping  Searching Range Filtering Aggregations  Counts Averages, Minimums and Maximums Percentile Percent by Rank Percent by Rank Interval  Resources        (adsbygoogle = window."
+  "description": "The following is an overview for querying Elasticsearch. Over the years I have tried to assemble developer notes for myself and my team on a variety of platforms, languages and frameworks, a type of cheat-sheet but with context, not a comprehensive how-to, but a decent 15-minute overview of the features we are most likely to implement in a given iteration.\nExplore the Elasticsearch official documentation: Search in Depth.\n Contents   Motivation Following Along with Elasticsearch and Kubernetes Vocabulary Basic CRUD API  Delete an Index Create an Index Create or Update a Document (Upsert) Get a Document   Mappings, Types and Metadata  Get Mapping Create a Mapping   Searching Range Filtering Aggregations  Counts Averages, Minimums and Maximums Percentile Percent by Rank Percent by Rank Interval   Resources     Please support my new book!"
 }
 </script>
 
@@ -207,89 +207,80 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h5>SHARE</h5>
-                <ul class="list-inline">
-                    <li><div class="addthis_inline_share_toolbox"></div></li>
-                </ul>
-
-                
-
-<p>The following is an overview for querying <a href="https://www.elastic.co/products/elasticsearch">Elasticsearch</a>. Over the years I have tried to assemble developer notes for myself and my team on a variety of platforms, languages and frameworks, a type of cheat-sheet but with context, not a comprehensive how-to, but a decent 15-minute overview of the features we are most likely to implement in a given iteration.</p>
-
+                <p>The following is an overview for querying <a href="https://www.elastic.co/products/elasticsearch">Elasticsearch</a>. Over the years I have tried to assemble developer notes for myself and my team on a variety of platforms, languages and frameworks, a type of cheat-sheet but with context, not a comprehensive how-to, but a decent 15-minute overview of the features we are most likely to implement in a given iteration.</p>
 <p>Explore the <a href="https://www.elastic.co/guide/en/elasticsearch/guide/current/search-in-depth.html">Elasticsearch official documentation</a>: <a href="https://www.elastic.co/guide/en/elasticsearch/guide/current/search-in-depth.html">Search in Depth</a>.</p>
-
 <aside class="toc">
     <header>
         <h2>Contents</h2>
     </header>
     <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#motivation">Motivation</a></li>
-<li><a href="#following-along-with-elasticsearch-and-kubernetes">Following Along with <a href="https://www.elastic.co/products/elasticsearch">Elasticsearch</a> and <a href="https://kubernetes.io/">Kubernetes</a></a></li>
-<li><a href="#vocabulary">Vocabulary</a></li>
-<li><a href="#basic-crud-api">Basic CRUD API</a>
-<ul>
-<li><a href="#delete-an-index">Delete an Index</a></li>
-<li><a href="#create-an-index">Create an Index</a></li>
-<li><a href="#create-or-update-a-document-upsert">Create or Update a Document (Upsert)</a></li>
-<li><a href="#get-a-document">Get a Document</a></li>
-</ul></li>
-<li><a href="#mappings-types-and-metadata">Mappings, Types and Metadata</a>
-<ul>
-<li><a href="#get-mapping">Get Mapping</a></li>
-<li><a href="#create-a-mapping">Create a Mapping</a></li>
-</ul></li>
-<li><a href="#searching">Searching</a></li>
-<li><a href="#range">Range</a></li>
-<li><a href="#filtering">Filtering</a></li>
-<li><a href="#aggregations">Aggregations</a>
-<ul>
-<li><a href="#counts">Counts</a></li>
-<li><a href="#averages-minimums-and-maximums">Averages, Minimums and Maximums</a></li>
-<li><a href="#percentile">Percentile</a></li>
-<li><a href="#percent-by-rank">Percent by Rank</a></li>
-<li><a href="#percent-by-rank-interval">Percent by Rank Interval</a></li>
-</ul></li>
-<li><a href="#resources">Resources</a></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#motivation">Motivation</a></li>
+    <li><a href="#following-along-with-elasticsearch-and-kubernetes">Following Along with <a href="https://www.elastic.co/products/elasticsearch">Elasticsearch</a> and <a href="https://kubernetes.io/">Kubernetes</a></a></li>
+    <li><a href="#vocabulary">Vocabulary</a></li>
+    <li><a href="#basic-crud-api">Basic CRUD API</a>
+      <ul>
+        <li><a href="#delete-an-index">Delete an Index</a></li>
+        <li><a href="#create-an-index">Create an Index</a></li>
+        <li><a href="#create-or-update-a-document-upsert">Create or Update a Document (Upsert)</a></li>
+        <li><a href="#get-a-document">Get a Document</a></li>
+      </ul>
+    </li>
+    <li><a href="#mappings-types-and-metadata">Mappings, Types and Metadata</a>
+      <ul>
+        <li><a href="#get-mapping">Get Mapping</a></li>
+        <li><a href="#create-a-mapping">Create a Mapping</a></li>
+      </ul>
+    </li>
+    <li><a href="#searching">Searching</a></li>
+    <li><a href="#range">Range</a></li>
+    <li><a href="#filtering">Filtering</a></li>
+    <li><a href="#aggregations">Aggregations</a>
+      <ul>
+        <li><a href="#counts">Counts</a></li>
+        <li><a href="#averages-minimums-and-maximums">Averages, Minimums and Maximums</a></li>
+        <li><a href="#percentile">Percentile</a></li>
+        <li><a href="#percent-by-rank">Percent by Rank</a></li>
+        <li><a href="#percent-by-rank-interval">Percent by Rank Interval</a></li>
+      </ul>
+    </li>
+    <li><a href="#resources">Resources</a></li>
+  </ul>
 </nav>
 </aside>
 
-<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<ins class="adsbygoogle"
-     style="display:block; text-align:center;"
-     data-ad-layout="in-article"
-     data-ad-format="fluid"
-     data-ad-client="ca-pub-5984764595236029"
-     data-ad-slot="7730310582"></ins>
-<script>
-    (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-
+<table>
+    <tr><td colspan="2" style="text-align: center"><b>Please support my new book!</b></td></tr>
+    <tr>
+        <td>
+            <a href="https://amzn.to/3hAZUvx">
+                <img src="/img/kubernetes_platform_development.jpg" style="padding:0; margin: 0"/>
+            </a>
+        </td>
+        <td>
+            <b><a href="https://amzn.to/3hAZUvx">Advanced Platform Development with Kubernetes: Enabling Data Management, the Internet of Things, Blockchain, and Machine Learning</a></b>
+            <h4>What You'll Learn</h4>
+            <ul style="padding-bottom: 0; margin: 0">
+                <li>Use data pipelines with <b>MQTT, NiFi, Logstash, Kafka and Elasticsearch</b></li>
+                <li>Install a serverless platform with <b>OpenFaaS</b></li>
+                <li>Explore <b>blockchain</b> network capabilities with <b>Ethereum</b></li>
+                <li>Support a multi-tenant <b>data science</b> platform and web IDE with <b>JupyterHub, MLflow and Seldon Core</b></li>
+                <li>Build a <b>hybrid cluster</b>, securely bridging <b>on-premise</b> and cloud-based Kubernetes nodes</li>
+                <li>Implement an integrated development toolchain for continuous integration and deployment</li>
+            </ul>
+        </td>
+    </tr>
+</table>
 <h2 id="motivation">Motivation</h2>
-
 <p>My team and I work with a lot of SQL-based data, from MySQL, SQLite and even our large Cassandra cluster, however, our reporting systems are built on <a href="https://www.elastic.co/products/elasticsearch">Elasticsearch</a>. Transitioning our thinking from SQL to the <a href="https://blog.parse.ly/post/1691/lucene/">Lucene</a> syntax on occasion requires hitting the docs. However, most technical documentation is either for getting started or gives you every variation of every feature, which is great when you are neck deep and need a specific problem solved.</p>
-
 <h2 id="following-along-with-elasticsearch-and-kubernetes">Following Along with <a href="https://www.elastic.co/products/elasticsearch">Elasticsearch</a> and <a href="https://kubernetes.io/">Kubernetes</a></h2>
-
 <p>Many of the examples I use in the range and filtering examples below are a result of setting up a reference implementation for supporting the ingestion of <a href="/post-json-elasticsearch-kubernetes/">High Traffic JSON Data into Elasticsearch on Kubernetes</a>. If you followed that guide, you could run against a similar set of data.</p>
-
 <p>If you want to set up a production-grade Kubernetes and Elastic cluster, I recommend checking out my <a href="/hobby-cluster/">Production Hobby Cluster</a> guide, followed by <a href="/team-kubernetes-remote-access/">Kubernetes Team Access, RBAC for developers and QA</a>, <a href="/kubernetes-production-elasticsearch/">Production Grade Elasticsearch on Kubernetes</a>, <a href="/kibana-kubernetes/">Kibana on Kubernetes</a> and finally <a href="/post-json-elasticsearch-kubernetes/">High Traffic JSON Data into Elasticsearch on Kubernetes</a>.</p>
-
 <p>In a few hours, you can have a highly-available, horizontally scalable, big data solution, ready for enterprise style experiments, and with some domain-aware tuning, a full production system.</p>
-
 <p>Below, I access the Elasticsearch API through my local port 9200. You can <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/install-elasticsearch.html">install Elasticsearch</a> directly on your workstation, or <a href="https://kubernetes.io/docs/tasks/access-application-cluster/port-forward-access-application-cluster/">port-forward services from a Kubernetes cluster</a>.</p>
-
-<pre><code class="language-bash">kubectl port-forward svc/elasticsearch 9200:9200 -n the-project
-</code></pre>
-
-<h2 id="vocabulary">Vocabulary</h2>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl port-forward svc/elasticsearch 9200:9200 -n the-project
+</code></pre></div><h2 id="vocabulary">Vocabulary</h2>
 <p>Elasticsearch inherits the <a href="https://blog.parse.ly/post/1691/lucene/">Lucene</a> vocabulary, and so it&rsquo;s best not to think of namespaces, tables, rows, and columns. Elasticsearch is built around <strong>indexes</strong>, that index a collection of <strong>documents</strong> grouped by <strong>type</strong>. Documents have <strong>fields</strong> which point to values and have an assigned data type. Elasticsearch indexes also contain <strong>inverted indexes</strong>, mapping field values to document ids.</p>
-
 <ul>
 <li>An <strong>index</strong> is a collection of <strong>documents</strong>.</li>
 <li>A <strong>document</strong> is a record in an <strong>index</strong>.</li>
@@ -297,131 +288,95 @@
 <li><strong>Term</strong>s are the values from the <strong>index</strong> documents use as keys for an <strong>inverted index</strong>.</li>
 <li>An <strong>inverted index</strong> maps <strong>terms</strong> to <strong>document</strong> ids.</li>
 </ul>
-
 <p>With <a href="https://www.elastic.co/products/elasticsearch">Elasticsearch</a> it is common to split indexes by date for time-series data. Indexes with names like <code>payments-20180801</code>, <code>payments-20180802</code>, <code>payments-20180803</code> can be queried together with a wildcard, for instance, queries needing to search all payments for August may reference the index <code>payments-201808-*</code>.</p>
-
 <h2 id="basic-crud-api">Basic CRUD API</h2>
-
 <p>Elasticsearch implements a <a href="https://en.wikipedia.org/wiki/Representational_state_transfer">REST</a> API with the <a href="https://www.restapitutorial.com/lessons/httpmethods.html">HTTP verbs</a> <strong>GET</strong> for read operations, <strong>PUT</strong> for update or replace, and <strong>DELETE</strong> to remove a document.</p>
-
-<p><img src="/images/content/elastic-query.png" alt="" /></p>
-
+<p><img src="/images/content/elastic-query.png" alt=""></p>
 <h3 id="delete-an-index">Delete an Index</h3>
-
 <p>Delete an index named <code>example</code>.</p>
-
-<pre><code class="language-bash">curl -X DELETE \
-  http://localhost:9200/example
-</code></pre>
-
-<p>If the index existed we get back:</p>
-
-<pre><code class="language-json">{
-    &quot;acknowledged&quot;: true
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">curl -X DELETE <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>  http://localhost:9200/example
+</code></pre></div><p>If the index existed we get back:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
+    <span style="color:#f92672">&#34;acknowledged&#34;</span>: <span style="color:#66d9ef">true</span>
 }
-</code></pre>
-
-<p>If the index did not exist we would get:</p>
-
-<pre><code class="language-json">{
-    &quot;error&quot;: {
-        &quot;root_cause&quot;: [
+</code></pre></div><p>If the index did not exist we would get:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
+    <span style="color:#f92672">&#34;error&#34;</span>: {
+        <span style="color:#f92672">&#34;root_cause&#34;</span>: [
             {
-                &quot;type&quot;: &quot;index_not_found_exception&quot;,
-                &quot;reason&quot;: &quot;no such index&quot;,
-                &quot;index_uuid&quot;: &quot;_na_&quot;,
-                &quot;resource.type&quot;: &quot;index_or_alias&quot;,
-                &quot;resource.id&quot;: &quot;example&quot;,
-                &quot;index&quot;: &quot;example&quot;
+                <span style="color:#f92672">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;index_not_found_exception&#34;</span>,
+                <span style="color:#f92672">&#34;reason&#34;</span>: <span style="color:#e6db74">&#34;no such index&#34;</span>,
+                <span style="color:#f92672">&#34;index_uuid&#34;</span>: <span style="color:#e6db74">&#34;_na_&#34;</span>,
+                <span style="color:#f92672">&#34;resource.type&#34;</span>: <span style="color:#e6db74">&#34;index_or_alias&#34;</span>,
+                <span style="color:#f92672">&#34;resource.id&#34;</span>: <span style="color:#e6db74">&#34;example&#34;</span>,
+                <span style="color:#f92672">&#34;index&#34;</span>: <span style="color:#e6db74">&#34;example&#34;</span>
             }
         ],
-        &quot;type&quot;: &quot;index_not_found_exception&quot;,
-        &quot;reason&quot;: &quot;no such index&quot;,
-        &quot;index_uuid&quot;: &quot;_na_&quot;,
-        &quot;resource.type&quot;: &quot;index_or_alias&quot;,
-        &quot;resource.id&quot;: &quot;example&quot;,
-        &quot;index&quot;: &quot;example&quot;
+        <span style="color:#f92672">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;index_not_found_exception&#34;</span>,
+        <span style="color:#f92672">&#34;reason&#34;</span>: <span style="color:#e6db74">&#34;no such index&#34;</span>,
+        <span style="color:#f92672">&#34;index_uuid&#34;</span>: <span style="color:#e6db74">&#34;_na_&#34;</span>,
+        <span style="color:#f92672">&#34;resource.type&#34;</span>: <span style="color:#e6db74">&#34;index_or_alias&#34;</span>,
+        <span style="color:#f92672">&#34;resource.id&#34;</span>: <span style="color:#e6db74">&#34;example&#34;</span>,
+        <span style="color:#f92672">&#34;index&#34;</span>: <span style="color:#e6db74">&#34;example&#34;</span>
     },
-    &quot;status&quot;: 404
+    <span style="color:#f92672">&#34;status&#34;</span>: <span style="color:#ae81ff">404</span>
 }
-</code></pre>
-
-<p>Keep in mind that although there is no consequence in issuing a <strong>DELETE</strong> for something that does not exist, Elasticsearch returns a <strong>&ldquo;status&rdquo;: 404</strong>.</p>
-
+</code></pre></div><p>Keep in mind that although there is no consequence in issuing a <strong>DELETE</strong> for something that does not exist, Elasticsearch returns a <strong>&ldquo;status&rdquo;: 404</strong>.</p>
 <h3 id="create-an-index">Create an Index</h3>
-
-<pre><code class="language-bash">curl -X PUT \
-  http://localhost:9200/example
-</code></pre>
-
-<h3 id="create-or-update-a-document-upsert">Create or Update a Document (Upsert)</h3>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">curl -X PUT <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>  http://localhost:9200/example
+</code></pre></div><h3 id="create-or-update-a-document-upsert">Create or Update a Document (Upsert)</h3>
 <p>A PUT command creates or overwrites a document if given an existing document id.</p>
-
-<pre><code class="language-bash">curl -X PUT \
-  http://localhost:9200/example/test/123 \
-  -H 'Content-Type: application/json' \
-  -d '{
-    &quot;testId&quot;: &quot;123&quot;,
-    &quot;description&quot;: &quot;This is a test&quot;
-}'
-</code></pre>
-
-<h3 id="get-a-document">Get a Document</h3>
-
-<pre><code class="language-bash">curl -X GET \
-  http://localhost:9200/example/test/123
-</code></pre>
-
-<p>Returns:</p>
-
-<pre><code class="language-json">{
-    &quot;_index&quot;: &quot;example&quot;,
-    &quot;_type&quot;: &quot;test&quot;,
-    &quot;_id&quot;: &quot;123&quot;,
-    &quot;_version&quot;: 3,
-    &quot;found&quot;: true,
-    &quot;_source&quot;: {
-        &quot;testId&quot;: &quot;123&quot;,
-        &quot;description&quot;: &quot;This is a test&quot;
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">curl -X PUT <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>  http://localhost:9200/example/test/123 <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>  -H <span style="color:#e6db74">&#39;Content-Type: application/json&#39;</span> <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>  -d <span style="color:#e6db74">&#39;{
+</span><span style="color:#e6db74">    &#34;testId&#34;: &#34;123&#34;,
+</span><span style="color:#e6db74">    &#34;description&#34;: &#34;This is a test&#34;
+</span><span style="color:#e6db74">}&#39;</span>
+</code></pre></div><h3 id="get-a-document">Get a Document</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">curl -X GET <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>  http://localhost:9200/example/test/123
+</code></pre></div><p>Returns:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
+    <span style="color:#f92672">&#34;_index&#34;</span>: <span style="color:#e6db74">&#34;example&#34;</span>,
+    <span style="color:#f92672">&#34;_type&#34;</span>: <span style="color:#e6db74">&#34;test&#34;</span>,
+    <span style="color:#f92672">&#34;_id&#34;</span>: <span style="color:#e6db74">&#34;123&#34;</span>,
+    <span style="color:#f92672">&#34;_version&#34;</span>: <span style="color:#ae81ff">3</span>,
+    <span style="color:#f92672">&#34;found&#34;</span>: <span style="color:#66d9ef">true</span>,
+    <span style="color:#f92672">&#34;_source&#34;</span>: {
+        <span style="color:#f92672">&#34;testId&#34;</span>: <span style="color:#e6db74">&#34;123&#34;</span>,
+        <span style="color:#f92672">&#34;description&#34;</span>: <span style="color:#e6db74">&#34;This is a test&#34;</span>
     }
 }
-</code></pre>
-
-<p>The <strong>_source</strong> sections stores the fields associated with a document.</p>
-
+</code></pre></div><p>The <strong>_source</strong> sections stores the fields associated with a document.</p>
 <h2 id="mappings-types-and-metadata">Mappings, Types and Metadata</h2>
-
 <p>For more advanced searching filtering you need to know the types of values stored for a document along with the various index mappings.</p>
-
 <h3 id="get-mapping">Get Mapping</h3>
-
-<pre><code class="language-bash">curl -X GET \
-  http://localhost:9200/example/_mapping
-</code></pre>
-
-<p>In this simple <strong>example</strong> index both <strong>testId</strong> and <strong>description</strong> are of <strong>&ldquo;type&rdquo;: &ldquo;text&rdquo;</strong>. Elasticsearch is indexing the first 256 characters of both fields as a keyword.</p>
-
-<pre><code class="language-json">{
-    &quot;example&quot;: {
-        &quot;mappings&quot;: {
-            &quot;test&quot;: {
-                &quot;properties&quot;: {
-                    &quot;description&quot;: {
-                        &quot;type&quot;: &quot;text&quot;,
-                        &quot;fields&quot;: {
-                            &quot;keyword&quot;: {
-                                &quot;type&quot;: &quot;keyword&quot;,
-                                &quot;ignore_above&quot;: 256
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">curl -X GET <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>  http://localhost:9200/example/_mapping
+</code></pre></div><p>In this simple <strong>example</strong> index both <strong>testId</strong> and <strong>description</strong> are of <strong>&ldquo;type&rdquo;: &ldquo;text&rdquo;</strong>. Elasticsearch is indexing the first 256 characters of both fields as a keyword.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
+    <span style="color:#f92672">&#34;example&#34;</span>: {
+        <span style="color:#f92672">&#34;mappings&#34;</span>: {
+            <span style="color:#f92672">&#34;test&#34;</span>: {
+                <span style="color:#f92672">&#34;properties&#34;</span>: {
+                    <span style="color:#f92672">&#34;description&#34;</span>: {
+                        <span style="color:#f92672">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;text&#34;</span>,
+                        <span style="color:#f92672">&#34;fields&#34;</span>: {
+                            <span style="color:#f92672">&#34;keyword&#34;</span>: {
+                                <span style="color:#f92672">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;keyword&#34;</span>,
+                                <span style="color:#f92672">&#34;ignore_above&#34;</span>: <span style="color:#ae81ff">256</span>
                             }
                         }
                     },
-                    &quot;testId&quot;: {
-                        &quot;type&quot;: &quot;text&quot;,
-                        &quot;fields&quot;: {
-                            &quot;keyword&quot;: {
-                                &quot;type&quot;: &quot;keyword&quot;,
-                                &quot;ignore_above&quot;: 256
+                    <span style="color:#f92672">&#34;testId&#34;</span>: {
+                        <span style="color:#f92672">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;text&#34;</span>,
+                        <span style="color:#f92672">&#34;fields&#34;</span>: {
+                            <span style="color:#f92672">&#34;keyword&#34;</span>: {
+                                <span style="color:#f92672">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;keyword&#34;</span>,
+                                <span style="color:#f92672">&#34;ignore_above&#34;</span>: <span style="color:#ae81ff">256</span>
                             }
                         }
                     }
@@ -430,543 +385,459 @@
         }
     }
 }
-</code></pre>
-
-<h3 id="create-a-mapping">Create a Mapping</h3>
-
+</code></pre></div><h3 id="create-a-mapping">Create a Mapping</h3>
 <p>Create the index <strong>example2</strong> along with a mapping:</p>
-
-<pre><code class="language-bash">curl -X PUT \
-  http://localhost:9200/example2 \
-  -H 'Content-Type: application/json' \
-  -d '{
-  &quot;mappings&quot;: {
-    &quot;test&quot;: { 
-      &quot;properties&quot;: { 
-        &quot;description&quot;: { &quot;type&quot;: &quot;text&quot;  }, 
-        &quot;TestId&quot;:      { &quot;type&quot;: &quot;integer&quot; }
-      }
-    }
-  }
-}'
-</code></pre>
-
-<p>For the complete, see the <a href="https://www.elastic.co/guide/en/elasticsearch/reference/6.3/mapping-types.html">official documentation on field datatypes for mapping</a>.</p>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">curl -X PUT <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>  http://localhost:9200/example2 <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>  -H <span style="color:#e6db74">&#39;Content-Type: application/json&#39;</span> <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>  -d <span style="color:#e6db74">&#39;{
+</span><span style="color:#e6db74">  &#34;mappings&#34;: {
+</span><span style="color:#e6db74">    &#34;test&#34;: { 
+</span><span style="color:#e6db74">      &#34;properties&#34;: { 
+</span><span style="color:#e6db74">        &#34;description&#34;: { &#34;type&#34;: &#34;text&#34;  }, 
+</span><span style="color:#e6db74">        &#34;TestId&#34;:      { &#34;type&#34;: &#34;integer&#34; }
+</span><span style="color:#e6db74">      }
+</span><span style="color:#e6db74">    }
+</span><span style="color:#e6db74">  }
+</span><span style="color:#e6db74">}&#39;</span>
+</code></pre></div><p>For the complete, see the <a href="https://www.elastic.co/guide/en/elasticsearch/reference/6.3/mapping-types.html">official documentation on field datatypes for mapping</a>.</p>
 <h2 id="searching">Searching</h2>
-
 <p>In the following examples assume the following example JSON snippets are  POSTed to <code>http://localhost:9200/wx-rtbeat-%2A/_search</code>. The <strong>%2A</strong> is a URL encoded * (wildcard) allowing us to query all indexes starting with <strong>wx-rtbeat-</strong>.</p>
-
 <p>Returning all documents with the field <strong>rxtxMsg.payload.currently.summary</strong> mathing the term <strong>&ldquo;Partly Cloudy&rdquo;</strong></p>
-
 <p><code>POST http://localhost:9200/wx-rtbeat-%2A/_search</code></p>
-
 <p>Post body:</p>
-
-<pre><code class="language-json">{
-  &quot;query&quot;: {
-    &quot;match&quot; : {
-      &quot;rxtxMsg.payload.currently.summary&quot; : &quot;Partly Cloudy&quot;
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
+  <span style="color:#f92672">&#34;query&#34;</span>: {
+    <span style="color:#f92672">&#34;match&#34;</span> : {
+      <span style="color:#f92672">&#34;rxtxMsg.payload.currently.summary&#34;</span> : <span style="color:#e6db74">&#34;Partly Cloudy&#34;</span>
     }
   }
 }
-</code></pre>
-
-<h2 id="range">Range</h2>
-
+</code></pre></div><h2 id="range">Range</h2>
 <p>Return all documents whose <strong>@timestamp</strong> is greater than or equal to 24 hours ago:</p>
-
 <p><code>POST http://localhost:9200/wx-rtbeat-%2A/_search</code></p>
-
 <p>Post body:</p>
-
-<pre><code class="language-json">{
-  &quot;query&quot;: {
-    &quot;range&quot; : {
-      &quot;@timestamp&quot; : {
-        &quot;gte&quot; : &quot;now-24h&quot;
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
+  <span style="color:#f92672">&#34;query&#34;</span>: {
+    <span style="color:#f92672">&#34;range&#34;</span> : {
+      <span style="color:#f92672">&#34;@timestamp&#34;</span> : {
+        <span style="color:#f92672">&#34;gte&#34;</span> : <span style="color:#e6db74">&#34;now-24h&#34;</span>
       }
     }
   }
 }
-</code></pre>
-
-<p>If you are interested only in the number of matches, you can limit the size of returned documents to <strong>0</strong></p>
-
+</code></pre></div><p>If you are interested only in the number of matches, you can limit the size of returned documents to <strong>0</strong></p>
 <p><code>POST http://localhost:9200/wx-rtbeat-%2A/_search</code></p>
-
 <p>Post body:</p>
-
-<pre><code class="language-json">{
-  &quot;size&quot;:0,
-  &quot;query&quot;: {
-    &quot;range&quot; : {
-      &quot;@timestamp&quot; : {
-        &quot;gte&quot; : &quot;now-24h&quot;
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
+  <span style="color:#f92672">&#34;size&#34;</span>:<span style="color:#ae81ff">0</span>,
+  <span style="color:#f92672">&#34;query&#34;</span>: {
+    <span style="color:#f92672">&#34;range&#34;</span> : {
+      <span style="color:#f92672">&#34;@timestamp&#34;</span> : {
+        <span style="color:#f92672">&#34;gte&#34;</span> : <span style="color:#e6db74">&#34;now-24h&#34;</span>
       }
     }
   }
 }
-</code></pre>
-
-<h2 id="filtering">Filtering</h2>
-
+</code></pre></div><h2 id="filtering">Filtering</h2>
 <p>The <strong>bool</strong> operator allows you to return any documents where the sub-conditions are true. In this case, we only implement one condition, a <strong>filter</strong>, however, that filter has an array of conditions.</p>
-
-<p>In addition to the <strong>query</strong> the return fields are limited to those defined in <strong>&ldquo;_source&rdquo;</strong>.</p>
-
+<p>In addition to the <strong>query</strong> the return fields are limited to those defined in <strong>&quot;_source&rdquo;</strong>.</p>
 <p>The following returns all documents in the last 72 hours where the summary is &ldquo;Partly Cloudy&rdquo; and the temperature is greater than or equal to 60 and less than or equal to 71.</p>
-
 <p><code>POST http://localhost:9200/wx-rtbeat-%2A/_search</code></p>
-
 <p>Post body:</p>
-
-<pre><code class="language-json">{
-  &quot;query&quot;: {
-    &quot;bool&quot;: {
-      &quot;filter&quot;: [
-        { &quot;range&quot; : { &quot;@timestamp&quot; : { &quot;gte&quot; : &quot;now-72h&quot; } } },
-        { &quot;term&quot;: { &quot;rxtxMsg.payload.currently.summary&quot;: &quot;Partly Cloudy&quot; } },
-        { &quot;range&quot; : { &quot;rxtxMsg.payload.currently.temperature&quot; : { &quot;gte&quot; : 60, &quot;lte&quot; : 71 } } }
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
+  <span style="color:#f92672">&#34;query&#34;</span>: {
+    <span style="color:#f92672">&#34;bool&#34;</span>: {
+      <span style="color:#f92672">&#34;filter&#34;</span>: [
+        { <span style="color:#f92672">&#34;range&#34;</span> : { <span style="color:#f92672">&#34;@timestamp&#34;</span> : { <span style="color:#f92672">&#34;gte&#34;</span> : <span style="color:#e6db74">&#34;now-72h&#34;</span> } } },
+        { <span style="color:#f92672">&#34;term&#34;</span>: { <span style="color:#f92672">&#34;rxtxMsg.payload.currently.summary&#34;</span>: <span style="color:#e6db74">&#34;Partly Cloudy&#34;</span> } },
+        { <span style="color:#f92672">&#34;range&#34;</span> : { <span style="color:#f92672">&#34;rxtxMsg.payload.currently.temperature&#34;</span> : { <span style="color:#f92672">&#34;gte&#34;</span> : <span style="color:#ae81ff">60</span>, <span style="color:#f92672">&#34;lte&#34;</span> : <span style="color:#ae81ff">71</span> } } }
       ]
     }
   },
-  &quot;_source&quot;: [
-    &quot;rxtxMsg.payload.currently.time&quot;,
-    &quot;rxtxMsg.payload.currently.temperature&quot;,
-    &quot;rxtxMsg.payload.currently.humidity&quot;,
-    &quot;rxtxMsg.payload.currently.pressure&quot;,
-    &quot;rxtxMsg.payload.currently.windSpeed&quot;,
-    &quot;rxtxMsg.payload.currently.summary&quot;
+  <span style="color:#f92672">&#34;_source&#34;</span>: [
+    <span style="color:#e6db74">&#34;rxtxMsg.payload.currently.time&#34;</span>,
+    <span style="color:#e6db74">&#34;rxtxMsg.payload.currently.temperature&#34;</span>,
+    <span style="color:#e6db74">&#34;rxtxMsg.payload.currently.humidity&#34;</span>,
+    <span style="color:#e6db74">&#34;rxtxMsg.payload.currently.pressure&#34;</span>,
+    <span style="color:#e6db74">&#34;rxtxMsg.payload.currently.windSpeed&#34;</span>,
+    <span style="color:#e6db74">&#34;rxtxMsg.payload.currently.summary&#34;</span>
   ]
 }
-</code></pre>
-
-<h2 id="aggregations">Aggregations</h2>
-
+</code></pre></div><h2 id="aggregations">Aggregations</h2>
 <p>Below are examples of basic <strong>counts</strong>, <strong>averages</strong>, <strong>minimums</strong> and <strong>maximums</strong> along with histograms for <strong>percentile</strong> and <strong>percent rank</strong>. See the <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations.html">Official documentation on aggregations</a> for a deeper understanding.</p>
-
 <h3 id="counts">Counts</h3>
-
 <p>Using the <strong>aggs</strong> condition, we can get document counts on all the terms for <strong>summary</strong> with additional filtering on <strong>temperature</strong> being greater-than or equal to 60.</p>
-
 <p>Note that the <strong>&ldquo;size&rdquo;</strong> is set to <strong>0</strong> since we are not interested in returning any documents.</p>
-
 <p><code>POST http://localhost:9200/wx-rtbeat-%2A/_search</code></p>
-
 <p>Post body:</p>
-
-<pre><code class="language-json">{
-  &quot;size&quot;: 0,
-  &quot;aggs&quot;: {
-    &quot;types&quot;: {
-      &quot;terms&quot;: {
-        &quot;field&quot;: &quot;rxtxMsg.payload.currently.summary&quot;
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
+  <span style="color:#f92672">&#34;size&#34;</span>: <span style="color:#ae81ff">0</span>,
+  <span style="color:#f92672">&#34;aggs&#34;</span>: {
+    <span style="color:#f92672">&#34;types&#34;</span>: {
+      <span style="color:#f92672">&#34;terms&#34;</span>: {
+        <span style="color:#f92672">&#34;field&#34;</span>: <span style="color:#e6db74">&#34;rxtxMsg.payload.currently.summary&#34;</span>
       }
     }
   },
-  &quot;query&quot;: {
-    &quot;bool&quot;: {
-      &quot;must&quot;: {
-        &quot;match_all&quot;: {}
+  <span style="color:#f92672">&#34;query&#34;</span>: {
+    <span style="color:#f92672">&#34;bool&#34;</span>: {
+      <span style="color:#f92672">&#34;must&#34;</span>: {
+        <span style="color:#f92672">&#34;match_all&#34;</span>: {}
       },
-      &quot;filter&quot;: {
-        &quot;range&quot;: {
-          &quot;rxtxMsg.payload.currently.temperature&quot;: {
-            &quot;gte&quot;: 60
+      <span style="color:#f92672">&#34;filter&#34;</span>: {
+        <span style="color:#f92672">&#34;range&#34;</span>: {
+          <span style="color:#f92672">&#34;rxtxMsg.payload.currently.temperature&#34;</span>: {
+            <span style="color:#f92672">&#34;gte&#34;</span>: <span style="color:#ae81ff">60</span>
           }
         }
       }
     }
   }
 }
-</code></pre>
-
-<p>Example Output:</p>
-
-<pre><code class="language-json">{
-  &quot;took&quot;: 13,
-  &quot;timed_out&quot;: false,
-  &quot;_shards&quot;: {
-    &quot;total&quot;: 5,
-    &quot;successful&quot;: 5,
-    &quot;skipped&quot;: 0,
-    &quot;failed&quot;: 0
+</code></pre></div><p>Example Output:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
+  <span style="color:#f92672">&#34;took&#34;</span>: <span style="color:#ae81ff">13</span>,
+  <span style="color:#f92672">&#34;timed_out&#34;</span>: <span style="color:#66d9ef">false</span>,
+  <span style="color:#f92672">&#34;_shards&#34;</span>: {
+    <span style="color:#f92672">&#34;total&#34;</span>: <span style="color:#ae81ff">5</span>,
+    <span style="color:#f92672">&#34;successful&#34;</span>: <span style="color:#ae81ff">5</span>,
+    <span style="color:#f92672">&#34;skipped&#34;</span>: <span style="color:#ae81ff">0</span>,
+    <span style="color:#f92672">&#34;failed&#34;</span>: <span style="color:#ae81ff">0</span>
   },
-  &quot;hits&quot;: {
-    &quot;total&quot;: 6632,
-    &quot;max_score&quot;: 0,
-    &quot;hits&quot;: []
+  <span style="color:#f92672">&#34;hits&#34;</span>: {
+    <span style="color:#f92672">&#34;total&#34;</span>: <span style="color:#ae81ff">6632</span>,
+    <span style="color:#f92672">&#34;max_score&#34;</span>: <span style="color:#ae81ff">0</span>,
+    <span style="color:#f92672">&#34;hits&#34;</span>: []
   },
-  &quot;aggregations&quot;: {
-    &quot;types&quot;: {
-      &quot;doc_count_error_upper_bound&quot;: 0,
-      &quot;sum_other_doc_count&quot;: 0,
-      &quot;buckets&quot;: [
+  <span style="color:#f92672">&#34;aggregations&#34;</span>: {
+    <span style="color:#f92672">&#34;types&#34;</span>: {
+      <span style="color:#f92672">&#34;doc_count_error_upper_bound&#34;</span>: <span style="color:#ae81ff">0</span>,
+      <span style="color:#f92672">&#34;sum_other_doc_count&#34;</span>: <span style="color:#ae81ff">0</span>,
+      <span style="color:#f92672">&#34;buckets&#34;</span>: [
         {
-          &quot;key&quot;: &quot;Clear&quot;,
-          &quot;doc_count&quot;: 4871
+          <span style="color:#f92672">&#34;key&#34;</span>: <span style="color:#e6db74">&#34;Clear&#34;</span>,
+          <span style="color:#f92672">&#34;doc_count&#34;</span>: <span style="color:#ae81ff">4871</span>
         },
         {
-          &quot;key&quot;: &quot;Partly Cloudy&quot;,
-          &quot;doc_count&quot;: 1523
+          <span style="color:#f92672">&#34;key&#34;</span>: <span style="color:#e6db74">&#34;Partly Cloudy&#34;</span>,
+          <span style="color:#f92672">&#34;doc_count&#34;</span>: <span style="color:#ae81ff">1523</span>
         },
         {
-          &quot;key&quot;: &quot;Mostly Cloudy&quot;,
-          &quot;doc_count&quot;: 238
+          <span style="color:#f92672">&#34;key&#34;</span>: <span style="color:#e6db74">&#34;Mostly Cloudy&#34;</span>,
+          <span style="color:#f92672">&#34;doc_count&#34;</span>: <span style="color:#ae81ff">238</span>
         }
       ]
     }
   }
 }
-</code></pre>
-
-<h3 id="averages-minimums-and-maximums">Averages, Minimums and Maximums</h3>
-
+</code></pre></div><h3 id="averages-minimums-and-maximums">Averages, Minimums and Maximums</h3>
 <p>To demonstrate averages, minimums, and maximums, I use a nested <strong>agg</strong> condition.</p>
-
 <p>The following returns a count for each term used in the <strong>summary</strong> field, along with the average, minimum and maximum temperature for that group.</p>
-
 <p><code>POST http://localhost:9200/wx-rtbeat-%2A/_search</code></p>
-
 <p>Post body:</p>
-
-<pre><code class="language-json">{
-  &quot;size&quot;: 0,
-  &quot;aggs&quot;: {
-    &quot;types&quot;: {
-      &quot;terms&quot;: {
-        &quot;field&quot;: &quot;rxtxMsg.payload.currently.summary&quot;
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
+  <span style="color:#f92672">&#34;size&#34;</span>: <span style="color:#ae81ff">0</span>,
+  <span style="color:#f92672">&#34;aggs&#34;</span>: {
+    <span style="color:#f92672">&#34;types&#34;</span>: {
+      <span style="color:#f92672">&#34;terms&#34;</span>: {
+        <span style="color:#f92672">&#34;field&#34;</span>: <span style="color:#e6db74">&#34;rxtxMsg.payload.currently.summary&#34;</span>
       },
-      &quot;aggs&quot;: {
-        &quot;avg_temp&quot;: {
-          &quot;avg&quot;: {
-            &quot;field&quot;: &quot;rxtxMsg.payload.currently.temperature&quot;
+      <span style="color:#f92672">&#34;aggs&#34;</span>: {
+        <span style="color:#f92672">&#34;avg_temp&#34;</span>: {
+          <span style="color:#f92672">&#34;avg&#34;</span>: {
+            <span style="color:#f92672">&#34;field&#34;</span>: <span style="color:#e6db74">&#34;rxtxMsg.payload.currently.temperature&#34;</span>
           }
         },
-        &quot;max_temp&quot;: {
-          &quot;max&quot;: {
-            &quot;field&quot;: &quot;rxtxMsg.payload.currently.temperature&quot;
+        <span style="color:#f92672">&#34;max_temp&#34;</span>: {
+          <span style="color:#f92672">&#34;max&#34;</span>: {
+            <span style="color:#f92672">&#34;field&#34;</span>: <span style="color:#e6db74">&#34;rxtxMsg.payload.currently.temperature&#34;</span>
           }
         },
-        &quot;min_temp&quot;: {
-          &quot;min&quot;: {
-            &quot;field&quot;: &quot;rxtxMsg.payload.currently.temperature&quot;
+        <span style="color:#f92672">&#34;min_temp&#34;</span>: {
+          <span style="color:#f92672">&#34;min&#34;</span>: {
+            <span style="color:#f92672">&#34;field&#34;</span>: <span style="color:#e6db74">&#34;rxtxMsg.payload.currently.temperature&#34;</span>
           }
         }
       }
     }
   },
-  &quot;query&quot;: {
-    &quot;range&quot;: {
-      &quot;@timestamp&quot;: {
-        &quot;gte&quot;: &quot;now-24h&quot;
+  <span style="color:#f92672">&#34;query&#34;</span>: {
+    <span style="color:#f92672">&#34;range&#34;</span>: {
+      <span style="color:#f92672">&#34;@timestamp&#34;</span>: {
+        <span style="color:#f92672">&#34;gte&#34;</span>: <span style="color:#e6db74">&#34;now-24h&#34;</span>
       }
     }
   }
 }
-</code></pre>
-
-<p>Example output:</p>
-
-<pre><code class="language-json">{
-  &quot;took&quot;: 13,
-  &quot;timed_out&quot;: false,
-  &quot;_shards&quot;: {
-    &quot;total&quot;: 5,
-    &quot;successful&quot;: 5,
-    &quot;skipped&quot;: 0,
-    &quot;failed&quot;: 0
+</code></pre></div><p>Example output:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
+  <span style="color:#f92672">&#34;took&#34;</span>: <span style="color:#ae81ff">13</span>,
+  <span style="color:#f92672">&#34;timed_out&#34;</span>: <span style="color:#66d9ef">false</span>,
+  <span style="color:#f92672">&#34;_shards&#34;</span>: {
+    <span style="color:#f92672">&#34;total&#34;</span>: <span style="color:#ae81ff">5</span>,
+    <span style="color:#f92672">&#34;successful&#34;</span>: <span style="color:#ae81ff">5</span>,
+    <span style="color:#f92672">&#34;skipped&#34;</span>: <span style="color:#ae81ff">0</span>,
+    <span style="color:#f92672">&#34;failed&#34;</span>: <span style="color:#ae81ff">0</span>
   },
-  &quot;hits&quot;: {
-    &quot;total&quot;: 718,
-    &quot;max_score&quot;: 0,
-    &quot;hits&quot;: []
+  <span style="color:#f92672">&#34;hits&#34;</span>: {
+    <span style="color:#f92672">&#34;total&#34;</span>: <span style="color:#ae81ff">718</span>,
+    <span style="color:#f92672">&#34;max_score&#34;</span>: <span style="color:#ae81ff">0</span>,
+    <span style="color:#f92672">&#34;hits&#34;</span>: []
   },
-  &quot;aggregations&quot;: {
-    &quot;types&quot;: {
-      &quot;doc_count_error_upper_bound&quot;: 0,
-      &quot;sum_other_doc_count&quot;: 0,
-      &quot;buckets&quot;: [
+  <span style="color:#f92672">&#34;aggregations&#34;</span>: {
+    <span style="color:#f92672">&#34;types&#34;</span>: {
+      <span style="color:#f92672">&#34;doc_count_error_upper_bound&#34;</span>: <span style="color:#ae81ff">0</span>,
+      <span style="color:#f92672">&#34;sum_other_doc_count&#34;</span>: <span style="color:#ae81ff">0</span>,
+      <span style="color:#f92672">&#34;buckets&#34;</span>: [
         {
-          &quot;key&quot;: &quot;Clear&quot;,
-          &quot;doc_count&quot;: 409,
-          &quot;avg_temp&quot;: {
-            &quot;value&quot;: 81.81280562347189
+          <span style="color:#f92672">&#34;key&#34;</span>: <span style="color:#e6db74">&#34;Clear&#34;</span>,
+          <span style="color:#f92672">&#34;doc_count&#34;</span>: <span style="color:#ae81ff">409</span>,
+          <span style="color:#f92672">&#34;avg_temp&#34;</span>: {
+            <span style="color:#f92672">&#34;value&#34;</span>: <span style="color:#ae81ff">81.81280562347189</span>
           },
-          &quot;min_temp&quot;: {
-            &quot;value&quot;: 71.6875
+          <span style="color:#f92672">&#34;min_temp&#34;</span>: {
+            <span style="color:#f92672">&#34;value&#34;</span>: <span style="color:#ae81ff">71.6875</span>
           },
-          &quot;max_temp&quot;: {
-            &quot;value&quot;: 88.75
+          <span style="color:#f92672">&#34;max_temp&#34;</span>: {
+            <span style="color:#f92672">&#34;value&#34;</span>: <span style="color:#ae81ff">88.75</span>
           }
         },
         {
-          &quot;key&quot;: &quot;Partly Cloudy&quot;,
-          &quot;doc_count&quot;: 192,
-          &quot;avg_temp&quot;: {
-            &quot;value&quot;: 71.58528645833333
+          <span style="color:#f92672">&#34;key&#34;</span>: <span style="color:#e6db74">&#34;Partly Cloudy&#34;</span>,
+          <span style="color:#f92672">&#34;doc_count&#34;</span>: <span style="color:#ae81ff">192</span>,
+          <span style="color:#f92672">&#34;avg_temp&#34;</span>: {
+            <span style="color:#f92672">&#34;value&#34;</span>: <span style="color:#ae81ff">71.58528645833333</span>
           },
-          &quot;min_temp&quot;: {
-            &quot;value&quot;: 68.1875
+          <span style="color:#f92672">&#34;min_temp&#34;</span>: {
+            <span style="color:#f92672">&#34;value&#34;</span>: <span style="color:#ae81ff">68.1875</span>
           },
-          &quot;max_temp&quot;: {
-            &quot;value&quot;: 79.1875
+          <span style="color:#f92672">&#34;max_temp&#34;</span>: {
+            <span style="color:#f92672">&#34;value&#34;</span>: <span style="color:#ae81ff">79.1875</span>
           }
         },
         {
-          &quot;key&quot;: &quot;Mostly Cloudy&quot;,
-          &quot;doc_count&quot;: 117,
-          &quot;avg_temp&quot;: {
-            &quot;value&quot;: 69.40331196581197
+          <span style="color:#f92672">&#34;key&#34;</span>: <span style="color:#e6db74">&#34;Mostly Cloudy&#34;</span>,
+          <span style="color:#f92672">&#34;doc_count&#34;</span>: <span style="color:#ae81ff">117</span>,
+          <span style="color:#f92672">&#34;avg_temp&#34;</span>: {
+            <span style="color:#f92672">&#34;value&#34;</span>: <span style="color:#ae81ff">69.40331196581197</span>
           },
-          &quot;min_temp&quot;: {
-            &quot;value&quot;: 68.5
+          <span style="color:#f92672">&#34;min_temp&#34;</span>: {
+            <span style="color:#f92672">&#34;value&#34;</span>: <span style="color:#ae81ff">68.5</span>
           },
-          &quot;max_temp&quot;: {
-            &quot;value&quot;: 71
+          <span style="color:#f92672">&#34;max_temp&#34;</span>: {
+            <span style="color:#f92672">&#34;value&#34;</span>: <span style="color:#ae81ff">71</span>
           }
         }
       ]
     }
   }
 }
-</code></pre>
-
-<h3 id="percentile">Percentile</h3>
-
+</code></pre></div><h3 id="percentile">Percentile</h3>
 <p>Obtaining the temperature field of our data in a series of percentiles requires creating a percentiles aggregator, this is merely wrapping the <strong>&ldquo;percentiles&rdquo;</strong> operator in a custom object. In this case I name the object <strong>&ldquo;pct_temp&rdquo;</strong>, however and name would suffice.</p>
-
 <p><code>POST http://localhost:9200/wx-rtbeat-%2A/_search</code></p>
-
 <p>Post body:</p>
-
-<pre><code class="language-json">{
-  &quot;size&quot;: 0,
-  &quot;aggs&quot;: {
-    &quot;pct_temp&quot;: {
-      &quot;percentiles&quot;: {
-        &quot;field&quot;: &quot;rxtxMsg.payload.currently.temperature&quot;,
-        &quot;percents&quot;: [
-          1,
-          5,
-          25,
-          50,
-          75,
-          95,
-          99
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
+  <span style="color:#f92672">&#34;size&#34;</span>: <span style="color:#ae81ff">0</span>,
+  <span style="color:#f92672">&#34;aggs&#34;</span>: {
+    <span style="color:#f92672">&#34;pct_temp&#34;</span>: {
+      <span style="color:#f92672">&#34;percentiles&#34;</span>: {
+        <span style="color:#f92672">&#34;field&#34;</span>: <span style="color:#e6db74">&#34;rxtxMsg.payload.currently.temperature&#34;</span>,
+        <span style="color:#f92672">&#34;percents&#34;</span>: [
+          <span style="color:#ae81ff">1</span>,
+          <span style="color:#ae81ff">5</span>,
+          <span style="color:#ae81ff">25</span>,
+          <span style="color:#ae81ff">50</span>,
+          <span style="color:#ae81ff">75</span>,
+          <span style="color:#ae81ff">95</span>,
+          <span style="color:#ae81ff">99</span>
         ]
       }
     }
   },
-  &quot;query&quot;: {
-    &quot;range&quot;: {
-      &quot;@timestamp&quot;: {
-        &quot;gte&quot;: &quot;now-24h&quot;
+  <span style="color:#f92672">&#34;query&#34;</span>: {
+    <span style="color:#f92672">&#34;range&#34;</span>: {
+      <span style="color:#f92672">&#34;@timestamp&#34;</span>: {
+        <span style="color:#f92672">&#34;gte&#34;</span>: <span style="color:#e6db74">&#34;now-24h&#34;</span>
       }
     }
   }
 }
-</code></pre>
-
-<p>Example output:</p>
-
-<pre><code class="language-json">{
-  &quot;took&quot;: 15,
-  &quot;timed_out&quot;: false,
-  &quot;_shards&quot;: {
-    &quot;total&quot;: 5,
-    &quot;successful&quot;: 5,
-    &quot;skipped&quot;: 0,
-    &quot;failed&quot;: 0
+</code></pre></div><p>Example output:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
+  <span style="color:#f92672">&#34;took&#34;</span>: <span style="color:#ae81ff">15</span>,
+  <span style="color:#f92672">&#34;timed_out&#34;</span>: <span style="color:#66d9ef">false</span>,
+  <span style="color:#f92672">&#34;_shards&#34;</span>: {
+    <span style="color:#f92672">&#34;total&#34;</span>: <span style="color:#ae81ff">5</span>,
+    <span style="color:#f92672">&#34;successful&#34;</span>: <span style="color:#ae81ff">5</span>,
+    <span style="color:#f92672">&#34;skipped&#34;</span>: <span style="color:#ae81ff">0</span>,
+    <span style="color:#f92672">&#34;failed&#34;</span>: <span style="color:#ae81ff">0</span>
   },
-  &quot;hits&quot;: {
-    &quot;total&quot;: 718,
-    &quot;max_score&quot;: 0,
-    &quot;hits&quot;: []
+  <span style="color:#f92672">&#34;hits&#34;</span>: {
+    <span style="color:#f92672">&#34;total&#34;</span>: <span style="color:#ae81ff">718</span>,
+    <span style="color:#f92672">&#34;max_score&#34;</span>: <span style="color:#ae81ff">0</span>,
+    <span style="color:#f92672">&#34;hits&#34;</span>: []
   },
-  &quot;aggregations&quot;: {
-    &quot;pct_temp&quot;: {
-      &quot;values&quot;: {
-        &quot;1.0&quot;: 68.25,
-        &quot;5.0&quot;: 68.5625,
-        &quot;25.0&quot;: 69.95982142857143,
-        &quot;50.0&quot;: 75.80357142857143,
-        &quot;75.0&quot;: 84.00483630952382,
-        &quot;95.0&quot;: 87.625,
-        &quot;99.0&quot;: 88.614375
+  <span style="color:#f92672">&#34;aggregations&#34;</span>: {
+    <span style="color:#f92672">&#34;pct_temp&#34;</span>: {
+      <span style="color:#f92672">&#34;values&#34;</span>: {
+        <span style="color:#f92672">&#34;1.0&#34;</span>: <span style="color:#ae81ff">68.25</span>,
+        <span style="color:#f92672">&#34;5.0&#34;</span>: <span style="color:#ae81ff">68.5625</span>,
+        <span style="color:#f92672">&#34;25.0&#34;</span>: <span style="color:#ae81ff">69.95982142857143</span>,
+        <span style="color:#f92672">&#34;50.0&#34;</span>: <span style="color:#ae81ff">75.80357142857143</span>,
+        <span style="color:#f92672">&#34;75.0&#34;</span>: <span style="color:#ae81ff">84.00483630952382</span>,
+        <span style="color:#f92672">&#34;95.0&#34;</span>: <span style="color:#ae81ff">87.625</span>,
+        <span style="color:#f92672">&#34;99.0&#34;</span>: <span style="color:#ae81ff">88.614375</span>
       }
     }
   }
 }
-</code></pre>
-
-<h3 id="percent-by-rank">Percent by Rank</h3>
-
+</code></pre></div><h3 id="percent-by-rank">Percent by Rank</h3>
 <p>Below, I use <strong>&ldquo;percentile_ranks&rdquo;</strong> to bucket the temperatures into four categories of interest.</p>
-
 <p><code>POST http://localhost:9200/wx-rtbeat-%2A/_search</code></p>
-
 <p>Post body:</p>
-
-<pre><code class="language-json">{
-  &quot;size&quot;: 0,
-  &quot;aggs&quot;: {
-    &quot;pct_temp&quot;: {
-      &quot;percentile_ranks&quot;: {
-        &quot;field&quot;: &quot;rxtxMsg.payload.currently.temperature&quot;,
-        &quot;values&quot;: [
-          60,
-          70,
-          75,
-          80
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
+  <span style="color:#f92672">&#34;size&#34;</span>: <span style="color:#ae81ff">0</span>,
+  <span style="color:#f92672">&#34;aggs&#34;</span>: {
+    <span style="color:#f92672">&#34;pct_temp&#34;</span>: {
+      <span style="color:#f92672">&#34;percentile_ranks&#34;</span>: {
+        <span style="color:#f92672">&#34;field&#34;</span>: <span style="color:#e6db74">&#34;rxtxMsg.payload.currently.temperature&#34;</span>,
+        <span style="color:#f92672">&#34;values&#34;</span>: [
+          <span style="color:#ae81ff">60</span>,
+          <span style="color:#ae81ff">70</span>,
+          <span style="color:#ae81ff">75</span>,
+          <span style="color:#ae81ff">80</span>
         ],
-        &quot;hdr&quot;: {
-          &quot;number_of_significant_value_digits&quot;: 2
+        <span style="color:#f92672">&#34;hdr&#34;</span>: {
+          <span style="color:#f92672">&#34;number_of_significant_value_digits&#34;</span>: <span style="color:#ae81ff">2</span>
         }
       }
     }
   },
-  &quot;query&quot;: {
-    &quot;range&quot;: {
-      &quot;@timestamp&quot;: {
-        &quot;gte&quot;: &quot;now-24h&quot;
+  <span style="color:#f92672">&#34;query&#34;</span>: {
+    <span style="color:#f92672">&#34;range&#34;</span>: {
+      <span style="color:#f92672">&#34;@timestamp&#34;</span>: {
+        <span style="color:#f92672">&#34;gte&#34;</span>: <span style="color:#e6db74">&#34;now-24h&#34;</span>
       }
     }
   }
 }
-</code></pre>
-
-<p>Example output:</p>
-
-<pre><code class="language-json">{
-  &quot;took&quot;: 13,
-  &quot;timed_out&quot;: false,
-  &quot;_shards&quot;: {
-    &quot;total&quot;: 5,
-    &quot;successful&quot;: 5,
-    &quot;skipped&quot;: 0,
-    &quot;failed&quot;: 0
+</code></pre></div><p>Example output:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
+  <span style="color:#f92672">&#34;took&#34;</span>: <span style="color:#ae81ff">13</span>,
+  <span style="color:#f92672">&#34;timed_out&#34;</span>: <span style="color:#66d9ef">false</span>,
+  <span style="color:#f92672">&#34;_shards&#34;</span>: {
+    <span style="color:#f92672">&#34;total&#34;</span>: <span style="color:#ae81ff">5</span>,
+    <span style="color:#f92672">&#34;successful&#34;</span>: <span style="color:#ae81ff">5</span>,
+    <span style="color:#f92672">&#34;skipped&#34;</span>: <span style="color:#ae81ff">0</span>,
+    <span style="color:#f92672">&#34;failed&#34;</span>: <span style="color:#ae81ff">0</span>
   },
-  &quot;hits&quot;: {
-    &quot;total&quot;: 718,
-    &quot;max_score&quot;: 0,
-    &quot;hits&quot;: []
+  <span style="color:#f92672">&#34;hits&#34;</span>: {
+    <span style="color:#f92672">&#34;total&#34;</span>: <span style="color:#ae81ff">718</span>,
+    <span style="color:#f92672">&#34;max_score&#34;</span>: <span style="color:#ae81ff">0</span>,
+    <span style="color:#f92672">&#34;hits&#34;</span>: []
   },
-  &quot;aggregations&quot;: {
-    &quot;pct_temp&quot;: {
-      &quot;values&quot;: {
-        &quot;60.0&quot;: 0,
-        &quot;70.0&quot;: 29.526462395543174,
-        &quot;75.0&quot;: 49.02506963788301,
-        &quot;80.0&quot;: 63.50974930362117
+  <span style="color:#f92672">&#34;aggregations&#34;</span>: {
+    <span style="color:#f92672">&#34;pct_temp&#34;</span>: {
+      <span style="color:#f92672">&#34;values&#34;</span>: {
+        <span style="color:#f92672">&#34;60.0&#34;</span>: <span style="color:#ae81ff">0</span>,
+        <span style="color:#f92672">&#34;70.0&#34;</span>: <span style="color:#ae81ff">29.526462395543174</span>,
+        <span style="color:#f92672">&#34;75.0&#34;</span>: <span style="color:#ae81ff">49.02506963788301</span>,
+        <span style="color:#f92672">&#34;80.0&#34;</span>: <span style="color:#ae81ff">63.50974930362117</span>
       }
     }
   }
 }
-</code></pre>
-
-<h3 id="percent-by-rank-interval">Percent by Rank Interval</h3>
-
+</code></pre></div><h3 id="percent-by-rank-interval">Percent by Rank Interval</h3>
 <p>I use <strong>&ldquo;interval&rdquo;</strong> to automatically generate rank buckets based on the value range. Intervals make building histograms easy when you have dynamic data that should not be scaled.</p>
-
 <p><code>POST http://localhost:9200/wx-rtbeat-%2A/_search</code></p>
-
 <p>Post body:</p>
-
-<pre><code class="language-json">{
-    &quot;size&quot;: 0,
-    &quot;aggs&quot;: {
-        &quot;temps&quot;: {
-            &quot;histogram&quot;: {
-                &quot;field&quot;: &quot;rxtxMsg.payload.currently.temperature&quot;,
-                &quot;interval&quot;: 2
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
+    <span style="color:#f92672">&#34;size&#34;</span>: <span style="color:#ae81ff">0</span>,
+    <span style="color:#f92672">&#34;aggs&#34;</span>: {
+        <span style="color:#f92672">&#34;temps&#34;</span>: {
+            <span style="color:#f92672">&#34;histogram&#34;</span>: {
+                <span style="color:#f92672">&#34;field&#34;</span>: <span style="color:#e6db74">&#34;rxtxMsg.payload.currently.temperature&#34;</span>,
+                <span style="color:#f92672">&#34;interval&#34;</span>: <span style="color:#ae81ff">2</span>
             }
         }
     },
-    &quot;query&quot;: {
-        &quot;range&quot; : {
-            &quot;@timestamp&quot; : {
-                &quot;gte&quot; : &quot;now-24h&quot;
+    <span style="color:#f92672">&#34;query&#34;</span>: {
+        <span style="color:#f92672">&#34;range&#34;</span> : {
+            <span style="color:#f92672">&#34;@timestamp&#34;</span> : {
+                <span style="color:#f92672">&#34;gte&#34;</span> : <span style="color:#e6db74">&#34;now-24h&#34;</span>
             }
         }
     }
 }
-</code></pre>
-
-<p>Example output:</p>
-
-<pre><code class="language-json">{
-  &quot;took&quot;: 11,
-  &quot;timed_out&quot;: false,
-  &quot;_shards&quot;: {
-    &quot;total&quot;: 5,
-    &quot;successful&quot;: 5,
-    &quot;skipped&quot;: 0,
-    &quot;failed&quot;: 0
+</code></pre></div><p>Example output:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
+  <span style="color:#f92672">&#34;took&#34;</span>: <span style="color:#ae81ff">11</span>,
+  <span style="color:#f92672">&#34;timed_out&#34;</span>: <span style="color:#66d9ef">false</span>,
+  <span style="color:#f92672">&#34;_shards&#34;</span>: {
+    <span style="color:#f92672">&#34;total&#34;</span>: <span style="color:#ae81ff">5</span>,
+    <span style="color:#f92672">&#34;successful&#34;</span>: <span style="color:#ae81ff">5</span>,
+    <span style="color:#f92672">&#34;skipped&#34;</span>: <span style="color:#ae81ff">0</span>,
+    <span style="color:#f92672">&#34;failed&#34;</span>: <span style="color:#ae81ff">0</span>
   },
-  &quot;hits&quot;: {
-    &quot;total&quot;: 718,
-    &quot;max_score&quot;: 0,
-    &quot;hits&quot;: []
+  <span style="color:#f92672">&#34;hits&#34;</span>: {
+    <span style="color:#f92672">&#34;total&#34;</span>: <span style="color:#ae81ff">718</span>,
+    <span style="color:#f92672">&#34;max_score&#34;</span>: <span style="color:#ae81ff">0</span>,
+    <span style="color:#f92672">&#34;hits&#34;</span>: []
   },
-  &quot;aggregations&quot;: {
-    &quot;temps&quot;: {
-      &quot;buckets&quot;: [
+  <span style="color:#f92672">&#34;aggregations&#34;</span>: {
+    <span style="color:#f92672">&#34;temps&#34;</span>: {
+      <span style="color:#f92672">&#34;buckets&#34;</span>: [
         {
-          &quot;key&quot;: 68,
-          &quot;doc_count&quot;: 173
+          <span style="color:#f92672">&#34;key&#34;</span>: <span style="color:#ae81ff">68</span>,
+          <span style="color:#f92672">&#34;doc_count&#34;</span>: <span style="color:#ae81ff">173</span>
         },
         {
-          &quot;key&quot;: 70,
-          &quot;doc_count&quot;: 77
+          <span style="color:#f92672">&#34;key&#34;</span>: <span style="color:#ae81ff">70</span>,
+          <span style="color:#f92672">&#34;doc_count&#34;</span>: <span style="color:#ae81ff">77</span>
         },
         {
-          &quot;key&quot;: 72,
-          &quot;doc_count&quot;: 69
+          <span style="color:#f92672">&#34;key&#34;</span>: <span style="color:#ae81ff">72</span>,
+          <span style="color:#f92672">&#34;doc_count&#34;</span>: <span style="color:#ae81ff">69</span>
         },
         {
-          &quot;key&quot;: 74,
-          &quot;doc_count&quot;: 43
+          <span style="color:#f92672">&#34;key&#34;</span>: <span style="color:#ae81ff">74</span>,
+          <span style="color:#f92672">&#34;doc_count&#34;</span>: <span style="color:#ae81ff">43</span>
         },
         {
-          &quot;key&quot;: 76,
-          &quot;doc_count&quot;: 31
+          <span style="color:#f92672">&#34;key&#34;</span>: <span style="color:#ae81ff">76</span>,
+          <span style="color:#f92672">&#34;doc_count&#34;</span>: <span style="color:#ae81ff">31</span>
         },
         {
-          &quot;key&quot;: 78,
-          &quot;doc_count&quot;: 51
+          <span style="color:#f92672">&#34;key&#34;</span>: <span style="color:#ae81ff">78</span>,
+          <span style="color:#f92672">&#34;doc_count&#34;</span>: <span style="color:#ae81ff">51</span>
         },
         {
-          &quot;key&quot;: 80,
-          &quot;doc_count&quot;: 44
+          <span style="color:#f92672">&#34;key&#34;</span>: <span style="color:#ae81ff">80</span>,
+          <span style="color:#f92672">&#34;doc_count&#34;</span>: <span style="color:#ae81ff">44</span>
         },
         {
-          &quot;key&quot;: 82,
-          &quot;doc_count&quot;: 48
+          <span style="color:#f92672">&#34;key&#34;</span>: <span style="color:#ae81ff">82</span>,
+          <span style="color:#f92672">&#34;doc_count&#34;</span>: <span style="color:#ae81ff">48</span>
         },
         {
-          &quot;key&quot;: 84,
-          &quot;doc_count&quot;: 53
+          <span style="color:#f92672">&#34;key&#34;</span>: <span style="color:#ae81ff">84</span>,
+          <span style="color:#f92672">&#34;doc_count&#34;</span>: <span style="color:#ae81ff">53</span>
         },
         {
-          &quot;key&quot;: 86,
-          &quot;doc_count&quot;: 104
+          <span style="color:#f92672">&#34;key&#34;</span>: <span style="color:#ae81ff">86</span>,
+          <span style="color:#f92672">&#34;doc_count&#34;</span>: <span style="color:#ae81ff">104</span>
         },
         {
-          &quot;key&quot;: 88,
-          &quot;doc_count&quot;: 25
+          <span style="color:#f92672">&#34;key&#34;</span>: <span style="color:#ae81ff">88</span>,
+          <span style="color:#f92672">&#34;doc_count&#34;</span>: <span style="color:#ae81ff">25</span>
         }
       ]
     }
   }
 }
-</code></pre>
-
-<p>The example data is powered by the <a href="https://darksky.net/dev">Dark Sky API</a>. If you are interested in gathering your own weather data, check out my article <a href="/post-json-elasticsearch-kubernetes/">High Traffic JSON Data into Elasticsearch on Kubernetes</a>.</p>
-
+</code></pre></div><p>The example data is powered by the <a href="https://darksky.net/dev">Dark Sky API</a>. If you are interested in gathering your own weather data, check out my article <a href="/post-json-elasticsearch-kubernetes/">High Traffic JSON Data into Elasticsearch on Kubernetes</a>.</p>
 <h2 id="resources">Resources</h2>
-
 <ul>
 <li><a href="https://www.elastic.co/products/elasticsearch">Elasticsearch</a></li>
 <li>How to <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/install-elasticsearch.html">install Elasticsearch</a></li>
@@ -982,6 +853,23 @@
                    <span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">Elasticsearch Essential Queries: Getting started with Elasticsearch</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="https://imti.co/" property="cc:attributionName" rel="cc:attributionURL">Craig Johnston</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
                     <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a>
                 </p>
+
+                <h5>SUPPORT</h5>
+                <p>
+                    Order my new Kubernetes book: <a href="https://amzn.to/34D56v6">Advanced Platform Development with Kubernetes: Enabling Data Management, the Internet of Things, Blockchain, and Machine Learning</a>
+                </p>
+                <script type="text/javascript">
+                  amzn_assoc_tracking_id = "imti-20";
+                  amzn_assoc_ad_mode = "manual";
+                  amzn_assoc_ad_type = "smart";
+                  amzn_assoc_marketplace = "amazon";
+                  amzn_assoc_region = "US";
+                  amzn_assoc_design = "enhanced_links";
+                  amzn_assoc_asins = "1484256107";
+                  amzn_assoc_placement = "adunit";
+                  amzn_assoc_linkid = "14a9d8b8d1b0bd44e9256e0e0a948015";
+                </script>
+                <script src="//z-na.amazon-adsystem.com/widgets/onejs?MarketPlace=US"></script>
 
                 
                 <hr>

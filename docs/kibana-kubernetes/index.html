@@ -87,7 +87,7 @@
       "url": "https:\/\/imti.co\/img\/craig_johnston_cjimti.jpg"
     }
   },
-  "description": "This guide walks through a process for setting up Kibana within a namespace on a Kubernetes cluster. If you followed along with Production Grade Elasticsearch on Kubernetes then aside from personal or corporate preferences, little modifications are necessary for the configurations below.\n Contents     Project Namespace Service Kibana ConfigMap Deployment Basic Auth TLS Certificate (Optional) Ingress Conclusion Port Forwarding \/ Local Development Resources        (adsbygoogle = window."
+  "description": "This guide walks through a process for setting up Kibana within a namespace on a Kubernetes cluster. If you followed along with Production Grade Elasticsearch on Kubernetes then aside from personal or corporate preferences, little modifications are necessary for the configurations below.\n Contents   Project Namespace Service Kibana ConfigMap Deployment Basic Auth (Optional) TLS Certificate (Optional) Ingress Conclusion Port Forwarding \/ Local Development Resources     Please support my new book!"
 }
 </script>
 
@@ -215,290 +215,221 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h5>SHARE</h5>
-                <ul class="list-inline">
-                    <li><div class="addthis_inline_share_toolbox"></div></li>
-                </ul>
-
-                
-
-<p>This guide walks through a process for setting up <a href="https://www.elastic.co/products/kibana">Kibana</a> within a <a href="/kubernetes-production-elasticsearch/#project-namespace">namespace</a> on a Kubernetes cluster. If you followed along with <a href="/kubernetes-production-elasticsearch/">Production Grade Elasticsearch on Kubernetes</a> then aside from personal or corporate preferences, little modifications are necessary for the configurations below.</p>
-
+                <p>This guide walks through a process for setting up <a href="https://www.elastic.co/products/kibana">Kibana</a> within a <a href="/kubernetes-production-elasticsearch/#project-namespace">namespace</a> on a Kubernetes cluster. If you followed along with <a href="/kubernetes-production-elasticsearch/">Production Grade Elasticsearch on Kubernetes</a> then aside from personal or corporate preferences, little modifications are necessary for the configurations below.</p>
 <aside class="toc">
     <header>
         <h2>Contents</h2>
     </header>
     <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#project-namespace">Project <a href="/kubernetes-production-elasticsearch/#project-namespace">Namespace</a></a></li>
-<li><a href="#service"><a href="https://kubernetes.io/docs/concepts/services-networking/service/">Service</a></a></li>
-<li><a href="#kibana-configmap">Kibana <a href="https://kubernetes.io/docs/tasks/configure-pod-container/configure-pod-configmap/#create-a-configmap">ConfigMap</a></a></li>
-<li><a href="#deployment">Deployment</a></li>
-<li><a href="#basic-auth-optional"><a href="Optional">Basic Auth</a></a></li>
-<li><a href="#tls-certificate-optional">TLS Certificate (Optional)</a></li>
-<li><a href="#ingress"><a href="/web-cluster-ingress/">Ingress</a></a></li>
-<li><a href="#conclusion">Conclusion</a></li>
-<li><a href="#port-forwarding-local-development">Port Forwarding / Local Development</a></li>
-<li><a href="#resources">Resources</a></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#project-namespace">Project <a href="/kubernetes-production-elasticsearch/#project-namespace">Namespace</a></a></li>
+    <li><a href="#service"><a href="https://kubernetes.io/docs/concepts/services-networking/service/">Service</a></a></li>
+    <li><a href="#kibana-configmap">Kibana <a href="https://kubernetes.io/docs/tasks/configure-pod-container/configure-pod-configmap/#create-a-configmap">ConfigMap</a></a></li>
+    <li><a href="#deployment">Deployment</a></li>
+    <li><a href="#basic-auth-optional"><a href="/kubernetes-ingress-basic-auth/">Basic Auth</a> (Optional)</a></li>
+    <li><a href="#tls-certificate-optional">TLS Certificate (Optional)</a></li>
+    <li><a href="#ingress"><a href="/web-cluster-ingress/">Ingress</a></a></li>
+    <li><a href="#conclusion">Conclusion</a></li>
+    <li><a href="#port-forwarding--local-development">Port Forwarding / Local Development</a></li>
+    <li><a href="#resources">Resources</a></li>
+  </ul>
 </nav>
 </aside>
 
-<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<ins class="adsbygoogle"
-     style="display:block; text-align:center;"
-     data-ad-layout="in-article"
-     data-ad-format="fluid"
-     data-ad-client="ca-pub-5984764595236029"
-     data-ad-slot="7730310582"></ins>
-<script>
-    (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-
+<table>
+    <tr><td colspan="2" style="text-align: center"><b>Please support my new book!</b></td></tr>
+    <tr>
+        <td>
+            <a href="https://amzn.to/3hAZUvx">
+                <img src="/img/kubernetes_platform_development.jpg" style="padding:0; margin: 0"/>
+            </a>
+        </td>
+        <td>
+            <b><a href="https://amzn.to/3hAZUvx">Advanced Platform Development with Kubernetes: Enabling Data Management, the Internet of Things, Blockchain, and Machine Learning</a></b>
+            <h4>What You'll Learn</h4>
+            <ul style="padding-bottom: 0; margin: 0">
+                <li>Use data pipelines with <b>MQTT, NiFi, Logstash, Kafka and Elasticsearch</b></li>
+                <li>Install a serverless platform with <b>OpenFaaS</b></li>
+                <li>Explore <b>blockchain</b> network capabilities with <b>Ethereum</b></li>
+                <li>Support a multi-tenant <b>data science</b> platform and web IDE with <b>JupyterHub, MLflow and Seldon Core</b></li>
+                <li>Build a <b>hybrid cluster</b>, securely bridging <b>on-premise</b> and cloud-based Kubernetes nodes</li>
+                <li>Implement an integrated development toolchain for continuous integration and deployment</li>
+            </ul>
+        </td>
+    </tr>
+</table>
 <h2 id="project-namespace">Project <a href="/kubernetes-production-elasticsearch/#project-namespace">Namespace</a></h2>
-
 <p>I use <code>the-project</code> as a namespace for all my examples and testing. <a href="https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/">Kubernetes Namespaces</a> are the main delimiter I use for security and organization. Configuration files are organized by project, and in Kubernetes, these projects are separated by namespace; therefore I always include a namespace configuration. There is no harm in asking Kubernetes to create a namespace that already exists; an error is returned confirming its existence.</p>
-
 <p><code>00-namespace.yml</code>:</p>
-
-<pre><code class="language-yaml">apiVersion: v1
-kind: Namespace
-metadata:
-  name: the-project
-  labels:
-    env: dev
-</code></pre>
-
-<p>Create the namespace:</p>
-
-<pre><code class="language-bash">kubectl create -f 00-namespace.yml
-</code></pre>
-
-<h2 id="service"><a href="https://kubernetes.io/docs/concepts/services-networking/service/">Service</a></h2>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">apiVersion</span>: v1
+<span style="color:#66d9ef">kind</span>: Namespace
+<span style="color:#66d9ef">metadata</span>:
+  <span style="color:#66d9ef">name</span>: the-project
+  <span style="color:#66d9ef">labels</span>:
+    <span style="color:#66d9ef">env</span>: dev
+</code></pre></div><p>Create the namespace:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl create -f 00-namespace.yml
+</code></pre></div><h2 id="service"><a href="https://kubernetes.io/docs/concepts/services-networking/service/">Service</a></h2>
 <p>I prefer setting up a <a href="https://kubernetes.io/docs/concepts/services-networking/service/">Service</a> early on in the process of configuring up a new application. In Kubernetes, <a href="https://kubernetes.io/docs/concepts/services-networking/service/">Service</a>s persist where many other components can come and go. Microservices in Kubernetes communicate through services rather than having to discover or rely on <a href="https://kubernetes.io/docs/concepts/workloads/pods/pod-overview/">Pods</a> directly. The service name and port automatically route traffic to Pods found with their selector.</p>
-
 <p><code>20-service.yml</code>:</p>
-
-<pre><code class="language-yaml">apiVersion: v1
-kind: Service
-metadata:
-  name: kibana
-  namespace: the-project
-  labels:
-    app: kibana
-    env: dev
-spec:
-  selector:
-    app: kibana
-  ports:
-  - protocol: &quot;TCP&quot;
-    port: 80
-    targetPort: 5601
-  type: ClusterIP
-</code></pre>
-
-<p>Create the service:</p>
-
-<pre><code class="language-bash">kubectl create -f 20-service.yml
-</code></pre>
-
-<p>In the configuration above, communicating within the Kubernetes cluster and in <code>the-project</code> namespace, the url <a href="http://kibana:80">http://kibana:80</a> uses the new service to route traffic to any pods with the <a href="https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/">label</a> <strong>app: kibana</strong> listening on port 5601.</p>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">apiVersion</span>: v1
+<span style="color:#66d9ef">kind</span>: Service
+<span style="color:#66d9ef">metadata</span>:
+  <span style="color:#66d9ef">name</span>: kibana
+  <span style="color:#66d9ef">namespace</span>: the-project
+  <span style="color:#66d9ef">labels</span>:
+    <span style="color:#66d9ef">app</span>: kibana
+    <span style="color:#66d9ef">env</span>: dev
+<span style="color:#66d9ef">spec</span>:
+  <span style="color:#66d9ef">selector</span>:
+    <span style="color:#66d9ef">app</span>: kibana
+  <span style="color:#66d9ef">ports</span>:
+  - <span style="color:#66d9ef">protocol</span>: <span style="color:#e6db74">&#34;TCP&#34;</span>
+    <span style="color:#66d9ef">port</span>: <span style="color:#ae81ff">80</span>
+    <span style="color:#66d9ef">targetPort</span>: <span style="color:#ae81ff">5601</span>
+  <span style="color:#66d9ef">type</span>: ClusterIP
+</code></pre></div><p>Create the service:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl create -f 20-service.yml
+</code></pre></div><p>In the configuration above, communicating within the Kubernetes cluster and in <code>the-project</code> namespace, the url http://kibana:80 uses the new service to route traffic to any pods with the <a href="https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/">label</a> <strong>app: kibana</strong> listening on port 5601.</p>
 <p>The ports are internal to the service and the Pods and can be assigned any legal value. Kibana listens on port 5601 by default, so we leave that as is. Port 80 on the <a href="https://kubernetes.io/docs/concepts/services-networking/service/">service</a> is to remind us that this is an HTTP web service, but can easily be any legal port value. We use <a href="/web-cluster-ingress/">ingress</a> in later steps to direct external traffic to the new <a href="#service">kibana service</a>.</p>
-
 <h2 id="kibana-configmap">Kibana <a href="https://kubernetes.io/docs/tasks/configure-pod-container/configure-pod-configmap/#create-a-configmap">ConfigMap</a></h2>
-
 <p>Kibana uses the configuration file <strong><a href="https://github.com/elastic/kibana/blob/master/config/kibana.yml">kibana.yml</a></strong>. Pods running Kibana are set up in the deployment further down this guide. The deployment instructs the Pods to mount this <a href="https://kubernetes.io/docs/tasks/configure-pod-container/configure-pod-configmap/#create-a-configmap">ConfigMap</a> as a file system from which Kibana accesses the data key <code>kibana.yml:</code> as a file.</p>
-
 <p><code>30-configmap.yml</code>:</p>
-
-<pre><code class="language-yaml">apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: kibana
-  namespace: the-project
-  labels:
-    app: kibana
-    env: dev
-data:
-  # kibana.yml is mounted into the Kibana container
-  # see https://github.com/elastic/kibana/blob/master/config/kibana.yml
-  # Kubernetes Ingress is used to route kib.the-project.d4ldev.txn2.com
-  kibana.yml: |-
-    server.name: kib.the-project.d4ldev.txn2.com
-    server.host: &quot;0&quot;
-    elasticsearch.url: http://elasticsearch:9200
-</code></pre>
-
-<p>Create the configmap:</p>
-
-<pre><code class="language-bash">kubectl create -f 30-configmap.yml
-</code></pre>
-
-<h2 id="deployment">Deployment</h2>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">apiVersion</span>: v1
+<span style="color:#66d9ef">kind</span>: ConfigMap
+<span style="color:#66d9ef">metadata</span>:
+  <span style="color:#66d9ef">name</span>: kibana
+  <span style="color:#66d9ef">namespace</span>: the-project
+  <span style="color:#66d9ef">labels</span>:
+    <span style="color:#66d9ef">app</span>: kibana
+    <span style="color:#66d9ef">env</span>: dev
+<span style="color:#66d9ef">data</span>:
+  <span style="color:#75715e"># kibana.yml is mounted into the Kibana container</span>
+  <span style="color:#75715e"># see https://github.com/elastic/kibana/blob/master/config/kibana.yml</span>
+  <span style="color:#75715e"># Kubernetes Ingress is used to route kib.the-project.d4ldev.txn2.com</span>
+  <span style="color:#66d9ef">kibana.yml</span>: |<span style="color:#e6db74">-
+</span><span style="color:#e6db74">    server.name: kib.the-project.d4ldev.txn2.com</span>
+    <span style="color:#66d9ef">server.host</span>: <span style="color:#e6db74">&#34;0&#34;</span>
+    <span style="color:#66d9ef">elasticsearch.url</span>: http://elasticsearch:<span style="color:#ae81ff">9200</span>
+</code></pre></div><p>Create the configmap:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl create -f 30-configmap.yml
+</code></pre></div><h2 id="deployment">Deployment</h2>
 <p>The Kubernetes Kibana deployment below is set to create one replica, that is one Pod in the <a href="https://kubernetes.io/docs/concepts/workloads/controllers/replicaset/">ReplicaSet</a> automatically created by the Deployment. The Deployment and can be scaled as needed by changing <strong>replicas: 1</strong> to a suitable value.</p>
-
 <p>The volume <strong>kibana-config-volume</strong> is configured as part of the <strong>spec:</strong> for the Pod template in the Deployment. <strong>kibana-config-volume</strong> attaches to the <a href="#kibana-configmap">Kibana ConfigMap</a> created above. Later, in the containers section, the <strong>volumeMounts:</strong> this <strong>kibana-config-volume</strong> to the directory <strong>/usr/share/kibana/config</strong> inside the Kibana container. By default Kibana looks in <strong>/usr/share/kibana/config</strong> to find the <a href="https://github.com/elastic/kibana/blob/master/config/kibana.yml">kibana.yml</a> configuration file.</p>
-
 <p>Elastic maintains an official set of Docker containers for Kibana at <a href="https://www.docker.elastic.co/#kibana">www.docker.elastic.co</a>. If you followed along with the previous article <a href="/kubernetes-production-elasticsearch/">Production Grade Elasticsearch on Kubernetes</a>, you might remember setting <strong>CLUSTER_NAME</strong> to <strong>elasticsearch</strong> in the StatefulSet and Deployments.</p>
-
 <p>The <strong>containerPort: 5601</strong> is exposed as Kibana listens on 5601 by default unless changed in the <a href="#kibana-configmap">Kibana ConfigMap</a> above.</p>
-
 <p><code>40-deployment.yml</code>:</p>
-
-<pre><code class="language-yaml">apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: kibana
-  namespace: the-project
-  labels:
-    app: kibana
-    env: dev
-spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: kibana
-  template:
-    metadata:
-      labels:
-        app: kibana
-        env: dev
-    spec:
-      volumes:
-      - name: kibana-config-volume
-        configMap:
-          name: kibana
-      containers:
-      - name: kibana
-        image: docker.elastic.co/kibana/kibana-oss:6.2.4
-        imagePullPolicy: Always
-        volumeMounts:
-        - name: kibana-config-volume
-          mountPath: /usr/share/kibana/config
-        env:
-        - name: CLUSTER_NAME
-          value: elasticsearch
-        ports:
-        - name: http
-          containerPort: 5601
-</code></pre>
-
-<p>Create the deployment:</p>
-
-<pre><code class="language-bash">kubectl create -f 40-deployment.yml
-</code></pre>
-
-<h2 id="basic-auth-optional"><a href="Optional">Basic Auth</a></h2>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">apiVersion</span>: apps/v1
+<span style="color:#66d9ef">kind</span>: Deployment
+<span style="color:#66d9ef">metadata</span>:
+  <span style="color:#66d9ef">name</span>: kibana
+  <span style="color:#66d9ef">namespace</span>: the-project
+  <span style="color:#66d9ef">labels</span>:
+    <span style="color:#66d9ef">app</span>: kibana
+    <span style="color:#66d9ef">env</span>: dev
+<span style="color:#66d9ef">spec</span>:
+  <span style="color:#66d9ef">replicas</span>: <span style="color:#ae81ff">1</span>
+  <span style="color:#66d9ef">selector</span>:
+    <span style="color:#66d9ef">matchLabels</span>:
+      <span style="color:#66d9ef">app</span>: kibana
+  <span style="color:#66d9ef">template</span>:
+    <span style="color:#66d9ef">metadata</span>:
+      <span style="color:#66d9ef">labels</span>:
+        <span style="color:#66d9ef">app</span>: kibana
+        <span style="color:#66d9ef">env</span>: dev
+    <span style="color:#66d9ef">spec</span>:
+      <span style="color:#66d9ef">volumes</span>:
+      - <span style="color:#66d9ef">name</span>: kibana-config-volume
+        <span style="color:#66d9ef">configMap</span>:
+          <span style="color:#66d9ef">name</span>: kibana
+      <span style="color:#66d9ef">containers</span>:
+      - <span style="color:#66d9ef">name</span>: kibana
+        <span style="color:#66d9ef">image</span>: docker.elastic.co/kibana/kibana-oss:<span style="color:#ae81ff">6.2.4</span>
+        <span style="color:#66d9ef">imagePullPolicy</span>: Always
+        <span style="color:#66d9ef">volumeMounts</span>:
+        - <span style="color:#66d9ef">name</span>: kibana-config-volume
+          <span style="color:#66d9ef">mountPath</span>: /usr/share/kibana/config
+        <span style="color:#66d9ef">env</span>:
+        - <span style="color:#66d9ef">name</span>: CLUSTER_NAME
+          <span style="color:#66d9ef">value</span>: elasticsearch
+        <span style="color:#66d9ef">ports</span>:
+        - <span style="color:#66d9ef">name</span>: http
+          <span style="color:#66d9ef">containerPort</span>: <span style="color:#ae81ff">5601</span>
+</code></pre></div><p>Create the deployment:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl create -f 40-deployment.yml
+</code></pre></div><h2 id="basic-auth-optional"><a href="/kubernetes-ingress-basic-auth/">Basic Auth</a> (Optional)</h2>
 <p>Described below are a few commands to get you started, however, for a more in-depth review check out my article <a href="/kubernetes-ingress-basic-auth/">Basic Auth on Kubernetes Ingress</a>.</p>
-
 <p>The <a href="https://kubernetes.io/docs/reference/kubectl/cheatsheet/">kubectl</a> makes it easy to create a Kubernetes <a href="https://kubernetes.io/docs/concepts/configuration/secret/">Secret</a> we can use for Basic Auth on our <a href="/web-cluster-ingress/">Ingress Nginx</a> we set up further down this guide.</p>
-
 <p>Begin with using the <a href="https://httpd.apache.org/docs/2.4/programs/htpasswd.html">htpasswd</a> command to generate the file <code>auth</code> with a user named <strong>kibop</strong> and a password specified when prompted. <a href="https://kubernetes.io/docs/reference/kubectl/cheatsheet/">kubectl</a> uses this file as-generated to create the appropriate <a href="https://kubernetes.io/docs/concepts/configuration/secret/">Secret</a> needed for Basic Auth.</p>
-
-<pre><code class="language-bash">htpasswd -c ./auth kibop
-</code></pre>
-
-<p>In this example, I create a user named <strong>kibop</strong> for Basic Auth, kubectl pulls the user and password combination for <strong>kibop</strong> from the <strong>auth</strong> file created above and uses the filename as the key. It is essential to name the file <strong>auth</strong> since this is a necessary key for Ingress to find the Basic Auth credentials.</p>
-
-<pre><code class="language-bash">kubectl create secret generic kibop-basic-auth --from-file auth -n the-project
-</code></pre>
-
-<p>Our namespace <code>the-project</code> now has the secret <strong>kibop-basic-auth</strong> we use to password-protect Kibana in the <a href="/web-cluster-ingress/">ingress</a> configuration further down.</p>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">htpasswd -c ./auth kibop
+</code></pre></div><p>In this example, I create a user named <strong>kibop</strong> for Basic Auth, kubectl pulls the user and password combination for <strong>kibop</strong> from the <strong>auth</strong> file created above and uses the filename as the key. It is essential to name the file <strong>auth</strong> since this is a necessary key for Ingress to find the Basic Auth credentials.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl create secret generic kibop-basic-auth --from-file auth -n the-project
+</code></pre></div><p>Our namespace <code>the-project</code> now has the secret <strong>kibop-basic-auth</strong> we use to password-protect Kibana in the <a href="/web-cluster-ingress/">ingress</a> configuration further down.</p>
 <h2 id="tls-certificate-optional">TLS Certificate (Optional)</h2>
-
 <p>It is highly recommended to encrypt all traffic to and from Kibana with TLS (HTTPS). I recommend configuring your Kubernetes cluster to use <a href="/lets-encrypt-kubernetes/">Let&rsquo;s Encrypt</a>, it&rsquo;s secure, free and takes about 15 minutes to set up. After setting up <a href="/lets-encrypt-kubernetes/">Let&rsquo;s Encrypt</a>, you can generate and renew certificates automatically.</p>
-
 <p><code>50-cert.yml</code>:</p>
-
-<pre><code class="language-yaml">apiVersion: certmanager.k8s.io/v1alpha1
-kind: Certificate
-metadata:
-  name: kib-dev-cert
-  namespace: the-project
-spec:
-  secretName: kib-dev-production-tls
-  issuerRef:
-    name: letsencrypt-production
-    kind: ClusterIssuer
-  commonName: kib.the-project.d4ldev.txn2.com
-  dnsNames:
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">apiVersion</span>: certmanager.k8s.io/v1alpha1
+<span style="color:#66d9ef">kind</span>: Certificate
+<span style="color:#66d9ef">metadata</span>:
+  <span style="color:#66d9ef">name</span>: kib-dev-cert
+  <span style="color:#66d9ef">namespace</span>: the-project
+<span style="color:#66d9ef">spec</span>:
+  <span style="color:#66d9ef">secretName</span>: kib-dev-production-tls
+  <span style="color:#66d9ef">issuerRef</span>:
+    <span style="color:#66d9ef">name</span>: letsencrypt-production
+    <span style="color:#66d9ef">kind</span>: ClusterIssuer
+  <span style="color:#66d9ef">commonName</span>: kib.the-project.d4ldev.txn2.com
+  <span style="color:#66d9ef">dnsNames</span>:
   - kib.the-project.d4ldev.txn2.com
-  acme:
-    config:
-    - http01:
-        ingressClass: nginx
-      domains:
+  <span style="color:#66d9ef">acme</span>:
+    <span style="color:#66d9ef">config</span>:
+    - <span style="color:#66d9ef">http01</span>:
+        <span style="color:#66d9ef">ingressClass</span>: nginx
+      <span style="color:#66d9ef">domains</span>:
       - kib.the-project.d4ldev.txn2.com
-    - http01:
-        ingressClass: nginx
-      domains:
+    - <span style="color:#66d9ef">http01</span>:
+        <span style="color:#66d9ef">ingressClass</span>: nginx
+      <span style="color:#66d9ef">domains</span>:
       - kib.the-project.d4ldev.txn2.com
-</code></pre>
-
-<p>Create the certificate:</p>
-
-<pre><code class="language-bash">kubectl create -f 50-cert.yml
-</code></pre>
-
-<h2 id="ingress"><a href="/web-cluster-ingress/">Ingress</a></h2>
-
+</code></pre></div><p>Create the certificate:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl create -f 50-cert.yml
+</code></pre></div><h2 id="ingress"><a href="/web-cluster-ingress/">Ingress</a></h2>
 <p><a href="/web-cluster-ingress/">Ingress</a> on Kubernetes routes outside traffic to a <a href="https://kubernetes.io/docs/concepts/services-networking/service/">Service</a> inside the cluster. You need an Ingress controller for this step. In this example, we configure the <a href="/web-cluster-ingress/">Ingress Nginx</a> controller. If you are using a different Ingress controller, you need to consult the appropriate documentation. If you do not already have an Ingress controller, then I recommend reading <a href="/web-cluster-ingress/">Ingress on Custom Kubernetes</a> for a quick guide on setting up <a href="/web-cluster-ingress/">Ingress Nginx</a>.</p>
-
 <p><code>60-ingress.yml</code>:</p>
-
-<pre><code class="language-yaml">apiVersion: extensions/v1beta1
-kind: Ingress
-metadata:
-  name: kibana
-  namespace: the-project
-  labels:
-    app: kibana
-    env: dev
-  annotations:
-    nginx.ingress.kubernetes.io/auth-type: basic
-    nginx.ingress.kubernetes.io/auth-secret: kibop-basic-auth
-    nginx.ingress.kubernetes.io/auth-realm: &quot;Authentication Required&quot;
-spec:
-  rules:
-  - host: kib.the-project.d4ldev.txn2.com
-    http:
-      paths:
-      - backend:
-          serviceName: kibana
-          servicePort: 80
-        path: /
-  tls:
-  - hosts:
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">apiVersion</span>: extensions/v1beta1
+<span style="color:#66d9ef">kind</span>: Ingress
+<span style="color:#66d9ef">metadata</span>:
+  <span style="color:#66d9ef">name</span>: kibana
+  <span style="color:#66d9ef">namespace</span>: the-project
+  <span style="color:#66d9ef">labels</span>:
+    <span style="color:#66d9ef">app</span>: kibana
+    <span style="color:#66d9ef">env</span>: dev
+  <span style="color:#66d9ef">annotations</span>:
+    <span style="color:#66d9ef">nginx.ingress.kubernetes.io/auth-type</span>: basic
+    <span style="color:#66d9ef">nginx.ingress.kubernetes.io/auth-secret</span>: kibop-basic-auth
+    <span style="color:#66d9ef">nginx.ingress.kubernetes.io/auth-realm</span>: <span style="color:#e6db74">&#34;Authentication Required&#34;</span>
+<span style="color:#66d9ef">spec</span>:
+  <span style="color:#66d9ef">rules</span>:
+  - <span style="color:#66d9ef">host</span>: kib.the-project.d4ldev.txn2.com
+    <span style="color:#66d9ef">http</span>:
+      <span style="color:#66d9ef">paths</span>:
+      - <span style="color:#66d9ef">backend</span>:
+          <span style="color:#66d9ef">serviceName</span>: kibana
+          <span style="color:#66d9ef">servicePort</span>: <span style="color:#ae81ff">80</span>
+        <span style="color:#66d9ef">path</span>: /
+  <span style="color:#66d9ef">tls</span>:
+  - <span style="color:#66d9ef">hosts</span>:
     - kib.the-project.d4ldev.txn2.com
-    secretName: kib-dev-production-tls
+    <span style="color:#66d9ef">secretName</span>: kib-dev-production-tls
 
-</code></pre>
-
-<p>If you are not using <strong>Basic Auth</strong> or <strong>TLS</strong> certificates you need to omit the <strong>annotations</strong> and <strong>tls</strong> sections. However, setting up <a href="/lets-encrypt-kubernetes/">Let&rsquo;s Encrypt</a> and <a href="#basic-auth-optional">Basic Auth</a> is quick and relatively simple.</p>
-
+</code></pre></div><p>If you are not using <strong>Basic Auth</strong> or <strong>TLS</strong> certificates you need to omit the <strong>annotations</strong> and <strong>tls</strong> sections. However, setting up <a href="/lets-encrypt-kubernetes/">Let&rsquo;s Encrypt</a> and <a href="#basic-auth-optional">Basic Auth</a> is quick and relatively simple.</p>
 <p>Create the ingress:</p>
-
-<pre><code class="language-bash">kubectl create -f 60-ingress.yml
-</code></pre>
-
-<h2 id="conclusion">Conclusion</h2>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl create -f 60-ingress.yml
+</code></pre></div><h2 id="conclusion">Conclusion</h2>
 <p>You now have <a href="https://www.elastic.co/products/kibana">Kibana</a> up and running in Kubernetes and pointed to your <a href="/kubernetes-production-elasticsearch/">Production Grade Elasticsearch on Kubernetes</a>. Check out the official <a href="https://www.elastic.co/guide/en/kibana/current/index.html">Kibana Documentation</a>.</p>
-
-<h2 id="port-forwarding-local-development">Port Forwarding / Local Development</h2>
-
+<h2 id="port-forwarding--local-development">Port Forwarding / Local Development</h2>
 <p>Check out <a href="https://github.com/txn2/kubefwd">kubefwd</a> for a simple command line utility that bulk forwards services of one or more namespaces to your local workstation.</p>
-
 <h2 id="resources">Resources</h2>
-
 <ul>
 <li><a href="/kubernetes-production-elasticsearch/">Production Grade Elasticsearch on Kubernetes</a></li>
 <li><a href="https://www.elastic.co/products/kibana">Kibana</a></li>
@@ -511,6 +442,23 @@ spec:
                    <span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">Kibana on Kubernetes: Visualize your Elasticsearch data.</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="https://imti.co/" property="cc:attributionName" rel="cc:attributionURL">Craig Johnston</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
                     <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a>
                 </p>
+
+                <h5>SUPPORT</h5>
+                <p>
+                    Order my new Kubernetes book: <a href="https://amzn.to/34D56v6">Advanced Platform Development with Kubernetes: Enabling Data Management, the Internet of Things, Blockchain, and Machine Learning</a>
+                </p>
+                <script type="text/javascript">
+                  amzn_assoc_tracking_id = "imti-20";
+                  amzn_assoc_ad_mode = "manual";
+                  amzn_assoc_ad_type = "smart";
+                  amzn_assoc_marketplace = "amazon";
+                  amzn_assoc_region = "US";
+                  amzn_assoc_design = "enhanced_links";
+                  amzn_assoc_asins = "1484256107";
+                  amzn_assoc_placement = "adunit";
+                  amzn_assoc_linkid = "14a9d8b8d1b0bd44e9256e0e0a948015";
+                </script>
+                <script src="//z-na.amazon-adsystem.com/widgets/onejs?MarketPlace=US"></script>
 
                 
                 <hr>

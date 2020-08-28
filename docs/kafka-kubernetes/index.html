@@ -211,144 +211,103 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h5>SHARE</h5>
-                <ul class="list-inline">
-                    <li><div class="addthis_inline_share_toolbox"></div></li>
-                </ul>
-
-                
-
-<p><a href="https://kafka.apache.org/">Kafka</a> is a fast, horizontally scalable, fault-tolerant, message queue service. <a href="https://kafka.apache.org/">Kafka</a> is used for building real-time data pipelines and streaming apps.</p>
-
+                <p><a href="https://kafka.apache.org/">Kafka</a> is a fast, horizontally scalable, fault-tolerant, message queue service. <a href="https://kafka.apache.org/">Kafka</a> is used for building real-time data pipelines and streaming apps.</p>
 <p>There are a few <a href="https://helm.sh/">Helm</a> based installers out there including the official Kubernetes <a href="https://github.com/helm/charts/tree/master/incubator/kafka">incubator/kafka</a>. However, in this article, I walk through applying a surprisingly small set of Kubernetes configuration files needed to stand up high performance, highly available Kafka. Manually applying Kubernetes configurations gives you a step-by-step understanding of the system you are deploying and limitless opportunities to customize.</p>
-
 <p>If you want a separate Kubernetes cluster to run or experiment with Kafka, I recommend reading my article on setting up a Kubernetes <a href="https://imti.co/hobby-cluster/">Production Hobby Cluster</a> for a quick and inexpensive way to deploy a production capable cluster.</p>
-
 <aside class="toc">
     <header>
         <h2>Contents</h2>
     </header>
     <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#setting-up-kafka-on-kubernetes">Setting up Kafka on Kubernetes</a>
-<ul>
-<li><a href="#namespace">Namespace</a></li>
-<li><a href="#zookeeper">Zookeeper</a>
-<ul>
-<li><a href="#zookeeper-service">Zookeeper Service</a></li>
-<li><a href="#zookeeper-headless-service">Zookeeper Headless Service</a></li>
-<li><a href="#zookeeper-statefulset">Zookeeper StatefulSet</a></li>
-<li><a href="#zookeeper-poddisruptionbudget">Zookeeper PodDisruptionBudget</a></li>
-</ul></li>
-<li><a href="#kafka">Kafka</a>
-<ul>
-<li><a href="#kafka-service">Kafka Service</a></li>
-<li><a href="#kafka-headless-service">Kafka Headless Service</a></li>
-<li><a href="#kafka-statefulset">Kafka StatefulSet</a></li>
-<li><a href="#kafka-test-pod">Kafka Test Pod</a></li>
-</ul></li>
-</ul></li>
-<li><a href="#working-with-kafka">Working with Kafka</a>
-<ul>
-<li><a href="#list-topics">List Topics</a></li>
-<li><a href="#create-topic">Create Topic</a></li>
-<li><a href="#listen-on-a-topic">Listen on a Topic</a></li>
-</ul></li>
-<li><a href="#port-forwarding-local-development">Port Forwarding / Local Development</a></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#setting-up-kafka-on-kubernetes">Setting up Kafka on Kubernetes</a>
+      <ul>
+        <li><a href="#namespace">Namespace</a></li>
+        <li><a href="#zookeeper">Zookeeper</a></li>
+        <li><a href="#kafka">Kafka</a></li>
+      </ul>
+    </li>
+    <li><a href="#working-with-kafka">Working with Kafka</a>
+      <ul>
+        <li><a href="#list-topics">List Topics</a></li>
+        <li><a href="#create-topic">Create Topic</a></li>
+        <li><a href="#listen-on-a-topic">Listen on a Topic</a></li>
+      </ul>
+    </li>
+    <li><a href="#port-forwarding--local-development">Port Forwarding / Local Development</a></li>
+  </ul>
 </nav>
 </aside>
 
-<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<ins class="adsbygoogle"
-     style="display:block; text-align:center;"
-     data-ad-layout="in-article"
-     data-ad-format="fluid"
-     data-ad-client="ca-pub-5984764595236029"
-     data-ad-slot="7730310582"></ins>
-<script>
-    (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-
+<table>
+    <tr><td colspan="2" style="text-align: center"><b>Please support my new book!</b></td></tr>
+    <tr>
+        <td>
+            <a href="https://amzn.to/3hAZUvx">
+                <img src="/img/kubernetes_platform_development.jpg" style="padding:0; margin: 0"/>
+            </a>
+        </td>
+        <td>
+            <b><a href="https://amzn.to/3hAZUvx">Advanced Platform Development with Kubernetes: Enabling Data Management, the Internet of Things, Blockchain, and Machine Learning</a></b>
+            <h4>What You'll Learn</h4>
+            <ul style="padding-bottom: 0; margin: 0">
+                <li>Use data pipelines with <b>MQTT, NiFi, Logstash, Kafka and Elasticsearch</b></li>
+                <li>Install a serverless platform with <b>OpenFaaS</b></li>
+                <li>Explore <b>blockchain</b> network capabilities with <b>Ethereum</b></li>
+                <li>Support a multi-tenant <b>data science</b> platform and web IDE with <b>JupyterHub, MLflow and Seldon Core</b></li>
+                <li>Build a <b>hybrid cluster</b>, securely bridging <b>on-premise</b> and cloud-based Kubernetes nodes</li>
+                <li>Implement an integrated development toolchain for continuous integration and deployment</li>
+            </ul>
+        </td>
+    </tr>
+</table>
 <h2 id="setting-up-kafka-on-kubernetes">Setting up Kafka on Kubernetes</h2>
-
 <p>This guide set up a three-node <a href="https://kafka.apache.org/">Kafka</a> cluster and a three-node <a href="https://zookeeper.apache.org/">Zookeeper</a> cluster required by Kafka. Kafka and Zookeeper can be manually scaled up at any time by altering and re-applying configuration. Kubernetes also provides features for autoscaling, read more about <a href="https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/">auto scaling</a> Kubernetes Pods should that be a requirement.</p>
-
 <h3 id="namespace">Namespace</h3>
-
 <p>In this guide, I use the fictional <a href="https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/">namespace</a> <strong>the-project</strong>. You can create this namespace in your cluster or use your own.</p>
-
 <p>Create the file <code>000-namespace.yml</code>:</p>
-
-<pre><code class="language-yaml">apiVersion: v1
-kind: Namespace
-metadata:
-  name: the-project
-</code></pre>
-
-<p>Apply the configuration:</p>
-
-<pre><code class="language-bash">kubectl create -f ./000-namespace.yml
-</code></pre>
-
-<p>If you wish to use your own <a href="https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/">namespace</a> for this Kafka installation, be sure to replace <strong>the-project</strong> in the configurations below.</p>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">apiVersion</span>: v1
+<span style="color:#66d9ef">kind</span>: Namespace
+<span style="color:#66d9ef">metadata</span>:
+  <span style="color:#66d9ef">name</span>: the-project
+</code></pre></div><p>Apply the configuration:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl create -f ./000-namespace.yml
+</code></pre></div><p>If you wish to use your own <a href="https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/">namespace</a> for this Kafka installation, be sure to replace <strong>the-project</strong> in the configurations below.</p>
 <h3 id="zookeeper">Zookeeper</h3>
-
 <p><a href="https://kafka.apache.org/">Kafka</a> requires <a href="https://zookeeper.apache.org/">Zookeeper</a> for maintaining configuration information, naming, providing distributed synchronization, and providing group services to coordinate its nodes.</p>
-
 <h4 id="zookeeper-service">Zookeeper Service</h4>
-
 <p>Kubernetes Services are persistent and provide a stable and reliable way to connect to Pods.</p>
-
 <p>Setup a Kubernetes <a href="https://kubernetes.io/docs/concepts/services-networking/service/">Service</a> named <strong>kafka-zookeeper</strong> in namespace <strong>the-project</strong>. The <strong>kafka-zookeeper</strong> service resolves the domain name <strong>kafka-zookeeper</strong> to an internal ClusterIP. The automatically assigned ClusterIP uses Kubernetes internal proxy to load balance calls to any Pods found from the configured selector, in this case, <code>app: kafka-zookeeper</code>.</p>
-
 <p>After setting up the <strong>kafka-zookeeper</strong> Service, a DNS lookup from within the cluster may produce a result similar to the following:</p>
-
-<pre><code class="language-bash"># nslookup kafka-zookeeper
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># nslookup kafka-zookeeper</span>
 Server:        10.96.0.10
 Address:    10.96.0.10#53
 
 Name:    kafka-zookeeper.the-project.svc.cluster.local
 Address: 10.103.184.71
-</code></pre>
-
-<p>In the example above, 10.103.184.71 is the internal IP address of the ** <strong>kafka-zookeeper</strong>* service itself and proxies calls to one of the Zookeeper Pods it finds labeled <strong>app: kafka-zookeeper</strong>. At this point, no Pods are available until added further down. However, the service finds them when they become active.</p>
-
+</code></pre></div><p>In the example above, 10.103.184.71 is the internal IP address of the ** <strong>kafka-zookeeper</strong>* service itself and proxies calls to one of the Zookeeper Pods it finds labeled **app: kafka-zookeeper**. At this point, no Pods are available until added further down. However, the service finds them when they become active.</p>
 <p>Create the file <code>110-zookeeper-service.yml</code>:</p>
-
-<pre><code class="language-yaml">apiVersion: v1
-kind: Service
-metadata:
-  name: kafka-zookeeper
-  namespace: the-project
-spec:
-  ports:
-  - name: client
-    port: 2181
-    protocol: TCP
-    targetPort: client
-  selector:
-    app: kafka-zookeeper
-  sessionAffinity: None
-  type: ClusterIP
-</code></pre>
-
-<p>Apply the configuration:</p>
-
-<pre><code class="language-bash">kubectl create -f ./110-zookeeper-service.yml
-</code></pre>
-
-<h4 id="zookeeper-headless-service">Zookeeper Headless Service</h4>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">apiVersion</span>: v1
+<span style="color:#66d9ef">kind</span>: Service
+<span style="color:#66d9ef">metadata</span>:
+  <span style="color:#66d9ef">name</span>: kafka-zookeeper
+  <span style="color:#66d9ef">namespace</span>: the-project
+<span style="color:#66d9ef">spec</span>:
+  <span style="color:#66d9ef">ports</span>:
+  - <span style="color:#66d9ef">name</span>: client
+    <span style="color:#66d9ef">port</span>: <span style="color:#ae81ff">2181</span>
+    <span style="color:#66d9ef">protocol</span>: TCP
+    <span style="color:#66d9ef">targetPort</span>: client
+  <span style="color:#66d9ef">selector</span>:
+    <span style="color:#66d9ef">app</span>: kafka-zookeeper
+  <span style="color:#66d9ef">sessionAffinity</span>: None
+  <span style="color:#66d9ef">type</span>: ClusterIP
+</code></pre></div><p>Apply the configuration:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl create -f ./110-zookeeper-service.yml
+</code></pre></div><h4 id="zookeeper-headless-service">Zookeeper Headless Service</h4>
 <p>A Kubernetes Headless Service does not resolve to a single IP; instead, Headless Services returns the IP addresses of any Pods found by their selector, in this case, Pods labeled <strong>app: kafka-zookeeper</strong>.</p>
-
 <p>Once Pods labeled <strong>app: kafka-zookeeper</strong> are running, this Headless Service returns the results of an in-cluster DNS lookup similar to the following:</p>
-
-<pre><code class="language-bash"># nslookup kafka-zookeeper-headless
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># nslookup kafka-zookeeper-headless</span>
 Server:        10.96.0.10
 Address:    10.96.0.10#53
 
@@ -358,435 +317,356 @@ Name:    kafka-zookeeper-headless.the-project.svc.cluster.local
 Address: 192.168.108.181
 Name:    kafka-zookeeper-headless.the-project.svc.cluster.local
 Address: 192.168.108.132
-</code></pre>
-
-<p>In the example above, the Kubernetes Service <strong>kafka-zookeeper-headless</strong> returned the internal IP addresses of three individual Pods.</p>
-
+</code></pre></div><p>In the example above, the Kubernetes Service <strong>kafka-zookeeper-headless</strong> returned the internal IP addresses of three individual Pods.</p>
 <p>At this point, no Pod IPs can be returned until the Pods are configured in the StatefulSet further down.</p>
-
 <p>Create the file <code>110-zookeeper-service-headless.yml</code>:</p>
-
-<pre><code class="language-yaml">apiVersion: v1
-kind: Service
-metadata:
-  name: kafka-zookeeper-headless
-  namespace: the-project
-spec:
-  clusterIP: None
-  ports:
-  - name: client
-    port: 2181
-    protocol: TCP
-    targetPort: 2181
-  - name: election
-    port: 3888
-    protocol: TCP
-    targetPort: 3888
-  - name: server
-    port: 2888
-    protocol: TCP
-    targetPort: 2888
-  selector:
-    app: kafka-zookeeper
-  sessionAffinity: None
-  type: ClusterIP
-</code></pre>
-
-<p>Apply the configuration:</p>
-
-<pre><code class="language-bash">kubectl create -f ./110-zookeeper-service-headless.yml
-</code></pre>
-
-<h4 id="zookeeper-statefulset">Zookeeper StatefulSet</h4>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">apiVersion</span>: v1
+<span style="color:#66d9ef">kind</span>: Service
+<span style="color:#66d9ef">metadata</span>:
+  <span style="color:#66d9ef">name</span>: kafka-zookeeper-headless
+  <span style="color:#66d9ef">namespace</span>: the-project
+<span style="color:#66d9ef">spec</span>:
+  <span style="color:#66d9ef">clusterIP</span>: None
+  <span style="color:#66d9ef">ports</span>:
+  - <span style="color:#66d9ef">name</span>: client
+    <span style="color:#66d9ef">port</span>: <span style="color:#ae81ff">2181</span>
+    <span style="color:#66d9ef">protocol</span>: TCP
+    <span style="color:#66d9ef">targetPort</span>: <span style="color:#ae81ff">2181</span>
+  - <span style="color:#66d9ef">name</span>: election
+    <span style="color:#66d9ef">port</span>: <span style="color:#ae81ff">3888</span>
+    <span style="color:#66d9ef">protocol</span>: TCP
+    <span style="color:#66d9ef">targetPort</span>: <span style="color:#ae81ff">3888</span>
+  - <span style="color:#66d9ef">name</span>: server
+    <span style="color:#66d9ef">port</span>: <span style="color:#ae81ff">2888</span>
+    <span style="color:#66d9ef">protocol</span>: TCP
+    <span style="color:#66d9ef">targetPort</span>: <span style="color:#ae81ff">2888</span>
+  <span style="color:#66d9ef">selector</span>:
+    <span style="color:#66d9ef">app</span>: kafka-zookeeper
+  <span style="color:#66d9ef">sessionAffinity</span>: None
+  <span style="color:#66d9ef">type</span>: ClusterIP
+</code></pre></div><p>Apply the configuration:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl create -f ./110-zookeeper-service-headless.yml
+</code></pre></div><h4 id="zookeeper-statefulset">Zookeeper StatefulSet</h4>
 <p>Kubernetes <a href="https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/">StatefulSet</a>s offer stable and unique network identifiers, persistent storage, ordered deployments, scaling, deletion, termination, and automated rolling updates.</p>
-
 <p>Unique network identifiers and persistent storage are essential for stateful cluster nodes in systems like Zookeeper and Kafka. While it seems strange to have a coordinator like Zookeeper running inside a Kubernetes cluster sitting on its own coordinator Etcd, it makes sense since these systems are built to run independently. Kubernettes supports running services like Zookeeper and Kafka with features like headless services and stateful sets which demonstrates the flexibility of Kubernetes as both a microservices platform and a type of virtual infrastructure.</p>
-
 <p>The following configuration creates three <strong>kafka-zookeeper</strong> Pods, kafka-zookeeper-0, kafka-zookeeper-1, kafka-zookeeper-2 and can be scaled to as many as desired. Ensure that the number of specified replicas matches the environment variable <strong>ZK_REPLICAS</strong> specified in the container spec.</p>
-
 <p>Pods in this <a href="https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/">StatefulSet</a> run the Zookeeper Docker image <code>gcr.io/google_samples/k8szk:v3</code>, which is a <strong>sample image</strong> provided by Google for testing GKE, it is recommended to use custom and maintained Zookeeper image once you are familiar with this setup.</p>
-
 <p>Create the file <code>140-zookeeper-statefulset.yml</code>:</p>
-
-<pre><code class="language-yaml">apiVersion: apps/v1
-kind: StatefulSet
-metadata:
-  name: kafka-zookeeper
-  namespace: the-project
-spec:
-  podManagementPolicy: OrderedReady
-  replicas: 3
-  revisionHistoryLimit: 1
-  selector:
-    matchLabels:
-      app: kafka-zookeeper
-  serviceName: kafka-zookeeper-headless
-  template:
-    metadata:
-      labels:
-        app: kafka-zookeeper
-    spec:
-      containers:
-      - command:
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">apiVersion</span>: apps/v1
+<span style="color:#66d9ef">kind</span>: StatefulSet
+<span style="color:#66d9ef">metadata</span>:
+  <span style="color:#66d9ef">name</span>: kafka-zookeeper
+  <span style="color:#66d9ef">namespace</span>: the-project
+<span style="color:#66d9ef">spec</span>:
+  <span style="color:#66d9ef">podManagementPolicy</span>: OrderedReady
+  <span style="color:#66d9ef">replicas</span>: <span style="color:#ae81ff">3</span>
+  <span style="color:#66d9ef">revisionHistoryLimit</span>: <span style="color:#ae81ff">1</span>
+  <span style="color:#66d9ef">selector</span>:
+    <span style="color:#66d9ef">matchLabels</span>:
+      <span style="color:#66d9ef">app</span>: kafka-zookeeper
+  <span style="color:#66d9ef">serviceName</span>: kafka-zookeeper-headless
+  <span style="color:#66d9ef">template</span>:
+    <span style="color:#66d9ef">metadata</span>:
+      <span style="color:#66d9ef">labels</span>:
+        <span style="color:#66d9ef">app</span>: kafka-zookeeper
+    <span style="color:#66d9ef">spec</span>:
+      <span style="color:#66d9ef">containers</span>:
+      - <span style="color:#66d9ef">command</span>:
         - /bin/bash
         - -xec
-        - zkGenConfig.sh &amp;&amp; exec zkServer.sh start-foreground
-        env:
-        - name: ZK_REPLICAS
-          value: &quot;3&quot;
-        - name: JMXAUTH
-          value: &quot;false&quot;
-        - name: JMXDISABLE
-          value: &quot;false&quot;
-        - name: JMXPORT
-          value: &quot;1099&quot;
-        - name: JMXSSL
-          value: &quot;false&quot;
-        - name: ZK_CLIENT_PORT
-          value: &quot;2181&quot;
-        - name: ZK_ELECTION_PORT
-          value: &quot;3888&quot;
-        - name: ZK_HEAP_SIZE
-          value: 1G
-        - name: ZK_INIT_LIMIT
-          value: &quot;5&quot;
-        - name: ZK_LOG_LEVEL
-          value: INFO
-        - name: ZK_MAX_CLIENT_CNXNS
-          value: &quot;60&quot;
-        - name: ZK_MAX_SESSION_TIMEOUT
-          value: &quot;40000&quot;
-        - name: ZK_MIN_SESSION_TIMEOUT
-          value: &quot;4000&quot;
-        - name: ZK_PURGE_INTERVAL
-          value: &quot;0&quot;
-        - name: ZK_SERVER_PORT
-          value: &quot;2888&quot;
-        - name: ZK_SNAP_RETAIN_COUNT
-          value: &quot;3&quot;
-        - name: ZK_SYNC_LIMIT
-          value: &quot;10&quot;
-        - name: ZK_TICK_TIME
-          value: &quot;2000&quot;
-        image: gcr.io/google_samples/k8szk:v3
-        imagePullPolicy: IfNotPresent
-        livenessProbe:
-          exec:
-            command:
+        - zkGenConfig.sh <span style="color:#75715e">&amp;&amp;</span> exec zkServer.sh start-foreground
+        <span style="color:#66d9ef">env</span>:
+        - <span style="color:#66d9ef">name</span>: ZK_REPLICAS
+          <span style="color:#66d9ef">value</span>: <span style="color:#e6db74">&#34;3&#34;</span>
+        - <span style="color:#66d9ef">name</span>: JMXAUTH
+          <span style="color:#66d9ef">value</span>: <span style="color:#e6db74">&#34;false&#34;</span>
+        - <span style="color:#66d9ef">name</span>: JMXDISABLE
+          <span style="color:#66d9ef">value</span>: <span style="color:#e6db74">&#34;false&#34;</span>
+        - <span style="color:#66d9ef">name</span>: JMXPORT
+          <span style="color:#66d9ef">value</span>: <span style="color:#e6db74">&#34;1099&#34;</span>
+        - <span style="color:#66d9ef">name</span>: JMXSSL
+          <span style="color:#66d9ef">value</span>: <span style="color:#e6db74">&#34;false&#34;</span>
+        - <span style="color:#66d9ef">name</span>: ZK_CLIENT_PORT
+          <span style="color:#66d9ef">value</span>: <span style="color:#e6db74">&#34;2181&#34;</span>
+        - <span style="color:#66d9ef">name</span>: ZK_ELECTION_PORT
+          <span style="color:#66d9ef">value</span>: <span style="color:#e6db74">&#34;3888&#34;</span>
+        - <span style="color:#66d9ef">name</span>: ZK_HEAP_SIZE
+          <span style="color:#66d9ef">value</span>: 1G
+        - <span style="color:#66d9ef">name</span>: ZK_INIT_LIMIT
+          <span style="color:#66d9ef">value</span>: <span style="color:#e6db74">&#34;5&#34;</span>
+        - <span style="color:#66d9ef">name</span>: ZK_LOG_LEVEL
+          <span style="color:#66d9ef">value</span>: INFO
+        - <span style="color:#66d9ef">name</span>: ZK_MAX_CLIENT_CNXNS
+          <span style="color:#66d9ef">value</span>: <span style="color:#e6db74">&#34;60&#34;</span>
+        - <span style="color:#66d9ef">name</span>: ZK_MAX_SESSION_TIMEOUT
+          <span style="color:#66d9ef">value</span>: <span style="color:#e6db74">&#34;40000&#34;</span>
+        - <span style="color:#66d9ef">name</span>: ZK_MIN_SESSION_TIMEOUT
+          <span style="color:#66d9ef">value</span>: <span style="color:#e6db74">&#34;4000&#34;</span>
+        - <span style="color:#66d9ef">name</span>: ZK_PURGE_INTERVAL
+          <span style="color:#66d9ef">value</span>: <span style="color:#e6db74">&#34;0&#34;</span>
+        - <span style="color:#66d9ef">name</span>: ZK_SERVER_PORT
+          <span style="color:#66d9ef">value</span>: <span style="color:#e6db74">&#34;2888&#34;</span>
+        - <span style="color:#66d9ef">name</span>: ZK_SNAP_RETAIN_COUNT
+          <span style="color:#66d9ef">value</span>: <span style="color:#e6db74">&#34;3&#34;</span>
+        - <span style="color:#66d9ef">name</span>: ZK_SYNC_LIMIT
+          <span style="color:#66d9ef">value</span>: <span style="color:#e6db74">&#34;10&#34;</span>
+        - <span style="color:#66d9ef">name</span>: ZK_TICK_TIME
+          <span style="color:#66d9ef">value</span>: <span style="color:#e6db74">&#34;2000&#34;</span>
+        <span style="color:#66d9ef">image</span>: gcr.io/google_samples/k8szk:v3
+        <span style="color:#66d9ef">imagePullPolicy</span>: IfNotPresent
+        <span style="color:#66d9ef">livenessProbe</span>:
+          <span style="color:#66d9ef">exec</span>:
+            <span style="color:#66d9ef">command</span>:
             - zkOk.sh
-          failureThreshold: 3
-          initialDelaySeconds: 20
-          periodSeconds: 10
-          successThreshold: 1
-          timeoutSeconds: 1
-        name: zookeeper
-        ports:
-        - containerPort: 2181
-          name: client
-          protocol: TCP
-        - containerPort: 3888
-          name: election
-          protocol: TCP
-        - containerPort: 2888
-          name: server
-          protocol: TCP
-        readinessProbe:
-          exec:
-            command:
+          <span style="color:#66d9ef">failureThreshold</span>: <span style="color:#ae81ff">3</span>
+          <span style="color:#66d9ef">initialDelaySeconds</span>: <span style="color:#ae81ff">20</span>
+          <span style="color:#66d9ef">periodSeconds</span>: <span style="color:#ae81ff">10</span>
+          <span style="color:#66d9ef">successThreshold</span>: <span style="color:#ae81ff">1</span>
+          <span style="color:#66d9ef">timeoutSeconds</span>: <span style="color:#ae81ff">1</span>
+        <span style="color:#66d9ef">name</span>: zookeeper
+        <span style="color:#66d9ef">ports</span>:
+        - <span style="color:#66d9ef">containerPort</span>: <span style="color:#ae81ff">2181</span>
+          <span style="color:#66d9ef">name</span>: client
+          <span style="color:#66d9ef">protocol</span>: TCP
+        - <span style="color:#66d9ef">containerPort</span>: <span style="color:#ae81ff">3888</span>
+          <span style="color:#66d9ef">name</span>: election
+          <span style="color:#66d9ef">protocol</span>: TCP
+        - <span style="color:#66d9ef">containerPort</span>: <span style="color:#ae81ff">2888</span>
+          <span style="color:#66d9ef">name</span>: server
+          <span style="color:#66d9ef">protocol</span>: TCP
+        <span style="color:#66d9ef">readinessProbe</span>:
+          <span style="color:#66d9ef">exec</span>:
+            <span style="color:#66d9ef">command</span>:
             - zkOk.sh
-          failureThreshold: 3
-          initialDelaySeconds: 20
-          periodSeconds: 10
-          successThreshold: 1
-          timeoutSeconds: 1
-        resources: {}
-        terminationMessagePath: /dev/termination-log
-        terminationMessagePolicy: File
-        volumeMounts:
-        - mountPath: /var/lib/zookeeper
-          name: data
-      dnsPolicy: ClusterFirst
-      restartPolicy: Always
-      schedulerName: default-scheduler
-      securityContext:
-        fsGroup: 1000
-        runAsUser: 1000
-      terminationGracePeriodSeconds: 30
-      volumes:
-      - emptyDir: {}
-        name: data
-  updateStrategy:
-    type: OnDelete
-</code></pre>
-
-<p>Apply the configuration:</p>
-
-<pre><code class="language-bash">kubectl create -f ./140-zookeeper-statefulset.yml
-</code></pre>
-
-<h4 id="zookeeper-poddisruptionbudget">Zookeeper PodDisruptionBudget</h4>
-
+          <span style="color:#66d9ef">failureThreshold</span>: <span style="color:#ae81ff">3</span>
+          <span style="color:#66d9ef">initialDelaySeconds</span>: <span style="color:#ae81ff">20</span>
+          <span style="color:#66d9ef">periodSeconds</span>: <span style="color:#ae81ff">10</span>
+          <span style="color:#66d9ef">successThreshold</span>: <span style="color:#ae81ff">1</span>
+          <span style="color:#66d9ef">timeoutSeconds</span>: <span style="color:#ae81ff">1</span>
+        <span style="color:#66d9ef">resources</span>: {}
+        <span style="color:#66d9ef">terminationMessagePath</span>: /dev/termination-log
+        <span style="color:#66d9ef">terminationMessagePolicy</span>: File
+        <span style="color:#66d9ef">volumeMounts</span>:
+        - <span style="color:#66d9ef">mountPath</span>: /var/lib/zookeeper
+          <span style="color:#66d9ef">name</span>: data
+      <span style="color:#66d9ef">dnsPolicy</span>: ClusterFirst
+      <span style="color:#66d9ef">restartPolicy</span>: Always
+      <span style="color:#66d9ef">schedulerName</span>: default-scheduler
+      <span style="color:#66d9ef">securityContext</span>:
+        <span style="color:#66d9ef">fsGroup</span>: <span style="color:#ae81ff">1000</span>
+        <span style="color:#66d9ef">runAsUser</span>: <span style="color:#ae81ff">1000</span>
+      <span style="color:#66d9ef">terminationGracePeriodSeconds</span>: <span style="color:#ae81ff">30</span>
+      <span style="color:#66d9ef">volumes</span>:
+      - <span style="color:#66d9ef">emptyDir</span>: {}
+        <span style="color:#66d9ef">name</span>: data
+  <span style="color:#66d9ef">updateStrategy</span>:
+    <span style="color:#66d9ef">type</span>: OnDelete
+</code></pre></div><p>Apply the configuration:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl create -f ./140-zookeeper-statefulset.yml
+</code></pre></div><h4 id="zookeeper-poddisruptionbudget">Zookeeper PodDisruptionBudget</h4>
 <p><a href="https://kubernetes.io/docs/concepts/workloads/pods/disruptions/">PodDisruptionBudget</a> can help keep the Zookeeper service stable during Kubernetes administrative events such as draining a node or updating Pods.</p>
-
 <p>From the official documentation for PDB (<a href="https://kubernetes.io/docs/concepts/workloads/pods/disruptions/">PodDisruptionBudget</a>):</p>
-
 <blockquote>
 <p>A PDB specifies the number of replicas that an application can tolerate having, relative to how many it is intended to have. For example, a Deployment which has a .spec.replicas: 5 is supposed to have 5 pods at any given time. If its PDB allows for there to be 4 at a time, then the Eviction API will allow voluntary disruption of one, but not two pods, at a time.</p>
 </blockquote>
-
 <p>The configuration below tells Kubernetes that we can only tolerate one of our Zookeeper Pods down at any given time. <strong>maxUnavailable</strong> may be set to a higher number if we increase the number of Zookeeper Pods in the StatefulSet.</p>
-
 <p>Create the file <code>150-zookeeper-disruptionbudget.yml</code>:</p>
-
-<pre><code class="language-yaml">apiVersion: policy/v1beta1
-kind: PodDisruptionBudget
-metadata:
-  labels:
-    app: kafka-zookeeper
-  name: kafka-zookeeper
-  namespace: the-project
-spec:
-  maxUnavailable: 1
-  selector:
-    matchLabels:
-      app: kafka-zookeeper
-</code></pre>
-
-<p>Apply the configuration:</p>
-
-<pre><code class="language-bash">kubectl create -f ./150-zookeeper-disruptionbudget.yml
-</code></pre>
-
-<h3 id="kafka">Kafka</h3>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">apiVersion</span>: policy/v1beta1
+<span style="color:#66d9ef">kind</span>: PodDisruptionBudget
+<span style="color:#66d9ef">metadata</span>:
+  <span style="color:#66d9ef">labels</span>:
+    <span style="color:#66d9ef">app</span>: kafka-zookeeper
+  <span style="color:#66d9ef">name</span>: kafka-zookeeper
+  <span style="color:#66d9ef">namespace</span>: the-project
+<span style="color:#66d9ef">spec</span>:
+  <span style="color:#66d9ef">maxUnavailable</span>: <span style="color:#ae81ff">1</span>
+  <span style="color:#66d9ef">selector</span>:
+    <span style="color:#66d9ef">matchLabels</span>:
+      <span style="color:#66d9ef">app</span>: kafka-zookeeper
+</code></pre></div><p>Apply the configuration:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl create -f ./150-zookeeper-disruptionbudget.yml
+</code></pre></div><h3 id="kafka">Kafka</h3>
 <p>Once <a href="https://zookeeper.apache.org/">Zookeeper</a> is up and running we have satisfied the requirements for Kafka. Kafka is set up in a similar configuration to Zookeeper, utilizing a <a href="https://kubernetes.io/docs/concepts/services-networking/service/">Service</a>, Headless Service and a <a href="https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/">StatefulSet</a>.</p>
-
 <h4 id="kafka-service">Kafka Service</h4>
-
 <p>The following <a href="https://kubernetes.io/docs/concepts/services-networking/service/">Service</a> provides a persistent internal Cluster IP address that proxies and load balance requests to Kafka Pods found with the label <strong>app: kafka</strong> and exposing the port <strong>9092</strong>.</p>
-
 <p>Create the file <code>210-kafka-service.yml</code>:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">apiVersion</span>: v1
+<span style="color:#66d9ef">kind</span>: Service
+<span style="color:#66d9ef">metadata</span>:
+  <span style="color:#66d9ef">name</span>: kafka
+  <span style="color:#66d9ef">namespace</span>: the-project
+<span style="color:#66d9ef">spec</span>:
+  <span style="color:#66d9ef">ports</span>:
+  - <span style="color:#66d9ef">name</span>: broker
+    <span style="color:#66d9ef">port</span>: <span style="color:#ae81ff">9092</span>
+    <span style="color:#66d9ef">protocol</span>: TCP
+    <span style="color:#66d9ef">targetPort</span>: kafka
+  <span style="color:#66d9ef">selector</span>:
+    <span style="color:#66d9ef">app</span>: kafka
+  <span style="color:#66d9ef">sessionAffinity</span>: None
+  <span style="color:#66d9ef">type</span>: ClusterIP
 
-<pre><code class="language-yaml">apiVersion: v1
-kind: Service
-metadata:
-  name: kafka
-  namespace: the-project
-spec:
-  ports:
-  - name: broker
-    port: 9092
-    protocol: TCP
-    targetPort: kafka
-  selector:
-    app: kafka
-  sessionAffinity: None
-  type: ClusterIP
-
-</code></pre>
-
-<p>Apply the configuration:</p>
-
-<pre><code class="language-bash">kubectl create -f ./210-kafka-service.yml
-</code></pre>
-
-<h4 id="kafka-headless-service">Kafka Headless Service</h4>
-
+</code></pre></div><p>Apply the configuration:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl create -f ./210-kafka-service.yml
+</code></pre></div><h4 id="kafka-headless-service">Kafka Headless Service</h4>
 <p>The following Headless <a href="https://kubernetes.io/docs/concepts/services-networking/service/">Service</a> provides a list of Pods and their internal IPs found with the label <strong>app: kafka</strong> and exposing the port <strong>9092</strong>. The previously created Service: <strong>kafka</strong> always returns a persistent IP assigned at the creation time of the Service. The following <strong>kafka-headless</strong> services return the domain names and IP address of individual Pods and are liable to change as Pods are added, removed or updated.</p>
-
 <p>Create the file <code>210-kafka-service-headless.yml</code>:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">apiVersion</span>: v1
+<span style="color:#66d9ef">kind</span>: Service
+<span style="color:#66d9ef">metadata</span>:
+  <span style="color:#66d9ef">name</span>: kafka-headless
+  <span style="color:#66d9ef">namespace</span>: the-project
+<span style="color:#66d9ef">spec</span>:
+  <span style="color:#66d9ef">clusterIP</span>: None
+  <span style="color:#66d9ef">ports</span>:
+  - <span style="color:#66d9ef">name</span>: broker
+    <span style="color:#66d9ef">port</span>: <span style="color:#ae81ff">9092</span>
+    <span style="color:#66d9ef">protocol</span>: TCP
+    <span style="color:#66d9ef">targetPort</span>: <span style="color:#ae81ff">9092</span>
+  <span style="color:#66d9ef">selector</span>:
+    <span style="color:#66d9ef">app</span>: kafka
+  <span style="color:#66d9ef">sessionAffinity</span>: None
+  <span style="color:#66d9ef">type</span>: ClusterIP
 
-<pre><code class="language-yaml">apiVersion: v1
-kind: Service
-metadata:
-  name: kafka-headless
-  namespace: the-project
-spec:
-  clusterIP: None
-  ports:
-  - name: broker
-    port: 9092
-    protocol: TCP
-    targetPort: 9092
-  selector:
-    app: kafka
-  sessionAffinity: None
-  type: ClusterIP
-
-</code></pre>
-
-<p>Apply the configuration:</p>
-
-<pre><code class="language-bash">kubectl create -f ./210-kafka-service-headless.yml
-</code></pre>
-
-<h4 id="kafka-statefulset">Kafka StatefulSet</h4>
-
+</code></pre></div><p>Apply the configuration:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl create -f ./210-kafka-service-headless.yml
+</code></pre></div><h4 id="kafka-statefulset">Kafka StatefulSet</h4>
 <p>The following <a href="https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/">StatefulSet</a> deploys Pods running the <strong>confluentinc/cp-kafka:4.1.2-2</strong> Docker image from <a href="https://www.confluent.io/">Confluent</a>.</p>
-
 <p>Each pod is assigned <strong>1Gi</strong> of storage using the rook-block <a href="https://kubernetes.io/docs/concepts/storage/storage-classes/">storage class</a>. See <a href="https://rook.io/">Rook.io</a> for more information on file, block, and object storage services for cloud-native environments.</p>
-
 <p>Create the file <code>240-kafka-statefulset.yml</code>:</p>
-
-<pre><code class="language-yaml">apiVersion: apps/v1
-kind: StatefulSet
-metadata:
-  labels:
-    app: kafka
-  name: kafka
-  namespace: the-project
-spec:
-  podManagementPolicy: OrderedReady
-  replicas: 3
-  revisionHistoryLimit: 1
-  selector:
-    matchLabels:
-      app: kafka
-  serviceName: kafka-headless
-  template:
-    metadata:
-      labels:
-        app: kafka
-    spec:
-      containers:
-      - command:
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">apiVersion</span>: apps/v1
+<span style="color:#66d9ef">kind</span>: StatefulSet
+<span style="color:#66d9ef">metadata</span>:
+  <span style="color:#66d9ef">labels</span>:
+    <span style="color:#66d9ef">app</span>: kafka
+  <span style="color:#66d9ef">name</span>: kafka
+  <span style="color:#66d9ef">namespace</span>: the-project
+<span style="color:#66d9ef">spec</span>:
+  <span style="color:#66d9ef">podManagementPolicy</span>: OrderedReady
+  <span style="color:#66d9ef">replicas</span>: <span style="color:#ae81ff">3</span>
+  <span style="color:#66d9ef">revisionHistoryLimit</span>: <span style="color:#ae81ff">1</span>
+  <span style="color:#66d9ef">selector</span>:
+    <span style="color:#66d9ef">matchLabels</span>:
+      <span style="color:#66d9ef">app</span>: kafka
+  <span style="color:#66d9ef">serviceName</span>: kafka-headless
+  <span style="color:#66d9ef">template</span>:
+    <span style="color:#66d9ef">metadata</span>:
+      <span style="color:#66d9ef">labels</span>:
+        <span style="color:#66d9ef">app</span>: kafka
+    <span style="color:#66d9ef">spec</span>:
+      <span style="color:#66d9ef">containers</span>:
+      - <span style="color:#66d9ef">command</span>:
         - sh
         - -exc
-        - |
-          unset KAFKA_PORT &amp;&amp; \
-          export KAFKA_BROKER_ID=${HOSTNAME##*-} &amp;&amp; \
-          export KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://${POD_IP}:9092 &amp;&amp; \
+        - <span style="color:#e6db74">|
+</span><span style="color:#e6db74">          unset KAFKA_PORT &amp;&amp; \</span>
+          export KAFKA_BROKER_ID=${HOSTNAME<span style="color:#75715e">##*-} &amp;&amp; \</span>
+          export KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://${POD_IP}:<span style="color:#ae81ff">9092</span> <span style="color:#75715e">&amp;&amp;</span> \
           exec /etc/confluent/docker/run
-        env:
-        - name: POD_IP
-          valueFrom:
-            fieldRef:
-              apiVersion: v1
-              fieldPath: status.podIP
-        - name: KAFKA_HEAP_OPTS
-          value: -Xmx1G -Xms1G
-        - name: KAFKA_ZOOKEEPER_CONNECT
-          value: kafka-zookeeper:2181
-        - name: KAFKA_LOG_DIRS
-          value: /opt/kafka/data/logs
-        - name: KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR
-          value: &quot;3&quot;
-        - name: KAFKA_JMX_PORT
-          value: &quot;5555&quot;
-        image: confluentinc/cp-kafka:4.1.2-2
-        imagePullPolicy: IfNotPresent
-        livenessProbe:
-          exec:
-            command:
+        <span style="color:#66d9ef">env</span>:
+        - <span style="color:#66d9ef">name</span>: POD_IP
+          <span style="color:#66d9ef">valueFrom</span>:
+            <span style="color:#66d9ef">fieldRef</span>:
+              <span style="color:#66d9ef">apiVersion</span>: v1
+              <span style="color:#66d9ef">fieldPath</span>: status.podIP
+        - <span style="color:#66d9ef">name</span>: KAFKA_HEAP_OPTS
+          <span style="color:#66d9ef">value</span>: -Xmx1G -Xms1G
+        - <span style="color:#66d9ef">name</span>: KAFKA_ZOOKEEPER_CONNECT
+          <span style="color:#66d9ef">value</span>: kafka-zookeeper:<span style="color:#ae81ff">2181</span>
+        - <span style="color:#66d9ef">name</span>: KAFKA_LOG_DIRS
+          <span style="color:#66d9ef">value</span>: /opt/kafka/data/logs
+        - <span style="color:#66d9ef">name</span>: KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR
+          <span style="color:#66d9ef">value</span>: <span style="color:#e6db74">&#34;3&#34;</span>
+        - <span style="color:#66d9ef">name</span>: KAFKA_JMX_PORT
+          <span style="color:#66d9ef">value</span>: <span style="color:#e6db74">&#34;5555&#34;</span>
+        <span style="color:#66d9ef">image</span>: confluentinc/cp-kafka:<span style="color:#ae81ff">4.1.2-2</span>
+        <span style="color:#66d9ef">imagePullPolicy</span>: IfNotPresent
+        <span style="color:#66d9ef">livenessProbe</span>:
+          <span style="color:#66d9ef">exec</span>:
+            <span style="color:#66d9ef">command</span>:
             - sh
             - -ec
             - /usr/bin/jps | /bin/grep -q SupportedKafka
-          failureThreshold: 3
-          initialDelaySeconds: 30
-          periodSeconds: 10
-          successThreshold: 1
-          timeoutSeconds: 5
-        name: kafka-broker
-        ports:
-        - containerPort: 9092
-          name: kafka
-          protocol: TCP
-        readinessProbe:
-          failureThreshold: 3
-          initialDelaySeconds: 30
-          periodSeconds: 10
-          successThreshold: 1
-          tcpSocket:
-            port: kafka
-          timeoutSeconds: 5
-        resources: {}
-        terminationMessagePath: /dev/termination-log
-        terminationMessagePolicy: File
-        volumeMounts:
-        - mountPath: /opt/kafka/data
-          name: datadir
-      dnsPolicy: ClusterFirst
-      restartPolicy: Always
-      schedulerName: default-scheduler
-      securityContext: {}
-      terminationGracePeriodSeconds: 60
-  updateStrategy:
-    type: OnDelete
-  volumeClaimTemplates:
-  - metadata:
-      name: datadir
-    spec:
-      accessModes:
+          <span style="color:#66d9ef">failureThreshold</span>: <span style="color:#ae81ff">3</span>
+          <span style="color:#66d9ef">initialDelaySeconds</span>: <span style="color:#ae81ff">30</span>
+          <span style="color:#66d9ef">periodSeconds</span>: <span style="color:#ae81ff">10</span>
+          <span style="color:#66d9ef">successThreshold</span>: <span style="color:#ae81ff">1</span>
+          <span style="color:#66d9ef">timeoutSeconds</span>: <span style="color:#ae81ff">5</span>
+        <span style="color:#66d9ef">name</span>: kafka-broker
+        <span style="color:#66d9ef">ports</span>:
+        - <span style="color:#66d9ef">containerPort</span>: <span style="color:#ae81ff">9092</span>
+          <span style="color:#66d9ef">name</span>: kafka
+          <span style="color:#66d9ef">protocol</span>: TCP
+        <span style="color:#66d9ef">readinessProbe</span>:
+          <span style="color:#66d9ef">failureThreshold</span>: <span style="color:#ae81ff">3</span>
+          <span style="color:#66d9ef">initialDelaySeconds</span>: <span style="color:#ae81ff">30</span>
+          <span style="color:#66d9ef">periodSeconds</span>: <span style="color:#ae81ff">10</span>
+          <span style="color:#66d9ef">successThreshold</span>: <span style="color:#ae81ff">1</span>
+          <span style="color:#66d9ef">tcpSocket</span>:
+            <span style="color:#66d9ef">port</span>: kafka
+          <span style="color:#66d9ef">timeoutSeconds</span>: <span style="color:#ae81ff">5</span>
+        <span style="color:#66d9ef">resources</span>: {}
+        <span style="color:#66d9ef">terminationMessagePath</span>: /dev/termination-log
+        <span style="color:#66d9ef">terminationMessagePolicy</span>: File
+        <span style="color:#66d9ef">volumeMounts</span>:
+        - <span style="color:#66d9ef">mountPath</span>: /opt/kafka/data
+          <span style="color:#66d9ef">name</span>: datadir
+      <span style="color:#66d9ef">dnsPolicy</span>: ClusterFirst
+      <span style="color:#66d9ef">restartPolicy</span>: Always
+      <span style="color:#66d9ef">schedulerName</span>: default-scheduler
+      <span style="color:#66d9ef">securityContext</span>: {}
+      <span style="color:#66d9ef">terminationGracePeriodSeconds</span>: <span style="color:#ae81ff">60</span>
+  <span style="color:#66d9ef">updateStrategy</span>:
+    <span style="color:#66d9ef">type</span>: OnDelete
+  <span style="color:#66d9ef">volumeClaimTemplates</span>:
+  - <span style="color:#66d9ef">metadata</span>:
+      <span style="color:#66d9ef">name</span>: datadir
+    <span style="color:#66d9ef">spec</span>:
+      <span style="color:#66d9ef">accessModes</span>:
       - ReadWriteOnce
-      resources:
-        requests:
-          storage: 1Gi
-      storageClassName: rook-block
-</code></pre>
-
-<p>Apply the configuration:</p>
-
-<pre><code class="language-bash">kubectl create -f ./240-kafka-statefulset.yml
-</code></pre>
-
-<h4 id="kafka-test-pod">Kafka Test Pod</h4>
-
+      <span style="color:#66d9ef">resources</span>:
+        <span style="color:#66d9ef">requests</span>:
+          <span style="color:#66d9ef">storage</span>: 1Gi
+      <span style="color:#66d9ef">storageClassName</span>: rook-block
+</code></pre></div><p>Apply the configuration:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl create -f ./240-kafka-statefulset.yml
+</code></pre></div><h4 id="kafka-test-pod">Kafka Test Pod</h4>
 <p>Add a test Pod to help explore and debug your new Kafka cluster. The Confluent Docker image <strong>confluentinc/cp-kafka:4.1.2-2</strong> used for the test Pod is the same as our nodes from the StatefulSet and contain useful command in the <strong>/usr/bin/</strong> folder.</p>
-
 <p>Create the file <code>400-pod-test.yml</code>:</p>
-
-<pre><code class="language-yaml">apiVersion: v1
-kind: Pod
-metadata:
-  name: kafka-test-client
-  namespace: the-project
-spec:
-  containers:
-  - command:
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">apiVersion</span>: v1
+<span style="color:#66d9ef">kind</span>: Pod
+<span style="color:#66d9ef">metadata</span>:
+  <span style="color:#66d9ef">name</span>: kafka-test-client
+  <span style="color:#66d9ef">namespace</span>: the-project
+<span style="color:#66d9ef">spec</span>:
+  <span style="color:#66d9ef">containers</span>:
+  - <span style="color:#66d9ef">command</span>:
     - sh
     - -c
-    - exec tail -f /dev/null
-    image: confluentinc/cp-kafka:4.1.2-2
-    imagePullPolicy: IfNotPresent
-    name: kafka
-    resources: {}
-    terminationMessagePath: /dev/termination-log
-    terminationMessagePolicy: File
+    - exec tail -f /dev/<span style="color:#66d9ef">null</span>
+    <span style="color:#66d9ef">image</span>: confluentinc/cp-kafka:<span style="color:#ae81ff">4.1.2-2</span>
+    <span style="color:#66d9ef">imagePullPolicy</span>: IfNotPresent
+    <span style="color:#66d9ef">name</span>: kafka
+    <span style="color:#66d9ef">resources</span>: {}
+    <span style="color:#66d9ef">terminationMessagePath</span>: /dev/termination-log
+    <span style="color:#66d9ef">terminationMessagePolicy</span>: File
 
-</code></pre>
-
-<p>Apply the configuration:</p>
-
-<pre><code class="language-bash">kubectl create -f ./400-pod-test.yml
-</code></pre>
-
-<h2 id="working-with-kafka">Working with Kafka</h2>
-
+</code></pre></div><p>Apply the configuration:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl create -f ./400-pod-test.yml
+</code></pre></div><h2 id="working-with-kafka">Working with Kafka</h2>
 <p>If you have deployed the <strong>kafka-test-client</strong> pod from the configuration above, the following commands should get you started with some basic operations:</p>
-
 <h3 id="list-topics">List Topics</h3>
-
-<pre><code class="language-bash">kubectl -n the-project exec kafka-test-client -- \
-/usr/bin/kafka-topics --zookeeper kafka-zookeeper:2181 --list
-</code></pre>
-
-<h3 id="create-topic">Create Topic</h3>
-
-<pre><code class="language-bash">kubectl -n the-project exec kafka-test-client -- \
-/usr/bin/kafka-topics --zookeeper kafka-zookeeper:2181 \
---topic test --create --partitions 1 --replication-factor 1
-</code></pre>
-
-<h3 id="listen-on-a-topic">Listen on a Topic</h3>
-
-<pre><code class="language-bash">kubectl -n the-project exec -ti kafka-test-client -- \
-/usr/bin/kafka-console-consumer --bootstrap-server kafka:9092 \
---topic test --from-beginning
-</code></pre>
-
-<h2 id="port-forwarding-local-development">Port Forwarding / Local Development</h2>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl -n the-project exec kafka-test-client -- <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>/usr/bin/kafka-topics --zookeeper kafka-zookeeper:2181 --list
+</code></pre></div><h3 id="create-topic">Create Topic</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl -n the-project exec kafka-test-client -- <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>/usr/bin/kafka-topics --zookeeper kafka-zookeeper:2181 <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>--topic test --create --partitions <span style="color:#ae81ff">1</span> --replication-factor <span style="color:#ae81ff">1</span>
+</code></pre></div><h3 id="listen-on-a-topic">Listen on a Topic</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl -n the-project exec -ti kafka-test-client -- <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>/usr/bin/kafka-console-consumer --bootstrap-server kafka:9092 <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>--topic test --from-beginning
+</code></pre></div><h2 id="port-forwarding--local-development">Port Forwarding / Local Development</h2>
 <p>Check out <a href="https://github.com/txn2/kubefwd">kubefwd</a> for a simple command line utility that bulk forwards services of one or more namespaces to your local workstation.</p>
 
 
@@ -794,6 +674,23 @@ spec:
                    <span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">Kafka on Kubernetes: Deploy a highly available Kafka cluster on Kubernetes.</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="https://imti.co/" property="cc:attributionName" rel="cc:attributionURL">Craig Johnston</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
                     <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a>
                 </p>
+
+                <h5>SUPPORT</h5>
+                <p>
+                    Order my new Kubernetes book: <a href="https://amzn.to/34D56v6">Advanced Platform Development with Kubernetes: Enabling Data Management, the Internet of Things, Blockchain, and Machine Learning</a>
+                </p>
+                <script type="text/javascript">
+                  amzn_assoc_tracking_id = "imti-20";
+                  amzn_assoc_ad_mode = "manual";
+                  amzn_assoc_ad_type = "smart";
+                  amzn_assoc_marketplace = "amazon";
+                  amzn_assoc_region = "US";
+                  amzn_assoc_design = "enhanced_links";
+                  amzn_assoc_asins = "1484256107";
+                  amzn_assoc_placement = "adunit";
+                  amzn_assoc_linkid = "14a9d8b8d1b0bd44e9256e0e0a948015";
+                </script>
+                <script src="//z-na.amazon-adsystem.com/widgets/onejs?MarketPlace=US"></script>
 
                 
                 <hr>

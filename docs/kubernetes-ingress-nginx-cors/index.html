@@ -87,7 +87,7 @@
       "url": "https:\/\/imti.co\/img\/craig_johnston_cjimti.jpg"
     }
   },
-  "description": "Using ingress-nginx on Kubernetes makes adding CORS headers painless. Kubernetes ingress-nginx uses annotations as a quick way to allow you to specify the automatic generation of an extensive list of common nginx configuration options.\nExample ingress configuration enabling CORS:\napiVersion: extensions\/v1beta1 kind: Ingress metadata: name: api namespace: fuse labels: app: api annotations: nginx.ingress.kubernetes.io\/enable-cors: \x26quot;true\x26quot; nginx.ingress.kubernetes.io\/cors-allow-methods: \x26quot;PUT, GET, POST, OPTIONS\x26quot; nginx.ingress.kubernetes.io\/cors-allow-origin: \x26quot;https:\/\/admin.example.com\x26quot; nginx.ingress.kubernetes.io\/cors-allow-credentials: \x26quot;true\x26quot; spec: rules: - host: api.example.com http: paths: - backend: serviceName: api-example servicePort: 80 path: \/api tls: - hosts: - api."
+  "description": "Using ingress-nginx on Kubernetes makes adding CORS headers painless. Kubernetes ingress-nginx uses annotations as a quick way to allow you to specify the automatic generation of an extensive list of common nginx configuration options.\nExample ingress configuration enabling CORS:\napiVersion: extensions\/v1beta1 kind: Ingress metadata: name: api namespace: fuse labels: app: api annotations: nginx.ingress.kubernetes.io\/enable-cors: \u0026#34;true\u0026#34; nginx.ingress.kubernetes.io\/cors-allow-methods: \u0026#34;PUT, GET, POST, OPTIONS\u0026#34; nginx.ingress.kubernetes.io\/cors-allow-origin: \u0026#34;https:\/\/admin.example.com\u0026#34; nginx.ingress.kubernetes.io\/cors-allow-credentials: \u0026#34;true\u0026#34; spec: rules: - host: api.example.com http: paths: - backend: serviceName: api-example servicePort: 80 path: \/api tls: - hosts: - api."
 }
 </script>
 
@@ -211,105 +211,106 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h5>SHARE</h5>
-                <ul class="list-inline">
-                    <li><div class="addthis_inline_share_toolbox"></div></li>
-                </ul>
-
-                
-
-<p>Using <a href="/web-cluster-ingress/">ingress</a>-nginx on <a href="https://kubernetes.io/">Kubernetes</a> makes adding <a href="https://en.wikipedia.org/wiki/Cross-origin_resource_sharing">CORS</a> headers painless. Kubernetes <a href="/web-cluster-ingress/">ingress</a>-nginx uses <a href="https://github.com/kubernetes/ingress-nginx/blob/master/docs/user-guide/nginx-configuration/annotations.md">annotations</a> as a quick way to allow you to specify the automatic generation of an extensive list of common <a href="http://nginx.org/en/docs/beginners_guide.html">nginx</a> configuration options.</p>
-
+                <p>Using <a href="/web-cluster-ingress/">ingress</a>-nginx on <a href="https://kubernetes.io/">Kubernetes</a> makes adding <a href="https://en.wikipedia.org/wiki/Cross-origin_resource_sharing">CORS</a> headers painless. Kubernetes <a href="/web-cluster-ingress/">ingress</a>-nginx uses <a href="https://github.com/kubernetes/ingress-nginx/blob/master/docs/user-guide/nginx-configuration/annotations.md">annotations</a> as a quick way to allow you to specify the automatic generation of an extensive list of common <a href="http://nginx.org/en/docs/beginners_guide.html">nginx</a> configuration options.</p>
 <p>Example <a href="/web-cluster-ingress/">ingress</a> configuration enabling <a href="https://en.wikipedia.org/wiki/Cross-origin_resource_sharing">CORS</a>:</p>
-
-<pre><code class="language-yaml">apiVersion: extensions/v1beta1
-kind: Ingress
-metadata:
-  name: api
-  namespace: fuse
-  labels:
-    app: api
-  annotations:
-    nginx.ingress.kubernetes.io/enable-cors: &quot;true&quot;
-    nginx.ingress.kubernetes.io/cors-allow-methods: &quot;PUT, GET, POST, OPTIONS&quot;
-    nginx.ingress.kubernetes.io/cors-allow-origin: &quot;https://admin.example.com&quot;
-    nginx.ingress.kubernetes.io/cors-allow-credentials: &quot;true&quot;
-spec:
-  rules:
-  - host: api.example.com
-    http:
-      paths:
-      - backend:
-          serviceName: api-example
-          servicePort: 80
-        path: /api
-  tls:
-  - hosts:
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">apiVersion</span>: extensions/v1beta1
+<span style="color:#66d9ef">kind</span>: Ingress
+<span style="color:#66d9ef">metadata</span>:
+  <span style="color:#66d9ef">name</span>: api
+  <span style="color:#66d9ef">namespace</span>: fuse
+  <span style="color:#66d9ef">labels</span>:
+    <span style="color:#66d9ef">app</span>: api
+  <span style="color:#66d9ef">annotations</span>:
+    <span style="color:#66d9ef">nginx.ingress.kubernetes.io/enable-cors</span>: <span style="color:#e6db74">&#34;true&#34;</span>
+    <span style="color:#66d9ef">nginx.ingress.kubernetes.io/cors-allow-methods</span>: <span style="color:#e6db74">&#34;PUT, GET, POST, OPTIONS&#34;</span>
+    <span style="color:#66d9ef">nginx.ingress.kubernetes.io/cors-allow-origin</span>: <span style="color:#e6db74">&#34;https://admin.example.com&#34;</span>
+    <span style="color:#66d9ef">nginx.ingress.kubernetes.io/cors-allow-credentials</span>: <span style="color:#e6db74">&#34;true&#34;</span>
+<span style="color:#66d9ef">spec</span>:
+  <span style="color:#66d9ef">rules</span>:
+  - <span style="color:#66d9ef">host</span>: api.example.com
+    <span style="color:#66d9ef">http</span>:
+      <span style="color:#66d9ef">paths</span>:
+      - <span style="color:#66d9ef">backend</span>:
+          <span style="color:#66d9ef">serviceName</span>: api-example
+          <span style="color:#66d9ef">servicePort</span>: <span style="color:#ae81ff">80</span>
+        <span style="color:#66d9ef">path</span>: /api
+  <span style="color:#66d9ef">tls</span>:
+  - <span style="color:#66d9ef">hosts</span>:
     - api.example.com
-    secretName: example-tls
-</code></pre>
-
-<p>You can check the nginx configuration file generated by Kubernetes <a href="/web-cluster-ingress/">ingress</a>-nginx on any of the ingress controller pods.</p>
-
+    <span style="color:#66d9ef">secretName</span>: example-tls
+</code></pre></div><p>You can check the nginx configuration file generated by Kubernetes <a href="/web-cluster-ingress/">ingress</a>-nginx on any of the ingress controller pods.</p>
 <p>If you set up the standard Kubernetes <a href="/web-cluster-ingress/">ingress</a>-nginx on your cluster, you should have one or more controller pods running in the ingress-nginx namespace.</p>
-
-<pre><code class="language-bash">kubectl get pods -n ingress-nginx
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl get pods -n ingress-nginx
 
 NAME                                      READY     STATUS    RESTARTS   AGE
-default-http-backend-5c6d95c48-xvs55      1/1       Running   0          26d
-nginx-ingress-controller-f5676dc7-5ks6q   1/1       Running   0          26d
-nginx-ingress-controller-f5676dc7-cjl6l   1/1       Running   0          26d
-nginx-ingress-controller-f5676dc7-kthxn   1/1       Running   0          26d
-nginx-ingress-controller-f5676dc7-rvhbv   1/1       Running   0          26d
-</code></pre>
-
-<p>Pick a controller and <code>cat</code> the nginx configuration:</p>
-
-<pre><code class="language-bash"># pipe the config to less or your favorite text reader
-kubectl exec -n ingress-nginx \
-    nginx-ingress-controller-f5676dc7-kthxn \
-    cat /etc/nginx/nginx.conf | less
-</code></pre>
-
-<p>You can see that <a href="/web-cluster-ingress/">ingress</a>-nginx created some header directives for nginx:</p>
-
-<pre><code class="language-plain">...
-more_set_headers 'Access-Control-Allow-Credentials: true';
+default-http-backend-5c6d95c48-xvs55      1/1       Running   <span style="color:#ae81ff">0</span>          26d
+nginx-ingress-controller-f5676dc7-5ks6q   1/1       Running   <span style="color:#ae81ff">0</span>          26d
+nginx-ingress-controller-f5676dc7-cjl6l   1/1       Running   <span style="color:#ae81ff">0</span>          26d
+nginx-ingress-controller-f5676dc7-kthxn   1/1       Running   <span style="color:#ae81ff">0</span>          26d
+nginx-ingress-controller-f5676dc7-rvhbv   1/1       Running   <span style="color:#ae81ff">0</span>          26d
+</code></pre></div><p>Pick a controller and <code>cat</code> the nginx configuration:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># pipe the config to less or your favorite text reader</span>
+kubectl exec -n ingress-nginx <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    nginx-ingress-controller-f5676dc7-kthxn <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    cat /etc/nginx/nginx.conf | less
+</code></pre></div><p>You can see that <a href="/web-cluster-ingress/">ingress</a>-nginx created some header directives for nginx:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plain" data-lang="plain">...
+more_set_headers &#39;Access-Control-Allow-Credentials: true&#39;;
 ...
-</code></pre>
-
-<h3 id="about-cors">About <a href="https://en.wikipedia.org/wiki/Cross-origin_resource_sharing">CORS</a></h3>
-
+</code></pre></div><h3 id="about-cors">About <a href="https://en.wikipedia.org/wiki/Cross-origin_resource_sharing">CORS</a></h3>
 <p><a href="https://en.wikipedia.org/wiki/Cross-origin_resource_sharing">CORS</a>, or <a href="https://en.wikipedia.org/wiki/Cross-origin_resource_sharing">Cross-origin resource sharing</a> consists of a few HTTP response headers intended to let a web browser know if it&rsquo;s ok to POST data to a specific endpoint. Before a web browser lets Javascript issue a POST to a URL, then performs a &ldquo;preflight&rdquo; request. A preflight request is merely a request to the server with the same URL using the method OPTIONS rather than POST. The web browser checks the HTTP headers for <a href="https://en.wikipedia.org/wiki/Cross-origin_resource_sharing">CORS</a> related headers to determine if POSTing data on behalf of the user is ok.</p>
 
-<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<ins class="adsbygoogle"
-     style="display:block; text-align:center;"
-     data-ad-layout="in-article"
-     data-ad-format="fluid"
-     data-ad-client="ca-pub-5984764595236029"
-     data-ad-slot="7730310582"></ins>
-<script>
-    (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-
-<h2 id="port-forwarding-local-development">Port Forwarding / Local Development</h2>
-
+<table>
+    <tr><td colspan="2" style="text-align: center"><b>Please support my new book!</b></td></tr>
+    <tr>
+        <td>
+            <a href="https://amzn.to/3hAZUvx">
+                <img src="/img/kubernetes_platform_development.jpg" style="padding:0; margin: 0"/>
+            </a>
+        </td>
+        <td>
+            <b><a href="https://amzn.to/3hAZUvx">Advanced Platform Development with Kubernetes: Enabling Data Management, the Internet of Things, Blockchain, and Machine Learning</a></b>
+            <h4>What You'll Learn</h4>
+            <ul style="padding-bottom: 0; margin: 0">
+                <li>Use data pipelines with <b>MQTT, NiFi, Logstash, Kafka and Elasticsearch</b></li>
+                <li>Install a serverless platform with <b>OpenFaaS</b></li>
+                <li>Explore <b>blockchain</b> network capabilities with <b>Ethereum</b></li>
+                <li>Support a multi-tenant <b>data science</b> platform and web IDE with <b>JupyterHub, MLflow and Seldon Core</b></li>
+                <li>Build a <b>hybrid cluster</b>, securely bridging <b>on-premise</b> and cloud-based Kubernetes nodes</li>
+                <li>Implement an integrated development toolchain for continuous integration and deployment</li>
+            </ul>
+        </td>
+    </tr>
+</table>
+<h2 id="port-forwarding--local-development">Port Forwarding / Local Development</h2>
 <p>Check out <a href="https://github.com/txn2/kubefwd">kubefwd</a> for a simple command line utility that bulk forwards services of one or more namespaces to your local workstation.</p>
-
 <h2 id="resources">Resources</h2>
-
 <p>If you found this article useful, you may want to check out <a href="http://localhost:4000/tag/phc.txn2.net/">all my articles on Kubernetes</a>, used to build on the <a href="/hobby-cluster/">Production Hobby Cluster</a>. <a href="/hobby-cluster/">PHC</a> an excellent environment for developing and testing cloud-native microservices like <a href="https://github.com/txn2/txtoken">txToken</a>. While using Minikube or similar environments for testing and developing cloud-native <a href="http://microservices.io/">microservice</a>s, I find it a much better experience to use a more true-to-production cluster like <a href="/hobby-cluster/">PHC</a>.</p>
-
 <p>If in a few days you find yourself setting up a <a href="/hobby-cluster/">Production Hobby Cluster</a> in Japan or Germany on <a href="https://www.linode.com/?r=848a6b0b21dc8edd33124f05ec8f99207ccddfde">Linode</a>, and another two in Australia and France on <a href="https://www.vultr.com/?ref=7418713">vultr</a>, then you may have just joined the PHC (Performance <a href="/hobby-cluster/">Hobby Cluster</a>s) club. Some people tinker late at night on their truck, we benchmark and test the resilience of node failures on our overseas, budget kubernetes clusters. It&rsquo;s all about going big, on the cheap.</p>
-
-<p><a href="https://amzn.to/2IOe8Yu"><img src="https://github.com/cjimti/mk/raw/master/images/content/k8s-tshirt-banner.jpg" alt="k8s performance hobby clusters" /></a></p>
+<p><a href="https://amzn.to/2IOe8Yu"><img src="https://github.com/cjimti/mk/raw/master/images/content/k8s-tshirt-banner.jpg" alt="k8s performance hobby clusters"></a></p>
 
 
                 <p>
                    <span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">CORS on Kubernetes Ingress Nginx: Painless CORS header configuration in Kubernetes</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="https://imti.co/" property="cc:attributionName" rel="cc:attributionURL">Craig Johnston</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
                     <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a>
                 </p>
+
+                <h5>SUPPORT</h5>
+                <p>
+                    Order my new Kubernetes book: <a href="https://amzn.to/34D56v6">Advanced Platform Development with Kubernetes: Enabling Data Management, the Internet of Things, Blockchain, and Machine Learning</a>
+                </p>
+                <script type="text/javascript">
+                  amzn_assoc_tracking_id = "imti-20";
+                  amzn_assoc_ad_mode = "manual";
+                  amzn_assoc_ad_type = "smart";
+                  amzn_assoc_marketplace = "amazon";
+                  amzn_assoc_region = "US";
+                  amzn_assoc_design = "enhanced_links";
+                  amzn_assoc_asins = "1484256107";
+                  amzn_assoc_placement = "adunit";
+                  amzn_assoc_linkid = "14a9d8b8d1b0bd44e9256e0e0a948015";
+                </script>
+                <script src="//z-na.amazon-adsystem.com/widgets/onejs?MarketPlace=US"></script>
 
                 
                 <hr>

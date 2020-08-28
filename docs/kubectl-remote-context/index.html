@@ -87,7 +87,7 @@
       "url": "https:\/\/imti.co\/img\/craig_johnston_cjimti.jpg"
     }
   },
-  "description": "I use a few Kubernetes clusters on a daily basis, and I use kubectl to access and configure them from my workstation. There are dozens of ways to configure kubectl however I find the following method the easiest for me to manage and not make a mess.\nI also set up test clusters from time-to-time, and so keeping my configs organized is, so I don\x26rsquo;t confuse myself or make a mess."
+  "description": "I use a few Kubernetes clusters on a daily basis, and I use kubectl to access and configure them from my workstation. There are dozens of ways to configure kubectl however I find the following method the easiest for me to manage and not make a mess.\nI also set up test clusters from time-to-time, and so keeping my configs organized is, so I don\u0026rsquo;t confuse myself or make a mess."
 }
 </script>
 
@@ -207,131 +207,80 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h5>SHARE</h5>
-                <ul class="list-inline">
-                    <li><div class="addthis_inline_share_toolbox"></div></li>
-                </ul>
-
-                
-
-<p>I use a few Kubernetes clusters on a daily basis, and I use <a href="https://kubernetes.io/docs/reference/kubectl/cheatsheet/">kubectl</a> to access and configure them from my workstation. There are dozens of ways to configure <a href="https://kubernetes.io/docs/reference/kubectl/cheatsheet/">kubectl</a> however I find the following method the easiest for me to manage and not make a mess.</p>
-
+                <p>I use a few Kubernetes clusters on a daily basis, and I use <a href="https://kubernetes.io/docs/reference/kubectl/cheatsheet/">kubectl</a> to access and configure them from my workstation. There are dozens of ways to configure <a href="https://kubernetes.io/docs/reference/kubectl/cheatsheet/">kubectl</a> however I find the following method the easiest for me to manage and not make a mess.</p>
 <p>I also set up test clusters from time-to-time, and so keeping my configs organized is, so I don&rsquo;t confuse myself or make a mess.</p>
-
 <p>For this post, I&rsquo;ll talk about four clusters and how I have them organized. The following is a list of the clusters I am managing:</p>
-
 <ul>
 <li><strong>minikube</strong>: running on my local workstation</li>
 <li><strong>work-dev</strong>:  a development cluster for my professional projects</li>
 <li><strong>work-prod</strong>: a large production cluster I host client projects and services on</li>
 <li><strong>txn2-phc</strong>: is a <a href="/hobby-cluster/">Production Hobby Cluster</a> I use for experiments in infrastructure and microservices</li>
 </ul>
-
 <p><a href="https://kubernetes.io/docs/reference/kubectl/cheatsheet/">kubectl</a> looks at an environment variable called <strong>KUBECONFIG</strong> to hold a colon-separated list of paths to configuration files. <a href="https://kubernetes.io/docs/reference/kubectl/cheatsheet/">kubectl</a> configurations can all be confined in one file. However, if multiple files are specified, <a href="https://kubernetes.io/docs/reference/kubectl/cheatsheet/">kubectl</a> combines them internally. I prefer the separate config file method since it&rsquo;s a little bit more scalable for my brain.</p>
-
 <p>Each Kubernetes cluster has an admin config file generated when installed. The Kubernetes config is found on the master node typically under:</p>
-
 <p><code>/etc/kubernetes/admin.conf</code></p>
-
 <p><a href="https://kubernetes.io/docs/tasks/tools/install-kubectl/">Install kubectl</a> on your local workstation. If the install went correctly, you should have a <code>.kube</code> folder just off your home directory. The <code>/home/USER/.kube/</code> holds all of your config files.</p>
-
 <p><code>/home/USER/.kube/</code></p>
-
 <p>I populate this directory using the <code>scp</code> (secure copy) command on my local workstation and download each config into <code>/home/USER/.kube/</code>. Of course, you need to replace <strong>USER</strong> with your username. You can also use the tilde character <code>~</code> to denote your home directory in most command shells, and I use that here:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># download the Kubernetes admin config for work dev</span>
+scp root@WORK_DEV_SERVER:/etc/kubernetes/admin.conf ~/.kube/config-work-dev<span style="color:#e6db74">`</span>
 
-<pre><code class="language-bash"># download the Kubernetes admin config for work dev
-scp root@WORK_DEV_SERVER:/etc/kubernetes/admin.conf ~/.kube/config-work-dev`
+<span style="color:#75715e"># download the Kubernetes admin config for work production</span>
+scp root@WORK_PROD_SERVER:/etc/kubernetes/admin.conf ~/.kube/config-work-prod<span style="color:#e6db74">`</span>
 
-# download the Kubernetes admin config for work production
-scp root@WORK_PROD_SERVER:/etc/kubernetes/admin.conf ~/.kube/config-work-prod`
-
-# download the Kubernetes admin config for txn2 production hobby
-scp root@PHC_SERVER:/etc/kubernetes/admin.conf ~/.kube/config-txn2-phc`
-</code></pre>
-
-<p>The above <code>scp</code> method is one way to get the files; you can use whatever method you like. The idea is that we need each one in our <code>.kube</code> directory and named appropriately. I like to name them <code>config-</code><strong>context</strong>, where context is the name of the configuration context I&rsquo;ll be giving them in the next step.</p>
-
+<span style="color:#75715e"># download the Kubernetes admin config for txn2 production hobby</span>
+scp root@PHC_SERVER:/etc/kubernetes/admin.conf ~/.kube/config-txn2-phc<span style="color:#e6db74">`</span>
+</code></pre></div><p>The above <code>scp</code> method is one way to get the files; you can use whatever method you like. The idea is that we need each one in our <code>.kube</code> directory and named appropriately. I like to name them <code>config-</code><strong>context</strong>, where context is the name of the configuration context I&rsquo;ll be giving them in the next step.</p>
 <p>Each configuration file has three parts I&rsquo;ll be concerned with:</p>
-
 <ul>
 <li>clusters</li>
 <li>users</li>
 <li>contexts (associates users with clusters)</li>
 </ul>
-
 <p>The <strong>clusters</strong> key in each config hold definitions of one or more clusters. The <strong>name:</strong> of the cluster is likely to be generic and may need adjustment to something more specific. In my configuration file <strong>config-work-dev</strong> I change the <strong>name:</strong> of the cluster to <strong>work-dev-cluster</strong>. The <strong>server:</strong> value is also wrong since it&rsquo;s an internal IP (this will not always be the case), ensure the <strong>server:</strong> points to an IP address accessible from your local workstation and should look something like <code>n.n.n.n:6443</code>.</p>
-
-<pre><code class="language-bash">...
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">...
 - cluster:
     server: https://1.1.1.1:6443
   name: work-dev-cluster
 ...
-</code></pre>
-
-<p>Under the <strong>user:</strong> section change the name of the users to match the cluster context, change it to something like:</p>
-
-<pre><code class="language-bash">users:
+</code></pre></div><p>Under the <strong>user:</strong> section change the name of the users to match the cluster context, change it to something like:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">users:
 - name: work-dev-admin
 ...
-</code></pre>
-
-<p>Change the <strong>context:</strong> section to properly tie the <strong>user:</strong> and <strong>cluster:</strong> together:</p>
-
-<pre><code class="language-bash">contexts:
+</code></pre></div><p>Change the <strong>context:</strong> section to properly tie the <strong>user:</strong> and <strong>cluster:</strong> together:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">contexts:
 - context:
     cluster: work-dev-cluster
     user: work-dev-admin
   name: work-dev
-</code></pre>
-
-<p>Update each of the config files, in my case</p>
-
+</code></pre></div><p>Update each of the config files, in my case</p>
 <ul>
 <li>~/.kube/config-<strong>work-dev</strong></li>
 <li>~/.kube/config-<strong>work-prod</strong></li>
 <li>~/.kube/config-<strong>txn2-phc</strong></li>
 </ul>
-
 <p>Next, we need to set the <strong>KUBECONFIG</strong> environment variable with them. I use my <code>.bash_profile</code> script but you can use whatever script your shell uses to set up. Add paths similar to:</p>
-
-<pre><code class="language-bash">export KUBECONFIG=$HOME/.kube/config-work-dev:$HOME/.kube/config-work-prod:$HOME/.kube/txn2-phc
-</code></pre>
-
-<p>You may need to open a fresh terminal to use the newly configured <strong>KUBECONFIG</strong> environment variable. Check the paths:</p>
-
-<pre><code class="language-bash">echo $KUBECONFIG
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">export KUBECONFIG<span style="color:#f92672">=</span>$HOME/.kube/config-work-dev:$HOME/.kube/config-work-prod:$HOME/.kube/txn2-phc
+</code></pre></div><p>You may need to open a fresh terminal to use the newly configured <strong>KUBECONFIG</strong> environment variable. Check the paths:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">echo $KUBECONFIG
 
 /Users/ME/.kube/config-work-dev:/Users/ME/.kube/config-work-prod:/Users/ME/.kube/txn2-phc
-</code></pre>
-
-<p>You are now able to run some commands to manage your <a href="https://kubernetes.io/docs/reference/kubectl/cheatsheet/">kubectl</a> context:</p>
-
-<pre><code class="language-bash"># get the current context
+</code></pre></div><p>You are now able to run some commands to manage your <a href="https://kubernetes.io/docs/reference/kubectl/cheatsheet/">kubectl</a> context:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># get the current context</span>
 kubectl config current-context
 
-# use a different context
+<span style="color:#75715e"># use a different context</span>
 kubectl config use-context work-dev
 
-</code></pre>
-
-<p>Now you can make Kubernetes clusters all over the place and have a single <code>kubectl</code> on your local workstation to manage them all.</p>
-
-<h3 id="unable-to-connect-to-the-server-x509-certificate-is-valid-for"><strong>Unable to connect to the server: x509: certificate is valid for &hellip;</strong>.</h3>
-
+</code></pre></div><p>Now you can make Kubernetes clusters all over the place and have a single <code>kubectl</code> on your local workstation to manage them all.</p>
+<h3 id="unable-to-connect-to-the-server-x509-certificate-is-valid-for-"><strong>Unable to connect to the server: x509: certificate is valid for &hellip;</strong>.</h3>
 <p>If you changed the cluster server to a hostname (like lax2.example.com) and did not use that name when setting up the cluster with <code>kubeadm</code>, then you will need to rebuild the cert on the master. This is easy to do. Check out my article <a href="/kubectl-remote-x509-valid/">Kubectl x509 Unable to Connect</a> for a few simple steps. Otherwise, just use the public IP address of the master node.</p>
-
-<h2 id="port-forwarding-local-development">Port Forwarding / Local Development</h2>
-
+<h2 id="port-forwarding--local-development">Port Forwarding / Local Development</h2>
 <p>Check out <a href="https://github.com/txn2/kubefwd">kubefwd</a> for a simple command line utility that bulk forwards services of one or more namespaces to your local workstation.</p>
-
-<hr />
-
+<hr>
 <p>If in a few days you find yourself setting up a cluster in Japan or Germany on <a href="https://www.linode.com/?r=848a6b0b21dc8edd33124f05ec8f99207ccddfde">Linode</a>, and another two in Australia and France on <a href="https://www.vultr.com/?ref=7418713">vultr</a>, then you may have just joined the PHC (Performance <a href="/hobby-cluster/">Hobby Cluster</a>s) club. Some people tinker late at night on their truck, we benchmark and test the resilience of node failures on our overseas, budget kubernetes clusters. It&rsquo;s all about going big, on the cheap.</p>
-
-<p><a href="https://amzn.to/2IOe8Yu"><img src="https://github.com/cjimti/mk/raw/master/images/content/k8s-tshirt-banner.jpg" alt="k8s performance hobby clusters" /></a></p>
-
+<p><a href="https://amzn.to/2IOe8Yu"><img src="https://github.com/cjimti/mk/raw/master/images/content/k8s-tshirt-banner.jpg" alt="k8s performance hobby clusters"></a></p>
 <h2 id="resources">Resources</h2>
-
 <ul>
 <li><a href="https://kubernetes.io/docs/tasks/tools/install-kubectl/">install kubectl</a></li>
 <li><a href="/hobby-cluster/">Production Hobby Cluster</a> how-to article.</li>
@@ -343,6 +292,23 @@ kubectl config use-context work-dev
                    <span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">kubectl Context Multiple Clusters: Managing multiple clusters with kubectl.</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="https://imti.co/" property="cc:attributionName" rel="cc:attributionURL">Craig Johnston</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
                     <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a>
                 </p>
+
+                <h5>SUPPORT</h5>
+                <p>
+                    Order my new Kubernetes book: <a href="https://amzn.to/34D56v6">Advanced Platform Development with Kubernetes: Enabling Data Management, the Internet of Things, Blockchain, and Machine Learning</a>
+                </p>
+                <script type="text/javascript">
+                  amzn_assoc_tracking_id = "imti-20";
+                  amzn_assoc_ad_mode = "manual";
+                  amzn_assoc_ad_type = "smart";
+                  amzn_assoc_marketplace = "amazon";
+                  amzn_assoc_region = "US";
+                  amzn_assoc_design = "enhanced_links";
+                  amzn_assoc_asins = "1484256107";
+                  amzn_assoc_placement = "adunit";
+                  amzn_assoc_linkid = "14a9d8b8d1b0bd44e9256e0e0a948015";
+                </script>
+                <script src="//z-na.amazon-adsystem.com/widgets/onejs?MarketPlace=US"></script>
 
                 
                 <hr>
