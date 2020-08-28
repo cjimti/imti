@@ -9,6 +9,8 @@ image:      "/img/greenfieldproject.jpg"
 twitter_image: "/img/post/greenfieldproject_876_438.jpg"
 ---
 
+{{< content-ad >}}
+
 I drive the vision and development of advanced software applications and user experience at [Deasil Cognitive] and [Deasil Works]. I have been developing software for over 25 years.
 
 I lead a talented team of software development and creative engineers, covering many industries looking to collect, analyze, move, buffer, queue, process and present data in significant ways. My expertise and that of my team revolve around microservices, artificial intelligence, algorithms, machine learning and blockchain technologies.

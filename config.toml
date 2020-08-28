@@ -65,6 +65,9 @@ home = ["HTML", "RSS"]
   #pinterest     = "full profile url in pinterest"
 
   [[params.bookmark_link]]
+  title =  "Author"
+  href =  "https://www.amazon.com/Craig-Johnston/e/B001K80LWI/ref=ntt_dp_epwbk_0"
+  [[params.bookmark_link]]
   title =  "Deasil Cognitive"
   href =  "https://deasilcognitive.com/"
   [[params.bookmark_link]]
