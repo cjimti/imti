@@ -1,7 +1,7 @@
 ---
 layout:     page
 title:      "About this site..."
-subtitle:   "Architecting, Developing, nixCraft, DevOps, AI/ML, Blockchain"
+subtitle:   "(I Make Things Interesting) Architecting, Developing, nixCraft, DevOps, AI/ML, Blockchain"
 date:       2018-01-01
 author:     "Craig Johnston"
 URL:        "about/"

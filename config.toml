@@ -21,7 +21,7 @@ home = ["HTML", "RSS"]
   SEOTitle = "| Craig Johnston"
   description = "I lead a talented team of software development and creative engineers, covering many industries looking to collect, analyze, move, buffer, queue, process and present data in significant ways. My expertise and that of my team revolve around microservices, artificial intelligence, algorithms, machine learning and blockchain technologies."
   keyword = "Go, Kubernetes, Elasticsearch, Python, Docker, Big Data, Artificial Intelligence, Machine Learning, Blockchain"
-  slogan = "Architecting, Developing, nixCraft, DevOps, AI/ML, Blockchain"
+  slogan = "(I Make Things Interesting)\nArchitecting, Developing, nixCraft, DevOps, AI/ML, Blockchain"
 
   image_404 = "img/404-bg.jpg"
   title_404 = "Nothing"
