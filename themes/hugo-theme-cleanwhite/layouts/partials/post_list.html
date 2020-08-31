@@ -19,7 +19,7 @@
         </div>
     </a>
     <p class="post-meta">
-    Posted by {{ with .Params.author }}{{ . }}{{ else }}{{ .Site.Title }}{{ end }} {{ .Date.Format "Monday, January 2, 2006" }}
+        Posted by <a href="https://twitter.com/cjimti">{{ with .Params.author }}{{ . }}{{ else }}{{ .Site.Title }}{{ end }}</a> {{ .Date.Format "Monday, January 2, 2006" }}
     </p>
 </div>
 <hr>
