@@ -22,6 +22,41 @@ Tracks is distributed under the terms of the GNU GPL
   line-height: 1.85;
 }
 
+.ad-div {
+  overflow:auto;
+  border-radius: 10px;
+  border: 2px solid #000;
+  background-color: #000;
+  font-size: 1em;
+  color: #01e0fe;
+  padding: 5px 10px 5px 5px;
+}
+
+.ad-div img {
+  border-radius: 10px;
+}
+
+.ad-div a {
+  color: #01e0fe;
+}
+
+.ad-div h4 {
+  padding: 0;
+  margin: 15px 0 0;
+}
+
+.ad-div h5 {
+  color: #FEC601;
+}
+
+.ad-div ul {
+  color: #FEC601;
+}
+
+.ad-div ul b {
+  color: #fff;
+}
+
 .wp-caption-text, .excerpt-meta, .entry-meta, .more-link, .pagination, .further-reading span,
 .further-reading a,
 .entry-categories span,
