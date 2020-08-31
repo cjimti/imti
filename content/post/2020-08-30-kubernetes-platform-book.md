@@ -54,7 +54,7 @@ I did not want to write a book on administering Kubernetes or how it works (alth
 
 ## Custom Kubernetes
 
-Quite a few books and how-twos specialize in AKS, EKS, and GKE.  "[Advanced Platform Development with Kubernetes: Enabling Data Management, the Internet of Things, Blockchain, and Machine Learning]" focuses on building **Custom Kubernetes** clusters and illustrates this by using generic (and cheap) compute instances (VMs) offered by [Vultr], [Digital Ocean], [Linode], [Hetzner] and [Scaleway].
+Quite a few books and how-tos specialize in AKS, EKS, and GKE.  "[Advanced Platform Development with Kubernetes: Enabling Data Management, the Internet of Things, Blockchain, and Machine Learning]" focuses on building **Custom Kubernetes** clusters and illustrates this by using generic (and cheap) compute instances (VMs) offered by [Vultr], [Digital Ocean], [Linode], [Hetzner] and [Scaleway].
 
 ## Technology
 
