@@ -87,7 +87,7 @@
       "url": "https:\/\/imti.co\/img\/craig_johnston_cjimti.jpg"
     }
   },
-  "description": "IOT devices, Point-of-Sale systems, application events or any client that sends data destined for indexing in Elasticsearch often need to send and forget, however, unless that data is of low value there needs to be assurance that arrives at its final destination. Back-pressure and database outages can pose a considerable threat to data integrity.\n Contents   Background Overview Development Environment  the-project Namespace   The Project: Weather (wx) Data rxtx for Store-and-Forward  wx-rxtx Service wx-rxtx StatefulSet   rtBeat to Collect, Buffer and Publish  wx-rtbeat Service wx-rtbeat ConfigMap wx-rtbeat Deployment   Client Simulation \/ Kubernetes Cron Performance Conclusion Port Forwarding \/ Local Development Reference     Please support my new book!"
+  "description": "IOT devices, Point-of-Sale systems, application events or any client that sends data destined for indexing in Elasticsearch often need to send and forget, however, unless that data is of low value there needs to be assurance that arrives at its final destination. Back-pressure and database outages can pose a considerable threat to data integrity.\n Contents   Background Overview Development Environment  the-project Namespace   The Project: Weather (wx) Data rxtx for Store-and-Forward  wx-rxtx Service wx-rxtx StatefulSet   rtBeat to Collect, Buffer and Publish  wx-rtbeat Service wx-rtbeat ConfigMap wx-rtbeat Deployment   Client Simulation \/ Kubernetes Cron Performance Conclusion Port Forwarding \/ Local Development Reference     Support this blog!"
 }
 </script>
 
@@ -193,7 +193,7 @@
                     </div>
                     <h1>High Traffic JSON Data into Elasticsearch on Kubernetes</h1>
                     <h2 class="subheading">Instant, reliable, send and forget.</h2>
-                    <span  class="meta">Posted by Craig Johnston on Wednesday, July 18, 2018
+                    <span  class="meta">Posted by <a href="https://twitter.com/cjimti">Craig Johnston</a> on Wednesday, July 18, 2018
                         
                     </span>
                 </div>
@@ -251,29 +251,26 @@
   </ul>
 </nav>
 </aside>
+<div class="ad-div">
+    <a href="https://amzn.to/3hAZUvx">
+        <img src="/img/kubernetes_platform_development.jpg" style="padding:0; margin: 0; width: 50%; float: left"/>
+    </a>
 
-<table>
-    <tr><td colspan="2" style="text-align: center"><b>Please support my new book!</b></td></tr>
-    <tr>
-        <td>
-            <a href="https://amzn.to/3hAZUvx">
-                <img src="/img/kubernetes_platform_development.jpg" style="padding:0; margin: 0"/>
-            </a>
-        </td>
-        <td>
-            <b><a href="https://amzn.to/3hAZUvx">Advanced Platform Development with Kubernetes: Enabling Data Management, the Internet of Things, Blockchain, and Machine Learning</a></b>
-            <h4>What You'll Learn</h4>
-            <ul style="padding-bottom: 0; margin: 0">
-                <li>Use data pipelines with <b>MQTT, NiFi, Logstash, Kafka and Elasticsearch</b></li>
-                <li>Install a serverless platform with <b>OpenFaaS</b></li>
-                <li>Explore <b>blockchain</b> network capabilities with <b>Ethereum</b></li>
-                <li>Support a multi-tenant <b>data science</b> platform and web IDE with <b>JupyterHub, MLflow and Seldon Core</b></li>
-                <li>Build a <b>hybrid cluster</b>, securely bridging <b>on-premise</b> and cloud-based Kubernetes nodes</li>
-                <li>Implement an integrated development toolchain for continuous integration and deployment</li>
-            </ul>
-        </td>
-    </tr>
-</table>
+    <div style="padding-left: 15px; overflow:auto;">
+        <a href="https://amzn.to/3hAZUvx">Support this blog! Buy my new book:
+            <h4>Advanced Platform Development with Kubernetes</h4>
+        </a>
+        <h5>What You'll Learn</h5>
+        <ul style="padding-bottom: 0; margin: 0">
+            <li>Use data pipelines with <b>MQTT, NiFi, Logstash, MinIO, Hive, Presto, Kafka and Elasticsearch</b></li>
+            <li>Leverage <b>Serverless</b> ETL with <b>OpenFaaS</b></li>
+            <li>Explore <b>Blockchain</b> networking with <b>Ethereum</b></li>
+            <li>Support a multi-tenant <b>Data Science</b> platform with <b>JupyterHub, MLflow and Seldon Core</b></li>
+            <li>Build a <b>Multi-cloud</b>, <b>Hybrid cluster</b>, securely bridging <b>on-premise</b> and cloud-based Kubernetes nodes</li>
+        </ul>
+    </div>
+</div>
+
 <h2 id="background">Background</h2>
 <p>High availability and high performance often mean burdensome complexity. Data replication, application, network and infrastructure redundancy, anything we can do to avoid a single point of failure. However, what happens when one of those points do fail? Alternatively, a cascade of problems causing slowdowns and back pressure builds to constant far too high for indexing to catch up?</p>
 <p><a href="https://en.wikipedia.org/wiki/Publish%E2%80%93subscribe_pattern">Pub-Sub</a> style message queues like Kafka are growing in popularity because they add incredible flexibility to data pipelines, yet these queues can also suffer from data loss and duplication unless you expend sufficient effort in expert tuning and configuration. <a href="https://en.wikipedia.org/wiki/Publish%E2%80%93subscribe_pattern">Pub-Sub</a> MQs can also over complicate the architecture depending on requirements. I found myself re-thinking some of my architectures after reading <a href="https://www.programmableweb.com/news/why-messaging-queues-suck/analysis/2017/02/13">Why Messaging Queues Suck</a> by Bob Reselman. I still use messaging queues but have pushed <a href="https://en.wikipedia.org/wiki/Publish%E2%80%93subscribe_pattern">Pub-Sub</a> further back from the edge of my stack.</p>
@@ -727,7 +724,7 @@
 
 
                 <p>
-                   <span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">High Traffic JSON Data into Elasticsearch on Kubernetes: Instant, reliable, send and forget.</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="https://imti.co/" property="cc:attributionName" rel="cc:attributionURL">Craig Johnston</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+                   This blog post, titled: "<span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">High Traffic JSON Data into Elasticsearch on Kubernetes: Instant, reliable, send and forget.</span>" by <a xmlns:cc="http://creativecommons.org/ns#" href="https://twitter.com/cjimti" property="cc:attributionName" rel="cc:attributionURL">Craig Johnston</a>, is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
                     <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a>
                 </p>
 
@@ -847,6 +844,10 @@
                         
                         
                         
+                        <a href="/tags/iot" title="iot">
+                        iot
+                        </a>
+                        
                         
                         
                         
@@ -866,6 +867,8 @@
                         <a href="/tags/kubernetes" title="kubernetes">
                         kubernetes
                         </a>
+                        
+                        
                         
                         
                         

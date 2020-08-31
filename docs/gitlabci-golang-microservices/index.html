@@ -193,7 +193,7 @@
                     </div>
                     <h1>A Microservices Workflow with Golang and Gitlab CI</h1>
                     <h2 class="subheading">Continuous Integration &amp; Deployment</h2>
-                    <span  class="meta">Posted by Craig Johnston on Friday, June 22, 2018
+                    <span  class="meta">Posted by <a href="https://twitter.com/cjimti">Craig Johnston</a> on Friday, June 22, 2018
                         
                     </span>
                 </div>
@@ -216,29 +216,26 @@
                 post-container">
 
                 <p>Many of the resources on Cloud Native <a href="/microservices/">Microservices</a> show you how easy it is to get up and running with AWS or GKE. I think this is great but for the fact that I see a trend (in my clients at least) of associating concepts with particular products or worse, companies. I love Amazon, but it&rsquo;s not THE cloud). In my opinion, to embrace Cloud Native and <a href="/microservices/">Microservices</a> you should develop some, and host them yourself. The cloud is not Google or Amazon; it&rsquo;s any cluster of virtualized systems, abstracted from their hardware interfaces and centrally managed.</p>
+<div class="ad-div">
+    <a href="https://amzn.to/3hAZUvx">
+        <img src="/img/kubernetes_platform_development.jpg" style="padding:0; margin: 0; width: 50%; float: left"/>
+    </a>
 
-<table>
-    <tr><td colspan="2" style="text-align: center"><b>Please support my new book!</b></td></tr>
-    <tr>
-        <td>
-            <a href="https://amzn.to/3hAZUvx">
-                <img src="/img/kubernetes_platform_development.jpg" style="padding:0; margin: 0"/>
-            </a>
-        </td>
-        <td>
-            <b><a href="https://amzn.to/3hAZUvx">Advanced Platform Development with Kubernetes: Enabling Data Management, the Internet of Things, Blockchain, and Machine Learning</a></b>
-            <h4>What You'll Learn</h4>
-            <ul style="padding-bottom: 0; margin: 0">
-                <li>Use data pipelines with <b>MQTT, NiFi, Logstash, Kafka and Elasticsearch</b></li>
-                <li>Install a serverless platform with <b>OpenFaaS</b></li>
-                <li>Explore <b>blockchain</b> network capabilities with <b>Ethereum</b></li>
-                <li>Support a multi-tenant <b>data science</b> platform and web IDE with <b>JupyterHub, MLflow and Seldon Core</b></li>
-                <li>Build a <b>hybrid cluster</b>, securely bridging <b>on-premise</b> and cloud-based Kubernetes nodes</li>
-                <li>Implement an integrated development toolchain for continuous integration and deployment</li>
-            </ul>
-        </td>
-    </tr>
-</table>
+    <div style="padding-left: 15px; overflow:auto;">
+        <a href="https://amzn.to/3hAZUvx">Support this blog! Buy my new book:
+            <h4>Advanced Platform Development with Kubernetes</h4>
+        </a>
+        <h5>What You'll Learn</h5>
+        <ul style="padding-bottom: 0; margin: 0">
+            <li>Use data pipelines with <b>MQTT, NiFi, Logstash, MinIO, Hive, Presto, Kafka and Elasticsearch</b></li>
+            <li>Leverage <b>Serverless</b> ETL with <b>OpenFaaS</b></li>
+            <li>Explore <b>Blockchain</b> networking with <b>Ethereum</b></li>
+            <li>Support a multi-tenant <b>Data Science</b> platform with <b>JupyterHub, MLflow and Seldon Core</b></li>
+            <li>Build a <b>Multi-cloud</b>, <b>Hybrid cluster</b>, securely bridging <b>on-premise</b> and cloud-based Kubernetes nodes</li>
+        </ul>
+    </div>
+</div>
+
 <p>The following workflow currently manages dozens of projects for me, some of which have been through thousands of builds; I find it highly stable. This workflow is also much more flexible and customizable than a lot of turn-key solutions. It requires a bit of explanation but typically only involves about twenty minutes of setup per microservice application, well worth the investment considering you get a simplified build and deploy script.</p>
 <p><img src="/images/content/microservices-woirkflow.png" alt="Gitlab Microservices Workflow"></p>
 <aside class="toc">
@@ -715,29 +712,26 @@ Events:              &lt;none&gt;
 <h2 id="conclusion">Conclusion</h2>
 <p>The process above takes me about twenty minutes per microservice application to setup. Considering that these projects may be around for years, and go through hundreds or even thousands of builds makes this a minimal investment in time.</p>
 <p>Streamlining this workflow can be accomplished with utilities like the Kubernetes package manager <a href="/helm-on-custom-cluster/">Helm</a>. However, caution is advised to ensure that every step in the workflow should make the workflow more clear and easy to visualize and understand a year from now. We should not be developing workflows for the sake of the workflow setup process. Build and deploy pipeline should make the process of using them and debugging them easy, years after they are up and running.</p>
+<div class="ad-div">
+    <a href="https://amzn.to/3hAZUvx">
+        <img src="/img/kubernetes_platform_development.jpg" style="padding:0; margin: 0; width: 50%; float: left"/>
+    </a>
 
-<table>
-    <tr><td colspan="2" style="text-align: center"><b>Please support my new book!</b></td></tr>
-    <tr>
-        <td>
-            <a href="https://amzn.to/3hAZUvx">
-                <img src="/img/kubernetes_platform_development.jpg" style="padding:0; margin: 0"/>
-            </a>
-        </td>
-        <td>
-            <b><a href="https://amzn.to/3hAZUvx">Advanced Platform Development with Kubernetes: Enabling Data Management, the Internet of Things, Blockchain, and Machine Learning</a></b>
-            <h4>What You'll Learn</h4>
-            <ul style="padding-bottom: 0; margin: 0">
-                <li>Use data pipelines with <b>MQTT, NiFi, Logstash, Kafka and Elasticsearch</b></li>
-                <li>Install a serverless platform with <b>OpenFaaS</b></li>
-                <li>Explore <b>blockchain</b> network capabilities with <b>Ethereum</b></li>
-                <li>Support a multi-tenant <b>data science</b> platform and web IDE with <b>JupyterHub, MLflow and Seldon Core</b></li>
-                <li>Build a <b>hybrid cluster</b>, securely bridging <b>on-premise</b> and cloud-based Kubernetes nodes</li>
-                <li>Implement an integrated development toolchain for continuous integration and deployment</li>
-            </ul>
-        </td>
-    </tr>
-</table>
+    <div style="padding-left: 15px; overflow:auto;">
+        <a href="https://amzn.to/3hAZUvx">Support this blog! Buy my new book:
+            <h4>Advanced Platform Development with Kubernetes</h4>
+        </a>
+        <h5>What You'll Learn</h5>
+        <ul style="padding-bottom: 0; margin: 0">
+            <li>Use data pipelines with <b>MQTT, NiFi, Logstash, MinIO, Hive, Presto, Kafka and Elasticsearch</b></li>
+            <li>Leverage <b>Serverless</b> ETL with <b>OpenFaaS</b></li>
+            <li>Explore <b>Blockchain</b> networking with <b>Ethereum</b></li>
+            <li>Support a multi-tenant <b>Data Science</b> platform with <b>JupyterHub, MLflow and Seldon Core</b></li>
+            <li>Build a <b>Multi-cloud</b>, <b>Hybrid cluster</b>, securely bridging <b>on-premise</b> and cloud-based Kubernetes nodes</li>
+        </ul>
+    </div>
+</div>
+
 <h2 id="port-forwarding--local-development">Port Forwarding / Local Development</h2>
 <p>Check out <a href="https://github.com/txn2/kubefwd">kubefwd</a> for a simple command line utility that bulk forwards services of one or more namespaces to your local workstation.</p>
 <h2 id="resources">Resources</h2>
@@ -751,7 +745,7 @@ Events:              &lt;none&gt;
 
 
                 <p>
-                   <span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">A Microservices Workflow with Golang and Gitlab CI: Continuous Integration &amp; Deployment</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="https://imti.co/" property="cc:attributionName" rel="cc:attributionURL">Craig Johnston</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+                   This blog post, titled: "<span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">A Microservices Workflow with Golang and Gitlab CI: Continuous Integration &amp; Deployment</span>" by <a xmlns:cc="http://creativecommons.org/ns#" href="https://twitter.com/cjimti" property="cc:attributionName" rel="cc:attributionURL">Craig Johnston</a>, is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
                     <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a>
                 </p>
 
@@ -871,6 +865,10 @@ Events:              &lt;none&gt;
                         
                         
                         
+                        <a href="/tags/iot" title="iot">
+                        iot
+                        </a>
+                        
                         
                         
                         
@@ -890,6 +888,8 @@ Events:              &lt;none&gt;
                         <a href="/tags/kubernetes" title="kubernetes">
                         kubernetes
                         </a>
+                        
+                        
                         
                         
                         

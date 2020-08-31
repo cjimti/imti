@@ -87,7 +87,7 @@
       "url": "https:\/\/imti.co\/img\/craig_johnston_cjimti.jpg"
     }
   },
-  "description": "I use Minikube to run a local Kubernetes single node cluster (cluster?). However, I also work with a custom production cluster for work. This cluster consists of development and production nodes. I often need to switch between working on my local Minikube and the online Kubernetes cluster.\nTIP: Visit the kubectl Cheat Sheet often.\n Please support my new book!      Advanced Platform Development with Kubernetes: Enabling Data Management, the Internet of Things, Blockchain, and Machine Learning What You\u0027ll Learn Use data pipelines with MQTT, NiFi, Logstash, Kafka and Elasticsearch Install a serverless platform with OpenFaaS Explore blockchain network capabilities with Ethereum Support a multi-tenant data science platform and web IDE with JupyterHub, MLflow and Seldon Core Build a hybrid cluster, securely bridging on-premise and cloud-based Kubernetes nodes Implement an integrated development toolchain for continuous integration and deployment     The default configuration kubectl is stored in ~\/."
+  "description": "I use Minikube to run a local Kubernetes single node cluster (cluster?). However, I also work with a custom production cluster for work. This cluster consists of development and production nodes. I often need to switch between working on my local Minikube and the online Kubernetes cluster.\nTIP: Visit the kubectl Cheat Sheet often.\n Support this blog! Buy my new book: Advanced Platform Development with Kubernetes  What You\u0027ll Learn Use data pipelines with MQTT, NiFi, Logstash, MinIO, Hive, Presto, Kafka and Elasticsearch Leverage Serverless ETL with OpenFaaS Explore Blockchain networking with Ethereum Support a multi-tenant Data Science platform with JupyterHub, MLflow and Seldon Core Build a Multi-cloud, Hybrid cluster, securely bridging on-premise and cloud-based Kubernetes nodes    The default configuration kubectl is stored in ~\/."
 }
 </script>
 
@@ -185,7 +185,7 @@
                     </div>
                     <h1>Kubernetes Remote Control</h1>
                     <h2 class="subheading">Using kubectl to Control a Remote Kubernetes Cluster</h2>
-                    <span  class="meta">Posted by Craig Johnston on Saturday, March 24, 2018
+                    <span  class="meta">Posted by <a href="https://twitter.com/cjimti">Craig Johnston</a> on Saturday, March 24, 2018
                         
                     </span>
                 </div>
@@ -209,29 +209,26 @@
 
                 <p>I use <a href="https://kubernetes.io/docs/getting-started-guides/minikube/">Minikube</a> to run a local <a href="https://kubernetes.io/">Kubernetes</a> single node cluster (cluster?). However, I also work with a custom production cluster for work. This cluster consists of development and production nodes. I often need to switch between working on my local <a href="https://kubernetes.io/docs/getting-started-guides/minikube/">Minikube</a> and the online <a href="https://kubernetes.io/">Kubernetes</a> cluster.</p>
 <p>TIP: Visit the <a href="https://kubernetes.io/docs/reference/kubectl/cheatsheet/">kubectl Cheat Sheet</a> often.</p>
+<div class="ad-div">
+    <a href="https://amzn.to/3hAZUvx">
+        <img src="/img/kubernetes_platform_development.jpg" style="padding:0; margin: 0; width: 50%; float: left"/>
+    </a>
 
-<table>
-    <tr><td colspan="2" style="text-align: center"><b>Please support my new book!</b></td></tr>
-    <tr>
-        <td>
-            <a href="https://amzn.to/3hAZUvx">
-                <img src="/img/kubernetes_platform_development.jpg" style="padding:0; margin: 0"/>
-            </a>
-        </td>
-        <td>
-            <b><a href="https://amzn.to/3hAZUvx">Advanced Platform Development with Kubernetes: Enabling Data Management, the Internet of Things, Blockchain, and Machine Learning</a></b>
-            <h4>What You'll Learn</h4>
-            <ul style="padding-bottom: 0; margin: 0">
-                <li>Use data pipelines with <b>MQTT, NiFi, Logstash, Kafka and Elasticsearch</b></li>
-                <li>Install a serverless platform with <b>OpenFaaS</b></li>
-                <li>Explore <b>blockchain</b> network capabilities with <b>Ethereum</b></li>
-                <li>Support a multi-tenant <b>data science</b> platform and web IDE with <b>JupyterHub, MLflow and Seldon Core</b></li>
-                <li>Build a <b>hybrid cluster</b>, securely bridging <b>on-premise</b> and cloud-based Kubernetes nodes</li>
-                <li>Implement an integrated development toolchain for continuous integration and deployment</li>
-            </ul>
-        </td>
-    </tr>
-</table>
+    <div style="padding-left: 15px; overflow:auto;">
+        <a href="https://amzn.to/3hAZUvx">Support this blog! Buy my new book:
+            <h4>Advanced Platform Development with Kubernetes</h4>
+        </a>
+        <h5>What You'll Learn</h5>
+        <ul style="padding-bottom: 0; margin: 0">
+            <li>Use data pipelines with <b>MQTT, NiFi, Logstash, MinIO, Hive, Presto, Kafka and Elasticsearch</b></li>
+            <li>Leverage <b>Serverless</b> ETL with <b>OpenFaaS</b></li>
+            <li>Explore <b>Blockchain</b> networking with <b>Ethereum</b></li>
+            <li>Support a multi-tenant <b>Data Science</b> platform with <b>JupyterHub, MLflow and Seldon Core</b></li>
+            <li>Build a <b>Multi-cloud</b>, <b>Hybrid cluster</b>, securely bridging <b>on-premise</b> and cloud-based Kubernetes nodes</li>
+        </ul>
+    </div>
+</div>
+
 <p>The default configuration <code>kubectl</code> is stored in <code>~/.kube/config</code> and
 if you have <a href="https://kubernetes.io/docs/getting-started-guides/minikube/">Minikube</a> installed, it added the context <strong>minikube</strong> to your config.</p>
 <p>With <code>kubectl</code> you can specify a config to use with the command flag <code>--kubeconfig</code>.</p>
@@ -272,29 +269,26 @@ if you have <a href="https://kubernetes.io/docs/getting-started-guides/minikube/
 to managing your local <a href="https://kubernetes.io/docs/getting-started-guides/minikube/">Minikube</a>.</p>
 <h2 id="port-forwarding--local-development">Port Forwarding / Local Development</h2>
 <p>Check out <a href="https://github.com/txn2/kubefwd">kubefwd</a> for a simple command line utility that bulk forwards services of one or more namespaces to your local workstation.</p>
+<div class="ad-div">
+    <a href="https://amzn.to/3hAZUvx">
+        <img src="/img/kubernetes_platform_development.jpg" style="padding:0; margin: 0; width: 50%; float: left"/>
+    </a>
 
-<table>
-    <tr><td colspan="2" style="text-align: center"><b>Please support my new book!</b></td></tr>
-    <tr>
-        <td>
-            <a href="https://amzn.to/3hAZUvx">
-                <img src="/img/kubernetes_platform_development.jpg" style="padding:0; margin: 0"/>
-            </a>
-        </td>
-        <td>
-            <b><a href="https://amzn.to/3hAZUvx">Advanced Platform Development with Kubernetes: Enabling Data Management, the Internet of Things, Blockchain, and Machine Learning</a></b>
-            <h4>What You'll Learn</h4>
-            <ul style="padding-bottom: 0; margin: 0">
-                <li>Use data pipelines with <b>MQTT, NiFi, Logstash, Kafka and Elasticsearch</b></li>
-                <li>Install a serverless platform with <b>OpenFaaS</b></li>
-                <li>Explore <b>blockchain</b> network capabilities with <b>Ethereum</b></li>
-                <li>Support a multi-tenant <b>data science</b> platform and web IDE with <b>JupyterHub, MLflow and Seldon Core</b></li>
-                <li>Build a <b>hybrid cluster</b>, securely bridging <b>on-premise</b> and cloud-based Kubernetes nodes</li>
-                <li>Implement an integrated development toolchain for continuous integration and deployment</li>
-            </ul>
-        </td>
-    </tr>
-</table>
+    <div style="padding-left: 15px; overflow:auto;">
+        <a href="https://amzn.to/3hAZUvx">Support this blog! Buy my new book:
+            <h4>Advanced Platform Development with Kubernetes</h4>
+        </a>
+        <h5>What You'll Learn</h5>
+        <ul style="padding-bottom: 0; margin: 0">
+            <li>Use data pipelines with <b>MQTT, NiFi, Logstash, MinIO, Hive, Presto, Kafka and Elasticsearch</b></li>
+            <li>Leverage <b>Serverless</b> ETL with <b>OpenFaaS</b></li>
+            <li>Explore <b>Blockchain</b> networking with <b>Ethereum</b></li>
+            <li>Support a multi-tenant <b>Data Science</b> platform with <b>JupyterHub, MLflow and Seldon Core</b></li>
+            <li>Build a <b>Multi-cloud</b>, <b>Hybrid cluster</b>, securely bridging <b>on-premise</b> and cloud-based Kubernetes nodes</li>
+        </ul>
+    </div>
+</div>
+
 <h2 id="resources">Resources</h2>
 <ul>
 <li><a href="https://kubernetes.io/docs/tasks/access-application-cluster/configure-access-multiple-clusters/">Configure Access to Multiple Clusters</a></li>
@@ -304,7 +298,7 @@ to managing your local <a href="https://kubernetes.io/docs/getting-started-guide
 
 
                 <p>
-                   <span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">Kubernetes Remote Control: Using kubectl to Control a Remote Kubernetes Cluster</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="https://imti.co/" property="cc:attributionName" rel="cc:attributionURL">Craig Johnston</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+                   This blog post, titled: "<span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">Kubernetes Remote Control: Using kubectl to Control a Remote Kubernetes Cluster</span>" by <a xmlns:cc="http://creativecommons.org/ns#" href="https://twitter.com/cjimti" property="cc:attributionName" rel="cc:attributionURL">Craig Johnston</a>, is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
                     <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a>
                 </p>
 
@@ -424,6 +418,10 @@ to managing your local <a href="https://kubernetes.io/docs/getting-started-guide
                         
                         
                         
+                        <a href="/tags/iot" title="iot">
+                        iot
+                        </a>
+                        
                         
                         
                         
@@ -443,6 +441,8 @@ to managing your local <a href="https://kubernetes.io/docs/getting-started-guide
                         <a href="/tags/kubernetes" title="kubernetes">
                         kubernetes
                         </a>
+                        
+                        
                         
                         
                         

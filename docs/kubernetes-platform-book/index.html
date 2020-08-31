@@ -8,14 +8,14 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
-    <meta name="description" content="Golang with Jupyter Notebooks">
+    <meta name="description" content="Enabling Data Management, the Internet of Things, Blockchain, and Machine Learning">
     
     <meta name="keyword"  content="Go, Kubernetes, Elasticsearch, Python, Docker, Big Data, Artificial Intelligence, Machine Learning, Blockchain">
     <link rel="shortcut icon" href="https://imti.co/img/favicon.ico">
 
-    <title>Golang to Jupyter - IMTI - Craig Johnston</title>
+    <title>Advanced Platform Development with Kubernetes - IMTI - Craig Johnston</title>
 
-    <link rel="canonical" href="https://imti.co/golang-to-jupyter/">
+    <link rel="canonical" href="https://imti.co/kubernetes-platform-book/">
 	
     
     <link rel="stylesheet" href="https://imti.co/css/bootstrap.min.css">
@@ -52,11 +52,11 @@
     <meta name="twitter:site" content="@cjimti">
 <meta name="twitter:creator" content="@cjimti">
 
-<meta name="twitter:description" content="Golang with Jupyter Notebooks" />
-<meta name="twitter:title" content="Golang to Jupyter" />
+<meta name="twitter:description" content="Enabling Data Management, the Internet of Things, Blockchain, and Machine Learning" />
+<meta name="twitter:title" content="Advanced Platform Development with Kubernetes" />
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:image" content="https://imti.co/img/post/juypter_876_438.jpg" />
-<meta property="og:image" content="https://imti.co/img/post/juypter_876_438.jpg" />
+<meta name="twitter:image" content="https://imti.co/img/post/apk8sdiag_876_438.jpg" />
+<meta property="og:image" content="https://imti.co/img/post/apk8sdiag_876_438.jpg" />
 
 
 
@@ -67,14 +67,14 @@
   "@type": "Article",
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https:\/\/imti.co\/golang-to-jupyter\/"
+    "@id": "https:\/\/imti.co\/kubernetes-platform-book\/"
   },
-  "headline": "Golang to Jupyter",
+  "headline": "Advanced Platform Development with Kubernetes",
   "image": [
-    "https:\/\/imti.co\/img\/post\/juypter_876_438.jpg"
+    "https:\/\/imti.co\/img\/post\/apk8sdiag_876_438.jpg"
    ],
-  "datePublished": "2018-06-10T00:00:00",
-  "dateModified": "2018-06-10T00:00:00",
+  "datePublished": "2020-08-30T00:00:00",
+  "dateModified": "2020-08-30T00:00:00",
   "author": {
     "@type": "Person",
     "name": "Craig Johnston"
@@ -87,7 +87,7 @@
       "url": "https:\/\/imti.co\/img\/craig_johnston_cjimti.jpg"
     }
   },
-  "description": "Jupyter Notbooks have been a popular technology in the Python data science community for a while now, especially in academics. Jupyter Notebooks are a way to mix inline, executable code with documentation in a presentation format. Best practices in organizing source code are not always the most efficient at communicating it\u0026rsquo;s functionality to a user.\nWhile the intention of a programming language is the abstraction of computational complexity into a simplified language humans can read and write, they must always weigh toward the efficiency of the primary interpreter, the computer."
+  "description": "I\u0026rsquo;ve been distracted for over a year now, writing a (~500 page) end-to-end tutorial on constructing data-centric platforms with Kubernetes. The book is titled \u0026ldquo;Advanced Platform Development with Kubernetes: Enabling Data Management, the Internet of Things, Blockchain, and Machine Learning\u0026rdquo;\n Support this blog! Buy my new book: Advanced Platform Development with Kubernetes  What You\u0027ll Learn Use data pipelines with MQTT, NiFi, Logstash, MinIO, Hive, Presto, Kafka and Elasticsearch Leverage Serverless ETL with OpenFaaS Explore Blockchain networking with Ethereum Support a multi-tenant Data Science platform with JupyterHub, MLflow and Seldon Core Build a Multi-cloud, Hybrid cluster, securely bridging on-premise and cloud-based Kubernetes nodes    A little more than a year ago, Apress reached out and asked if I would write a book on Kubernetes for them, mirroring the wide range of projects I develop (and write about) for my clients."
 }
 </script>
 
@@ -164,7 +164,7 @@
 
 <style type="text/css">
     header.intro-header{
-        background-image: url('https://imti.co/img/post/juypter.jpg')
+        background-image: url('https://imti.co/img/post/apk8s.jpg')
     }
 </style>
 <header class="intro-header" >
@@ -174,18 +174,34 @@
                 <div class="post-heading">
                     <div class="tags">
                         
-                        <a class="tag" href="/tags/golang" title="Golang">
-                        Golang
+                        <a class="tag" href="/tags/kubernetes" title="Kubernetes">
+                        Kubernetes
                         </a>
                         
-                        <a class="tag" href="/tags/jupyter-notebooks" title="Jupyter Notebooks">
-                        Jupyter Notebooks
+                        <a class="tag" href="/tags/data" title="Data">
+                        Data
+                        </a>
+                        
+                        <a class="tag" href="/tags/machine-learning" title="Machine Learning">
+                        Machine Learning
+                        </a>
+                        
+                        <a class="tag" href="/tags/blockchain" title="Blockchain">
+                        Blockchain
+                        </a>
+                        
+                        <a class="tag" href="/tags/iot" title="IoT">
+                        IoT
+                        </a>
+                        
+                        <a class="tag" href="/tags/data-science" title="Data Science">
+                        Data Science
                         </a>
                         
                     </div>
-                    <h1>Golang to Jupyter</h1>
-                    <h2 class="subheading">Golang with Jupyter Notebooks</h2>
-                    <span  class="meta">Posted by <a href="https://twitter.com/cjimti">Craig Johnston</a> on Sunday, June 10, 2018
+                    <h1>Advanced Platform Development with Kubernetes</h1>
+                    <h2 class="subheading">Enabling Data Management, the Internet of Things, Blockchain, and Machine Learning</h2>
+                    <span  class="meta">Posted by <a href="https://twitter.com/cjimti">Craig Johnston</a> on Sunday, August 30, 2020
                         
                     </span>
                 </div>
@@ -207,18 +223,7 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <p><a href="http://jupyter.org/">Jupyter Notbooks</a> have been a popular technology in the Python data science community for a while now, especially in academics. Jupyter Notebooks are a way to mix inline, executable code with documentation in a presentation format. Best practices in organizing source code are not always the most efficient at communicating it&rsquo;s functionality to a user.</p>
-<p>While the intention of a programming language is the abstraction of computational complexity into a simplified language humans can read and write, they must always weigh toward the efficiency of the primary interpreter, the computer. Jupyter Notebooks are intended to communicate source code to humans first and computers second. We can use Jupyter Notebooks to communicate to humans not only the source but the interpreted result.</p>
-<p>Jupyter can use a growing number of interpreters (called <a href="https://github.com/jupyter/jupyter/wiki/Jupyter-kernels">kernels</a>) to run and render output, including my favorite, <a href="https://github.com/gopherdata/gophernotes#examples">Golang</a>.</p>
-<p>Although data science expressed in Python is the first and most popular use of Jupyter Notebooks, I see a lot of other beneficial applications, including:</p>
-<ul>
-<li>Programming tutorials in a variety of languages.</li>
-<li>Coding Best practices and style guides.</li>
-<li>Technical articles and blogs.</li>
-<li>Leveraging static site generators like <a href="https://jekyllrb.com/">Jekyll</a> and <a href="https://gohugo.io/">Hugo</a></li>
-</ul>
-<p>Beyond the ability to execute code in-line, the most useful features to me are exporting these notebooks as Markdown. Site builders like <a href="https://jekyllrb.com/">Jekyll</a> and <a href="https://gohugo.io/">Hugo</a> use <a href="https://daringfireball.net/projects/markdown/syntax">Markdown</a> to generate <a href="https://gohugo.io/showcase/">beautiful static websites and blogs</a>.</p>
-<p><img src="/images/content/GolangToJupyter-screen.png" alt="Notebook Screenshot"></p>
+                <p>I&rsquo;ve been distracted for over a year now, writing a (~500 page) end-to-end tutorial on constructing data-centric platforms with Kubernetes. The book is titled &ldquo;<a href="https://amzn.to/3hAZUvx">Advanced Platform Development with Kubernetes: Enabling Data Management, the Internet of Things, Blockchain, and Machine Learning</a>&rdquo;</p>
 <div class="ad-div">
     <a href="https://amzn.to/3hAZUvx">
         <img src="/img/kubernetes_platform_development.jpg" style="padding:0; margin: 0; width: 50%; float: left"/>
@@ -239,86 +244,119 @@
     </div>
 </div>
 
-<h2 id="example">Example</h2>
-<p>In the sections below I demonstrate simple HTTP client call in Golang with Golang code executed directly in the Jupyter Notebook.</p>
-<p>First I&rsquo;ll set a variable using Golang&rsquo;s implicit assignment operator &ldquo;:=&rdquo;.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#a6e22e">post</span> <span style="color:#f92672">:=</span> <span style="color:#e6db74">&#34;2&#34;</span>
-</code></pre></div><p>Next, I&rsquo;ll use the new <strong>post</strong> variable in the call below.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">import</span> (
-    <span style="color:#e6db74">&#34;net/http&#34;</span>
-    <span style="color:#e6db74">&#34;io/ioutil&#34;</span>
-    <span style="color:#e6db74">&#34;fmt&#34;</span>
-)
-
-<span style="color:#75715e">// append the post variable assigned earlier in the notebook
-</span><span style="color:#75715e">// try changing post := &#34;2&#34; to post := &#34;1&#34; or overwriting it
-</span><span style="color:#75715e">// remember to re-execute the code block after any changes.
-</span><span style="color:#75715e"></span><span style="color:#a6e22e">resp</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">Get</span>(<span style="color:#e6db74">&#34;https://jsonplaceholder.typicode.com/posts/&#34;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">post</span>)
-<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
-    panic(<span style="color:#a6e22e">err</span>)
-}
-
-<span style="color:#a6e22e">body</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">ioutil</span>.<span style="color:#a6e22e">ReadAll</span>(<span style="color:#a6e22e">resp</span>.<span style="color:#a6e22e">Body</span>)
-<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
-    panic(<span style="color:#a6e22e">err</span>)
-}
-
-<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;Getting Post #%s\n&#34;</span>, <span style="color:#a6e22e">post</span>)
-<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;Raw JSON: %s\n&#34;</span>, <span style="color:#a6e22e">body</span>)
-</code></pre></div><pre><code>Getting Post #2
-Raw JSON: {
-  &quot;userId&quot;: 1,
-  &quot;id&quot;: 2,
-  &quot;title&quot;: &quot;qui est esse&quot;,
-  &quot;body&quot;: &quot;est rerum tempore vitae\nsequi sint nihil reprehenderit dolor beatae ea dolores neque\nfugiat blanditiis voluptate porro vel nihil molestiae ut reiciendis\nqui aperiam non debitis possimus qui neque nisi nulla&quot;
-}
-
-
-
-
-
-289 &lt;nil&gt;
-</code></pre>
-<p>If you are reading this article on <a href="https://mk.imti.co">https://mk.imti.co</a> then what you see here was exported from Jupyter Notebooks on my Mac in the Markdown format and saved to Github repository for this site. <a href="https://mk.imti.co">https://mk.imti.co</a> is a static website <a href="https://pages.github.com/">automatically generated by Github</a> using <a href="https://jekyllrb.com/">Jekyll</a>.</p>
-<p><img src="/images/content/GolangToJupyter-markdown.png" alt="Notebook Screenshot Markdown"></p>
-<p>Although I could easily save this Notebook as HTML, site builders like <a href="https://jekyllrb.com/">Jekyll</a> and <a href="https://gohugo.io/">Hugo</a> use Markdown to transform the content into the structure and style of my site. Markdown along with a sitebuilder allows me to present the notebook in a format that fits my site. Other options include:</p>
+<p>A little more than a year ago, Apress reached out and asked if I would write a book on Kubernetes for them, mirroring the wide range of projects I develop (and write about) for my clients. I have been building data-centric platforms for almost twenty years, spanning everything from my early days on the aggregation of massive volumes of international log files for Disney to fan-driven location data for Nine Inch Nails. And in the last decade, retailers with point-of-sale, logistics, and inventory systems, marketers leveraging social media metrics, fleet operators with demanding telematics platforms, and manufacturers with advanced IIoT (industrial internet of things) networks.</p>
+<p>Furthermore, the clients behind these verticals have begun looking for an edge, often found beyond standard PaaS offerings available today. Yet these clients from established organizations and age-old industries have little tolerance for the risk associated with a multi-year development on technologies whose value is speculative. Will blockchain revolutionize logistics and finance? Will machine learning produce artificial intelligence capable of replacing legacy decisions making systems? The safe bet is to wait. If there is gold in any of these mountains the hyper clouds will find it, and they will happily sell it to everyone, by the hour, megabyte, or IOPS.</p>
+<p>Not every organization should be developing custom software, let alone advanced data platforms. However, the barrier to entry is lowering every day. I have been building platforms for twenty years, and never has a single technology increased productivity in this practice more than Kubernetes has in the last five. Kubernetes is truly a platform for building platforms, capable of harnessing the wide breadth of new technologies released into the open-source landscape almost daily.</p>
+<p>On October 28, 2018, IBM announced a $34 billion deal to buy Red Hat, the company behind Red Hat Enterprise Linux (RHEL) and, more recently, Red Hat OpenShift, an enterprise Kubernetes-based application platform. What we see is $34 billion of evidence that Cloud-native and open source technologies centered on the Linux ecosystem and empowered by Kubernetes is leading disruption in enterprise software application development. IBM sells platforms, and yet it looks to capitalize on the value of a system tailored to platform development. IBM is speculating that the next trend in PaaS offerings is itself a platform for developing platforms. An organization does not spend $34 billion to on-board brand and technology without a market. Who is demanding the capabilities of OpenShift/Kubernetes? Systems, solutions, and software architects, full-stack developers, programmers, integrators, and DevOps engineers. These are the people and roles responsible for the technology that powers the business logic.</p>
+<p>I did not want to write a book on administering Kubernetes or how it works (although you&rsquo;ll likely learn this along the way). There are a ton of excellent books and tutorials on the matter. I wanted to write about what gets the lion&rsquo;s share of hits on my blog: &ldquo;How to run X on Kubernetes.&rdquo; I don&rsquo;t know why you want to run a Blockchain network on Kubernetes; I have my reasons for doing so. I don&rsquo;t know why you need to interconnect <a href="https://kafka.apache.org/">Kafka</a>, <a href="https://nifi.apache.org/">NiFi</a>, <a href="https://min.io/">MinIO</a>, <a href="https://hive.apache.org/">Hive</a>, <a href="https://www.keycloak.org/">Keycloak</a>, <a href="https://cassandra.apache.org/">Cassandra</a>, <a href="https://www.mysql.com/">MySQL</a>, <a href="https://zookeeper.apache.org/">Zookeeper</a>, <a href="https://mosquitto.org/">Mosquitto</a>, <a href="https://www.elastic.co/elasticsearch/">Elasticsearch</a>, <a href="https://www.elastic.co/logstash">Logstash</a>, <a href="https://www.elastic.co/kibana">Kibana</a>, <a href="https://prestodb.io/">Presto</a>, <a href="https://www.openfaas.com/">OpenFaaS</a>, <a href="https://ethereum.org/en/">Ethereum</a>, <a href="https://jupyter.org/">Jupyter</a>, <a href="https://mlflow.org/">MLflow</a>, and <a href="https://www.seldon.io/tech/products/core/">Seldon Core</a>. You don&rsquo;t need Kubernetes to run these excellent applications. You don&rsquo;t need Kubernetes to run containers networked across the globe on various cloud providers communicating over secure VPNs, on-premises, on a mix of bare metal servers and virtual machines. I know that I, and the many roles mentioned above want to, (evidenced by Kubernetes enormous success) and it&rsquo;s likely because they are building sophisticated and modern platforms and see the value Kubernetes brings to this endeavor.</p>
+<p>&ldquo;<a href="https://amzn.to/3hAZUvx">Advanced Platform Development with Kubernetes: Enabling Data Management, the Internet of Things, Blockchain, and Machine Learning</a>&rdquo; is a 500 page tutorial on the work I do daily. The examples are scaled-down yet real and fully functional. If you are an entrepreneur with dreams of building your own AWS or Azure or if constructing enterprise-capable data-centric platforms is what you do for work or hobby, my book is looking to inspire you and give you traction where I have found it myself.</p>
+<h2 id="weekend-projects">Weekend Projects</h2>
+<p><strong>All source code and configuration manifests are open source and available online at</strong>: <a href="https://github.com/apk8s/book-source">https://github.com/apk8s/book-source</a></p>
+<p>&ldquo;<a href="https://amzn.to/3hAZUvx">Advanced Platform Development with Kubernetes: Enabling Data Management, the Internet of Things, Blockchain, and Machine Learning</a>&rdquo; will give you an equivalent of ten weekend projects, covering all the technology mentioned above and more, broken down as follows:</p>
 <ul>
-<li><a href="https://raw.githubusercontent.com/cjimti/mk/master/notebooks/GolangToJupyter.ipynb">providing the Notebook for download</a>.</li>
-<li>linking to Jupyter&rsquo;s <a href="https://nbviewer.jupyter.org/github/cjimti/mk/blob/master/notebooks/GolangToJupyter.ipynb">nbviewer</a></li>
-<li>exported Markdown: <a href="https://github.com/cjimti/mk/blob/master/_posts/2018-06-10-golang-to-jupyter.md">2018-06-10-golang-to-jupyter.md</a></li>
-<li>&hellip;and of course <a href="/golang-to-jupyter/">the page you are reading</a>.</li>
+<li>Week 1: DevOps Infrastructure</li>
+<li>Week 2: Development Environment</li>
+<li>Week 3: In-Platform CI/CD</li>
+<li>Week 4: Pipeline</li>
+<li>Week 5: Indexing and Analytics</li>
+<li>Week 6: Data Lakes</li>
+<li>Week 7: Data Warehouses</li>
+<li>Week 8: Routing and Transformation</li>
+<li>Week 9: Platforming Blockchain</li>
+<li>Week 10: Platforming AIML</li>
 </ul>
-<p>You can run, modify or extend <a href="/notebooks/GolangToJupyter.ipynb">this article</a> in a Jupyter Notebook server on your local workstation.</p>
-<h2 id="getting-started-with-go-in-jupyter-notebooks">Getting Started with GO in Jupyter Notebooks</h2>
-<ol>
-<li>Install the <a href="https://www.anaconda.com/download/#macos">Anaconda</a> package manager.
+<h2 id="custom-kubernetes">Custom Kubernetes</h2>
+<p>Quite a few books and how-twos specialize in AKS, EKS, and GKE.  &ldquo;<a href="https://amzn.to/3hAZUvx">Advanced Platform Development with Kubernetes: Enabling Data Management, the Internet of Things, Blockchain, and Machine Learning</a>&rdquo; focuses on building <strong>Custom Kubernetes</strong> clusters and illustrates this by using generic (and cheap) compute instances (VMs) offered by <a href="https://www.vultr.com/?ref=7418713">Vultr</a>, <a href="https://m.do.co/c/97b733e7eba4">Digital Ocean</a>, <a href="https://www.linode.com/?r=848a6b0b21dc8edd33124f05ec8f99207ccddfde">Linode</a>, <a href="https://hetzner.cloud/?ref=MKrfJcJkRliR">Hetzner</a> and <a href="https://www.scaleway.com/en/">Scaleway</a>.</p>
+<h2 id="technology">Technology</h2>
+<p>&ldquo;<a href="https://amzn.to/3hAZUvx">Advanced Platform Development with Kubernetes: Enabling Data Management, the Internet of Things, Blockchain, and Machine Learning</a>&rdquo; covers the following technology:</p>
 <ul>
-<li>Download <a href="https://repo.anaconda.com/archive/Anaconda3-5.2.0-MacOSX-x86_64.pkg">Anaconda for Python 3.6 on Mac</a></li>
+<li><a href="https://github.com/apk8s/book-source/tree/master/chapter-02">Chapter 2: <strong>DevOps Infrastructure</strong></a> (source)
+<ul>
+<li><a href="https://about.gitlab.com/">GitLab</a></li>
+<li><a href="https://k3s.io/">k3s</a></li>
+<li><a href="https://cert-manager.io/">Cert Manager</a></li>
 </ul>
 </li>
-<li>Install the <a href="https://github.com/gopherdata/gophernotes">gophernotes</a> golang kernel.
+<li><a href="https://github.com/apk8s/book-source/tree/master/chapter-03">Chapter 3: <strong>Development Environment</strong></a> (source)
 <ul>
-<li><code>go get github.com/gopherdata/gophernotes</code></li>
-<li><code>mkdir -p ~/Library/Jupyter/kernels/gophernotes</code></li>
-<li><code>~/src/github.com/gopherdata/gophernotes/kernel/* ~/Library/Jupyter/kernels/gophernotes</code></li>
+<li><a href="https://www.wireguard.com/">WireGuard</a></li>
+<li><a href="https://www.docker.com/">Docker</a></li>
+<li><a href="https://kubernetes.io/">Kubernetes</a> (<a href="https://kubernetes.io/docs/reference/command-line-tools-reference/kubelet/">kubelet</a>, <a href="https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/">kubeadm</a>, <a href="https://kubernetes.io/docs/reference/kubectl/overview/">kubectl</a>)</li>
+<li><a href="https://github.com/kubernetes/ingress-nginx">Ingress Nginx</a></li>
+<li><a href="https://rook.io/docs/rook/v1.4/ceph-storage.html">Rook Ceph</a>
+<ul>
+<li><a href="https://rook.io/docs/rook/v1.4/ceph-block.html">Ceph Block Storage</a></li>
+<li><a href="https://rook.io/docs/rook/v1.4/ceph-filesystem.html">Ceph Filesystem</a></li>
 </ul>
 </li>
-</ol>
-<p><strong>NOTE:</strong> Your path to Go source may be $GOPATH/src and not ~/src/.</p>
-<p>From a directory containing (or will contain) your notebooks, run:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">jupyter notebook
-</code></pre></div><p>This will fire up a Jupyter Notebooks server running on port 8888. You should be able to browse to <a href="http://localhost:8888/">http://localhost:8888/</a></p>
-<p>You can test out the <a href="https://github.com/gopherdata/gophernotes">gophernotes</a> Golang kernel by <a href="https://raw.githubusercontent.com/cjimti/mk/master/notebooks/GolangToJupyter.ipynb">downloading and altering this article here.</a></p>
-<ul>
-<li><a href="https://raw.githubusercontent.com/cjimti/mk/master/notebooks/GolangToJupyter.ipynb">https://raw.githubusercontent.com/cjimti/mk/master/notebooks/GolangToJupyter.ipynb</a></li>
+<li>Monitoring (<a href="https://github.com/prometheus-operator/kube-prometheus">kube-prometheus</a>)</li>
 </ul>
-<h2 id="resources">Resources</h2>
+</li>
+<li><a href="https://github.com/apk8s/book-source/tree/master/chapter-04">Chapter 4: <strong>In-Platform CI/CD</strong></a> (source)
 <ul>
-<li>Jupyter Notbooks golang kernel: <a href="https://github.com/gopherdata/gophernotes">gophernotes</a></li>
-<li><a href="http://jupyter.readthedocs.io/en/latest/install.html">Installing</a> Jupyter Notbooks</li>
-<li><a href="http://jupyter.org/documentation">Jupyter Notbooks Documentation</a></li>
-<li><a href="https://nteract.io/">nteract - desktop application</a></li>
-<li><a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet">Markdown-Cheatsheet</a></li>
+<li><a href="https://github.com/jupyterlab/jupyterlab">JupyterLab</a></li>
+<li><a href="https://docs.gitlab.com/ce/ci/">GitLab CI</a></li>
+<li><a href="https://github.com/GoogleContainerTools/kaniko">Kaniko</a></li>
+</ul>
+</li>
+<li><a href="https://github.com/apk8s/book-source/tree/master/chapter-05">Chapter 5: <strong>Pipeline</strong></a> (source)
+<ul>
+<li><a href="https://zookeeper.apache.org/">Apache Zookeeper</a></li>
+<li><a href="https://kafka.apache.org/">Apache Kafka</a></li>
+<li><a href="https://mosquitto.org/">Mosquitto</a> (MQTT)</li>
+</ul>
+</li>
+<li><a href="https://github.com/apk8s/book-source/tree/master/chapter-06">Chapter 6: <strong>Indexing and Analytics</strong></a> (source)
+<ul>
+<li><a href="https://www.elastic.co/elasticsearch/">Elasticsearch</a></li>
+<li><a href="https://www.elastic.co/logstash">Logstash</a></li>
+<li><a href="https://www.elastic.co/kibana">Kibana</a></li>
+<li><a href="https://www.keycloak.org/">Keycloak</a> (IAM)</li>
+<li><a href="https://jupyter.org/hub">JupyterHub</a></li>
+<li><a href="https://kubernetes.io/docs/concepts/overview/kubernetes-api/">Kubernetes API</a></li>
+</ul>
+</li>
+<li><a href="https://github.com/apk8s/book-source/tree/master/chapter-07">Chapter 7: <strong>Data Lakes</strong></a> (source)
+<ul>
+<li><a href="https://min.io/">MinIO</a></li>
+<li><a href="https://golang.org/">Golang</a></li>
+</ul>
+</li>
+<li><a href="https://github.com/apk8s/book-source/tree/master/chapter-08">Chapter 8: <strong>Data Warehouses</strong></a> (source)
+<ul>
+<li><a href="https://www.mysql.com/">MySQL</a></li>
+<li><a href="https://cassandra.apache.org/">Apache Cassandra</a></li>
+<li><a href="https://hive.apache.org/">Apache Hive</a></li>
+<li><a href="https://prestodb.io/">Presto</a></li>
+</ul>
+</li>
+<li><a href="https://github.com/apk8s/book-source/tree/master/chapter-09">Chapter 9: <strong>Routing and Transformation</strong></a> (source)
+<ul>
+<li><a href="https://www.openfaas.com/">OpenFaaS</a></li>
+<li><a href="https://nifi.apache.org/">Apache NiFi</a></li>
+</ul>
+</li>
+<li><a href="https://github.com/apk8s/book-source/tree/master/chapter-10">Chapter 10: <strong>Platforming Blockchain</strong></a> (source)
+<ul>
+<li><a href="https://ethereum.org/en/">Ethereum</a>
+<ul>
+<li><a href="https://geth.ethereum.org/">Geth</a></li>
+</ul>
+</li>
+<li><a href="https://github.com/cubedro/eth-netstats">Ethstats</a></li>
+</ul>
+</li>
+<li><a href="https://github.com/apk8s/book-source/tree/master/chapter-11">Chapter 11: <strong>Platforming AIML</strong></a> (source)
+<ul>
+<li><a href="https://github.com/squat/kilo">Kilo</a> (Automated <a href="https://www.wireguard.com/">WireGuard</a>)</li>
+<li><a href="https://www.nvidia.com/en-us/">Nvidia</a> / <a href="https://developer.nvidia.com/cuda-zone">CUDA</a></li>
+<li><a href="https://www.gnu.org/software/bash/">Bash</a> / Shell Scripting</li>
+<li><a href="https://www.raspberrypi.org/">Raspberry Pi</a></li>
+<li><a href="https://kubernetes.io/docs/concepts/workloads/controllers/cron-jobs/">CronJob</a> with <a href="https://www.python.org/">Python</a></li>
+<li><a href="https://mlflow.org/">MLflow</a></li>
+<li><a href="https://www.seldon.io/tech/products/core/">Seldon Core</a></li>
+</ul>
+</li>
 </ul>
 <div class="ad-div">
     <a href="https://amzn.to/3hAZUvx">
@@ -340,10 +378,11 @@ Raw JSON: {
     </div>
 </div>
 
+<hr>
 
 
                 <p>
-                   This blog post, titled: "<span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">Golang to Jupyter: Golang with Jupyter Notebooks</span>" by <a xmlns:cc="http://creativecommons.org/ns#" href="https://twitter.com/cjimti" property="cc:attributionName" rel="cc:attributionURL">Craig Johnston</a>, is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+                   This blog post, titled: "<span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">Advanced Platform Development with Kubernetes: Enabling Data Management, the Internet of Things, Blockchain, and Machine Learning</span>" by <a xmlns:cc="http://creativecommons.org/ns#" href="https://twitter.com/cjimti" property="cc:attributionName" rel="cc:attributionURL">Craig Johnston</a>, is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
                     <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a>
                 </p>
 

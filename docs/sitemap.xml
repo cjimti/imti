@@ -3,13 +3,53 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://imti.co/kubernetes-platform-book/</loc>
+    <lastmod>2020-08-30T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://imti.co/tags/blockchain/</loc>
+    <lastmod>2020-08-30T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://imti.co/tags/data/</loc>
+    <lastmod>2020-08-30T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://imti.co/tags/data-science/</loc>
-    <lastmod>2018-12-08T00:00:00+00:00</lastmod>
+    <lastmod>2020-08-30T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://imti.co/</loc>
-    <lastmod>2018-12-08T00:00:00+00:00</lastmod>
+    <lastmod>2020-08-30T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://imti.co/tags/iot/</loc>
+    <lastmod>2020-08-30T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://imti.co/tags/kubernetes/</loc>
+    <lastmod>2020-08-30T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://imti.co/tags/machine-learning/</loc>
+    <lastmod>2020-08-30T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://imti.co/post/</loc>
+    <lastmod>2020-08-30T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://imti.co/tags/</loc>
+    <lastmod>2020-08-30T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -33,17 +73,7 @@
   </url>
   
   <url>
-    <loc>https://imti.co/post/</loc>
-    <lastmod>2018-12-08T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://imti.co/tags/python/</loc>
-    <lastmod>2018-12-08T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://imti.co/tags/</loc>
     <lastmod>2018-12-08T00:00:00+00:00</lastmod>
   </url>
   
@@ -68,11 +98,6 @@
   </url>
   
   <url>
-    <loc>https://imti.co/tags/data/</loc>
-    <lastmod>2018-09-25T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://imti.co/tags/kafka/</loc>
     <lastmod>2018-09-25T00:00:00+00:00</lastmod>
   </url>
@@ -80,16 +105,6 @@
   <url>
     <loc>https://imti.co/kafka-kubernetes/</loc>
     <lastmod>2018-09-25T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://imti.co/tags/kubernetes/</loc>
-    <lastmod>2018-09-25T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://imti.co/tags/blockchain/</loc>
-    <lastmod>2018-09-22T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -405,11 +420,6 @@
   <url>
     <loc>https://imti.co/microservices/</loc>
     <lastmod>2018-03-24T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://imti.co/tags/iot/</loc>
-    <lastmod>2018-03-15T00:00:00+00:00</lastmod>
   </url>
   
   <url>

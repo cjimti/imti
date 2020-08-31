@@ -49,7 +49,7 @@ TL;DR: &amp;ldquo;I don&amp;rsquo;t care about the fix I need to remote control 
       <guid>https://imti.co/kubectl-remote/</guid>
       <description>I use Minikube to run a local Kubernetes single node cluster (cluster?). However, I also work with a custom production cluster for work. This cluster consists of development and production nodes. I often need to switch between working on my local Minikube and the online Kubernetes cluster.
 TIP: Visit the kubectl Cheat Sheet often.
- Please support my new book!      Advanced Platform Development with Kubernetes: Enabling Data Management, the Internet of Things, Blockchain, and Machine Learning What You&#39;ll Learn Use data pipelines with MQTT, NiFi, Logstash, Kafka and Elasticsearch Install a serverless platform with OpenFaaS Explore blockchain network capabilities with Ethereum Support a multi-tenant data science platform and web IDE with JupyterHub, MLflow and Seldon Core Build a hybrid cluster, securely bridging on-premise and cloud-based Kubernetes nodes Implement an integrated development toolchain for continuous integration and deployment     The default configuration kubectl is stored in ~/.</description>
+ Support this blog! Buy my new book: Advanced Platform Development with Kubernetes  What You&#39;ll Learn Use data pipelines with MQTT, NiFi, Logstash, MinIO, Hive, Presto, Kafka and Elasticsearch Leverage Serverless ETL with OpenFaaS Explore Blockchain networking with Ethereum Support a multi-tenant Data Science platform with JupyterHub, MLflow and Seldon Core Build a Multi-cloud, Hybrid cluster, securely bridging on-premise and cloud-based Kubernetes nodes    The default configuration kubectl is stored in ~/.</description>
     </item>
     
   </channel>

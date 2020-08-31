@@ -28,7 +28,7 @@
       <guid>https://imti.co/elasticsearch-essential-queries/</guid>
       <description>The following is an overview for querying Elasticsearch. Over the years I have tried to assemble developer notes for myself and my team on a variety of platforms, languages and frameworks, a type of cheat-sheet but with context, not a comprehensive how-to, but a decent 15-minute overview of the features we are most likely to implement in a given iteration.
 Explore the Elasticsearch official documentation: Search in Depth.
- Contents   Motivation Following Along with Elasticsearch and Kubernetes Vocabulary Basic CRUD API  Delete an Index Create an Index Create or Update a Document (Upsert) Get a Document   Mappings, Types and Metadata  Get Mapping Create a Mapping   Searching Range Filtering Aggregations  Counts Averages, Minimums and Maximums Percentile Percent by Rank Percent by Rank Interval   Resources     Please support my new book!</description>
+ Contents   Motivation Following Along with Elasticsearch and Kubernetes Vocabulary Basic CRUD API  Delete an Index Create an Index Create or Update a Document (Upsert) Get a Document   Mappings, Types and Metadata  Get Mapping Create a Mapping   Searching Range Filtering Aggregations  Counts Averages, Minimums and Maximums Percentile Percent by Rank Percent by Rank Interval   Resources     Support this blog!</description>
     </item>
     
     <item>
@@ -48,7 +48,7 @@ In days before Kubernetes, writing code in IDEs on our local workstation meant w
       
       <guid>https://imti.co/post-json-elasticsearch-kubernetes/</guid>
       <description>IOT devices, Point-of-Sale systems, application events or any client that sends data destined for indexing in Elasticsearch often need to send and forget, however, unless that data is of low value there needs to be assurance that arrives at its final destination. Back-pressure and database outages can pose a considerable threat to data integrity.
- Contents   Background Overview Development Environment  the-project Namespace   The Project: Weather (wx) Data rxtx for Store-and-Forward  wx-rxtx Service wx-rxtx StatefulSet   rtBeat to Collect, Buffer and Publish  wx-rtbeat Service wx-rtbeat ConfigMap wx-rtbeat Deployment   Client Simulation / Kubernetes Cron Performance Conclusion Port Forwarding / Local Development Reference     Please support my new book!</description>
+ Contents   Background Overview Development Environment  the-project Namespace   The Project: Weather (wx) Data rxtx for Store-and-Forward  wx-rxtx Service wx-rxtx StatefulSet   rtBeat to Collect, Buffer and Publish  wx-rtbeat Service wx-rtbeat ConfigMap wx-rtbeat Deployment   Client Simulation / Kubernetes Cron Performance Conclusion Port Forwarding / Local Development Reference     Support this blog!</description>
     </item>
     
     <item>
@@ -58,7 +58,7 @@ In days before Kubernetes, writing code in IDEs on our local workstation meant w
       
       <guid>https://imti.co/kibana-kubernetes/</guid>
       <description>This guide walks through a process for setting up Kibana within a namespace on a Kubernetes cluster. If you followed along with Production Grade Elasticsearch on Kubernetes then aside from personal or corporate preferences, little modifications are necessary for the configurations below.
- Contents   Project Namespace Service Kibana ConfigMap Deployment Basic Auth (Optional) TLS Certificate (Optional) Ingress Conclusion Port Forwarding / Local Development Resources     Please support my new book!</description>
+ Contents   Project Namespace Service Kibana ConfigMap Deployment Basic Auth (Optional) TLS Certificate (Optional) Ingress Conclusion Port Forwarding / Local Development Resources     Support this blog!</description>
     </item>
     
     <item>

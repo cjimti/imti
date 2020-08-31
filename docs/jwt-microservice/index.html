@@ -197,7 +197,7 @@
                     </div>
                     <h1>JWT Microservice, Tokenize Remote APIs</h1>
                     <h2 class="subheading">Using txToken to create JWT Tokens from JSON POST data.</h2>
-                    <span  class="meta">Posted by Craig Johnston on Friday, May 18, 2018
+                    <span  class="meta">Posted by <a href="https://twitter.com/cjimti">Craig Johnston</a> on Friday, May 18, 2018
                         
                     </span>
                 </div>
@@ -224,29 +224,26 @@
 <p><img src="/images/content/txToken-00.png" alt="txToken Proxy"></p>
 <p><a href="https://github.com/txn2/txtoken">txToken</a> exposes an HTTP POST endpoint accepting JSON data, used to make a proxied POST to a remote server along with a preset bearer token. Validation of this token on the remote side is optional and only needed if the remote wishes to authenticate the <a href="https://github.com/txn2/txtoken">txToken</a> call using the shared key.</p>
 <p><a href="https://github.com/txn2/txtoken">txToken</a> can be run as a standalone binary on amd64 or arm6/7 based systems, however <a href="https://github.com/txn2/txtoken">txToken</a> is most at home in it&rsquo;s <a href="https://hub.docker.com/r/txn2/txtoken/">Docker container</a> within a <a href="https://kubernetes.io/">Kubernetes</a> cluster.</p>
+<div class="ad-div">
+    <a href="https://amzn.to/3hAZUvx">
+        <img src="/img/kubernetes_platform_development.jpg" style="padding:0; margin: 0; width: 50%; float: left"/>
+    </a>
 
-<table>
-    <tr><td colspan="2" style="text-align: center"><b>Please support my new book!</b></td></tr>
-    <tr>
-        <td>
-            <a href="https://amzn.to/3hAZUvx">
-                <img src="/img/kubernetes_platform_development.jpg" style="padding:0; margin: 0"/>
-            </a>
-        </td>
-        <td>
-            <b><a href="https://amzn.to/3hAZUvx">Advanced Platform Development with Kubernetes: Enabling Data Management, the Internet of Things, Blockchain, and Machine Learning</a></b>
-            <h4>What You'll Learn</h4>
-            <ul style="padding-bottom: 0; margin: 0">
-                <li>Use data pipelines with <b>MQTT, NiFi, Logstash, Kafka and Elasticsearch</b></li>
-                <li>Install a serverless platform with <b>OpenFaaS</b></li>
-                <li>Explore <b>blockchain</b> network capabilities with <b>Ethereum</b></li>
-                <li>Support a multi-tenant <b>data science</b> platform and web IDE with <b>JupyterHub, MLflow and Seldon Core</b></li>
-                <li>Build a <b>hybrid cluster</b>, securely bridging <b>on-premise</b> and cloud-based Kubernetes nodes</li>
-                <li>Implement an integrated development toolchain for continuous integration and deployment</li>
-            </ul>
-        </td>
-    </tr>
-</table>
+    <div style="padding-left: 15px; overflow:auto;">
+        <a href="https://amzn.to/3hAZUvx">Support this blog! Buy my new book:
+            <h4>Advanced Platform Development with Kubernetes</h4>
+        </a>
+        <h5>What You'll Learn</h5>
+        <ul style="padding-bottom: 0; margin: 0">
+            <li>Use data pipelines with <b>MQTT, NiFi, Logstash, MinIO, Hive, Presto, Kafka and Elasticsearch</b></li>
+            <li>Leverage <b>Serverless</b> ETL with <b>OpenFaaS</b></li>
+            <li>Explore <b>Blockchain</b> networking with <b>Ethereum</b></li>
+            <li>Support a multi-tenant <b>Data Science</b> platform with <b>JupyterHub, MLflow and Seldon Core</b></li>
+            <li>Build a <b>Multi-cloud</b>, <b>Hybrid cluster</b>, securely bridging <b>on-premise</b> and cloud-based Kubernetes nodes</li>
+        </ul>
+    </div>
+</div>
+
 <h3 id="implementation">Implementation</h3>
 <p>For demonstration, assume the existence of a fictional API endpoint, something like <code>https://auth.exmaple.com/login</code>. <strong>login</strong> excepts POST body data in the form of JSON.</p>
 <p>Example login:</p>
@@ -382,7 +379,7 @@
 
 
                 <p>
-                   <span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">JWT Microservice, Tokenize Remote APIs: Using txToken to create JWT Tokens from JSON POST data.</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="https://imti.co/" property="cc:attributionName" rel="cc:attributionURL">Craig Johnston</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+                   This blog post, titled: "<span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">JWT Microservice, Tokenize Remote APIs: Using txToken to create JWT Tokens from JSON POST data.</span>" by <a xmlns:cc="http://creativecommons.org/ns#" href="https://twitter.com/cjimti" property="cc:attributionName" rel="cc:attributionURL">Craig Johnston</a>, is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
                     <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a>
                 </p>
 
@@ -502,6 +499,10 @@
                         
                         
                         
+                        <a href="/tags/iot" title="iot">
+                        iot
+                        </a>
+                        
                         
                         
                         
@@ -521,6 +522,8 @@
                         <a href="/tags/kubernetes" title="kubernetes">
                         kubernetes
                         </a>
+                        
+                        
                         
                         
                         
