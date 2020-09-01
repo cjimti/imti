@@ -7,7 +7,7 @@ date:     2020-08-30
 author:   "Craig Johnston"
 URL:      "kubernetes-platform-book/"
 image:    "/img/post/apk8s.jpg"
-twitter_image:  "/img/post/apk8sdiag_876_438.jpg"
+twitter_image:  "/img/post/apk8sdiag_876_438-3.jpg"
 tags:
 - Kubernetes
 - Data
