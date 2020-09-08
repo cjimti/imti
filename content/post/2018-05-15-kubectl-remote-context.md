@@ -25,6 +25,7 @@ For this post, I'll talk about four clusters and how I have them organized. The 
 - **work-prod**: a large production cluster I host client projects and services on
 - **txn2-phc**: is a [Production Hobby Cluster] I use for experiments in infrastructure and microservices
 
+{{< content-ad >}}
 
 [kubectl] looks at an environment variable called **KUBECONFIG** to hold a colon-separated list of paths to configuration files. [kubectl] configurations can all be confined in one file. However, if multiple files are specified, [kubectl] combines them internally. I prefer the separate config file method since it's a little bit more scalable for my brain.
 

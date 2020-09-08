@@ -16,6 +16,8 @@ series:
 
 The following is a collection of articles, videos, and notes on [Microservices]. The [Microservices] architecture is a variant of the [service-oriented architecture] (SOA), a collection of loosely coupled services.
 
+{{< content-ad >}}
+
 ## Articles
 - Background concept - ["Open Data: Small Pieces Loosely Joined"](http://radar.oreilly.com/2006/09/open-data-small-pieces-loosely.html), Tim O’Reilly
 - Modern software design problems and solutions - ["12-Fractured Apps"](https://medium.com/@kelseyhightower/12-fractured-apps-1080c73d481c), Kelsey Hightower (SysAdmin @ Google)

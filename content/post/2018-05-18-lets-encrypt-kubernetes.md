@@ -19,6 +19,8 @@ Use [cert-manager] to get port 443/https running with signed x509 certificates f
 
 You need to [install Helm] first if you do not already have it. Otherwise, check out my article [Helm on Custom Kubernetes], especially if you are following along with my [Production Hobby Cluster] guides.
 
+{{< content-ad >}}
+
 ### Install [cert-manager]
 
 ```bash

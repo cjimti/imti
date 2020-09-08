@@ -210,6 +210,26 @@
                 <p>A recurring requirement for my <a href="https://en.wikipedia.org/wiki/Internet_of_things">IOT</a> projects involves keeping a set of files synced with a central server. Many of these projects include media players, kiosk systems, or applications that need frequently updated configuration files, all while entirely unattended, and in most cases unreachable through firewalls. I have one project that alone has 2000+ devices pulling media continuously from an <a href="https://en.wikipedia.org/wiki/Rsync">rsync</a> server. Many of these devices are on doggy wifi networks.</p>
 <p>The <a href="https://en.wikipedia.org/wiki/Rsync">rsync</a> utility works excellent on <a href="https://amzn.to/2qlJT3d">Raspberry Pi</a> as well as an assortment of <a href="https://www.armbian.com/">Armbian</a> installed devices. However, writing scripts to manage <a href="https://en.wikipedia.org/wiki/Rsync">rsync</a> when it fails, or restarting it on some interval when it finishes can be a pain. I have a dozen rickety, cobbled-together <a href="https://www.gnu.org/software/bash/">bash</a> hacks that have somewhat worked in the past. I needed something more stable, portable and upgradeable.</p>
 <p>Open Source: <a href="https://github.com/txn2/irsync">https://github.com/txn2/irsync</a></p>
+<div class="ad-div">
+    <a href="https://amzn.to/3hAZUvx">
+        <img src="/img/kubernetes_platform_development.jpg" style="padding:0; margin: 0; width: 50%; float: left"/>
+    </a>
+
+    <div style="padding-left: 15px; overflow:auto;">
+        <a href="https://amzn.to/3hAZUvx">Support this blog! Buy my new book:
+            <h4>Advanced Platform Development with Kubernetes</h4>
+        </a>
+        <h5>What You'll Learn</h5>
+        <ul style="padding-bottom: 0; margin: 0">
+            <li>Build data pipelines with <b>MQTT, NiFi, Logstash, MinIO, Hive, Presto, Kafka and Elasticsearch</b></li>
+            <li>Leverage <b>Serverless</b> ETL with <b>OpenFaaS</b></li>
+            <li>Explore <b>Blockchain</b> networking with <b>Ethereum</b></li>
+            <li>Support a multi-tenant <b>Data Science</b> platform with <b>JupyterHub, MLflow and Seldon Core</b></li>
+            <li>Build a <b>Multi-cloud</b>, <b>Hybrid cluster</b>, securely bridging <b>on-premise</b> and cloud-based Kubernetes nodes</li>
+        </ul>
+    </div>
+</div>
+
 <p><a href="https://github.com/cjimti/irsync"><img src="https://raw.githubusercontent.com/cjimti/irsync/master/irsync-mast.jpg" alt="irsync: interval rsync"></a></p>
 <p>I built <a href="https://github.com/cjimti/irsync">irsync</a> to operate on any (<a href="https://en.wikipedia.org/wiki/X86-64">amd64/x86-64</a> or <a href="https://en.wikipedia.org/wiki/ARM_architecture">armhf</a>) system that has <a href="https://www.docker.com/">Docker</a> running on it.</p>
 <p>If we stick with the defaults, the interval duration is 30 seconds and the activity timeout is 2 hours.</p>

@@ -213,6 +213,26 @@
 
                 <p>Use <a href="https://github.com/jetstack/cert-manager/">cert-manager</a> to get port 443/https running with signed x509 certificates for <a href="/web-cluster-ingress/">Ingress</a> on your Kubernetes <a href="/hobby-cluster/">Production Hobby Cluster</a>. <a href="https://github.com/jetstack/cert-manager/">cert-manager</a> is the successor to <strong>kube-lego</strong> and the preferred way to &ldquo;<a href="https://letsencrypt.org/how-it-works/">automatically obtain browser-trusted certificates, without any human intervention.</a>&rdquo; using <a href="https://letsencrypt.org/">Let&rsquo;s Encrypt</a>.</p>
 <p>You need to <a href="/helm-on-custom-cluster/">install Helm</a> first if you do not already have it. Otherwise, check out my article <a href="/helm-on-custom-cluster/">Helm on Custom Kubernetes</a>, especially if you are following along with my <a href="/hobby-cluster/">Production Hobby Cluster</a> guides.</p>
+<div class="ad-div">
+    <a href="https://amzn.to/3hAZUvx">
+        <img src="/img/kubernetes_platform_development.jpg" style="padding:0; margin: 0; width: 50%; float: left"/>
+    </a>
+
+    <div style="padding-left: 15px; overflow:auto;">
+        <a href="https://amzn.to/3hAZUvx">Support this blog! Buy my new book:
+            <h4>Advanced Platform Development with Kubernetes</h4>
+        </a>
+        <h5>What You'll Learn</h5>
+        <ul style="padding-bottom: 0; margin: 0">
+            <li>Build data pipelines with <b>MQTT, NiFi, Logstash, MinIO, Hive, Presto, Kafka and Elasticsearch</b></li>
+            <li>Leverage <b>Serverless</b> ETL with <b>OpenFaaS</b></li>
+            <li>Explore <b>Blockchain</b> networking with <b>Ethereum</b></li>
+            <li>Support a multi-tenant <b>Data Science</b> platform with <b>JupyterHub, MLflow and Seldon Core</b></li>
+            <li>Build a <b>Multi-cloud</b>, <b>Hybrid cluster</b>, securely bridging <b>on-premise</b> and cloud-based Kubernetes nodes</li>
+        </ul>
+    </div>
+</div>
+
 <h3 id="install-cert-manager">Install <a href="https://github.com/jetstack/cert-manager/">cert-manager</a></h3>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">helm install --name cert-manager --namespace kube-system stable/cert-manager
 </code></pre></div><p>After <a href="https://helm.sh/">Helm</a> installs <a href="https://github.com/jetstack/cert-manager/">cert-manager</a> you end up with a <a href="https://kubernetes.io/docs/admin/service-accounts-admin/">ServiceAccount</a> <a href="https://kubernetes.io/docs/admin/authorization/rbac/#role-and-clusterrole">ClusterRole</a>, <a href="https://kubernetes.io/docs/admin/authorization/rbac/#rolebinding-and-clusterrolebinding">ClusterRoleBinding</a>, <a href="https://kubernetes.io/docs/concepts/workloads/controllers/deployment/">Deployment</a> and a couple of <a href="https://kubernetes.io/docs/concepts/workloads/pods/pod/">Pod</a>s named <strong>cert-manager-cert-manager</strong> in the <strong>kube-system</strong> <a href="https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/">namespace</a>. <a href="https://helm.sh/">Helm</a> additionaly installs three <a href="https://kubernetes.io/docs/tasks/access-kubernetes-api/extend-api-custom-resource-definitions/">CustomResourceDefinition</a>s for <a href="https://github.com/jetstack/cert-manager/">cert-manager</a> (custom resources are not namespaced):</p>

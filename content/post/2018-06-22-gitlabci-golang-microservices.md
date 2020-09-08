@@ -24,6 +24,8 @@ The following workflow currently manages dozens of projects for me, some of whic
 
 {{< toc >}}
 
+{{< content-ad >}}
+
 ## Overview
 
 If you are like me your early days were developing Java or Perl scripts that were installed on dev, staging or production hardware and executed under the Apache or Tomcat web servers, and that may still be part of your architecture today. Big monolithic applications, running on big fast servers that you could visit at the data center. However many developers like myself have started moving new development to Cloud Native [Microservices]. The process of deploying monoliths is not really any different, except that while traditional monoliths do not tend to run in containers, they can.

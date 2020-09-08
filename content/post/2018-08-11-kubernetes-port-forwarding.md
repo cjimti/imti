@@ -20,6 +20,8 @@ series:
 
 {{< tweet 1059519420064706579 >}}
 
+{{< content-ad >}}
+
 Developing services in a [Microservices] architecture presents local development challenges, especially when the service you are developing needs to interact with a mixture of other services. [Microservices], like any other applications are rarely ever self-contained and often need access to databases, authentication services, and other public or private APIs. Loosely-coupled applications still have couplings, they happen on a higher layer of the application stack and often through TCP networking.
 
 ## [kubectl port-forward][port-forward]

@@ -71,6 +71,8 @@ I have tried a few of the full GUI apps for burning but don't seem to get the sp
 - [Tinker Board Site]
 - [Orange Pi Site]
 
+{{< content-ad >}}
+
 [Raspberry Pi]: https://amzn.to/2JwJeEu
 [Libre Computer Site]: https://libre.computer/
 [Libre Computer]: https://amzn.to/2GLp8Vg

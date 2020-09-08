@@ -88,5 +88,6 @@ If you are interested in really mastering SQL, I can highly recommend three book
 - [Joe Celko's Trees and Hierarchies in SQL for Smarties](https://amzn.to/2KFBL6J)
 - [Joe Celko's Thinking in Sets: Auxiliary, Temporal, and Virtual Tables in SQL](https://amzn.to/2Im8NdT)
 
+{{< content-ad >}}
 
 [![celko](/images/content/celko.png)](https://amzn.to/2rs09jC)

@@ -23,6 +23,8 @@ FaaS or [Function as a Service] also known as [Serverless computing] implementat
 
 {{< toc >}}
 
+{{< content-ad >}}
+
 ## Architecture
 
 Lately, I have been seeing a trend of comparisons for choosing between developing applications with Monoliths, Microservices, or FaaS. I believe this comparison in some context, is flawed. Unless you are on a desert island and can only choose one implementation in which to develop your application, you sill have a problem of definition. Even if you did have to limit your architecture to one concept, you would first need to define a standard of comparison, determining where a bloated Microservice is a monolith, or if a prewarmed FaaS is just a small Microservice. If you are following my point, they can all have a place regardless of definition, that is if the underlying platform can support them equally. All these concepts can work together seamlessly in one platform, by operating in networked containers, orchestrated by Kubernetes.

@@ -19,6 +19,8 @@ The [rsync] utility works excellent on [Raspberry Pi] as well as an assortment o
 
 Open Source: https://github.com/txn2/irsync
 
+{{< content-ad >}}
+
 [![irsync: interval rsync](https://raw.githubusercontent.com/cjimti/irsync/master/irsync-mast.jpg)](https://github.com/cjimti/irsync)
 
 I built [irsync] to operate on any ([amd64/x86-64] or [armhf]) system that has [Docker] running on it.

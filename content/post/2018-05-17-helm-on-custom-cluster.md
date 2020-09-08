@@ -14,7 +14,9 @@ series:
 - Kubernetes
 ---
 
-[Helm] is the official package manager for [Kubernetes]. If you are looking to start using [Helm] or want to test its capabilities, I suggest you set up a [Production Hobby Cluster]. This article is a continuation of the [Production Hobby Cluster] configuration but should be entirely useful on its own.
+[Helm] is the de facto package manager for [Kubernetes]. If you are looking to start using [Helm] or want to test its capabilities, I suggest you set up a [Production Hobby Cluster]. This article is a continuation of the [Production Hobby Cluster] configuration but should be entirely useful on its own.
+
+{{< content-ad >}}
 
 > From https://github.com/kubernetes/helm
 > - Helm has two parts: a client (helm) and a server (tiller)

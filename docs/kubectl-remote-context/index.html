@@ -216,6 +216,26 @@
 <li><strong>work-prod</strong>: a large production cluster I host client projects and services on</li>
 <li><strong>txn2-phc</strong>: is a <a href="/hobby-cluster/">Production Hobby Cluster</a> I use for experiments in infrastructure and microservices</li>
 </ul>
+<div class="ad-div">
+    <a href="https://amzn.to/3hAZUvx">
+        <img src="/img/kubernetes_platform_development.jpg" style="padding:0; margin: 0; width: 50%; float: left"/>
+    </a>
+
+    <div style="padding-left: 15px; overflow:auto;">
+        <a href="https://amzn.to/3hAZUvx">Support this blog! Buy my new book:
+            <h4>Advanced Platform Development with Kubernetes</h4>
+        </a>
+        <h5>What You'll Learn</h5>
+        <ul style="padding-bottom: 0; margin: 0">
+            <li>Build data pipelines with <b>MQTT, NiFi, Logstash, MinIO, Hive, Presto, Kafka and Elasticsearch</b></li>
+            <li>Leverage <b>Serverless</b> ETL with <b>OpenFaaS</b></li>
+            <li>Explore <b>Blockchain</b> networking with <b>Ethereum</b></li>
+            <li>Support a multi-tenant <b>Data Science</b> platform with <b>JupyterHub, MLflow and Seldon Core</b></li>
+            <li>Build a <b>Multi-cloud</b>, <b>Hybrid cluster</b>, securely bridging <b>on-premise</b> and cloud-based Kubernetes nodes</li>
+        </ul>
+    </div>
+</div>
+
 <p><a href="https://kubernetes.io/docs/reference/kubectl/cheatsheet/">kubectl</a> looks at an environment variable called <strong>KUBECONFIG</strong> to hold a colon-separated list of paths to configuration files. <a href="https://kubernetes.io/docs/reference/kubectl/cheatsheet/">kubectl</a> configurations can all be confined in one file. However, if multiple files are specified, <a href="https://kubernetes.io/docs/reference/kubectl/cheatsheet/">kubectl</a> combines them internally. I prefer the separate config file method since it&rsquo;s a little bit more scalable for my brain.</p>
 <p>Each Kubernetes cluster has an admin config file generated when installed. The Kubernetes config is found on the master node typically under:</p>
 <p><code>/etc/kubernetes/admin.conf</code></p>

@@ -32,6 +32,7 @@ Contents
 * [Create a Deployment](#create-a-deployment)
 * [Useful Commands](#useful-commands)
 
+{{< content-ad >}}
 
 ## Deeper Reading and Resources
 

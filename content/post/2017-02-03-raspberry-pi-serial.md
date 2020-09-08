@@ -26,3 +26,5 @@ Example output:
      00000000e215b4a2
 
 An interesting use for this is "binding" software, encryption or other servcies to a specific Pi. Found this in a suggestion on the Stack Overflow question ["Securing data on SD card Raspberry Pi"](http://stackoverflow.com/questions/27730877/securing-data-on-sd-card-raspberry-pi)
+
+{{< content-ad >}}
