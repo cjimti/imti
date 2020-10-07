@@ -6,11 +6,7 @@
     <description>Recent content in DNS on IMTI</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 17 May 2018 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="https://imti.co/tags/dns/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Thu, 17 May 2018 00:00:00 +0000</lastBuildDate><atom:link href="https://imti.co/tags/dns/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Kubernetes Custom Upstream DNS</title>
       <link>https://imti.co/kubernetes-custom-dns/</link>

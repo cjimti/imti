@@ -237,7 +237,7 @@
 <h3 id="context">Context</h3>
 <p>I now use the official <a href="https://github.com/kubernetes/ingress-nginx">NGINX Ingress Controller</a>, there are quite a few options out there, so this solution only applies to the official <a href="https://github.com/kubernetes/ingress-nginx">NGINX Ingress Controller</a>. If you don&rsquo;t already have it, you can follow the easy <a href="https://github.com/kubernetes/ingress-nginx/tree/master/deploy">ingress controller deployment</a> instructions.</p>
 <p>I found this solution in the <a href="https://github.com/kubernetes/ingress-nginx/tree/master/docs/examples">Ingress examples</a> folder in the <a href="https://github.com/kubernetes/ingress-nginx">Github repository</a>. I probably should have started there on my journey to set up a private <a href="https://hub.docker.com/_/registry/">Docker registry</a> on my <a href="https://kubernetes.io/">Kubernetes</a> cluster.</p>
-<!-- raw HTML omitted -->
+<script src="https://gist.github.com/cjimti/4cd7fdb93787fa5aca84b4d386b757aa.js"></script>
 <p>Using <strong>annotations</strong> you can customize various configuration settings. In the case of nginx upload limits, use the annotation below:</p>
 <pre><code>nginx.ingress.kubernetes.io/proxy-body-size: &quot;0&quot;
 </code></pre><p>The annotation (see its context in the gist: <a href="https://gist.github.com/cjimti/4cd7fdb93787fa5aca84b4d386b757aa">Registry Ingress Example</a> above) removes any restriction on upload size. Of course, you can set this to a size appropriate to your situation.</p>

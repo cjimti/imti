@@ -268,15 +268,15 @@
 <p><a href="https://github.com/txn2/txtoken">txToken</a> is easy to setup, it runs as a single binary or docker container. <a href="https://github.com/txn2/txtoken">txToken</a> reads a yaml configuration file from a path specified by the environment variable <strong>CFG_FILE</strong>.</p>
 <p>Example <code>txtoken-config.yml</code></p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#75715e"># Example configuration</span>
-<span style="color:#66d9ef">port</span>: <span style="color:#ae81ff">8888</span>
-<span style="color:#66d9ef">debug</span>: <span style="color:#66d9ef">true</span>
-<span style="color:#66d9ef">encKey</span>: <span style="color:#e6db74">&#34;xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx&#34;</span> <span style="color:#75715e"># 32-64 character string</span>
-<span style="color:#66d9ef">remote</span>: https://auth.example.com/login
-<span style="color:#66d9ef">expHours</span>: <span style="color:#ae81ff">1</span>
-<span style="color:#66d9ef">getTokenRoute</span>: <span style="color:#e6db74">&#34;/getToken&#34;</span>
-<span style="color:#66d9ef">checkTokenRoute</span>: <span style="color:#e6db74">&#34;/checkToken&#34;</span>
-<span style="color:#66d9ef">requestTokenData</span>:
-  <span style="color:#66d9ef">authorization</span>: <span style="color:#e6db74">&#34;internal&#34;</span>
+<span style="color:#f92672">port</span>: <span style="color:#ae81ff">8888</span>
+<span style="color:#f92672">debug</span>: <span style="color:#66d9ef">true</span>
+<span style="color:#f92672">encKey</span>: <span style="color:#e6db74">&#34;xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx&#34;</span> <span style="color:#75715e"># 32-64 character string</span>
+<span style="color:#f92672">remote</span>: <span style="color:#ae81ff">https://auth.example.com/login</span>
+<span style="color:#f92672">expHours</span>: <span style="color:#ae81ff">1</span>
+<span style="color:#f92672">getTokenRoute</span>: <span style="color:#e6db74">&#34;/getToken&#34;</span>
+<span style="color:#f92672">checkTokenRoute</span>: <span style="color:#e6db74">&#34;/checkToken&#34;</span>
+<span style="color:#f92672">requestTokenData</span>:
+  <span style="color:#f92672">authorization</span>: <span style="color:#e6db74">&#34;internal&#34;</span>
 </code></pre></div><p>In this example <a href="https://github.com/txn2/txtoken">txToken</a> services any HTTP POST to <code>/getToken</code> and <code>/checkToken</code> on port <code>8888</code> of the localhost. Securing <a href="https://github.com/txn2/txtoken">txToken</a> communication over SSL is the responsibility of the network layer; I use <a href="/web-cluster-ingress/">kubernetes ingress</a> for this.</p>
 <p>In the example configuration above, a client posts JSON to <code>/getToken</code> just as it would have to the <strong>login</strong> endpoint (fictional example above). <a href="https://github.com/txn2/txtoken">txToken</a> then issues a POST call to endpoint specified in the <code>remote</code> key of the yaml config using the JSON it received from the client.</p>
 <p><a href="https://github.com/txn2/txtoken">txToken</a> expects the <code>remote</code> endpoint to return an HTTP 200 status code along with JSON data.</p>
@@ -352,16 +352,16 @@
 </span><span style="color:#ae81ff"></span>  -d <span style="color:#e6db74">&#39;{&#34;email&#34;:&#34;john.d@example.com&#34;,&#34;password&#34;:&#34;12345&#34;}&#39;</span>
 </code></pre></div><h5 id="docker-compose">Docker Compose</h5>
 <p>Create <code>docker-compose.yml</code> consisting of:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">version</span>: <span style="color:#e6db74">&#34;3.2&#34;</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">version</span>: <span style="color:#e6db74">&#34;3.2&#34;</span>
 
-<span style="color:#66d9ef">services</span>:
-  <span style="color:#66d9ef">txtoken</span>:
-    <span style="color:#66d9ef">image</span>: txn2/txtoken:latest
-    <span style="color:#66d9ef">volumes</span>:
-      - ./txtoken.yml:/config/txtoken.yml
-    <span style="color:#66d9ef">environment</span>:
-        <span style="color:#66d9ef">CFG_FILE</span>: /config/txtoken.yml
-    <span style="color:#66d9ef">ports</span>:
+<span style="color:#f92672">services</span>:
+  <span style="color:#f92672">txtoken</span>:
+    <span style="color:#f92672">image</span>: <span style="color:#ae81ff">txn2/txtoken:latest</span>
+    <span style="color:#f92672">volumes</span>:
+      - <span style="color:#ae81ff">./txtoken.yml:/config/txtoken.yml</span>
+    <span style="color:#f92672">environment</span>:
+        <span style="color:#f92672">CFG_FILE</span>: <span style="color:#ae81ff">/config/txtoken.yml</span>
+    <span style="color:#f92672">ports</span>:
       - <span style="color:#e6db74">&#34;8888:8888&#34;</span>
 </code></pre></div><p>Run <code>docker-compose</code> in the foreground to watch the logs:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">docker-compose up
@@ -371,7 +371,7 @@
 </span><span style="color:#ae81ff"></span>  -d <span style="color:#e6db74">&#39;{&#34;email&#34;:&#34;john.d@example.com&#34;,&#34;password&#34;:&#34;12345&#34;}&#39;</span>
 </code></pre></div><h5 id="kubernetes">Kubernetes</h5>
 <p>The following is an example of a <a href="https://kubernetes.io/docs/concepts/services-networking/service/">Service</a>, <a href="https://kubernetes.io/docs/tasks/configure-pod-container/configure-pod-configmap/">ConfigMap</a>, <a href="https://kubernetes.io/docs/concepts/workloads/controllers/deployment/">Deployment</a>, and <a href="/web-cluster-ingress/">Ingress</a> combined into one file:</p>
-<!-- raw HTML omitted -->
+<script src="https://gist.github.com/cjimti/f006a4f57dd2ef6245866bf5ba0250fd.js"></script>
 <h2 id="resources">Resources</h2>
 <p>If you found this article useful, you may want to check out <a href="http://localhost:4000/tag/phc.txn2.net/">all my articles on Kubernetes</a>, used to build on the <a href="/hobby-cluster/">Production Hobby Cluster</a>, an excellent environment for developing and testing cloud-native microservices like <a href="https://github.com/txn2/txtoken">txToken</a>. While using Minikube or similar environments for testing and developing cloud-native <a href="http://microservices.io/">microservice</a>s, I find it a much better experience to use a more true-to-production cluster.</p>
 <p>If in a few days you find yourself setting up a <a href="/hobby-cluster/">Production Hobby Cluster</a> in Japan or Germany on <a href="https://www.linode.com/?r=848a6b0b21dc8edd33124f05ec8f99207ccddfde">Linode</a>, and another two in Australia and France on <a href="https://www.vultr.com/?ref=7418713">vultr</a>, then you may have just joined the PHC (Performance <a href="/hobby-cluster/">Hobby Cluster</a>s) club. Some people tinker late at night on their truck, we benchmark and test the resilience of node failures on our overseas, budget kubernetes clusters. It&rsquo;s all about going big, on the cheap.</p>

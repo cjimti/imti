@@ -6,11 +6,7 @@
     <description>Recent content in Jupyter Notebooks on IMTI</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 10 Jun 2018 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="https://imti.co/tags/jupyter-notebooks/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Sun, 10 Jun 2018 00:00:00 +0000</lastBuildDate><atom:link href="https://imti.co/tags/jupyter-notebooks/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Golang to Jupyter</title>
       <link>https://imti.co/golang-to-jupyter/</link>

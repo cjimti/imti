@@ -511,13 +511,13 @@ started with tiny a static web container suitable for building user interfaces f
 <pre><code>sudo vi /etc/wpa_supplicant/wpa_supplicant.conf
 </code></pre>
 <p>Add and customize the following:</p>
-<!-- raw HTML omitted -->
+<script src="https://gist.github.com/cjimti/f377348aa739beb08309156c495b030e.js"></script>
 <h4 id="network-interfaces">Network Interfaces</h4>
 <p>Edit the interfaces configuration:</p>
 <pre><code>sudo vi /etc/network/interfaces
 </code></pre>
 <p>The entire configuration file should look like the following:</p>
-<!-- raw HTML omitted -->
+<script src="https://gist.github.com/cjimti/a0d54e8b8904f231927ab88a559ef348.js"></script>
 <p>The uap0 interface will be used later on for our Access Point (AP).</p>
 <p>Reboot the Pi:</p>
 <pre><code>sudo reboot
@@ -540,7 +540,7 @@ started with tiny a static web container suitable for building user interfaces f
 <pre><code>sudo vi /etc/hostapd/hostapd.conf
 </code></pre>
 <p>The new configuration should look like this:</p>
-<!-- raw HTML omitted -->
+<script src="https://gist.github.com/cjimti/6a66a61cc65f26c908e0424e15a37163.js"></script>
 <p>Of course you will want to customize a few things like the ssid and passphrase (wpa_passphrase). You will also want to determine the best channel by looking at the channel wlan0 is currently using.</p>
 <pre><code>iwlist wlan0 channel
 </code></pre>
@@ -556,7 +556,7 @@ started with tiny a static web container suitable for building user interfaces f
 <pre><code>sudo vi /usr/local/bin/hostapdstart
 </code></pre>
 <p>Add the following lines to this new script.</p>
-<!-- raw HTML omitted -->
+<script src="https://gist.github.com/cjimti/af6eb1e41c2ec855136e7ffc3e22296a.js"></script>
 <p>Update permissions on the new hostap start script.</p>
 <pre><code>chmod 775 /usr/local/bin/hostapdstart
 </code></pre>
@@ -565,7 +565,7 @@ started with tiny a static web container suitable for building user interfaces f
 <pre><code>sudo vi /etc/dnsmasq.conf
 </code></pre>
 <p>The configration should look like the following.</p>
-<!-- raw HTML omitted -->
+<script src="https://gist.github.com/cjimti/542d9dadaca8c2e1bc0a91bdf0137d4e.js"></script>
 <p>Start dnsmasq with the following.</p>
 <pre><code>sudo service dnsmasq start
 </code></pre>
@@ -589,7 +589,7 @@ started with tiny a static web container suitable for building user interfaces f
 <ul>
 <li><a href="http://linuxcommando.blogspot.com/2013/10/how-to-connect-to-wpawpa2-wifi-network.html">How to connect to a WPA/WPA2 WiFi network using Linux command line</a></li>
 </ul>
-<!-- raw HTML omitted -->
+<div id="amzn-assoc-ad-0fe3d6da-b252-4a87-a36c-72a4cc7ee81e"></div><script async src="//z-na.amazon-adsystem.com/widgets/onejs?MarketPlace=US&adInstanceId=0fe3d6da-b252-4a87-a36c-72a4cc7ee81e"></script>
 
 
                 <p>

@@ -296,23 +296,23 @@
 <h4 id="bootnode-service">Bootnode Service</h4>
 <p>The <strong>Bootnode Service</strong> provides the endpoints <code>eth-bootnode:30301</code> and <code>eth-bootnode:8080</code> to Pod with the selector <strong>eth-bootnode</strong> defined further down in the <strong>Bootnode Deployment</strong>.</p>
 <p>Create the file <code>110-bootnode-service.yml</code>:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">apiVersion</span>: v1
-<span style="color:#66d9ef">kind</span>: Service
-<span style="color:#66d9ef">metadata</span>:
-  <span style="color:#66d9ef">name</span>: eth-bootnode
-  <span style="color:#66d9ef">namespace</span>: the-project
-  <span style="color:#66d9ef">labels</span>:
-    <span style="color:#66d9ef">app</span>: eth-bootnode
-<span style="color:#66d9ef">spec</span>:
-  <span style="color:#66d9ef">selector</span>:
-    <span style="color:#66d9ef">app</span>: eth-bootnode
-  <span style="color:#66d9ef">clusterIP</span>: None
-  <span style="color:#66d9ef">ports</span>:
-  - <span style="color:#66d9ef">name</span>: discovery
-    <span style="color:#66d9ef">port</span>: <span style="color:#ae81ff">30301</span>
-    <span style="color:#66d9ef">protocol</span>: UDP
-  - <span style="color:#66d9ef">name</span>: http
-    <span style="color:#66d9ef">port</span>: <span style="color:#ae81ff">8080</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">v1</span>
+<span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Service</span>
+<span style="color:#f92672">metadata</span>:
+  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">eth-bootnode</span>
+  <span style="color:#f92672">namespace</span>: <span style="color:#ae81ff">the-project</span>
+  <span style="color:#f92672">labels</span>:
+    <span style="color:#f92672">app</span>: <span style="color:#ae81ff">eth-bootnode</span>
+<span style="color:#f92672">spec</span>:
+  <span style="color:#f92672">selector</span>:
+    <span style="color:#f92672">app</span>: <span style="color:#ae81ff">eth-bootnode</span>
+  <span style="color:#f92672">clusterIP</span>: <span style="color:#ae81ff">None</span>
+  <span style="color:#f92672">ports</span>:
+  - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">discovery</span>
+    <span style="color:#f92672">port</span>: <span style="color:#ae81ff">30301</span>
+    <span style="color:#f92672">protocol</span>: <span style="color:#ae81ff">UDP</span>
+  - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">http</span>
+    <span style="color:#f92672">port</span>: <span style="color:#ae81ff">8080</span>
 </code></pre></div><p>Apply the configuration:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl create -f ./110-bootnode-service.yml
 </code></pre></div><h4 id="bootnode-deployment">Bootnode Deployment</h4>
@@ -325,98 +325,98 @@
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">curl eth-bootnode:8080
 enode://e01bcec287...ceb1a7ada4f@192.168.108.136:30301
 </code></pre></div><p>Create the file <code>120-bootnode-deployment.yml</code>:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">apiVersion</span>: apps/v1
-<span style="color:#66d9ef">kind</span>: Deployment
-<span style="color:#66d9ef">metadata</span>:
-  <span style="color:#66d9ef">name</span>: eth-bootnode
-  <span style="color:#66d9ef">namespace</span>: the-project
-  <span style="color:#66d9ef">labels</span>:
-    <span style="color:#66d9ef">app</span>: eth-bootnode
-<span style="color:#66d9ef">spec</span>:
-  <span style="color:#66d9ef">replicas</span>: <span style="color:#ae81ff">2</span>
-  <span style="color:#66d9ef">revisionHistoryLimit</span>: <span style="color:#ae81ff">1</span>
-  <span style="color:#66d9ef">selector</span>:
-    <span style="color:#66d9ef">matchLabels</span>:
-      <span style="color:#66d9ef">app</span>: eth-bootnode
-  <span style="color:#66d9ef">template</span>:
-    <span style="color:#66d9ef">metadata</span>:
-      <span style="color:#66d9ef">labels</span>:
-        <span style="color:#66d9ef">app</span>: eth-bootnode
-    <span style="color:#66d9ef">spec</span>:
-      <span style="color:#66d9ef">containers</span>:
-      - <span style="color:#66d9ef">name</span>: bootnode
-        <span style="color:#66d9ef">image</span>: ethereum/client-go:alltools-release<span style="color:#ae81ff">-1.8</span>
-        <span style="color:#66d9ef">imagePullPolicy</span>: IfNotPresent
-        <span style="color:#66d9ef">resources</span>:
-          <span style="color:#66d9ef">limits</span>:
-            <span style="color:#66d9ef">cpu</span>: <span style="color:#e6db74">&#34;.5&#34;</span>
-          <span style="color:#66d9ef">requests</span>:
-            <span style="color:#66d9ef">cpu</span>: <span style="color:#e6db74">&#34;0.25&#34;</span>
-        <span style="color:#66d9ef">command</span>: [<span style="color:#e6db74">&#34;/bin/sh&#34;</span>]
-        <span style="color:#66d9ef">args</span>:
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">apps/v1</span>
+<span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Deployment</span>
+<span style="color:#f92672">metadata</span>:
+  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">eth-bootnode</span>
+  <span style="color:#f92672">namespace</span>: <span style="color:#ae81ff">the-project</span>
+  <span style="color:#f92672">labels</span>:
+    <span style="color:#f92672">app</span>: <span style="color:#ae81ff">eth-bootnode</span>
+<span style="color:#f92672">spec</span>:
+  <span style="color:#f92672">replicas</span>: <span style="color:#ae81ff">2</span>
+  <span style="color:#f92672">revisionHistoryLimit</span>: <span style="color:#ae81ff">1</span>
+  <span style="color:#f92672">selector</span>:
+    <span style="color:#f92672">matchLabels</span>:
+      <span style="color:#f92672">app</span>: <span style="color:#ae81ff">eth-bootnode</span>
+  <span style="color:#f92672">template</span>:
+    <span style="color:#f92672">metadata</span>:
+      <span style="color:#f92672">labels</span>:
+        <span style="color:#f92672">app</span>: <span style="color:#ae81ff">eth-bootnode</span>
+    <span style="color:#f92672">spec</span>:
+      <span style="color:#f92672">containers</span>:
+      - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">bootnode</span>
+        <span style="color:#f92672">image</span>: <span style="color:#ae81ff">ethereum/client-go:alltools-release-1.8</span>
+        <span style="color:#f92672">imagePullPolicy</span>: <span style="color:#ae81ff">IfNotPresent</span>
+        <span style="color:#f92672">resources</span>:
+          <span style="color:#f92672">limits</span>:
+            <span style="color:#f92672">cpu</span>: <span style="color:#e6db74">&#34;.5&#34;</span>
+          <span style="color:#f92672">requests</span>:
+            <span style="color:#f92672">cpu</span>: <span style="color:#e6db74">&#34;0.25&#34;</span>
+        <span style="color:#f92672">command</span>: [<span style="color:#e6db74">&#34;/bin/sh&#34;</span>]
+        <span style="color:#f92672">args</span>:
         - <span style="color:#e6db74">&#34;-c&#34;</span>
         - <span style="color:#e6db74">&#34;bootnode --nodekey=/etc/bootnode/node.key --verbosity=4&#34;</span>
-        <span style="color:#66d9ef">volumeMounts</span>:
-        - <span style="color:#66d9ef">name</span>: data
-          <span style="color:#66d9ef">mountPath</span>: /etc/bootnode
-        <span style="color:#66d9ef">ports</span>:
-        - <span style="color:#66d9ef">name</span>: discovery
-          <span style="color:#66d9ef">containerPort</span>: <span style="color:#ae81ff">30301</span>
-          <span style="color:#66d9ef">protocol</span>: UDP
-      - <span style="color:#66d9ef">name</span>: bootnode-server
-        <span style="color:#66d9ef">image</span>: ethereum/client-go:alltools-release<span style="color:#ae81ff">-1.8</span>
-        <span style="color:#66d9ef">imagePullPolicy</span>: IfNotPresent
-        <span style="color:#66d9ef">command</span>: [<span style="color:#e6db74">&#34;/bin/sh&#34;</span>]
-        <span style="color:#66d9ef">args</span>:
+        <span style="color:#f92672">volumeMounts</span>:
+        - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">data</span>
+          <span style="color:#f92672">mountPath</span>: <span style="color:#ae81ff">/etc/bootnode</span>
+        <span style="color:#f92672">ports</span>:
+        - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">discovery</span>
+          <span style="color:#f92672">containerPort</span>: <span style="color:#ae81ff">30301</span>
+          <span style="color:#f92672">protocol</span>: <span style="color:#ae81ff">UDP</span>
+      - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">bootnode-server</span>
+        <span style="color:#f92672">image</span>: <span style="color:#ae81ff">ethereum/client-go:alltools-release-1.8</span>
+        <span style="color:#f92672">imagePullPolicy</span>: <span style="color:#ae81ff">IfNotPresent</span>
+        <span style="color:#f92672">command</span>: [<span style="color:#e6db74">&#34;/bin/sh&#34;</span>]
+        <span style="color:#f92672">args</span>:
         - <span style="color:#e6db74">&#34;-c&#34;</span>
         - <span style="color:#e6db74">&#34;while [ 1 ]; do echo -e \&#34;HTTP/1.1 200 OK\n\nenode://$(bootnode -writeaddress --nodekey=/etc/bootnode/node.key)@$(POD_IP):30301\&#34; | nc -l -v -p 8080 || break; done;&#34;</span>
-        <span style="color:#66d9ef">volumeMounts</span>:
-        - <span style="color:#66d9ef">name</span>: data
-          <span style="color:#66d9ef">mountPath</span>: /etc/bootnode
-        <span style="color:#66d9ef">env</span>:
-        - <span style="color:#66d9ef">name</span>: POD_IP
-          <span style="color:#66d9ef">valueFrom</span>:
-            <span style="color:#66d9ef">fieldRef</span>:
-              <span style="color:#66d9ef">fieldPath</span>: status.podIP
-        <span style="color:#66d9ef">ports</span>:
-        - <span style="color:#66d9ef">containerPort</span>: <span style="color:#ae81ff">8080</span>
-      <span style="color:#66d9ef">initContainers</span>:
-      - <span style="color:#66d9ef">name</span>: genkey
-        <span style="color:#66d9ef">image</span>: ethereum/client-go:alltools-release<span style="color:#ae81ff">-1.8</span>
-        <span style="color:#66d9ef">imagePullPolicy</span>: IfNotPresent
-        <span style="color:#66d9ef">command</span>: [<span style="color:#e6db74">&#34;/bin/sh&#34;</span>]
-        <span style="color:#66d9ef">args</span>:
+        <span style="color:#f92672">volumeMounts</span>:
+        - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">data</span>
+          <span style="color:#f92672">mountPath</span>: <span style="color:#ae81ff">/etc/bootnode</span>
+        <span style="color:#f92672">env</span>:
+        - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">POD_IP</span>
+          <span style="color:#f92672">valueFrom</span>:
+            <span style="color:#f92672">fieldRef</span>:
+              <span style="color:#f92672">fieldPath</span>: <span style="color:#ae81ff">status.podIP</span>
+        <span style="color:#f92672">ports</span>:
+        - <span style="color:#f92672">containerPort</span>: <span style="color:#ae81ff">8080</span>
+      <span style="color:#f92672">initContainers</span>:
+      - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">genkey</span>
+        <span style="color:#f92672">image</span>: <span style="color:#ae81ff">ethereum/client-go:alltools-release-1.8</span>
+        <span style="color:#f92672">imagePullPolicy</span>: <span style="color:#ae81ff">IfNotPresent</span>
+        <span style="color:#f92672">command</span>: [<span style="color:#e6db74">&#34;/bin/sh&#34;</span>]
+        <span style="color:#f92672">args</span>:
         - <span style="color:#e6db74">&#34;-c&#34;</span>
         - <span style="color:#e6db74">&#34;bootnode --genkey=/etc/bootnode/node.key&#34;</span>
-        <span style="color:#66d9ef">volumeMounts</span>:
-        - <span style="color:#66d9ef">name</span>: data
-          <span style="color:#66d9ef">mountPath</span>: /etc/bootnode
-      <span style="color:#66d9ef">volumes</span>:
-      - <span style="color:#66d9ef">name</span>: data
-        <span style="color:#66d9ef">emptyDir</span>: {}
+        <span style="color:#f92672">volumeMounts</span>:
+        - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">data</span>
+          <span style="color:#f92672">mountPath</span>: <span style="color:#ae81ff">/etc/bootnode</span>
+      <span style="color:#f92672">volumes</span>:
+      - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">data</span>
+        <span style="color:#f92672">emptyDir</span>: {}
 </code></pre></div><p>Apply the configuration:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl create -f ./120-bootnode-deployment.yml
 </code></pre></div><h3 id="bootnode-registrar">Bootnode Registrar</h3>
-<p><a href="https://github.com/jpoon/bootnode-registrar">bootnode-registrar</a> is a &ldquo;Registrar for Geth Bootnodes. bootnode-registrar resolves a DNS address record to a enode addresses that can then be consumed by geth &ndash;bootnodes=<!-- raw HTML omitted -->.&rdquo; written by <a href="http://jasonpoon.ca/">Jason Poon</a>.</p>
+<p><a href="https://github.com/jpoon/bootnode-registrar">bootnode-registrar</a> is a &ldquo;Registrar for Geth Bootnodes. bootnode-registrar resolves a DNS address record to a enode addresses that can then be consumed by geth &ndash;bootnodes=<enodes>.&rdquo; written by <a href="http://jasonpoon.ca/">Jason Poon</a>.</p>
 <p>Later on in this configuration the <strong>miner</strong> and <strong>tx</strong> Pods initialize by calling the <strong>eth-bootnode-registrar:80</strong> service to receive a comma-separated list of bootnodes as Ethereum node address.</p>
 <p>An example response from this services (ellipses added for brevity):</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plain" data-lang="plain">enode://e01bc...672ceb1a7ada4f@192.168.108.136:30301,enode://a5f65...d7c9e356d@192.168.59.1:30301
 </code></pre></div><h4 id="bootnode-registrar-service">Bootnode Registrar Service</h4>
 <p>Create the file <code>130-bootnode-registrar-service.yml</code>:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">apiVersion</span>: v1
-<span style="color:#66d9ef">kind</span>: Service
-<span style="color:#66d9ef">metadata</span>:
-  <span style="color:#66d9ef">name</span>: eth-bootnode-registrar
-  <span style="color:#66d9ef">namespace</span>: the-project
-  <span style="color:#66d9ef">labels</span>:
-    <span style="color:#66d9ef">app</span>: eth-bootnode-registrar
-<span style="color:#66d9ef">spec</span>:
-  <span style="color:#66d9ef">selector</span>:
-    <span style="color:#66d9ef">app</span>: eth-bootnode-registrar
-  <span style="color:#66d9ef">type</span>: ClusterIP
-  <span style="color:#66d9ef">ports</span>:
-  - <span style="color:#66d9ef">port</span>: <span style="color:#ae81ff">80</span>
-    <span style="color:#66d9ef">targetPort</span>: <span style="color:#ae81ff">9898</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">v1</span>
+<span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Service</span>
+<span style="color:#f92672">metadata</span>:
+  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">eth-bootnode-registrar</span>
+  <span style="color:#f92672">namespace</span>: <span style="color:#ae81ff">the-project</span>
+  <span style="color:#f92672">labels</span>:
+    <span style="color:#f92672">app</span>: <span style="color:#ae81ff">eth-bootnode-registrar</span>
+<span style="color:#f92672">spec</span>:
+  <span style="color:#f92672">selector</span>:
+    <span style="color:#f92672">app</span>: <span style="color:#ae81ff">eth-bootnode-registrar</span>
+  <span style="color:#f92672">type</span>: <span style="color:#ae81ff">ClusterIP</span>
+  <span style="color:#f92672">ports</span>:
+  - <span style="color:#f92672">port</span>: <span style="color:#ae81ff">80</span>
+    <span style="color:#f92672">targetPort</span>: <span style="color:#ae81ff">9898</span>
 </code></pre></div><p>Apply the configuration:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl create -f ./130-bootnode-registrar-service.yml
 </code></pre></div><h4 id="bootnode-registrar-deployment">Bootnode Registrar Deployment</h4>
@@ -424,33 +424,33 @@ enode://e01bcec287...ceb1a7ada4f@192.168.108.136:30301
 <p>If you are using a custom namespace be sure to change the <strong>BOOTNODE_SERVICE</strong> environment variable to the namespace you are using: &ldquo;eth-bootnode.<strong>the-project</strong>.svc.cluster.local&rdquo;.</p>
 <p>The <a href="https://github.com/jpoon/bootnode-registrar">bootnode-registrar</a> Pod runs a single Docker container named <code>bootnode-registrar</code>, running the <code>jpoon/bootnode-registrar:v1.0.0</code> image from Docker hub.</p>
 <p>Create the file <code>140-bootnode-registrar-deployment.yml</code>:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">apiVersion</span>: apps/v1
-<span style="color:#66d9ef">kind</span>: Deployment
-<span style="color:#66d9ef">metadata</span>:
-  <span style="color:#66d9ef">name</span>: eth-bootnode-registrar
-  <span style="color:#66d9ef">namespace</span>: the-project
-  <span style="color:#66d9ef">labels</span>:
-    <span style="color:#66d9ef">app</span>: eth-bootnode-registrar
-<span style="color:#66d9ef">spec</span>:
-  <span style="color:#66d9ef">replicas</span>: <span style="color:#ae81ff">1</span>
-  <span style="color:#66d9ef">revisionHistoryLimit</span>: <span style="color:#ae81ff">1</span>
-  <span style="color:#66d9ef">selector</span>:
-    <span style="color:#66d9ef">matchLabels</span>:
-      <span style="color:#66d9ef">app</span>: eth-bootnode-registrar
-  <span style="color:#66d9ef">template</span>:
-    <span style="color:#66d9ef">metadata</span>:
-      <span style="color:#66d9ef">labels</span>:
-        <span style="color:#66d9ef">app</span>: eth-bootnode-registrar
-    <span style="color:#66d9ef">spec</span>:
-      <span style="color:#66d9ef">containers</span>:
-      - <span style="color:#66d9ef">name</span>: bootnode-registrar
-        <span style="color:#66d9ef">image</span>: jpoon/bootnode-registrar:v1<span style="color:#ae81ff">.0.0</span>
-        <span style="color:#66d9ef">imagePullPolicy</span>: IfNotPresent
-        <span style="color:#66d9ef">env</span>:
-        - <span style="color:#66d9ef">name</span>: BOOTNODE_SERVICE
-          <span style="color:#66d9ef">value</span>: <span style="color:#e6db74">&#34;eth-bootnode.the-project.svc.cluster.local&#34;</span>
-        <span style="color:#66d9ef">ports</span>:
-        - <span style="color:#66d9ef">containerPort</span>: <span style="color:#ae81ff">9898</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">apps/v1</span>
+<span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Deployment</span>
+<span style="color:#f92672">metadata</span>:
+  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">eth-bootnode-registrar</span>
+  <span style="color:#f92672">namespace</span>: <span style="color:#ae81ff">the-project</span>
+  <span style="color:#f92672">labels</span>:
+    <span style="color:#f92672">app</span>: <span style="color:#ae81ff">eth-bootnode-registrar</span>
+<span style="color:#f92672">spec</span>:
+  <span style="color:#f92672">replicas</span>: <span style="color:#ae81ff">1</span>
+  <span style="color:#f92672">revisionHistoryLimit</span>: <span style="color:#ae81ff">1</span>
+  <span style="color:#f92672">selector</span>:
+    <span style="color:#f92672">matchLabels</span>:
+      <span style="color:#f92672">app</span>: <span style="color:#ae81ff">eth-bootnode-registrar</span>
+  <span style="color:#f92672">template</span>:
+    <span style="color:#f92672">metadata</span>:
+      <span style="color:#f92672">labels</span>:
+        <span style="color:#f92672">app</span>: <span style="color:#ae81ff">eth-bootnode-registrar</span>
+    <span style="color:#f92672">spec</span>:
+      <span style="color:#f92672">containers</span>:
+      - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">bootnode-registrar</span>
+        <span style="color:#f92672">image</span>: <span style="color:#ae81ff">jpoon/bootnode-registrar:v1.0.0</span>
+        <span style="color:#f92672">imagePullPolicy</span>: <span style="color:#ae81ff">IfNotPresent</span>
+        <span style="color:#f92672">env</span>:
+        - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">BOOTNODE_SERVICE</span>
+          <span style="color:#f92672">value</span>: <span style="color:#e6db74">&#34;eth-bootnode.the-project.svc.cluster.local&#34;</span>
+        <span style="color:#f92672">ports</span>:
+        - <span style="color:#f92672">containerPort</span>: <span style="color:#ae81ff">9898</span>
 </code></pre></div><p>Apply the configuration:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl create -f ./140-bootnode-registrar-deployment.yml
 </code></pre></div><h3 id="ethstats-dashboard">Ethstats Dashboard</h3>
@@ -459,20 +459,20 @@ enode://e01bcec287...ceb1a7ada4f@192.168.108.136:30301
 <p>Read the article <a href="/ethereum-ethstats/">Ethereum Ethstats - Learning the Ethereum Blockchain through its metrics</a> if you are new to Blockchain or Ethereum terminology. In the article, I review essential metrics and their meaning.</p>
 <h4 id="ethstats-dashboard-service">Ethstats Dashboard Service</h4>
 <p>Create the file <code>210-ethstats-service.yml</code>:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">apiVersion</span>: v1
-<span style="color:#66d9ef">kind</span>: Service
-<span style="color:#66d9ef">metadata</span>:
-  <span style="color:#66d9ef">name</span>: eth-ethstats
-  <span style="color:#66d9ef">namespace</span>: the-project
-  <span style="color:#66d9ef">labels</span>:
-    <span style="color:#66d9ef">app</span>: eth-ethstats
-<span style="color:#66d9ef">spec</span>:
-  <span style="color:#66d9ef">selector</span>:
-    <span style="color:#66d9ef">app</span>: eth-ethstats
-  <span style="color:#66d9ef">type</span>: ClusterIP
-  <span style="color:#66d9ef">ports</span>:
-  - <span style="color:#66d9ef">port</span>: <span style="color:#ae81ff">80</span>
-    <span style="color:#66d9ef">targetPort</span>: http
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">v1</span>
+<span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Service</span>
+<span style="color:#f92672">metadata</span>:
+  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">eth-ethstats</span>
+  <span style="color:#f92672">namespace</span>: <span style="color:#ae81ff">the-project</span>
+  <span style="color:#f92672">labels</span>:
+    <span style="color:#f92672">app</span>: <span style="color:#ae81ff">eth-ethstats</span>
+<span style="color:#f92672">spec</span>:
+  <span style="color:#f92672">selector</span>:
+    <span style="color:#f92672">app</span>: <span style="color:#ae81ff">eth-ethstats</span>
+  <span style="color:#f92672">type</span>: <span style="color:#ae81ff">ClusterIP</span>
+  <span style="color:#f92672">ports</span>:
+  - <span style="color:#f92672">port</span>: <span style="color:#ae81ff">80</span>
+    <span style="color:#f92672">targetPort</span>: <span style="color:#ae81ff">http</span>
 </code></pre></div><p>Apply the configuration:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl create -f ./210-ethstats-service.yml
 </code></pre></div><h4 id="ethstats-dashboard-secret">Ethstats Dashboard Secret</h4>
@@ -483,53 +483,53 @@ enode://e01bcec287...ceb1a7ada4f@192.168.108.136:30301
  Y2hhbmdlbWU<span style="color:#f92672">=</span>
 </code></pre></div><p>The following Secret <code>eth-ethstats</code> is mounted by Ethstats and the <a href="https://github.com/ethereum/go-ethereum/wiki/geth">geth</a> node Pods further down this guide.</p>
 <p>Create the file <code>220-ethstats-secret.yml</code>:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">apiVersion</span>: v1
-<span style="color:#66d9ef">kind</span>: Secret
-<span style="color:#66d9ef">metadata</span>:
-  <span style="color:#66d9ef">name</span>: eth-ethstats
-  <span style="color:#66d9ef">namespace</span>: the-project
-  <span style="color:#66d9ef">labels</span>:
-    <span style="color:#66d9ef">app</span>: eth-ethstats
-<span style="color:#66d9ef">type</span>: Opaque
-<span style="color:#66d9ef">data</span>:
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">v1</span>
+<span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Secret</span>
+<span style="color:#f92672">metadata</span>:
+  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">eth-ethstats</span>
+  <span style="color:#f92672">namespace</span>: <span style="color:#ae81ff">the-project</span>
+  <span style="color:#f92672">labels</span>:
+    <span style="color:#f92672">app</span>: <span style="color:#ae81ff">eth-ethstats</span>
+<span style="color:#f92672">type</span>: <span style="color:#ae81ff">Opaque</span>
+<span style="color:#f92672">data</span>:
   <span style="color:#75715e"># &#34;changeme&#34;</span>
-  <span style="color:#66d9ef">WS_SECRET</span>: <span style="color:#e6db74">&#34;Y2hhbmdlbWU=&#34;</span>
+  <span style="color:#f92672">WS_SECRET</span>: <span style="color:#e6db74">&#34;Y2hhbmdlbWU=&#34;</span>
 </code></pre></div><p>Apply the configuration:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl create -f ./220-ethstats-secret.yml
 </code></pre></div><h4 id="ethstats-dashboard-deployment">Ethstats Dashboard Deployment</h4>
 <p>The Ethstats dashboard Deployment uses the Docker <a href="https://hub.docker.com/r/ethereumex/eth-stats-dashboard/">ethereumex/eth-stats-dashboard container</a> from <a href="https://github.com/EthereumEx">Ethereum Expertise</a>. The container uses the environment variable <strong>WS_SECRET</strong> to set the password the Ethereum nodes use in calling to report their stats.  The <strong>eth-ethstats</strong> Secret created above defines the password.</p>
 <p>Create the file <code>230-ethstats-deployment.yml</code>:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">apiVersion</span>: apps/v1
-<span style="color:#66d9ef">kind</span>: Deployment
-<span style="color:#66d9ef">metadata</span>:
-  <span style="color:#66d9ef">name</span>: eth-ethstats
-  <span style="color:#66d9ef">namespace</span>: the-project
-  <span style="color:#66d9ef">labels</span>:
-    <span style="color:#66d9ef">app</span>: eth-ethstats
-<span style="color:#66d9ef">spec</span>:
-  <span style="color:#66d9ef">replicas</span>: <span style="color:#ae81ff">1</span>
-  <span style="color:#66d9ef">revisionHistoryLimit</span>: <span style="color:#ae81ff">1</span>
-  <span style="color:#66d9ef">selector</span>:
-    <span style="color:#66d9ef">matchLabels</span>:
-      <span style="color:#66d9ef">app</span>: eth-ethstats
-  <span style="color:#66d9ef">template</span>:
-    <span style="color:#66d9ef">metadata</span>:
-      <span style="color:#66d9ef">labels</span>:
-        <span style="color:#66d9ef">app</span>: eth-ethstats
-    <span style="color:#66d9ef">spec</span>:
-      <span style="color:#66d9ef">containers</span>:
-      - <span style="color:#66d9ef">name</span>: ethstats
-        <span style="color:#66d9ef">image</span>: ethereumex/eth-stats-dashboard:latest
-        <span style="color:#66d9ef">imagePullPolicy</span>: IfNotPresent
-        <span style="color:#66d9ef">ports</span>:
-        - <span style="color:#66d9ef">name</span>: http
-          <span style="color:#66d9ef">containerPort</span>: <span style="color:#ae81ff">3000</span>
-        <span style="color:#66d9ef">env</span>:
-        - <span style="color:#66d9ef">name</span>: WS_SECRET
-          <span style="color:#66d9ef">valueFrom</span>:
-            <span style="color:#66d9ef">secretKeyRef</span>:
-              <span style="color:#66d9ef">name</span>: eth-ethstats
-              <span style="color:#66d9ef">key</span>: WS_SECRET
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">apps/v1</span>
+<span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Deployment</span>
+<span style="color:#f92672">metadata</span>:
+  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">eth-ethstats</span>
+  <span style="color:#f92672">namespace</span>: <span style="color:#ae81ff">the-project</span>
+  <span style="color:#f92672">labels</span>:
+    <span style="color:#f92672">app</span>: <span style="color:#ae81ff">eth-ethstats</span>
+<span style="color:#f92672">spec</span>:
+  <span style="color:#f92672">replicas</span>: <span style="color:#ae81ff">1</span>
+  <span style="color:#f92672">revisionHistoryLimit</span>: <span style="color:#ae81ff">1</span>
+  <span style="color:#f92672">selector</span>:
+    <span style="color:#f92672">matchLabels</span>:
+      <span style="color:#f92672">app</span>: <span style="color:#ae81ff">eth-ethstats</span>
+  <span style="color:#f92672">template</span>:
+    <span style="color:#f92672">metadata</span>:
+      <span style="color:#f92672">labels</span>:
+        <span style="color:#f92672">app</span>: <span style="color:#ae81ff">eth-ethstats</span>
+    <span style="color:#f92672">spec</span>:
+      <span style="color:#f92672">containers</span>:
+      - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">ethstats</span>
+        <span style="color:#f92672">image</span>: <span style="color:#ae81ff">ethereumex/eth-stats-dashboard:latest</span>
+        <span style="color:#f92672">imagePullPolicy</span>: <span style="color:#ae81ff">IfNotPresent</span>
+        <span style="color:#f92672">ports</span>:
+        - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">http</span>
+          <span style="color:#f92672">containerPort</span>: <span style="color:#ae81ff">3000</span>
+        <span style="color:#f92672">env</span>:
+        - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">WS_SECRET</span>
+          <span style="color:#f92672">valueFrom</span>:
+            <span style="color:#f92672">secretKeyRef</span>:
+              <span style="color:#f92672">name</span>: <span style="color:#ae81ff">eth-ethstats</span>
+              <span style="color:#f92672">key</span>: <span style="color:#ae81ff">WS_SECRET</span>
 </code></pre></div><p>Apply the configuration:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl create -f ./230-ethstats-deployment.yml
 </code></pre></div><p><a href="https://hub.docker.com/r/ethereumex/eth-stats-dashboard/">ethereumex/eth-stats-dashboard container</a></p>
@@ -538,30 +538,30 @@ enode://e01bcec287...ceb1a7ada4f@192.168.108.136:30301
 <p>The example below uses the secret <strong>imti-dev-production-tls</strong> to provide an SSL cert. <a href="https://letsencrypt.org/">Let&rsquo;s Encrypt</a> is a free, automated, and open Certificate Authority and a simple way to get up and running on a custom Kubernetes cluster. I suggest reading <a href="https://imti.co/lets-encrypt-kubernetes/">Let&rsquo;s Encrypt, Kubernetes</a> to get up and running quickly with SSL.</p>
 <p>Lastly, the following Ingress configuration uses annotations to specify a Basic Auth password from the secret <strong>imti-basic-auth</strong>, if you are new to Basic Auth on Kubernetes Ingress I suggest reading <a href="https://imti.co/kubernetes-ingress-basic-auth/">Basic Auth on Kubernetes Ingress</a>, which gives clear instructions for generating a secret that can be used with <strong><a href="https://kubernetes.github.io/ingress-nginx/">ingress-nginx</a></strong>.</p>
 <p>Create the file <code>240-ethstats-ingress.yml</code>:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">apiVersion</span>: extensions/v1beta1
-<span style="color:#66d9ef">kind</span>: Ingress
-<span style="color:#66d9ef">metadata</span>:
-  <span style="color:#66d9ef">name</span>: eth-ethstats
-  <span style="color:#66d9ef">namespace</span>: the-project
-  <span style="color:#66d9ef">labels</span>:
-    <span style="color:#66d9ef">app</span>: eth-ethstats
-  <span style="color:#66d9ef">annotations</span>:
-    <span style="color:#66d9ef">nginx.ingress.kubernetes.io/auth-type</span>: basic
-    <span style="color:#66d9ef">nginx.ingress.kubernetes.io/auth-secret</span>: imti-basic-auth
-    <span style="color:#66d9ef">nginx.ingress.kubernetes.io/auth-realm</span>: <span style="color:#e6db74">&#34;Authentication Required&#34;</span>
-<span style="color:#66d9ef">spec</span>:
-  <span style="color:#66d9ef">rules</span>:
-  - <span style="color:#66d9ef">host</span>: ethstats.dcp.dev.d4l.cloud
-    <span style="color:#66d9ef">http</span>:
-      <span style="color:#66d9ef">paths</span>:
-      - <span style="color:#66d9ef">backend</span>:
-          <span style="color:#66d9ef">serviceName</span>: eth-ethstats
-          <span style="color:#66d9ef">servicePort</span>: <span style="color:#ae81ff">80</span>
-        <span style="color:#66d9ef">path</span>: /
-  <span style="color:#66d9ef">tls</span>:
-  - <span style="color:#66d9ef">hosts</span>:
-    - ethstats.eth.imti.co
-    <span style="color:#66d9ef">secretName</span>: imti-dev-production-tls
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">extensions/v1beta1</span>
+<span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Ingress</span>
+<span style="color:#f92672">metadata</span>:
+  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">eth-ethstats</span>
+  <span style="color:#f92672">namespace</span>: <span style="color:#ae81ff">the-project</span>
+  <span style="color:#f92672">labels</span>:
+    <span style="color:#f92672">app</span>: <span style="color:#ae81ff">eth-ethstats</span>
+  <span style="color:#f92672">annotations</span>:
+    <span style="color:#f92672">nginx.ingress.kubernetes.io/auth-type</span>: <span style="color:#ae81ff">basic</span>
+    <span style="color:#f92672">nginx.ingress.kubernetes.io/auth-secret</span>: <span style="color:#ae81ff">imti-basic-auth</span>
+    <span style="color:#f92672">nginx.ingress.kubernetes.io/auth-realm</span>: <span style="color:#e6db74">&#34;Authentication Required&#34;</span>
+<span style="color:#f92672">spec</span>:
+  <span style="color:#f92672">rules</span>:
+  - <span style="color:#f92672">host</span>: <span style="color:#ae81ff">ethstats.dcp.dev.d4l.cloud</span>
+    <span style="color:#f92672">http</span>:
+      <span style="color:#f92672">paths</span>:
+      - <span style="color:#f92672">backend</span>:
+          <span style="color:#f92672">serviceName</span>: <span style="color:#ae81ff">eth-ethstats</span>
+          <span style="color:#f92672">servicePort</span>: <span style="color:#ae81ff">80</span>
+        <span style="color:#f92672">path</span>: <span style="color:#ae81ff">/</span>
+  <span style="color:#f92672">tls</span>:
+  - <span style="color:#f92672">hosts</span>:
+    - <span style="color:#ae81ff">ethstats.eth.imti.co</span>
+    <span style="color:#f92672">secretName</span>: <span style="color:#ae81ff">imti-dev-production-tls</span>
 </code></pre></div><p>Apply the configuration:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl create -f ./240-ethstats-ingress.yml
 </code></pre></div><h3 id="geth-configuration">Geth Configuration</h3>
@@ -577,34 +577,34 @@ enode://e01bcec287...ceb1a7ada4f@192.168.108.136:30301
 <p>This private network has a limited number of miners running with restricted CPU access, so we want to keep the difficulty low.</p>
 <p>Read the <a href="https://github.com/ethereum/go-ethereum/wiki/Private-network">official documentation on private networks</a> configuration for more details on choosing a network id and creating the Genesis Block.</p>
 <p>Create the file <code>310-geth-configmap.yml</code>:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">apiVersion</span>: v1
-<span style="color:#66d9ef">kind</span>: ConfigMap
-<span style="color:#66d9ef">metadata</span>:
-  <span style="color:#66d9ef">name</span>: eth-geth
-  <span style="color:#66d9ef">namespace</span>: the-project
-  <span style="color:#66d9ef">labels</span>:
-    <span style="color:#66d9ef">app</span>: eth-geth
-<span style="color:#66d9ef">data</span>:
-  <span style="color:#66d9ef">networkid</span>: <span style="color:#e6db74">&#34;8189450821&#34;</span>
-  <span style="color:#66d9ef">genesis.json</span>: |<span style="color:#e6db74">-
-</span><span style="color:#e6db74">    {</span>
-        <span style="color:#66d9ef">&#34;config&#34;: </span>{
-            <span style="color:#66d9ef">&#34;chainId&#34;: </span><span style="color:#ae81ff">8189450821</span>,
-            <span style="color:#66d9ef">&#34;homesteadBlock&#34;: </span><span style="color:#ae81ff">0</span>,
-            <span style="color:#66d9ef">&#34;eip150Block&#34;: </span><span style="color:#ae81ff">0</span>,
-            <span style="color:#66d9ef">&#34;eip155Block&#34;: </span><span style="color:#ae81ff">0</span>,
-            <span style="color:#66d9ef">&#34;eip158Block&#34;: </span><span style="color:#ae81ff">0</span>
-        },
-        <span style="color:#66d9ef">&#34;difficulty&#34;: </span><span style="color:#e6db74">&#34;0x400&#34;</span>,
-        <span style="color:#66d9ef">&#34;gasLimit&#34;: </span><span style="color:#e6db74">&#34;2000000&#34;</span>,
-        <span style="color:#e6db74">&#34;nonce&#34;</span>   : <span style="color:#e6db74">&#34;0x0000000000000000&#34;</span>,
-        <span style="color:#66d9ef">&#34;alloc&#34;: </span>{
-          <span style="color:#66d9ef">&#34;0x58917D55dA991da576F148FD7E3E05a34666988b&#34;: { &#34;balance&#34;: </span><span style="color:#e6db74">&#34;100000000000000000000&#34;</span> },
-          <span style="color:#66d9ef">&#34;0x29bb385cF8ae4Cc49dBd10CcdA5e3d591D831527&#34;: { &#34;balance&#34;: </span><span style="color:#e6db74">&#34;200000000000000000000&#34;</span> },
-          <span style="color:#66d9ef">&#34;0xf1c9C9a1Ba591588147c2A729c470D8AFA91a04d&#34;: { &#34;balance&#34;: </span><span style="color:#e6db74">&#34;300000000000000000000&#34;</span> }
-        }
-    }
-</code></pre></div><p>Apply the configuration:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">v1</span>
+<span style="color:#f92672">kind</span>: <span style="color:#ae81ff">ConfigMap</span>
+<span style="color:#f92672">metadata</span>:
+  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">eth-geth</span>
+  <span style="color:#f92672">namespace</span>: <span style="color:#ae81ff">the-project</span>
+  <span style="color:#f92672">labels</span>:
+    <span style="color:#f92672">app</span>: <span style="color:#ae81ff">eth-geth</span>
+<span style="color:#f92672">data</span>:
+  <span style="color:#f92672">networkid</span>: <span style="color:#e6db74">&#34;8189450821&#34;</span>
+  <span style="color:#f92672">genesis.json</span>: <span style="color:#e6db74">|-
+</span><span style="color:#e6db74">    {
+</span><span style="color:#e6db74">        &#34;config&#34;: {
+</span><span style="color:#e6db74">            &#34;chainId&#34;: 8189450821,
+</span><span style="color:#e6db74">            &#34;homesteadBlock&#34;: 0,
+</span><span style="color:#e6db74">            &#34;eip150Block&#34;: 0,
+</span><span style="color:#e6db74">            &#34;eip155Block&#34;: 0,
+</span><span style="color:#e6db74">            &#34;eip158Block&#34;: 0
+</span><span style="color:#e6db74">        },
+</span><span style="color:#e6db74">        &#34;difficulty&#34;: &#34;0x400&#34;,
+</span><span style="color:#e6db74">        &#34;gasLimit&#34;: &#34;2000000&#34;,
+</span><span style="color:#e6db74">        &#34;nonce&#34;   : &#34;0x0000000000000000&#34;,
+</span><span style="color:#e6db74">        &#34;alloc&#34;: {
+</span><span style="color:#e6db74">          &#34;0x58917D55dA991da576F148FD7E3E05a34666988b&#34;: { &#34;balance&#34;: &#34;100000000000000000000&#34; },
+</span><span style="color:#e6db74">          &#34;0x29bb385cF8ae4Cc49dBd10CcdA5e3d591D831527&#34;: { &#34;balance&#34;: &#34;200000000000000000000&#34; },
+</span><span style="color:#e6db74">          &#34;0xf1c9C9a1Ba591588147c2A729c470D8AFA91a04d&#34;: { &#34;balance&#34;: &#34;300000000000000000000&#34; }
+</span><span style="color:#e6db74">        }
+</span><span style="color:#e6db74">    }
+</span></code></pre></div><p>Apply the configuration:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl create -f ./310-geth-configmap.yml
 </code></pre></div><h3 id="geth-miner-nodes">Geth Miner Nodes</h3>
 <p>The following configuration deploys three <a href="https://github.com/ethereum/go-ethereum/wiki/geth">Geth</a> miner nodes that share a <a href="https://kubernetes.io/docs/concepts/configuration/secret/">Secret</a> used for creating their coinbase accounts.</p>
@@ -615,270 +615,270 @@ enode://e01bcec287...ceb1a7ada4f@192.168.108.136:30301
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> echo -n <span style="color:#e6db74">&#39;password&#39;</span> | base64
  cGFzc3dvcmQ<span style="color:#f92672">=</span>
 </code></pre></div><p>Create the file <code>320-geth-miner-secret.yml</code>:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">apiVersion</span>: v1
-<span style="color:#66d9ef">kind</span>: Secret
-<span style="color:#66d9ef">metadata</span>:
-  <span style="color:#66d9ef">name</span>: eth-geth-miner
-  <span style="color:#66d9ef">namespace</span>: the-project
-  <span style="color:#66d9ef">labels</span>:
-    <span style="color:#66d9ef">app</span>: eth-geth-miner
-<span style="color:#66d9ef">type</span>: Opaque
-<span style="color:#66d9ef">data</span>:
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">v1</span>
+<span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Secret</span>
+<span style="color:#f92672">metadata</span>:
+  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">eth-geth-miner</span>
+  <span style="color:#f92672">namespace</span>: <span style="color:#ae81ff">the-project</span>
+  <span style="color:#f92672">labels</span>:
+    <span style="color:#f92672">app</span>: <span style="color:#ae81ff">eth-geth-miner</span>
+<span style="color:#f92672">type</span>: <span style="color:#ae81ff">Opaque</span>
+<span style="color:#f92672">data</span>:
   <span style="color:#75715e"># echo -n &#39;password&#39; | base64</span>
-  <span style="color:#66d9ef">accountsecret</span>: <span style="color:#e6db74">&#34;cGFzc3dvcmQ=&#34;</span>
+  <span style="color:#f92672">accountsecret</span>: <span style="color:#e6db74">&#34;cGFzc3dvcmQ=&#34;</span>
 </code></pre></div><p>Apply the configuration:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl create -f ./320-geth-miner-secret.yml
 </code></pre></div><h4 id="geth-miner-deployment">Geth Miner Deployment</h4>
 <p>This configuration starts with three miner Pods but can easily be scaled. Pods consist of one main container named <strong>geth-miner</strong> and two initialization containers named <strong>init-genesis</strong> and <strong>eth-geth-miner</strong>.</p>
 <p>The pods request a minimum CPU allotment of 0.25 cores and maximum of 1.</p>
 <p>Create the file <code>330-geth-miner-deployment.yml</code>:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">apiVersion</span>: apps/v1
-<span style="color:#66d9ef">kind</span>: Deployment
-<span style="color:#66d9ef">metadata</span>:
-  <span style="color:#66d9ef">name</span>: eth-geth-miner
-  <span style="color:#66d9ef">namespace</span>: the-project
-  <span style="color:#66d9ef">labels</span>:
-    <span style="color:#66d9ef">app</span>: eth-geth-miner
-<span style="color:#66d9ef">spec</span>:
-  <span style="color:#66d9ef">replicas</span>: <span style="color:#ae81ff">3</span>
-  <span style="color:#66d9ef">revisionHistoryLimit</span>: <span style="color:#ae81ff">1</span>
-  <span style="color:#66d9ef">selector</span>:
-    <span style="color:#66d9ef">matchLabels</span>:
-      <span style="color:#66d9ef">app</span>: eth-geth-miner
-  <span style="color:#66d9ef">template</span>:
-    <span style="color:#66d9ef">metadata</span>:
-      <span style="color:#66d9ef">labels</span>:
-        <span style="color:#66d9ef">app</span>: eth-geth-miner
-    <span style="color:#66d9ef">spec</span>:
-      <span style="color:#66d9ef">containers</span>:
-      - <span style="color:#66d9ef">name</span>: geth-miner
-        <span style="color:#66d9ef">image</span>: ethereum/client-go:release<span style="color:#ae81ff">-1.8</span>
-        <span style="color:#66d9ef">imagePullPolicy</span>: IfNotPresent
-        <span style="color:#66d9ef">resources</span>:
-          <span style="color:#66d9ef">limits</span>:
-            <span style="color:#66d9ef">cpu</span>: <span style="color:#e6db74">&#34;.5&#34;</span>
-          <span style="color:#66d9ef">requests</span>:
-            <span style="color:#66d9ef">cpu</span>: <span style="color:#e6db74">&#34;0.25&#34;</span>
-        <span style="color:#66d9ef">command</span>: [<span style="color:#e6db74">&#34;/bin/sh&#34;</span>]
-        <span style="color:#66d9ef">args</span>:
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">apps/v1</span>
+<span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Deployment</span>
+<span style="color:#f92672">metadata</span>:
+  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">eth-geth-miner</span>
+  <span style="color:#f92672">namespace</span>: <span style="color:#ae81ff">the-project</span>
+  <span style="color:#f92672">labels</span>:
+    <span style="color:#f92672">app</span>: <span style="color:#ae81ff">eth-geth-miner</span>
+<span style="color:#f92672">spec</span>:
+  <span style="color:#f92672">replicas</span>: <span style="color:#ae81ff">3</span>
+  <span style="color:#f92672">revisionHistoryLimit</span>: <span style="color:#ae81ff">1</span>
+  <span style="color:#f92672">selector</span>:
+    <span style="color:#f92672">matchLabels</span>:
+      <span style="color:#f92672">app</span>: <span style="color:#ae81ff">eth-geth-miner</span>
+  <span style="color:#f92672">template</span>:
+    <span style="color:#f92672">metadata</span>:
+      <span style="color:#f92672">labels</span>:
+        <span style="color:#f92672">app</span>: <span style="color:#ae81ff">eth-geth-miner</span>
+    <span style="color:#f92672">spec</span>:
+      <span style="color:#f92672">containers</span>:
+      - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">geth-miner</span>
+        <span style="color:#f92672">image</span>: <span style="color:#ae81ff">ethereum/client-go:release-1.8</span>
+        <span style="color:#f92672">imagePullPolicy</span>: <span style="color:#ae81ff">IfNotPresent</span>
+        <span style="color:#f92672">resources</span>:
+          <span style="color:#f92672">limits</span>:
+            <span style="color:#f92672">cpu</span>: <span style="color:#e6db74">&#34;.5&#34;</span>
+          <span style="color:#f92672">requests</span>:
+            <span style="color:#f92672">cpu</span>: <span style="color:#e6db74">&#34;0.25&#34;</span>
+        <span style="color:#f92672">command</span>: [<span style="color:#e6db74">&#34;/bin/sh&#34;</span>]
+        <span style="color:#f92672">args</span>:
         - <span style="color:#e6db74">&#34;-c&#34;</span>
         - <span style="color:#e6db74">&#34;geth --bootnodes=`cat /root/.ethereum/bootnodes` --mine --etherbase=0 --networkid=${NETWORK_ID} --ethstats=${HOSTNAME}:${ETHSTATS_SECRET}@${ETHSTATS_SVC} --verbosity=5&#34;</span>
-        <span style="color:#66d9ef">env</span>:
-        - <span style="color:#66d9ef">name</span>: ETHSTATS_SVC
-          <span style="color:#66d9ef">value</span>: eth-ethstats.dcp
-        - <span style="color:#66d9ef">name</span>: ETHSTATS_SECRET
-          <span style="color:#66d9ef">valueFrom</span>:
-            <span style="color:#66d9ef">secretKeyRef</span>:
-              <span style="color:#66d9ef">name</span>: eth-ethstats
-              <span style="color:#66d9ef">key</span>: WS_SECRET
-        - <span style="color:#66d9ef">name</span>: NETWORK_ID
-          <span style="color:#66d9ef">valueFrom</span>:
-            <span style="color:#66d9ef">configMapKeyRef</span>:
-              <span style="color:#66d9ef">name</span>: eth-geth
-              <span style="color:#66d9ef">key</span>: networkid
-        <span style="color:#66d9ef">ports</span>:
-        - <span style="color:#66d9ef">name</span>: discovery-udp
-          <span style="color:#66d9ef">containerPort</span>: <span style="color:#ae81ff">30303</span>
-          <span style="color:#66d9ef">protocol</span>: UDP
-        - <span style="color:#66d9ef">name</span>: discovery-tcp
-          <span style="color:#66d9ef">containerPort</span>: <span style="color:#ae81ff">30303</span>
-        <span style="color:#66d9ef">volumeMounts</span>:
-        - <span style="color:#66d9ef">name</span>: data
-          <span style="color:#66d9ef">mountPath</span>: /root/.ethereum
-      <span style="color:#66d9ef">initContainers</span>:
-      - <span style="color:#66d9ef">name</span>: init-genesis
-        <span style="color:#66d9ef">image</span>: ethereum/client-go:release<span style="color:#ae81ff">-1.8</span>
-        <span style="color:#66d9ef">imagePullPolicy</span>: IfNotPresent
-        <span style="color:#66d9ef">args</span>:
+        <span style="color:#f92672">env</span>:
+        - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">ETHSTATS_SVC</span>
+          <span style="color:#f92672">value</span>: <span style="color:#ae81ff">eth-ethstats.dcp</span>
+        - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">ETHSTATS_SECRET</span>
+          <span style="color:#f92672">valueFrom</span>:
+            <span style="color:#f92672">secretKeyRef</span>:
+              <span style="color:#f92672">name</span>: <span style="color:#ae81ff">eth-ethstats</span>
+              <span style="color:#f92672">key</span>: <span style="color:#ae81ff">WS_SECRET</span>
+        - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">NETWORK_ID</span>
+          <span style="color:#f92672">valueFrom</span>:
+            <span style="color:#f92672">configMapKeyRef</span>:
+              <span style="color:#f92672">name</span>: <span style="color:#ae81ff">eth-geth</span>
+              <span style="color:#f92672">key</span>: <span style="color:#ae81ff">networkid</span>
+        <span style="color:#f92672">ports</span>:
+        - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">discovery-udp</span>
+          <span style="color:#f92672">containerPort</span>: <span style="color:#ae81ff">30303</span>
+          <span style="color:#f92672">protocol</span>: <span style="color:#ae81ff">UDP</span>
+        - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">discovery-tcp</span>
+          <span style="color:#f92672">containerPort</span>: <span style="color:#ae81ff">30303</span>
+        <span style="color:#f92672">volumeMounts</span>:
+        - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">data</span>
+          <span style="color:#f92672">mountPath</span>: <span style="color:#ae81ff">/root/.ethereum</span>
+      <span style="color:#f92672">initContainers</span>:
+      - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">init-genesis</span>
+        <span style="color:#f92672">image</span>: <span style="color:#ae81ff">ethereum/client-go:release-1.8</span>
+        <span style="color:#f92672">imagePullPolicy</span>: <span style="color:#ae81ff">IfNotPresent</span>
+        <span style="color:#f92672">args</span>:
         - <span style="color:#e6db74">&#34;init&#34;</span>
         - <span style="color:#e6db74">&#34;/var/geth/genesis.json&#34;</span>
-        <span style="color:#66d9ef">volumeMounts</span>:
-        - <span style="color:#66d9ef">name</span>: data
-          <span style="color:#66d9ef">mountPath</span>: /root/.ethereum
-        - <span style="color:#66d9ef">name</span>: config
-          <span style="color:#66d9ef">mountPath</span>: /var/geth
-      - <span style="color:#66d9ef">name</span>: create-account
-        <span style="color:#66d9ef">image</span>: ethereum/client-go:release<span style="color:#ae81ff">-1.8</span>
-        <span style="color:#66d9ef">imagePullPolicy</span>: IfNotPresent
-        <span style="color:#66d9ef">command</span>: [<span style="color:#e6db74">&#34;/bin/sh&#34;</span>]
-        <span style="color:#66d9ef">args</span>:
+        <span style="color:#f92672">volumeMounts</span>:
+        - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">data</span>
+          <span style="color:#f92672">mountPath</span>: <span style="color:#ae81ff">/root/.ethereum</span>
+        - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">config</span>
+          <span style="color:#f92672">mountPath</span>: <span style="color:#ae81ff">/var/geth</span>
+      - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">create-account</span>
+        <span style="color:#f92672">image</span>: <span style="color:#ae81ff">ethereum/client-go:release-1.8</span>
+        <span style="color:#f92672">imagePullPolicy</span>: <span style="color:#ae81ff">IfNotPresent</span>
+        <span style="color:#f92672">command</span>: [<span style="color:#e6db74">&#34;/bin/sh&#34;</span>]
+        <span style="color:#f92672">args</span>:
         - <span style="color:#e6db74">&#34;-c&#34;</span>
         - <span style="color:#e6db74">&#34;printf &#39;$(ACCOUNT_SECRET)\n$(ACCOUNT_SECRET)\n&#39; | geth account new&#34;</span>
-        <span style="color:#66d9ef">env</span>:
-        - <span style="color:#66d9ef">name</span>: ACCOUNT_SECRET
-          <span style="color:#66d9ef">valueFrom</span>:
-            <span style="color:#66d9ef">secretKeyRef</span>:
-              <span style="color:#66d9ef">name</span>: eth-geth-miner
-              <span style="color:#66d9ef">key</span>: accountsecret
-        <span style="color:#66d9ef">volumeMounts</span>:
-        - <span style="color:#66d9ef">name</span>: data
-          <span style="color:#66d9ef">mountPath</span>: /root/.ethereum
-      - <span style="color:#66d9ef">name</span>: get-bootnodes
-        <span style="color:#66d9ef">image</span>: ethereum/client-go:release<span style="color:#ae81ff">-1.8</span>
-        <span style="color:#66d9ef">imagePullPolicy</span>: IfNotPresent
-        <span style="color:#66d9ef">command</span>: [<span style="color:#e6db74">&#34;/bin/sh&#34;</span>]
-        <span style="color:#66d9ef">args</span>:
+        <span style="color:#f92672">env</span>:
+        - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">ACCOUNT_SECRET</span>
+          <span style="color:#f92672">valueFrom</span>:
+            <span style="color:#f92672">secretKeyRef</span>:
+              <span style="color:#f92672">name</span>: <span style="color:#ae81ff">eth-geth-miner</span>
+              <span style="color:#f92672">key</span>: <span style="color:#ae81ff">accountsecret</span>
+        <span style="color:#f92672">volumeMounts</span>:
+        - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">data</span>
+          <span style="color:#f92672">mountPath</span>: <span style="color:#ae81ff">/root/.ethereum</span>
+      - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">get-bootnodes</span>
+        <span style="color:#f92672">image</span>: <span style="color:#ae81ff">ethereum/client-go:release-1.8</span>
+        <span style="color:#f92672">imagePullPolicy</span>: <span style="color:#ae81ff">IfNotPresent</span>
+        <span style="color:#f92672">command</span>: [<span style="color:#e6db74">&#34;/bin/sh&#34;</span>]
+        <span style="color:#f92672">args</span>:
         - <span style="color:#e6db74">&#34;-c&#34;</span>
-        - |<span style="color:#e6db74">-
-</span><span style="color:#e6db74">          apk add --no-cache curl;</span>
-          CNT=<span style="color:#ae81ff">0</span>;
-          echo <span style="color:#e6db74">&#34;retreiving bootnodes from $BOOTNODE_REGISTRAR_SVC&#34;</span>
-          while [ $CNT -le <span style="color:#ae81ff">90</span> ]
-          do
-            curl -m <span style="color:#ae81ff">5</span> -s $BOOTNODE_REGISTRAR_SVC | xargs echo -n &gt;&gt; /geth/bootnodes;
-            if [ -s /geth/bootnodes ]
-            then
-              cat /geth/bootnodes;
-              exit <span style="color:#ae81ff">0</span>;
-            fi;
-
-            echo <span style="color:#e6db74">&#34;no bootnodes found. retrying $CNT...&#34;</span>;
-            sleep <span style="color:#ae81ff">2</span> || break;
-            CNT=$((CNT<span style="color:#ae81ff">+1</span>));
-          done;
-          echo <span style="color:#e6db74">&#34;WARNING. unable to find bootnodes. continuing but geth may not be able to find any peers.&#34;</span>;
-          exit <span style="color:#ae81ff">0</span>;
-        <span style="color:#66d9ef">env</span>:
-        - <span style="color:#66d9ef">name</span>: BOOTNODE_REGISTRAR_SVC
-          <span style="color:#66d9ef">value</span>: eth-bootnode-registrar
-        <span style="color:#66d9ef">volumeMounts</span>:
-        - <span style="color:#66d9ef">name</span>: data
-          <span style="color:#66d9ef">mountPath</span>: /geth
-      <span style="color:#66d9ef">volumes</span>:
-      - <span style="color:#66d9ef">name</span>: data
-        <span style="color:#66d9ef">emptyDir</span>: {}
-      - <span style="color:#66d9ef">name</span>: config
-        <span style="color:#66d9ef">configMap</span>:
-          <span style="color:#66d9ef">name</span>: eth-geth
-</code></pre></div><p>Apply the configuration:</p>
+        - <span style="color:#e6db74">|-
+</span><span style="color:#e6db74">          apk add --no-cache curl;
+</span><span style="color:#e6db74">          CNT=0;
+</span><span style="color:#e6db74">          echo &#34;retreiving bootnodes from $BOOTNODE_REGISTRAR_SVC&#34;
+</span><span style="color:#e6db74">          while [ $CNT -le 90 ]
+</span><span style="color:#e6db74">          do
+</span><span style="color:#e6db74">            curl -m 5 -s $BOOTNODE_REGISTRAR_SVC | xargs echo -n &gt;&gt; /geth/bootnodes;
+</span><span style="color:#e6db74">            if [ -s /geth/bootnodes ]
+</span><span style="color:#e6db74">            then
+</span><span style="color:#e6db74">              cat /geth/bootnodes;
+</span><span style="color:#e6db74">              exit 0;
+</span><span style="color:#e6db74">            fi;
+</span><span style="color:#e6db74">
+</span><span style="color:#e6db74">            echo &#34;no bootnodes found. retrying $CNT...&#34;;
+</span><span style="color:#e6db74">            sleep 2 || break;
+</span><span style="color:#e6db74">            CNT=$((CNT+1));
+</span><span style="color:#e6db74">          done;
+</span><span style="color:#e6db74">          echo &#34;WARNING. unable to find bootnodes. continuing but geth may not be able to find any peers.&#34;;
+</span><span style="color:#e6db74">          exit 0;
+</span><span style="color:#e6db74">        env:
+</span><span style="color:#e6db74">        - name: BOOTNODE_REGISTRAR_SVC
+</span><span style="color:#e6db74">          value: eth-bootnode-registrar
+</span><span style="color:#e6db74">        volumeMounts:
+</span><span style="color:#e6db74">        - name: data
+</span><span style="color:#e6db74">          mountPath: /geth
+</span><span style="color:#e6db74">      volumes:
+</span><span style="color:#e6db74">      - name: data
+</span><span style="color:#e6db74">        emptyDir: {}
+</span><span style="color:#e6db74">      - name: config
+</span><span style="color:#e6db74">        configMap:
+</span><span style="color:#e6db74">          name: eth-geth
+</span></code></pre></div><p>Apply the configuration:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl create -f ./330-geth-miner-deployment.yml
 </code></pre></div><h3 id="geth-transaction-nodes">Geth Transaction Nodes</h3>
 <p>Geth Transaction Nodes <strong>eth-geth-tx</strong> are only used to create transactions on the private blockchain.</p>
 <h4 id="geth-transaction-nodes-service">Geth Transaction Nodes Service</h4>
 <p>Access to Geth Transaction Nodes is through a <a href="https://kubernetes.io/docs/concepts/services-networking/service/">Service</a> named <strong>eth-geth-tx</strong> on ports 8545 and 8546.</p>
 <p>Create the file <code>410-geth-tx-service.yml</code>:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">apiVersion</span>: v1
-<span style="color:#66d9ef">kind</span>: Service
-<span style="color:#66d9ef">metadata</span>:
-  <span style="color:#66d9ef">name</span>: eth-geth-tx
-  <span style="color:#66d9ef">namespace</span>: the-project
-  <span style="color:#66d9ef">labels</span>:
-    <span style="color:#66d9ef">app</span>: eth-geth-tx
-<span style="color:#66d9ef">spec</span>:
-  <span style="color:#66d9ef">selector</span>:
-    <span style="color:#66d9ef">app</span>: eth-geth-tx
-  <span style="color:#66d9ef">type</span>: ClusterIP
-  <span style="color:#66d9ef">ports</span>:
-  - <span style="color:#66d9ef">name</span>: rpc
-    <span style="color:#66d9ef">port</span>: <span style="color:#ae81ff">8545</span>
-  - <span style="color:#66d9ef">name</span>: ws
-    <span style="color:#66d9ef">port</span>: <span style="color:#ae81ff">8546</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">v1</span>
+<span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Service</span>
+<span style="color:#f92672">metadata</span>:
+  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">eth-geth-tx</span>
+  <span style="color:#f92672">namespace</span>: <span style="color:#ae81ff">the-project</span>
+  <span style="color:#f92672">labels</span>:
+    <span style="color:#f92672">app</span>: <span style="color:#ae81ff">eth-geth-tx</span>
+<span style="color:#f92672">spec</span>:
+  <span style="color:#f92672">selector</span>:
+    <span style="color:#f92672">app</span>: <span style="color:#ae81ff">eth-geth-tx</span>
+  <span style="color:#f92672">type</span>: <span style="color:#ae81ff">ClusterIP</span>
+  <span style="color:#f92672">ports</span>:
+  - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">rpc</span>
+    <span style="color:#f92672">port</span>: <span style="color:#ae81ff">8545</span>
+  - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">ws</span>
+    <span style="color:#f92672">port</span>: <span style="color:#ae81ff">8546</span>
 </code></pre></div><p>Apply the configuration:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl create -f ./410-geth-tx-service.yml
 </code></pre></div><h4 id="geth-transaction-nodes-deployment">Geth Transaction Nodes Deployment</h4>
 <p>Issuing transactions on the private Blockchain occur through a set of two Geth Transaction Nodes; these Pods are setup similar to miners running the official <a href="https://hub.docker.com/r/ethereum/client-go/">ethereum/client-go:release-1.8</a>. Geth Transaction Node consist of one main container named <strong>geth-tx</strong> and two initialization containers <strong>init-genesis</strong> and <strong>get-bootnodes</strong>.</p>
 <p>Create the file <code>420-geth-tx-deployment.yml</code>:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">apiVersion</span>: apps/v1
-<span style="color:#66d9ef">kind</span>: Deployment
-<span style="color:#66d9ef">metadata</span>:
-  <span style="color:#66d9ef">name</span>: eth-geth-tx
-  <span style="color:#66d9ef">namespace</span>: the-project
-  <span style="color:#66d9ef">labels</span>:
-    <span style="color:#66d9ef">app</span>: eth-geth-tx
-<span style="color:#66d9ef">spec</span>:
-  <span style="color:#66d9ef">replicas</span>: <span style="color:#ae81ff">2</span>
-  <span style="color:#66d9ef">selector</span>:
-    <span style="color:#66d9ef">matchLabels</span>:
-      <span style="color:#66d9ef">app</span>: eth-geth-tx
-  <span style="color:#66d9ef">template</span>:
-    <span style="color:#66d9ef">metadata</span>:
-      <span style="color:#66d9ef">labels</span>:
-        <span style="color:#66d9ef">app</span>: eth-geth-tx
-    <span style="color:#66d9ef">spec</span>:
-      <span style="color:#66d9ef">containers</span>:
-      - <span style="color:#66d9ef">name</span>: geth-tx
-        <span style="color:#66d9ef">image</span>: ethereum/client-go:release<span style="color:#ae81ff">-1.8</span>
-        <span style="color:#66d9ef">imagePullPolicy</span>: IfNotPresent
-        <span style="color:#66d9ef">command</span>: [<span style="color:#e6db74">&#34;/bin/sh&#34;</span>]
-        <span style="color:#66d9ef">args</span>:
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">apps/v1</span>
+<span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Deployment</span>
+<span style="color:#f92672">metadata</span>:
+  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">eth-geth-tx</span>
+  <span style="color:#f92672">namespace</span>: <span style="color:#ae81ff">the-project</span>
+  <span style="color:#f92672">labels</span>:
+    <span style="color:#f92672">app</span>: <span style="color:#ae81ff">eth-geth-tx</span>
+<span style="color:#f92672">spec</span>:
+  <span style="color:#f92672">replicas</span>: <span style="color:#ae81ff">2</span>
+  <span style="color:#f92672">selector</span>:
+    <span style="color:#f92672">matchLabels</span>:
+      <span style="color:#f92672">app</span>: <span style="color:#ae81ff">eth-geth-tx</span>
+  <span style="color:#f92672">template</span>:
+    <span style="color:#f92672">metadata</span>:
+      <span style="color:#f92672">labels</span>:
+        <span style="color:#f92672">app</span>: <span style="color:#ae81ff">eth-geth-tx</span>
+    <span style="color:#f92672">spec</span>:
+      <span style="color:#f92672">containers</span>:
+      - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">geth-tx</span>
+        <span style="color:#f92672">image</span>: <span style="color:#ae81ff">ethereum/client-go:release-1.8</span>
+        <span style="color:#f92672">imagePullPolicy</span>: <span style="color:#ae81ff">IfNotPresent</span>
+        <span style="color:#f92672">command</span>: [<span style="color:#e6db74">&#34;/bin/sh&#34;</span>]
+        <span style="color:#f92672">args</span>:
         - <span style="color:#e6db74">&#34;-c&#34;</span>
         - <span style="color:#e6db74">&#34;geth --bootnodes=`cat /root/.ethereum/bootnodes` --rpc --rpcapi=eth,net,web3 --rpccorsdomain=&#39;*&#39; --ws --networkid=${NETWORK_ID} --ethstats=${HOSTNAME}:${ETHSTATS_SECRET}@${ETHSTATS_SVC} --verbosity=5&#34;</span>
-        <span style="color:#66d9ef">env</span>:
-        - <span style="color:#66d9ef">name</span>: ETHSTATS_SVC
-          <span style="color:#66d9ef">value</span>: eth-ethstats.dcp
-        - <span style="color:#66d9ef">name</span>: ETHSTATS_SECRET
-          <span style="color:#66d9ef">valueFrom</span>:
-            <span style="color:#66d9ef">secretKeyRef</span>:
-              <span style="color:#66d9ef">name</span>: eth-ethstats
-              <span style="color:#66d9ef">key</span>: WS_SECRET
-        - <span style="color:#66d9ef">name</span>: NETWORK_ID
-          <span style="color:#66d9ef">valueFrom</span>:
-            <span style="color:#66d9ef">configMapKeyRef</span>:
-              <span style="color:#66d9ef">name</span>: eth-geth
-              <span style="color:#66d9ef">key</span>: networkid
-        <span style="color:#66d9ef">ports</span>:
-        - <span style="color:#66d9ef">name</span>: rpc
-          <span style="color:#66d9ef">containerPort</span>: <span style="color:#ae81ff">8545</span>
-        - <span style="color:#66d9ef">name</span>: ws
-          <span style="color:#66d9ef">containerPort</span>: <span style="color:#ae81ff">8546</span>
-        - <span style="color:#66d9ef">name</span>: discovery-udp
-          <span style="color:#66d9ef">containerPort</span>: <span style="color:#ae81ff">30303</span>
-          <span style="color:#66d9ef">protocol</span>: UDP
-        - <span style="color:#66d9ef">name</span>: discovery-tcp
-          <span style="color:#66d9ef">containerPort</span>: <span style="color:#ae81ff">30303</span>
-        <span style="color:#66d9ef">volumeMounts</span>:
-        - <span style="color:#66d9ef">name</span>: data
-          <span style="color:#66d9ef">mountPath</span>: /root/.ethereum
-      <span style="color:#66d9ef">initContainers</span>:
-      - <span style="color:#66d9ef">name</span>: init-genesis
-        <span style="color:#66d9ef">image</span>: ethereum/client-go:release<span style="color:#ae81ff">-1.8</span>
-        <span style="color:#66d9ef">imagePullPolicy</span>: IfNotPresent
-        <span style="color:#66d9ef">args</span>:
+        <span style="color:#f92672">env</span>:
+        - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">ETHSTATS_SVC</span>
+          <span style="color:#f92672">value</span>: <span style="color:#ae81ff">eth-ethstats.dcp</span>
+        - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">ETHSTATS_SECRET</span>
+          <span style="color:#f92672">valueFrom</span>:
+            <span style="color:#f92672">secretKeyRef</span>:
+              <span style="color:#f92672">name</span>: <span style="color:#ae81ff">eth-ethstats</span>
+              <span style="color:#f92672">key</span>: <span style="color:#ae81ff">WS_SECRET</span>
+        - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">NETWORK_ID</span>
+          <span style="color:#f92672">valueFrom</span>:
+            <span style="color:#f92672">configMapKeyRef</span>:
+              <span style="color:#f92672">name</span>: <span style="color:#ae81ff">eth-geth</span>
+              <span style="color:#f92672">key</span>: <span style="color:#ae81ff">networkid</span>
+        <span style="color:#f92672">ports</span>:
+        - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">rpc</span>
+          <span style="color:#f92672">containerPort</span>: <span style="color:#ae81ff">8545</span>
+        - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">ws</span>
+          <span style="color:#f92672">containerPort</span>: <span style="color:#ae81ff">8546</span>
+        - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">discovery-udp</span>
+          <span style="color:#f92672">containerPort</span>: <span style="color:#ae81ff">30303</span>
+          <span style="color:#f92672">protocol</span>: <span style="color:#ae81ff">UDP</span>
+        - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">discovery-tcp</span>
+          <span style="color:#f92672">containerPort</span>: <span style="color:#ae81ff">30303</span>
+        <span style="color:#f92672">volumeMounts</span>:
+        - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">data</span>
+          <span style="color:#f92672">mountPath</span>: <span style="color:#ae81ff">/root/.ethereum</span>
+      <span style="color:#f92672">initContainers</span>:
+      - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">init-genesis</span>
+        <span style="color:#f92672">image</span>: <span style="color:#ae81ff">ethereum/client-go:release-1.8</span>
+        <span style="color:#f92672">imagePullPolicy</span>: <span style="color:#ae81ff">IfNotPresent</span>
+        <span style="color:#f92672">args</span>:
         - <span style="color:#e6db74">&#34;init&#34;</span>
         - <span style="color:#e6db74">&#34;/var/geth/genesis.json&#34;</span>
-        <span style="color:#66d9ef">volumeMounts</span>:
-        - <span style="color:#66d9ef">name</span>: data
-          <span style="color:#66d9ef">mountPath</span>: /root/.ethereum
-        - <span style="color:#66d9ef">name</span>: config
-          <span style="color:#66d9ef">mountPath</span>: /var/geth
-      - <span style="color:#66d9ef">name</span>: get-bootnodes
-        <span style="color:#66d9ef">image</span>: ethereum/client-go:release<span style="color:#ae81ff">-1.8</span>
-        <span style="color:#66d9ef">imagePullPolicy</span>: IfNotPresent
-        <span style="color:#66d9ef">command</span>: [<span style="color:#e6db74">&#34;/bin/sh&#34;</span>]
-        <span style="color:#66d9ef">args</span>:
+        <span style="color:#f92672">volumeMounts</span>:
+        - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">data</span>
+          <span style="color:#f92672">mountPath</span>: <span style="color:#ae81ff">/root/.ethereum</span>
+        - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">config</span>
+          <span style="color:#f92672">mountPath</span>: <span style="color:#ae81ff">/var/geth</span>
+      - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">get-bootnodes</span>
+        <span style="color:#f92672">image</span>: <span style="color:#ae81ff">ethereum/client-go:release-1.8</span>
+        <span style="color:#f92672">imagePullPolicy</span>: <span style="color:#ae81ff">IfNotPresent</span>
+        <span style="color:#f92672">command</span>: [<span style="color:#e6db74">&#34;/bin/sh&#34;</span>]
+        <span style="color:#f92672">args</span>:
         - <span style="color:#e6db74">&#34;-c&#34;</span>
-        - |<span style="color:#e6db74">-
-</span><span style="color:#e6db74">          apk add --no-cache curl;</span>
-          CNT=<span style="color:#ae81ff">0</span>;
-          echo <span style="color:#e6db74">&#34;retreiving bootnodes from $BOOTNODE_REGISTRAR_SVC&#34;</span>
-          while [ $CNT -le <span style="color:#ae81ff">90</span> ]
-          do
-            curl -m <span style="color:#ae81ff">5</span> -s $BOOTNODE_REGISTRAR_SVC | xargs echo -n &gt;&gt; /geth/bootnodes;
-            if [ -s /geth/bootnodes ]
-            then
-              cat /geth/bootnodes;
-              exit <span style="color:#ae81ff">0</span>;
-            fi;
-
-            echo <span style="color:#e6db74">&#34;no bootnodes found. retrying $CNT...&#34;</span>;
-            sleep <span style="color:#ae81ff">2</span> || break;
-            CNT=$((CNT<span style="color:#ae81ff">+1</span>));
-          done;
-          echo <span style="color:#e6db74">&#34;WARNING. unable to find bootnodes. continuing but geth may not be able to find any peers.&#34;</span>;
-          exit <span style="color:#ae81ff">0</span>;
-        <span style="color:#66d9ef">env</span>:
-        - <span style="color:#66d9ef">name</span>: BOOTNODE_REGISTRAR_SVC
-          <span style="color:#66d9ef">value</span>: eth-bootnode-registrar.dcp
-        <span style="color:#66d9ef">volumeMounts</span>:
-        - <span style="color:#66d9ef">name</span>: data
-          <span style="color:#66d9ef">mountPath</span>: /geth
-      <span style="color:#66d9ef">volumes</span>:
-      - <span style="color:#66d9ef">name</span>: data
-        <span style="color:#66d9ef">emptyDir</span>: {}
-      - <span style="color:#66d9ef">name</span>: config
-        <span style="color:#66d9ef">configMap</span>:
-          <span style="color:#66d9ef">name</span>: eth-geth
-</code></pre></div><p>Apply the configuration:</p>
+        - <span style="color:#e6db74">|-
+</span><span style="color:#e6db74">          apk add --no-cache curl;
+</span><span style="color:#e6db74">          CNT=0;
+</span><span style="color:#e6db74">          echo &#34;retreiving bootnodes from $BOOTNODE_REGISTRAR_SVC&#34;
+</span><span style="color:#e6db74">          while [ $CNT -le 90 ]
+</span><span style="color:#e6db74">          do
+</span><span style="color:#e6db74">            curl -m 5 -s $BOOTNODE_REGISTRAR_SVC | xargs echo -n &gt;&gt; /geth/bootnodes;
+</span><span style="color:#e6db74">            if [ -s /geth/bootnodes ]
+</span><span style="color:#e6db74">            then
+</span><span style="color:#e6db74">              cat /geth/bootnodes;
+</span><span style="color:#e6db74">              exit 0;
+</span><span style="color:#e6db74">            fi;
+</span><span style="color:#e6db74">
+</span><span style="color:#e6db74">            echo &#34;no bootnodes found. retrying $CNT...&#34;;
+</span><span style="color:#e6db74">            sleep 2 || break;
+</span><span style="color:#e6db74">            CNT=$((CNT+1));
+</span><span style="color:#e6db74">          done;
+</span><span style="color:#e6db74">          echo &#34;WARNING. unable to find bootnodes. continuing but geth may not be able to find any peers.&#34;;
+</span><span style="color:#e6db74">          exit 0;
+</span><span style="color:#e6db74">        env:
+</span><span style="color:#e6db74">        - name: BOOTNODE_REGISTRAR_SVC
+</span><span style="color:#e6db74">          value: eth-bootnode-registrar.dcp
+</span><span style="color:#e6db74">        volumeMounts:
+</span><span style="color:#e6db74">        - name: data
+</span><span style="color:#e6db74">          mountPath: /geth
+</span><span style="color:#e6db74">      volumes:
+</span><span style="color:#e6db74">      - name: data
+</span><span style="color:#e6db74">        emptyDir: {}
+</span><span style="color:#e6db74">      - name: config
+</span><span style="color:#e6db74">        configMap:
+</span><span style="color:#e6db74">          name: eth-geth
+</span></code></pre></div><p>Apply the configuration:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl create -f ./420-geth-tx-deployment.yml
 </code></pre></div><h2 id="conclusion">Conclusion</h2>
 <p>Depending on your difficulty and resources it may take 10-20 minutes to mine your first block in this private chain. However, the difficulty is automatically adjusted, and you may begin to mine blocks at around 20-30 seconds on average.</p>

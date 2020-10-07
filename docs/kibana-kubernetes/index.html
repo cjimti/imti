@@ -258,33 +258,33 @@
 <h2 id="project-namespace">Project <a href="/kubernetes-production-elasticsearch/#project-namespace">Namespace</a></h2>
 <p>I use <code>the-project</code> as a namespace for all my examples and testing. <a href="https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/">Kubernetes Namespaces</a> are the main delimiter I use for security and organization. Configuration files are organized by project, and in Kubernetes, these projects are separated by namespace; therefore I always include a namespace configuration. There is no harm in asking Kubernetes to create a namespace that already exists; an error is returned confirming its existence.</p>
 <p><code>00-namespace.yml</code>:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">apiVersion</span>: v1
-<span style="color:#66d9ef">kind</span>: Namespace
-<span style="color:#66d9ef">metadata</span>:
-  <span style="color:#66d9ef">name</span>: the-project
-  <span style="color:#66d9ef">labels</span>:
-    <span style="color:#66d9ef">env</span>: dev
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">v1</span>
+<span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Namespace</span>
+<span style="color:#f92672">metadata</span>:
+  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">the-project</span>
+  <span style="color:#f92672">labels</span>:
+    <span style="color:#f92672">env</span>: <span style="color:#ae81ff">dev</span>
 </code></pre></div><p>Create the namespace:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl create -f 00-namespace.yml
 </code></pre></div><h2 id="service"><a href="https://kubernetes.io/docs/concepts/services-networking/service/">Service</a></h2>
 <p>I prefer setting up a <a href="https://kubernetes.io/docs/concepts/services-networking/service/">Service</a> early on in the process of configuring up a new application. In Kubernetes, <a href="https://kubernetes.io/docs/concepts/services-networking/service/">Service</a>s persist where many other components can come and go. Microservices in Kubernetes communicate through services rather than having to discover or rely on <a href="https://kubernetes.io/docs/concepts/workloads/pods/pod-overview/">Pods</a> directly. The service name and port automatically route traffic to Pods found with their selector.</p>
 <p><code>20-service.yml</code>:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">apiVersion</span>: v1
-<span style="color:#66d9ef">kind</span>: Service
-<span style="color:#66d9ef">metadata</span>:
-  <span style="color:#66d9ef">name</span>: kibana
-  <span style="color:#66d9ef">namespace</span>: the-project
-  <span style="color:#66d9ef">labels</span>:
-    <span style="color:#66d9ef">app</span>: kibana
-    <span style="color:#66d9ef">env</span>: dev
-<span style="color:#66d9ef">spec</span>:
-  <span style="color:#66d9ef">selector</span>:
-    <span style="color:#66d9ef">app</span>: kibana
-  <span style="color:#66d9ef">ports</span>:
-  - <span style="color:#66d9ef">protocol</span>: <span style="color:#e6db74">&#34;TCP&#34;</span>
-    <span style="color:#66d9ef">port</span>: <span style="color:#ae81ff">80</span>
-    <span style="color:#66d9ef">targetPort</span>: <span style="color:#ae81ff">5601</span>
-  <span style="color:#66d9ef">type</span>: ClusterIP
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">v1</span>
+<span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Service</span>
+<span style="color:#f92672">metadata</span>:
+  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">kibana</span>
+  <span style="color:#f92672">namespace</span>: <span style="color:#ae81ff">the-project</span>
+  <span style="color:#f92672">labels</span>:
+    <span style="color:#f92672">app</span>: <span style="color:#ae81ff">kibana</span>
+    <span style="color:#f92672">env</span>: <span style="color:#ae81ff">dev</span>
+<span style="color:#f92672">spec</span>:
+  <span style="color:#f92672">selector</span>:
+    <span style="color:#f92672">app</span>: <span style="color:#ae81ff">kibana</span>
+  <span style="color:#f92672">ports</span>:
+  - <span style="color:#f92672">protocol</span>: <span style="color:#e6db74">&#34;TCP&#34;</span>
+    <span style="color:#f92672">port</span>: <span style="color:#ae81ff">80</span>
+    <span style="color:#f92672">targetPort</span>: <span style="color:#ae81ff">5601</span>
+  <span style="color:#f92672">type</span>: <span style="color:#ae81ff">ClusterIP</span>
 </code></pre></div><p>Create the service:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl create -f 20-service.yml
 </code></pre></div><p>In the configuration above, communicating within the Kubernetes cluster and in <code>the-project</code> namespace, the url http://kibana:80 uses the new service to route traffic to any pods with the <a href="https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/">label</a> <strong>app: kibana</strong> listening on port 5601.</p>
@@ -292,23 +292,23 @@
 <h2 id="kibana-configmap">Kibana <a href="https://kubernetes.io/docs/tasks/configure-pod-container/configure-pod-configmap/#create-a-configmap">ConfigMap</a></h2>
 <p>Kibana uses the configuration file <strong><a href="https://github.com/elastic/kibana/blob/master/config/kibana.yml">kibana.yml</a></strong>. Pods running Kibana are set up in the deployment further down this guide. The deployment instructs the Pods to mount this <a href="https://kubernetes.io/docs/tasks/configure-pod-container/configure-pod-configmap/#create-a-configmap">ConfigMap</a> as a file system from which Kibana accesses the data key <code>kibana.yml:</code> as a file.</p>
 <p><code>30-configmap.yml</code>:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">apiVersion</span>: v1
-<span style="color:#66d9ef">kind</span>: ConfigMap
-<span style="color:#66d9ef">metadata</span>:
-  <span style="color:#66d9ef">name</span>: kibana
-  <span style="color:#66d9ef">namespace</span>: the-project
-  <span style="color:#66d9ef">labels</span>:
-    <span style="color:#66d9ef">app</span>: kibana
-    <span style="color:#66d9ef">env</span>: dev
-<span style="color:#66d9ef">data</span>:
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">v1</span>
+<span style="color:#f92672">kind</span>: <span style="color:#ae81ff">ConfigMap</span>
+<span style="color:#f92672">metadata</span>:
+  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">kibana</span>
+  <span style="color:#f92672">namespace</span>: <span style="color:#ae81ff">the-project</span>
+  <span style="color:#f92672">labels</span>:
+    <span style="color:#f92672">app</span>: <span style="color:#ae81ff">kibana</span>
+    <span style="color:#f92672">env</span>: <span style="color:#ae81ff">dev</span>
+<span style="color:#f92672">data</span>:
   <span style="color:#75715e"># kibana.yml is mounted into the Kibana container</span>
   <span style="color:#75715e"># see https://github.com/elastic/kibana/blob/master/config/kibana.yml</span>
   <span style="color:#75715e"># Kubernetes Ingress is used to route kib.the-project.d4ldev.txn2.com</span>
-  <span style="color:#66d9ef">kibana.yml</span>: |<span style="color:#e6db74">-
-</span><span style="color:#e6db74">    server.name: kib.the-project.d4ldev.txn2.com</span>
-    <span style="color:#66d9ef">server.host</span>: <span style="color:#e6db74">&#34;0&#34;</span>
-    <span style="color:#66d9ef">elasticsearch.url</span>: http://elasticsearch:<span style="color:#ae81ff">9200</span>
-</code></pre></div><p>Create the configmap:</p>
+  <span style="color:#f92672">kibana.yml</span>: <span style="color:#e6db74">|-
+</span><span style="color:#e6db74">    server.name: kib.the-project.d4ldev.txn2.com
+</span><span style="color:#e6db74">    server.host: &#34;0&#34;
+</span><span style="color:#e6db74">    elasticsearch.url: http://elasticsearch:9200
+</span></code></pre></div><p>Create the configmap:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl create -f 30-configmap.yml
 </code></pre></div><h2 id="deployment">Deployment</h2>
 <p>The Kubernetes Kibana deployment below is set to create one replica, that is one Pod in the <a href="https://kubernetes.io/docs/concepts/workloads/controllers/replicaset/">ReplicaSet</a> automatically created by the Deployment. The Deployment and can be scaled as needed by changing <strong>replicas: 1</strong> to a suitable value.</p>
@@ -316,42 +316,42 @@
 <p>Elastic maintains an official set of Docker containers for Kibana at <a href="https://www.docker.elastic.co/#kibana">www.docker.elastic.co</a>. If you followed along with the previous article <a href="/kubernetes-production-elasticsearch/">Production Grade Elasticsearch on Kubernetes</a>, you might remember setting <strong>CLUSTER_NAME</strong> to <strong>elasticsearch</strong> in the StatefulSet and Deployments.</p>
 <p>The <strong>containerPort: 5601</strong> is exposed as Kibana listens on 5601 by default unless changed in the <a href="#kibana-configmap">Kibana ConfigMap</a> above.</p>
 <p><code>40-deployment.yml</code>:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">apiVersion</span>: apps/v1
-<span style="color:#66d9ef">kind</span>: Deployment
-<span style="color:#66d9ef">metadata</span>:
-  <span style="color:#66d9ef">name</span>: kibana
-  <span style="color:#66d9ef">namespace</span>: the-project
-  <span style="color:#66d9ef">labels</span>:
-    <span style="color:#66d9ef">app</span>: kibana
-    <span style="color:#66d9ef">env</span>: dev
-<span style="color:#66d9ef">spec</span>:
-  <span style="color:#66d9ef">replicas</span>: <span style="color:#ae81ff">1</span>
-  <span style="color:#66d9ef">selector</span>:
-    <span style="color:#66d9ef">matchLabels</span>:
-      <span style="color:#66d9ef">app</span>: kibana
-  <span style="color:#66d9ef">template</span>:
-    <span style="color:#66d9ef">metadata</span>:
-      <span style="color:#66d9ef">labels</span>:
-        <span style="color:#66d9ef">app</span>: kibana
-        <span style="color:#66d9ef">env</span>: dev
-    <span style="color:#66d9ef">spec</span>:
-      <span style="color:#66d9ef">volumes</span>:
-      - <span style="color:#66d9ef">name</span>: kibana-config-volume
-        <span style="color:#66d9ef">configMap</span>:
-          <span style="color:#66d9ef">name</span>: kibana
-      <span style="color:#66d9ef">containers</span>:
-      - <span style="color:#66d9ef">name</span>: kibana
-        <span style="color:#66d9ef">image</span>: docker.elastic.co/kibana/kibana-oss:<span style="color:#ae81ff">6.2.4</span>
-        <span style="color:#66d9ef">imagePullPolicy</span>: Always
-        <span style="color:#66d9ef">volumeMounts</span>:
-        - <span style="color:#66d9ef">name</span>: kibana-config-volume
-          <span style="color:#66d9ef">mountPath</span>: /usr/share/kibana/config
-        <span style="color:#66d9ef">env</span>:
-        - <span style="color:#66d9ef">name</span>: CLUSTER_NAME
-          <span style="color:#66d9ef">value</span>: elasticsearch
-        <span style="color:#66d9ef">ports</span>:
-        - <span style="color:#66d9ef">name</span>: http
-          <span style="color:#66d9ef">containerPort</span>: <span style="color:#ae81ff">5601</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">apps/v1</span>
+<span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Deployment</span>
+<span style="color:#f92672">metadata</span>:
+  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">kibana</span>
+  <span style="color:#f92672">namespace</span>: <span style="color:#ae81ff">the-project</span>
+  <span style="color:#f92672">labels</span>:
+    <span style="color:#f92672">app</span>: <span style="color:#ae81ff">kibana</span>
+    <span style="color:#f92672">env</span>: <span style="color:#ae81ff">dev</span>
+<span style="color:#f92672">spec</span>:
+  <span style="color:#f92672">replicas</span>: <span style="color:#ae81ff">1</span>
+  <span style="color:#f92672">selector</span>:
+    <span style="color:#f92672">matchLabels</span>:
+      <span style="color:#f92672">app</span>: <span style="color:#ae81ff">kibana</span>
+  <span style="color:#f92672">template</span>:
+    <span style="color:#f92672">metadata</span>:
+      <span style="color:#f92672">labels</span>:
+        <span style="color:#f92672">app</span>: <span style="color:#ae81ff">kibana</span>
+        <span style="color:#f92672">env</span>: <span style="color:#ae81ff">dev</span>
+    <span style="color:#f92672">spec</span>:
+      <span style="color:#f92672">volumes</span>:
+      - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">kibana-config-volume</span>
+        <span style="color:#f92672">configMap</span>:
+          <span style="color:#f92672">name</span>: <span style="color:#ae81ff">kibana</span>
+      <span style="color:#f92672">containers</span>:
+      - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">kibana</span>
+        <span style="color:#f92672">image</span>: <span style="color:#ae81ff">docker.elastic.co/kibana/kibana-oss:6.2.4</span>
+        <span style="color:#f92672">imagePullPolicy</span>: <span style="color:#ae81ff">Always</span>
+        <span style="color:#f92672">volumeMounts</span>:
+        - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">kibana-config-volume</span>
+          <span style="color:#f92672">mountPath</span>: <span style="color:#ae81ff">/usr/share/kibana/config</span>
+        <span style="color:#f92672">env</span>:
+        - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">CLUSTER_NAME</span>
+          <span style="color:#f92672">value</span>: <span style="color:#ae81ff">elasticsearch</span>
+        <span style="color:#f92672">ports</span>:
+        - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">http</span>
+          <span style="color:#f92672">containerPort</span>: <span style="color:#ae81ff">5601</span>
 </code></pre></div><p>Create the deployment:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl create -f 40-deployment.yml
 </code></pre></div><h2 id="basic-auth-optional"><a href="/kubernetes-ingress-basic-auth/">Basic Auth</a> (Optional)</h2>
@@ -365,59 +365,59 @@
 <h2 id="tls-certificate-optional">TLS Certificate (Optional)</h2>
 <p>It is highly recommended to encrypt all traffic to and from Kibana with TLS (HTTPS). I recommend configuring your Kubernetes cluster to use <a href="/lets-encrypt-kubernetes/">Let&rsquo;s Encrypt</a>, it&rsquo;s secure, free and takes about 15 minutes to set up. After setting up <a href="/lets-encrypt-kubernetes/">Let&rsquo;s Encrypt</a>, you can generate and renew certificates automatically.</p>
 <p><code>50-cert.yml</code>:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">apiVersion</span>: certmanager.k8s.io/v1alpha1
-<span style="color:#66d9ef">kind</span>: Certificate
-<span style="color:#66d9ef">metadata</span>:
-  <span style="color:#66d9ef">name</span>: kib-dev-cert
-  <span style="color:#66d9ef">namespace</span>: the-project
-<span style="color:#66d9ef">spec</span>:
-  <span style="color:#66d9ef">secretName</span>: kib-dev-production-tls
-  <span style="color:#66d9ef">issuerRef</span>:
-    <span style="color:#66d9ef">name</span>: letsencrypt-production
-    <span style="color:#66d9ef">kind</span>: ClusterIssuer
-  <span style="color:#66d9ef">commonName</span>: kib.the-project.d4ldev.txn2.com
-  <span style="color:#66d9ef">dnsNames</span>:
-  - kib.the-project.d4ldev.txn2.com
-  <span style="color:#66d9ef">acme</span>:
-    <span style="color:#66d9ef">config</span>:
-    - <span style="color:#66d9ef">http01</span>:
-        <span style="color:#66d9ef">ingressClass</span>: nginx
-      <span style="color:#66d9ef">domains</span>:
-      - kib.the-project.d4ldev.txn2.com
-    - <span style="color:#66d9ef">http01</span>:
-        <span style="color:#66d9ef">ingressClass</span>: nginx
-      <span style="color:#66d9ef">domains</span>:
-      - kib.the-project.d4ldev.txn2.com
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">certmanager.k8s.io/v1alpha1</span>
+<span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Certificate</span>
+<span style="color:#f92672">metadata</span>:
+  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">kib-dev-cert</span>
+  <span style="color:#f92672">namespace</span>: <span style="color:#ae81ff">the-project</span>
+<span style="color:#f92672">spec</span>:
+  <span style="color:#f92672">secretName</span>: <span style="color:#ae81ff">kib-dev-production-tls</span>
+  <span style="color:#f92672">issuerRef</span>:
+    <span style="color:#f92672">name</span>: <span style="color:#ae81ff">letsencrypt-production</span>
+    <span style="color:#f92672">kind</span>: <span style="color:#ae81ff">ClusterIssuer</span>
+  <span style="color:#f92672">commonName</span>: <span style="color:#ae81ff">kib.the-project.d4ldev.txn2.com</span>
+  <span style="color:#f92672">dnsNames</span>:
+  - <span style="color:#ae81ff">kib.the-project.d4ldev.txn2.com</span>
+  <span style="color:#f92672">acme</span>:
+    <span style="color:#f92672">config</span>:
+    - <span style="color:#f92672">http01</span>:
+        <span style="color:#f92672">ingressClass</span>: <span style="color:#ae81ff">nginx</span>
+      <span style="color:#f92672">domains</span>:
+      - <span style="color:#ae81ff">kib.the-project.d4ldev.txn2.com</span>
+    - <span style="color:#f92672">http01</span>:
+        <span style="color:#f92672">ingressClass</span>: <span style="color:#ae81ff">nginx</span>
+      <span style="color:#f92672">domains</span>:
+      - <span style="color:#ae81ff">kib.the-project.d4ldev.txn2.com</span>
 </code></pre></div><p>Create the certificate:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl create -f 50-cert.yml
 </code></pre></div><h2 id="ingress"><a href="/web-cluster-ingress/">Ingress</a></h2>
 <p><a href="/web-cluster-ingress/">Ingress</a> on Kubernetes routes outside traffic to a <a href="https://kubernetes.io/docs/concepts/services-networking/service/">Service</a> inside the cluster. You need an Ingress controller for this step. In this example, we configure the <a href="/web-cluster-ingress/">Ingress Nginx</a> controller. If you are using a different Ingress controller, you need to consult the appropriate documentation. If you do not already have an Ingress controller, then I recommend reading <a href="/web-cluster-ingress/">Ingress on Custom Kubernetes</a> for a quick guide on setting up <a href="/web-cluster-ingress/">Ingress Nginx</a>.</p>
 <p><code>60-ingress.yml</code>:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">apiVersion</span>: extensions/v1beta1
-<span style="color:#66d9ef">kind</span>: Ingress
-<span style="color:#66d9ef">metadata</span>:
-  <span style="color:#66d9ef">name</span>: kibana
-  <span style="color:#66d9ef">namespace</span>: the-project
-  <span style="color:#66d9ef">labels</span>:
-    <span style="color:#66d9ef">app</span>: kibana
-    <span style="color:#66d9ef">env</span>: dev
-  <span style="color:#66d9ef">annotations</span>:
-    <span style="color:#66d9ef">nginx.ingress.kubernetes.io/auth-type</span>: basic
-    <span style="color:#66d9ef">nginx.ingress.kubernetes.io/auth-secret</span>: kibop-basic-auth
-    <span style="color:#66d9ef">nginx.ingress.kubernetes.io/auth-realm</span>: <span style="color:#e6db74">&#34;Authentication Required&#34;</span>
-<span style="color:#66d9ef">spec</span>:
-  <span style="color:#66d9ef">rules</span>:
-  - <span style="color:#66d9ef">host</span>: kib.the-project.d4ldev.txn2.com
-    <span style="color:#66d9ef">http</span>:
-      <span style="color:#66d9ef">paths</span>:
-      - <span style="color:#66d9ef">backend</span>:
-          <span style="color:#66d9ef">serviceName</span>: kibana
-          <span style="color:#66d9ef">servicePort</span>: <span style="color:#ae81ff">80</span>
-        <span style="color:#66d9ef">path</span>: /
-  <span style="color:#66d9ef">tls</span>:
-  - <span style="color:#66d9ef">hosts</span>:
-    - kib.the-project.d4ldev.txn2.com
-    <span style="color:#66d9ef">secretName</span>: kib-dev-production-tls
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">extensions/v1beta1</span>
+<span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Ingress</span>
+<span style="color:#f92672">metadata</span>:
+  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">kibana</span>
+  <span style="color:#f92672">namespace</span>: <span style="color:#ae81ff">the-project</span>
+  <span style="color:#f92672">labels</span>:
+    <span style="color:#f92672">app</span>: <span style="color:#ae81ff">kibana</span>
+    <span style="color:#f92672">env</span>: <span style="color:#ae81ff">dev</span>
+  <span style="color:#f92672">annotations</span>:
+    <span style="color:#f92672">nginx.ingress.kubernetes.io/auth-type</span>: <span style="color:#ae81ff">basic</span>
+    <span style="color:#f92672">nginx.ingress.kubernetes.io/auth-secret</span>: <span style="color:#ae81ff">kibop-basic-auth</span>
+    <span style="color:#f92672">nginx.ingress.kubernetes.io/auth-realm</span>: <span style="color:#e6db74">&#34;Authentication Required&#34;</span>
+<span style="color:#f92672">spec</span>:
+  <span style="color:#f92672">rules</span>:
+  - <span style="color:#f92672">host</span>: <span style="color:#ae81ff">kib.the-project.d4ldev.txn2.com</span>
+    <span style="color:#f92672">http</span>:
+      <span style="color:#f92672">paths</span>:
+      - <span style="color:#f92672">backend</span>:
+          <span style="color:#f92672">serviceName</span>: <span style="color:#ae81ff">kibana</span>
+          <span style="color:#f92672">servicePort</span>: <span style="color:#ae81ff">80</span>
+        <span style="color:#f92672">path</span>: <span style="color:#ae81ff">/</span>
+  <span style="color:#f92672">tls</span>:
+  - <span style="color:#f92672">hosts</span>:
+    - <span style="color:#ae81ff">kib.the-project.d4ldev.txn2.com</span>
+    <span style="color:#f92672">secretName</span>: <span style="color:#ae81ff">kib-dev-production-tls</span>
 
 </code></pre></div><p>If you are not using <strong>Basic Auth</strong> or <strong>TLS</strong> certificates you need to omit the <strong>annotations</strong> and <strong>tls</strong> sections. However, setting up <a href="/lets-encrypt-kubernetes/">Let&rsquo;s Encrypt</a> and <a href="#basic-auth-optional">Basic Auth</a> is quick and relatively simple.</p>
 <p>Create the ingress:</p>

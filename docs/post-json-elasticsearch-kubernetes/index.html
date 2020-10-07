@@ -290,12 +290,12 @@
 <h3 id="the-project-namespace">the-project Namespace</h3>
 <p>In continuity with previous tutorials, I&rsquo;ll stick with <code>the-project</code> <a href="https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/">namespace</a>.</p>
 <p><code>00-namespace.yml</code>:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">apiVersion</span>: v1
-<span style="color:#66d9ef">kind</span>: Namespace
-<span style="color:#66d9ef">metadata</span>:
-  <span style="color:#66d9ef">name</span>: the-project
-  <span style="color:#66d9ef">labels</span>:
-    <span style="color:#66d9ef">env</span>: dev
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">v1</span>
+<span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Namespace</span>
+<span style="color:#f92672">metadata</span>:
+  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">the-project</span>
+  <span style="color:#f92672">labels</span>:
+    <span style="color:#f92672">env</span>: <span style="color:#ae81ff">dev</span>
 </code></pre></div><p>Create the namespace:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl create -f 00-namespace.yml
 </code></pre></div><h2 id="the-project-weather-wx-data">The Project: Weather (wx) Data</h2>
@@ -312,22 +312,22 @@
 <p>Kubernetes <a href="https://kubernetes.io/docs/concepts/services-networking/service/">Services</a> are the communication hub for a microservices architecture. Services are, and so it makes sense to set them up early on.</p>
 <p>Our <strong>wx-rxtx</strong> service look for Pods with the label <strong>app: wx-rxtx</strong> and direct traffic to them on port 80 to port 80 on the Pods.</p>
 <p><code>wx-rxtx/20-service.yml</code>:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">apiVersion</span>: v1
-<span style="color:#66d9ef">kind</span>: Service
-<span style="color:#66d9ef">metadata</span>:
-  <span style="color:#66d9ef">name</span>: wx-rxtx
-  <span style="color:#66d9ef">namespace</span>: the-project
-  <span style="color:#66d9ef">labels</span>:
-    <span style="color:#66d9ef">app</span>: wx-rxtx
-    <span style="color:#66d9ef">env</span>: dev
-<span style="color:#66d9ef">spec</span>:
-  <span style="color:#66d9ef">selector</span>:
-    <span style="color:#66d9ef">app</span>: wx-rxtx
-  <span style="color:#66d9ef">ports</span>:
-  - <span style="color:#66d9ef">protocol</span>: <span style="color:#e6db74">&#34;TCP&#34;</span>
-    <span style="color:#66d9ef">port</span>: <span style="color:#ae81ff">80</span>
-    <span style="color:#66d9ef">targetPort</span>: <span style="color:#ae81ff">80</span>
-  <span style="color:#66d9ef">type</span>: ClusterIP
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">v1</span>
+<span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Service</span>
+<span style="color:#f92672">metadata</span>:
+  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">wx-rxtx</span>
+  <span style="color:#f92672">namespace</span>: <span style="color:#ae81ff">the-project</span>
+  <span style="color:#f92672">labels</span>:
+    <span style="color:#f92672">app</span>: <span style="color:#ae81ff">wx-rxtx</span>
+    <span style="color:#f92672">env</span>: <span style="color:#ae81ff">dev</span>
+<span style="color:#f92672">spec</span>:
+  <span style="color:#f92672">selector</span>:
+    <span style="color:#f92672">app</span>: <span style="color:#ae81ff">wx-rxtx</span>
+  <span style="color:#f92672">ports</span>:
+  - <span style="color:#f92672">protocol</span>: <span style="color:#e6db74">&#34;TCP&#34;</span>
+    <span style="color:#f92672">port</span>: <span style="color:#ae81ff">80</span>
+    <span style="color:#f92672">targetPort</span>: <span style="color:#ae81ff">80</span>
+  <span style="color:#f92672">type</span>: <span style="color:#ae81ff">ClusterIP</span>
 </code></pre></div><p>Create the wx-rxtx service:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl create -f wx-rxtx/20-service.yml
 </code></pre></div><p>Although it won&rsquo;t do much, at this point we do have a service listening at http://wx-rxtx:80/ from inside the cluster; however, from outside <code>the-project</code> namespace it would need to be addressed <a href="http://the-project.wx">http://the-project.wx</a>-rxtx:80/.</p>
@@ -337,52 +337,52 @@
 <p>Configuring <a href="https://ceph.com/">Ceph</a> to replicate your data ensures that with <a href="https://hub.docker.com/r/txn2/rxtx/">rxtx</a> every message is eventually sent, even with a catastrophic failure of multiple Kubernets nodes.</p>
 <p>Setting up <a href="https://ceph.com/">Ceph</a> and <a href="https://rook.io/">rook</a> is beyond the scope of this article, but quickly done with their excellent documentation.</p>
 <p><code>wx-rxtx/40-statefulset.yml</code>:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">apiVersion</span>: apps/v1
-<span style="color:#66d9ef">kind</span>: StatefulSet
-<span style="color:#66d9ef">metadata</span>:
-  <span style="color:#66d9ef">name</span>: wx-rxtx
-  <span style="color:#66d9ef">namespace</span>: the-project
-  <span style="color:#66d9ef">labels</span>:
-    <span style="color:#66d9ef">app</span>: wx-rxtx
-    <span style="color:#66d9ef">env</span>: dev
-<span style="color:#66d9ef">spec</span>:
-  <span style="color:#66d9ef">serviceName</span>: wx-rxtx
-  <span style="color:#66d9ef">replicas</span>: <span style="color:#ae81ff">1</span> <span style="color:#75715e"># scale as desired</span>
-  <span style="color:#66d9ef">selector</span>:
-    <span style="color:#66d9ef">matchLabels</span>:
-      <span style="color:#66d9ef">app</span>: wx-rxtx
-  <span style="color:#66d9ef">template</span>:
-    <span style="color:#66d9ef">metadata</span>:
-      <span style="color:#66d9ef">labels</span>:
-        <span style="color:#66d9ef">app</span>: wx-rxtx
-        <span style="color:#66d9ef">env</span>: dev
-    <span style="color:#66d9ef">spec</span>:
-      <span style="color:#66d9ef">containers</span>:
-      - <span style="color:#66d9ef">name</span>: wx-rxtx
-        <span style="color:#66d9ef">image</span>: txn2/rxtx:<span style="color:#ae81ff">1.2.0</span>
-        <span style="color:#66d9ef">imagePullPolicy</span>: Always
-        <span style="color:#66d9ef">args</span>: [
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">apps/v1</span>
+<span style="color:#f92672">kind</span>: <span style="color:#ae81ff">StatefulSet</span>
+<span style="color:#f92672">metadata</span>:
+  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">wx-rxtx</span>
+  <span style="color:#f92672">namespace</span>: <span style="color:#ae81ff">the-project</span>
+  <span style="color:#f92672">labels</span>:
+    <span style="color:#f92672">app</span>: <span style="color:#ae81ff">wx-rxtx</span>
+    <span style="color:#f92672">env</span>: <span style="color:#ae81ff">dev</span>
+<span style="color:#f92672">spec</span>:
+  <span style="color:#f92672">serviceName</span>: <span style="color:#ae81ff">wx-rxtx</span>
+  <span style="color:#f92672">replicas</span>: <span style="color:#ae81ff">1</span> <span style="color:#75715e"># scale as desired</span>
+  <span style="color:#f92672">selector</span>:
+    <span style="color:#f92672">matchLabels</span>:
+      <span style="color:#f92672">app</span>: <span style="color:#ae81ff">wx-rxtx</span>
+  <span style="color:#f92672">template</span>:
+    <span style="color:#f92672">metadata</span>:
+      <span style="color:#f92672">labels</span>:
+        <span style="color:#f92672">app</span>: <span style="color:#ae81ff">wx-rxtx</span>
+        <span style="color:#f92672">env</span>: <span style="color:#ae81ff">dev</span>
+    <span style="color:#f92672">spec</span>:
+      <span style="color:#f92672">containers</span>:
+      - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">wx-rxtx</span>
+        <span style="color:#f92672">image</span>: <span style="color:#ae81ff">txn2/rxtx:1.2.0</span>
+        <span style="color:#f92672">imagePullPolicy</span>: <span style="color:#ae81ff">Always</span>
+        <span style="color:#f92672">args</span>: [
           <span style="color:#e6db74">&#34;--ingest=http://wx-rtbeat:80/in&#34;</span>,
           <span style="color:#e6db74">&#34;--port=80&#34;</span>,
           <span style="color:#e6db74">&#34;--path=/data&#34;</span>,
           <span style="color:#e6db74">&#34;--interval=10&#34;</span>, <span style="color:#75715e"># seconds between intervals</span>
           <span style="color:#e6db74">&#34;--batch=4000&#34;</span>,  <span style="color:#75715e"># maximum batch size</span>
           <span style="color:#e6db74">&#34;--maxq=500000&#34;</span>] <span style="color:#75715e"># maximum message to store</span>
-        <span style="color:#66d9ef">volumeMounts</span>:
-        - <span style="color:#66d9ef">name</span>: wx-rxtx-data-volume
-          <span style="color:#66d9ef">mountPath</span>: /data
-        <span style="color:#66d9ef">ports</span>:
-        - <span style="color:#66d9ef">name</span>: rxtx
-          <span style="color:#66d9ef">containerPort</span>: <span style="color:#ae81ff">80</span>
-  <span style="color:#66d9ef">volumeClaimTemplates</span>:
-  - <span style="color:#66d9ef">metadata</span>:
-      <span style="color:#66d9ef">name</span>: wx-rxtx-data-volume
-    <span style="color:#66d9ef">spec</span>:
-      <span style="color:#66d9ef">storageClassName</span>: rook-block
-      <span style="color:#66d9ef">accessModes</span>: [ ReadWriteOnce ]
-      <span style="color:#66d9ef">resources</span>:
-        <span style="color:#66d9ef">requests</span>:
-          <span style="color:#66d9ef">storage</span>: 1Gi <span style="color:#75715e"># enough to hold maxq</span>
+        <span style="color:#f92672">volumeMounts</span>:
+        - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">wx-rxtx-data-volume</span>
+          <span style="color:#f92672">mountPath</span>: <span style="color:#ae81ff">/data</span>
+        <span style="color:#f92672">ports</span>:
+        - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">rxtx</span>
+          <span style="color:#f92672">containerPort</span>: <span style="color:#ae81ff">80</span>
+  <span style="color:#f92672">volumeClaimTemplates</span>:
+  - <span style="color:#f92672">metadata</span>:
+      <span style="color:#f92672">name</span>: <span style="color:#ae81ff">wx-rxtx-data-volume</span>
+    <span style="color:#f92672">spec</span>:
+      <span style="color:#f92672">storageClassName</span>: <span style="color:#ae81ff">rook-block</span>
+      <span style="color:#f92672">accessModes</span>: [ <span style="color:#ae81ff">ReadWriteOnce ]</span>
+      <span style="color:#f92672">resources</span>:
+        <span style="color:#f92672">requests</span>:
+          <span style="color:#f92672">storage</span>: <span style="color:#ae81ff">1Gi # enough to hold maxq</span>
 </code></pre></div><p>Create the wx-rxtx statefulset:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl create -f wx-rxtx/40-statefulset.yml
 </code></pre></div><p>The <strong>wx-rxtx service</strong> should now be able to find <strong>wx-rxtx</strong> Pods deployed by the <a href="https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/">StatefulSet</a> and any data sent to the service http://wx-rxtx:80/ is send to them.</p>
@@ -396,23 +396,23 @@
 <h3 id="wx-rtbeat-service">wx-rtbeat Service</h3>
 <p>wx-rtbeat listens internally on the cluster at http://wx-rtbeat:80, we can set up <a href="/web-cluster-ingress/">ingress</a> to point to this service in the future to allow external access.</p>
 <p><code>wx-rtbeat/20-service.yml</code>:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">apiVersion</span>: v1
-<span style="color:#66d9ef">kind</span>: Service
-<span style="color:#66d9ef">metadata</span>:
-  <span style="color:#66d9ef">name</span>: wx-rtbeat
-  <span style="color:#66d9ef">namespace</span>: the-project
-  <span style="color:#66d9ef">labels</span>:
-    <span style="color:#66d9ef">app</span>: wx-rtbeat
-    <span style="color:#66d9ef">env</span>: dev
-<span style="color:#66d9ef">spec</span>:
-  <span style="color:#66d9ef">type</span>: ClusterIP
-  <span style="color:#66d9ef">selector</span>:
-    <span style="color:#66d9ef">app</span>: wx-rtbeat
-  <span style="color:#66d9ef">ports</span>:
-  - <span style="color:#66d9ef">name</span>: rtbeat
-    <span style="color:#66d9ef">protocol</span>: TCP
-    <span style="color:#66d9ef">port</span>: <span style="color:#ae81ff">80</span>
-    <span style="color:#66d9ef">targetPort</span>: <span style="color:#ae81ff">80</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">v1</span>
+<span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Service</span>
+<span style="color:#f92672">metadata</span>:
+  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">wx-rtbeat</span>
+  <span style="color:#f92672">namespace</span>: <span style="color:#ae81ff">the-project</span>
+  <span style="color:#f92672">labels</span>:
+    <span style="color:#f92672">app</span>: <span style="color:#ae81ff">wx-rtbeat</span>
+    <span style="color:#f92672">env</span>: <span style="color:#ae81ff">dev</span>
+<span style="color:#f92672">spec</span>:
+  <span style="color:#f92672">type</span>: <span style="color:#ae81ff">ClusterIP</span>
+  <span style="color:#f92672">selector</span>:
+    <span style="color:#f92672">app</span>: <span style="color:#ae81ff">wx-rtbeat</span>
+  <span style="color:#f92672">ports</span>:
+  - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">rtbeat</span>
+    <span style="color:#f92672">protocol</span>: <span style="color:#ae81ff">TCP</span>
+    <span style="color:#f92672">port</span>: <span style="color:#ae81ff">80</span>
+    <span style="color:#f92672">targetPort</span>: <span style="color:#ae81ff">80</span>
 </code></pre></div><p>Create the wx-rtbeat Service:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl create -f wx-rtbeat/20-service.yml
 </code></pre></div><h3 id="wx-rtbeat-configmap">wx-rtbeat ConfigMap</h3>
@@ -420,240 +420,240 @@
 <p>The following <a href="https://kubernetes.io/docs/tasks/configure-pod-container/configure-pod-configmap/">ConfigMap</a> mounts as a volume into the Pods running <a href="https://hub.docker.com/r/txn2/rtbeat/">rtbeat</a>.</p>
 <p>Within the <strong>rtbeat.yml</strong> section under <strong>output.elasticsearch:</strong> you find <strong>hosts:</strong> set to <strong>&ldquo;elasticsearch:9200&rdquo;</strong>. The elasticsearch service running on port 9200 is setup in the tutorial <a href="/kubernetes-production-elasticsearch/">Production Grade Elasticsearch on Kubernetes</a>.</p>
 <p><code>wx-rtbeat/30-configmap.yml</code>:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">apiVersion</span>: v1
-<span style="color:#66d9ef">kind</span>: ConfigMap
-<span style="color:#66d9ef">metadata</span>:
-  <span style="color:#66d9ef">name</span>: wx-rtbeat
-  <span style="color:#66d9ef">namespace</span>: the-project
-  <span style="color:#66d9ef">labels</span>:
-    <span style="color:#66d9ef">app</span>: wx-rtbeat
-    <span style="color:#66d9ef">env</span>: dev
-<span style="color:#66d9ef">data</span>:
-  <span style="color:#66d9ef">rtbeat.yml</span>: |<span style="color:#e6db74">-
-</span><span style="color:#e6db74">    rtbeat:</span>
-      <span style="color:#75715e"># beat configuration</span>
-      <span style="color:#75715e"># see https://github.com/txn2/rtbeat/blob/master/rtbeat.reference.yml</span>
-      <span style="color:#66d9ef">port</span>: <span style="color:#e6db74">&#34;80&#34;</span>
-      <span style="color:#66d9ef">timeout</span>: <span style="color:#ae81ff">5</span>
-      <span style="color:#66d9ef">name</span>: wx-rtbeat
-
-    <span style="color:#66d9ef">output.elasticsearch</span>:
-      <span style="color:#75715e"># Array of hosts to connect to.</span>
-      <span style="color:#66d9ef">hosts</span>: [<span style="color:#e6db74">&#34;elasticsearch:9200&#34;</span>]
-      <span style="color:#75715e"># Elasticsearch Index (new index each month)</span>
-      <span style="color:#66d9ef">index</span>: <span style="color:#e6db74">&#34;wx-rtbeat-%{+yyyy.MM}&#34;</span>
-
-    <span style="color:#66d9ef">setup</span>:
-      <span style="color:#66d9ef">template.name</span>: <span style="color:#e6db74">&#34;wx-rtbeat&#34;</span>
-      <span style="color:#66d9ef">template.pattern</span>: <span style="color:#e6db74">&#34;wx-rtbeat-*&#34;</span>
-      <span style="color:#66d9ef">template.fields</span>: <span style="color:#e6db74">&#34;/config/fields.yml&#34;</span>
-      <span style="color:#66d9ef">template.overwrite</span>: <span style="color:#66d9ef">true</span>
-
-    <span style="color:#75715e">#setup.kibana:</span>
-    <span style="color:#75715e">#  protocol: &#34;http&#34;</span>
-    <span style="color:#75715e">#  host: &#34;kibana:80&#34;</span>
-    <span style="color:#75715e">#  ssl.enabled: false</span>
-
-    <span style="color:#75715e"># internal metrics through a HTTP endpoint</span>
-    <span style="color:#66d9ef">http.enabled</span>: <span style="color:#66d9ef">true</span>
-    <span style="color:#66d9ef">http.port</span>: <span style="color:#ae81ff">5066</span>
-
-  <span style="color:#66d9ef">fields.yml</span>: |<span style="color:#e6db74">-
-</span><span style="color:#e6db74">    - key: rxtx</span>
-      <span style="color:#66d9ef">title</span>: rtbeat
-      <span style="color:#75715e"># Data sent in from rxtx will be in batches of rxtxMsg objects where</span>
-      <span style="color:#75715e"># the payload will hold the original post data and will be prefixed as such,</span>
-      <span style="color:#75715e"># model the data here for proper indexing into Elasticsearch.</span>
-      <span style="color:#75715e"># see https://www.elastic.co/guide/en/elasticsearch/reference/6.3/mapping-types.html</span>
-      <span style="color:#66d9ef">description</span>: <span style="color:#e6db74">&gt;
-</span><span style="color:#e6db74">        “Powered by Dark Sky” - https://darksky.net/poweredby/</span>
-        The following fields are pulled from the Dark Sky API free tier allowing <span style="color:#ae81ff">1000</span> requests per day,
-        see https://darksky.net/dev/docs for API documentation. The fields below only
-        map to returned data excluding all but the <span style="color:#e6db74">&#34;currently&#34;</span> key (exclude=minutely,hourly,daily,flags)
-      <span style="color:#66d9ef">fields</span>:
-      <span style="color:#75715e"># rxtx standard fields (customizable)</span>
-      - <span style="color:#66d9ef">name</span>: rxtxMsg.seq
-        <span style="color:#66d9ef">required</span>: <span style="color:#66d9ef">true</span>
-        <span style="color:#66d9ef">type</span>: string
-      - <span style="color:#66d9ef">name</span>: rxtxMsg.time
-        <span style="color:#66d9ef">required</span>: <span style="color:#66d9ef">true</span>
-        <span style="color:#66d9ef">type</span>: date
-      - <span style="color:#66d9ef">name</span>: rxtxMsg.producer
-        <span style="color:#66d9ef">required</span>: <span style="color:#66d9ef">true</span>
-        <span style="color:#66d9ef">type</span>: keyword
-      - <span style="color:#66d9ef">name</span>: rxtxMsg.label
-        <span style="color:#66d9ef">required</span>: <span style="color:#66d9ef">true</span>
-        <span style="color:#66d9ef">type</span>: keyword
-      - <span style="color:#66d9ef">name</span>: rxtxMsg.key
-        <span style="color:#66d9ef">required</span>: <span style="color:#66d9ef">true</span>
-        <span style="color:#66d9ef">type</span>: keyword
-      <span style="color:#75715e"># custom</span>
-      - <span style="color:#66d9ef">name</span>: rxtxMsg.payload.latitude
-        <span style="color:#66d9ef">required</span>: <span style="color:#66d9ef">true</span>
-        <span style="color:#66d9ef">type</span>: half_float
-      - <span style="color:#66d9ef">name</span>: rxtxMsg.payload.longitude
-        <span style="color:#66d9ef">required</span>: <span style="color:#66d9ef">true</span>
-        <span style="color:#66d9ef">type</span>: half_float
-      - <span style="color:#66d9ef">name</span>: rxtxMsg.payload.timezone
-        <span style="color:#66d9ef">required</span>: <span style="color:#66d9ef">true</span>
-        <span style="color:#66d9ef">type</span>: keyword
-      - <span style="color:#66d9ef">name</span>: rxtxMsg.payload.offset
-        <span style="color:#66d9ef">required</span>: <span style="color:#66d9ef">true</span>
-        <span style="color:#66d9ef">type</span>: byte
-      - <span style="color:#66d9ef">name</span>: rxtxMsg.payload.currently.time
-        <span style="color:#66d9ef">required</span>: <span style="color:#66d9ef">true</span>
-        <span style="color:#66d9ef">type</span>: long
-      - <span style="color:#66d9ef">name</span>: rxtxMsg.payload.currently.summary
-        <span style="color:#66d9ef">required</span>: <span style="color:#66d9ef">true</span>
-        <span style="color:#66d9ef">type</span>: keyword
-      - <span style="color:#66d9ef">name</span>: rxtxMsg.payload.currently.icon
-        <span style="color:#66d9ef">required</span>: <span style="color:#66d9ef">true</span>
-        <span style="color:#66d9ef">type</span>: keyword
-      - <span style="color:#66d9ef">name</span>: rxtxMsg.payload.currently.nearestStormDistance
-        <span style="color:#66d9ef">required</span>: <span style="color:#66d9ef">true</span>
-        <span style="color:#66d9ef">type</span>: integer
-      - <span style="color:#66d9ef">name</span>: rxtxMsg.payload.currently.precipIntensity
-        <span style="color:#66d9ef">required</span>: <span style="color:#66d9ef">true</span>
-        <span style="color:#66d9ef">type</span>: half_float
-      - <span style="color:#66d9ef">name</span>: rxtxMsg.payload.currently.precipIntensityError
-        <span style="color:#66d9ef">required</span>: <span style="color:#66d9ef">true</span>
-        <span style="color:#66d9ef">type</span>: half_float
-      - <span style="color:#66d9ef">name</span>: rxtxMsg.payload.currently.precipProbability
-        <span style="color:#66d9ef">required</span>: <span style="color:#66d9ef">true</span>
-        <span style="color:#66d9ef">type</span>: half_float
-      - <span style="color:#66d9ef">name</span>: rxtxMsg.payload.currently.precipType
-        <span style="color:#66d9ef">required</span>: <span style="color:#66d9ef">true</span>
-        <span style="color:#66d9ef">type</span>: keyword
-      - <span style="color:#66d9ef">name</span>: rxtxMsg.payload.currently.temperature
-        <span style="color:#66d9ef">required</span>: <span style="color:#66d9ef">true</span>
-        <span style="color:#66d9ef">type</span>: half_float
-      - <span style="color:#66d9ef">name</span>: rxtxMsg.payload.currently.apparentTemperature
-        <span style="color:#66d9ef">required</span>: <span style="color:#66d9ef">true</span>
-        <span style="color:#66d9ef">type</span>: half_float
-      - <span style="color:#66d9ef">name</span>: rxtxMsg.payload.currently.dewPoint
-        <span style="color:#66d9ef">required</span>: <span style="color:#66d9ef">true</span>
-        <span style="color:#66d9ef">type</span>: half_float
-      - <span style="color:#66d9ef">name</span>: rxtxMsg.payload.currently.humidity
-        <span style="color:#66d9ef">required</span>: <span style="color:#66d9ef">true</span>
-        <span style="color:#66d9ef">type</span>: half_float
-      - <span style="color:#66d9ef">name</span>: rxtxMsg.payload.currently.pressure
-        <span style="color:#66d9ef">required</span>: <span style="color:#66d9ef">true</span>
-        <span style="color:#66d9ef">type</span>: half_float
-      - <span style="color:#66d9ef">name</span>: rxtxMsg.payload.currently.windSpeed
-        <span style="color:#66d9ef">required</span>: <span style="color:#66d9ef">true</span>
-        <span style="color:#66d9ef">type</span>: half_float
-      - <span style="color:#66d9ef">name</span>: rxtxMsg.payload.currently.windGust
-        <span style="color:#66d9ef">required</span>: <span style="color:#66d9ef">true</span>
-        <span style="color:#66d9ef">type</span>: half_float
-      - <span style="color:#66d9ef">name</span>: rxtxMsg.payload.currently.windBearing
-        <span style="color:#66d9ef">required</span>: <span style="color:#66d9ef">true</span>
-        <span style="color:#66d9ef">type</span>: half_float
-      - <span style="color:#66d9ef">name</span>: rxtxMsg.payload.currently.cloudCover
-        <span style="color:#66d9ef">required</span>: <span style="color:#66d9ef">true</span>
-        <span style="color:#66d9ef">type</span>: half_float
-      - <span style="color:#66d9ef">name</span>: rxtxMsg.payload.currently.uvIndex
-        <span style="color:#66d9ef">required</span>: <span style="color:#66d9ef">true</span>
-        <span style="color:#66d9ef">type</span>: half_float
-      - <span style="color:#66d9ef">name</span>: rxtxMsg.payload.currently.visibility
-        <span style="color:#66d9ef">required</span>: <span style="color:#66d9ef">true</span>
-        <span style="color:#66d9ef">type</span>: half_float
-      - <span style="color:#66d9ef">name</span>: rxtxMsg.payload.currently.ozone
-        <span style="color:#66d9ef">required</span>: <span style="color:#66d9ef">true</span>
-        <span style="color:#66d9ef">type</span>: half_float
-
-    - <span style="color:#66d9ef">key</span>: beat
-      <span style="color:#66d9ef">title</span>: Beat
-      <span style="color:#66d9ef">description</span>: <span style="color:#e6db74">&gt;
-</span><span style="color:#e6db74">        Contains common beat fields available in all event types.</span>
-      <span style="color:#66d9ef">fields</span>:
-        - <span style="color:#66d9ef">name</span>: beat.name
-          <span style="color:#66d9ef">description</span>: <span style="color:#e6db74">&gt;
-</span><span style="color:#e6db74">            The name of the Beat sending the log messages. If the Beat name is</span>
-            set in the configuration file, then that value is used. If it is not
-            set, the hostname is used. To set the Beat name, use the `name`
-            option in the configuration file.
-        - <span style="color:#66d9ef">name</span>: beat.hostname
-          <span style="color:#66d9ef">description</span>: <span style="color:#e6db74">&gt;
-</span><span style="color:#e6db74">            The hostname as returned by the operating system on which the Beat is running.</span>
-        - <span style="color:#66d9ef">name</span>: beat.version
-          <span style="color:#66d9ef">description</span>: <span style="color:#e6db74">&gt;
-</span><span style="color:#e6db74">            The version of the beat that generated this event.</span>
-
-        - <span style="color:#66d9ef">name</span>: <span style="color:#e6db74">&#34;@timestamp&#34;</span>
-          <span style="color:#66d9ef">type</span>: date
-          <span style="color:#66d9ef">required</span>: <span style="color:#66d9ef">true</span>
-          <span style="color:#66d9ef">format</span>: date
-          <span style="color:#66d9ef">example</span>: August 26th <span style="color:#ae81ff">2016</span>, <span style="color:#ae81ff">12</span>:<span style="color:#ae81ff">35</span>:<span style="color:#ae81ff">53.332</span>
-          <span style="color:#66d9ef">description</span>: <span style="color:#e6db74">&gt;
-</span><span style="color:#e6db74">            The timestamp when the event log record was generated.</span>
-
-        - <span style="color:#66d9ef">name</span>: tags
-          <span style="color:#66d9ef">description</span>: <span style="color:#e6db74">&gt;
-</span><span style="color:#e6db74">            Arbitrary tags that can be set per Beat and per transaction</span>
-            type.
-
-        - <span style="color:#66d9ef">name</span>: fields
-          <span style="color:#66d9ef">type</span>: object
-          <span style="color:#66d9ef">object_type</span>: keyword
-          <span style="color:#66d9ef">description</span>: <span style="color:#e6db74">&gt;
-</span><span style="color:#e6db74">            Contains user configurable fields.</span>
-
-        - <span style="color:#66d9ef">name</span>: error
-          <span style="color:#66d9ef">type</span>: group
-          <span style="color:#66d9ef">description</span>: <span style="color:#e6db74">&gt;
-</span><span style="color:#e6db74">            Error fields containing additional info in case of errors.</span>
-          <span style="color:#66d9ef">fields</span>:
-            - <span style="color:#66d9ef">name</span>: message
-              <span style="color:#66d9ef">type</span>: text
-              <span style="color:#66d9ef">description</span>: <span style="color:#e6db74">&gt;
-</span><span style="color:#e6db74">                Error message.</span>
-            - <span style="color:#66d9ef">name</span>: code
-              <span style="color:#66d9ef">type</span>: long
-              <span style="color:#66d9ef">description</span>: <span style="color:#e6db74">&gt;
-</span><span style="color:#e6db74">                Error code.</span>
-            - <span style="color:#66d9ef">name</span>: type
-              <span style="color:#66d9ef">type</span>: keyword
-              <span style="color:#66d9ef">description</span>: <span style="color:#e6db74">&gt;
-</span><span style="color:#e6db74">                Error type.</span>
-</code></pre></div><p>Create the wx-rtbeat ConfigMap:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">v1</span>
+<span style="color:#f92672">kind</span>: <span style="color:#ae81ff">ConfigMap</span>
+<span style="color:#f92672">metadata</span>:
+  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">wx-rtbeat</span>
+  <span style="color:#f92672">namespace</span>: <span style="color:#ae81ff">the-project</span>
+  <span style="color:#f92672">labels</span>:
+    <span style="color:#f92672">app</span>: <span style="color:#ae81ff">wx-rtbeat</span>
+    <span style="color:#f92672">env</span>: <span style="color:#ae81ff">dev</span>
+<span style="color:#f92672">data</span>:
+  <span style="color:#f92672">rtbeat.yml</span>: <span style="color:#e6db74">|-
+</span><span style="color:#e6db74">    rtbeat:
+</span><span style="color:#e6db74">      # beat configuration
+</span><span style="color:#e6db74">      # see https://github.com/txn2/rtbeat/blob/master/rtbeat.reference.yml
+</span><span style="color:#e6db74">      port: &#34;80&#34;
+</span><span style="color:#e6db74">      timeout: 5
+</span><span style="color:#e6db74">      name: wx-rtbeat
+</span><span style="color:#e6db74">
+</span><span style="color:#e6db74">    output.elasticsearch:
+</span><span style="color:#e6db74">      # Array of hosts to connect to.
+</span><span style="color:#e6db74">      hosts: [&#34;elasticsearch:9200&#34;]
+</span><span style="color:#e6db74">      # Elasticsearch Index (new index each month)
+</span><span style="color:#e6db74">      index: &#34;wx-rtbeat-%{+yyyy.MM}&#34;
+</span><span style="color:#e6db74">
+</span><span style="color:#e6db74">    setup:
+</span><span style="color:#e6db74">      template.name: &#34;wx-rtbeat&#34;
+</span><span style="color:#e6db74">      template.pattern: &#34;wx-rtbeat-*&#34;
+</span><span style="color:#e6db74">      template.fields: &#34;/config/fields.yml&#34;
+</span><span style="color:#e6db74">      template.overwrite: true
+</span><span style="color:#e6db74">
+</span><span style="color:#e6db74">    #setup.kibana:
+</span><span style="color:#e6db74">    #  protocol: &#34;http&#34;
+</span><span style="color:#e6db74">    #  host: &#34;kibana:80&#34;
+</span><span style="color:#e6db74">    #  ssl.enabled: false
+</span><span style="color:#e6db74">
+</span><span style="color:#e6db74">    # internal metrics through a HTTP endpoint
+</span><span style="color:#e6db74">    http.enabled: true
+</span><span style="color:#e6db74">    http.port: 5066
+</span><span style="color:#e6db74">
+</span><span style="color:#e6db74">  fields.yml: |-
+</span><span style="color:#e6db74">    - key: rxtx
+</span><span style="color:#e6db74">      title: rtbeat
+</span><span style="color:#e6db74">      # Data sent in from rxtx will be in batches of rxtxMsg objects where
+</span><span style="color:#e6db74">      # the payload will hold the original post data and will be prefixed as such,
+</span><span style="color:#e6db74">      # model the data here for proper indexing into Elasticsearch.
+</span><span style="color:#e6db74">      # see https://www.elastic.co/guide/en/elasticsearch/reference/6.3/mapping-types.html
+</span><span style="color:#e6db74">      description: &gt;
+</span><span style="color:#e6db74">        “Powered by Dark Sky” - https://darksky.net/poweredby/
+</span><span style="color:#e6db74">        The following fields are pulled from the Dark Sky API free tier allowing 1000 requests per day,
+</span><span style="color:#e6db74">        see https://darksky.net/dev/docs for API documentation. The fields below only
+</span><span style="color:#e6db74">        map to returned data excluding all but the &#34;currently&#34; key (exclude=minutely,hourly,daily,flags)
+</span><span style="color:#e6db74">      fields:
+</span><span style="color:#e6db74">      # rxtx standard fields (customizable)
+</span><span style="color:#e6db74">      - name: rxtxMsg.seq
+</span><span style="color:#e6db74">        required: true
+</span><span style="color:#e6db74">        type: string
+</span><span style="color:#e6db74">      - name: rxtxMsg.time
+</span><span style="color:#e6db74">        required: true
+</span><span style="color:#e6db74">        type: date
+</span><span style="color:#e6db74">      - name: rxtxMsg.producer
+</span><span style="color:#e6db74">        required: true
+</span><span style="color:#e6db74">        type: keyword
+</span><span style="color:#e6db74">      - name: rxtxMsg.label
+</span><span style="color:#e6db74">        required: true
+</span><span style="color:#e6db74">        type: keyword
+</span><span style="color:#e6db74">      - name: rxtxMsg.key
+</span><span style="color:#e6db74">        required: true
+</span><span style="color:#e6db74">        type: keyword
+</span><span style="color:#e6db74">      # custom
+</span><span style="color:#e6db74">      - name: rxtxMsg.payload.latitude
+</span><span style="color:#e6db74">        required: true
+</span><span style="color:#e6db74">        type: half_float
+</span><span style="color:#e6db74">      - name: rxtxMsg.payload.longitude
+</span><span style="color:#e6db74">        required: true
+</span><span style="color:#e6db74">        type: half_float
+</span><span style="color:#e6db74">      - name: rxtxMsg.payload.timezone
+</span><span style="color:#e6db74">        required: true
+</span><span style="color:#e6db74">        type: keyword
+</span><span style="color:#e6db74">      - name: rxtxMsg.payload.offset
+</span><span style="color:#e6db74">        required: true
+</span><span style="color:#e6db74">        type: byte
+</span><span style="color:#e6db74">      - name: rxtxMsg.payload.currently.time
+</span><span style="color:#e6db74">        required: true
+</span><span style="color:#e6db74">        type: long
+</span><span style="color:#e6db74">      - name: rxtxMsg.payload.currently.summary
+</span><span style="color:#e6db74">        required: true
+</span><span style="color:#e6db74">        type: keyword
+</span><span style="color:#e6db74">      - name: rxtxMsg.payload.currently.icon
+</span><span style="color:#e6db74">        required: true
+</span><span style="color:#e6db74">        type: keyword
+</span><span style="color:#e6db74">      - name: rxtxMsg.payload.currently.nearestStormDistance
+</span><span style="color:#e6db74">        required: true
+</span><span style="color:#e6db74">        type: integer
+</span><span style="color:#e6db74">      - name: rxtxMsg.payload.currently.precipIntensity
+</span><span style="color:#e6db74">        required: true
+</span><span style="color:#e6db74">        type: half_float
+</span><span style="color:#e6db74">      - name: rxtxMsg.payload.currently.precipIntensityError
+</span><span style="color:#e6db74">        required: true
+</span><span style="color:#e6db74">        type: half_float
+</span><span style="color:#e6db74">      - name: rxtxMsg.payload.currently.precipProbability
+</span><span style="color:#e6db74">        required: true
+</span><span style="color:#e6db74">        type: half_float
+</span><span style="color:#e6db74">      - name: rxtxMsg.payload.currently.precipType
+</span><span style="color:#e6db74">        required: true
+</span><span style="color:#e6db74">        type: keyword
+</span><span style="color:#e6db74">      - name: rxtxMsg.payload.currently.temperature
+</span><span style="color:#e6db74">        required: true
+</span><span style="color:#e6db74">        type: half_float
+</span><span style="color:#e6db74">      - name: rxtxMsg.payload.currently.apparentTemperature
+</span><span style="color:#e6db74">        required: true
+</span><span style="color:#e6db74">        type: half_float
+</span><span style="color:#e6db74">      - name: rxtxMsg.payload.currently.dewPoint
+</span><span style="color:#e6db74">        required: true
+</span><span style="color:#e6db74">        type: half_float
+</span><span style="color:#e6db74">      - name: rxtxMsg.payload.currently.humidity
+</span><span style="color:#e6db74">        required: true
+</span><span style="color:#e6db74">        type: half_float
+</span><span style="color:#e6db74">      - name: rxtxMsg.payload.currently.pressure
+</span><span style="color:#e6db74">        required: true
+</span><span style="color:#e6db74">        type: half_float
+</span><span style="color:#e6db74">      - name: rxtxMsg.payload.currently.windSpeed
+</span><span style="color:#e6db74">        required: true
+</span><span style="color:#e6db74">        type: half_float
+</span><span style="color:#e6db74">      - name: rxtxMsg.payload.currently.windGust
+</span><span style="color:#e6db74">        required: true
+</span><span style="color:#e6db74">        type: half_float
+</span><span style="color:#e6db74">      - name: rxtxMsg.payload.currently.windBearing
+</span><span style="color:#e6db74">        required: true
+</span><span style="color:#e6db74">        type: half_float
+</span><span style="color:#e6db74">      - name: rxtxMsg.payload.currently.cloudCover
+</span><span style="color:#e6db74">        required: true
+</span><span style="color:#e6db74">        type: half_float
+</span><span style="color:#e6db74">      - name: rxtxMsg.payload.currently.uvIndex
+</span><span style="color:#e6db74">        required: true
+</span><span style="color:#e6db74">        type: half_float
+</span><span style="color:#e6db74">      - name: rxtxMsg.payload.currently.visibility
+</span><span style="color:#e6db74">        required: true
+</span><span style="color:#e6db74">        type: half_float
+</span><span style="color:#e6db74">      - name: rxtxMsg.payload.currently.ozone
+</span><span style="color:#e6db74">        required: true
+</span><span style="color:#e6db74">        type: half_float
+</span><span style="color:#e6db74">
+</span><span style="color:#e6db74">    - key: beat
+</span><span style="color:#e6db74">      title: Beat
+</span><span style="color:#e6db74">      description: &gt;
+</span><span style="color:#e6db74">        Contains common beat fields available in all event types.
+</span><span style="color:#e6db74">      fields:
+</span><span style="color:#e6db74">        - name: beat.name
+</span><span style="color:#e6db74">          description: &gt;
+</span><span style="color:#e6db74">            The name of the Beat sending the log messages. If the Beat name is
+</span><span style="color:#e6db74">            set in the configuration file, then that value is used. If it is not
+</span><span style="color:#e6db74">            set, the hostname is used. To set the Beat name, use the `name`
+</span><span style="color:#e6db74">            option in the configuration file.
+</span><span style="color:#e6db74">        - name: beat.hostname
+</span><span style="color:#e6db74">          description: &gt;
+</span><span style="color:#e6db74">            The hostname as returned by the operating system on which the Beat is running.
+</span><span style="color:#e6db74">        - name: beat.version
+</span><span style="color:#e6db74">          description: &gt;
+</span><span style="color:#e6db74">            The version of the beat that generated this event.
+</span><span style="color:#e6db74">
+</span><span style="color:#e6db74">        - name: &#34;@timestamp&#34;
+</span><span style="color:#e6db74">          type: date
+</span><span style="color:#e6db74">          required: true
+</span><span style="color:#e6db74">          format: date
+</span><span style="color:#e6db74">          example: August 26th 2016, 12:35:53.332
+</span><span style="color:#e6db74">          description: &gt;
+</span><span style="color:#e6db74">            The timestamp when the event log record was generated.
+</span><span style="color:#e6db74">
+</span><span style="color:#e6db74">        - name: tags
+</span><span style="color:#e6db74">          description: &gt;
+</span><span style="color:#e6db74">            Arbitrary tags that can be set per Beat and per transaction
+</span><span style="color:#e6db74">            type.
+</span><span style="color:#e6db74">
+</span><span style="color:#e6db74">        - name: fields
+</span><span style="color:#e6db74">          type: object
+</span><span style="color:#e6db74">          object_type: keyword
+</span><span style="color:#e6db74">          description: &gt;
+</span><span style="color:#e6db74">            Contains user configurable fields.
+</span><span style="color:#e6db74">
+</span><span style="color:#e6db74">        - name: error
+</span><span style="color:#e6db74">          type: group
+</span><span style="color:#e6db74">          description: &gt;
+</span><span style="color:#e6db74">            Error fields containing additional info in case of errors.
+</span><span style="color:#e6db74">          fields:
+</span><span style="color:#e6db74">            - name: message
+</span><span style="color:#e6db74">              type: text
+</span><span style="color:#e6db74">              description: &gt;
+</span><span style="color:#e6db74">                Error message.
+</span><span style="color:#e6db74">            - name: code
+</span><span style="color:#e6db74">              type: long
+</span><span style="color:#e6db74">              description: &gt;
+</span><span style="color:#e6db74">                Error code.
+</span><span style="color:#e6db74">            - name: type
+</span><span style="color:#e6db74">              type: keyword
+</span><span style="color:#e6db74">              description: &gt;
+</span><span style="color:#e6db74">                Error type.
+</span></code></pre></div><p>Create the wx-rtbeat ConfigMap:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl create -f wx-rtbeat/30-configmap.yml
 </code></pre></div><h3 id="wx-rtbeat-deployment">wx-rtbeat Deployment</h3>
 <p>The deployment creates a Pod running the <a href="https://hub.docker.com/r/txn2/rtbeat/">rtbeat</a> Docker container configured by the <a href="https://kubernetes.io/docs/tasks/configure-pod-container/configure-pod-configmap/">ConfigMap</a> we created above.</p>
 <p><code>wx-rtbeat/40-depoloyment.yml</code>:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">apiVersion</span>: apps/v1
-<span style="color:#66d9ef">kind</span>: Deployment
-<span style="color:#66d9ef">metadata</span>:
-  <span style="color:#66d9ef">name</span>: wx-rtbeat
-  <span style="color:#66d9ef">namespace</span>: the-project
-  <span style="color:#66d9ef">labels</span>:
-    <span style="color:#66d9ef">app</span>: wx-rtbeat
-    <span style="color:#66d9ef">env</span>: dev
-<span style="color:#66d9ef">spec</span>:
-  <span style="color:#66d9ef">replicas</span>: <span style="color:#ae81ff">1</span>
-  <span style="color:#66d9ef">selector</span>:
-    <span style="color:#66d9ef">matchLabels</span>:
-      <span style="color:#66d9ef">app</span>: wx-rtbeat
-  <span style="color:#66d9ef">template</span>:
-    <span style="color:#66d9ef">metadata</span>:
-      <span style="color:#66d9ef">labels</span>:
-        <span style="color:#66d9ef">app</span>: wx-rtbeat
-        <span style="color:#66d9ef">env</span>: dev
-    <span style="color:#66d9ef">spec</span>:
-      <span style="color:#66d9ef">containers</span>:
-      - <span style="color:#66d9ef">name</span>: wx-rtbeat
-        <span style="color:#66d9ef">image</span>: txn2/rtbeat:<span style="color:#ae81ff">1.0.2</span>
-        <span style="color:#66d9ef">imagePullPolicy</span>: Always
-        <span style="color:#66d9ef">args</span>: [<span style="color:#e6db74">&#34;-e&#34;</span>, <span style="color:#e6db74">&#34;--path.config=/config&#34;</span>]
-        <span style="color:#66d9ef">volumeMounts</span>:
-        - <span style="color:#66d9ef">name</span>: wx-rtbeat-config-volume
-          <span style="color:#66d9ef">mountPath</span>: /config
-        <span style="color:#66d9ef">ports</span>:
-        - <span style="color:#66d9ef">name</span>: rtbeat
-          <span style="color:#66d9ef">containerPort</span>: <span style="color:#ae81ff">80</span>
-      <span style="color:#66d9ef">volumes</span>:
-      - <span style="color:#66d9ef">name</span>: wx-rtbeat-config-volume
-        <span style="color:#66d9ef">configMap</span>:
-          <span style="color:#66d9ef">name</span>: wx-rtbeat
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">apps/v1</span>
+<span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Deployment</span>
+<span style="color:#f92672">metadata</span>:
+  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">wx-rtbeat</span>
+  <span style="color:#f92672">namespace</span>: <span style="color:#ae81ff">the-project</span>
+  <span style="color:#f92672">labels</span>:
+    <span style="color:#f92672">app</span>: <span style="color:#ae81ff">wx-rtbeat</span>
+    <span style="color:#f92672">env</span>: <span style="color:#ae81ff">dev</span>
+<span style="color:#f92672">spec</span>:
+  <span style="color:#f92672">replicas</span>: <span style="color:#ae81ff">1</span>
+  <span style="color:#f92672">selector</span>:
+    <span style="color:#f92672">matchLabels</span>:
+      <span style="color:#f92672">app</span>: <span style="color:#ae81ff">wx-rtbeat</span>
+  <span style="color:#f92672">template</span>:
+    <span style="color:#f92672">metadata</span>:
+      <span style="color:#f92672">labels</span>:
+        <span style="color:#f92672">app</span>: <span style="color:#ae81ff">wx-rtbeat</span>
+        <span style="color:#f92672">env</span>: <span style="color:#ae81ff">dev</span>
+    <span style="color:#f92672">spec</span>:
+      <span style="color:#f92672">containers</span>:
+      - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">wx-rtbeat</span>
+        <span style="color:#f92672">image</span>: <span style="color:#ae81ff">txn2/rtbeat:1.0.2</span>
+        <span style="color:#f92672">imagePullPolicy</span>: <span style="color:#ae81ff">Always</span>
+        <span style="color:#f92672">args</span>: [<span style="color:#e6db74">&#34;-e&#34;</span>, <span style="color:#e6db74">&#34;--path.config=/config&#34;</span>]
+        <span style="color:#f92672">volumeMounts</span>:
+        - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">wx-rtbeat-config-volume</span>
+          <span style="color:#f92672">mountPath</span>: <span style="color:#ae81ff">/config</span>
+        <span style="color:#f92672">ports</span>:
+        - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">rtbeat</span>
+          <span style="color:#f92672">containerPort</span>: <span style="color:#ae81ff">80</span>
+      <span style="color:#f92672">volumes</span>:
+      - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">wx-rtbeat-config-volume</span>
+        <span style="color:#f92672">configMap</span>:
+          <span style="color:#f92672">name</span>: <span style="color:#ae81ff">wx-rtbeat</span>
 </code></pre></div><p>Create the wx-rtbeat <a href="https://kubernetes.io/docs/concepts/workloads/controllers/deployment/">Deployment</a>:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl create -f wx-rtbeat/40-deployment.yml
 </code></pre></div><h2 id="client-simulation--kubernetes-cron">Client Simulation / Kubernetes Cron</h2>
@@ -667,41 +667,41 @@
 <p>Create the Kubernetes secret <strong>wx-data-api-key</strong> in <strong>the-project</strong> namespace:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl create secret generic wx-data-api-key --from-file<span style="color:#f92672">=</span>apikey -n the-project
 </code></pre></div><p><code>wx-data/40-cron.yml</code>:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">apiVersion</span>: batch/v1beta1
-<span style="color:#66d9ef">kind</span>: CronJob
-<span style="color:#66d9ef">metadata</span>:
-  <span style="color:#66d9ef">name</span>: wx-data
-  <span style="color:#66d9ef">namespace</span>: the-project
-  <span style="color:#66d9ef">labels</span>:
-    <span style="color:#66d9ef">app</span>: wx-data
-    <span style="color:#66d9ef">env</span>: dev
-<span style="color:#66d9ef">spec</span>:
-  <span style="color:#66d9ef">schedule</span>: <span style="color:#e6db74">&#34;*/2 * * * *&#34;</span>
-  <span style="color:#66d9ef">concurrencyPolicy</span>: Forbid
-  <span style="color:#66d9ef">startingDeadlineSeconds</span>: <span style="color:#ae81ff">90</span>
-  <span style="color:#66d9ef">jobTemplate</span>:
-    <span style="color:#66d9ef">spec</span>:
-      <span style="color:#66d9ef">template</span>:
-        <span style="color:#66d9ef">spec</span>:
-          <span style="color:#66d9ef">containers</span>:
-          - <span style="color:#66d9ef">name</span>: wx-data
-            <span style="color:#66d9ef">image</span>: txn2/curl:v3<span style="color:#ae81ff">.0.0</span>
-            <span style="color:#66d9ef">env</span>:
-            - <span style="color:#66d9ef">name</span>: API_KEY
-              <span style="color:#66d9ef">valueFrom</span>:
-                <span style="color:#66d9ef">secretKeyRef</span>:
-                  <span style="color:#66d9ef">name</span>: wx-data-api-key
-                  <span style="color:#66d9ef">key</span>: apikey
-            - <span style="color:#66d9ef">name</span>: DATA_FROM
-              <span style="color:#66d9ef">value</span>: <span style="color:#e6db74">&#34;https://api.darksky.net/forecast/$(API_KEY)/33.8148455,-117.826581?exclude=minutely,hourly,daily,flags&#34;</span>
-            - <span style="color:#66d9ef">name</span>: DATA_TO
-              <span style="color:#66d9ef">value</span>: <span style="color:#e6db74">&#34;http://wx-rxtx:80/rx/cron/collector/wx-data&#34;</span>
-            <span style="color:#66d9ef">command</span>: [
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">batch/v1beta1</span>
+<span style="color:#f92672">kind</span>: <span style="color:#ae81ff">CronJob</span>
+<span style="color:#f92672">metadata</span>:
+  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">wx-data</span>
+  <span style="color:#f92672">namespace</span>: <span style="color:#ae81ff">the-project</span>
+  <span style="color:#f92672">labels</span>:
+    <span style="color:#f92672">app</span>: <span style="color:#ae81ff">wx-data</span>
+    <span style="color:#f92672">env</span>: <span style="color:#ae81ff">dev</span>
+<span style="color:#f92672">spec</span>:
+  <span style="color:#f92672">schedule</span>: <span style="color:#e6db74">&#34;*/2 * * * *&#34;</span>
+  <span style="color:#f92672">concurrencyPolicy</span>: <span style="color:#ae81ff">Forbid</span>
+  <span style="color:#f92672">startingDeadlineSeconds</span>: <span style="color:#ae81ff">90</span>
+  <span style="color:#f92672">jobTemplate</span>:
+    <span style="color:#f92672">spec</span>:
+      <span style="color:#f92672">template</span>:
+        <span style="color:#f92672">spec</span>:
+          <span style="color:#f92672">containers</span>:
+          - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">wx-data</span>
+            <span style="color:#f92672">image</span>: <span style="color:#ae81ff">txn2/curl:v3.0.0</span>
+            <span style="color:#f92672">env</span>:
+            - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">API_KEY</span>
+              <span style="color:#f92672">valueFrom</span>:
+                <span style="color:#f92672">secretKeyRef</span>:
+                  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">wx-data-api-key</span>
+                  <span style="color:#f92672">key</span>: <span style="color:#ae81ff">apikey</span>
+            - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">DATA_FROM</span>
+              <span style="color:#f92672">value</span>: <span style="color:#e6db74">&#34;https://api.darksky.net/forecast/$(API_KEY)/33.8148455,-117.826581?exclude=minutely,hourly,daily,flags&#34;</span>
+            - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">DATA_TO</span>
+              <span style="color:#f92672">value</span>: <span style="color:#e6db74">&#34;http://wx-rxtx:80/rx/cron/collector/wx-data&#34;</span>
+            <span style="color:#f92672">command</span>: [
               <span style="color:#e6db74">&#34;/bin/sh&#34;</span>,
               <span style="color:#e6db74">&#34;-c&#34;</span>,
               <span style="color:#e6db74">&#34;/usr/bin/curl -sX GET $(DATA_FROM) &gt; data &amp;&amp; /usr/bin/curl -sX POST -d @data $(DATA_TO)&#34;</span>
             ]
-          <span style="color:#66d9ef">restartPolicy</span>: OnFailure
+          <span style="color:#f92672">restartPolicy</span>: <span style="color:#ae81ff">OnFailure</span>
 </code></pre></div><p>Create the wx-data <a href="https://kubernetes.io/docs/concepts/workloads/controllers/cron-jobs/">CronJob</a>:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl create -f wx-data/40-cron.yml
 </code></pre></div><h2 id="performance">Performance</h2>

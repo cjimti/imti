@@ -263,12 +263,12 @@
 <h3 id="project-namespace">Project <a href="https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/">Namespace</a></h3>
 <p>In the examples below I&rsquo;ll use the namespace <strong>the-project</strong> for all the configurations. The file names are suggestions and may be adjusted to your standards.</p>
 <p><code>00-namespace.yml</code>:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">apiVersion</span>: v1
-<span style="color:#66d9ef">kind</span>: Namespace
-<span style="color:#66d9ef">metadata</span>:
-  <span style="color:#66d9ef">name</span>: the-project
-  <span style="color:#66d9ef">labels</span>:
-    <span style="color:#66d9ef">env</span>: dev
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">v1</span>
+<span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Namespace</span>
+<span style="color:#f92672">metadata</span>:
+  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">the-project</span>
+  <span style="color:#f92672">labels</span>:
+    <span style="color:#f92672">env</span>: <span style="color:#ae81ff">dev</span>
 </code></pre></div><p>Create the namespace:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl create -f 00-namespace.yml
 </code></pre></div><h3 id="rbac-for-access-and-security"><a href="https://kubernetes.io/docs/reference/access-authn-authz/rbac/">RBAC</a> for Access and Security</h3>
@@ -279,34 +279,34 @@
 </code></pre></div><p>Next, create a <a href="/team-kubernetes-remote-access/#role-and-rolebinding">Role and RoleBinding</a> for the new <code>sa-elasticsearch</code> <a href="/team-kubernetes-remote-access/#serviceaccount">ServiceAccount</a>, it makes sense to group tease in the same configuration file.</p>
 <p><code>10-rbac.yml</code></p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">---
-<span style="color:#66d9ef">apiVersion</span>: rbac.authorization.k8s.io/v1
-<span style="color:#66d9ef">kind</span>: Role
-<span style="color:#66d9ef">metadata</span>:
-  <span style="color:#66d9ef">name</span>: elasticsearch
-  <span style="color:#66d9ef">namespace</span>: the-project
-  <span style="color:#66d9ef">labels</span>:
-    <span style="color:#66d9ef">env</span>: dev
-<span style="color:#66d9ef">rules</span>:
-- <span style="color:#66d9ef">apiGroups</span>:
+<span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">rbac.authorization.k8s.io/v1</span>
+<span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Role</span>
+<span style="color:#f92672">metadata</span>:
+  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">elasticsearch</span>
+  <span style="color:#f92672">namespace</span>: <span style="color:#ae81ff">the-project</span>
+  <span style="color:#f92672">labels</span>:
+    <span style="color:#f92672">env</span>: <span style="color:#ae81ff">dev</span>
+<span style="color:#f92672">rules</span>:
+- <span style="color:#f92672">apiGroups</span>:
   - <span style="color:#e6db74">&#34;&#34;</span>
-  <span style="color:#66d9ef">resources</span>:
-  - endpoints
-  <span style="color:#66d9ef">verbs</span>:
-  - get
+  <span style="color:#f92672">resources</span>:
+  - <span style="color:#ae81ff">endpoints</span>
+  <span style="color:#f92672">verbs</span>:
+  - <span style="color:#ae81ff">get</span>
 ---
-<span style="color:#66d9ef">apiVersion</span>: rbac.authorization.k8s.io/v1
-<span style="color:#66d9ef">kind</span>: RoleBinding
-<span style="color:#66d9ef">metadata</span>:
-  <span style="color:#66d9ef">name</span>: elasticsearch
-  <span style="color:#66d9ef">namespace</span>: the-project
-<span style="color:#66d9ef">roleRef</span>:
-  <span style="color:#66d9ef">apiGroup</span>: rbac.authorization.k8s.io
-  <span style="color:#66d9ef">kind</span>: Role
-  <span style="color:#66d9ef">name</span>: elasticsearch
-<span style="color:#66d9ef">subjects</span>:
-- <span style="color:#66d9ef">kind</span>: ServiceAccount
-  <span style="color:#66d9ef">name</span>: sa-elasticsearch
-  <span style="color:#66d9ef">namespace</span>: the-project
+<span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">rbac.authorization.k8s.io/v1</span>
+<span style="color:#f92672">kind</span>: <span style="color:#ae81ff">RoleBinding</span>
+<span style="color:#f92672">metadata</span>:
+  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">elasticsearch</span>
+  <span style="color:#f92672">namespace</span>: <span style="color:#ae81ff">the-project</span>
+<span style="color:#f92672">roleRef</span>:
+  <span style="color:#f92672">apiGroup</span>: <span style="color:#ae81ff">rbac.authorization.k8s.io</span>
+  <span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Role</span>
+  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">elasticsearch</span>
+<span style="color:#f92672">subjects</span>:
+- <span style="color:#f92672">kind</span>: <span style="color:#ae81ff">ServiceAccount</span>
+  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">sa-elasticsearch</span>
+  <span style="color:#f92672">namespace</span>: <span style="color:#ae81ff">the-project</span>
 </code></pre></div><p>Create the <a href="/team-kubernetes-remote-access/#role-and-rolebinding">Role and RoleBinding</a>:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl create -f 10-rbac.yml
 </code></pre></div><h3 id="services-for-communication"><a href="https://kubernetes.io/docs/concepts/services-networking/service/">Services</a> for Communication</h3>
@@ -314,288 +314,288 @@
 <p>Combine all three Services in the same configuration file to keep things simple.</p>
 <p><code>20-services.yml</code>:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">---
-<span style="color:#66d9ef">apiVersion</span>: v1
-<span style="color:#66d9ef">kind</span>: Service
-<span style="color:#66d9ef">metadata</span>:
-  <span style="color:#66d9ef">namespace</span>: the-project 
-  <span style="color:#66d9ef">name</span>: elasticsearch
-  <span style="color:#66d9ef">labels</span>:
-    <span style="color:#66d9ef">env</span>: dev
-<span style="color:#66d9ef">spec</span>:
-  <span style="color:#66d9ef">type</span>: ClusterIP
-  <span style="color:#66d9ef">selector</span>:
-    <span style="color:#66d9ef">app</span>: elasticsearch-client
-  <span style="color:#66d9ef">ports</span>:
-  - <span style="color:#66d9ef">name</span>: http
-    <span style="color:#66d9ef">port</span>: <span style="color:#ae81ff">9200</span>
-    <span style="color:#66d9ef">protocol</span>: TCP
+<span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">v1</span>
+<span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Service</span>
+<span style="color:#f92672">metadata</span>:
+  <span style="color:#f92672">namespace</span>: <span style="color:#ae81ff">the-project </span>
+  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">elasticsearch</span>
+  <span style="color:#f92672">labels</span>:
+    <span style="color:#f92672">env</span>: <span style="color:#ae81ff">dev</span>
+<span style="color:#f92672">spec</span>:
+  <span style="color:#f92672">type</span>: <span style="color:#ae81ff">ClusterIP</span>
+  <span style="color:#f92672">selector</span>:
+    <span style="color:#f92672">app</span>: <span style="color:#ae81ff">elasticsearch-client</span>
+  <span style="color:#f92672">ports</span>:
+  - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">http</span>
+    <span style="color:#f92672">port</span>: <span style="color:#ae81ff">9200</span>
+    <span style="color:#f92672">protocol</span>: <span style="color:#ae81ff">TCP</span>
 ---
-<span style="color:#66d9ef">apiVersion</span>: v1
-<span style="color:#66d9ef">kind</span>: Service
-<span style="color:#66d9ef">metadata</span>:
-  <span style="color:#66d9ef">namespace</span>: the-project 
-  <span style="color:#66d9ef">name</span>: elasticsearch-data
-  <span style="color:#66d9ef">labels</span>:
-    <span style="color:#66d9ef">env</span>: dev
-<span style="color:#66d9ef">spec</span>:
-  <span style="color:#66d9ef">clusterIP</span>: None
-  <span style="color:#66d9ef">selector</span>:
-    <span style="color:#66d9ef">app</span>: elasticsearch-data
-  <span style="color:#66d9ef">ports</span>:
-  - <span style="color:#66d9ef">port</span>: <span style="color:#ae81ff">9300</span>
-    <span style="color:#66d9ef">name</span>: transport
+<span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">v1</span>
+<span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Service</span>
+<span style="color:#f92672">metadata</span>:
+  <span style="color:#f92672">namespace</span>: <span style="color:#ae81ff">the-project </span>
+  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">elasticsearch-data</span>
+  <span style="color:#f92672">labels</span>:
+    <span style="color:#f92672">env</span>: <span style="color:#ae81ff">dev</span>
+<span style="color:#f92672">spec</span>:
+  <span style="color:#f92672">clusterIP</span>: <span style="color:#ae81ff">None</span>
+  <span style="color:#f92672">selector</span>:
+    <span style="color:#f92672">app</span>: <span style="color:#ae81ff">elasticsearch-data</span>
+  <span style="color:#f92672">ports</span>:
+  - <span style="color:#f92672">port</span>: <span style="color:#ae81ff">9300</span>
+    <span style="color:#f92672">name</span>: <span style="color:#ae81ff">transport</span>
 ---
-<span style="color:#66d9ef">apiVersion</span>: v1
-<span style="color:#66d9ef">kind</span>: Service
-<span style="color:#66d9ef">metadata</span>:
-  <span style="color:#66d9ef">namespace</span>: the-project 
-  <span style="color:#66d9ef">name</span>: elasticsearch-discovery
-  <span style="color:#66d9ef">labels</span>:
-    <span style="color:#66d9ef">env</span>: dev
-<span style="color:#66d9ef">spec</span>:
-  <span style="color:#66d9ef">selector</span>:
-    <span style="color:#66d9ef">app</span>: elasticsearch-master
-  <span style="color:#66d9ef">ports</span>:
-  - <span style="color:#66d9ef">name</span>: transport
-    <span style="color:#66d9ef">port</span>: <span style="color:#ae81ff">9300</span>
-    <span style="color:#66d9ef">protocol</span>: TCP
+<span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">v1</span>
+<span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Service</span>
+<span style="color:#f92672">metadata</span>:
+  <span style="color:#f92672">namespace</span>: <span style="color:#ae81ff">the-project </span>
+  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">elasticsearch-discovery</span>
+  <span style="color:#f92672">labels</span>:
+    <span style="color:#f92672">env</span>: <span style="color:#ae81ff">dev</span>
+<span style="color:#f92672">spec</span>:
+  <span style="color:#f92672">selector</span>:
+    <span style="color:#f92672">app</span>: <span style="color:#ae81ff">elasticsearch-master</span>
+  <span style="color:#f92672">ports</span>:
+  - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">transport</span>
+    <span style="color:#f92672">port</span>: <span style="color:#ae81ff">9300</span>
+    <span style="color:#f92672">protocol</span>: <span style="color:#ae81ff">TCP</span>
 </code></pre></div><h3 id="statefulset-for-data-nodes"><a href="https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/">StatefulSet</a> for <a href="https://www.elastic.co/guide/en/elasticsearch/reference/6.2/modules-node.html#data-node">Data</a> nodes</h3>
 <p>Next, we configure a Kubernetes <a href="https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/">StatefulSet</a> to manage our Elasticsearch <strong><a href="https://www.elastic.co/guide/en/elasticsearch/reference/6.2/modules-node.html#data-node">Data</a></strong> nodes (<a href="https://kubernetes.io/docs/concepts/workloads/pods/pod/">Pods</a>). A <a href="https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/">StatefulSet</a> &ldquo;manages the deployment and scaling of a set of Pods, and provides guarantees about the ordering and uniqueness of these Pods.&rdquo;</p>
 <p>Since a Kubernetes <a href="https://kubernetes.io/docs/concepts/workloads/controllers/deployment/">Deployment</a> creates <a href="https://kubernetes.io/docs/concepts/workloads/controllers/replicaset/">ReplicaSets</a> and not <a href="https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/">StatefulSet</a>, we need to create a <a href="https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/">StatefulSet</a> directly for the Elasticsearch <strong><a href="https://www.elastic.co/guide/en/elasticsearch/reference/6.2/modules-node.html#data-node">data</a></strong> nodes. The <strong><a href="https://www.elastic.co/guide/en/elasticsearch/reference/6.2/modules-node.html#master-node">Master</a></strong> and <strong><a href="https://www.elastic.co/guide/en/elasticsearch/reference/6.2/ingest.html">Ingest</a></strong> nodes use <a href="https://kubernetes.io/docs/concepts/workloads/controllers/deployment/">Deployment</a>s which automatically generate <a href="https://kubernetes.io/docs/concepts/workloads/controllers/replicaset/">ReplicaSets</a> for them.</p>
 <p><code>30-statefulset-data.yml</code>:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">apiVersion</span>: apps/v1
-<span style="color:#66d9ef">kind</span>: StatefulSet
-<span style="color:#66d9ef">metadata</span>:
-  <span style="color:#66d9ef">name</span>: elasticsearch-data
-  <span style="color:#66d9ef">namespace</span>: the-project
-  <span style="color:#66d9ef">labels</span>:
-    <span style="color:#66d9ef">app</span>: elasticsearch-data
-    <span style="color:#66d9ef">env</span>: dev
-<span style="color:#66d9ef">spec</span>:
-  <span style="color:#66d9ef">serviceName</span>: elasticsearch-data
-  <span style="color:#66d9ef">replicas</span>: <span style="color:#ae81ff">1</span> <span style="color:#75715e"># scale when desired</span>
-  <span style="color:#66d9ef">selector</span>:
-    <span style="color:#66d9ef">matchLabels</span>:
-      <span style="color:#66d9ef">app</span>: elasticsearch-data
-  <span style="color:#66d9ef">template</span>:
-    <span style="color:#66d9ef">metadata</span>:
-      <span style="color:#66d9ef">labels</span>:
-        <span style="color:#66d9ef">app</span>: elasticsearch-data
-    <span style="color:#66d9ef">spec</span>:
-      <span style="color:#66d9ef">initContainers</span>:
-      - <span style="color:#66d9ef">name</span>: init-sysctl
-        <span style="color:#66d9ef">image</span>: busybox:<span style="color:#ae81ff">1.27.2</span>
-        <span style="color:#66d9ef">command</span>:
-        - sysctl
-        - -w
-        - vm.max_map_count=<span style="color:#ae81ff">262144</span>
-        <span style="color:#66d9ef">securityContext</span>:
-          <span style="color:#66d9ef">privileged</span>: <span style="color:#66d9ef">true</span>
-      <span style="color:#66d9ef">containers</span>:
-      - <span style="color:#66d9ef">name</span>: elasticsearch-data
-        <span style="color:#66d9ef">image</span>: txn2/k8s-es:v6<span style="color:#ae81ff">.2.3</span>
-        <span style="color:#66d9ef">imagePullPolicy</span>: Always
-        <span style="color:#66d9ef">env</span>:
-        - <span style="color:#66d9ef">name</span>: NAMESPACE
-          <span style="color:#66d9ef">valueFrom</span>:
-            <span style="color:#66d9ef">fieldRef</span>:
-              <span style="color:#66d9ef">fieldPath</span>: metadata.namespace
-        - <span style="color:#66d9ef">name</span>: DISCOVERY_SERVICE
-          <span style="color:#66d9ef">value</span>: elasticsearch-discovery
-        - <span style="color:#66d9ef">name</span>: NODE_NAME
-          <span style="color:#66d9ef">valueFrom</span>:
-            <span style="color:#66d9ef">fieldRef</span>:
-              <span style="color:#66d9ef">fieldPath</span>: metadata.name
-        - <span style="color:#66d9ef">name</span>: CLUSTER_NAME
-          <span style="color:#66d9ef">value</span>: elasticsearch
-        - <span style="color:#66d9ef">name</span>: NODE_DATA
-          <span style="color:#66d9ef">value</span>: <span style="color:#e6db74">&#34;true&#34;</span>
-        - <span style="color:#66d9ef">name</span>: NODE_MASTER
-          <span style="color:#66d9ef">value</span>: <span style="color:#e6db74">&#34;false&#34;</span>
-        - <span style="color:#66d9ef">name</span>: NODE_INGEST
-          <span style="color:#66d9ef">value</span>: <span style="color:#e6db74">&#34;false&#34;</span>
-        - <span style="color:#66d9ef">name</span>: HTTP_ENABLE
-          <span style="color:#66d9ef">value</span>: <span style="color:#e6db74">&#34;false&#34;</span>
-        - <span style="color:#66d9ef">name</span>: ES_JAVA_OPTS
-          <span style="color:#66d9ef">value</span>: -Xms256m -Xmx256m
-        - <span style="color:#66d9ef">name</span>: PROCESSORS
-          <span style="color:#66d9ef">valueFrom</span>:
-            <span style="color:#66d9ef">resourceFieldRef</span>:
-              <span style="color:#66d9ef">resource</span>: limits.cpu
-        <span style="color:#66d9ef">resources</span>:
-          <span style="color:#66d9ef">limits</span>:
-            <span style="color:#66d9ef">cpu</span>: <span style="color:#ae81ff">1</span>
-        <span style="color:#66d9ef">ports</span>:
-        - <span style="color:#66d9ef">containerPort</span>: <span style="color:#ae81ff">9300</span>
-          <span style="color:#66d9ef">name</span>: transport
-        <span style="color:#66d9ef">volumeMounts</span>:
-        - <span style="color:#66d9ef">name</span>: elasticsearch-data-storage
-          <span style="color:#66d9ef">mountPath</span>: /data
-  <span style="color:#66d9ef">volumeClaimTemplates</span>:
-  - <span style="color:#66d9ef">metadata</span>:
-      <span style="color:#66d9ef">name</span>: elasticsearch-data-storage
-    <span style="color:#66d9ef">spec</span>:
-      <span style="color:#66d9ef">storageClassName</span>: rook-block
-      <span style="color:#66d9ef">accessModes</span>: [ ReadWriteOnce ]
-      <span style="color:#66d9ef">resources</span>:
-        <span style="color:#66d9ef">requests</span>:
-          <span style="color:#66d9ef">storage</span>: 2Gi <span style="color:#75715e"># small for dev / testing</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">apps/v1</span>
+<span style="color:#f92672">kind</span>: <span style="color:#ae81ff">StatefulSet</span>
+<span style="color:#f92672">metadata</span>:
+  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">elasticsearch-data</span>
+  <span style="color:#f92672">namespace</span>: <span style="color:#ae81ff">the-project</span>
+  <span style="color:#f92672">labels</span>:
+    <span style="color:#f92672">app</span>: <span style="color:#ae81ff">elasticsearch-data</span>
+    <span style="color:#f92672">env</span>: <span style="color:#ae81ff">dev</span>
+<span style="color:#f92672">spec</span>:
+  <span style="color:#f92672">serviceName</span>: <span style="color:#ae81ff">elasticsearch-data</span>
+  <span style="color:#f92672">replicas</span>: <span style="color:#ae81ff">1</span> <span style="color:#75715e"># scale when desired</span>
+  <span style="color:#f92672">selector</span>:
+    <span style="color:#f92672">matchLabels</span>:
+      <span style="color:#f92672">app</span>: <span style="color:#ae81ff">elasticsearch-data</span>
+  <span style="color:#f92672">template</span>:
+    <span style="color:#f92672">metadata</span>:
+      <span style="color:#f92672">labels</span>:
+        <span style="color:#f92672">app</span>: <span style="color:#ae81ff">elasticsearch-data</span>
+    <span style="color:#f92672">spec</span>:
+      <span style="color:#f92672">initContainers</span>:
+      - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">init-sysctl</span>
+        <span style="color:#f92672">image</span>: <span style="color:#ae81ff">busybox:1.27.2</span>
+        <span style="color:#f92672">command</span>:
+        - <span style="color:#ae81ff">sysctl</span>
+        - -<span style="color:#ae81ff">w</span>
+        - <span style="color:#ae81ff">vm.max_map_count=262144</span>
+        <span style="color:#f92672">securityContext</span>:
+          <span style="color:#f92672">privileged</span>: <span style="color:#66d9ef">true</span>
+      <span style="color:#f92672">containers</span>:
+      - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">elasticsearch-data</span>
+        <span style="color:#f92672">image</span>: <span style="color:#ae81ff">txn2/k8s-es:v6.2.3</span>
+        <span style="color:#f92672">imagePullPolicy</span>: <span style="color:#ae81ff">Always</span>
+        <span style="color:#f92672">env</span>:
+        - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">NAMESPACE</span>
+          <span style="color:#f92672">valueFrom</span>:
+            <span style="color:#f92672">fieldRef</span>:
+              <span style="color:#f92672">fieldPath</span>: <span style="color:#ae81ff">metadata.namespace</span>
+        - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">DISCOVERY_SERVICE</span>
+          <span style="color:#f92672">value</span>: <span style="color:#ae81ff">elasticsearch-discovery</span>
+        - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">NODE_NAME</span>
+          <span style="color:#f92672">valueFrom</span>:
+            <span style="color:#f92672">fieldRef</span>:
+              <span style="color:#f92672">fieldPath</span>: <span style="color:#ae81ff">metadata.name</span>
+        - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">CLUSTER_NAME</span>
+          <span style="color:#f92672">value</span>: <span style="color:#ae81ff">elasticsearch</span>
+        - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">NODE_DATA</span>
+          <span style="color:#f92672">value</span>: <span style="color:#e6db74">&#34;true&#34;</span>
+        - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">NODE_MASTER</span>
+          <span style="color:#f92672">value</span>: <span style="color:#e6db74">&#34;false&#34;</span>
+        - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">NODE_INGEST</span>
+          <span style="color:#f92672">value</span>: <span style="color:#e6db74">&#34;false&#34;</span>
+        - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">HTTP_ENABLE</span>
+          <span style="color:#f92672">value</span>: <span style="color:#e6db74">&#34;false&#34;</span>
+        - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">ES_JAVA_OPTS</span>
+          <span style="color:#f92672">value</span>: -<span style="color:#ae81ff">Xms256m -Xmx256m</span>
+        - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">PROCESSORS</span>
+          <span style="color:#f92672">valueFrom</span>:
+            <span style="color:#f92672">resourceFieldRef</span>:
+              <span style="color:#f92672">resource</span>: <span style="color:#ae81ff">limits.cpu</span>
+        <span style="color:#f92672">resources</span>:
+          <span style="color:#f92672">limits</span>:
+            <span style="color:#f92672">cpu</span>: <span style="color:#ae81ff">1</span>
+        <span style="color:#f92672">ports</span>:
+        - <span style="color:#f92672">containerPort</span>: <span style="color:#ae81ff">9300</span>
+          <span style="color:#f92672">name</span>: <span style="color:#ae81ff">transport</span>
+        <span style="color:#f92672">volumeMounts</span>:
+        - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">elasticsearch-data-storage</span>
+          <span style="color:#f92672">mountPath</span>: <span style="color:#ae81ff">/data</span>
+  <span style="color:#f92672">volumeClaimTemplates</span>:
+  - <span style="color:#f92672">metadata</span>:
+      <span style="color:#f92672">name</span>: <span style="color:#ae81ff">elasticsearch-data-storage</span>
+    <span style="color:#f92672">spec</span>:
+      <span style="color:#f92672">storageClassName</span>: <span style="color:#ae81ff">rook-block</span>
+      <span style="color:#f92672">accessModes</span>: [ <span style="color:#ae81ff">ReadWriteOnce ]</span>
+      <span style="color:#f92672">resources</span>:
+        <span style="color:#f92672">requests</span>:
+          <span style="color:#f92672">storage</span>: <span style="color:#ae81ff">2Gi # small for dev / testing</span>
 </code></pre></div><h3 id="deployment-for-master-nodes"><a href="https://kubernetes.io/docs/concepts/workloads/controllers/deployment/">Deployment</a> for <a href="https://www.elastic.co/guide/en/elasticsearch/reference/6.2/modules-node.html#master-node">Master</a> Nodes</h3>
 <p>The <strong><a href="https://www.elastic.co/guide/en/elasticsearch/reference/6.2/modules-node.html#master-node">Master</a></strong> Elasticsearch nodes are &ldquo;responsible for lightweight cluster-wide actions such as creating or deleting an index, tracking which nodes are part of the cluster, and deciding which shards to allocate to which nodes. It is important for cluster health to have a stable master node.&rdquo;</p>
 <p><code>40-deployment-master.yml</code>:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">apiVersion</span>: apps/v1
-<span style="color:#66d9ef">kind</span>: Deployment
-<span style="color:#66d9ef">metadata</span>:
-  <span style="color:#66d9ef">name</span>: elasticsearch-master
-  <span style="color:#66d9ef">namespace</span>: the-project
-  <span style="color:#66d9ef">labels</span>:
-    <span style="color:#66d9ef">app</span>: elasticsearch-master
-    <span style="color:#66d9ef">env</span>: dev
-<span style="color:#66d9ef">spec</span>:
-  <span style="color:#66d9ef">replicas</span>: <span style="color:#ae81ff">2</span> <span style="color:#75715e"># scale as desired (see NUMBER_OF_MASTERS below)</span>
-  <span style="color:#66d9ef">selector</span>:
-    <span style="color:#66d9ef">matchLabels</span>:
-      <span style="color:#66d9ef">app</span>: elasticsearch-master
-  <span style="color:#66d9ef">template</span>:
-    <span style="color:#66d9ef">metadata</span>:
-      <span style="color:#66d9ef">labels</span>:
-        <span style="color:#66d9ef">app</span>: elasticsearch-master
-        <span style="color:#66d9ef">env</span>: dev
-    <span style="color:#66d9ef">spec</span>:
-      <span style="color:#66d9ef">initContainers</span>:
-      - <span style="color:#66d9ef">name</span>: init-sysctl
-        <span style="color:#66d9ef">image</span>: busybox:<span style="color:#ae81ff">1.27.2</span>
-        <span style="color:#66d9ef">command</span>:
-        - sysctl
-        - -w
-        - vm.max_map_count=<span style="color:#ae81ff">262144</span>
-        <span style="color:#66d9ef">securityContext</span>:
-          <span style="color:#66d9ef">privileged</span>: <span style="color:#66d9ef">true</span>
-      <span style="color:#66d9ef">containers</span>:
-      - <span style="color:#66d9ef">name</span>: elasticsearch-master
-        <span style="color:#66d9ef">image</span>: txn2/k8s-es:v6<span style="color:#ae81ff">.2.3</span>
-        <span style="color:#66d9ef">imagePullPolicy</span>: Always
-        <span style="color:#66d9ef">env</span>:
-        - <span style="color:#66d9ef">name</span>: NAMESPACE
-          <span style="color:#66d9ef">valueFrom</span>:
-            <span style="color:#66d9ef">fieldRef</span>:
-              <span style="color:#66d9ef">fieldPath</span>: metadata.namespace
-        - <span style="color:#66d9ef">name</span>: NODE_NAME
-          <span style="color:#66d9ef">valueFrom</span>:
-            <span style="color:#66d9ef">fieldRef</span>:
-              <span style="color:#66d9ef">fieldPath</span>: metadata.name
-        - <span style="color:#66d9ef">name</span>: DISCOVERY_SERVICE
-          <span style="color:#66d9ef">value</span>: elasticsearch-discovery
-        - <span style="color:#66d9ef">name</span>: CLUSTER_NAME
-          <span style="color:#66d9ef">value</span>: elasticsearch
-        - <span style="color:#66d9ef">name</span>: NUMBER_OF_MASTERS
-          <span style="color:#66d9ef">value</span>: <span style="color:#e6db74">&#34;2&#34;</span>
-        - <span style="color:#66d9ef">name</span>: NODE_MASTER
-          <span style="color:#66d9ef">value</span>: <span style="color:#e6db74">&#34;true&#34;</span>
-        - <span style="color:#66d9ef">name</span>: NODE_INGEST
-          <span style="color:#66d9ef">value</span>: <span style="color:#e6db74">&#34;false&#34;</span>
-        - <span style="color:#66d9ef">name</span>: NODE_DATA
-          <span style="color:#66d9ef">value</span>: <span style="color:#e6db74">&#34;false&#34;</span>
-        - <span style="color:#66d9ef">name</span>: HTTP_ENABLE
-          <span style="color:#66d9ef">value</span>: <span style="color:#e6db74">&#34;false&#34;</span>
-        - <span style="color:#66d9ef">name</span>: ES_JAVA_OPTS
-          <span style="color:#66d9ef">value</span>: -Xms256m -Xmx256m
-        - <span style="color:#66d9ef">name</span>: PROCESSORS
-          <span style="color:#66d9ef">valueFrom</span>:
-            <span style="color:#66d9ef">resourceFieldRef</span>:
-              <span style="color:#66d9ef">resource</span>: limits.cpu
-        <span style="color:#66d9ef">resources</span>:
-          <span style="color:#66d9ef">limits</span>:
-            <span style="color:#66d9ef">cpu</span>: <span style="color:#ae81ff">1</span>
-        <span style="color:#66d9ef">ports</span>:
-        - <span style="color:#66d9ef">containerPort</span>: <span style="color:#ae81ff">9300</span>
-          <span style="color:#66d9ef">name</span>: transport
-        <span style="color:#66d9ef">volumeMounts</span>:
-        - <span style="color:#66d9ef">name</span>: storage
-          <span style="color:#66d9ef">mountPath</span>: /data
-      <span style="color:#66d9ef">volumes</span>:
-      - <span style="color:#66d9ef">emptyDir</span>:
-          <span style="color:#66d9ef">medium</span>: <span style="color:#e6db74">&#34;&#34;</span>
-        <span style="color:#66d9ef">name</span>: <span style="color:#e6db74">&#34;storage&#34;</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">apps/v1</span>
+<span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Deployment</span>
+<span style="color:#f92672">metadata</span>:
+  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">elasticsearch-master</span>
+  <span style="color:#f92672">namespace</span>: <span style="color:#ae81ff">the-project</span>
+  <span style="color:#f92672">labels</span>:
+    <span style="color:#f92672">app</span>: <span style="color:#ae81ff">elasticsearch-master</span>
+    <span style="color:#f92672">env</span>: <span style="color:#ae81ff">dev</span>
+<span style="color:#f92672">spec</span>:
+  <span style="color:#f92672">replicas</span>: <span style="color:#ae81ff">2</span> <span style="color:#75715e"># scale as desired (see NUMBER_OF_MASTERS below)</span>
+  <span style="color:#f92672">selector</span>:
+    <span style="color:#f92672">matchLabels</span>:
+      <span style="color:#f92672">app</span>: <span style="color:#ae81ff">elasticsearch-master</span>
+  <span style="color:#f92672">template</span>:
+    <span style="color:#f92672">metadata</span>:
+      <span style="color:#f92672">labels</span>:
+        <span style="color:#f92672">app</span>: <span style="color:#ae81ff">elasticsearch-master</span>
+        <span style="color:#f92672">env</span>: <span style="color:#ae81ff">dev</span>
+    <span style="color:#f92672">spec</span>:
+      <span style="color:#f92672">initContainers</span>:
+      - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">init-sysctl</span>
+        <span style="color:#f92672">image</span>: <span style="color:#ae81ff">busybox:1.27.2</span>
+        <span style="color:#f92672">command</span>:
+        - <span style="color:#ae81ff">sysctl</span>
+        - -<span style="color:#ae81ff">w</span>
+        - <span style="color:#ae81ff">vm.max_map_count=262144</span>
+        <span style="color:#f92672">securityContext</span>:
+          <span style="color:#f92672">privileged</span>: <span style="color:#66d9ef">true</span>
+      <span style="color:#f92672">containers</span>:
+      - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">elasticsearch-master</span>
+        <span style="color:#f92672">image</span>: <span style="color:#ae81ff">txn2/k8s-es:v6.2.3</span>
+        <span style="color:#f92672">imagePullPolicy</span>: <span style="color:#ae81ff">Always</span>
+        <span style="color:#f92672">env</span>:
+        - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">NAMESPACE</span>
+          <span style="color:#f92672">valueFrom</span>:
+            <span style="color:#f92672">fieldRef</span>:
+              <span style="color:#f92672">fieldPath</span>: <span style="color:#ae81ff">metadata.namespace</span>
+        - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">NODE_NAME</span>
+          <span style="color:#f92672">valueFrom</span>:
+            <span style="color:#f92672">fieldRef</span>:
+              <span style="color:#f92672">fieldPath</span>: <span style="color:#ae81ff">metadata.name</span>
+        - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">DISCOVERY_SERVICE</span>
+          <span style="color:#f92672">value</span>: <span style="color:#ae81ff">elasticsearch-discovery</span>
+        - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">CLUSTER_NAME</span>
+          <span style="color:#f92672">value</span>: <span style="color:#ae81ff">elasticsearch</span>
+        - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">NUMBER_OF_MASTERS</span>
+          <span style="color:#f92672">value</span>: <span style="color:#e6db74">&#34;2&#34;</span>
+        - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">NODE_MASTER</span>
+          <span style="color:#f92672">value</span>: <span style="color:#e6db74">&#34;true&#34;</span>
+        - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">NODE_INGEST</span>
+          <span style="color:#f92672">value</span>: <span style="color:#e6db74">&#34;false&#34;</span>
+        - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">NODE_DATA</span>
+          <span style="color:#f92672">value</span>: <span style="color:#e6db74">&#34;false&#34;</span>
+        - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">HTTP_ENABLE</span>
+          <span style="color:#f92672">value</span>: <span style="color:#e6db74">&#34;false&#34;</span>
+        - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">ES_JAVA_OPTS</span>
+          <span style="color:#f92672">value</span>: -<span style="color:#ae81ff">Xms256m -Xmx256m</span>
+        - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">PROCESSORS</span>
+          <span style="color:#f92672">valueFrom</span>:
+            <span style="color:#f92672">resourceFieldRef</span>:
+              <span style="color:#f92672">resource</span>: <span style="color:#ae81ff">limits.cpu</span>
+        <span style="color:#f92672">resources</span>:
+          <span style="color:#f92672">limits</span>:
+            <span style="color:#f92672">cpu</span>: <span style="color:#ae81ff">1</span>
+        <span style="color:#f92672">ports</span>:
+        - <span style="color:#f92672">containerPort</span>: <span style="color:#ae81ff">9300</span>
+          <span style="color:#f92672">name</span>: <span style="color:#ae81ff">transport</span>
+        <span style="color:#f92672">volumeMounts</span>:
+        - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">storage</span>
+          <span style="color:#f92672">mountPath</span>: <span style="color:#ae81ff">/data</span>
+      <span style="color:#f92672">volumes</span>:
+      - <span style="color:#f92672">emptyDir</span>:
+          <span style="color:#f92672">medium</span>: <span style="color:#e6db74">&#34;&#34;</span>
+        <span style="color:#f92672">name</span>: <span style="color:#e6db74">&#34;storage&#34;</span>
 </code></pre></div><h3 id="deployment-for-client-and-ingest-nodes"><a href="https://kubernetes.io/docs/concepts/workloads/controllers/deployment/">Deployment</a> for Client and <a href="https://www.elastic.co/guide/en/elasticsearch/reference/6.2/ingest.html">Ingest</a> Nodes</h3>
 <p>For the sake of simplicity, we use our <strong>client</strong> nodes for <a href="https://www.elastic.co/guide/en/elasticsearch/reference/6.2/ingest.html">ingest</a> and queries. These can easily be separated out once you have determined your load model. Separate <strong><a href="https://www.elastic.co/guide/en/elasticsearch/reference/6.2/ingest.html">Ingest</a></strong> nodes allow you to &ldquo;pre-process documents before the actual document indexing happens. The ingest node intercepts bulk and index requests, it applies transformations, and it then passes the documents back to the index or bulk APIs.&rdquo; By default, Elasticsearch nodes allow <a href="https://www.elastic.co/guide/en/elasticsearch/reference/6.2/ingest.html">ingest</a>, so clients remain in this default mode.</p>
 <p><code>60-deployment-client.yml</code>:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">apiVersion</span>: apps/v1
-<span style="color:#66d9ef">kind</span>: Deployment
-<span style="color:#66d9ef">metadata</span>:
-  <span style="color:#66d9ef">name</span>: elasticsearch-client
-  <span style="color:#66d9ef">namespace</span>: the-project
-  <span style="color:#66d9ef">labels</span>:
-    <span style="color:#66d9ef">app</span>: elasticsearch-client
-    <span style="color:#66d9ef">env</span>: dev
-<span style="color:#66d9ef">spec</span>:
-  <span style="color:#66d9ef">replicas</span>: <span style="color:#ae81ff">1</span> <span style="color:#75715e"># scale as desired</span>
-  <span style="color:#66d9ef">selector</span>:
-    <span style="color:#66d9ef">matchLabels</span>:
-      <span style="color:#66d9ef">app</span>: elasticsearch-client
-  <span style="color:#66d9ef">template</span>:
-    <span style="color:#66d9ef">metadata</span>:
-      <span style="color:#66d9ef">labels</span>:
-        <span style="color:#66d9ef">app</span>: elasticsearch-client
-        <span style="color:#66d9ef">env</span>: dev
-    <span style="color:#66d9ef">spec</span>:
-      <span style="color:#66d9ef">initContainers</span>:
-      - <span style="color:#66d9ef">name</span>: init-sysctl
-        <span style="color:#66d9ef">image</span>: busybox:<span style="color:#ae81ff">1.27.2</span>
-        <span style="color:#66d9ef">command</span>:
-        - sysctl
-        - -w
-        - vm.max_map_count=<span style="color:#ae81ff">262144</span>
-        <span style="color:#66d9ef">securityContext</span>:
-          <span style="color:#66d9ef">privileged</span>: <span style="color:#66d9ef">true</span>
-      <span style="color:#66d9ef">containers</span>:
-      - <span style="color:#66d9ef">name</span>: elasticsearch-client
-        <span style="color:#66d9ef">image</span>: txn2/k8s-es:v6<span style="color:#ae81ff">.2.3</span>
-        <span style="color:#66d9ef">imagePullPolicy</span>: Always
-        <span style="color:#66d9ef">env</span>:
-        - <span style="color:#66d9ef">name</span>: NAMESPACE
-          <span style="color:#66d9ef">valueFrom</span>:
-            <span style="color:#66d9ef">fieldRef</span>:
-              <span style="color:#66d9ef">fieldPath</span>: metadata.namespace
-        - <span style="color:#66d9ef">name</span>: NODE_NAME
-          <span style="color:#66d9ef">valueFrom</span>:
-            <span style="color:#66d9ef">fieldRef</span>:
-              <span style="color:#66d9ef">fieldPath</span>: metadata.name
-        - <span style="color:#66d9ef">name</span>: DISCOVERY_SERVICE
-          <span style="color:#66d9ef">value</span>: elasticsearch-discovery
-        - <span style="color:#66d9ef">name</span>: CLUSTER_NAME
-          <span style="color:#66d9ef">value</span>: elasticsearch
-        - <span style="color:#66d9ef">name</span>: NODE_MASTER
-          <span style="color:#66d9ef">value</span>: <span style="color:#e6db74">&#34;false&#34;</span>
-        - <span style="color:#66d9ef">name</span>: NETWORK_HOST
-          <span style="color:#66d9ef">value</span>: <span style="color:#e6db74">&#34;0.0.0.0&#34;</span>
-        - <span style="color:#66d9ef">name</span>: NODE_INGEST
-          <span style="color:#66d9ef">value</span>: <span style="color:#e6db74">&#34;true&#34;</span>
-        - <span style="color:#66d9ef">name</span>: NODE_DATA
-          <span style="color:#66d9ef">value</span>: <span style="color:#e6db74">&#34;false&#34;</span>
-        - <span style="color:#66d9ef">name</span>: HTTP_ENABLE
-          <span style="color:#66d9ef">value</span>: <span style="color:#e6db74">&#34;true&#34;</span>
-        - <span style="color:#66d9ef">name</span>: ES_JAVA_OPTS
-          <span style="color:#66d9ef">value</span>: -Xms256m -Xmx256m
-        - <span style="color:#66d9ef">name</span>: PROCESSORS
-          <span style="color:#66d9ef">valueFrom</span>:
-            <span style="color:#66d9ef">resourceFieldRef</span>:
-              <span style="color:#66d9ef">resource</span>: limits.cpu
-        <span style="color:#66d9ef">resources</span>:
-          <span style="color:#66d9ef">limits</span>:
-            <span style="color:#66d9ef">cpu</span>: <span style="color:#ae81ff">1</span>
-        <span style="color:#66d9ef">ports</span>:
-        - <span style="color:#66d9ef">containerPort</span>: <span style="color:#ae81ff">9200</span>
-          <span style="color:#66d9ef">name</span>: http
-        - <span style="color:#66d9ef">containerPort</span>: <span style="color:#ae81ff">9300</span>
-          <span style="color:#66d9ef">name</span>: transport
-        <span style="color:#66d9ef">volumeMounts</span>:
-        - <span style="color:#66d9ef">name</span>: storage
-          <span style="color:#66d9ef">mountPath</span>: /data
-      <span style="color:#66d9ef">volumes</span>:
-      - <span style="color:#66d9ef">emptyDir</span>:
-          <span style="color:#66d9ef">medium</span>: <span style="color:#e6db74">&#34;&#34;</span>
-        <span style="color:#66d9ef">name</span>: <span style="color:#e6db74">&#34;storage&#34;</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">apps/v1</span>
+<span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Deployment</span>
+<span style="color:#f92672">metadata</span>:
+  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">elasticsearch-client</span>
+  <span style="color:#f92672">namespace</span>: <span style="color:#ae81ff">the-project</span>
+  <span style="color:#f92672">labels</span>:
+    <span style="color:#f92672">app</span>: <span style="color:#ae81ff">elasticsearch-client</span>
+    <span style="color:#f92672">env</span>: <span style="color:#ae81ff">dev</span>
+<span style="color:#f92672">spec</span>:
+  <span style="color:#f92672">replicas</span>: <span style="color:#ae81ff">1</span> <span style="color:#75715e"># scale as desired</span>
+  <span style="color:#f92672">selector</span>:
+    <span style="color:#f92672">matchLabels</span>:
+      <span style="color:#f92672">app</span>: <span style="color:#ae81ff">elasticsearch-client</span>
+  <span style="color:#f92672">template</span>:
+    <span style="color:#f92672">metadata</span>:
+      <span style="color:#f92672">labels</span>:
+        <span style="color:#f92672">app</span>: <span style="color:#ae81ff">elasticsearch-client</span>
+        <span style="color:#f92672">env</span>: <span style="color:#ae81ff">dev</span>
+    <span style="color:#f92672">spec</span>:
+      <span style="color:#f92672">initContainers</span>:
+      - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">init-sysctl</span>
+        <span style="color:#f92672">image</span>: <span style="color:#ae81ff">busybox:1.27.2</span>
+        <span style="color:#f92672">command</span>:
+        - <span style="color:#ae81ff">sysctl</span>
+        - -<span style="color:#ae81ff">w</span>
+        - <span style="color:#ae81ff">vm.max_map_count=262144</span>
+        <span style="color:#f92672">securityContext</span>:
+          <span style="color:#f92672">privileged</span>: <span style="color:#66d9ef">true</span>
+      <span style="color:#f92672">containers</span>:
+      - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">elasticsearch-client</span>
+        <span style="color:#f92672">image</span>: <span style="color:#ae81ff">txn2/k8s-es:v6.2.3</span>
+        <span style="color:#f92672">imagePullPolicy</span>: <span style="color:#ae81ff">Always</span>
+        <span style="color:#f92672">env</span>:
+        - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">NAMESPACE</span>
+          <span style="color:#f92672">valueFrom</span>:
+            <span style="color:#f92672">fieldRef</span>:
+              <span style="color:#f92672">fieldPath</span>: <span style="color:#ae81ff">metadata.namespace</span>
+        - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">NODE_NAME</span>
+          <span style="color:#f92672">valueFrom</span>:
+            <span style="color:#f92672">fieldRef</span>:
+              <span style="color:#f92672">fieldPath</span>: <span style="color:#ae81ff">metadata.name</span>
+        - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">DISCOVERY_SERVICE</span>
+          <span style="color:#f92672">value</span>: <span style="color:#ae81ff">elasticsearch-discovery</span>
+        - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">CLUSTER_NAME</span>
+          <span style="color:#f92672">value</span>: <span style="color:#ae81ff">elasticsearch</span>
+        - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">NODE_MASTER</span>
+          <span style="color:#f92672">value</span>: <span style="color:#e6db74">&#34;false&#34;</span>
+        - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">NETWORK_HOST</span>
+          <span style="color:#f92672">value</span>: <span style="color:#e6db74">&#34;0.0.0.0&#34;</span>
+        - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">NODE_INGEST</span>
+          <span style="color:#f92672">value</span>: <span style="color:#e6db74">&#34;true&#34;</span>
+        - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">NODE_DATA</span>
+          <span style="color:#f92672">value</span>: <span style="color:#e6db74">&#34;false&#34;</span>
+        - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">HTTP_ENABLE</span>
+          <span style="color:#f92672">value</span>: <span style="color:#e6db74">&#34;true&#34;</span>
+        - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">ES_JAVA_OPTS</span>
+          <span style="color:#f92672">value</span>: -<span style="color:#ae81ff">Xms256m -Xmx256m</span>
+        - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">PROCESSORS</span>
+          <span style="color:#f92672">valueFrom</span>:
+            <span style="color:#f92672">resourceFieldRef</span>:
+              <span style="color:#f92672">resource</span>: <span style="color:#ae81ff">limits.cpu</span>
+        <span style="color:#f92672">resources</span>:
+          <span style="color:#f92672">limits</span>:
+            <span style="color:#f92672">cpu</span>: <span style="color:#ae81ff">1</span>
+        <span style="color:#f92672">ports</span>:
+        - <span style="color:#f92672">containerPort</span>: <span style="color:#ae81ff">9200</span>
+          <span style="color:#f92672">name</span>: <span style="color:#ae81ff">http</span>
+        - <span style="color:#f92672">containerPort</span>: <span style="color:#ae81ff">9300</span>
+          <span style="color:#f92672">name</span>: <span style="color:#ae81ff">transport</span>
+        <span style="color:#f92672">volumeMounts</span>:
+        - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">storage</span>
+          <span style="color:#f92672">mountPath</span>: <span style="color:#ae81ff">/data</span>
+      <span style="color:#f92672">volumes</span>:
+      - <span style="color:#f92672">emptyDir</span>:
+          <span style="color:#f92672">medium</span>: <span style="color:#e6db74">&#34;&#34;</span>
+        <span style="color:#f92672">name</span>: <span style="color:#e6db74">&#34;storage&#34;</span>
 </code></pre></div><h3 id="testing">Testing</h3>
 <p>Use <code>kubectl exec</code> to open a terminal into a Pod in <code>the-project</code> namespace and use <code>curl</code> to test the new Elasticsearch cluster.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl exec -it SOME_POD sh -n the-project 

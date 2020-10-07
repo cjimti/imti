@@ -251,36 +251,36 @@
 <span style="color:#75715e"># irsync docker image: https://hub.docker.com/r/cjimti/irsync/</span>
 <span style="color:#75715e"># rsyncd docker image: https://hub.docker.com/r/cjimti/rsyncd/ (or use any rsync server)</span>
 <span style="color:#75715e">#</span>
-<span style="color:#66d9ef">version</span>: <span style="color:#e6db74">&#39;3&#39;</span>
+<span style="color:#f92672">version</span>: <span style="color:#e6db74">&#39;3&#39;</span>
 
 <span style="color:#75715e"># Setting up an internal network allow us to use the</span>
 <span style="color:#75715e"># default port and not wory about exposing ports on our</span>
 <span style="color:#75715e"># host.</span>
 <span style="color:#75715e">#</span>
-<span style="color:#66d9ef">networks</span>:
-  <span style="color:#66d9ef">sync-net</span>:
+<span style="color:#f92672">networks</span>:
+  <span style="color:#f92672">sync-net</span>:
 
-<span style="color:#66d9ef">services</span>:
-  <span style="color:#66d9ef">server</span>:
-    <span style="color:#66d9ef">image</span>: <span style="color:#e6db74">&#34;txn2/rsyncd&#34;</span>
-    <span style="color:#66d9ef">container_name</span>: rsyncd-server
-    <span style="color:#66d9ef">environment</span>:
-      - USERNAME=test
-      - PASSWORD=password
-      - VOLUME_PATH=/source_data
-      - READ_ONLY=<span style="color:#66d9ef">true</span>
-      - CHROOT=yes
-      - VOLUME_NAME=source_data
-      - HOSTS_ALLOW=<span style="color:#ae81ff">0.0.0.0</span>/<span style="color:#ae81ff">0</span>
-    <span style="color:#66d9ef">volumes</span>:
-      - ./data/source:/source_data
-    <span style="color:#66d9ef">networks</span>:
-      - sync-net
-  <span style="color:#66d9ef">client</span>:
-    <span style="color:#66d9ef">image</span>: <span style="color:#e6db74">&#34;txn2/irsync&#34;</span>
-    <span style="color:#66d9ef">container_name</span>: irsync-client
-    <span style="color:#66d9ef">environment</span>:
-      - RSYNC_PASSWORD=password
+<span style="color:#f92672">services</span>:
+  <span style="color:#f92672">server</span>:
+    <span style="color:#f92672">image</span>: <span style="color:#e6db74">&#34;txn2/rsyncd&#34;</span>
+    <span style="color:#f92672">container_name</span>: <span style="color:#ae81ff">rsyncd-server</span>
+    <span style="color:#f92672">environment</span>:
+      - <span style="color:#ae81ff">USERNAME=test</span>
+      - <span style="color:#ae81ff">PASSWORD=password</span>
+      - <span style="color:#ae81ff">VOLUME_PATH=/source_data</span>
+      - <span style="color:#ae81ff">READ_ONLY=true</span>
+      - <span style="color:#ae81ff">CHROOT=yes</span>
+      - <span style="color:#ae81ff">VOLUME_NAME=source_data</span>
+      - <span style="color:#ae81ff">HOSTS_ALLOW=0.0.0.0/0</span>
+    <span style="color:#f92672">volumes</span>:
+      - <span style="color:#ae81ff">./data/source:/source_data</span>
+    <span style="color:#f92672">networks</span>:
+      - <span style="color:#ae81ff">sync-net</span>
+  <span style="color:#f92672">client</span>:
+    <span style="color:#f92672">image</span>: <span style="color:#e6db74">&#34;txn2/irsync&#34;</span>
+    <span style="color:#f92672">container_name</span>: <span style="color:#ae81ff">irsync-client</span>
+    <span style="color:#f92672">environment</span>:
+      - <span style="color:#ae81ff">RSYNC_PASSWORD=password</span>
 
     <span style="color:#75715e"># irsync and rsync options can be intermixed.</span>
     <span style="color:#75715e">#</span>
@@ -291,7 +291,7 @@
     <span style="color:#75715e"># rsync has over one hundred options:</span>
     <span style="color:#75715e">#     see: https://download.samba.org/pub/rsync/rsync.html</span>
     <span style="color:#75715e">#</span>
-    <span style="color:#66d9ef">command</span>: [
+    <span style="color:#f92672">command</span>: [
       <span style="color:#e6db74">&#34;--irsync-interval-seconds=30&#34;</span>,
       <span style="color:#e6db74">&#34;-pvrt&#34;</span>,
       <span style="color:#e6db74">&#34;--delete&#34;</span>,
@@ -299,12 +299,12 @@
       <span style="color:#e6db74">&#34;rsync://test@rsyncd-server:873/source_data/&#34;</span>,
       <span style="color:#e6db74">&#34;/data/&#34;</span>
     ]
-    <span style="color:#66d9ef">volumes</span>:
-      - ./data/dest:/data
-    <span style="color:#66d9ef">depends_on</span>:
-      - server
-    <span style="color:#66d9ef">networks</span>:
-      - sync-net
+    <span style="color:#f92672">volumes</span>:
+      - <span style="color:#ae81ff">./data/dest:/data</span>
+    <span style="color:#f92672">depends_on</span>:
+      - <span style="color:#ae81ff">server</span>
+    <span style="color:#f92672">networks</span>:
+      - <span style="color:#ae81ff">sync-net</span>
 </code></pre></div><p>Say you need to ensure your device (or another server) always has the latest files from the server. However, syncing hundreds or even thousands of files could take hours or days. First, <a href="https://en.wikipedia.org/wiki/Rsync">rsync</a> will only grab the data you don&rsquo;t have, or may have an outdated version of, you can never assume the state of the data on your device. <a href="https://github.com/cjimti/irsync">irsync</a> will use it&rsquo;s built-in <a href="https://en.wikipedia.org/wiki/Rsync">rsync</a> to do the heavy lifting of determining your state versus the server. But <a href="https://en.wikipedia.org/wiki/Rsync">rsync</a> is not perfect, and dealing with an unstable network can sometimes cause it to hang or fail. The good news is that, if restarted, <a href="https://en.wikipedia.org/wiki/Rsync">rsync</a> will pick up where it left off.</p>
 <p>In the IOT device world you can&rsquo;t sit watch the transfer and restart it when needed, this is what <a href="https://github.com/cjimti/irsync">irsync</a> was built for.</p>
 <p><a href="https://github.com/cjimti/irsync">irsync</a> manages the output of it&rsquo;s internal <a href="https://en.wikipedia.org/wiki/Rsync">rsync</a> and will restart a synchronization process if the timeout exceeds the specified directive. Most of the files I need to be synchronized are under 200 megabytes, so I sent my timeout to 2 hours per file. If a file takes longer than 2 hours to sync then I assume, there is a network or connection failure and let <a href="https://github.com/cjimti/irsync">irsync</a> start the process over.</p>
@@ -360,7 +360,7 @@ docker-compose logs -f
 </div>
 
 <p>I recorded a video performing the demo above:</p>
-<!-- raw HTML omitted -->
+<style>.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'><iframe src='https://www.youtube.com/embed/gT_P2a-xpPw?rel=0' frameborder='0' allowfullscreen></iframe></div>
 <h2 id="custom-docker-container">Custom Docker Container</h2>
 <p>Another useful implementation method involves creating a custom Docker image for each source and destination synchronizations you want to keep running. See the following example Dockerfile:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Dockerfile" data-lang="Dockerfile"><span style="color:#66d9ef">FROM</span><span style="color:#e6db74"> txn2/irsync</span><span style="color:#960050;background-color:#1e0010">
@@ -381,7 +381,7 @@ docker-compose logs -f
 </span><span style="color:#ae81ff"></span>    -v <span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">$(</span>pwd<span style="color:#66d9ef">)</span><span style="color:#e6db74">&#34;</span>/data:/data custom-sync
 </code></pre></div><h2 id="wear-it">Wear it</h2>
 <p>If you have read this far, you might be be the kind of person to appreciate a high-end fashion statement:</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a target="_blank"  href="https://www.amazon.com/gp/product/B07BZ8R8B2/ref=as_li_tl?ie=UTF8&camp=1789&creative=9325&creativeASIN=B07BZ8R8B2&linkCode=as2&tag=imti-20&linkId=2ae79aaf417450259d43834db6c71e74"><img border="0" src="//ws-na.amazon-adsystem.com/widgets/q?_encoding=UTF8&MarketPlace=US&ASIN=B07BZ8R8B2&ServiceVersion=20070822&ID=AsinImage&WS=1&Format=_SL250_&tag=imti-20" ></a><img src="//ir-na.amazon-adsystem.com/e/ir?t=imti-20&l=am2&o=1&a=B07BZ8R8B2" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" /></p>
 <h3 id="resources">Resources</h3>
 <ul>
 <li><a href="https://amzn.to/2qlJT3d">Raspberry Pi</a></li>

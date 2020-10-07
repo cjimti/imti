@@ -249,45 +249,45 @@
 </code></pre></div><p>Ensure the <a href="https://kubernetes.io/docs/concepts/configuration/secret/">Secret</a> was created successfully by viewing the details:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl get secret sysop -o yaml
 </code></pre></div><p>You should have a secret similar to the following:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">apiVersion</span>: v1
-<span style="color:#66d9ef">data</span>:
-  <span style="color:#66d9ef">auth</span>: c3avb2A2GGFwcjEkMmo5SwoucC4kcWtDR3NTVUxSDXJmTVkwNUwxUlZYLbo=
-<span style="color:#66d9ef">kind</span>: Secret
-<span style="color:#66d9ef">metadata</span>:
-  <span style="color:#66d9ef">creationTimestamp</span>: <span style="color:#e6db74">2018-05-18T06:55:51Z</span>
-  <span style="color:#66d9ef">name</span>: sysop
-  <span style="color:#66d9ef">namespace</span>: default
-  <span style="color:#66d9ef">resourceVersion</span>: <span style="color:#e6db74">&#34;265674&#34;</span>
-  <span style="color:#66d9ef">selfLink</span>: /api/v1/namespaces/default/secrets/sysop
-  <span style="color:#66d9ef">uid</span>: 2bfb399c-58d6<span style="color:#ae81ff">-11e8</span>-b11e-5600017e897a
-<span style="color:#66d9ef">type</span>: Opaque
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">v1</span>
+<span style="color:#f92672">data</span>:
+  <span style="color:#f92672">auth</span>: <span style="color:#ae81ff">c3avb2A2GGFwcjEkMmo5SwoucC4kcWtDR3NTVUxSDXJmTVkwNUwxUlZYLbo=</span>
+<span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Secret</span>
+<span style="color:#f92672">metadata</span>:
+  <span style="color:#f92672">creationTimestamp</span>: <span style="color:#e6db74">2018-05-18T06:55:51Z</span>
+  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">sysop</span>
+  <span style="color:#f92672">namespace</span>: <span style="color:#ae81ff">default</span>
+  <span style="color:#f92672">resourceVersion</span>: <span style="color:#e6db74">&#34;265674&#34;</span>
+  <span style="color:#f92672">selfLink</span>: <span style="color:#ae81ff">/api/v1/namespaces/default/secrets/sysop</span>
+  <span style="color:#f92672">uid</span>: <span style="color:#ae81ff">2bfb399c-58d6-11e8-b11e-5600017e897a</span>
+<span style="color:#f92672">type</span>: <span style="color:#ae81ff">Opaque</span>
 </code></pre></div><p>Of course, you should avoid publishing your new <a href="https://kubernetes.io/docs/concepts/configuration/secret/">Secret</a> like I just did, since the <code>auth:</code> value under <code>data:</code> is only a <a href="https://en.wikipedia.org/wiki/Base64">base64</a> encoded version of the username and encoded password pair. The password may be reversed quickly with a dictionary attack or other password cracking utilities.</p>
 <h3 id="protect-ingress">Protect <a href="/web-cluster-ingress/">Ingress</a></h3>
 <p>The following is an example <a href="/web-cluster-ingress/">Ingress</a> configuration for a test application called <a href="https://github.com/txn2/ok">ok</a> running on the <a href="http://localhost:4000/tag/phc.txn2.net/">phc.txn2.net</a> test cluster.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"> <span style="color:#66d9ef">apiVersion</span>: extensions/v1beta1
- <span style="color:#66d9ef">kind</span>: Ingress
- <span style="color:#66d9ef">metadata</span>:
-   <span style="color:#66d9ef">name</span>: ok-auth
-   <span style="color:#66d9ef">labels</span>:
-     <span style="color:#66d9ef">app</span>: ok-auth
-     <span style="color:#66d9ef">system</span>: test
-   <span style="color:#66d9ef">annotations</span>:
-     <span style="color:#66d9ef">nginx.ingress.kubernetes.io/auth-type</span>: basic
-     <span style="color:#66d9ef">nginx.ingress.kubernetes.io/auth-secret</span>: sysop
-     <span style="color:#66d9ef">nginx.ingress.kubernetes.io/auth-realm</span>: <span style="color:#e6db74">&#34;Authentication Required - ok&#34;</span>
- <span style="color:#66d9ef">spec</span>:
-   <span style="color:#66d9ef">rules</span>:
-   - <span style="color:#66d9ef">host</span>: ok-auth.la.txn2.net
-     <span style="color:#66d9ef">http</span>:
-       <span style="color:#66d9ef">paths</span>:
-       - <span style="color:#66d9ef">backend</span>:
-           <span style="color:#66d9ef">serviceName</span>: <span style="color:#e6db74">&#34;ok&#34;</span>
-           <span style="color:#66d9ef">servicePort</span>: <span style="color:#ae81ff">5001</span>
-         <span style="color:#66d9ef">path</span>: /
-   <span style="color:#66d9ef">tls</span>:
-   - <span style="color:#66d9ef">hosts</span>:
-     - ok-auth.la.txn2.net
-     <span style="color:#66d9ef">secretName</span>: la-txn2-net-tls
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"> <span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">extensions/v1beta1</span>
+ <span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Ingress</span>
+ <span style="color:#f92672">metadata</span>:
+   <span style="color:#f92672">name</span>: <span style="color:#ae81ff">ok-auth</span>
+   <span style="color:#f92672">labels</span>:
+     <span style="color:#f92672">app</span>: <span style="color:#ae81ff">ok-auth</span>
+     <span style="color:#f92672">system</span>: <span style="color:#ae81ff">test</span>
+   <span style="color:#f92672">annotations</span>:
+     <span style="color:#f92672">nginx.ingress.kubernetes.io/auth-type</span>: <span style="color:#ae81ff">basic</span>
+     <span style="color:#f92672">nginx.ingress.kubernetes.io/auth-secret</span>: <span style="color:#ae81ff">sysop</span>
+     <span style="color:#f92672">nginx.ingress.kubernetes.io/auth-realm</span>: <span style="color:#e6db74">&#34;Authentication Required - ok&#34;</span>
+ <span style="color:#f92672">spec</span>:
+   <span style="color:#f92672">rules</span>:
+   - <span style="color:#f92672">host</span>: <span style="color:#ae81ff">ok-auth.la.txn2.net</span>
+     <span style="color:#f92672">http</span>:
+       <span style="color:#f92672">paths</span>:
+       - <span style="color:#f92672">backend</span>:
+           <span style="color:#f92672">serviceName</span>: <span style="color:#e6db74">&#34;ok&#34;</span>
+           <span style="color:#f92672">servicePort</span>: <span style="color:#ae81ff">5001</span>
+         <span style="color:#f92672">path</span>: <span style="color:#ae81ff">/</span>
+   <span style="color:#f92672">tls</span>:
+   - <span style="color:#f92672">hosts</span>:
+     - <span style="color:#ae81ff">ok-auth.la.txn2.net</span>
+     <span style="color:#f92672">secretName</span>: <span style="color:#ae81ff">la-txn2-net-tls</span>
 </code></pre></div><p>All that is needed are three <a href="/web-cluster-ingress/">Ingress</a> annotations:</p>
 <ul>
 <li>nginx.ingress.kubernetes.io/auth-type: basic</li>

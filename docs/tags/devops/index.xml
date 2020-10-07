@@ -6,11 +6,7 @@
     <description>Recent content in DevOps on IMTI</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 10 Jul 2018 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="https://imti.co/tags/devops/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Tue, 10 Jul 2018 00:00:00 +0000</lastBuildDate><atom:link href="https://imti.co/tags/devops/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Kubernetes Team Access - RBAC for developers and QA</title>
       <link>https://imti.co/team-kubernetes-remote-access/</link>

@@ -335,7 +335,7 @@ Loading cached images from config file.
 go-ok     1         1         1            1           2m
 </code></pre></div><p>Get the yaml configuration of the deployment</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl get deployment -o yaml
-</code></pre></div><!-- raw HTML omitted -->
+</code></pre></div><script src="https://gist.github.com/cjimti/ee9de951e0efececa14432a3b82d8315.js"></script>
 <h4 id="pods"><a href="https://kubernetes.io/docs/concepts/workloads/pods/pod/">Pods</a></h4>
 <p>List all pods on the cluster (default namespace):</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl get pods
@@ -343,7 +343,7 @@ go-ok     1         1         1            1           2m
 go-ok-5bc6b8bf6c-sltjk   1/1       Running   0          12m
 </code></pre></div><p>Get the yaml configuration of the Pod:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl get pod go-ok-5bc6b8bf6c-sltjk -o yaml
-</code></pre></div><!-- raw HTML omitted -->
+</code></pre></div><script src="https://gist.github.com/cjimti/530022b6b9cd57db86dff67419f13044.js"></script>
 <h4 id="replica-sets"><a href="https://kubernetes.io/docs/concepts/workloads/controllers/replicaset/">Replica Sets</a></h4>
 <blockquote>
 <p>While <a href="https://kubernetes.io/docs/concepts/workloads/controllers/replicaset/">ReplicaSets</a> can be used independently, today it’s mainly used by <a href="https://kubernetes.io/docs/concepts/workloads/controllers/deployment/">Deployments</a> as a mechanism to orchestrate pod creation, deletion and updates. When you use <a href="https://kubernetes.io/docs/concepts/workloads/controllers/deployment/">Deployments</a> you don’t have to worry about managing the <a href="https://kubernetes.io/docs/concepts/workloads/controllers/replicaset/">ReplicaSets</a> that they create. Deployments own and manage their <a href="https://kubernetes.io/docs/concepts/workloads/controllers/replicaset/">ReplicaSets</a>.</p>
@@ -354,7 +354,7 @@ go-ok-5bc6b8bf6c-sltjk   1/1       Running   0          12m
 go-ok-5bc6b8bf6c   1         1         1         20m
 </code></pre></div><p>Get the yaml configuration of the Replica Set:</p>
 <pre><code>kubectl get rs go-ok-5bc6b8bf6c -o yaml
-</code></pre><!-- raw HTML omitted -->
+</code></pre><script src="https://gist.github.com/cjimti/97e22b3b779764e8f199d22f565f6a17.js"></script>
 <h4 id="expose-a-container-services">Expose A Container <a href="https://kubernetes.io/docs/concepts/services-networking/service/">Services</a></h4>
 <p>We expose the container with the following:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl expose deployments go-ok --port <span style="color:#ae81ff">8080</span> --type NodePort
@@ -372,7 +372,7 @@ kubernetes   ClusterIP   10.96.0.1        &lt;none&gt;        443/TCP          2
 </code></pre></div><p>The go-ok services is now running on port 32414 as is seen in the PORT(S) column: <code>8080:32414/TCP</code></p>
 <p>Get the yaml configuration of the service:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl get service go-ok -o yaml
-</code></pre></div><!-- raw HTML omitted -->
+</code></pre></div><script src="https://gist.github.com/cjimti/bfb8cc086f9ff122910f1a9411d0be3f.js"></script>
 <p>The service is now viewable in the <a href="https://kubernetes.io/docs/tasks/access-application-cluster/web-ui-dashboard/">Dashboard</a>:
 <img src="/images/k8s-kubernetes-dashboard-services.jpg" alt="k8s services dashboard go-ok"></p>
 <h4 id="architecture-overview-deployments">Architecture Overview: Deployments</h4>
@@ -400,26 +400,26 @@ kubernetes   ClusterIP   10.96.0.1        &lt;none&gt;        443/TCP          2
 </code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectp describe configmap nginx-proxy-conf
 </code></pre></div><h2 id="declare-a-pod">Declare a <a href="https://kubernetes.io/docs/concepts/workloads/pods/pod/">Pod</a></h2>
 <p>Create a <code>pod.yml</code>:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">apiVersion</span>: v1
-<span style="color:#66d9ef">kind</span>: Pod
-<span style="color:#66d9ef">metadata</span>:
-  <span style="color:#66d9ef">name</span>: go-ok
-  <span style="color:#66d9ef">labels</span>:
-    <span style="color:#66d9ef">app</span>: go-ok-app
-    <span style="color:#66d9ef">purpose</span>: example
-<span style="color:#66d9ef">spec</span>:
-  <span style="color:#66d9ef">containers</span>:
-    - <span style="color:#66d9ef">name</span>: go-ok
-      <span style="color:#66d9ef">image</span>: cjimti/go-ok:v1
-      <span style="color:#66d9ef">imagePullPolicy</span>: Always
-      <span style="color:#66d9ef">env</span>:
-        - <span style="color:#66d9ef">name</span>: PORT
-          <span style="color:#66d9ef">value</span>: <span style="color:#e6db74">&#34;80&#34;</span>
-        - <span style="color:#66d9ef">name</span>: GIN_MODE
-          <span style="color:#66d9ef">value</span>: <span style="color:#e6db74">&#34;release&#34;</span>
-      <span style="color:#66d9ef">ports</span>:
-        - <span style="color:#66d9ef">name</span>: http
-          <span style="color:#66d9ef">containerPort</span>: <span style="color:#ae81ff">80</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">v1</span>
+<span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Pod</span>
+<span style="color:#f92672">metadata</span>:
+  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">go-ok</span>
+  <span style="color:#f92672">labels</span>:
+    <span style="color:#f92672">app</span>: <span style="color:#ae81ff">go-ok-app</span>
+    <span style="color:#f92672">purpose</span>: <span style="color:#ae81ff">example</span>
+<span style="color:#f92672">spec</span>:
+  <span style="color:#f92672">containers</span>:
+    - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">go-ok</span>
+      <span style="color:#f92672">image</span>: <span style="color:#ae81ff">cjimti/go-ok:v1</span>
+      <span style="color:#f92672">imagePullPolicy</span>: <span style="color:#ae81ff">Always</span>
+      <span style="color:#f92672">env</span>:
+        - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">PORT</span>
+          <span style="color:#f92672">value</span>: <span style="color:#e6db74">&#34;80&#34;</span>
+        - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">GIN_MODE</span>
+          <span style="color:#f92672">value</span>: <span style="color:#e6db74">&#34;release&#34;</span>
+      <span style="color:#f92672">ports</span>:
+        - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">http</span>
+          <span style="color:#f92672">containerPort</span>: <span style="color:#ae81ff">80</span>
 </code></pre></div><p>Create the <a href="https://kubernetes.io/docs/concepts/workloads/pods/pod/">Pod</a>:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl create -f ./pod.yml
 </code></pre></div><p>Get a list of <a href="https://kubernetes.io/docs/concepts/workloads/pods/pod/">Pods</a> using a label selectors:</p>
@@ -444,20 +444,20 @@ kubectl label pods go-ok owner=cjimti
 </ul>
 <p>Create a <a href="https://kubernetes.io/docs/concepts/services-networking/service/">Service</a> using a <a href="https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/#label-selectors">Selector</a>:</p>
 <p><code>service.yml</code>:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">apiVersion</span>: v1
-<span style="color:#66d9ef">kind</span>: Service
-<span style="color:#66d9ef">metadata</span>:
-  <span style="color:#66d9ef">name</span>: <span style="color:#e6db74">&#34;go-ok&#34;</span>
-<span style="color:#66d9ef">spec</span>:
-  <span style="color:#66d9ef">selector</span>:
-    <span style="color:#66d9ef">app</span>: <span style="color:#e6db74">&#34;go-ok&#34;</span>
-    <span style="color:#66d9ef">purpose</span>: <span style="color:#e6db74">&#34;example&#34;</span>
-  <span style="color:#66d9ef">ports</span>:
-    - <span style="color:#66d9ef">protocol</span>: <span style="color:#e6db74">&#34;TCP&#34;</span>
-      <span style="color:#66d9ef">port</span>: <span style="color:#ae81ff">80</span>
-      <span style="color:#66d9ef">targetPort</span>: <span style="color:#ae81ff">80</span>
-      <span style="color:#66d9ef">nodePort</span>: <span style="color:#ae81ff">31000</span> //port exposed on the node (cluster)
-  <span style="color:#66d9ef">type</span>: NodePort
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">v1</span>
+<span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Service</span>
+<span style="color:#f92672">metadata</span>:
+  <span style="color:#f92672">name</span>: <span style="color:#e6db74">&#34;go-ok&#34;</span>
+<span style="color:#f92672">spec</span>:
+  <span style="color:#f92672">selector</span>:
+    <span style="color:#f92672">app</span>: <span style="color:#e6db74">&#34;go-ok&#34;</span>
+    <span style="color:#f92672">purpose</span>: <span style="color:#e6db74">&#34;example&#34;</span>
+  <span style="color:#f92672">ports</span>:
+    - <span style="color:#f92672">protocol</span>: <span style="color:#e6db74">&#34;TCP&#34;</span>
+      <span style="color:#f92672">port</span>: <span style="color:#ae81ff">80</span>
+      <span style="color:#f92672">targetPort</span>: <span style="color:#ae81ff">80</span>
+      <span style="color:#f92672">nodePort</span>: <span style="color:#ae81ff">31000</span> <span style="color:#ae81ff">//port exposed on the node (cluster)</span>
+  <span style="color:#f92672">type</span>: <span style="color:#ae81ff">NodePort</span>
 </code></pre></div><p>List the service created with the config:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl get -f service.yml
 </code></pre></div><h2 id="ingress-controller"><a href="https://kubernetes.io/docs/concepts/services-networking/ingress/">Ingress</a> Controller</h2>

@@ -451,7 +451,11 @@ dtype: float64
 
 df_ai <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>DataFrame(ai)
 df_ai
-</code></pre></div><!-- raw HTML omitted -->
+</code></pre></div><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
 <pre><code>.dataframe tbody tr th {
     vertical-align: top;
 }
@@ -460,8 +464,44 @@ df_ai
     text-align: right;
 }
 </code></pre>
-<p><!-- raw HTML omitted --></p>
-<!-- raw HTML omitted -->
+<p></style></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>bender</th>
+      <th>hal</th>
+      <th>johnny 5</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>bending</th>
+      <td>100</td>
+      <td>NaN</td>
+      <td>2.0</td>
+    </tr>
+    <tr>
+      <th>dangerous</th>
+      <td>50</td>
+      <td>90.0</td>
+      <td>12.0</td>
+    </tr>
+    <tr>
+      <th>humor</th>
+      <td>50</td>
+      <td>NaN</td>
+      <td>5.0</td>
+    </tr>
+    <tr>
+      <th>intellect</th>
+      <td>20</td>
+      <td>100.0</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+</div>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">print</span>(f<span style="color:#e6db74">&#39;     Shape: {df_ai.shape}&#39;</span>)
 <span style="color:#66d9ef">print</span>(f<span style="color:#e6db74">&#39;Dimensions: {df_ai.ndim}&#39;</span>)
 <span style="color:#66d9ef">print</span>(f<span style="color:#e6db74">&#39;      Size: {df_ai.size}&#39;</span>)
@@ -495,7 +535,11 @@ dtype: int64
 </ul>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># mask out any data greater than 10</span>
 df_ai<span style="color:#f92672">.</span>mask(df_ai <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">10</span>)
-</code></pre></div><!-- raw HTML omitted -->
+</code></pre></div><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
 <pre><code>.dataframe tbody tr th {
     vertical-align: top;
 }
@@ -504,11 +548,51 @@ df_ai<span style="color:#f92672">.</span>mask(df_ai <span style="color:#f92672">
     text-align: right;
 }
 </code></pre>
-<p><!-- raw HTML omitted --></p>
-<!-- raw HTML omitted -->
+<p></style></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>bender</th>
+      <th>hal</th>
+      <th>johnny 5</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>bending</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>2.0</td>
+    </tr>
+    <tr>
+      <th>dangerous</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>humor</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>5.0</td>
+    </tr>
+    <tr>
+      <th>intellect</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+</div>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># only return data greater than 10, otherwise NaN</span>
 df_ai<span style="color:#f92672">.</span>where(df_ai <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">10</span>)
-</code></pre></div><!-- raw HTML omitted -->
+</code></pre></div><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
 <pre><code>.dataframe tbody tr th {
     vertical-align: top;
 }
@@ -517,11 +601,51 @@ df_ai<span style="color:#f92672">.</span>where(df_ai <span style="color:#f92672"
     text-align: right;
 }
 </code></pre>
-<p><!-- raw HTML omitted --></p>
-<!-- raw HTML omitted -->
+<p></style></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>bender</th>
+      <th>hal</th>
+      <th>johnny 5</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>bending</th>
+      <td>100</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>dangerous</th>
+      <td>50</td>
+      <td>90.0</td>
+      <td>12.0</td>
+    </tr>
+    <tr>
+      <th>humor</th>
+      <td>50</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>intellect</th>
+      <td>20</td>
+      <td>100.0</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+</div>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># only return data greater than 10, otherwise 0</span>
 df_ai<span style="color:#f92672">.</span>where(df_ai <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">0</span>)
-</code></pre></div><!-- raw HTML omitted -->
+</code></pre></div><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
 <pre><code>.dataframe tbody tr th {
     vertical-align: top;
 }
@@ -530,15 +654,55 @@ df_ai<span style="color:#f92672">.</span>where(df_ai <span style="color:#f92672"
     text-align: right;
 }
 </code></pre>
-<p><!-- raw HTML omitted --></p>
-<!-- raw HTML omitted -->
+<p></style></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>bender</th>
+      <th>hal</th>
+      <th>johnny 5</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>bending</th>
+      <td>100</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>dangerous</th>
+      <td>50</td>
+      <td>90.0</td>
+      <td>12.0</td>
+    </tr>
+    <tr>
+      <th>humor</th>
+      <td>50</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>intellect</th>
+      <td>20</td>
+      <td>100.0</td>
+      <td>0.0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
 <h3 id="modifying">Modifying</h3>
 <p>The AI bots &lsquo;hal&rsquo;, &lsquo;johnny 5&rsquo; and &lsquo;bender&rsquo; share some common attributes, however where they do not, we get <strong>nan</strong> (not a number). Running the AI bot data through any math function would be problematic with the existence of non-numbers. Pandas give us quite a few options.</p>
 <p>There are many options for cleaning this data. I&rsquo;ll start with removing any rows that contain <strong>nan</strong> values. We can make these adjustments with the optional parameter <strong>inplace=True</strong> if we wanted to modify the DataFrame in place, however for the sake of examples it is better to keep the original in-tact.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># return a frame eliminating rows with NaN values</span>
 df_ai_common_rows <span style="color:#f92672">=</span> df_ai<span style="color:#f92672">.</span>dropna(axis<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>)
 df_ai_common_rows
-</code></pre></div><!-- raw HTML omitted -->
+</code></pre></div><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
 <pre><code>.dataframe tbody tr th {
     vertical-align: top;
 }
@@ -547,12 +711,34 @@ df_ai_common_rows
     text-align: right;
 }
 </code></pre>
-<p><!-- raw HTML omitted --></p>
-<!-- raw HTML omitted -->
+<p></style></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>bender</th>
+      <th>hal</th>
+      <th>johnny 5</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>dangerous</th>
+      <td>50</td>
+      <td>90.0</td>
+      <td>12.0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># return a frame eliminating rows with NaN values</span>
 df_ai_common_cols <span style="color:#f92672">=</span> df_ai<span style="color:#f92672">.</span>dropna(axis<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)
 df_ai_common_cols
-</code></pre></div><!-- raw HTML omitted -->
+</code></pre></div><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
 <pre><code>.dataframe tbody tr th {
     vertical-align: top;
 }
@@ -561,12 +747,42 @@ df_ai_common_cols
     text-align: right;
 }
 </code></pre>
-<p><!-- raw HTML omitted --></p>
-<!-- raw HTML omitted -->
+<p></style></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>bender</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>bending</th>
+      <td>100</td>
+    </tr>
+    <tr>
+      <th>dangerous</th>
+      <td>50</td>
+    </tr>
+    <tr>
+      <th>humor</th>
+      <td>50</td>
+    </tr>
+    <tr>
+      <th>intellect</th>
+      <td>20</td>
+    </tr>
+  </tbody>
+</table>
+</div>
 <p>Depending on requirements, no data could mean zero in our scale of 0-100. While zero is not a reasonable assumption for our AI bots, it&rsquo;s an easy data fix:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># fill all NaNs with 0</span>
 df_ai<span style="color:#f92672">.</span>fillna(<span style="color:#ae81ff">0</span>)
-</code></pre></div><!-- raw HTML omitted -->
+</code></pre></div><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
 <pre><code>.dataframe tbody tr th {
     vertical-align: top;
 }
@@ -575,11 +791,51 @@ df_ai<span style="color:#f92672">.</span>fillna(<span style="color:#ae81ff">0</s
     text-align: right;
 }
 </code></pre>
-<p><!-- raw HTML omitted --></p>
-<!-- raw HTML omitted -->
+<p></style></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>bender</th>
+      <th>hal</th>
+      <th>johnny 5</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>bending</th>
+      <td>100</td>
+      <td>0.0</td>
+      <td>2.0</td>
+    </tr>
+    <tr>
+      <th>dangerous</th>
+      <td>50</td>
+      <td>90.0</td>
+      <td>12.0</td>
+    </tr>
+    <tr>
+      <th>humor</th>
+      <td>50</td>
+      <td>0.0</td>
+      <td>5.0</td>
+    </tr>
+    <tr>
+      <th>intellect</th>
+      <td>20</td>
+      <td>100.0</td>
+      <td>0.0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># forward fill rows with previous column (axis=0) data </span>
 df_ai<span style="color:#f92672">.</span>fillna(method<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;ffill&#39;</span>, axis<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>)
-</code></pre></div><!-- raw HTML omitted -->
+</code></pre></div><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
 <pre><code>.dataframe tbody tr th {
     vertical-align: top;
 }
@@ -588,12 +844,52 @@ df_ai<span style="color:#f92672">.</span>fillna(method<span style="color:#f92672
     text-align: right;
 }
 </code></pre>
-<p><!-- raw HTML omitted --></p>
-<!-- raw HTML omitted -->
+<p></style></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>bender</th>
+      <th>hal</th>
+      <th>johnny 5</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>bending</th>
+      <td>100</td>
+      <td>NaN</td>
+      <td>2.0</td>
+    </tr>
+    <tr>
+      <th>dangerous</th>
+      <td>50</td>
+      <td>90.0</td>
+      <td>12.0</td>
+    </tr>
+    <tr>
+      <th>humor</th>
+      <td>50</td>
+      <td>90.0</td>
+      <td>5.0</td>
+    </tr>
+    <tr>
+      <th>intellect</th>
+      <td>20</td>
+      <td>100.0</td>
+      <td>5.0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># forward fill rows with previous column (axis=0) data </span>
 <span style="color:#75715e"># then back fill</span>
 df_ai<span style="color:#f92672">.</span>fillna(method<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;ffill&#39;</span>, axis<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>)<span style="color:#f92672">.</span>fillna(method<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;bfill&#39;</span>, axis<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>)
-</code></pre></div><!-- raw HTML omitted -->
+</code></pre></div><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
 <pre><code>.dataframe tbody tr th {
     vertical-align: top;
 }
@@ -602,8 +898,44 @@ df_ai<span style="color:#f92672">.</span>fillna(method<span style="color:#f92672
     text-align: right;
 }
 </code></pre>
-<p><!-- raw HTML omitted --></p>
-<!-- raw HTML omitted -->
+<p></style></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>bender</th>
+      <th>hal</th>
+      <th>johnny 5</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>bending</th>
+      <td>100</td>
+      <td>90.0</td>
+      <td>2.0</td>
+    </tr>
+    <tr>
+      <th>dangerous</th>
+      <td>50</td>
+      <td>90.0</td>
+      <td>12.0</td>
+    </tr>
+    <tr>
+      <th>humor</th>
+      <td>50</td>
+      <td>90.0</td>
+      <td>5.0</td>
+    </tr>
+    <tr>
+      <th>intellect</th>
+      <td>20</td>
+      <td>100.0</td>
+      <td>5.0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
 <p>Forward (ffill) and backfilling (bfill) have far better uses in time-series data. In this case, <code>hal</code> having a danger rating of 90 should not assume that his bending ability would be 90 as well, but this example clearly illustrates the forward and backfilling capabilities of <a href="https://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.html">DataFrame</a>&rsquo;s <a href="https://pandas.pydata.org/pandas-docs/version/0.22/generated/pandas.DataFrame.fillna.html">fillna</a> method.</p>
 <p>If we needed to make assumptions regarding the ability of this team of AI bots we could assume unknown data could start as an average of known data.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># get the mean of data for each attribute row by column (axis=1)</span>
@@ -618,7 +950,11 @@ dtype: float64
 <p>We could have defied a named function; however this small opperation <strong>x.fillna(x.mean())</strong> is hardly worthy of such attention. Python&rsquo;s <a href="https://docs.python.org/3/tutorial/controlflow.html#lambda-expressions">lambda</a>s are one line, anonymous functions, and then used responsibly, can make the code more compact and readable at the same time.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">clean_df_ai <span style="color:#f92672">=</span> df_ai<span style="color:#f92672">.</span>apply(<span style="color:#66d9ef">lambda</span> x: x<span style="color:#f92672">.</span>fillna(x<span style="color:#f92672">.</span>mean()),axis<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)
 clean_df_ai
-</code></pre></div><!-- raw HTML omitted -->
+</code></pre></div><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
 <pre><code>.dataframe tbody tr th {
     vertical-align: top;
 }
@@ -627,13 +963,53 @@ clean_df_ai
     text-align: right;
 }
 </code></pre>
-<p><!-- raw HTML omitted --></p>
-<!-- raw HTML omitted -->
+<p></style></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>bender</th>
+      <th>hal</th>
+      <th>johnny 5</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>bending</th>
+      <td>100.0</td>
+      <td>51.0</td>
+      <td>2.0</td>
+    </tr>
+    <tr>
+      <th>dangerous</th>
+      <td>50.0</td>
+      <td>90.0</td>
+      <td>12.0</td>
+    </tr>
+    <tr>
+      <th>humor</th>
+      <td>50.0</td>
+      <td>27.5</td>
+      <td>5.0</td>
+    </tr>
+    <tr>
+      <th>intellect</th>
+      <td>20.0</td>
+      <td>100.0</td>
+      <td>60.0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
 <h3 id="sorting">Sorting</h3>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># order the columns by ai bot with the highest intellect</span>
 hii <span style="color:#f92672">=</span> clean_df_ai<span style="color:#f92672">.</span>sort_values([<span style="color:#e6db74">&#39;intellect&#39;</span>], axis<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>, ascending<span style="color:#f92672">=</span>False)
 hii
-</code></pre></div><!-- raw HTML omitted -->
+</code></pre></div><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
 <pre><code>.dataframe tbody tr th {
     vertical-align: top;
 }
@@ -642,8 +1018,44 @@ hii
     text-align: right;
 }
 </code></pre>
-<p><!-- raw HTML omitted --></p>
-<!-- raw HTML omitted -->
+<p></style></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>hal</th>
+      <th>johnny 5</th>
+      <th>bender</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>bending</th>
+      <td>51.0</td>
+      <td>2.0</td>
+      <td>100.0</td>
+    </tr>
+    <tr>
+      <th>dangerous</th>
+      <td>90.0</td>
+      <td>12.0</td>
+      <td>50.0</td>
+    </tr>
+    <tr>
+      <th>humor</th>
+      <td>27.5</td>
+      <td>5.0</td>
+      <td>50.0</td>
+    </tr>
+    <tr>
+      <th>intellect</th>
+      <td>100.0</td>
+      <td>60.0</td>
+      <td>20.0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">print</span>(f<span style="color:#e6db74">&#39;The bot with the highest intelligence is {hii.columns[0]}.&#39;</span>)
 <span style="color:#66d9ef">print</span>(f<span style="color:#e6db74">&#39;The bot with the lowest intelligence is {hii.columns[-1]}.&#39;</span>)
 </code></pre></div><pre><code>The bot with the highest intelligence is hal.

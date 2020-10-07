@@ -212,7 +212,7 @@
 <h2 id="1---list-disks">1 - List Disks</h2>
 <p>Insert your SD card and from the command line use <a href="https://developer.apple.com/legacy/library/documentation/Darwin/Reference/ManPages/man8/diskutil.8.html">diskUtil</a> to lists all your drives.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">diskUtil list
-</code></pre></div><!-- raw HTML omitted -->
+</code></pre></div><script src="https://gist.github.com/cjimti/059b841f492506936f2950c463b46d50.js"></script>
 <p>You are going to want to stay away from disk0 and disk1. You don&rsquo;t want to kill your hard drive. Also, watch out for other attached storage. I can see my 32g mounted as <strong>/dev/disk3</strong>.</p>
 <h2 id="2---unmount-disks">2 - Unmount Disks</h2>
 <p>Unmount the SD card. In my case, it&rsquo;s <strong>/dev/disk3</strong>. If you have additional attached storage, your SD card might be disk 4, 5, or higher.</p>

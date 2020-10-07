@@ -276,13 +276,13 @@
 <p>If you are getting an error along the lines of <code>127.0.0.1:9200, 16): Connection refused</code> it is most likely that Elasticsearch is not binding to all local interfaces on the Pod and is defaulting to its hostname. Since you can not provide a hostname through simple port-forward, you want to check your <code>elasticsearch.yml</code> configuration and ensure that Elasticsearch listens on all interfaces by specifying <code>network.host: 0.0.0.0</code>. However, if you are using the configuration from the article <a href="/kubernetes-production-elasticsearch/">Production Grade Elasticsearch on Kubernetes</a>, the value of <strong>network.host</strong> is set from the environment variable <strong>NETWORK_HOST</strong> for the Pod. See the <a href="/kubernetes-production-elasticsearch/#deployment-for-client-and-ingest-nodes">Deployment for Client and Ingest Nodes</a> configuration, paying special attention to the <strong>env:</strong> section where the environment variable setting <strong>NETWORK_HOST</strong> is <strong>0.0.0.0</strong>.</p>
 <h4 id="port-forwarding-rbac-permissions">Port-forwarding RBAC Permissions</h4>
 <p>In the article, <a href="/team-kubernetes-remote-access/">Kubernetes Team Access - RBAC for developers and QA</a>, I set up the <a href="/team-kubernetes-remote-access/#role-and-rolebinding">Roles</a> <strong>developer</strong> and <strong>deployer</strong>. In this example, I am using the <code>kubectl config</code> context with the developer service account. Whatever Role you are bound to must have the following RBAC rules applied to port forward:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">- <span style="color:#66d9ef">apiGroups</span>:
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">- <span style="color:#f92672">apiGroups</span>:
   - <span style="color:#e6db74">&#39;*&#39;</span>
-  <span style="color:#66d9ef">resources</span>:
+  <span style="color:#f92672">resources</span>:
   - <span style="color:#e6db74">&#39;pods/portforward&#39;</span>
   - <span style="color:#e6db74">&#39;services/portforward&#39;</span>
-  <span style="color:#66d9ef">verbs</span>:
-  - create
+  <span style="color:#f92672">verbs</span>:
+  - <span style="color:#ae81ff">create</span>
 </code></pre></div><p>See <a href="/team-kubernetes-remote-access/#role-and-rolebinding">Roles and RoleBindings</a> for a better understanding of how these rules apply to our access.</p>
 <h3 id="postman">Postman</h3>
 <p>In the following examples, I use my favorite (and free) HTTP client, <a href="https://www.getpostman.com/">Postman</a>. When working with HTTP based APIs, I typically use <a href="https://www.getpostman.com/">Postman</a>. However, I&rsquo;ll be exporting the <a href="https://www.getpostman.com/">Postman</a> calls to <code>curl</code> commands so they can also be displayed here and tested on the command line.</p>

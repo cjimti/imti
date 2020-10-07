@@ -270,7 +270,7 @@ There are a handful of cheap cloud providers these days, and in keeping competit
 complicated, and easy to get wrong) but <code>ufw</code> is just dead-simple, and it&rsquo;s production grade security since it&rsquo;s just
 wrapping more complicated <code>iptables</code> rules.</p>
 <p>Login to the box and setup security:</p>
-<!-- raw HTML omitted -->
+<script src="https://gist.github.com/cjimti/4088e76e5016202a8da93fd041dd9fae.js"></script>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># you can run the gist above directly if you wish</span>
 curl -L https://git.io/vpDYI | sh
 
@@ -283,19 +283,19 @@ ufw enable
 </code></pre></div><h3 id="vpn">VPN</h3>
 <p><a href="https://www.wireguard.io/">WireGuard</a> is the VPN I use for cluster communication security. <a href="https://www.wireguard.com/install/">Install WireGuard</a>
 by following their instructions for Ubuntu below:</p>
-<!-- raw HTML omitted -->
+<script src="https://gist.github.com/cjimti/3402964e0a2a89c076f9fb0430028dff.js"></script>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># run each command manually or pipe the gist to sh</span>
 curl -L https://git.io/vpDYE | sh
 </code></pre></div><p>Although according to the documentation it&rsquo;s okay to run <a href="https://www.wireguard.io/">WireGuard</a> over the public interface; if your host allows it, you might as well set up a private network. On <a href="https://www.vultr.com/?ref=7418713">Vultr</a> it is as simple as checking a box setup or clicking on &ldquo;Add Private Network&rdquo; in the server settings. However on <a href="https://www.vultr.com/?ref=7418713">Vultr</a> servers you need to add the new private network interface manually, this is not the case with <a href="https://m.do.co/c/97b733e7eba4">Digital Ocean</a>:</p>
 <p>In <code>/etc/netplan/10-ens7.yaml</code> add the following lines (replace 10.99.0.200/16 with the assigned private IP and range):</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">network</span>:
-  <span style="color:#66d9ef">version</span>: <span style="color:#ae81ff">2</span>
-  <span style="color:#66d9ef">renderer</span>: networkd
-  <span style="color:#66d9ef">ethernets</span>:
-    <span style="color:#66d9ef">ens7</span>:
-      <span style="color:#66d9ef">mtu</span>: <span style="color:#ae81ff">1450</span>
-      <span style="color:#66d9ef">dhcp4</span>: no
-      <span style="color:#66d9ef">addresses</span>: [<span style="color:#ae81ff">10.5.96.4</span>/<span style="color:#ae81ff">20</span>]
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">network</span>:
+  <span style="color:#f92672">version</span>: <span style="color:#ae81ff">2</span>
+  <span style="color:#f92672">renderer</span>: <span style="color:#ae81ff">networkd</span>
+  <span style="color:#f92672">ethernets</span>:
+    <span style="color:#f92672">ens7</span>:
+      <span style="color:#f92672">mtu</span>: <span style="color:#ae81ff">1450</span>
+      <span style="color:#f92672">dhcp4</span>: <span style="color:#66d9ef">no</span>
+      <span style="color:#f92672">addresses</span>: [<span style="color:#ae81ff">10.5.96.4</span><span style="color:#ae81ff">/20]</span>
 </code></pre></div><p>In my case, the subnet mask is 255.255.240.0 which equates to a /20.
 <a href="https://www.aelius.com/njh/subnet_sheet.html">Check out this cheat sheet for a quick IP range refrence</a></p>
 <p>Then run the command:</p>
@@ -323,7 +323,7 @@ rtt min/avg/max/mdev <span style="color:#f92672">=</span> 0.808/1.144/1.481/0.33
 </code></pre></div><p><strong>Configuring <a href="https://www.wireguard.io/">WireGuard</a></strong></p>
 <p>You will need a public and private key for each server. Here is a simple bash script for generating the key
 pairs all at once (thanks <a href="https://github.com/hobby-kube/">Hobby Kube</a>]:</p>
-<!-- raw HTML omitted -->
+<script src="https://gist.github.com/cjimti/d04392fb9c726d4b2612f24599b28251.js"></script>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># you can run the gist directly with a pipe from curl to sh</span>
 curl -L https://git.io/vpDYP |sh
 </code></pre></div><p>Example output</p>
@@ -426,17 +426,17 @@ apt-get install -y kubelet kubeadm kubectl kubernetes-cni
 </code></pre></div><h4 id="initialize-the-master-node">Initialize the master node</h4>
 <p>Create the configuration file <code>/tmp/master-configuration.yml</code> and
 replace PUBLIC_IP_LAX1 with the servers public ip address:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">apiVersion</span>: kubeadm.k8s.io/v1alpha1
-<span style="color:#66d9ef">kind</span>: MasterConfiguration
-<span style="color:#66d9ef">api</span>:
-  <span style="color:#66d9ef">advertiseAddress</span>: <span style="color:#ae81ff">10.0.1.1</span>
-<span style="color:#66d9ef">etcd</span>:
-  <span style="color:#66d9ef">endpoints</span>:
-  - http://<span style="color:#ae81ff">10.0.1.1</span>:<span style="color:#ae81ff">2379</span>
-  - http://<span style="color:#ae81ff">10.0.1.2</span>:<span style="color:#ae81ff">2379</span>
-  - http://<span style="color:#ae81ff">10.0.1.3</span>:<span style="color:#ae81ff">2379</span>
-<span style="color:#66d9ef">apiServerCertSANs</span>:
-  - &lt;PUBLIC_IP_LAX1&gt;
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">kubeadm.k8s.io/v1alpha1</span>
+<span style="color:#f92672">kind</span>: <span style="color:#ae81ff">MasterConfiguration</span>
+<span style="color:#f92672">api</span>:
+  <span style="color:#f92672">advertiseAddress</span>: <span style="color:#ae81ff">10.0.1.1</span>
+<span style="color:#f92672">etcd</span>:
+  <span style="color:#f92672">endpoints</span>:
+  - <span style="color:#ae81ff">http://10.0.1.1:2379</span>
+  - <span style="color:#ae81ff">http://10.0.1.2:2379</span>
+  - <span style="color:#ae81ff">http://10.0.1.3:2379</span>
+<span style="color:#f92672">apiServerCertSANs</span>:
+  - <span style="color:#ae81ff">&lt;PUBLIC_IP_LAX1&gt;</span>
 </code></pre></div><p>Run the following command on lax1:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubeadm init --config /tmp/master-configuration.yml
 </code></pre></div><p>After running <code>kubeadm init</code> make sure you copy the output, specifically the <code>--token</code>, it will look something like
@@ -535,7 +535,7 @@ kubectl get nodes
 
 </code></pre></div><h3 id="deploy-an-application">Deploy an Application</h3>
 <p>Create a file called <code>tcp-echo-service.yml</code></p>
-<!-- raw HTML omitted -->
+<script src="https://gist.github.com/cjimti/cb051976caa20f5c53311a7a75e85487.js"></script>
 <p>kubectl can use URLs or local files for input:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># create a service</span>
 kubectl create -f https://bit.ly/tcp-echo-service
@@ -548,7 +548,7 @@ kubernetes   ClusterIP   10.96.0.1       &lt;none&gt;        443/TCP          1d
 tcp-echo     NodePort    10.109.249.93   &lt;none&gt;        5000:30552/TCP   3m
 </code></pre></div><p>In my case, the port <strong>32413</strong> was assigned to the new TCP echo service.</p>
 <p>Create a deployment configuration called <code>tcp-echo-deployment.yml</code>:</p>
-<!-- raw HTML omitted -->
+<script src="https://gist.github.com/cjimti/f936f728b28cdaf3f0edb26b2a7b8c99.js"></script>
 <p>kubectl can use URLs or local files for input:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl create -f http://bit.ly/tcp-echo-deployment
 
@@ -622,7 +622,7 @@ node <span style="color:#e6db74">&#34;lax1&#34;</span> untainted
 taint <span style="color:#e6db74">&#34;node-role.kubernetes.io/master:&#34;</span> not found
 taint <span style="color:#e6db74">&#34;node-role.kubernetes.io/master:&#34;</span> not found
 </code></pre></div><p>In order to test our lax1 node as a pod host, we need give the cluster a reason to use it.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># scale back our tcp-echo</span> 
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># scale back our tcp-echo </span>
 kubectl scale deployments/tcp-echo --replicas<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>
 
 <span style="color:#75715e"># then scale up again to 4</span>

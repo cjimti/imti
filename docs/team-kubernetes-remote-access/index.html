@@ -280,13 +280,13 @@
 <h4 id="namespace">Namespace</h4>
 <p>I use the term <code>the-project</code> as a fictional <a href="https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/">namespace</a> for the examples going forward. If you want to follow along, use the following configuration to create the example <a href="https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/">namespace</a>.</p>
 <p><code>00-namespace.yml</code>:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">apiVersion</span>: v1
-<span style="color:#66d9ef">kind</span>: Namespace
-<span style="color:#66d9ef">metadata</span>:
-  <span style="color:#66d9ef">name</span>: the-project
-  <span style="color:#66d9ef">labels</span>:
-    <span style="color:#66d9ef">client</span>: mk.imti.co
-    <span style="color:#66d9ef">env</span>: dev
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">v1</span>
+<span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Namespace</span>
+<span style="color:#f92672">metadata</span>:
+  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">the-project</span>
+  <span style="color:#f92672">labels</span>:
+    <span style="color:#f92672">client</span>: <span style="color:#ae81ff">mk.imti.co</span>
+    <span style="color:#f92672">env</span>: <span style="color:#ae81ff">dev</span>
 </code></pre></div><p>The filename is not important. I use a numeric value to represent a suggested order in which to apply the configuration, followed by the <code>kind</code> of the kubernetes object to create. However, this is not a rigid rule across all projects and only the [namespace[</p>
 <p>The <code>labels</code> section is optional and only used to give additional sections capabilities to command-line and automated tools.</p>
 <p>Create the <a href="https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/">namespace</a> kubernetes object:</p>
@@ -294,101 +294,101 @@
 </code></pre></div><h4 id="deployment">Deployment</h4>
 <p>After adding the <code>the-project</code> <a href="https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/">namespace</a> above, create a Kubernetes <a href="https://kubernetes.io/docs/concepts/workloads/controllers/deployment/">Deployment</a> in <code>the-project</code> to manage <a href="https://kubernetes.io/docs/concepts/workloads/pods/pod/">pods</a> running <a href="https://github.com/txn2/ok">txn2/ok</a> Docker containers.</p>
 <p><code>10-deployment-ok.yml</code>:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">apiVersion</span>: apps/v1
-<span style="color:#66d9ef">kind</span>: Deployment
-<span style="color:#66d9ef">metadata</span>:
-  <span style="color:#66d9ef">name</span>: ok
-  <span style="color:#66d9ef">namespace</span>: the-project
-  <span style="color:#66d9ef">labels</span>:
-    <span style="color:#66d9ef">app</span>: ok
-    <span style="color:#66d9ef">client</span>: mk.imti.co
-    <span style="color:#66d9ef">env</span>: dev
-<span style="color:#66d9ef">spec</span>:
-  <span style="color:#66d9ef">replicas</span>: <span style="color:#ae81ff">1</span>
-  <span style="color:#66d9ef">selector</span>:
-    <span style="color:#66d9ef">matchLabels</span>:
-      <span style="color:#66d9ef">app</span>: ok
-  <span style="color:#66d9ef">template</span>:
-    <span style="color:#66d9ef">metadata</span>:
-      <span style="color:#66d9ef">namespace</span>: the-project
-      <span style="color:#66d9ef">labels</span>:
-        <span style="color:#66d9ef">app</span>: ok
-        <span style="color:#66d9ef">client</span>: mk.imti.co
-        <span style="color:#66d9ef">env</span>: dev
-    <span style="color:#66d9ef">spec</span>:
-      <span style="color:#66d9ef">containers</span>:
-        - <span style="color:#66d9ef">name</span>: ok
-          <span style="color:#66d9ef">image</span>: txn2/ok
-          <span style="color:#66d9ef">imagePullPolicy</span>: Always
-          <span style="color:#66d9ef">env</span>:
-            - <span style="color:#66d9ef">name</span>: NODE_NAME
-              <span style="color:#66d9ef">valueFrom</span>:
-                <span style="color:#66d9ef">fieldRef</span>:
-                  <span style="color:#66d9ef">fieldPath</span>: spec.nodeName
-            - <span style="color:#66d9ef">name</span>: POD_NAME
-              <span style="color:#66d9ef">valueFrom</span>:
-                <span style="color:#66d9ef">fieldRef</span>:
-                  <span style="color:#66d9ef">fieldPath</span>: metadata.name
-            - <span style="color:#66d9ef">name</span>: POD_NAMESPACE
-              <span style="color:#66d9ef">valueFrom</span>:
-                <span style="color:#66d9ef">fieldRef</span>:
-                  <span style="color:#66d9ef">fieldPath</span>: metadata.namespace
-            - <span style="color:#66d9ef">name</span>: POD_IP
-              <span style="color:#66d9ef">valueFrom</span>:
-                <span style="color:#66d9ef">fieldRef</span>:
-                  <span style="color:#66d9ef">fieldPath</span>: status.podIP
-            - <span style="color:#66d9ef">name</span>: SERVICE_ACCOUNT
-              <span style="color:#66d9ef">valueFrom</span>:
-                <span style="color:#66d9ef">fieldRef</span>:
-                  <span style="color:#66d9ef">fieldPath</span>: spec.serviceAccountName
-          <span style="color:#66d9ef">ports</span>:
-            - <span style="color:#66d9ef">name</span>: ok-port
-              <span style="color:#66d9ef">containerPort</span>: <span style="color:#ae81ff">8080</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">apps/v1</span>
+<span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Deployment</span>
+<span style="color:#f92672">metadata</span>:
+  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">ok</span>
+  <span style="color:#f92672">namespace</span>: <span style="color:#ae81ff">the-project</span>
+  <span style="color:#f92672">labels</span>:
+    <span style="color:#f92672">app</span>: <span style="color:#ae81ff">ok</span>
+    <span style="color:#f92672">client</span>: <span style="color:#ae81ff">mk.imti.co</span>
+    <span style="color:#f92672">env</span>: <span style="color:#ae81ff">dev</span>
+<span style="color:#f92672">spec</span>:
+  <span style="color:#f92672">replicas</span>: <span style="color:#ae81ff">1</span>
+  <span style="color:#f92672">selector</span>:
+    <span style="color:#f92672">matchLabels</span>:
+      <span style="color:#f92672">app</span>: <span style="color:#ae81ff">ok</span>
+  <span style="color:#f92672">template</span>:
+    <span style="color:#f92672">metadata</span>:
+      <span style="color:#f92672">namespace</span>: <span style="color:#ae81ff">the-project</span>
+      <span style="color:#f92672">labels</span>:
+        <span style="color:#f92672">app</span>: <span style="color:#ae81ff">ok</span>
+        <span style="color:#f92672">client</span>: <span style="color:#ae81ff">mk.imti.co</span>
+        <span style="color:#f92672">env</span>: <span style="color:#ae81ff">dev</span>
+    <span style="color:#f92672">spec</span>:
+      <span style="color:#f92672">containers</span>:
+        - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">ok</span>
+          <span style="color:#f92672">image</span>: <span style="color:#ae81ff">txn2/ok</span>
+          <span style="color:#f92672">imagePullPolicy</span>: <span style="color:#ae81ff">Always</span>
+          <span style="color:#f92672">env</span>:
+            - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">NODE_NAME</span>
+              <span style="color:#f92672">valueFrom</span>:
+                <span style="color:#f92672">fieldRef</span>:
+                  <span style="color:#f92672">fieldPath</span>: <span style="color:#ae81ff">spec.nodeName</span>
+            - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">POD_NAME</span>
+              <span style="color:#f92672">valueFrom</span>:
+                <span style="color:#f92672">fieldRef</span>:
+                  <span style="color:#f92672">fieldPath</span>: <span style="color:#ae81ff">metadata.name</span>
+            - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">POD_NAMESPACE</span>
+              <span style="color:#f92672">valueFrom</span>:
+                <span style="color:#f92672">fieldRef</span>:
+                  <span style="color:#f92672">fieldPath</span>: <span style="color:#ae81ff">metadata.namespace</span>
+            - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">POD_IP</span>
+              <span style="color:#f92672">valueFrom</span>:
+                <span style="color:#f92672">fieldRef</span>:
+                  <span style="color:#f92672">fieldPath</span>: <span style="color:#ae81ff">status.podIP</span>
+            - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">SERVICE_ACCOUNT</span>
+              <span style="color:#f92672">valueFrom</span>:
+                <span style="color:#f92672">fieldRef</span>:
+                  <span style="color:#f92672">fieldPath</span>: <span style="color:#ae81ff">spec.serviceAccountName</span>
+          <span style="color:#f92672">ports</span>:
+            - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">ok-port</span>
+              <span style="color:#f92672">containerPort</span>: <span style="color:#ae81ff">8080</span>
 </code></pre></div><p>Create the Kubernetes <a href="https://kubernetes.io/docs/concepts/workloads/controllers/deployment/">Deployment</a> object:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl create -f 10-deployment-ok.yml
 </code></pre></div><h4 id="service">Service</h4>
 <p>Kubernetes <a href="https://kubernetes.io/docs/concepts/workloads/controllers/deployment/">Deployment</a>s manage <a href="https://kubernetes.io/docs/concepts/workloads/pods/pod/">Pods</a>. Consider <a href="https://kubernetes.io/docs/concepts/workloads/pods/pod/">Pods</a> ephemeral, being moved from one node to another, destroyed or re-created at any time. <a href="https://kubernetes.io/docs/concepts/services-networking/service/">Service</a>s are persistent and give us a point to attach our network <a href="https://kubernetes.io/docs/concepts/services-networking/ingress/">ingress</a>. If you don&rsquo;t already have ingress setup, you might want to read my article <a href="/web-cluster-ingress/">Ingress on Custom Kubernetes</a> to get started. <a href="https://kubernetes.io/docs/concepts/services-networking/ingress/">Ingress</a> needs a <a href="https://kubernetes.io/docs/concepts/services-networking/service/">service</a> to attach to; however you don&rsquo;t need ingress to set up a service.</p>
 <p><code>50-service-ok.yml</code>:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">apiVersion</span>: v1
-<span style="color:#66d9ef">kind</span>: Service
-<span style="color:#66d9ef">metadata</span>:
-  <span style="color:#66d9ef">name</span>: ok
-  <span style="color:#66d9ef">namespace</span>: the-project
-  <span style="color:#66d9ef">labels</span>:
-    <span style="color:#66d9ef">app</span>: ok
-    <span style="color:#66d9ef">client</span>: mk.imti.co
-    <span style="color:#66d9ef">env</span>: dev
-<span style="color:#66d9ef">spec</span>:
-  <span style="color:#66d9ef">selector</span>:
-    <span style="color:#66d9ef">app</span>: ok
-  <span style="color:#66d9ef">ports</span>:
-    - <span style="color:#66d9ef">protocol</span>: <span style="color:#e6db74">&#34;TCP&#34;</span>
-      <span style="color:#66d9ef">port</span>: <span style="color:#ae81ff">8080</span>
-      <span style="color:#66d9ef">targetPort</span>: <span style="color:#ae81ff">8080</span>
-  <span style="color:#66d9ef">type</span>: ClusterIP
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">v1</span>
+<span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Service</span>
+<span style="color:#f92672">metadata</span>:
+  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">ok</span>
+  <span style="color:#f92672">namespace</span>: <span style="color:#ae81ff">the-project</span>
+  <span style="color:#f92672">labels</span>:
+    <span style="color:#f92672">app</span>: <span style="color:#ae81ff">ok</span>
+    <span style="color:#f92672">client</span>: <span style="color:#ae81ff">mk.imti.co</span>
+    <span style="color:#f92672">env</span>: <span style="color:#ae81ff">dev</span>
+<span style="color:#f92672">spec</span>:
+  <span style="color:#f92672">selector</span>:
+    <span style="color:#f92672">app</span>: <span style="color:#ae81ff">ok</span>
+  <span style="color:#f92672">ports</span>:
+    - <span style="color:#f92672">protocol</span>: <span style="color:#e6db74">&#34;TCP&#34;</span>
+      <span style="color:#f92672">port</span>: <span style="color:#ae81ff">8080</span>
+      <span style="color:#f92672">targetPort</span>: <span style="color:#ae81ff">8080</span>
+  <span style="color:#f92672">type</span>: <span style="color:#ae81ff">ClusterIP</span>
 </code></pre></div><p>Create the Kubernetes <a href="https://kubernetes.io/docs/concepts/services-networking/service/">Service</a> object:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl create -f 50-service-ok.yml
 </code></pre></div><h4 id="ingress">Ingress</h4>
 <p>Setting up <a href="https://kubernetes.io/docs/concepts/services-networking/ingress/">ingress</a> for the <a href="https://github.com/txn2/ok">txn2/ok</a> service for the sake of completeness. We will configure <a href="https://kubernetes.io/docs/concepts/services-networking/ingress/">ingress</a> to send HTTP requests for the domain <a href="http://ok.d4ldev.txn2.com/">ok.d4ldev.txn2.com</a> to the <a href="https://github.com/txn2/ok">txn2/ok</a> service running in <code>the-project</code> <a href="https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/">namespace</a>.</p>
 <p><code>80-ingress-ok.yml</code>:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">apiVersion</span>: extensions/v1beta1
-<span style="color:#66d9ef">kind</span>: Ingress
-<span style="color:#66d9ef">metadata</span>:
-  <span style="color:#66d9ef">name</span>: ok
-  <span style="color:#66d9ef">namespace</span>: the-project
-  <span style="color:#66d9ef">labels</span>:
-    <span style="color:#66d9ef">app</span>: ok
-    <span style="color:#66d9ef">client</span>: mk.imti.co
-    <span style="color:#66d9ef">env</span>: dev
-<span style="color:#66d9ef">spec</span>:
-  <span style="color:#66d9ef">rules</span>:
-  - <span style="color:#66d9ef">host</span>: ok.d4ldev.txn2.com
-    <span style="color:#66d9ef">http</span>:
-      <span style="color:#66d9ef">paths</span>:
-      - <span style="color:#66d9ef">backend</span>:
-          <span style="color:#66d9ef">serviceName</span>: ok
-          <span style="color:#66d9ef">servicePort</span>: <span style="color:#ae81ff">8080</span>
-        <span style="color:#66d9ef">path</span>: /
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">extensions/v1beta1</span>
+<span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Ingress</span>
+<span style="color:#f92672">metadata</span>:
+  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">ok</span>
+  <span style="color:#f92672">namespace</span>: <span style="color:#ae81ff">the-project</span>
+  <span style="color:#f92672">labels</span>:
+    <span style="color:#f92672">app</span>: <span style="color:#ae81ff">ok</span>
+    <span style="color:#f92672">client</span>: <span style="color:#ae81ff">mk.imti.co</span>
+    <span style="color:#f92672">env</span>: <span style="color:#ae81ff">dev</span>
+<span style="color:#f92672">spec</span>:
+  <span style="color:#f92672">rules</span>:
+  - <span style="color:#f92672">host</span>: <span style="color:#ae81ff">ok.d4ldev.txn2.com</span>
+    <span style="color:#f92672">http</span>:
+      <span style="color:#f92672">paths</span>:
+      - <span style="color:#f92672">backend</span>:
+          <span style="color:#f92672">serviceName</span>: <span style="color:#ae81ff">ok</span>
+          <span style="color:#f92672">servicePort</span>: <span style="color:#ae81ff">8080</span>
+        <span style="color:#f92672">path</span>: <span style="color:#ae81ff">/</span>
 </code></pre></div><p>Create the <a href="https://kubernetes.io/docs/concepts/services-networking/ingress/">ingress</a>:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl create -f 80-ingress-ok.yml
 </code></pre></div><p>Adding TLS support is easy but out the scope of this article. If you are interested in setting up free, automated TLS certificate using <a href="https://letsencrypt.org/">Let&rsquo;s Encrypt</a> on Kubernetes, check out my article: <a href="/lets-encrypt-kubernetes/">Let&rsquo;s Encrypt, Kubernetes</a>. Setting up <a href="/lets-encrypt-kubernetes/">Let&rsquo;s Encrypt, Kubernetes</a> should only have to be done once and take only about twenty minutes.</p>
@@ -436,63 +436,63 @@ token:      eyYhbfEf7XaMa...REDACTED...
 <h4 id="role-and-rolebinding">Role and RoleBinding</h4>
 <p>Next, we create four Kubernetes objects at one time, two <a href="https://kubernetes.io/docs/reference/access-authn-authz/rbac/#default-roles-and-role-bindings">Role</a>s and two <a href="https://kubernetes.io/docs/reference/access-authn-authz/rbac/#default-roles-and-role-bindings">RoleBinding</a>s. One Role and RoleBinding set for <strong>deployer</strong> and one set for <strong>developer</strong>.</p>
 <p><code>90-RBAC.yml</code>:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">apiVersion</span>: rbac.authorization.k8s.io/v1beta1
-<span style="color:#66d9ef">kind</span>: Role
-<span style="color:#66d9ef">metadata</span>:
-  <span style="color:#66d9ef">namespace</span>: the-project
-  <span style="color:#66d9ef">name</span>: deployer
-<span style="color:#66d9ef">rules</span>:
-- <span style="color:#66d9ef">apiGroups</span>: [<span style="color:#e6db74">&#34;apps&#34;</span>,<span style="color:#e6db74">&#34;extensions&#34;</span>]
-  <span style="color:#66d9ef">resources</span>: [<span style="color:#e6db74">&#34;deployments&#34;</span>,<span style="color:#e6db74">&#34;configmaps&#34;</span>,<span style="color:#e6db74">&#34;pods&#34;</span>,<span style="color:#e6db74">&#34;secrets&#34;</span>,<span style="color:#e6db74">&#34;ingresses&#34;</span>]
-  <span style="color:#66d9ef">verbs</span>: [<span style="color:#e6db74">&#34;create&#34;</span>,<span style="color:#e6db74">&#34;get&#34;</span>,<span style="color:#e6db74">&#34;delete&#34;</span>,<span style="color:#e6db74">&#34;list&#34;</span>,<span style="color:#e6db74">&#34;update&#34;</span>,<span style="color:#e6db74">&#34;edit&#34;</span>,<span style="color:#e6db74">&#34;watch&#34;</span>,<span style="color:#e6db74">&#34;exec&#34;</span>,<span style="color:#e6db74">&#34;patch&#34;</span>]
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">rbac.authorization.k8s.io/v1beta1</span>
+<span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Role</span>
+<span style="color:#f92672">metadata</span>:
+  <span style="color:#f92672">namespace</span>: <span style="color:#ae81ff">the-project</span>
+  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">deployer</span>
+<span style="color:#f92672">rules</span>:
+- <span style="color:#f92672">apiGroups</span>: [<span style="color:#e6db74">&#34;apps&#34;</span>,<span style="color:#e6db74">&#34;extensions&#34;</span>]
+  <span style="color:#f92672">resources</span>: [<span style="color:#e6db74">&#34;deployments&#34;</span>,<span style="color:#e6db74">&#34;configmaps&#34;</span>,<span style="color:#e6db74">&#34;pods&#34;</span>,<span style="color:#e6db74">&#34;secrets&#34;</span>,<span style="color:#e6db74">&#34;ingresses&#34;</span>]
+  <span style="color:#f92672">verbs</span>: [<span style="color:#e6db74">&#34;create&#34;</span>,<span style="color:#e6db74">&#34;get&#34;</span>,<span style="color:#e6db74">&#34;delete&#34;</span>,<span style="color:#e6db74">&#34;list&#34;</span>,<span style="color:#e6db74">&#34;update&#34;</span>,<span style="color:#e6db74">&#34;edit&#34;</span>,<span style="color:#e6db74">&#34;watch&#34;</span>,<span style="color:#e6db74">&#34;exec&#34;</span>,<span style="color:#e6db74">&#34;patch&#34;</span>]
 ---
-<span style="color:#66d9ef">apiVersion</span>: rbac.authorization.k8s.io/v1beta1
-<span style="color:#66d9ef">kind</span>: Role
-<span style="color:#66d9ef">metadata</span>:
-  <span style="color:#66d9ef">namespace</span>: the-project
-  <span style="color:#66d9ef">name</span>: developer
-<span style="color:#66d9ef">rules</span>:
-- <span style="color:#66d9ef">apiGroups</span>: [<span style="color:#e6db74">&#34;*&#34;</span>]
-  <span style="color:#66d9ef">resources</span>: [<span style="color:#e6db74">&#34;*&#34;</span>]
-  <span style="color:#66d9ef">verbs</span>: [<span style="color:#e6db74">&#34;get&#34;</span>,<span style="color:#e6db74">&#34;describe&#34;</span>,<span style="color:#e6db74">&#34;list&#34;</span>,<span style="color:#e6db74">&#34;watch&#34;</span>,<span style="color:#e6db74">&#34;exec&#34;</span>]
+<span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">rbac.authorization.k8s.io/v1beta1</span>
+<span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Role</span>
+<span style="color:#f92672">metadata</span>:
+  <span style="color:#f92672">namespace</span>: <span style="color:#ae81ff">the-project</span>
+  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">developer</span>
+<span style="color:#f92672">rules</span>:
+- <span style="color:#f92672">apiGroups</span>: [<span style="color:#e6db74">&#34;*&#34;</span>]
+  <span style="color:#f92672">resources</span>: [<span style="color:#e6db74">&#34;*&#34;</span>]
+  <span style="color:#f92672">verbs</span>: [<span style="color:#e6db74">&#34;get&#34;</span>,<span style="color:#e6db74">&#34;describe&#34;</span>,<span style="color:#e6db74">&#34;list&#34;</span>,<span style="color:#e6db74">&#34;watch&#34;</span>,<span style="color:#e6db74">&#34;exec&#34;</span>]
 ---
-<span style="color:#66d9ef">apiVersion</span>: rbac.authorization.k8s.io/v1
-<span style="color:#66d9ef">kind</span>: RoleBinding
-<span style="color:#66d9ef">metadata</span>:
-  <span style="color:#66d9ef">name</span>: deployer
-  <span style="color:#66d9ef">namespace</span>: the-project
-<span style="color:#66d9ef">roleRef</span>:
-  <span style="color:#66d9ef">kind</span>: Role
-  <span style="color:#66d9ef">name</span>: deployer
-  <span style="color:#66d9ef">apiGroup</span>: rbac.authorization.k8s.io
-<span style="color:#66d9ef">subjects</span>:
-- <span style="color:#66d9ef">kind</span>: ServiceAccount
-  <span style="color:#66d9ef">namespace</span>: the-project
-  <span style="color:#66d9ef">name</span>: sa-deployer
+<span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">rbac.authorization.k8s.io/v1</span>
+<span style="color:#f92672">kind</span>: <span style="color:#ae81ff">RoleBinding</span>
+<span style="color:#f92672">metadata</span>:
+  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">deployer</span>
+  <span style="color:#f92672">namespace</span>: <span style="color:#ae81ff">the-project</span>
+<span style="color:#f92672">roleRef</span>:
+  <span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Role</span>
+  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">deployer</span>
+  <span style="color:#f92672">apiGroup</span>: <span style="color:#ae81ff">rbac.authorization.k8s.io</span>
+<span style="color:#f92672">subjects</span>:
+- <span style="color:#f92672">kind</span>: <span style="color:#ae81ff">ServiceAccount</span>
+  <span style="color:#f92672">namespace</span>: <span style="color:#ae81ff">the-project</span>
+  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">sa-deployer</span>
 ---
-<span style="color:#66d9ef">apiVersion</span>: rbac.authorization.k8s.io/v1
-<span style="color:#66d9ef">kind</span>: RoleBinding
-<span style="color:#66d9ef">metadata</span>:
-  <span style="color:#66d9ef">name</span>: developer
-  <span style="color:#66d9ef">namespace</span>: the-project
-<span style="color:#66d9ef">roleRef</span>:
-  <span style="color:#66d9ef">kind</span>: Role
-  <span style="color:#66d9ef">name</span>: developer
-  <span style="color:#66d9ef">apiGroup</span>: rbac.authorization.k8s.io
-<span style="color:#66d9ef">subjects</span>:
-- <span style="color:#66d9ef">kind</span>: ServiceAccount
-  <span style="color:#66d9ef">namespace</span>: the-project
-  <span style="color:#66d9ef">name</span>: sa-developer
+<span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">rbac.authorization.k8s.io/v1</span>
+<span style="color:#f92672">kind</span>: <span style="color:#ae81ff">RoleBinding</span>
+<span style="color:#f92672">metadata</span>:
+  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">developer</span>
+  <span style="color:#f92672">namespace</span>: <span style="color:#ae81ff">the-project</span>
+<span style="color:#f92672">roleRef</span>:
+  <span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Role</span>
+  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">developer</span>
+  <span style="color:#f92672">apiGroup</span>: <span style="color:#ae81ff">rbac.authorization.k8s.io</span>
+<span style="color:#f92672">subjects</span>:
+- <span style="color:#f92672">kind</span>: <span style="color:#ae81ff">ServiceAccount</span>
+  <span style="color:#f92672">namespace</span>: <span style="color:#ae81ff">the-project</span>
+  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">sa-developer</span>
 
 </code></pre></div><p>If you want to give your team even more access, you can enable the ability to port-forward a service or pod directly to their local workstation. Add the following to the end of the <strong>developer</strong> role.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">- <span style="color:#66d9ef">apiGroups</span>:
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">- <span style="color:#f92672">apiGroups</span>:
   - <span style="color:#e6db74">&#39;*&#39;</span>
-  <span style="color:#66d9ef">resources</span>:
+  <span style="color:#f92672">resources</span>:
   - <span style="color:#e6db74">&#39;pods/exec&#39;</span>
   - <span style="color:#e6db74">&#39;pods/portforward&#39;</span>
   - <span style="color:#e6db74">&#39;services/portforward&#39;</span>
-  <span style="color:#66d9ef">verbs</span>:
-  - create
+  <span style="color:#f92672">verbs</span>:
+  - <span style="color:#ae81ff">create</span>
 </code></pre></div><p>Example <code>kubectl port-forward</code> to an <code>elasticsearch</code> service running in <code>the-project</code> namespace:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl port-forward svc/elasticsearch 9200:9200 -n the-project
 </code></pre></div><p>Create the new <a href="https://kubernetes.io/docs/reference/access-authn-authz/rbac/#default-roles-and-role-bindings">Role</a>s and the RoleBindings that connect them to the ServiceAccounts <a href="#serviceaccount">created with kubectl a bit earlier</a>.</p>

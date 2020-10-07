@@ -404,7 +404,19 @@ plt<span style="color:#f92672">.</span>show()
 </code></pre></div><p><img src="/images/content/la-1/output_11_0.png" alt="png"></p>
 <h4 id="a-3-dimensional-column-vector">A 3-dimensional column vector</h4>
 <p>$\vec{vectb}$ can be transposed $\vec{vectb} = \vec{vectb}^{T}$ to form a 3-dimensional column vector.</p>
-<!-- raw HTML omitted -->
+<p><div>
+$
+\vec{vectb} =
+\left[
+\begin{array}{ccc}
+    10 \\ 
+    -20 \\ 
+    \pi \\
+\end{array}
+\right]
+= \mathbb{R}^{3\times1}
+$
+</div></p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># transposing 1-d vectores is not typically needed </span>
 <span style="color:#75715e"># with numpy as it will automatically broadcast a </span>
 <span style="color:#75715e"># 1D array when doing various calculations</span>
@@ -447,7 +459,30 @@ plt<span style="color:#f92672">.</span>xlabel(<span style="color:#e6db74">&#39;v
 plt<span style="color:#f92672">.</span>show()
 </code></pre></div><p><img src="/images/content/la-1/output_16_0.png" alt="png"></p>
 <p>An algebeaiac interpretation:</p>
-<!-- raw HTML omitted -->
+<p><div>
+$
+\left[
+\begin{array}{ccc}
+    15 \\ 
+    8 \\ 
+\end{array}
+\right]
++
+\left[
+\begin{array}{ccc}
+    1 \\ 
+    -11 \\ 
+\end{array}
+\right]
+=
+\left[
+\begin{array}{ccc}
+    16 \\ 
+    -3 \\ 
+\end{array}
+\right]
+$
+</div></p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># subtract d from c</span>
 vectf <span style="color:#f92672">=</span> vectc <span style="color:#f92672">-</span> vectd
 vectf
@@ -468,7 +503,24 @@ plt<span style="color:#f92672">.</span>show()
 </code></pre></div><p><img src="/images/content/la-1/output_20_0.png" alt="png"></p>
 <p>Scalars are often noted with lowercase greek symbols like alpha: $\alpha$, beta: $\beta$, and theta: $\theta$</p>
 <p>$\vec{vecth} = \theta\vec{vectg}$</p>
-<!-- raw HTML omitted -->
+<p><div>
+$
+1.5
+\left[
+\begin{array}{ccc}
+    5 \\ 
+    2 \\ 
+\end{array}
+\right]
+=
+\left[
+\begin{array}{ccc}
+    7.5 \\ 
+    3 \\ 
+\end{array}
+\right]
+$
+</div></p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">m <span style="color:#f92672">=</span> <span style="color:#ae81ff">1.5</span>
 vecth <span style="color:#f92672">=</span> vectg <span style="color:#f92672">*</span> m
 vecth

@@ -383,58 +383,58 @@ Dockerfile
 <p>I use a pretty standard form for all my Kubernetes objects. This example assumes we have a project called <code>the-project</code> and consists of many <a href="/microservices/">Microservices</a>. Although the <a href="https://Kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/">namespace</a> is at the project level and not specific to a service, I keep a copy in each service. Duplicating this namespace configuration helps document the service and Kubernetes does not add the namespace if it already exists.</p>
 <p>I also label every configuration with a <strong>client</strong> and <strong>env</strong>, this aids in selection rules and adds additional clarity of purpose.</p>
 <p><strong>./k8s/dev/10-namespace.yml</strong>:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">apiVersion</span>: v1
-<span style="color:#66d9ef">kind</span>: Namespace
-<span style="color:#66d9ef">metadata</span>:
-  <span style="color:#66d9ef">name</span>: the-project
-  <span style="color:#66d9ef">labels</span>:
-    <span style="color:#66d9ef">client</span>: internal
-    <span style="color:#66d9ef">env</span>: dev
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">v1</span>
+<span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Namespace</span>
+<span style="color:#f92672">metadata</span>:
+  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">the-project</span>
+  <span style="color:#f92672">labels</span>:
+    <span style="color:#f92672">client</span>: <span style="color:#ae81ff">internal</span>
+    <span style="color:#f92672">env</span>: <span style="color:#ae81ff">dev</span>
 </code></pre></div><h5 id="service-k8sdev20-serviceyml">Service: <code>./k8s/dev/20-service.yml</code></h5>
 <p><a href="https://Kubernetes.io/docs/concepts/services-networking/service/">Services</a> are persistent in Kubernetes. While <a href="https://Kubernetes.io/docs/concepts/workloads/pods/pod/">Pods</a> come and go, <a href="https://Kubernetes.io/docs/concepts/services-networking/service/">Services</a> stick around and attach themselves to any <a href="https://Kubernetes.io/docs/concepts/workloads/pods/pod/">Pods</a> that match their selection rules. I like to setup services first to help illustrate this decoupled nature.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">apiVersion</span>: v1
-<span style="color:#66d9ef">kind</span>: Service
-<span style="color:#66d9ef">metadata</span>:
-  <span style="color:#66d9ef">name</span>: example-microservice
-  <span style="color:#66d9ef">namespace</span>: the-project
-  <span style="color:#66d9ef">labels</span>:
-    <span style="color:#66d9ef">app</span>: example-microservice
-    <span style="color:#66d9ef">client</span>: internal
-    <span style="color:#66d9ef">env</span>: dev
-<span style="color:#66d9ef">spec</span>:
-  <span style="color:#66d9ef">selector</span>:
-    <span style="color:#66d9ef">app</span>: example-microservice
-  <span style="color:#66d9ef">ports</span>:
-    - <span style="color:#66d9ef">protocol</span>: <span style="color:#e6db74">&#34;TCP&#34;</span>
-      <span style="color:#66d9ef">port</span>: <span style="color:#ae81ff">8080</span>
-      <span style="color:#66d9ef">targetPort</span>: <span style="color:#ae81ff">8080</span>
-  <span style="color:#66d9ef">type</span>: ClusterIP
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">v1</span>
+<span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Service</span>
+<span style="color:#f92672">metadata</span>:
+  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">example-microservice</span>
+  <span style="color:#f92672">namespace</span>: <span style="color:#ae81ff">the-project</span>
+  <span style="color:#f92672">labels</span>:
+    <span style="color:#f92672">app</span>: <span style="color:#ae81ff">example-microservice</span>
+    <span style="color:#f92672">client</span>: <span style="color:#ae81ff">internal</span>
+    <span style="color:#f92672">env</span>: <span style="color:#ae81ff">dev</span>
+<span style="color:#f92672">spec</span>:
+  <span style="color:#f92672">selector</span>:
+    <span style="color:#f92672">app</span>: <span style="color:#ae81ff">example-microservice</span>
+  <span style="color:#f92672">ports</span>:
+    - <span style="color:#f92672">protocol</span>: <span style="color:#e6db74">&#34;TCP&#34;</span>
+      <span style="color:#f92672">port</span>: <span style="color:#ae81ff">8080</span>
+      <span style="color:#f92672">targetPort</span>: <span style="color:#ae81ff">8080</span>
+  <span style="color:#f92672">type</span>: <span style="color:#ae81ff">ClusterIP</span>
 </code></pre></div><p>Most of my services attach to <a href="https://Kubernetes.io/docs/concepts/workloads/pods/pod/">Pods</a> with the same name as the service. The <strong>name:</strong> of my Kubernetes object and <strong>app:</strong> labels nearly always match. I never prefix or suffix the object type as I have seen in some tutorials, this makes <a href="https://Kubernetes.io/docs/tasks/tools/install-kubectl/">kubectl</a> commands cleaner. Here are some examples of selecting all objects associated with a Microservice:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl get all -l app<span style="color:#f92672">=</span>example-microservice -n the-project
 </code></pre></div><p>I use <strong>ClusterIP</strong> for <strong>type:</strong> because I don&rsquo;t need a publicly accessible IP address or port. I use <a href="/web-cluster-ingress/">Ingress on Custom Kubernetes</a> for external access.</p>
 <h5 id="config-k8sdev30-configyml">Config: <code>./k8s/dev/30-config.yml</code></h5>
 <p>Configuration using <strong>30-config.yml</strong> is optional since many of my <a href="/microservices/">Microservices</a> share the same configuration. However, the setup is the same.</p>
 <p><strong>Example <code>./k8s/dev/30-config.yml</code></strong>:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">apiVersion</span>: v1
-<span style="color:#66d9ef">kind</span>: ConfigMap
-<span style="color:#66d9ef">metadata</span>:
-  <span style="color:#66d9ef">name</span>: example-microservice
-  <span style="color:#66d9ef">namespace</span>: the-project
-  <span style="color:#66d9ef">labels</span>:
-    <span style="color:#66d9ef">app</span>: example-microservice
-    <span style="color:#66d9ef">client</span>: internal
-    <span style="color:#66d9ef">env</span>: dev
-<span style="color:#66d9ef">data</span>:
-  <span style="color:#66d9ef">dev_config.yml</span>: <span style="color:#e6db74">|
-</span><span style="color:#e6db74">    something:</span>
-      <span style="color:#66d9ef">important</span>: <span style="color:#66d9ef">true</span>
-    <span style="color:#66d9ef">token</span>:
-      <span style="color:#66d9ef">encKey</span>: <span style="color:#e6db74">&#34;somethingsecure&#34;</span>
-      <span style="color:#66d9ef">expHours</span>: <span style="color:#ae81ff">24</span>
-    <span style="color:#66d9ef">cassandra</span>:
-      <span style="color:#66d9ef">cluster</span>: [<span style="color:#e6db74">&#34;lax1.cas.example.com&#34;</span>,<span style="color:#e6db74">&#34;ny1.cas.example.com&#34;</span>]
-      <span style="color:#66d9ef">keyspace</span>: dev_app
-</code></pre></div><p>In the deployment configuration below we mount this <a href="https://Kubernetes.io/docs/tasks/configure-pod-container/configure-pod-configmap/">ConfigMap</a> into the file system of our <a href="https://Kubernetes.io/docs/concepts/workloads/pods/pod/">Pod</a>. Mounting a <a href="https://Kubernetes.io/docs/tasks/configure-pod-container/configure-pod-configmap/">ConfigMap</a> as files allow our service to test outside the cloud with plain configuration files easily.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">v1</span>
+<span style="color:#f92672">kind</span>: <span style="color:#ae81ff">ConfigMap</span>
+<span style="color:#f92672">metadata</span>:
+  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">example-microservice</span>
+  <span style="color:#f92672">namespace</span>: <span style="color:#ae81ff">the-project</span>
+  <span style="color:#f92672">labels</span>:
+    <span style="color:#f92672">app</span>: <span style="color:#ae81ff">example-microservice</span>
+    <span style="color:#f92672">client</span>: <span style="color:#ae81ff">internal</span>
+    <span style="color:#f92672">env</span>: <span style="color:#ae81ff">dev</span>
+<span style="color:#f92672">data</span>:
+  <span style="color:#f92672">dev_config.yml</span>: <span style="color:#e6db74">|
+</span><span style="color:#e6db74">    something:
+</span><span style="color:#e6db74">      important: true
+</span><span style="color:#e6db74">    token:
+</span><span style="color:#e6db74">      encKey: &#34;somethingsecure&#34;
+</span><span style="color:#e6db74">      expHours: 24
+</span><span style="color:#e6db74">    cassandra:
+</span><span style="color:#e6db74">      cluster: [&#34;lax1.cas.example.com&#34;,&#34;ny1.cas.example.com&#34;]
+</span><span style="color:#e6db74">      keyspace: dev_app
+</span></code></pre></div><p>In the deployment configuration below we mount this <a href="https://Kubernetes.io/docs/tasks/configure-pod-container/configure-pod-configmap/">ConfigMap</a> into the file system of our <a href="https://Kubernetes.io/docs/concepts/workloads/pods/pod/">Pod</a>. Mounting a <a href="https://Kubernetes.io/docs/tasks/configure-pod-container/configure-pod-configmap/">ConfigMap</a> as files allow our service to test outside the cloud with plain configuration files easily.</p>
 <h5 id="deployment-k8sdev40-deploymentyml">Deployment: <code>./k8s/dev/40-deployment.yml</code></h5>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">apiVersion: apps/v1
 kind: Deployment
@@ -506,28 +506,28 @@ spec:
 <p>Setup <a href="/web-cluster-ingress/">Ingress on Custom Kubernetes</a> if you have not done so already. You should also secure your <a href="/web-cluster-ingress/">ingress</a> API endpoints with HTTPS, a secure, free and easy way of doing this involves setting up <a href="/lets-encrypt-Kubernetes/">Let&rsquo;s Encrypt on Kubernetes</a> with <a href="https://github.com/jetstack/cert-manager/">cert-manager</a>.</p>
 <p><strong>50-ingress.yml</strong></p>
 <p>The following <a href="/web-cluster-ingress/">Ingress on Custom Kubernetes</a> configuration directs traffic for <strong>HTTP port 80</strong> and <strong>HTTPS port 443</strong> on our example domain <strong>api.the-project.dev.example.com</strong> to port 8080 on the <strong>example-microservice</strong> we setup in <a href="https://Kubernetes.io/docs/concepts/services-networking/service/">Services</a> configuration <a href="#service-k8sdev20-serviceyml"><code>20-service.yml</code> above</a>.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">apiVersion</span>: extensions/v1beta1
-<span style="color:#66d9ef">kind</span>: Ingress
-<span style="color:#66d9ef">metadata</span>:
-  <span style="color:#66d9ef">name</span>: example-microservice
-  <span style="color:#66d9ef">namespace</span>: the-project
-  <span style="color:#66d9ef">labels</span>:
-    <span style="color:#66d9ef">app</span>: example-microservice
-    <span style="color:#66d9ef">client</span>: internal
-    <span style="color:#66d9ef">env</span>: dev
-<span style="color:#66d9ef">spec</span>:
-  <span style="color:#66d9ef">rules</span>:
-  - <span style="color:#66d9ef">host</span>: api.the-project.dev.example.com
-    <span style="color:#66d9ef">http</span>:
-      <span style="color:#66d9ef">paths</span>:
-      - <span style="color:#66d9ef">backend</span>:
-          <span style="color:#66d9ef">serviceName</span>: example-microservice
-          <span style="color:#66d9ef">servicePort</span>: <span style="color:#ae81ff">8080</span>
-        <span style="color:#66d9ef">path</span>: /example/api/endpoint
-  <span style="color:#66d9ef">tls</span>:
-  - <span style="color:#66d9ef">hosts</span>:
-    - api.example.com
-    <span style="color:#66d9ef">secretName</span>: the-project-dev-production-tls
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">extensions/v1beta1</span>
+<span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Ingress</span>
+<span style="color:#f92672">metadata</span>:
+  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">example-microservice</span>
+  <span style="color:#f92672">namespace</span>: <span style="color:#ae81ff">the-project</span>
+  <span style="color:#f92672">labels</span>:
+    <span style="color:#f92672">app</span>: <span style="color:#ae81ff">example-microservice</span>
+    <span style="color:#f92672">client</span>: <span style="color:#ae81ff">internal</span>
+    <span style="color:#f92672">env</span>: <span style="color:#ae81ff">dev</span>
+<span style="color:#f92672">spec</span>:
+  <span style="color:#f92672">rules</span>:
+  - <span style="color:#f92672">host</span>: <span style="color:#ae81ff">api.the-project.dev.example.com</span>
+    <span style="color:#f92672">http</span>:
+      <span style="color:#f92672">paths</span>:
+      - <span style="color:#f92672">backend</span>:
+          <span style="color:#f92672">serviceName</span>: <span style="color:#ae81ff">example-microservice</span>
+          <span style="color:#f92672">servicePort</span>: <span style="color:#ae81ff">8080</span>
+        <span style="color:#f92672">path</span>: <span style="color:#ae81ff">/example/api/endpoint</span>
+  <span style="color:#f92672">tls</span>:
+  - <span style="color:#f92672">hosts</span>:
+    - <span style="color:#ae81ff">api.example.com</span>
+    <span style="color:#f92672">secretName</span>: <span style="color:#ae81ff">the-project-dev-production-tls</span>
 </code></pre></div><h4 id="initial-kubernetes-deployment">Initial Kubernetes Deployment</h4>
 <p>I never automate the initial configuration and deployment of <a href="/microservices/">Microservices</a> in Kubernetes. There are a few things that once setup don&rsquo;t need to change per iteration. Packing the install for automatic configuration and deployment is better left to the Kubernetes package manager <a href="/helm-on-custom-cluster/">Helm</a>, and after development iterations have stabilized into a more mature state. In this example workflow we are just getting started.</p>
 <p><strong>The quick way</strong>:</p>
@@ -549,39 +549,39 @@ kubectl create -f ./50-ingress.yml
 <h4 id="automated-builds-and-deployments-gitlab-ciyml">Automated Builds and Deployments: <code>.gitlab-ci.yml</code></h4>
 <p>Make sure to first <a href="https://docs.gitlab.com/ee/ci/quick_start/#configuring-a-runner">configure runners</a> in Gitlab and <a href="https://docs.gitlab.com/ee/ci/runners/">enable runners for the current repository</a>. When you push source code into Gitlab, and CI is enabled. Gitlab executes the instructions found in <code>.gitlab-ci.yml</code> if one exists.</p>
 <p>The following is an example <code>.gitlab-ci.yml</code> I commonly use for building and deploying <a href="/microservices/">Microservices</a> in Kubernetes. Skim over the file and after I&rsquo;ll go over the critical parts.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">image</span>: txn2/docker-kubectl
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">image</span>: <span style="color:#ae81ff">txn2/docker-kubectl</span>
 
-<span style="color:#66d9ef">variables</span>:
-  <span style="color:#66d9ef">DOCKER_DRIVER</span>: overlay2
-  <span style="color:#66d9ef">GIT_STRATEGY</span>: fetch
+<span style="color:#f92672">variables</span>:
+  <span style="color:#f92672">DOCKER_DRIVER</span>: <span style="color:#ae81ff">overlay2</span>
+  <span style="color:#f92672">GIT_STRATEGY</span>: <span style="color:#ae81ff">fetch</span>
 
-<span style="color:#66d9ef">before_script</span>:
-    - docker login -u gitlab-ci-token -p ${CI_JOB_TOKEN} private-registry.example.com:<span style="color:#ae81ff">5050</span>
+<span style="color:#f92672">before_script</span>:
+    - <span style="color:#ae81ff">docker login -u gitlab-ci-token -p ${CI_JOB_TOKEN} private-registry.example.com:5050</span>
 
-<span style="color:#66d9ef">dev_build</span>:
-  <span style="color:#66d9ef">stage</span>: build
-  <span style="color:#66d9ef">only</span>:
-    - dev@the-project/example-microservice
-  <span style="color:#66d9ef">script</span>:
-    - docker build -t ${CI_REGISTRY_IMAGE}:dev-${CI_PIPELINE_ID} -f ./k8s/Dockerfile .
-    - docker push ${CI_REGISTRY_IMAGE}:dev-${CI_PIPELINE_ID}
-    - docker tag ${CI_REGISTRY_IMAGE}:dev-${CI_PIPELINE_ID} ${CI_REGISTRY_IMAGE}:dev-latest
-    - docker push ${CI_REGISTRY_IMAGE}:dev-latest
+<span style="color:#f92672">dev_build</span>:
+  <span style="color:#f92672">stage</span>: <span style="color:#ae81ff">build</span>
+  <span style="color:#f92672">only</span>:
+    - <span style="color:#ae81ff">dev@the-project/example-microservice</span>
+  <span style="color:#f92672">script</span>:
+    - <span style="color:#ae81ff">docker build -t ${CI_REGISTRY_IMAGE}:dev-${CI_PIPELINE_ID} -f ./k8s/Dockerfile .</span>
+    - <span style="color:#ae81ff">docker push ${CI_REGISTRY_IMAGE}:dev-${CI_PIPELINE_ID}</span>
+    - <span style="color:#ae81ff">docker tag ${CI_REGISTRY_IMAGE}:dev-${CI_PIPELINE_ID} ${CI_REGISTRY_IMAGE}:dev-latest</span>
+    - <span style="color:#ae81ff">docker push ${CI_REGISTRY_IMAGE}:dev-latest</span>
 
 <span style="color:#75715e"># update the deployment image</span>
-<span style="color:#66d9ef">dev_deploy</span>:
-  <span style="color:#66d9ef">stage</span>: deploy
-  <span style="color:#66d9ef">only</span>:
-    - dev@the-project/example-microservice
-  <span style="color:#66d9ef">variables</span>:
-    <span style="color:#66d9ef">GIT_STRATEGY</span>: none
-  <span style="color:#66d9ef">script</span>: <span style="color:#e6db74">|
-</span><span style="color:#e6db74">    kubectl set image deployment/example-microservice cog=${CI_REGISTRY_IMAGE}:dev-${CI_PIPELINE_ID} \</span>
-    --namespace=<span style="color:#e6db74">&#34;the-project&#34;</span> \
-    --server=<span style="color:#e6db74">&#34;${K8S_DEV_SERVER}&#34;</span> \
-    --token=<span style="color:#e6db74">&#34;${K8S_DEV_TOKEN}&#34;</span> \
-    --insecure-skip-tls-verify=<span style="color:#66d9ef">true</span>
-</code></pre></div><h5 id="runner-image-txn2docker-kubectl">Runner <code>image: txn2/docker-kubectl</code></h5>
+<span style="color:#f92672">dev_deploy</span>:
+  <span style="color:#f92672">stage</span>: <span style="color:#ae81ff">deploy</span>
+  <span style="color:#f92672">only</span>:
+    - <span style="color:#ae81ff">dev@the-project/example-microservice</span>
+  <span style="color:#f92672">variables</span>:
+    <span style="color:#f92672">GIT_STRATEGY</span>: <span style="color:#ae81ff">none</span>
+  <span style="color:#f92672">script</span>: <span style="color:#e6db74">|
+</span><span style="color:#e6db74">    kubectl set image deployment/example-microservice cog=${CI_REGISTRY_IMAGE}:dev-${CI_PIPELINE_ID} \
+</span><span style="color:#e6db74">    --namespace=&#34;the-project&#34; \
+</span><span style="color:#e6db74">    --server=&#34;${K8S_DEV_SERVER}&#34; \
+</span><span style="color:#e6db74">    --token=&#34;${K8S_DEV_TOKEN}&#34; \
+</span><span style="color:#e6db74">    --insecure-skip-tls-verify=true
+</span></code></pre></div><h5 id="runner-image-txn2docker-kubectl">Runner <code>image: txn2/docker-kubectl</code></h5>
 <p>The build script uses Docker and <code>kubectl</code>. You can use any base image and install these as part of the build and deploy stages; however, I find it faster to use an image with these utilities already installed. Use the Docker container <a href="https://github.com/txn2/docker-kubectl">txn2/docker-kubectl</a> or create your own.</p>
 <p><strong>Dockerfile</strong> for Gitlab Kubernetes deployments:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-dockerfile" data-lang="dockerfile"><span style="color:#66d9ef">FROM</span><span style="color:#e6db74"> docker:latest</span><span style="color:#960050;background-color:#1e0010">
@@ -595,8 +595,8 @@ kubectl create -f ./50-ingress.yml
 <h5 id="runner-before_script">Runner <code>before_script</code></h5>
 <p>The runner needs access to push Docker containers it builds back to the <a href="https://docs.gitlab.com/ee/user/project/container_registry.html">Gitlab container registry</a>. <a href="https://docs.gitlab.com/ee/ci/variables/">GitLab CI/CD Variables</a> provides the <code>CI_JOB_TOKEN</code> specifically for registry authentication. We don&rsquo;t need Docker access for every stage. However, it&rsquo;s a minor operation to issue a <a href="https://docs.docker.com/engine/reference/commandline/login/">Docker login</a>, so it&rsquo;s one less thing we have to think about should we require access in later stages; for instance, a testing stage that may tag containers as passing or failing.</p>
 <p><strong>Excerpt from <a href="/gitlabci-golang-microservices/#automated-builds-and-deployments-gitlab-ciyml">.gitlab-ci.yml</a></strong></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">before_script</span>:
-    - docker login -u gitlab-ci-token -p ${CI_JOB_TOKEN} private-registry.example.com:<span style="color:#ae81ff">5050</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">before_script</span>:
+    - <span style="color:#ae81ff">docker login -u gitlab-ci-token -p ${CI_JOB_TOKEN} private-registry.example.com:5050</span>
 </code></pre></div><h5 id="runner-dev_build">Runner <code>dev_build</code></h5>
 <p>The <code>deb_build</code> might look a little complicated, but it is only the <a href="https://docs.docker.com/engine/reference/commandline/build/">docker build</a>, <a href="https://docs.docker.com/engine/reference/commandline/tag/">docker tag</a> and <a href="https://docs.docker.com/engine/reference/commandline/push/">docker push</a> commands along with the use of a few  <a href="https://docs.gitlab.com/ee/ci/variables/">GitLab CI/CD Variables</a>.</p>
 <p>The <a href="https://docs.gitlab.com/ee/ci/variables/">GitLab CI/CD Variables</a> used:</p>
@@ -605,15 +605,15 @@ kubectl create -f ./50-ingress.yml
 <li><strong><code>CI_PIPELINE_ID</code></strong> is the unique id of the current pipeline that GitLab CI uses internally. This variable gives us an always incrementing number, and this helps to distinguish our new container from a previously built one more easily. We could use a separate versioning system or even re-tag with an assigned version number after passing some test. The options are limitless.</li>
 </ul>
 <p><strong>Excerpt from <a href="/gitlabci-golang-microservices/#automated-builds-and-deployments-gitlab-ciyml">.gitlab-ci.yml</a></strong></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">dev_build</span>:
-  <span style="color:#66d9ef">stage</span>: build
-  <span style="color:#66d9ef">only</span>:
-    - dev@the-project/example-microservice
-  <span style="color:#66d9ef">script</span>:
-    - docker build -t ${CI_REGISTRY_IMAGE}:dev-${CI_PIPELINE_ID} -f ./k8s/Dockerfile .
-    - docker push ${CI_REGISTRY_IMAGE}:dev-${CI_PIPELINE_ID}
-    - docker tag ${CI_REGISTRY_IMAGE}:dev-${CI_PIPELINE_ID} ${CI_REGISTRY_IMAGE}:dev-latest
-    - docker push ${CI_REGISTRY_IMAGE}:dev-latest
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">dev_build</span>:
+  <span style="color:#f92672">stage</span>: <span style="color:#ae81ff">build</span>
+  <span style="color:#f92672">only</span>:
+    - <span style="color:#ae81ff">dev@the-project/example-microservice</span>
+  <span style="color:#f92672">script</span>:
+    - <span style="color:#ae81ff">docker build -t ${CI_REGISTRY_IMAGE}:dev-${CI_PIPELINE_ID} -f ./k8s/Dockerfile .</span>
+    - <span style="color:#ae81ff">docker push ${CI_REGISTRY_IMAGE}:dev-${CI_PIPELINE_ID}</span>
+    - <span style="color:#ae81ff">docker tag ${CI_REGISTRY_IMAGE}:dev-${CI_PIPELINE_ID} ${CI_REGISTRY_IMAGE}:dev-latest</span>
+    - <span style="color:#ae81ff">docker push ${CI_REGISTRY_IMAGE}:dev-latest</span>
 </code></pre></div><p>The <code>dev_build:</code> section <strong>only:</strong> to ensure the <code>dev_build:</code> script is run when the <strong>dev</strong> branch of the main repository receives a merge (after a pull request is approved). The directive <code>dev@the-project/example-microservice</code> ensures it does not run on forks of this repository.</p>
 <p>Tagging a container <code>dev</code> lets us know that this container is not yet ready for production, it may need testing or may contain features not yet approved for production deployment. Additional tags can easily be given to this image in later stages, or new containers can be generated specifically for production.</p>
 <p>This workflow assumes four or more git branches. In the example <a href="/gitlabci-golang-microservices/#automated-builds-and-deployments-gitlab-ciyml">.gitlab-ci.yml</a> I only cover operations on the <strong>dev</strong> branch, but you can easily extrapolate how <strong>stg</strong> and <strong>prod</strong> branches might work.</p>
@@ -648,19 +648,19 @@ kubectl create -f ./50-ingress.yml
 <p>The <strong><code>dev_deploy:</code></strong> script deploys our new container with one command: <a href="https://Kubernetes.io/docs/concepts/workloads/controllers/deployment/#updating-a-deployment">kubectl set image</a>. Setting a new image on a <a href="https://Kubernetes.io/docs/concepts/workloads/controllers/deployment/">Deployment</a> triggers Kubernetes to pull the new image, spin up the defined number of required <a href="https://Kubernetes.io/docs/concepts/workloads/pods/pod/">Pods</a>, then shut down any pods running the previous image. <a href="https://Kubernetes.io/docs/tutorials/Kubernetes-basics/update/update-intro/">Rolling updates</a> are a powerful feature of Kubernetes and help prevent any downtime if handled correctly.</p>
 <p><strong>Excerpt from <a href="/gitlabci-golang-microservices/#automated-builds-and-deployments-gitlab-ciyml">.gitlab-ci.yml</a></strong></p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#75715e"># update the deployment image</span>
-<span style="color:#66d9ef">dev_deploy</span>:
-  <span style="color:#66d9ef">stage</span>: deploy
-  <span style="color:#66d9ef">only</span>:
-    - dev@the-project/example-microservice
-  <span style="color:#66d9ef">variables</span>:
-    <span style="color:#66d9ef">GIT_STRATEGY</span>: none
-  <span style="color:#66d9ef">script</span>: <span style="color:#e6db74">|
-</span><span style="color:#e6db74">    kubectl set image deployment/example-microservice example-microservice=${CI_REGISTRY_IMAGE}:dev-${CI_PIPELINE_ID} \</span>
-    --namespace=<span style="color:#e6db74">&#34;the-project&#34;</span> \
-    --server=<span style="color:#e6db74">&#34;${K8S_DEV_SERVER}&#34;</span> \
-    --token=<span style="color:#e6db74">&#34;${K8S_DEV_TOKEN}&#34;</span> \
-    --insecure-skip-tls-verify=<span style="color:#66d9ef">true</span>
-</code></pre></div><p>Note the new variables <strong>K8S_DEV_SERVER</strong> and <strong>K8S_DEV_TOKEN</strong>.</p>
+<span style="color:#f92672">dev_deploy</span>:
+  <span style="color:#f92672">stage</span>: <span style="color:#ae81ff">deploy</span>
+  <span style="color:#f92672">only</span>:
+    - <span style="color:#ae81ff">dev@the-project/example-microservice</span>
+  <span style="color:#f92672">variables</span>:
+    <span style="color:#f92672">GIT_STRATEGY</span>: <span style="color:#ae81ff">none</span>
+  <span style="color:#f92672">script</span>: <span style="color:#e6db74">|
+</span><span style="color:#e6db74">    kubectl set image deployment/example-microservice example-microservice=${CI_REGISTRY_IMAGE}:dev-${CI_PIPELINE_ID} \
+</span><span style="color:#e6db74">    --namespace=&#34;the-project&#34; \
+</span><span style="color:#e6db74">    --server=&#34;${K8S_DEV_SERVER}&#34; \
+</span><span style="color:#e6db74">    --token=&#34;${K8S_DEV_TOKEN}&#34; \
+</span><span style="color:#e6db74">    --insecure-skip-tls-verify=true
+</span></code></pre></div><p>Note the new variables <strong>K8S_DEV_SERVER</strong> and <strong>K8S_DEV_TOKEN</strong>.</p>
 <table>
 <thead>
 <tr>
@@ -681,35 +681,35 @@ kubectl create -f ./50-ingress.yml
 </table>
 <p>If your <a href="/hobby-cluster/">custom Kubernetes cluster</a> uses Role-based access control (<a href="https://Kubernetes.io/docs/reference/access-authn-authz/rbac/">RBAC</a>), and it should, use the following steps to get a token granting <code>kubectl</code> access to <code>the-project</code> namespace.</p>
 <p>You can combine three configuration directives into one yaml file and get the objects you need in Kubernetes. You need a <a href="https://Kubernetes.io/docs/reference/access-authn-authz/service-accounts-admin/">ServiceAccount</a>, a <a href="https://Kubernetes.io/docs/reference/access-authn-authz/rbac/#default-roles-and-role-bindings">Role</a> and a <a href="https://Kubernetes.io/docs/reference/access-authn-authz/rbac/#default-roles-and-role-bindings">RoleBinding</a> tying the two together.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">apiVersion</span>: v1
-<span style="color:#66d9ef">kind</span>: ServiceAccount
-<span style="color:#66d9ef">metadata</span>:
-  <span style="color:#66d9ef">namespace</span>: the-project
-  <span style="color:#66d9ef">name</span>: the-project
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">v1</span>
+<span style="color:#f92672">kind</span>: <span style="color:#ae81ff">ServiceAccount</span>
+<span style="color:#f92672">metadata</span>:
+  <span style="color:#f92672">namespace</span>: <span style="color:#ae81ff">the-project</span>
+  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">the-project</span>
 ---
-<span style="color:#66d9ef">apiVersion</span>: rbac.authorization.k8s.io/v1beta1
-<span style="color:#66d9ef">kind</span>: Role
-<span style="color:#66d9ef">metadata</span>:
-  <span style="color:#66d9ef">namespace</span>: the-project
-  <span style="color:#66d9ef">name</span>: deployer
-<span style="color:#66d9ef">rules</span>:
-- <span style="color:#66d9ef">apiGroups</span>: [<span style="color:#e6db74">&#34;apps&#34;</span>,<span style="color:#e6db74">&#34;extensions&#34;</span>]
-  <span style="color:#66d9ef">resources</span>: [<span style="color:#e6db74">&#34;deployments&#34;</span>,<span style="color:#e6db74">&#34;configmaps&#34;</span>,<span style="color:#e6db74">&#34;pods&#34;</span>,<span style="color:#e6db74">&#34;secrets&#34;</span>,<span style="color:#e6db74">&#34;ingresses&#34;</span>]
-  <span style="color:#66d9ef">verbs</span>: [<span style="color:#e6db74">&#34;create&#34;</span>,<span style="color:#e6db74">&#34;get&#34;</span>,<span style="color:#e6db74">&#34;delete&#34;</span>,<span style="color:#e6db74">&#34;list&#34;</span>,<span style="color:#e6db74">&#34;update&#34;</span>,<span style="color:#e6db74">&#34;edit&#34;</span>,<span style="color:#e6db74">&#34;watch&#34;</span>,<span style="color:#e6db74">&#34;exec&#34;</span>,<span style="color:#e6db74">&#34;patch&#34;</span>]
+<span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">rbac.authorization.k8s.io/v1beta1</span>
+<span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Role</span>
+<span style="color:#f92672">metadata</span>:
+  <span style="color:#f92672">namespace</span>: <span style="color:#ae81ff">the-project</span>
+  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">deployer</span>
+<span style="color:#f92672">rules</span>:
+- <span style="color:#f92672">apiGroups</span>: [<span style="color:#e6db74">&#34;apps&#34;</span>,<span style="color:#e6db74">&#34;extensions&#34;</span>]
+  <span style="color:#f92672">resources</span>: [<span style="color:#e6db74">&#34;deployments&#34;</span>,<span style="color:#e6db74">&#34;configmaps&#34;</span>,<span style="color:#e6db74">&#34;pods&#34;</span>,<span style="color:#e6db74">&#34;secrets&#34;</span>,<span style="color:#e6db74">&#34;ingresses&#34;</span>]
+  <span style="color:#f92672">verbs</span>: [<span style="color:#e6db74">&#34;create&#34;</span>,<span style="color:#e6db74">&#34;get&#34;</span>,<span style="color:#e6db74">&#34;delete&#34;</span>,<span style="color:#e6db74">&#34;list&#34;</span>,<span style="color:#e6db74">&#34;update&#34;</span>,<span style="color:#e6db74">&#34;edit&#34;</span>,<span style="color:#e6db74">&#34;watch&#34;</span>,<span style="color:#e6db74">&#34;exec&#34;</span>,<span style="color:#e6db74">&#34;patch&#34;</span>]
 ---
-<span style="color:#66d9ef">apiVersion</span>: rbac.authorization.k8s.io/v1
-<span style="color:#66d9ef">kind</span>: RoleBinding
-<span style="color:#66d9ef">metadata</span>:
-  <span style="color:#66d9ef">name</span>: deployer
-  <span style="color:#66d9ef">namespace</span>: the-project
-<span style="color:#66d9ef">subjects</span>:
-- <span style="color:#66d9ef">kind</span>: ServiceAccount
-  <span style="color:#66d9ef">namespace</span>: the-project
-  <span style="color:#66d9ef">name</span>: the-project
-<span style="color:#66d9ef">roleRef</span>:
-  <span style="color:#66d9ef">kind</span>: Role <span style="color:#75715e">#this must be Role or ClusterRole</span>
-  <span style="color:#66d9ef">name</span>: deployer <span style="color:#75715e"># this must match the name of the Role or ClusterRole you wish to bind to</span>
-  <span style="color:#66d9ef">apiGroup</span>: rbac.authorization.k8s.io
+<span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">rbac.authorization.k8s.io/v1</span>
+<span style="color:#f92672">kind</span>: <span style="color:#ae81ff">RoleBinding</span>
+<span style="color:#f92672">metadata</span>:
+  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">deployer</span>
+  <span style="color:#f92672">namespace</span>: <span style="color:#ae81ff">the-project</span>
+<span style="color:#f92672">subjects</span>:
+- <span style="color:#f92672">kind</span>: <span style="color:#ae81ff">ServiceAccount</span>
+  <span style="color:#f92672">namespace</span>: <span style="color:#ae81ff">the-project</span>
+  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">the-project</span>
+<span style="color:#f92672">roleRef</span>:
+  <span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Role #this must be Role or ClusterRole</span>
+  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">deployer # this must match the name of the Role or ClusterRole you wish to bind to</span>
+  <span style="color:#f92672">apiGroup</span>: <span style="color:#ae81ff">rbac.authorization.k8s.io</span>
 </code></pre></div><p>You need to extract the generated token from a <a href="https://Kubernetes.io/docs/concepts/configuration/secret/">secret</a> automatically created for the new <a href="https://Kubernetes.io/docs/reference/access-authn-authz/service-accounts-admin/">ServiceAccount</a>.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl describe serviceaccount the-project -n fuse
 

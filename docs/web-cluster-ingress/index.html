@@ -236,43 +236,43 @@
 
 <h3 id="namespace">Namespace</h3>
 <p>Setup a new <a href="https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/">namespace</a> called <strong>ingress-nginx</strong></p>
-<!-- raw HTML omitted -->
+<script src="https://gist.github.com/cjimti/591d65a6940a87e7136bf0f51f438088.js"></script>
 <p>Create using the configuration:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl create -f https://gist.githubusercontent.com/cjimti/591d65a6940a87e7136bf0f51f438088/raw/0c5db06855d285d8a8b5bac1bfa6c9ed64b00c3b/00-namespace.yml
 </code></pre></div><h3 id="default-backend">Default Backend</h3>
 <p>Next, create a <a href="https://kubernetes.io/docs/concepts/workloads/controllers/deployment/">Deployment</a> and a <a href="https://kubernetes.io/docs/concepts/services-networking/service/">Service</a> for the ingress controller.</p>
-<!-- raw HTML omitted -->
+<script src="https://gist.github.com/cjimti/78a8ce1be09a9e874f6af54a6c8e4714.js"></script>
 <p>Create using the configuration:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl create -f https://gist.githubusercontent.com/cjimti/78a8ce1be09a9e874f6af54a6c8e4714/raw/95b172435fbc2b4551daf375e19f569bd9cc3aec/01-default-backend.yml
 </code></pre></div><h3 id="ingress-nginx-configmap">Ingress Nginx <a href="https://kubernetes.io/docs/tasks/configure-pod-container/configure-pod-configmap/">ConfigMap</a></h3>
 <p>Create an empty <a href="https://kubernetes.io/docs/tasks/configure-pod-container/configure-pod-configmap/">ConfigMap</a> for <strong>ingress-nginx</strong>.</p>
-<!-- raw HTML omitted -->
+<script src="https://gist.github.com/cjimti/dc2841651c68a463b8990e6ce2ddb0c8.js"></script>
 <p>Create using the configuration:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl create -f https://gist.githubusercontent.com/cjimti/dc2841651c68a463b8990e6ce2ddb0c8/raw/2d4af61ac416e7494dac37c2eaf8bb024a1306a2/02-empty-configmap.yml
 </code></pre></div><h3 id="tcp-services-configmap">TCP Services <a href="https://kubernetes.io/docs/tasks/configure-pod-container/configure-pod-configmap/">ConfigMap</a></h3>
 <p>Create an empty <a href="https://kubernetes.io/docs/tasks/configure-pod-container/configure-pod-configmap/">ConfigMap</a> for <strong>ingress-nginx</strong> TCP Services.</p>
-<!-- raw HTML omitted -->
+<script src="https://gist.github.com/cjimti/66605e303591b61e1baa347547336f2c.js"></script>
 <p>Create using the configuration:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl create -f https://gist.githubusercontent.com/cjimti/66605e303591b61e1baa347547336f2c/raw/eb6d3a6d1c5d0a47e4105a21d73573cb8e844406/03-tcp-services-configmap.yaml
 </code></pre></div><h3 id="udp-services-configmap">UDP Services <a href="https://kubernetes.io/docs/tasks/configure-pod-container/configure-pod-configmap/">ConfigMap</a></h3>
 <p>Create an empty <a href="https://kubernetes.io/docs/tasks/configure-pod-container/configure-pod-configmap/">ConfigMap</a> for <strong>ingress-nginx</strong> UDP Services.</p>
-<!-- raw HTML omitted -->
+<script src="https://gist.github.com/cjimti/ddb750c825e42ffd398da4590d4b61f7.js"></script>
 <p>Create using the configuration:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl create -f https://gist.githubusercontent.com/cjimti/ddb750c825e42ffd398da4590d4b61f7/raw/88061f9096e11be3457967b3ad5be6c2a1dcf68e/04-udp-services-configmap.yaml
 </code></pre></div><h3 id="rbac---ingress-roles-and-permissions">RBAC - Ingress Roles and Permissions</h3>
 <p>Here we setup a <a href="https://kubernetes.io/docs/admin/service-accounts-admin/">ServiceAccount</a> named <strong>nginx-ingress-serviceaccount</strong>, a <a href="https://kubernetes.io/docs/admin/authorization/rbac/#role-and-clusterrole">ClusterRole</a> named <strong>nginx-ingress-clusterrole</strong>, a <a href="https://kubernetes.io/docs/admin/authorization/rbac/#role-and-clusterrole">Role</a> named <strong>nginx-ingress-role</strong>, a <a href="https://kubernetes.io/docs/admin/authorization/rbac/#rolebinding-and-clusterrolebinding">RoleBinding</a> named <strong>nginx-ingress-role-nisa-binding</strong> and a <a href="https://kubernetes.io/docs/admin/authorization/rbac/#rolebinding-and-clusterrolebinding">ClusterRoleBinding</a> named
 <strong>nginx-ingress-clusterrole-nisa-binding</strong>:</p>
-<!-- raw HTML omitted -->
+<script src="https://gist.github.com/cjimti/b06886efc6313192282224d7c84c2151.js"></script>
 <p>Create using the configuration:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl create -f https://gist.githubusercontent.com/cjimti/b06886efc6313192282224d7c84c2151/raw/0c0c6501124c96d7229cafaeafe9f2a00db3fbea/05-rbac.yml
 </code></pre></div><h3 id="daemonset"><a href="https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/">DaemonSet</a></h3>
 <p>Creating a <a href="https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/">DaemonSet</a> ensures that we have one Ingress Nginx controller <a href="https://kubernetes.io/docs/concepts/workloads/pods/pod/">Pod</a> running on each node. Having an Ingress Controller on each node is crucial since we are using the host network and assigning the host ports 80 and 443 for HTTP and HTTPS ingress on each node. When adding a new node to the cluster, the <a href="https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/">DaemonSet</a> ensures it gets an Ingress Nginx controller <a href="https://kubernetes.io/docs/concepts/workloads/pods/pod/">Pod</a>.</p>
-<!-- raw HTML omitted -->
+<script src="https://gist.github.com/cjimti/b9e820a18b06bd8a735b3b0676724826.js"></script>
 <p>Create using the configuration:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl create -f https://gist.githubusercontent.com/cjimti/b9e820a18b06bd8a735b3b0676724826/raw/d4a0317cfe4ae4c4739d1d04e94c55b8d1426a98/06-ds.yaml
 </code></pre></div><h3 id="service">Service</h3>
 <p>Add an <strong>ingress-nginx</strong> <a href="https://kubernetes.io/docs/concepts/services-networking/service/">Service</a>.</p>
-<!-- raw HTML omitted -->
+<script src="https://gist.github.com/cjimti/d733ed08d59b3779233fb6edc175bb75.js"></script>
 <p>Create using the configuration:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl create -f https://gist.githubusercontent.com/cjimti/d733ed08d59b3779233fb6edc175bb75/raw/a62765921f4fff395032d0e1f0a6db2cb773ab1c/07-service-nodeport.yaml
 </code></pre></div><h3 id="test">Test</h3>
@@ -313,32 +313,32 @@ default backend - <span style="color:#ae81ff">404</span>
 <p>We are finally at a spot where we can start routing ingress to services. If you don&rsquo;t already have a service to route to, I recommend using the <a href="https://txn2.com">txn2</a> <strong><a href="https://github.com/txn2/ok">ok</a></strong> service. <a href="https://github.com/txn2/ok">ok</a> is specifically designed to give useful information when testing <a href="https://kubernetes.io/docs/concepts/workloads/pods/pod/">Pod</a> deployments.</p>
 <h4 id="ok-deployment"><a href="https://github.com/txn2/ok">ok</a> Deployment</h4>
 <p>Here we add a <a href="https://kubernetes.io/docs/concepts/workloads/controllers/deployment/">Deployment</a> of <a href="https://github.com/txn2/ok">ok</a> with one replica.</p>
-<!-- raw HTML omitted -->
+<script src="https://gist.github.com/cjimti/bc293996ddcc3bf0cb9e5c3514ef1853.js"></script>
 <p>Use the following command to add the <a href="https://kubernetes.io/docs/concepts/workloads/controllers/deployment/">Deployment</a>:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl create -f https://gist.githubusercontent.com/cjimti/bc293996ddcc3bf0cb9e5c3514ef1853/raw/18a26df0df3d239b679446af8b7b55f29d2271ba/00-ok-deployment.yml
 </code></pre></div><h4 id="ok-service"><a href="https://github.com/txn2/ok">ok</a> Service</h4>
 <p>Create an <a href="https://github.com/txn2/ok">ok</a> service to front-end our new <a href="https://github.com/txn2/ok">ok</a> <a href="https://kubernetes.io/docs/concepts/workloads/controllers/deployment/">Deployment</a> above.</p>
-<!-- raw HTML omitted -->
+<script src="https://gist.github.com/cjimti/ae86bb7d3f777ac61e9ff9794ca52521.js"></script>
 <p>Use the following command to add the <a href="https://kubernetes.io/docs/concepts/services-networking/service/">Service</a>:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl create -f https://gist.githubusercontent.com/cjimti/ae86bb7d3f777ac61e9ff9794ca52521/raw/b4f4bf26bf5526953bcc4e0c538887bfa7be1484/10-ok-service.yml
 </code></pre></div><h4 id="ok-ingress"><a href="https://github.com/txn2/ok">ok</a> Ingress</h4>
 <p>Finally, we have the easy task of creating an ingress route. The following is a minimal template since you need to point a domain name to your cluster:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">apiVersion</span>: extensions/v1beta1
-<span style="color:#66d9ef">kind</span>: Ingress
-<span style="color:#66d9ef">metadata</span>:
-  <span style="color:#66d9ef">name</span>: ok
-  <span style="color:#66d9ef">labels</span>:
-    <span style="color:#66d9ef">app</span>: ok
-    <span style="color:#66d9ef">system</span>: test
-<span style="color:#66d9ef">spec</span>:
-  <span style="color:#66d9ef">rules</span>:
-  - <span style="color:#66d9ef">host</span>: ok.la.txn2.net
-    <span style="color:#66d9ef">http</span>:
-      <span style="color:#66d9ef">paths</span>:
-      - <span style="color:#66d9ef">backend</span>:
-          <span style="color:#66d9ef">serviceName</span>: ok
-          <span style="color:#66d9ef">servicePort</span>: <span style="color:#ae81ff">8080</span>
-        <span style="color:#66d9ef">path</span>: /
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">extensions/v1beta1</span>
+<span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Ingress</span>
+<span style="color:#f92672">metadata</span>:
+  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">ok</span>
+  <span style="color:#f92672">labels</span>:
+    <span style="color:#f92672">app</span>: <span style="color:#ae81ff">ok</span>
+    <span style="color:#f92672">system</span>: <span style="color:#ae81ff">test</span>
+<span style="color:#f92672">spec</span>:
+  <span style="color:#f92672">rules</span>:
+  - <span style="color:#f92672">host</span>: <span style="color:#ae81ff">ok.la.txn2.net</span>
+    <span style="color:#f92672">http</span>:
+      <span style="color:#f92672">paths</span>:
+      - <span style="color:#f92672">backend</span>:
+          <span style="color:#f92672">serviceName</span>: <span style="color:#ae81ff">ok</span>
+          <span style="color:#f92672">servicePort</span>: <span style="color:#ae81ff">8080</span>
+        <span style="color:#f92672">path</span>: <span style="color:#ae81ff">/</span>
 </code></pre></div><p>I will go over https and managing certificates in future articles. For now you may want to checkout other <a href="https://github.com/kubernetes/ingress-nginx/tree/master/docs/examples">ingress nginx examples</a>.</p>
 <h2 id="port-forwarding--local-development">Port Forwarding / Local Development</h2>
 <p>Check out <a href="https://github.com/txn2/kubefwd">kubefwd</a> for a simple command line utility that bulk forwards services of one or more namespaces to your local workstation.</p>

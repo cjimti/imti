@@ -247,22 +247,22 @@
 <h3 id="create-a-clusterissuer">Create a <a href="https://cert-manager.readthedocs.io/en/latest/reference/clusterissuers.html">ClusterIssuer</a></h3>
 <p>First, we need to have a functional <a href="/web-cluster-ingress/">Ingress</a> on our Kubernetes cluster. If you have not done so, check out my article <a href="/web-cluster-ingress/">Ingress on Custom Kubernetes</a>.</p>
 <p>Create a file called <code>10-cluster-issuer-letsencrypt-staging.yml</code> for the <a href="https://cert-manager.readthedocs.io/en/latest/reference/clusterissuers.html">ClusterIssuer</a>, add the following configuration and change the email address to your own.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">apiVersion</span>: certmanager.k8s.io/v1alpha1
-<span style="color:#66d9ef">kind</span>: ClusterIssuer
-<span style="color:#66d9ef">metadata</span>:
-  <span style="color:#66d9ef">name</span>: letsencrypt-staging
-  <span style="color:#66d9ef">namespace</span>: default
-<span style="color:#66d9ef">spec</span>:
-  <span style="color:#66d9ef">acme</span>:
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">certmanager.k8s.io/v1alpha1</span>
+<span style="color:#f92672">kind</span>: <span style="color:#ae81ff">ClusterIssuer</span>
+<span style="color:#f92672">metadata</span>:
+  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">letsencrypt-staging</span>
+  <span style="color:#f92672">namespace</span>: <span style="color:#ae81ff">default</span>
+<span style="color:#f92672">spec</span>:
+  <span style="color:#f92672">acme</span>:
     <span style="color:#75715e"># The ACME server URL</span>
-    <span style="color:#66d9ef">server</span>: https://acme-staging.api.letsencrypt.org/directory
+    <span style="color:#f92672">server</span>: <span style="color:#ae81ff">https://acme-staging.api.letsencrypt.org/directory</span>
     <span style="color:#75715e"># Email address used for ACME registration</span>
-    <span style="color:#66d9ef">email</span>: someone@example.com
+    <span style="color:#f92672">email</span>: <span style="color:#ae81ff">someone@example.com</span>
     <span style="color:#75715e"># Name of a secret used to store the ACME account private key</span>
-    <span style="color:#66d9ef">privateKeySecretRef</span>:
-      <span style="color:#66d9ef">name</span>: letsencrypt-staging
+    <span style="color:#f92672">privateKeySecretRef</span>:
+      <span style="color:#f92672">name</span>: <span style="color:#ae81ff">letsencrypt-staging</span>
     <span style="color:#75715e"># Enable the HTTP-01 challenge provider</span>
-    <span style="color:#66d9ef">http01</span>: {}
+    <span style="color:#f92672">http01</span>: {}
 </code></pre></div><p>Create the staging <a href="https://cert-manager.readthedocs.io/en/latest/reference/clusterissuers.html">ClusterIssuer</a> with <code>kubectl</code>:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl create -f 10-cluster-issuer-letsencrypt-staging.yml
 </code></pre></div><p>Expect output similar to the following:</p>
@@ -270,12 +270,12 @@
 </code></pre></div><p>Check the status of the new <a href="https://cert-manager.readthedocs.io/en/latest/reference/clusterissuers.html">ClusterIssuer</a>:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl describe ClusterIssuer
 </code></pre></div><p>Under the status section you should get output similar to the following:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">  <span style="color:#66d9ef">Conditions</span>:
-    <span style="color:#66d9ef">Last Transition Time</span>:  <span style="color:#e6db74">2018-05-18T08:05:09Z</span>
-    <span style="color:#66d9ef">Message</span>:               The ACME account was registered with the ACME server
-    <span style="color:#66d9ef">Reason</span>:                ACMEAccountRegistered
-    <span style="color:#66d9ef">Status</span>:                True
-    <span style="color:#66d9ef">Type</span>:                  Ready
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">  <span style="color:#f92672">Conditions</span>:
+    <span style="color:#f92672">Last Transition Time</span>:  <span style="color:#e6db74">2018-05-18T08:05:09Z</span>
+    <span style="color:#f92672">Message</span>:               <span style="color:#ae81ff">The ACME account was registered with the ACME server</span>
+    <span style="color:#f92672">Reason</span>:                <span style="color:#ae81ff">ACMEAccountRegistered</span>
+    <span style="color:#f92672">Status</span>:                <span style="color:#66d9ef">True</span>
+    <span style="color:#f92672">Type</span>:                  <span style="color:#ae81ff">Ready</span>
 </code></pre></div><p>Now we can create a production <a href="https://cert-manager.readthedocs.io/en/latest/reference/clusterissuers.html">ClusterIssuer</a>, for use only after we test with our staging configuration; otherwise, we are likely to hit rate limits while testing.</p>
 <p>The only essential difference between the staging and production <a href="https://cert-manager.readthedocs.io/en/latest/reference/clusterissuers.html">ClusterIssuer</a> is the <code>server:</code> URL.</p>
 <ul>
@@ -284,22 +284,22 @@
 </ul>
 <p>Create a production <a href="https://cert-manager.readthedocs.io/en/latest/reference/clusterissuers.html">ClusterIssuer</a> with the configuration below, make sure to change the email address to a valid account. The configured email address may receive messages from <a href="https://letsencrypt.org/">Let&rsquo;s Encrypt</a>.</p>
 <p>Create a file called <code>20-cluster-issuer-letsencrypt-production.yml</code> for the <a href="https://cert-manager.readthedocs.io/en/latest/reference/clusterissuers.html">ClusterIssuer</a>, add the following configuration and change the email address.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">apiVersion</span>: certmanager.k8s.io/v1alpha1
-<span style="color:#66d9ef">kind</span>: ClusterIssuer
-<span style="color:#66d9ef">metadata</span>:
-  <span style="color:#66d9ef">name</span>: letsencrypt-production
-  <span style="color:#66d9ef">namespace</span>: default
-<span style="color:#66d9ef">spec</span>:
-  <span style="color:#66d9ef">acme</span>:
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">certmanager.k8s.io/v1alpha1</span>
+<span style="color:#f92672">kind</span>: <span style="color:#ae81ff">ClusterIssuer</span>
+<span style="color:#f92672">metadata</span>:
+  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">letsencrypt-production</span>
+  <span style="color:#f92672">namespace</span>: <span style="color:#ae81ff">default</span>
+<span style="color:#f92672">spec</span>:
+  <span style="color:#f92672">acme</span>:
     <span style="color:#75715e"># The ACME server URL</span>
-    <span style="color:#66d9ef">server</span>: https://acme-v01.api.letsencrypt.org/directory
+    <span style="color:#f92672">server</span>: <span style="color:#ae81ff">https://acme-v01.api.letsencrypt.org/directory</span>
     <span style="color:#75715e"># Email address used for ACME registration</span>
-    <span style="color:#66d9ef">email</span>: someone@example.com
+    <span style="color:#f92672">email</span>: <span style="color:#ae81ff">someone@example.com</span>
     <span style="color:#75715e"># Name of a secret used to store the ACME account private key</span>
-    <span style="color:#66d9ef">privateKeySecretRef</span>:
-      <span style="color:#66d9ef">name</span>: letsencrypt-production
+    <span style="color:#f92672">privateKeySecretRef</span>:
+      <span style="color:#f92672">name</span>: <span style="color:#ae81ff">letsencrypt-production</span>
     <span style="color:#75715e"># Enable the HTTP-01 challenge provider</span>
-    <span style="color:#66d9ef">http01</span>: {}
+    <span style="color:#f92672">http01</span>: {}
 </code></pre></div><p>Create the production <a href="https://cert-manager.readthedocs.io/en/latest/reference/clusterissuers.html">ClusterIssuer</a> with <code>kubectl</code>:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl create -f 20-cluster-issuer-letsencrypt-production.yml
 </code></pre></div><p>Ensure both <a href="https://cert-manager.readthedocs.io/en/latest/reference/clusterissuers.html">ClusterIssuer</a>s are present:</p>
@@ -310,29 +310,29 @@ letsencrypt-production   3m
 letsencrypt-staging      5m
 </code></pre></div><h3 id="obtain-a-certificate">Obtain a Certificate</h3>
 <p>Create a file named <code>30-Cert-DOMAIN.yml</code>, replacing <strong>DOMAIN</strong> with your domain. Copy the below configuration and change all the example domain references to your own. This configuration generates a test certificate from <a href="https://letsencrypt.org/">Let&rsquo;s Encrypt</a>&rsquo;s staging environment.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">apiVersion</span>: certmanager.k8s.io/v1alpha1
-<span style="color:#66d9ef">kind</span>: Certificate
-<span style="color:#66d9ef">metadata</span>:
-  <span style="color:#66d9ef">name</span>: example-com
-  <span style="color:#66d9ef">namespace</span>: default
-<span style="color:#66d9ef">spec</span>:
-  <span style="color:#66d9ef">secretName</span>: example-com-staging-tls
-  <span style="color:#66d9ef">issuerRef</span>:
-    <span style="color:#66d9ef">name</span>: letsencrypt-staging
-    <span style="color:#66d9ef">kind</span>: ClusterIssuer
-  <span style="color:#66d9ef">commonName</span>: example.com
-  <span style="color:#66d9ef">dnsNames</span>:
-  - www.example.com
-  <span style="color:#66d9ef">acme</span>:
-    <span style="color:#66d9ef">config</span>:
-    - <span style="color:#66d9ef">http01</span>:
-        <span style="color:#66d9ef">ingressClass</span>: nginx
-      <span style="color:#66d9ef">domains</span>:
-      - example.com
-    - <span style="color:#66d9ef">http01</span>:
-        <span style="color:#66d9ef">ingress</span>: my-ingress
-      <span style="color:#66d9ef">domains</span>:
-      - www.example.com
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">certmanager.k8s.io/v1alpha1</span>
+<span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Certificate</span>
+<span style="color:#f92672">metadata</span>:
+  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">example-com</span>
+  <span style="color:#f92672">namespace</span>: <span style="color:#ae81ff">default</span>
+<span style="color:#f92672">spec</span>:
+  <span style="color:#f92672">secretName</span>: <span style="color:#ae81ff">example-com-staging-tls</span>
+  <span style="color:#f92672">issuerRef</span>:
+    <span style="color:#f92672">name</span>: <span style="color:#ae81ff">letsencrypt-staging</span>
+    <span style="color:#f92672">kind</span>: <span style="color:#ae81ff">ClusterIssuer</span>
+  <span style="color:#f92672">commonName</span>: <span style="color:#ae81ff">example.com</span>
+  <span style="color:#f92672">dnsNames</span>:
+  - <span style="color:#ae81ff">www.example.com</span>
+  <span style="color:#f92672">acme</span>:
+    <span style="color:#f92672">config</span>:
+    - <span style="color:#f92672">http01</span>:
+        <span style="color:#f92672">ingressClass</span>: <span style="color:#ae81ff">nginx</span>
+      <span style="color:#f92672">domains</span>:
+      - <span style="color:#ae81ff">example.com</span>
+    - <span style="color:#f92672">http01</span>:
+        <span style="color:#f92672">ingress</span>: <span style="color:#ae81ff">my-ingress</span>
+      <span style="color:#f92672">domains</span>:
+      - <span style="color:#ae81ff">www.example.com</span>
 </code></pre></div><p>The two <code>http01</code> sections under <code>acme:</code> demonstrate using the http-01 challenge with and without an existing ingress. The http-01 challenge creates or uses an existing ingress to create a route for <a href="https://letsencrypt.org/">Let&rsquo;s Encrypt</a> to determine that you control the domain. If you do not yet have an <a href="/web-cluster-ingress/">ingress</a> configuration or have <a href="/web-cluster-ingress/">Ingress</a> setup yet, I suggest checking out my article <a href="/web-cluster-ingress/">Ingress on Custom Kubernetes</a>, which builds on the <a href="/hobby-cluster/">Production Hobby Cluster</a> guide.</p>
 <p>Create the test <a href="https://cert-manager.readthedocs.io/en/latest/reference/certificates.html">Certificate</a> with <code>kubectl</code>:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl create -f 30-Cert-DOMAIN.yml<span style="color:#e6db74">`</span>
@@ -352,91 +352,91 @@ letsencrypt-staging      5m
 <h3 id="using-the-new-cert-for-ingress">Using the new cert for <a href="/web-cluster-ingress/">Ingress</a></h3>
 <p>Now comes the easiest part, using the new <a href="https://letsencrypt.org/">Let&rsquo;s Encrypt</a> signed x509 certificate. I&rsquo;ll stick with using the domains example.com and <a href="http://www.example.com">www.example.com</a> for purposes of illustration.</p>
 <p>Sample <a href="/web-cluster-ingress/">Ingress</a> using example cert:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">apiVersion</span>: extensions/v1beta1
-<span style="color:#66d9ef">kind</span>: Ingress
-<span style="color:#66d9ef">metadata</span>:
-  <span style="color:#66d9ef">name</span>: example
-  <span style="color:#66d9ef">labels</span>:
-    <span style="color:#66d9ef">app</span>: example
-    <span style="color:#66d9ef">system</span>: test
-<span style="color:#66d9ef">spec</span>:
-  <span style="color:#66d9ef">rules</span>:
-  - <span style="color:#66d9ef">host</span>: example.com
-    <span style="color:#66d9ef">http</span>:
-      <span style="color:#66d9ef">paths</span>:
-      - <span style="color:#66d9ef">backend</span>:
-          <span style="color:#66d9ef">serviceName</span>: <span style="color:#e6db74">&#34;ok&#34;</span>
-          <span style="color:#66d9ef">servicePort</span>: <span style="color:#ae81ff">5001</span>
-        <span style="color:#66d9ef">path</span>: /
-  <span style="color:#66d9ef">tls</span>:
-  - <span style="color:#66d9ef">hosts</span>:
-    - example.com
-    - www.example.com
-    <span style="color:#66d9ef">secretName</span>: example-com-production-tls
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">extensions/v1beta1</span>
+<span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Ingress</span>
+<span style="color:#f92672">metadata</span>:
+  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">example</span>
+  <span style="color:#f92672">labels</span>:
+    <span style="color:#f92672">app</span>: <span style="color:#ae81ff">example</span>
+    <span style="color:#f92672">system</span>: <span style="color:#ae81ff">test</span>
+<span style="color:#f92672">spec</span>:
+  <span style="color:#f92672">rules</span>:
+  - <span style="color:#f92672">host</span>: <span style="color:#ae81ff">example.com</span>
+    <span style="color:#f92672">http</span>:
+      <span style="color:#f92672">paths</span>:
+      - <span style="color:#f92672">backend</span>:
+          <span style="color:#f92672">serviceName</span>: <span style="color:#e6db74">&#34;ok&#34;</span>
+          <span style="color:#f92672">servicePort</span>: <span style="color:#ae81ff">5001</span>
+        <span style="color:#f92672">path</span>: <span style="color:#ae81ff">/</span>
+  <span style="color:#f92672">tls</span>:
+  - <span style="color:#f92672">hosts</span>:
+    - <span style="color:#ae81ff">example.com</span>
+    - <span style="color:#ae81ff">www.example.com</span>
+    <span style="color:#f92672">secretName</span>: <span style="color:#ae81ff">example-com-production-tls</span>
 </code></pre></div><h3 id="real-life-example">Real Life Example</h3>
 <p>The following is my <a href="https://cert-manager.readthedocs.io/en/latest/reference/certificates.html">Certificate</a> and <a href="/web-cluster-ingress/">Ingress</a> configuration for the domains <a href="https://phc.imti.co">phc.imti.co</a>, <a href="https://phc.txn2.com">phc.txn2.com</a> and <a href="https://phc.txn2.net">phc.txn2.net</a>. I&rsquo;ll refrain from publishing my actual TLS certificate <a href="https://kubernetes.io/docs/concepts/configuration/secret/">Secret</a>. <a href="https://letsencrypt.org/">Let&rsquo;s Encrypt</a> produces a Multi-Domain (SAN) Certificate, and as you might have noticed imti.co is hanging out at the bottom of the list; A separate TLD like this works but should probably be a separate cert, if I were concerned with having a matching <a href="https://www.quora.com/What-does-the-CN-name-in-a-client-certificate-refer-to">common name</a>. However, the sub-domain phc.imti.co is destined for a redirect, so it&rsquo;s not necessary.</p>
 <p>I created the <a href="https://cert-manager.readthedocs.io/en/latest/reference/certificates.html">Certificate</a> configuration with the file name <code>00-phc-cert.yml</code>. I set these certs up before I added <a href="/web-cluster-ingress/">Ingress</a> rules but after I first pointed the DNS to the cluster. <a href="https://github.com/jetstack/cert-manager/">cert-manager</a> uses the <strong>nginx</strong> <a href="/web-cluster-ingress/">Ingress</a> as specified under <code>http01:</code> <code>ingressClass:</code> to temporarily create routes for <a href="https://letsencrypt.org/">Let&rsquo;s Encrypt</a> to verify the ownership of the domain.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">apiVersion</span>: certmanager.k8s.io/v1alpha1
-<span style="color:#66d9ef">kind</span>: Certificate
-<span style="color:#66d9ef">metadata</span>:
-  <span style="color:#66d9ef">name</span>: phc
-  <span style="color:#66d9ef">namespace</span>: default
-<span style="color:#66d9ef">spec</span>:
-  <span style="color:#66d9ef">secretName</span>: phc-production-tls
-  <span style="color:#66d9ef">issuerRef</span>:
-    <span style="color:#66d9ef">name</span>: letsencrypt-production
-    <span style="color:#66d9ef">kind</span>: ClusterIssuer
-  <span style="color:#66d9ef">commonName</span>: phc.txn2.net
-  <span style="color:#66d9ef">dnsNames</span>:
-  - phc.txn2.net
-  - phc.txn2.com
-  - phc.imti.co
-  <span style="color:#66d9ef">acme</span>:
-    <span style="color:#66d9ef">config</span>:
-    - <span style="color:#66d9ef">http01</span>:
-        <span style="color:#66d9ef">ingressClass</span>: nginx
-      <span style="color:#66d9ef">domains</span>:
-      - phc.txn2.net
-      - phc.txn2.com
-      - phc.imti.co
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">certmanager.k8s.io/v1alpha1</span>
+<span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Certificate</span>
+<span style="color:#f92672">metadata</span>:
+  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">phc</span>
+  <span style="color:#f92672">namespace</span>: <span style="color:#ae81ff">default</span>
+<span style="color:#f92672">spec</span>:
+  <span style="color:#f92672">secretName</span>: <span style="color:#ae81ff">phc-production-tls</span>
+  <span style="color:#f92672">issuerRef</span>:
+    <span style="color:#f92672">name</span>: <span style="color:#ae81ff">letsencrypt-production</span>
+    <span style="color:#f92672">kind</span>: <span style="color:#ae81ff">ClusterIssuer</span>
+  <span style="color:#f92672">commonName</span>: <span style="color:#ae81ff">phc.txn2.net</span>
+  <span style="color:#f92672">dnsNames</span>:
+  - <span style="color:#ae81ff">phc.txn2.net</span>
+  - <span style="color:#ae81ff">phc.txn2.com</span>
+  - <span style="color:#ae81ff">phc.imti.co</span>
+  <span style="color:#f92672">acme</span>:
+    <span style="color:#f92672">config</span>:
+    - <span style="color:#f92672">http01</span>:
+        <span style="color:#f92672">ingressClass</span>: <span style="color:#ae81ff">nginx</span>
+      <span style="color:#f92672">domains</span>:
+      - <span style="color:#ae81ff">phc.txn2.net</span>
+      - <span style="color:#ae81ff">phc.txn2.com</span>
+      - <span style="color:#ae81ff">phc.imti.co</span>
 </code></pre></div><p>I named the <a href="/web-cluster-ingress/">Ingress</a> configuration <code>10-ingress.yml</code> and all the domains use a
 in the TLS <a href="https://kubernetes.io/docs/concepts/configuration/secret/">Secret</a> defined in <code>secretName: phc-production-tls</code>.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">apiVersion</span>: extensions/v1beta1
-<span style="color:#66d9ef">kind</span>: Ingress
-<span style="color:#66d9ef">metadata</span>:
-  <span style="color:#66d9ef">name</span>: ok-phc
-  <span style="color:#66d9ef">labels</span>:
-    <span style="color:#66d9ef">app</span>: ok-phc
-    <span style="color:#66d9ef">system</span>: test
-<span style="color:#66d9ef">spec</span>:
-  <span style="color:#66d9ef">rules</span>:
-  - <span style="color:#66d9ef">host</span>: phc.imti.co
-    <span style="color:#66d9ef">http</span>:
-      <span style="color:#66d9ef">paths</span>:
-      - <span style="color:#66d9ef">backend</span>:
-          <span style="color:#66d9ef">serviceName</span>: <span style="color:#e6db74">&#34;ok&#34;</span>
-          <span style="color:#66d9ef">servicePort</span>: <span style="color:#ae81ff">5001</span>
-        <span style="color:#66d9ef">path</span>: /
-  - <span style="color:#66d9ef">host</span>: phc.txn2.net
-    <span style="color:#66d9ef">http</span>:
-      <span style="color:#66d9ef">paths</span>:
-      - <span style="color:#66d9ef">backend</span>:
-          <span style="color:#66d9ef">serviceName</span>: <span style="color:#e6db74">&#34;ok&#34;</span>
-          <span style="color:#66d9ef">servicePort</span>: <span style="color:#ae81ff">5001</span>
-        <span style="color:#66d9ef">path</span>: /
-  - <span style="color:#66d9ef">host</span>: phc.txn2.com
-    <span style="color:#66d9ef">http</span>:
-      <span style="color:#66d9ef">paths</span>:
-      - <span style="color:#66d9ef">backend</span>:
-          <span style="color:#66d9ef">serviceName</span>: <span style="color:#e6db74">&#34;ok&#34;</span>
-          <span style="color:#66d9ef">servicePort</span>: <span style="color:#ae81ff">5001</span>
-        <span style="color:#66d9ef">path</span>: /
-  <span style="color:#66d9ef">tls</span>:
-  - <span style="color:#66d9ef">hosts</span>:
-    - phc.txn2.net
-    - phc.txn2.com
-    - phc.imti.co
-    <span style="color:#66d9ef">secretName</span>: phc-production-tls
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">extensions/v1beta1</span>
+<span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Ingress</span>
+<span style="color:#f92672">metadata</span>:
+  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">ok-phc</span>
+  <span style="color:#f92672">labels</span>:
+    <span style="color:#f92672">app</span>: <span style="color:#ae81ff">ok-phc</span>
+    <span style="color:#f92672">system</span>: <span style="color:#ae81ff">test</span>
+<span style="color:#f92672">spec</span>:
+  <span style="color:#f92672">rules</span>:
+  - <span style="color:#f92672">host</span>: <span style="color:#ae81ff">phc.imti.co</span>
+    <span style="color:#f92672">http</span>:
+      <span style="color:#f92672">paths</span>:
+      - <span style="color:#f92672">backend</span>:
+          <span style="color:#f92672">serviceName</span>: <span style="color:#e6db74">&#34;ok&#34;</span>
+          <span style="color:#f92672">servicePort</span>: <span style="color:#ae81ff">5001</span>
+        <span style="color:#f92672">path</span>: <span style="color:#ae81ff">/</span>
+  - <span style="color:#f92672">host</span>: <span style="color:#ae81ff">phc.txn2.net</span>
+    <span style="color:#f92672">http</span>:
+      <span style="color:#f92672">paths</span>:
+      - <span style="color:#f92672">backend</span>:
+          <span style="color:#f92672">serviceName</span>: <span style="color:#e6db74">&#34;ok&#34;</span>
+          <span style="color:#f92672">servicePort</span>: <span style="color:#ae81ff">5001</span>
+        <span style="color:#f92672">path</span>: <span style="color:#ae81ff">/</span>
+  - <span style="color:#f92672">host</span>: <span style="color:#ae81ff">phc.txn2.com</span>
+    <span style="color:#f92672">http</span>:
+      <span style="color:#f92672">paths</span>:
+      - <span style="color:#f92672">backend</span>:
+          <span style="color:#f92672">serviceName</span>: <span style="color:#e6db74">&#34;ok&#34;</span>
+          <span style="color:#f92672">servicePort</span>: <span style="color:#ae81ff">5001</span>
+        <span style="color:#f92672">path</span>: <span style="color:#ae81ff">/</span>
+  <span style="color:#f92672">tls</span>:
+  - <span style="color:#f92672">hosts</span>:
+    - <span style="color:#ae81ff">phc.txn2.net</span>
+    - <span style="color:#ae81ff">phc.txn2.com</span>
+    - <span style="color:#ae81ff">phc.imti.co</span>
+    <span style="color:#f92672">secretName</span>: <span style="color:#ae81ff">phc-production-tls</span>
 </code></pre></div><p>I could have easily created a seperate cert for imti.co and grouped it under a seperate <code>hosts:</code> section. However I&rsquo;ll probably be redirecting it in the future so it suits my need at the moment.</p>
 <h2 id="port-forwarding--local-development">Port Forwarding / Local Development</h2>
 <p>Check out <a href="https://github.com/txn2/kubefwd">kubefwd</a> for a simple command line utility that bulk forwards services of one or more namespaces to your local workstation.</p>
