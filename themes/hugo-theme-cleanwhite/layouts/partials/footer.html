@@ -154,18 +154,12 @@
     }
 </script>
 
-<!-- Go to www.addthis.com/dashboard to customize your tools -->
-<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5b905a667cf4d77c"></script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-R56SP4WLS2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
-<!--fastClick.js -->
-<!--<script>-->
-    <!--async("https://cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.js", function(){-->
-        <!--var $nav = document.querySelector("nav");-->
-        <!--if($nav) FastClick.attach($nav);-->
-    <!--})-->
-<!--</script>-->
-
-
-{{ if .Site.GoogleAnalytics }}
-{{ template "_internal/google_analytics_async.html" . }}
-{{ end }}
+  gtag('config', 'G-R56SP4WLS2');
+</script>

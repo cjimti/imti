@@ -439,7 +439,7 @@
       <span style="color:#f92672">accessModes</span>: [ <span style="color:#ae81ff">ReadWriteOnce ]</span>
       <span style="color:#f92672">resources</span>:
         <span style="color:#f92672">requests</span>:
-          <span style="color:#f92672">storage</span>: <span style="color:#ae81ff">2Gi # small for dev / testing</span>
+          <span style="color:#f92672">storage</span>: <span style="color:#ae81ff">2Gi</span> <span style="color:#75715e"># small for dev / testing</span>
 </code></pre></div><h3 id="deployment-for-master-nodes"><a href="https://kubernetes.io/docs/concepts/workloads/controllers/deployment/">Deployment</a> for <a href="https://www.elastic.co/guide/en/elasticsearch/reference/6.2/modules-node.html#master-node">Master</a> Nodes</h3>
 <p>The <strong><a href="https://www.elastic.co/guide/en/elasticsearch/reference/6.2/modules-node.html#master-node">Master</a></strong> Elasticsearch nodes are &ldquo;responsible for lightweight cluster-wide actions such as creating or deleting an index, tracking which nodes are part of the cluster, and deciding which shards to allocate to which nodes. It is important for cluster health to have a stable master node.&rdquo;</p>
 <p><code>40-deployment-master.yml</code>:</p>
@@ -1080,31 +1080,14 @@
 </script>
 
 
-<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5b905a667cf4d77c"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-R56SP4WLS2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
-
-
-    
-        
-        
-    
-
-
-
-
-
-<script type="application/javascript">
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-	ga('create', 'UA-78786435-1', 'auto');
-	
-	ga('send', 'pageview');
-}
+  gtag('config', 'G-R56SP4WLS2');
 </script>
-<script async src='https://www.google-analytics.com/analytics.js'></script>
-
-
 
 </body>
 </html>

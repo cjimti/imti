@@ -382,7 +382,7 @@
       <span style="color:#f92672">accessModes</span>: [ <span style="color:#ae81ff">ReadWriteOnce ]</span>
       <span style="color:#f92672">resources</span>:
         <span style="color:#f92672">requests</span>:
-          <span style="color:#f92672">storage</span>: <span style="color:#ae81ff">1Gi # enough to hold maxq</span>
+          <span style="color:#f92672">storage</span>: <span style="color:#ae81ff">1Gi</span> <span style="color:#75715e"># enough to hold maxq</span>
 </code></pre></div><p>Create the wx-rxtx statefulset:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl create -f wx-rxtx/40-statefulset.yml
 </code></pre></div><p>The <strong>wx-rxtx service</strong> should now be able to find <strong>wx-rxtx</strong> Pods deployed by the <a href="https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/">StatefulSet</a> and any data sent to the service http://wx-rxtx:80/ is send to them.</p>
@@ -429,7 +429,7 @@
     <span style="color:#f92672">app</span>: <span style="color:#ae81ff">wx-rtbeat</span>
     <span style="color:#f92672">env</span>: <span style="color:#ae81ff">dev</span>
 <span style="color:#f92672">data</span>:
-  <span style="color:#f92672">rtbeat.yml</span>: <span style="color:#e6db74">|-
+  <span style="color:#f92672">rtbeat.yml</span>: |-<span style="color:#e6db74">
 </span><span style="color:#e6db74">    rtbeat:
 </span><span style="color:#e6db74">      # beat configuration
 </span><span style="color:#e6db74">      # see https://github.com/txn2/rtbeat/blob/master/rtbeat.reference.yml
@@ -456,9 +456,9 @@
 </span><span style="color:#e6db74">
 </span><span style="color:#e6db74">    # internal metrics through a HTTP endpoint
 </span><span style="color:#e6db74">    http.enabled: true
-</span><span style="color:#e6db74">    http.port: 5066
-</span><span style="color:#e6db74">
-</span><span style="color:#e6db74">  fields.yml: |-
+</span><span style="color:#e6db74">    http.port: 5066</span>    
+
+  <span style="color:#f92672">fields.yml</span>: |-<span style="color:#e6db74">
 </span><span style="color:#e6db74">    - key: rxtx
 </span><span style="color:#e6db74">      title: rtbeat
 </span><span style="color:#e6db74">      # Data sent in from rxtx will be in batches of rxtxMsg objects where
@@ -614,8 +614,8 @@
 </span><span style="color:#e6db74">            - name: type
 </span><span style="color:#e6db74">              type: keyword
 </span><span style="color:#e6db74">              description: &gt;
-</span><span style="color:#e6db74">                Error type.
-</span></code></pre></div><p>Create the wx-rtbeat ConfigMap:</p>
+</span><span style="color:#e6db74">                Error type.</span>    
+</code></pre></div><p>Create the wx-rtbeat ConfigMap:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl create -f wx-rtbeat/30-configmap.yml
 </code></pre></div><h3 id="wx-rtbeat-deployment">wx-rtbeat Deployment</h3>
 <p>The deployment creates a Pod running the <a href="https://hub.docker.com/r/txn2/rtbeat/">rtbeat</a> Docker container configured by the <a href="https://kubernetes.io/docs/tasks/configure-pod-container/configure-pod-configmap/">ConfigMap</a> we created above.</p>
@@ -1047,31 +1047,14 @@
 </script>
 
 
-<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5b905a667cf4d77c"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-R56SP4WLS2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
-
-
-    
-        
-        
-    
-
-
-
-
-
-<script type="application/javascript">
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-	ga('create', 'UA-78786435-1', 'auto');
-	
-	ga('send', 'pageview');
-}
+  gtag('config', 'G-R56SP4WLS2');
 </script>
-<script async src='https://www.google-analytics.com/analytics.js'></script>
-
-
 
 </body>
 </html>

@@ -304,11 +304,11 @@
   <span style="color:#75715e"># kibana.yml is mounted into the Kibana container</span>
   <span style="color:#75715e"># see https://github.com/elastic/kibana/blob/master/config/kibana.yml</span>
   <span style="color:#75715e"># Kubernetes Ingress is used to route kib.the-project.d4ldev.txn2.com</span>
-  <span style="color:#f92672">kibana.yml</span>: <span style="color:#e6db74">|-
+  <span style="color:#f92672">kibana.yml</span>: |-<span style="color:#e6db74">
 </span><span style="color:#e6db74">    server.name: kib.the-project.d4ldev.txn2.com
 </span><span style="color:#e6db74">    server.host: &#34;0&#34;
-</span><span style="color:#e6db74">    elasticsearch.url: http://elasticsearch:9200
-</span></code></pre></div><p>Create the configmap:</p>
+</span><span style="color:#e6db74">    elasticsearch.url: http://elasticsearch:9200</span>    
+</code></pre></div><p>Create the configmap:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl create -f 30-configmap.yml
 </code></pre></div><h2 id="deployment">Deployment</h2>
 <p>The Kubernetes Kibana deployment below is set to create one replica, that is one Pod in the <a href="https://kubernetes.io/docs/concepts/workloads/controllers/replicaset/">ReplicaSet</a> automatically created by the Deployment. The Deployment and can be scaled as needed by changing <strong>replicas: 1</strong> to a suitable value.</p>
@@ -759,31 +759,14 @@
 </script>
 
 
-<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5b905a667cf4d77c"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-R56SP4WLS2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
-
-
-    
-        
-        
-    
-
-
-
-
-
-<script type="application/javascript">
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-	ga('create', 'UA-78786435-1', 'auto');
-	
-	ga('send', 'pageview');
-}
+  gtag('config', 'G-R56SP4WLS2');
 </script>
-<script async src='https://www.google-analytics.com/analytics.js'></script>
-
-
 
 </body>
 </html>

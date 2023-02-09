@@ -555,77 +555,77 @@ Address: 192.168.108.132
       - <span style="color:#f92672">command</span>:
         - <span style="color:#ae81ff">sh</span>
         - -<span style="color:#ae81ff">exc</span>
-        - <span style="color:#e6db74">|
+        - |<span style="color:#e6db74">
 </span><span style="color:#e6db74">          unset KAFKA_PORT &amp;&amp; \
 </span><span style="color:#e6db74">          export KAFKA_BROKER_ID=${HOSTNAME##*-} &amp;&amp; \
 </span><span style="color:#e6db74">          export KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://${POD_IP}:9092 &amp;&amp; \
-</span><span style="color:#e6db74">          exec /etc/confluent/docker/run
-</span><span style="color:#e6db74">        env:
-</span><span style="color:#e6db74">        - name: POD_IP
-</span><span style="color:#e6db74">          valueFrom:
-</span><span style="color:#e6db74">            fieldRef:
-</span><span style="color:#e6db74">              apiVersion: v1
-</span><span style="color:#e6db74">              fieldPath: status.podIP
-</span><span style="color:#e6db74">        - name: KAFKA_HEAP_OPTS
-</span><span style="color:#e6db74">          value: -Xmx1G -Xms1G
-</span><span style="color:#e6db74">        - name: KAFKA_ZOOKEEPER_CONNECT
-</span><span style="color:#e6db74">          value: kafka-zookeeper:2181
-</span><span style="color:#e6db74">        - name: KAFKA_LOG_DIRS
-</span><span style="color:#e6db74">          value: /opt/kafka/data/logs
-</span><span style="color:#e6db74">        - name: KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR
-</span><span style="color:#e6db74">          value: &#34;3&#34;
-</span><span style="color:#e6db74">        - name: KAFKA_JMX_PORT
-</span><span style="color:#e6db74">          value: &#34;5555&#34;
-</span><span style="color:#e6db74">        image: confluentinc/cp-kafka:4.1.2-2
-</span><span style="color:#e6db74">        imagePullPolicy: IfNotPresent
-</span><span style="color:#e6db74">        livenessProbe:
-</span><span style="color:#e6db74">          exec:
-</span><span style="color:#e6db74">            command:
-</span><span style="color:#e6db74">            - sh
-</span><span style="color:#e6db74">            - -ec
-</span><span style="color:#e6db74">            - /usr/bin/jps | /bin/grep -q SupportedKafka
-</span><span style="color:#e6db74">          failureThreshold: 3
-</span><span style="color:#e6db74">          initialDelaySeconds: 30
-</span><span style="color:#e6db74">          periodSeconds: 10
-</span><span style="color:#e6db74">          successThreshold: 1
-</span><span style="color:#e6db74">          timeoutSeconds: 5
-</span><span style="color:#e6db74">        name: kafka-broker
-</span><span style="color:#e6db74">        ports:
-</span><span style="color:#e6db74">        - containerPort: 9092
-</span><span style="color:#e6db74">          name: kafka
-</span><span style="color:#e6db74">          protocol: TCP
-</span><span style="color:#e6db74">        readinessProbe:
-</span><span style="color:#e6db74">          failureThreshold: 3
-</span><span style="color:#e6db74">          initialDelaySeconds: 30
-</span><span style="color:#e6db74">          periodSeconds: 10
-</span><span style="color:#e6db74">          successThreshold: 1
-</span><span style="color:#e6db74">          tcpSocket:
-</span><span style="color:#e6db74">            port: kafka
-</span><span style="color:#e6db74">          timeoutSeconds: 5
-</span><span style="color:#e6db74">        resources: {}
-</span><span style="color:#e6db74">        terminationMessagePath: /dev/termination-log
-</span><span style="color:#e6db74">        terminationMessagePolicy: File
-</span><span style="color:#e6db74">        volumeMounts:
-</span><span style="color:#e6db74">        - mountPath: /opt/kafka/data
-</span><span style="color:#e6db74">          name: datadir
-</span><span style="color:#e6db74">      dnsPolicy: ClusterFirst
-</span><span style="color:#e6db74">      restartPolicy: Always
-</span><span style="color:#e6db74">      schedulerName: default-scheduler
-</span><span style="color:#e6db74">      securityContext: {}
-</span><span style="color:#e6db74">      terminationGracePeriodSeconds: 60
-</span><span style="color:#e6db74">  updateStrategy:
-</span><span style="color:#e6db74">    type: OnDelete
-</span><span style="color:#e6db74">  volumeClaimTemplates:
-</span><span style="color:#e6db74">  - metadata:
-</span><span style="color:#e6db74">      name: datadir
-</span><span style="color:#e6db74">    spec:
-</span><span style="color:#e6db74">      accessModes:
-</span><span style="color:#e6db74">      - ReadWriteOnce
-</span><span style="color:#e6db74">      resources:
-</span><span style="color:#e6db74">        requests:
-</span><span style="color:#e6db74">          storage: 1Gi
-</span><span style="color:#e6db74">      storageClassName: rook-block
-</span></code></pre></div><p>Apply the configuration:</p>
+</span><span style="color:#e6db74">          exec /etc/confluent/docker/run</span>          
+        <span style="color:#f92672">env</span>:
+        - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">POD_IP</span>
+          <span style="color:#f92672">valueFrom</span>:
+            <span style="color:#f92672">fieldRef</span>:
+              <span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">v1</span>
+              <span style="color:#f92672">fieldPath</span>: <span style="color:#ae81ff">status.podIP</span>
+        - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">KAFKA_HEAP_OPTS</span>
+          <span style="color:#f92672">value</span>: -<span style="color:#ae81ff">Xmx1G -Xms1G</span>
+        - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">KAFKA_ZOOKEEPER_CONNECT</span>
+          <span style="color:#f92672">value</span>: <span style="color:#ae81ff">kafka-zookeeper:2181</span>
+        - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">KAFKA_LOG_DIRS</span>
+          <span style="color:#f92672">value</span>: <span style="color:#ae81ff">/opt/kafka/data/logs</span>
+        - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR</span>
+          <span style="color:#f92672">value</span>: <span style="color:#e6db74">&#34;3&#34;</span>
+        - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">KAFKA_JMX_PORT</span>
+          <span style="color:#f92672">value</span>: <span style="color:#e6db74">&#34;5555&#34;</span>
+        <span style="color:#f92672">image</span>: <span style="color:#ae81ff">confluentinc/cp-kafka:4.1.2-2</span>
+        <span style="color:#f92672">imagePullPolicy</span>: <span style="color:#ae81ff">IfNotPresent</span>
+        <span style="color:#f92672">livenessProbe</span>:
+          <span style="color:#f92672">exec</span>:
+            <span style="color:#f92672">command</span>:
+            - <span style="color:#ae81ff">sh</span>
+            - -<span style="color:#ae81ff">ec</span>
+            - <span style="color:#ae81ff">/usr/bin/jps | /bin/grep -q SupportedKafka</span>
+          <span style="color:#f92672">failureThreshold</span>: <span style="color:#ae81ff">3</span>
+          <span style="color:#f92672">initialDelaySeconds</span>: <span style="color:#ae81ff">30</span>
+          <span style="color:#f92672">periodSeconds</span>: <span style="color:#ae81ff">10</span>
+          <span style="color:#f92672">successThreshold</span>: <span style="color:#ae81ff">1</span>
+          <span style="color:#f92672">timeoutSeconds</span>: <span style="color:#ae81ff">5</span>
+        <span style="color:#f92672">name</span>: <span style="color:#ae81ff">kafka-broker</span>
+        <span style="color:#f92672">ports</span>:
+        - <span style="color:#f92672">containerPort</span>: <span style="color:#ae81ff">9092</span>
+          <span style="color:#f92672">name</span>: <span style="color:#ae81ff">kafka</span>
+          <span style="color:#f92672">protocol</span>: <span style="color:#ae81ff">TCP</span>
+        <span style="color:#f92672">readinessProbe</span>:
+          <span style="color:#f92672">failureThreshold</span>: <span style="color:#ae81ff">3</span>
+          <span style="color:#f92672">initialDelaySeconds</span>: <span style="color:#ae81ff">30</span>
+          <span style="color:#f92672">periodSeconds</span>: <span style="color:#ae81ff">10</span>
+          <span style="color:#f92672">successThreshold</span>: <span style="color:#ae81ff">1</span>
+          <span style="color:#f92672">tcpSocket</span>:
+            <span style="color:#f92672">port</span>: <span style="color:#ae81ff">kafka</span>
+          <span style="color:#f92672">timeoutSeconds</span>: <span style="color:#ae81ff">5</span>
+        <span style="color:#f92672">resources</span>: {}
+        <span style="color:#f92672">terminationMessagePath</span>: <span style="color:#ae81ff">/dev/termination-log</span>
+        <span style="color:#f92672">terminationMessagePolicy</span>: <span style="color:#ae81ff">File</span>
+        <span style="color:#f92672">volumeMounts</span>:
+        - <span style="color:#f92672">mountPath</span>: <span style="color:#ae81ff">/opt/kafka/data</span>
+          <span style="color:#f92672">name</span>: <span style="color:#ae81ff">datadir</span>
+      <span style="color:#f92672">dnsPolicy</span>: <span style="color:#ae81ff">ClusterFirst</span>
+      <span style="color:#f92672">restartPolicy</span>: <span style="color:#ae81ff">Always</span>
+      <span style="color:#f92672">schedulerName</span>: <span style="color:#ae81ff">default-scheduler</span>
+      <span style="color:#f92672">securityContext</span>: {}
+      <span style="color:#f92672">terminationGracePeriodSeconds</span>: <span style="color:#ae81ff">60</span>
+  <span style="color:#f92672">updateStrategy</span>:
+    <span style="color:#f92672">type</span>: <span style="color:#ae81ff">OnDelete</span>
+  <span style="color:#f92672">volumeClaimTemplates</span>:
+  - <span style="color:#f92672">metadata</span>:
+      <span style="color:#f92672">name</span>: <span style="color:#ae81ff">datadir</span>
+    <span style="color:#f92672">spec</span>:
+      <span style="color:#f92672">accessModes</span>:
+      - <span style="color:#ae81ff">ReadWriteOnce</span>
+      <span style="color:#f92672">resources</span>:
+        <span style="color:#f92672">requests</span>:
+          <span style="color:#f92672">storage</span>: <span style="color:#ae81ff">1Gi</span>
+      <span style="color:#f92672">storageClassName</span>: <span style="color:#ae81ff">rook-block</span>
+</code></pre></div><p>Apply the configuration:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl create -f ./240-kafka-statefulset.yml
 </code></pre></div><h4 id="kafka-test-pod">Kafka Test Pod</h4>
 <p>Add a test Pod to help explore and debug your new Kafka cluster. The Confluent Docker image <strong>confluentinc/cp-kafka:4.1.2-2</strong> used for the test Pod is the same as our nodes from the StatefulSet and contain useful command in the <strong>/usr/bin/</strong> folder.</p>
@@ -991,31 +991,14 @@ Address: 192.168.108.132
 </script>
 
 
-<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5b905a667cf4d77c"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-R56SP4WLS2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
-
-
-    
-        
-        
-    
-
-
-
-
-
-<script type="application/javascript">
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-	ga('create', 'UA-78786435-1', 'auto');
-	
-	ga('send', 'pageview');
-}
+  gtag('config', 'G-R56SP4WLS2');
 </script>
-<script async src='https://www.google-analytics.com/analytics.js'></script>
-
-
 
 </body>
 </html>

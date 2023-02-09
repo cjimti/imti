@@ -425,7 +425,7 @@ Dockerfile
     <span style="color:#f92672">client</span>: <span style="color:#ae81ff">internal</span>
     <span style="color:#f92672">env</span>: <span style="color:#ae81ff">dev</span>
 <span style="color:#f92672">data</span>:
-  <span style="color:#f92672">dev_config.yml</span>: <span style="color:#e6db74">|
+  <span style="color:#f92672">dev_config.yml</span>: |<span style="color:#e6db74">
 </span><span style="color:#e6db74">    something:
 </span><span style="color:#e6db74">      important: true
 </span><span style="color:#e6db74">    token:
@@ -433,8 +433,8 @@ Dockerfile
 </span><span style="color:#e6db74">      expHours: 24
 </span><span style="color:#e6db74">    cassandra:
 </span><span style="color:#e6db74">      cluster: [&#34;lax1.cas.example.com&#34;,&#34;ny1.cas.example.com&#34;]
-</span><span style="color:#e6db74">      keyspace: dev_app
-</span></code></pre></div><p>In the deployment configuration below we mount this <a href="https://Kubernetes.io/docs/tasks/configure-pod-container/configure-pod-configmap/">ConfigMap</a> into the file system of our <a href="https://Kubernetes.io/docs/concepts/workloads/pods/pod/">Pod</a>. Mounting a <a href="https://Kubernetes.io/docs/tasks/configure-pod-container/configure-pod-configmap/">ConfigMap</a> as files allow our service to test outside the cloud with plain configuration files easily.</p>
+</span><span style="color:#e6db74">      keyspace: dev_app</span>    
+</code></pre></div><p>In the deployment configuration below we mount this <a href="https://Kubernetes.io/docs/tasks/configure-pod-container/configure-pod-configmap/">ConfigMap</a> into the file system of our <a href="https://Kubernetes.io/docs/concepts/workloads/pods/pod/">Pod</a>. Mounting a <a href="https://Kubernetes.io/docs/tasks/configure-pod-container/configure-pod-configmap/">ConfigMap</a> as files allow our service to test outside the cloud with plain configuration files easily.</p>
 <h5 id="deployment-k8sdev40-deploymentyml">Deployment: <code>./k8s/dev/40-deployment.yml</code></h5>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">apiVersion: apps/v1
 kind: Deployment
@@ -575,13 +575,13 @@ kubectl create -f ./50-ingress.yml
     - <span style="color:#ae81ff">dev@the-project/example-microservice</span>
   <span style="color:#f92672">variables</span>:
     <span style="color:#f92672">GIT_STRATEGY</span>: <span style="color:#ae81ff">none</span>
-  <span style="color:#f92672">script</span>: <span style="color:#e6db74">|
+  <span style="color:#f92672">script</span>: |<span style="color:#e6db74">
 </span><span style="color:#e6db74">    kubectl set image deployment/example-microservice cog=${CI_REGISTRY_IMAGE}:dev-${CI_PIPELINE_ID} \
 </span><span style="color:#e6db74">    --namespace=&#34;the-project&#34; \
 </span><span style="color:#e6db74">    --server=&#34;${K8S_DEV_SERVER}&#34; \
 </span><span style="color:#e6db74">    --token=&#34;${K8S_DEV_TOKEN}&#34; \
-</span><span style="color:#e6db74">    --insecure-skip-tls-verify=true
-</span></code></pre></div><h5 id="runner-image-txn2docker-kubectl">Runner <code>image: txn2/docker-kubectl</code></h5>
+</span><span style="color:#e6db74">    --insecure-skip-tls-verify=true</span>    
+</code></pre></div><h5 id="runner-image-txn2docker-kubectl">Runner <code>image: txn2/docker-kubectl</code></h5>
 <p>The build script uses Docker and <code>kubectl</code>. You can use any base image and install these as part of the build and deploy stages; however, I find it faster to use an image with these utilities already installed. Use the Docker container <a href="https://github.com/txn2/docker-kubectl">txn2/docker-kubectl</a> or create your own.</p>
 <p><strong>Dockerfile</strong> for Gitlab Kubernetes deployments:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-dockerfile" data-lang="dockerfile"><span style="color:#66d9ef">FROM</span><span style="color:#e6db74"> docker:latest</span><span style="color:#960050;background-color:#1e0010">
@@ -654,13 +654,13 @@ kubectl create -f ./50-ingress.yml
     - <span style="color:#ae81ff">dev@the-project/example-microservice</span>
   <span style="color:#f92672">variables</span>:
     <span style="color:#f92672">GIT_STRATEGY</span>: <span style="color:#ae81ff">none</span>
-  <span style="color:#f92672">script</span>: <span style="color:#e6db74">|
+  <span style="color:#f92672">script</span>: |<span style="color:#e6db74">
 </span><span style="color:#e6db74">    kubectl set image deployment/example-microservice example-microservice=${CI_REGISTRY_IMAGE}:dev-${CI_PIPELINE_ID} \
 </span><span style="color:#e6db74">    --namespace=&#34;the-project&#34; \
 </span><span style="color:#e6db74">    --server=&#34;${K8S_DEV_SERVER}&#34; \
 </span><span style="color:#e6db74">    --token=&#34;${K8S_DEV_TOKEN}&#34; \
-</span><span style="color:#e6db74">    --insecure-skip-tls-verify=true
-</span></code></pre></div><p>Note the new variables <strong>K8S_DEV_SERVER</strong> and <strong>K8S_DEV_TOKEN</strong>.</p>
+</span><span style="color:#e6db74">    --insecure-skip-tls-verify=true</span>    
+</code></pre></div><p>Note the new variables <strong>K8S_DEV_SERVER</strong> and <strong>K8S_DEV_TOKEN</strong>.</p>
 <table>
 <thead>
 <tr>
@@ -707,8 +707,8 @@ kubectl create -f ./50-ingress.yml
   <span style="color:#f92672">namespace</span>: <span style="color:#ae81ff">the-project</span>
   <span style="color:#f92672">name</span>: <span style="color:#ae81ff">the-project</span>
 <span style="color:#f92672">roleRef</span>:
-  <span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Role #this must be Role or ClusterRole</span>
-  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">deployer # this must match the name of the Role or ClusterRole you wish to bind to</span>
+  <span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Role</span> <span style="color:#75715e">#this must be Role or ClusterRole</span>
+  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">deployer</span> <span style="color:#75715e"># this must match the name of the Role or ClusterRole you wish to bind to</span>
   <span style="color:#f92672">apiGroup</span>: <span style="color:#ae81ff">rbac.authorization.k8s.io</span>
 </code></pre></div><p>You need to extract the generated token from a <a href="https://Kubernetes.io/docs/concepts/configuration/secret/">secret</a> automatically created for the new <a href="https://Kubernetes.io/docs/reference/access-authn-authz/service-accounts-admin/">ServiceAccount</a>.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl describe serviceaccount the-project -n fuse
@@ -1088,31 +1088,14 @@ Events:              &lt;none&gt;
 </script>
 
 
-<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5b905a667cf4d77c"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-R56SP4WLS2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
-
-
-    
-        
-        
-    
-
-
-
-
-
-<script type="application/javascript">
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-	ga('create', 'UA-78786435-1', 'auto');
-	
-	ga('send', 'pageview');
-}
+  gtag('config', 'G-R56SP4WLS2');
 </script>
-<script async src='https://www.google-analytics.com/analytics.js'></script>
-
-
 
 </body>
 </html>

@@ -211,7 +211,7 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <p>Blockchain technologies have been made famous by Cryptocurrencies such as Bitcoin and Ethereum. However, the concepts behind <a href="http://imti.co/blockchain/">Blockchain</a> are far more reaching than their support for cryptocurrency. Blockchain technologies now support any digital asset, from signal data to complex messaging, to the execution of business logic through code. Blockchain technologies are rapidly forming a new decentralized internet of transactions.</p>
+                <p>Blockchain technologies have been made famous by Cryptocurrencies such as Bitcoin and <a href="https://www.ethereum.org/">Ethereum</a>. However, the concepts behind <a href="http://imti.co/blockchain/">Blockchain</a> are far more reaching than their support for cryptocurrency. Blockchain technologies now support any digital asset, from signal data to complex messaging, to the execution of business logic through code. Blockchain technologies are rapidly forming a new decentralized internet of transactions.</p>
 <div class="ad-div">
     <a href="https://amzn.to/3hAZUvx">
         <img src="/img/kubernetes_platform_development.jpg" style="padding:0; margin: 0; width: 50%; float: left"/>
@@ -586,7 +586,7 @@ enode://e01bcec287...ceb1a7ada4f@192.168.108.136:30301
     <span style="color:#f92672">app</span>: <span style="color:#ae81ff">eth-geth</span>
 <span style="color:#f92672">data</span>:
   <span style="color:#f92672">networkid</span>: <span style="color:#e6db74">&#34;8189450821&#34;</span>
-  <span style="color:#f92672">genesis.json</span>: <span style="color:#e6db74">|-
+  <span style="color:#f92672">genesis.json</span>: |-<span style="color:#e6db74">
 </span><span style="color:#e6db74">    {
 </span><span style="color:#e6db74">        &#34;config&#34;: {
 </span><span style="color:#e6db74">            &#34;chainId&#34;: 8189450821,
@@ -603,8 +603,8 @@ enode://e01bcec287...ceb1a7ada4f@192.168.108.136:30301
 </span><span style="color:#e6db74">          &#34;0x29bb385cF8ae4Cc49dBd10CcdA5e3d591D831527&#34;: { &#34;balance&#34;: &#34;200000000000000000000&#34; },
 </span><span style="color:#e6db74">          &#34;0xf1c9C9a1Ba591588147c2A729c470D8AFA91a04d&#34;: { &#34;balance&#34;: &#34;300000000000000000000&#34; }
 </span><span style="color:#e6db74">        }
-</span><span style="color:#e6db74">    }
-</span></code></pre></div><p>Apply the configuration:</p>
+</span><span style="color:#e6db74">    }</span>    
+</code></pre></div><p>Apply the configuration:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl create -f ./310-geth-configmap.yml
 </code></pre></div><h3 id="geth-miner-nodes">Geth Miner Nodes</h3>
 <p>The following configuration deploys three <a href="https://github.com/ethereum/go-ethereum/wiki/geth">Geth</a> miner nodes that share a <a href="https://kubernetes.io/docs/concepts/configuration/secret/">Secret</a> used for creating their coinbase accounts.</p>
@@ -719,7 +719,7 @@ enode://e01bcec287...ceb1a7ada4f@192.168.108.136:30301
         <span style="color:#f92672">command</span>: [<span style="color:#e6db74">&#34;/bin/sh&#34;</span>]
         <span style="color:#f92672">args</span>:
         - <span style="color:#e6db74">&#34;-c&#34;</span>
-        - <span style="color:#e6db74">|-
+        - |-<span style="color:#e6db74">
 </span><span style="color:#e6db74">          apk add --no-cache curl;
 </span><span style="color:#e6db74">          CNT=0;
 </span><span style="color:#e6db74">          echo &#34;retreiving bootnodes from $BOOTNODE_REGISTRAR_SVC&#34;
@@ -737,20 +737,20 @@ enode://e01bcec287...ceb1a7ada4f@192.168.108.136:30301
 </span><span style="color:#e6db74">            CNT=$((CNT+1));
 </span><span style="color:#e6db74">          done;
 </span><span style="color:#e6db74">          echo &#34;WARNING. unable to find bootnodes. continuing but geth may not be able to find any peers.&#34;;
-</span><span style="color:#e6db74">          exit 0;
-</span><span style="color:#e6db74">        env:
-</span><span style="color:#e6db74">        - name: BOOTNODE_REGISTRAR_SVC
-</span><span style="color:#e6db74">          value: eth-bootnode-registrar
-</span><span style="color:#e6db74">        volumeMounts:
-</span><span style="color:#e6db74">        - name: data
-</span><span style="color:#e6db74">          mountPath: /geth
-</span><span style="color:#e6db74">      volumes:
-</span><span style="color:#e6db74">      - name: data
-</span><span style="color:#e6db74">        emptyDir: {}
-</span><span style="color:#e6db74">      - name: config
-</span><span style="color:#e6db74">        configMap:
-</span><span style="color:#e6db74">          name: eth-geth
-</span></code></pre></div><p>Apply the configuration:</p>
+</span><span style="color:#e6db74">          exit 0;</span>          
+        <span style="color:#f92672">env</span>:
+        - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">BOOTNODE_REGISTRAR_SVC</span>
+          <span style="color:#f92672">value</span>: <span style="color:#ae81ff">eth-bootnode-registrar</span>
+        <span style="color:#f92672">volumeMounts</span>:
+        - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">data</span>
+          <span style="color:#f92672">mountPath</span>: <span style="color:#ae81ff">/geth</span>
+      <span style="color:#f92672">volumes</span>:
+      - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">data</span>
+        <span style="color:#f92672">emptyDir</span>: {}
+      - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">config</span>
+        <span style="color:#f92672">configMap</span>:
+          <span style="color:#f92672">name</span>: <span style="color:#ae81ff">eth-geth</span>
+</code></pre></div><p>Apply the configuration:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl create -f ./330-geth-miner-deployment.yml
 </code></pre></div><h3 id="geth-transaction-nodes">Geth Transaction Nodes</h3>
 <p>Geth Transaction Nodes <strong>eth-geth-tx</strong> are only used to create transactions on the private blockchain.</p>
@@ -847,7 +847,7 @@ enode://e01bcec287...ceb1a7ada4f@192.168.108.136:30301
         <span style="color:#f92672">command</span>: [<span style="color:#e6db74">&#34;/bin/sh&#34;</span>]
         <span style="color:#f92672">args</span>:
         - <span style="color:#e6db74">&#34;-c&#34;</span>
-        - <span style="color:#e6db74">|-
+        - |-<span style="color:#e6db74">
 </span><span style="color:#e6db74">          apk add --no-cache curl;
 </span><span style="color:#e6db74">          CNT=0;
 </span><span style="color:#e6db74">          echo &#34;retreiving bootnodes from $BOOTNODE_REGISTRAR_SVC&#34;
@@ -865,20 +865,20 @@ enode://e01bcec287...ceb1a7ada4f@192.168.108.136:30301
 </span><span style="color:#e6db74">            CNT=$((CNT+1));
 </span><span style="color:#e6db74">          done;
 </span><span style="color:#e6db74">          echo &#34;WARNING. unable to find bootnodes. continuing but geth may not be able to find any peers.&#34;;
-</span><span style="color:#e6db74">          exit 0;
-</span><span style="color:#e6db74">        env:
-</span><span style="color:#e6db74">        - name: BOOTNODE_REGISTRAR_SVC
-</span><span style="color:#e6db74">          value: eth-bootnode-registrar.dcp
-</span><span style="color:#e6db74">        volumeMounts:
-</span><span style="color:#e6db74">        - name: data
-</span><span style="color:#e6db74">          mountPath: /geth
-</span><span style="color:#e6db74">      volumes:
-</span><span style="color:#e6db74">      - name: data
-</span><span style="color:#e6db74">        emptyDir: {}
-</span><span style="color:#e6db74">      - name: config
-</span><span style="color:#e6db74">        configMap:
-</span><span style="color:#e6db74">          name: eth-geth
-</span></code></pre></div><p>Apply the configuration:</p>
+</span><span style="color:#e6db74">          exit 0;</span>          
+        <span style="color:#f92672">env</span>:
+        - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">BOOTNODE_REGISTRAR_SVC</span>
+          <span style="color:#f92672">value</span>: <span style="color:#ae81ff">eth-bootnode-registrar.dcp</span>
+        <span style="color:#f92672">volumeMounts</span>:
+        - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">data</span>
+          <span style="color:#f92672">mountPath</span>: <span style="color:#ae81ff">/geth</span>
+      <span style="color:#f92672">volumes</span>:
+      - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">data</span>
+        <span style="color:#f92672">emptyDir</span>: {}
+      - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">config</span>
+        <span style="color:#f92672">configMap</span>:
+          <span style="color:#f92672">name</span>: <span style="color:#ae81ff">eth-geth</span>
+</code></pre></div><p>Apply the configuration:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl create -f ./420-geth-tx-deployment.yml
 </code></pre></div><h2 id="conclusion">Conclusion</h2>
 <p>Depending on your difficulty and resources it may take 10-20 minutes to mine your first block in this private chain. However, the difficulty is automatically adjusted, and you may begin to mine blocks at around 20-30 seconds on average.</p>
@@ -1215,31 +1215,14 @@ enode://e01bcec287...ceb1a7ada4f@192.168.108.136:30301
 </script>
 
 
-<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5b905a667cf4d77c"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-R56SP4WLS2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
-
-
-    
-        
-        
-    
-
-
-
-
-
-<script type="application/javascript">
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-	ga('create', 'UA-78786435-1', 'auto');
-	
-	ga('send', 'pageview');
-}
+  gtag('config', 'G-R56SP4WLS2');
 </script>
-<script async src='https://www.google-analytics.com/analytics.js'></script>
-
-
 
 </body>
 </html>
