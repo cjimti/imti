@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><head>
+    <meta name="msvalidate.01" content="DBC34551F2DD1BA3DC0D62EE46D7448F" />
+    <meta name="google-site-verification" content="DrtKc88u9uc7iptd4LyURAKBmFcOn7Kuk6HcRk_kNmo" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <meta name="description" content="Let your AI assistant manage cluster connections">
+    
+    <meta name="keyword"  content="Go, Kubernetes, Elasticsearch, Python, Docker, Big Data, Artificial Intelligence, Machine Learning">
+    <link rel="shortcut icon" href="http://localhost:1313/img/favicon.ico">
+
+    <title>AI-Assisted Kubernetes Development with kubefwd - IMTI - Craig Johnston</title>
+
+    <link rel="canonical" href="http://localhost:1313/kubefwd-mcp/">
+	
+    
+    <link rel="stylesheet" href="http://localhost:1313/css/bootstrap.min.css">
+
+    
+    <link rel="stylesheet" href="http://localhost:1313/css/hux-blog.min.css">
+
+    
+    <link rel="stylesheet" href="http://localhost:1313/css/syntax.css">
+
+    
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    
+    
+    <link rel="stylesheet" href="/css/imti.css">
+
+    
+    <script src="http://localhost:1313/js/jquery.min.js"></script>
+    
+    
+    <script src="http://localhost:1313/js/bootstrap.min.js"></script>
+    
+    
+    <script src="http://localhost:1313/js/hux-blog.min.js"></script>
+
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({
+            google_ad_client: "ca-pub-5984764595236029",
+            enable_page_level_ads: true
+        });
+    </script>
+
+    <meta name="twitter:site" content="@cjimti">
+<meta name="twitter:creator" content="@cjimti">
+
+<meta name="twitter:description" content="Let your AI assistant manage cluster connections" />
+<meta name="twitter:title" content="AI-Assisted Kubernetes Development with kubefwd" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="http://localhost:1313/img/post/patchbay_876_438.jpg" />
+<meta property="og:image" content="http://localhost:1313/img/post/patchbay_876_438.jpg" />
+
+
+
+    
+
+<script type="application/ld+json">
+"{\n  \"@context\": \"http://schema.org\",\n  \"@type\": \"Article\",\n  \"author\": {\n    \"@type\": \"Person\",\n    \"name\": \"Craig Johnston\"\n  },\n  \"dateModified\": \"2026-01-04T12:00:00\",\n  \"datePublished\": \"2026-01-04T12:00:00\",\n  \"description\": \"\\u003cp\\u003e\\u003ca href=\\\"https://github.com/txn2/kubefwd\\\"\\u003ekubefwd\\u003c/a\\u003e is a tool that bulk-forwards Kubernetes services to your local machine, making them accessible by their real hostnames. Instead of juggling \\u003ccode\\u003ekubectl port-forward\\u003c/code\\u003e commands, you run \\u003ccode\\u003esudo kubefwd svc -n mynamespace\\u003c/code\\u003e and your app can connect to \\u003ccode\\u003epostgres:5432\\u003c/code\\u003e or \\u003ccode\\u003eapi:8080\\u003c/code\\u003e as if those services were running locally. For full details on kubefwd\\u0026rsquo;s features, see \\u003ca href=\\\"/kubefwd-2026/\\\"\\u003ekubefwd in 2026: Interactive TUI and Auto-Reconnect\\u003c/a\\u003e.\\u003c/p\\u003e\\n\\u003cp\\u003eThis article focuses on kubefwd\\u0026rsquo;s MCP integration, which lets AI assistants manage port forwarding on your behalf.\\u003c/p\\u003e\",\n  \"headline\": \"AI-Assisted Kubernetes Development with kubefwd\",\n  \"image\": [\n    \"http://localhost:1313/img/post/patchbay_876_438.jpg\"\n  ],\n  \"mainEntityOfPage\": {\n    \"@id\": \"http://localhost:1313/kubefwd-mcp/\",\n    \"@type\": \"WebPage\"\n  },\n  \"publisher\": {\n    \"@type\": \"Organization\",\n    \"logo\": {\n      \"@type\": \"ImageObject\",\n      \"url\": \"http://localhost:1313/img/craig_johnston_cjimti.jpg\"\n    },\n    \"name\": \"imti.co\"\n  }\n}"
+</script>
+
+
+</head></head>
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="http://localhost:1313//">IMTI</a>
+        </div>
+
+        
+        
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="http://localhost:1313//">Home</a>
+                    </li>
+                    <li>
+                        <a href="http://localhost:1313//about/">About</a>
+                    </li>
+                    <li>
+                        <a href="https://twitter.com/cjimti">Follow</a>
+                    </li>
+                    
+
+                    
+                </ul>
+            </div>
+        </div>
+        
+    </div>
+    
+</nav>
+<script>
+    
+    
+    
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        
+            $navbar.className = " ";
+            
+            setTimeout(function(){
+                
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+
+
+<style type="text/css">
+    header.intro-header{
+        background-image: url('http://localhost:1313/img/post/patchbay.jpg')
+    }
+</style>
+<header class="intro-header" >
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/kubernetes" title="Kubernetes">
+                        Kubernetes
+                        </a>
+                        
+                        <a class="tag" href="/tags/development" title="Development">
+                        Development
+                        </a>
+                        
+                        <a class="tag" href="/tags/kubefwd" title="kubefwd">
+                        kubefwd
+                        </a>
+                        
+                        <a class="tag" href="/tags/mcp" title="MCP">
+                        MCP
+                        </a>
+                        
+                        <a class="tag" href="/tags/ai" title="AI">
+                        AI
+                        </a>
+                        
+                    </div>
+                    <h1>AI-Assisted Kubernetes Development with kubefwd</h1>
+                    <h2 class="subheading">Let your AI assistant manage cluster connections</h2>
+                    <span  class="meta">Posted by <a href="https://twitter.com/cjimti">Craig Johnston</a> on Sunday, January 4, 2026
+                        
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+<article>
+    <div class="container">
+        <div class="row">
+
+            
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <p><a href="https://github.com/txn2/kubefwd">kubefwd</a> is a tool that bulk-forwards Kubernetes services to your local machine, making them accessible by their real hostnames. Instead of juggling <code>kubectl port-forward</code> commands, you run <code>sudo kubefwd svc -n mynamespace</code> and your app can connect to <code>postgres:5432</code> or <code>api:8080</code> as if those services were running locally. For full details on kubefwd&rsquo;s features, see <a href="/kubefwd-2026/">kubefwd in 2026: Interactive TUI and Auto-Reconnect</a>.</p>
+<p>This article focuses on kubefwd&rsquo;s MCP integration, which lets AI assistants manage port forwarding on your behalf.</p>
+<aside class="toc">
+    <header>
+        <h2>Contents</h2>
+    </header>
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#why-mcp-for-development-tools">Why MCP for Development Tools?</a></li>
+    <li><a href="#what-your-ai-can-do">What Your AI Can Do</a></li>
+    <li><a href="#examples">Examples</a>
+      <ul>
+        <li><a href="#claude-code">Claude Code</a></li>
+        <li><a href="#claude-desktop">Claude Desktop</a></li>
+        <li><a href="#other-mcp-capable-tools">Other MCP-Capable Tools</a></li>
+      </ul>
+    </li>
+    <li><a href="#setup">Setup</a>
+      <ul>
+        <li><a href="#claude-code-1">Claude Code</a></li>
+        <li><a href="#claude-desktop-1">Claude Desktop</a></li>
+        <li><a href="#running-kubefwd-for-mcp">Running kubefwd for MCP</a></li>
+      </ul>
+    </li>
+    <li><a href="#how-it-works">How It Works</a></li>
+    <li><a href="#quick-start">Quick Start</a></li>
+    <li><a href="#resources">Resources</a></li>
+  </ul>
+</nav>
+</aside>
+<h2 id="why-mcp-for-development-tools">Why MCP for Development Tools?</h2>
+<p>MCP (Model Context Protocol) is a standard that lets AI assistants interact with external tools.</p>
+<p>AI tools have taken software development to new levels of efficiency. Tools like Claude Code allow novices to develop impressive applications, and the technology is even more potent when harnessed by experienced professionals. More and more software will be written by, or heavily assisted by, AI, and that includes the tooling surrounding software development itself.</p>
+<p>LLMs are good at writing code, but writing code is a small part of software development. Tools like kubefwd are specifically designed to make developing applications that rely on cluster services easier for the developer, and with MCP, easier for the developer and their AI assistant.</p>
+<p>Consider implementing a new caching layer for your application. Your AI assistant can see that you have redis and authentication services running in the project namespace, forward them locally to their native hostnames and ports (<code>redis:6379</code>, <code>auth:443</code>), configure the new software with those natural endpoint addresses, test the connections, and explore pod logs for errors. All of this happens seamlessly, just by adding the kubefwd MCP to Claude Code or another MCP-capable agent.</p>
+<h2 id="what-your-ai-can-do">What Your AI Can Do</h2>
+<p>With the kubefwd MCP, your AI assistant can:</p>
+<ul>
+<li><strong>Discover services</strong>: List what&rsquo;s running in your cluster namespaces</li>
+<li><strong>Forward on demand</strong>: Start forwarding specific services or entire namespaces</li>
+<li><strong>Stop forwarding</strong>: Remove forwards you no longer need</li>
+<li><strong>Debug issues</strong>: Read pod logs and Kubernetes events</li>
+<li><strong>Provide connection info</strong>: Give you the exact hostnames and ports to use</li>
+</ul>
+<p>The AI understands runtime, not just code. It can see what&rsquo;s actually deployed, what ports services expose, and configure your local development environment to match.</p>
+<h2 id="examples">Examples</h2>
+<h3 id="claude-code">Claude Code</h3>
+<p>Here&rsquo;s Claude Code with the kubefwd MCP helping develop a new notification service:</p>
+<pre tabindex="0"><code>&gt; Help me develop a new service in Python that will query the
+  kfdemo database and send an email to each address in the
+  database that has not yet received a notification.
+
+⏺ I&#39;ll help you build that. Let me first see what services
+  are available in the kfdemo namespace:
+
+⏺ kubefwd:list_k8s_services (namespace: &#34;kfdemo&#34;)
+  ⎿  { &#34;count&#34;: 4, &#34;namespace&#34;: &#34;kfdemo&#34;, ... }
+
+⏺ You have a postgres database on port 5432 and an smtp
+  service on port 2525. Let me forward those so you can
+  develop locally:
+
+⏺ kubefwd:add_service (namespace: &#34;kfdemo&#34;, service_name: &#34;postgres&#34;)
+  ⎿  { &#34;localIP&#34;: &#34;127.1.27.3&#34;, &#34;ports&#34;: [{&#34;localPort&#34;: &#34;5432&#34; ... }
+
+⏺ kubefwd:add_service (namespace: &#34;kfdemo&#34;, service_name: &#34;smtp&#34;)
+  ⎿  { &#34;localIP&#34;: &#34;127.1.27.4&#34;, &#34;ports&#34;: [{&#34;localPort&#34;: &#34;2525&#34; ... }
+
+⏺ Both services are now forwarded. Here&#39;s a configuration
+  file for your Python service:
+
+  # config.py
+  DATABASE = {
+      &#34;host&#34;: &#34;postgres&#34;,
+      &#34;port&#34;: 5432,
+      ...
+  }
+
+  SMTP = {
+      &#34;host&#34;: &#34;smtp&#34;,
+      &#34;port&#34;: 2525
+  }
+
+  Your code can now connect to postgres:5432 and smtp:2525
+  using those exact hostnames, just like it would in production.
+</code></pre><p>The AI discovered the available services, forwarded the ones needed for the task, and configured the application with the correct connection strings.</p>
+<h3 id="claude-desktop">Claude Desktop</h3>
+<p>The same workflow works in Claude Desktop. Here a user asks Claude to forward services so their existing config.py can connect:</p>
+<p><img src="/images/content/kubefwd/MCP_Claude_Desktop.png" alt="Claude Desktop with kubefwd MCP"></p>
+<p>Claude identifies the services from the config file, forwards them from the kfdemo namespace, and confirms the /etc/hosts entries are in place. The user&rsquo;s script works without any configuration changes.</p>
+<h3 id="other-mcp-capable-tools">Other MCP-Capable Tools</h3>
+<p>Any tool that supports MCP can use the kubefwd server. This includes Cursor, Windsurf, and other AI-assisted development environments. The setup process is similar: configure the MCP server and start kubefwd with the API enabled.</p>
+<h2 id="setup">Setup</h2>
+<h3 id="claude-code-1">Claude Code</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>claude mcp add --transport stdio kubefwd -- kubefwd mcp
+</span></span></code></pre></div><h3 id="claude-desktop-1">Claude Desktop</h3>
+<p>Download the <code>.mcpb</code> bundle for your platform from <a href="https://github.com/txn2/kubefwd/releases">GitHub Releases</a> and double-click to install.</p>
+<h3 id="running-kubefwd-for-mcp">Running kubefwd for MCP</h3>
+<p>After configuring MCP support, start kubefwd in a terminal:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo -E kubefwd --tui
+</span></span></code></pre></div><p>I prefer running with the TUI so I can see what Claude is doing. The TUI shows services being added and removed as your AI manages them.</p>
+<p>The <code>--tui</code> flag is optional. You can also run without it for a quieter experience:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo -E kubefwd
+</span></span></code></pre></div><p>Both modes enable the REST API that the MCP server connects to.</p>
+<h2 id="how-it-works">How It Works</h2>
+<p>The MCP integration uses a two-process architecture:</p>
+<ol>
+<li><strong>kubefwd</strong> runs with sudo and manages the actual port forwarding, <code>/etc/hosts</code> entries, and network bindings</li>
+<li><strong>kubefwd mcp</strong> runs without sudo as a stdio-based MCP server that AI assistants spawn</li>
+</ol>
+<p>The <code>kubefwd mcp</code> process connects to kubefwd&rsquo;s REST API (at <code>http://kubefwd.internal/api</code>) to discover and control forwarding. This design lets AI assistants spawn the MCP server without requiring elevated privileges.</p>
+<pre tabindex="0"><code>AI Assistant
+    ↓ (stdio)
+kubefwd mcp (no sudo)
+    ↓ (HTTP)
+kubefwd (sudo) → Kubernetes cluster
+</code></pre><h2 id="quick-start">Quick Start</h2>
+<p>If you&rsquo;re new to kubefwd, here&rsquo;s the fast path:</p>
+<p><strong>Install</strong> (macOS):</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>brew install txn2/tap/kubefwd
+</span></span></code></pre></div><p><strong>Configure MCP</strong> (Claude Code):</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>claude mcp add --transport stdio kubefwd -- kubefwd mcp
+</span></span></code></pre></div><p><strong>Run kubefwd</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo -E kubefwd --tui
+</span></span></code></pre></div><p>Now your AI assistant can manage Kubernetes service forwarding. Ask it to &ldquo;forward the postgres service from namespace X&rdquo; and watch it happen.</p>
+<p>For the full feature guide including the interactive TUI, auto-reconnect, and REST API, see <a href="/kubefwd-2026/">kubefwd in 2026: Interactive TUI and Auto-Reconnect</a>.</p>
+<h2 id="resources">Resources</h2>
+<ul>
+<li><a href="https://github.com/txn2/kubefwd">kubefwd on GitHub</a></li>
+<li><a href="https://kubefwd.com">kubefwd Documentation</a></li>
+<li><a href="https://github.com/txn2/kubefwd/releases">Release Downloads</a></li>
+<li><a href="https://modelcontextprotocol.io">Model Context Protocol</a></li>
+<li><a href="/kubefwd-2026/">kubefwd Features Guide</a></li>
+</ul>
+
+                <p>
+                   This blog post, titled: "<span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">AI-Assisted Kubernetes Development with kubefwd: Let your AI assistant manage cluster connections</span>" by <a xmlns:cc="http://creativecommons.org/ns#" href="https://twitter.com/cjimti" property="cc:attributionName" rel="cc:attributionURL">Craig Johnston</a>, is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+                    <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a>
+                </p>
+
+            </div>
+            
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                
+                <section>
+                    <hr class="hidden-sm hidden-xs">
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/blockchain" title="blockchain">
+                        blockchain
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/data" title="data">
+                        data
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/data-science" title="data science">
+                        data science
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/development" title="development">
+                        development
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/devops" title="devops">
+                        devops
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/docker" title="docker">
+                        docker
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/elasticsearch" title="elasticsearch">
+                        elasticsearch
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/golang" title="golang">
+                        golang
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/ingress" title="ingress">
+                        ingress
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/iot" title="iot">
+                        iot
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/kubectl" title="kubectl">
+                        kubectl
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/kubefwd" title="kubefwd">
+                        kubefwd
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/kubernetes" title="kubernetes">
+                        kubernetes
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/microservices" title="microservices">
+                        microservices
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/python" title="python">
+                        python
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/raspberry-pi" title="raspberry pi">
+                        raspberry pi
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/security" title="security">
+                        security
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/utils" title="utils">
+                        utils
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                    </div>
+                </section>
+
+                
+                <hr>
+                <h5>RELATED</h5>
+                <ul class="list-inline">
+                    
+                </ul>
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                   
+                   <li>
+                       <a href="/index.xml" rel="alternate" type="application/rss+xml" title="IMTI" >
+                           <span class="fa-stack fa-lg">
+                               <i class="fa fa-circle fa-stack-2x"></i>
+                               <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+                           </span>
+                       </a>
+                   </li>
+                   
+                    
+                    <li>
+                        <a href="mailto:cjimti@gmail.com">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                    
+                    
+                    <li>
+                        <a href="https://twitter.com/cjimti">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    
+
+                    
+
+		    
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/cjimti">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                    
+                    <li>
+                        <a target="_blank" href="https://www.linkedin.com/in/cjimti/">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                </ul>
+
+                
+                
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+
+
+
+
+<script>
+    
+    if($('#tag_cloud').length !== 0){
+        async("/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-R56SP4WLS2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-R56SP4WLS2');
+</script>
+
+</body>
+</html>

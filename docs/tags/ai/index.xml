@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>AI on IMTI</title>
+    <link>https://imti.co/tags/ai/</link>
+    <description>Recent content in AI on IMTI</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 04 Jan 2026 12:01:00 +0000</lastBuildDate>
+    <atom:link href="https://imti.co/tags/ai/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>kubefwd in 2026: Interactive TUI and Auto-Reconnect</title>
+      <link>https://imti.co/kubefwd-2026/</link>
+      <pubDate>Sun, 04 Jan 2026 12:01:00 +0000</pubDate>
+      <guid>https://imti.co/kubefwd-2026/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://github.com/txn2/kubefwd&#34;&gt;kubefwd&lt;/a&gt; has been a stable and useful tool for my team and me for almost eight years. It solves a simple but persistent problem: developing applications locally that need to communicate with services running in Kubernetes. Rather than juggling multiple &lt;code&gt;kubectl port-forward&lt;/code&gt; commands or maintaining environment-specific connection strings, kubefwd bulk-forwards services so they&amp;rsquo;re accessible by name, just like they would be inside the cluster.&lt;/p&gt;&#xA;&lt;p&gt;After years of reliable service (aside from Windows &lt;code&gt;/etc/hosts&lt;/code&gt; limitations and reconnection logic that are now resolved), I finally added features that people had been requesting: auto-reconnect, an interactive terminal UI, and a REST API for programmatic control. This article covers what&amp;rsquo;s new.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>AI-Assisted Kubernetes Development with kubefwd</title>
+      <link>https://imti.co/kubefwd-mcp/</link>
+      <pubDate>Sun, 04 Jan 2026 12:00:00 +0000</pubDate>
+      <guid>https://imti.co/kubefwd-mcp/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://github.com/txn2/kubefwd&#34;&gt;kubefwd&lt;/a&gt; is a tool that bulk-forwards Kubernetes services to your local machine, making them accessible by their real hostnames. Instead of juggling &lt;code&gt;kubectl port-forward&lt;/code&gt; commands, you run &lt;code&gt;sudo kubefwd svc -n mynamespace&lt;/code&gt; and your app can connect to &lt;code&gt;postgres:5432&lt;/code&gt; or &lt;code&gt;api:8080&lt;/code&gt; as if those services were running locally. For full details on kubefwd&amp;rsquo;s features, see &lt;a href=&#34;https://imti.co/kubefwd-2026/&#34;&gt;kubefwd in 2026: Interactive TUI and Auto-Reconnect&lt;/a&gt;.&lt;/p&gt;&#xA;&lt;p&gt;This article focuses on kubefwd&amp;rsquo;s MCP integration, which lets AI assistants manage port forwarding on your behalf.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

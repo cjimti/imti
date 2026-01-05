@@ -5,9 +5,10 @@ languageCode = "en-us"
 disqusShortname = ""
 googleAnalytics = "UA-78786435-1"
 preserveTaxonomyNames = true
-paginate = 30 #frontpage pagination
+[pagination]
+  pagerSize = 30 #frontpage pagination
 hasCJKLanguage = true
-publishDir = "docs"
+publishdir = "docs"
 
 displayMath = [['$','$'], ['$$','$$'], ['\\[','\\]']]
 
@@ -22,9 +23,9 @@ home = ["HTML", "RSS"]
 
   header_image = "img/imti.jpg"
   SEOTitle = "| Craig Johnston"
-  description = "I lead a talented team of software development and creative engineers, covering many industries looking to collect, analyze, move, buffer, queue, process and present data in significant ways. My expertise and that of my team revolve around microservices, artificial intelligence, algorithms, machine learning and blockchain technologies."
-  keyword = "Go, Kubernetes, Elasticsearch, Python, Docker, Big Data, Artificial Intelligence, Machine Learning, Blockchain"
-  slogan = "(I Make Things Interesting)\nArchitecting, Developing, nixCraft, DevOps, AI/ML, Blockchain"
+  description = "I lead a talented team of software development and creative engineers, covering many industries looking to collect, analyze, move, buffer, queue, process and present data in significant ways. My expertise and that of my team revolve around microservices, artificial intelligence, algorithms, and machine learning."
+  keyword = "Go, Kubernetes, Elasticsearch, Python, Docker, Big Data, Artificial Intelligence, Machine Learning"
+  slogan = "Architecting, Developing, SRE, DevOps, AI/ML"
 
   image_404 = "img/404-bg.jpg"
   title_404 = "Nothing"
@@ -41,7 +42,7 @@ home = ["HTML", "RSS"]
   algolia_apiKey = ""
 
   # Sidebar settings
-  sidebar_about_description = "I lead a talented team of software development and creative engineers, covering many industries looking to collect, analyze, move, buffer, queue, process and present data in significant ways. My expertise and that of my team revolve around microservices, artificial intelligence, algorithms, machine learning and blockchain technologies."
+  sidebar_about_description = "I lead a talented team of software development and creative engineers, covering many industries looking to collect, analyze, move, buffer, queue, process and present data in significant ways. My expertise and that of my team revolve around microservices, artificial intelligence, algorithms, and machine learning."
   sidebar_avatar = "/img/craig_johnston_cjimti.jpg"      # use absolute URL, seeing it's used in both `/` and `/about/`
 
   featured_tags = true
@@ -71,9 +72,6 @@ home = ["HTML", "RSS"]
   title =  "Author"
   href =  "https://www.amazon.com/Craig-Johnston/e/B001K80LWI/ref=ntt_dp_epwbk_0"
   [[params.bookmark_link]]
-  title =  "Deasil Cognitive"
-  href =  "https://deasilcognitive.com/"
-  [[params.bookmark_link]]
   title =  "Deasil Works"
   href =  "https://deasil.works/"
   [[params.bookmark_link]]
@@ -88,10 +86,6 @@ home = ["HTML", "RSS"]
   [[params.bookmark_link]]
   title = "Hacker News (cjimti)"
   href =  "https://news.ycombinator.com/submitted?id=cjimti"
-  [[params.bookmark_link]]
-  title = "Sourcerer (cjimti)"
-  href =  "https://sourcerer.io/cjimti"
-
   [[params.reddit_link]]
   title = "user/imti_co"
   href =  "https://www.reddit.com/user/imti_co/posts/"
@@ -116,12 +110,6 @@ home = ["HTML", "RSS"]
   [[params.reddit_link]]
   title = "r/apachekafka"
   href =  "https://www.reddit.com/r/apachekafka/"
-  [[params.reddit_link]]
-  title = "r/ethereum"
-  href =  "https://www.reddit.com/r/ethereum/"
-  [[params.reddit_link]]
-  title = "r/blockchain"
-  href =  "https://www.reddit.com/r/blockchain/"
 
   [[params.docker_link]]
   title = "n2proxy"

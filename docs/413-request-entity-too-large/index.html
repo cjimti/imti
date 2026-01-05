@@ -10,7 +10,7 @@
     
     <meta name="description" content="Configuring the NGINX Ingress Controller">
     
-    <meta name="keyword"  content="Go, Kubernetes, Elasticsearch, Python, Docker, Big Data, Artificial Intelligence, Machine Learning, Blockchain">
+    <meta name="keyword"  content="Go, Kubernetes, Elasticsearch, Python, Docker, Big Data, Artificial Intelligence, Machine Learning">
     <link rel="shortcut icon" href="https://imti.co/img/favicon.ico">
 
     <title>Kubernetes - 413 Request Entity Too Large - IMTI - Craig Johnston</title>
@@ -61,35 +61,11 @@
 
 
     
+
 <script type="application/ld+json">
-{
-  "@context": "http://schema.org",
-  "@type": "Article",
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": "https:\/\/imti.co\/413-request-entity-too-large\/"
-  },
-  "headline": "Kubernetes - 413 Request Entity Too Large",
-  "image": [
-    "https:\/\/imti.co\/img\/post\/tooth_876_438.jpg"
-   ],
-  "datePublished": "2018-03-24T00:00:00",
-  "dateModified": "2018-03-24T00:00:00",
-  "author": {
-    "@type": "Person",
-    "name": "Craig Johnston"
-  },
-   "publisher": {
-    "@type": "Organization",
-    "name": 'imti.co",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "https:\/\/imti.co\/img\/craig_johnston_cjimti.jpg"
-    }
-  },
-  "description": "When setting up nginx ingress on Kubernetes for a private Docker Registry, I ran into an error when trying to push an image to it.\nError parsing HTTP response: invalid character \u0027\u0026lt;\u0027 looking for beginning of value: \u0026quot;\u0026lt;html\u0026gt;\\r\\n\u0026lt;head\u0026gt;\u0026lt;title\u0026gt;413 Request Entity Too Large\u0026lt;\/title\u0026gt;\u0026lt;\/head\u0026gt;\\r\\n\u0026lt;body bgcolor=\\\u0026quot;white\\\u0026quot;\u0026gt;\\r\\n\u0026lt;center\u0026gt;\u0026lt;h1\u0026gt;413 Request Entity Too Large\u0026lt;\/h1\u0026gt;\u0026lt;\/center\u0026gt;\\r\\n\u0026lt;hr\u0026gt;\u0026lt;center\u0026gt;nginx\/1.9.14\u0026lt;\/center\u0026gt;\\r\\n\u0026lt;\/body\u0026gt;\\r\\n\u0026lt;\/html\u0026gt;\\r\\n\u0026quot; The \u0026ldquo;413 Request Entity Too Large\u0026rdquo; error is something many accustomed to running nginx as a standard web server\/proxy. nginx is configured to restrict the size of files it will allow over a post."
-}
+"{\n  \"@context\": \"http://schema.org\",\n  \"@type\": \"Article\",\n  \"author\": {\n    \"@type\": \"Person\",\n    \"name\": \"Craig Johnston\"\n  },\n  \"dateModified\": \"2018-03-24T00:00:00\",\n  \"datePublished\": \"2018-03-24T00:00:00\",\n  \"description\": \"\\u003cp\\u003eWhen setting up \\u003ca href=\\\"https://github.com/kubernetes/ingress-nginx\\\"\\u003enginx ingress\\u003c/a\\u003e on \\u003ca href=\\\"https://kubernetes.io/\\\"\\u003eKubernetes\\u003c/a\\u003e for a private \\u003ca href=\\\"https://hub.docker.com/_/registry/\\\"\\u003eDocker Registry\\u003c/a\\u003e, I ran into an error when trying to push an image to it.\\u003c/p\\u003e\\n\\u003cpre tabindex=\\\"0\\\"\\u003e\\u003ccode\\u003eError parsing HTTP response: invalid character \\u0026#39;\\u0026lt;\\u0026#39; looking for beginning of value: \\u0026#34;\\u0026lt;html\\u0026gt;\\\\r\\\\n\\u0026lt;head\\u0026gt;\\u0026lt;title\\u0026gt;413 Request Entity Too Large\\u0026lt;/title\\u0026gt;\\u0026lt;/head\\u0026gt;\\\\r\\\\n\\u0026lt;body bgcolor=\\\\\\u0026#34;white\\\\\\u0026#34;\\u0026gt;\\\\r\\\\n\\u0026lt;center\\u0026gt;\\u0026lt;h1\\u0026gt;413 Request Entity Too Large\\u0026lt;/h1\\u0026gt;\\u0026lt;/center\\u0026gt;\\\\r\\\\n\\u0026lt;hr\\u0026gt;\\u0026lt;center\\u0026gt;nginx/1.9.14\\u0026lt;/center\\u0026gt;\\\\r\\\\n\\u0026lt;/body\\u0026gt;\\\\r\\\\n\\u0026lt;/html\\u0026gt;\\\\r\\\\n\\u0026#34;\\n\\u003c/code\\u003e\\u003c/pre\\u003e\\u003cp\\u003eThe \\u0026ldquo;413 Request Entity Too Large\\u0026rdquo; error is something many accustomed to running \\u003ca href=\\\"https://www.nginx.com/\\\"\\u003enginx\\u003c/a\\u003e as a standard web server/proxy. \\u003ca href=\\\"https://www.nginx.com/\\\"\\u003enginx\\u003c/a\\u003e is configured to restrict the size of files it will allow over a post. This restriction helps avoid some DoS attacks. The default values are easy to adjust in the Nginx configuration. However, in the \\u003ca href=\\\"https://kubernetes.io/\\\"\\u003eKubernetes\\u003c/a\\u003e world things are a bit different. I prefer to do things the \\u003ca href=\\\"https://kubernetes.io/\\\"\\u003eKubernetes\\u003c/a\\u003e way; however, there is still a lack of established configuration idioms, since part of its appeal is flexibility. One thousand different ways of doing something means ten thousand variations of remedies to every potential problem. Googling errors in the \\u003ca href=\\\"https://kubernetes.io/\\\"\\u003eKubernetes\\u003c/a\\u003e world leads to a mess of solutions not always explicitly tied to an implementation. I am hoping that as \\u003ca href=\\\"https://kubernetes.io/\\\"\\u003eKubernetes\\u003c/a\\u003e continues to gain popularity more care will be taken to provide context for solutions to common problems.\\u003c/p\\u003e\",\n  \"headline\": \"Kubernetes - 413 Request Entity Too Large\",\n  \"image\": [\n    \"https://imti.co/img/post/tooth_876_438.jpg\"\n  ],\n  \"mainEntityOfPage\": {\n    \"@id\": \"https://imti.co/413-request-entity-too-large/\",\n    \"@type\": \"WebPage\"\n  },\n  \"publisher\": {\n    \"@type\": \"Organization\",\n    \"logo\": {\n      \"@type\": \"ImageObject\",\n      \"url\": \"https://imti.co/img/craig_johnston_cjimti.jpg\"\n    },\n    \"name\": \"imti.co\"\n  }\n}"
 </script>
+
 
 </head></head>
 
@@ -103,7 +79,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="https://imti.co/">IMTI</a>
+            <a class="navbar-brand" href="https://imti.co//">IMTI</a>
         </div>
 
         
@@ -112,10 +88,10 @@
             <div class="navbar-collapse">
                 <ul class="nav navbar-nav navbar-right">
                     <li>
-                        <a href="https://imti.co/">Home</a>
+                        <a href="https://imti.co//">Home</a>
                     </li>
                     <li>
-                        <a href="https://imti.co/about/">About</a>
+                        <a href="https://imti.co//about/">About</a>
                     </li>
                     <li>
                         <a href="https://twitter.com/cjimti">Follow</a>
@@ -212,34 +188,16 @@
                 post-container">
 
                 <p>When setting up <a href="https://github.com/kubernetes/ingress-nginx">nginx ingress</a> on <a href="https://kubernetes.io/">Kubernetes</a> for a private <a href="https://hub.docker.com/_/registry/">Docker Registry</a>, I ran into an error when trying to push an image to it.</p>
-<pre><code>Error parsing HTTP response: invalid character '&lt;' looking for beginning of value: &quot;&lt;html&gt;\r\n&lt;head&gt;&lt;title&gt;413 Request Entity Too Large&lt;/title&gt;&lt;/head&gt;\r\n&lt;body bgcolor=\&quot;white\&quot;&gt;\r\n&lt;center&gt;&lt;h1&gt;413 Request Entity Too Large&lt;/h1&gt;&lt;/center&gt;\r\n&lt;hr&gt;&lt;center&gt;nginx/1.9.14&lt;/center&gt;\r\n&lt;/body&gt;\r\n&lt;/html&gt;\r\n&quot;
+<pre tabindex="0"><code>Error parsing HTTP response: invalid character &#39;&lt;&#39; looking for beginning of value: &#34;&lt;html&gt;\r\n&lt;head&gt;&lt;title&gt;413 Request Entity Too Large&lt;/title&gt;&lt;/head&gt;\r\n&lt;body bgcolor=\&#34;white\&#34;&gt;\r\n&lt;center&gt;&lt;h1&gt;413 Request Entity Too Large&lt;/h1&gt;&lt;/center&gt;\r\n&lt;hr&gt;&lt;center&gt;nginx/1.9.14&lt;/center&gt;\r\n&lt;/body&gt;\r\n&lt;/html&gt;\r\n&#34;
 </code></pre><p>The &ldquo;413 Request Entity Too Large&rdquo; error is something many accustomed to running <a href="https://www.nginx.com/">nginx</a> as a standard web server/proxy. <a href="https://www.nginx.com/">nginx</a> is configured to restrict the size of files it will allow over a post. This restriction helps avoid some DoS attacks. The default values are easy to adjust in the Nginx configuration. However, in the <a href="https://kubernetes.io/">Kubernetes</a> world things are a bit different. I prefer to do things the <a href="https://kubernetes.io/">Kubernetes</a> way; however, there is still a lack of established configuration idioms, since part of its appeal is flexibility. One thousand different ways of doing something means ten thousand variations of remedies to every potential problem. Googling errors in the <a href="https://kubernetes.io/">Kubernetes</a> world leads to a mess of solutions not always explicitly tied to an implementation. I am hoping that as <a href="https://kubernetes.io/">Kubernetes</a> continues to gain popularity more care will be taken to provide context for solutions to common problems.</p>
-<div class="ad-div">
-    <a href="https://amzn.to/3hAZUvx">
-        <img src="/img/kubernetes_platform_development.jpg" style="padding:0; margin: 0; width: 50%; float: left"/>
-    </a>
 
-    <div style="padding-left: 15px; overflow:auto;">
-        <a href="https://amzn.to/3hAZUvx">Support this blog! Buy my new book:
-            <h4>Advanced Platform Development with Kubernetes</h4>
-        </a>
-        <h5>What You'll Learn</h5>
-        <ul style="padding-bottom: 0; margin: 0">
-            <li>Build data pipelines with <b>MQTT, NiFi, Logstash, MinIO, Hive, Presto, Kafka and Elasticsearch</b></li>
-            <li>Leverage <b>Serverless</b> ETL with <b>OpenFaaS</b></li>
-            <li>Explore <b>Blockchain</b> networking with <b>Ethereum</b></li>
-            <li>Support a multi-tenant <b>Data Science</b> platform with <b>JupyterHub, MLflow and Seldon Core</b></li>
-            <li>Build a <b>Multi-cloud</b>, <b>Hybrid cluster</b>, securely bridging <b>on-premise</b> and cloud-based Kubernetes nodes</li>
-        </ul>
-    </div>
-</div>
 
 <h3 id="context">Context</h3>
 <p>I now use the official <a href="https://github.com/kubernetes/ingress-nginx">NGINX Ingress Controller</a>, there are quite a few options out there, so this solution only applies to the official <a href="https://github.com/kubernetes/ingress-nginx">NGINX Ingress Controller</a>. If you don&rsquo;t already have it, you can follow the easy <a href="https://github.com/kubernetes/ingress-nginx/tree/master/deploy">ingress controller deployment</a> instructions.</p>
 <p>I found this solution in the <a href="https://github.com/kubernetes/ingress-nginx/tree/master/docs/examples">Ingress examples</a> folder in the <a href="https://github.com/kubernetes/ingress-nginx">Github repository</a>. I probably should have started there on my journey to set up a private <a href="https://hub.docker.com/_/registry/">Docker registry</a> on my <a href="https://kubernetes.io/">Kubernetes</a> cluster.</p>
 <script src="https://gist.github.com/cjimti/4cd7fdb93787fa5aca84b4d386b757aa.js"></script>
 <p>Using <strong>annotations</strong> you can customize various configuration settings. In the case of nginx upload limits, use the annotation below:</p>
-<pre><code>nginx.ingress.kubernetes.io/proxy-body-size: &quot;0&quot;
+<pre tabindex="0"><code>nginx.ingress.kubernetes.io/proxy-body-size: &#34;0&#34;
 </code></pre><p>The annotation (see its context in the gist: <a href="https://gist.github.com/cjimti/4cd7fdb93787fa5aca84b4d386b757aa">Registry Ingress Example</a> above) removes any restriction on upload size. Of course, you can set this to a size appropriate to your situation.</p>
 <h3 id="still-not-working">Still Not Working?</h3>
 <p>Maybe you installed the <a href="https://github.com/kubernetes/ingress-nginx">NGINX Ingress Controller</a> wrong as I did. I was rushing to get a project done at 3 am, cutting and pasting commands like a wild monkey. I installed the non-RBAC based configuration; however, my cluster uses RBAC. To make things worse, everything else was working fine for some reason (at least it seemed to) until this configuration issue came up and the annotations were not working. Double check your <a href="https://github.com/kubernetes/ingress-nginx/tree/master/deploy">install steps</a>.</p>
@@ -256,35 +214,6 @@
                     <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a>
                 </p>
 
-                <h5>SUPPORT</h5>
-                <p>
-                    Order my new Kubernetes book: <a href="https://amzn.to/34D56v6">Advanced Platform Development with Kubernetes: Enabling Data Management, the Internet of Things, Blockchain, and Machine Learning</a>
-                </p>
-                <script type="text/javascript">
-                  amzn_assoc_tracking_id = "imti-20";
-                  amzn_assoc_ad_mode = "manual";
-                  amzn_assoc_ad_type = "smart";
-                  amzn_assoc_marketplace = "amazon";
-                  amzn_assoc_region = "US";
-                  amzn_assoc_design = "enhanced_links";
-                  amzn_assoc_asins = "1484256107";
-                  amzn_assoc_placement = "adunit";
-                  amzn_assoc_linkid = "14a9d8b8d1b0bd44e9256e0e0a948015";
-                </script>
-                <script src="//z-na.amazon-adsystem.com/widgets/onejs?MarketPlace=US"></script>
-
-                
-                <hr>
-                <h5>SHARE</h5>
-                <ul class="list-inline">
-                    <li><div class="addthis_inline_share_toolbox"></div></li>
-                </ul>
-
-                <h5>FOLLOW</h5>
-                <ul class="list-inline">
-                    <li><div class="addthis_inline_follow_toolbox"></div></li>
-                </ul>
-
             </div>
             
             <div class="
@@ -297,6 +226,8 @@
                     <hr class="hidden-sm hidden-xs">
                     <h5><a href="/tags/">FEATURED TAGS</a></h5>
                     <div class="tags">
+                        
+                        
                         
                         
                         
@@ -316,8 +247,8 @@
                         
                         
                         
-                        <a href="/tags/data-science" title="data-science">
-                        data-science
+                        <a href="/tags/data-science" title="data science">
+                        data science
                         </a>
                         
                         
@@ -392,9 +323,17 @@
                         
                         
                         
+                        <a href="/tags/kubefwd" title="kubefwd">
+                        kubefwd
+                        </a>
+                        
+                        
+                        
                         <a href="/tags/kubernetes" title="kubernetes">
                         kubernetes
                         </a>
+                        
+                        
                         
                         
                         
@@ -428,8 +367,8 @@
                         
                         
                         
-                        <a href="/tags/raspberry-pi" title="raspberry-pi">
-                        raspberry-pi
+                        <a href="/tags/raspberry-pi" title="raspberry pi">
+                        raspberry pi
                         </a>
                         
                         
@@ -477,7 +416,7 @@
                 <ul class="list-inline text-center">
                    
                    <li>
-                       <a href="" rel="alternate" type="application/rss+xml" title="IMTI" >
+                       <a href="/index.xml" rel="alternate" type="application/rss+xml" title="IMTI" >
                            <span class="fa-stack fa-lg">
                                <i class="fa fa-circle fa-stack-2x"></i>
                                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>

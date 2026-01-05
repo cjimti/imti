@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Development on IMTI</title>
+    <link>http://localhost:1313/tags/development/</link>
+    <description>Recent content in Development on IMTI</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 04 Jan 2026 12:02:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/development/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>kubefwd: Forward Kubernetes Services to Localhost by Name</title>
+      <link>http://localhost:1313/kubefwd-launch/</link>
+      <pubDate>Sun, 04 Jan 2026 12:02:00 +0000</pubDate>
+      <guid>http://localhost:1313/kubefwd-launch/</guid>
+      <description>&lt;h2 id=&#34;the-problem&#34;&gt;The Problem&lt;/h2&gt;&#xA;&lt;p&gt;&lt;code&gt;kubectl port-forward&lt;/code&gt; works fine for one service. Two services? Three? A microservices app with a dozen dependencies? You end up with a terminal full of port-forward commands, each needing different local ports to avoid conflicts, and connection strings that differ between local and production.&lt;/p&gt;&#xA;&lt;h2 id=&#34;the-solution&#34;&gt;The Solution&lt;/h2&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://github.com/txn2/kubefwd&#34;&gt;kubefwd&lt;/a&gt; bulk-forwards Kubernetes services so they&amp;rsquo;re accessible by their real hostnames:&lt;/p&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;brew install txn2/tap/kubefwd&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sudo -E kubefwd svc -n mynamespace&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Your app connects to &lt;code&gt;postgres:5432&lt;/code&gt; and &lt;code&gt;redis:6379&lt;/code&gt; locally, using the same hostnames it would use inside the cluster.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>kubefwd in 2026: Interactive TUI and Auto-Reconnect</title>
+      <link>http://localhost:1313/kubefwd-2026/</link>
+      <pubDate>Sun, 04 Jan 2026 12:01:00 +0000</pubDate>
+      <guid>http://localhost:1313/kubefwd-2026/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://github.com/txn2/kubefwd&#34;&gt;kubefwd&lt;/a&gt; has been a stable and useful tool for my team and me for almost eight years. It solves a simple but persistent problem: developing applications locally that need to communicate with services running in Kubernetes. Rather than juggling multiple &lt;code&gt;kubectl port-forward&lt;/code&gt; commands or maintaining environment-specific connection strings, kubefwd bulk-forwards services so they&amp;rsquo;re accessible by name, just like they would be inside the cluster.&lt;/p&gt;&#xA;&lt;p&gt;After years of reliable service (aside from Windows &lt;code&gt;/etc/hosts&lt;/code&gt; limitations and reconnection logic that are now resolved), I finally added features that people had been requesting: auto-reconnect, an interactive terminal UI, and a REST API for programmatic control. This article covers what&amp;rsquo;s new.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>AI-Assisted Kubernetes Development with kubefwd</title>
+      <link>http://localhost:1313/kubefwd-mcp/</link>
+      <pubDate>Sun, 04 Jan 2026 12:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/kubefwd-mcp/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://github.com/txn2/kubefwd&#34;&gt;kubefwd&lt;/a&gt; is a tool that bulk-forwards Kubernetes services to your local machine, making them accessible by their real hostnames. Instead of juggling &lt;code&gt;kubectl port-forward&lt;/code&gt; commands, you run &lt;code&gt;sudo kubefwd svc -n mynamespace&lt;/code&gt; and your app can connect to &lt;code&gt;postgres:5432&lt;/code&gt; or &lt;code&gt;api:8080&lt;/code&gt; as if those services were running locally. For full details on kubefwd&amp;rsquo;s features, see &lt;a href=&#34;http://localhost:1313/kubefwd-2026/&#34;&gt;kubefwd in 2026: Interactive TUI and Auto-Reconnect&lt;/a&gt;.&lt;/p&gt;&#xA;&lt;p&gt;This article focuses on kubefwd&amp;rsquo;s MCP integration, which lets AI assistants manage port forwarding on your behalf.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Kubernetes Port Forwarding for Local Development</title>
+      <link>http://localhost:1313/kubernetes-port-forwarding/</link>
+      <pubDate>Sat, 11 Aug 2018 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/kubernetes-port-forwarding/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://github.com/txn2/kubefwd&#34;&gt;kubefwd&lt;/a&gt; helps to enable a seamless and efficient way to develop applications and services on a local workstation. Locally develop applications that intend to interact with other services in a Kubernetes cluster. &lt;a href=&#34;https://github.com/txn2/kubefwd&#34;&gt;kubefwd&lt;/a&gt; allows applications with connection strings like http://elasticsearch:9200/ or tcp://db:3306 to communicate into the remote cluster. &lt;a href=&#34;https://github.com/txn2/kubefwd&#34;&gt;kubefwd&lt;/a&gt; can be used to reduce or eliminate the need for local environment specific connection configurations.&lt;/p&gt;&#xA;&#xA;&#xA;&#xA;&lt;p&gt;Developing services in a &lt;a href=&#34;https://microservices.io/&#34;&gt;Microservices&lt;/a&gt; architecture presents local development challenges, especially when the service you are developing needs to interact with a mixture of other services. &lt;a href=&#34;https://microservices.io/&#34;&gt;Microservices&lt;/a&gt;, like any other applications are rarely ever self-contained and often need access to databases, authentication services, and other public or private APIs. Loosely-coupled applications still have couplings, they happen on a higher layer of the application stack and often through TCP networking.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Raspberry Pi 3 - WiFi Station&#43;AP</title>
+      <link>http://localhost:1313/iot-wifi/</link>
+      <pubDate>Thu, 15 Mar 2018 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/iot-wifi/</guid>
+      <description>&lt;p&gt;&lt;strong&gt;Update&lt;/strong&gt;: Looking for contributors.&lt;/p&gt;&#xA;&lt;table&gt;&#xA;  &lt;thead&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;th&gt;Golang&lt;/th&gt;&#xA;          &lt;th&gt;Size&lt;/th&gt;&#xA;          &lt;th&gt;Pulls&lt;/th&gt;&#xA;      &lt;/tr&gt;&#xA;  &lt;/thead&gt;&#xA;  &lt;tbody&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;&lt;a href=&#34;https://goreportcard.com/report/github.com/cjimti/iotwifi&#34;&gt;&lt;img src=&#34;https://goreportcard.com/badge/github.com/cjimti/iotwifi&#34; alt=&#34;Go Report Card&#34;&gt;&lt;/a&gt;&lt;/td&gt;&#xA;          &lt;td&gt;&lt;a href=&#34;https://hub.docker.com/r/cjimti/iotwifi/&#34;&gt;&lt;img src=&#34;https://shields.beevelop.com/docker/image/image-size/cjimti/iotwifi/latest.svg&#34; alt=&#34;Docker Container Image Size&#34;&gt;&lt;/a&gt;&lt;/td&gt;&#xA;          &lt;td&gt;&lt;a href=&#34;https://hub.docker.com/r/cjimti/iotwifi/&#34;&gt;&lt;img src=&#34;https://img.shields.io/docker/pulls/cjimti/iotwifi.svg&#34; alt=&#34;Docker Container Pulls&#34;&gt;&lt;/a&gt;&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;  &lt;/tbody&gt;&#xA;&lt;/table&gt;&#xA;&lt;p&gt;IOT Wifi is very small/8MB &lt;a href=&#34;https://www.docker.com/&#34;&gt;Docker&lt;/a&gt; Container built for the &lt;a href=&#34;https://amzn.to/2jfXhCA&#34;&gt;Raspberry Pi 3&lt;/a&gt;.&#xA;IOT Wifi exposes a simple JSON based REST API for controlling the wireless network interface. This container allows the Raspberry Pi to accept wifi connections as an access point (aka AP) while at the same time connecting to an existing wifi network (station mode).&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Raspberry Pi - Serial Number</title>
+      <link>http://localhost:1313/raspberry-pi-serial/</link>
+      <pubDate>Mon, 13 Feb 2017 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/raspberry-pi-serial/</guid>
+      <description>&lt;p&gt;Getting the unique serial number from a Raspberry Pi.&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;cat /proc/cpuinfo | grep ^Serial | cut -d&amp;quot;:&amp;quot; -f2&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;Example output:&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt; 00000000e215b4a2&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;An interesting use for this is &amp;ldquo;binding&amp;rdquo; software, encryption or other servcies to a specific Pi. Found this in a suggestion on the Stack Overflow question &lt;a href=&#34;http://stackoverflow.com/questions/27730877/securing-data-on-sd-card-raspberry-pi&#34;&gt;&amp;ldquo;Securing data on SD card Raspberry Pi&amp;rdquo;&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

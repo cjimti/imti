@@ -10,7 +10,7 @@
     
     <meta name="description" content="Containers as utility applications">
     
-    <meta name="keyword"  content="Go, Kubernetes, Elasticsearch, Python, Docker, Big Data, Artificial Intelligence, Machine Learning, Blockchain">
+    <meta name="keyword"  content="Go, Kubernetes, Elasticsearch, Python, Docker, Big Data, Artificial Intelligence, Machine Learning">
     <link rel="shortcut icon" href="https://imti.co/img/favicon.ico">
 
     <title>Don&#39;t Install cqlsh - IMTI - Craig Johnston</title>
@@ -61,35 +61,11 @@
 
 
     
+
 <script type="application/ld+json">
-{
-  "@context": "http://schema.org",
-  "@type": "Article",
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": "https:\/\/imti.co\/dont-install-cqlsh\/"
-  },
-  "headline": "Don\u0027t Install cqlsh",
-  "image": [
-    "https:\/\/imti.co\/img\/post\/eye_876_438.jpg"
-   ],
-  "datePublished": "2018-03-01T00:00:00",
-  "dateModified": "2018-03-01T00:00:00",
-  "author": {
-    "@type": "Person",
-    "name": "Craig Johnston"
-  },
-   "publisher": {
-    "@type": "Organization",
-    "name": 'imti.co",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "https:\/\/imti.co\/img\/craig_johnston_cjimti.jpg"
-    }
-  },
-  "description": "We live in a world of process isolation and tools that make utilizing it extremely simple, with apps like Docker we can perform dependency management with dependency isolation. As I am slowly becoming a fanboy of containerization, I look forward to the day when typing ps on my local workstation or remote server is nearly synonymous with commands like docker ps or kubectl get services.\nCase: Cassandra development and your local workstation."
-}
+"{\n  \"@context\": \"http://schema.org\",\n  \"@type\": \"Article\",\n  \"author\": {\n    \"@type\": \"Person\",\n    \"name\": \"Craig Johnston\"\n  },\n  \"dateModified\": \"2018-03-01T00:00:00\",\n  \"datePublished\": \"2018-03-01T00:00:00\",\n  \"description\": \"\\u003cp\\u003eWe live in a world of process isolation and tools that make utilizing it extremely simple, with apps like \\u003ca href=\\\"https://www.docker.com/\\\"\\u003eDocker\\u003c/a\\u003e we can perform dependency management with \\u003cstrong\\u003edependency isolation\\u003c/strong\\u003e. As I am slowly becoming a fanboy of containerization, I look forward to the day when typing \\u003ccode\\u003eps\\u003c/code\\u003e on my local workstation or remote server is nearly synonymous with commands like \\u003ccode\\u003edocker ps\\u003c/code\\u003e or \\u003ccode\\u003ekubectl get services\\u003c/code\\u003e.\\u003c/p\\u003e\\n\\u003cp\\u003eCase: \\u003cstrong\\u003eCassandra development and your local workstation.\\u003c/strong\\u003e\\u003c/p\\u003e\",\n  \"headline\": \"Don't Install cqlsh\",\n  \"image\": [\n    \"https://imti.co/img/post/eye_876_438.jpg\"\n  ],\n  \"mainEntityOfPage\": {\n    \"@id\": \"https://imti.co/dont-install-cqlsh/\",\n    \"@type\": \"WebPage\"\n  },\n  \"publisher\": {\n    \"@type\": \"Organization\",\n    \"logo\": {\n      \"@type\": \"ImageObject\",\n      \"url\": \"https://imti.co/img/craig_johnston_cjimti.jpg\"\n    },\n    \"name\": \"imti.co\"\n  }\n}"
 </script>
+
 
 </head></head>
 
@@ -103,7 +79,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="https://imti.co/">IMTI</a>
+            <a class="navbar-brand" href="https://imti.co//">IMTI</a>
         </div>
 
         
@@ -112,10 +88,10 @@
             <div class="navbar-collapse">
                 <ul class="nav navbar-nav navbar-right">
                     <li>
-                        <a href="https://imti.co/">Home</a>
+                        <a href="https://imti.co//">Home</a>
                     </li>
                     <li>
-                        <a href="https://imti.co/about/">About</a>
+                        <a href="https://imti.co//about/">About</a>
                     </li>
                     <li>
                         <a href="https://twitter.com/cjimti">Follow</a>
@@ -213,57 +189,21 @@
 
                 <p>We live in a world of process isolation and tools that make utilizing it extremely simple, with apps like <a href="https://www.docker.com/">Docker</a> we can perform dependency management with <strong>dependency isolation</strong>. As I am slowly becoming a fanboy of containerization, I look forward to the day when typing <code>ps</code> on my local workstation or remote server is nearly synonymous with commands like <code>docker ps</code> or <code>kubectl get services</code>.</p>
 <p>Case: <strong>Cassandra development and your local workstation.</strong></p>
-<div class="ad-div">
-    <a href="https://amzn.to/3hAZUvx">
-        <img src="/img/kubernetes_platform_development.jpg" style="padding:0; margin: 0; width: 50%; float: left"/>
-    </a>
 
-    <div style="padding-left: 15px; overflow:auto;">
-        <a href="https://amzn.to/3hAZUvx">Support this blog! Buy my new book:
-            <h4>Advanced Platform Development with Kubernetes</h4>
-        </a>
-        <h5>What You'll Learn</h5>
-        <ul style="padding-bottom: 0; margin: 0">
-            <li>Build data pipelines with <b>MQTT, NiFi, Logstash, MinIO, Hive, Presto, Kafka and Elasticsearch</b></li>
-            <li>Leverage <b>Serverless</b> ETL with <b>OpenFaaS</b></li>
-            <li>Explore <b>Blockchain</b> networking with <b>Ethereum</b></li>
-            <li>Support a multi-tenant <b>Data Science</b> platform with <b>JupyterHub, MLflow and Seldon Core</b></li>
-            <li>Build a <b>Multi-cloud</b>, <b>Hybrid cluster</b>, securely bridging <b>on-premise</b> and cloud-based Kubernetes nodes</li>
-        </ul>
-    </div>
-</div>
 
 <p>I use <a href="http://cassandra.apache.org/">Apache Cassandra</a> almost daily for my job. A lot of our services require this high performance, highly available database. The command line tool <a href="http://cassandra.apache.org/doc/latest/tools/cqlsh.html"><code>cqlsh</code></a> is the official tool for interacting with Cassandra. <a href="http://cassandra.apache.org/doc/latest/tools/cqlsh.html"><code>cqlsh</code></a> is an easy and intuitive terminal into <a href="http://cassandra.apache.org/">Apache Cassandra</a>, but it has dependencies, one of which is <a href="https://www.python.org/">Python</a>. Over the years of local development on my MacBook Pro, I have had many tools that require <a href="https://www.python.org/">Python</a> and Python libraries. Some of these tools I installed years ago require older versions of Python, or older Python libraries not able to run in newer Python versions. <a href="https://www.python.org/">Python</a> is a great language, but sooner or later you run into dependency nightmares, (see <a href="https://medium.com/knerd/the-nine-circles-of-python-dependency-hell-481d53e3e025">The Nine Circles of Python Dependency Hell</a>) including missing libs, version conflicts, and the list goes on. It makes sense to resolve these issues or use a <a href="https://github.com/pyenv/pyenv">Python version manager</a> like Ruby&rsquo;s <a href="https://rvm.io/">RVM</a> if you are actively developing locally in <a href="https://www.python.org/">Python</a>. But wait, <strong>I&rsquo;m not developing in Python at the moment</strong>, I just want to run <a href="http://cassandra.apache.org/doc/latest/tools/cqlsh.html"><code>cqlsh</code></a>, and it is not the weekend, so I am not motivated to Google my Python version conflicts and library dependency errors because I have a ton of work to get done. Yes, my problems, likely caused by something dumb I did playing around with the questionable code I found in the far-off corners of Github.</p>
 <p>So I&rsquo;m going to ignore my confused local install of <code>cqlsh</code>, the broken state of my Python and the mess I made of its libraries. I&rsquo;m just going to run:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">docker run -it --rm cassandra cqlsh node1.example.com -u itsme -p mypassword<span style="color:#e6db74">`</span>
-</code></pre></div><p>It&rsquo;s a one time pull of the <a href="https://hub.docker.com/_/cassandra/">Cassandra Docker</a> image and once done the <code>--rm</code> flag cleans up the stopped container.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>docker run -it --rm cassandra cqlsh node1.example.com -u itsme -p mypassword<span style="color:#e6db74">`</span>
+</span></span></code></pre></div><p>It&rsquo;s a one time pull of the <a href="https://hub.docker.com/_/cassandra/">Cassandra Docker</a> image and once done the <code>--rm</code> flag cleans up the stopped container.</p>
 <p>But that&rsquo;s a lot of command for me to think about when I just need my <code>cqlsh</code> so I add a simple alias to my <code>.bashrc</code></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">alias cqlsh<span style="color:#f92672">=</span><span style="color:#960050;background-color:#1e0010">&#39;</span>docker run -it --rm cassandra cqlsh<span style="color:#e6db74">`</span> 
-</code></pre></div><p>From now on I run the command <code>cqlsh</code> and get just that, will all its dependencies in isolation, not worried about Python versions or state of my local workstation. Just keep Docker running well, and I&rsquo;m good.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>alias cqlsh<span style="color:#f92672">=</span><span style="color:#960050;background-color:#1e0010">&#39;</span>docker run -it --rm cassandra cqlsh<span style="color:#e6db74">`</span> 
+</span></span></code></pre></div><p>From now on I run the command <code>cqlsh</code> and get just that, will all its dependencies in isolation, not worried about Python versions or state of my local workstation. Just keep Docker running well, and I&rsquo;m good.</p>
 <p>The alias above is helpful for the times I just want a cqlsh terminal to issue a few commands. However, I often need to pass cql scripts into <a href="http://cassandra.apache.org/doc/latest/tools/cqlsh.html"><code>cqlsh</code></a>. So I updated my alias to always mount my current directory into a <code>/src</code> directory in the container. All I have have to remember is that that path to a local file is <code>./src</code> and not <code>./</code>.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">alias cqlsh<span style="color:#f92672">=</span><span style="color:#960050;background-color:#1e0010">&#39;</span>docker run -it --rm -v <span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">$(</span>pwd<span style="color:#66d9ef">)</span><span style="color:#e6db74">&#34;</span>:/src cassandra cqlsh
-</code></pre></div><p>This allows me to run commands that pass in files, like:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ cqlsh node1.example.com <span style="color:#ae81ff">9042</span> -f /src/setup_some_keyspace_and_tables.cql
-</code></pre></div><p>The <a href="https://hub.docker.com/_/cassandra/">Cassandra Docker</a> image is 323MB, and when run without a command will start up a fully functional Cassandra node, which is useful for testing. However, if this is not something you need, then a 323MB image is a bit overkill. You can always make a small Docker image using [Alpine Linux], adding only the packages you need. However, that is a subject of another article I suppose.</p>
-<div class="ad-div">
-    <a href="https://amzn.to/3hAZUvx">
-        <img src="/img/kubernetes_platform_development.jpg" style="padding:0; margin: 0; width: 50%; float: left"/>
-    </a>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>alias cqlsh<span style="color:#f92672">=</span><span style="color:#960050;background-color:#1e0010">&#39;</span>docker run -it --rm -v <span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">$(</span>pwd<span style="color:#66d9ef">)</span><span style="color:#e6db74">&#34;</span>:/src cassandra cqlsh
+</span></span></code></pre></div><p>This allows me to run commands that pass in files, like:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ cqlsh node1.example.com <span style="color:#ae81ff">9042</span> -f /src/setup_some_keyspace_and_tables.cql
+</span></span></code></pre></div><p>The <a href="https://hub.docker.com/_/cassandra/">Cassandra Docker</a> image is 323MB, and when run without a command will start up a fully functional Cassandra node, which is useful for testing. However, if this is not something you need, then a 323MB image is a bit overkill. You can always make a small Docker image using [Alpine Linux], adding only the packages you need. However, that is a subject of another article I suppose.</p>
 
-    <div style="padding-left: 15px; overflow:auto;">
-        <a href="https://amzn.to/3hAZUvx">Support this blog! Buy my new book:
-            <h4>Advanced Platform Development with Kubernetes</h4>
-        </a>
-        <h5>What You'll Learn</h5>
-        <ul style="padding-bottom: 0; margin: 0">
-            <li>Build data pipelines with <b>MQTT, NiFi, Logstash, MinIO, Hive, Presto, Kafka and Elasticsearch</b></li>
-            <li>Leverage <b>Serverless</b> ETL with <b>OpenFaaS</b></li>
-            <li>Explore <b>Blockchain</b> networking with <b>Ethereum</b></li>
-            <li>Support a multi-tenant <b>Data Science</b> platform with <b>JupyterHub, MLflow and Seldon Core</b></li>
-            <li>Build a <b>Multi-cloud</b>, <b>Hybrid cluster</b>, securely bridging <b>on-premise</b> and cloud-based Kubernetes nodes</li>
-        </ul>
-    </div>
-</div>
 
 
 
@@ -271,35 +211,6 @@
                    This blog post, titled: "<span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">Don&#39;t Install cqlsh: Containers as utility applications</span>" by <a xmlns:cc="http://creativecommons.org/ns#" href="https://twitter.com/cjimti" property="cc:attributionName" rel="cc:attributionURL">Craig Johnston</a>, is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
                     <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a>
                 </p>
-
-                <h5>SUPPORT</h5>
-                <p>
-                    Order my new Kubernetes book: <a href="https://amzn.to/34D56v6">Advanced Platform Development with Kubernetes: Enabling Data Management, the Internet of Things, Blockchain, and Machine Learning</a>
-                </p>
-                <script type="text/javascript">
-                  amzn_assoc_tracking_id = "imti-20";
-                  amzn_assoc_ad_mode = "manual";
-                  amzn_assoc_ad_type = "smart";
-                  amzn_assoc_marketplace = "amazon";
-                  amzn_assoc_region = "US";
-                  amzn_assoc_design = "enhanced_links";
-                  amzn_assoc_asins = "1484256107";
-                  amzn_assoc_placement = "adunit";
-                  amzn_assoc_linkid = "14a9d8b8d1b0bd44e9256e0e0a948015";
-                </script>
-                <script src="//z-na.amazon-adsystem.com/widgets/onejs?MarketPlace=US"></script>
-
-                
-                <hr>
-                <h5>SHARE</h5>
-                <ul class="list-inline">
-                    <li><div class="addthis_inline_share_toolbox"></div></li>
-                </ul>
-
-                <h5>FOLLOW</h5>
-                <ul class="list-inline">
-                    <li><div class="addthis_inline_follow_toolbox"></div></li>
-                </ul>
 
             </div>
             
@@ -313,6 +224,8 @@
                     <hr class="hidden-sm hidden-xs">
                     <h5><a href="/tags/">FEATURED TAGS</a></h5>
                     <div class="tags">
+                        
+                        
                         
                         
                         
@@ -332,8 +245,8 @@
                         
                         
                         
-                        <a href="/tags/data-science" title="data-science">
-                        data-science
+                        <a href="/tags/data-science" title="data science">
+                        data science
                         </a>
                         
                         
@@ -408,9 +321,17 @@
                         
                         
                         
+                        <a href="/tags/kubefwd" title="kubefwd">
+                        kubefwd
+                        </a>
+                        
+                        
+                        
                         <a href="/tags/kubernetes" title="kubernetes">
                         kubernetes
                         </a>
+                        
+                        
                         
                         
                         
@@ -444,8 +365,8 @@
                         
                         
                         
-                        <a href="/tags/raspberry-pi" title="raspberry-pi">
-                        raspberry-pi
+                        <a href="/tags/raspberry-pi" title="raspberry pi">
+                        raspberry pi
                         </a>
                         
                         
@@ -493,7 +414,7 @@
                 <ul class="list-inline text-center">
                    
                    <li>
-                       <a href="" rel="alternate" type="application/rss+xml" title="IMTI" >
+                       <a href="/index.xml" rel="alternate" type="application/rss+xml" title="IMTI" >
                            <span class="fa-stack fa-lg">
                                <i class="fa fa-circle fa-stack-2x"></i>
                                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>

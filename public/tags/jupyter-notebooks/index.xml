@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Jupyter Notebooks on IMTI</title>
+    <link>http://localhost:1313/tags/jupyter-notebooks/</link>
+    <description>Recent content in Jupyter Notebooks on IMTI</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 10 Jun 2018 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/jupyter-notebooks/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Golang to Jupyter</title>
+      <link>http://localhost:1313/golang-to-jupyter/</link>
+      <pubDate>Sun, 10 Jun 2018 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/golang-to-jupyter/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;http://jupyter.org/&#34;&gt;Jupyter Notbooks&lt;/a&gt; have been a popular technology in the Python data science community for a while now, especially in academics. Jupyter Notebooks are a way to mix inline, executable code with documentation in a presentation format. Best practices in organizing source code are not always the most efficient at communicating it&amp;rsquo;s functionality to a user.&lt;/p&gt;&#xA;&lt;p&gt;While the intention of a programming language is the abstraction of computational complexity into a simplified language humans can read and write, they must always weigh toward the efficiency of the primary interpreter, the computer. Jupyter Notebooks are intended to communicate source code to humans first and computers second. We can use Jupyter Notebooks to communicate to humans not only the source but the interpreted result.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

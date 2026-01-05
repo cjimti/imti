@@ -8,9 +8,9 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
-    <meta name="description" content="I lead a talented team of software development and creative engineers, covering many industries looking to collect, analyze, move, buffer, queue, process and present data in significant ways. My expertise and that of my team revolve around microservices, artificial intelligence, algorithms, machine learning and blockchain technologies.">
+    <meta name="description" content="I lead a talented team of software development and creative engineers, covering many industries looking to collect, analyze, move, buffer, queue, process and present data in significant ways. My expertise and that of my team revolve around microservices, artificial intelligence, algorithms, and machine learning.">
     
-    <meta name="keyword"  content="Go, Kubernetes, Elasticsearch, Python, Docker, Big Data, Artificial Intelligence, Machine Learning, Blockchain">
+    <meta name="keyword"  content="Go, Kubernetes, Elasticsearch, Python, Docker, Big Data, Artificial Intelligence, Machine Learning">
     <link rel="shortcut icon" href="https://imti.co/img/favicon.ico">
 
     <title>DevOps - IMTI - Craig Johnston</title>
@@ -57,6 +57,7 @@
 
 
     
+
 </head></head>
 
 <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
@@ -69,7 +70,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="https://imti.co/">IMTI</a>
+            <a class="navbar-brand" href="https://imti.co//">IMTI</a>
         </div>
 
         
@@ -78,10 +79,10 @@
             <div class="navbar-collapse">
                 <ul class="nav navbar-nav navbar-right">
                     <li>
-                        <a href="https://imti.co/">Home</a>
+                        <a href="https://imti.co//">Home</a>
                     </li>
                     <li>
-                        <a href="https://imti.co/about/">About</a>
+                        <a href="https://imti.co//about/">About</a>
                     </li>
                     <li>
                         <a href="https://twitter.com/cjimti">Follow</a>
@@ -134,8 +135,7 @@
                 <div class="site-heading">
                     <h1>IMTI</h1>
                     
-		            <span class="subheading">(I Make Things Interesting)
-Architecting, Developing, nixCraft, DevOps, AI/ML, Blockchain</span>
+		            <span class="subheading">Architecting, Developing, SRE, DevOps, AI/ML</span>
                 </div>
             </div>
         </div>
@@ -170,8 +170,8 @@ Architecting, Developing, nixCraft, DevOps, AI/ML, Blockchain</span>
 	
         <div class="post-content-preview">
 	
-            RBAC (Role Based Access Control) allows our Kubernetes clusters to provide the development team better visibility and access into the development, staging and production environments than it has have ever had in the past. Developers using the command line tool kubectl, can explore the network topology of running microservices, tail live server logs, proxy local ports directly to services or even execute shells into running pods.
-Kubernetes and GitlabCI are the central components of our DevOps toolchain and have increased our productivity by many multiples over the traditional approaches of the past.
+            <p>RBAC (Role Based Access Control) allows our Kubernetes clusters to provide the development team better visibility and access into the development, staging and production environments than it has have ever had in the past. Developers using the command line tool <strong><a href="https://kubernetes.io/docs/reference/kubectl/kubectl/">kubectl</a></strong>, can explore the network topology of running <a href="/microservices/">microservices</a>, tail live server logs, proxy local ports directly to services or even execute shells into running pods.</p>
+<p><a href="/gitlabci-golang-microservices/">Kubernetes and GitlabCI</a> are the central components of our DevOps toolchain and have increased our productivity by many multiples over the traditional approaches of the past.</p>
        
         </div>
     </a>
@@ -193,7 +193,7 @@ Kubernetes and GitlabCI are the central components of our DevOps toolchain and h
 	
         <div class="post-content-preview">
 	
-            Many of the resources on Cloud Native Microservices show you how easy it is to get up and running with AWS or GKE. I think this is great but for the fact that I see a trend (in my clients at least) of associating concepts with particular products or worse, companies. I love Amazon, but it&rsquo;s not THE cloud). In my opinion, to embrace Cloud Native and Microservices you should develop some, and host them yourself.
+            <p>Many of the resources on Cloud Native <a href="/microservices/">Microservices</a> show you how easy it is to get up and running with AWS or GKE. I think this is great but for the fact that I see a trend (in my clients at least) of associating concepts with particular products or worse, companies. I love Amazon, but it&rsquo;s not THE cloud). In my opinion, to embrace Cloud Native and <a href="/microservices/">Microservices</a> you should develop some, and host them yourself. The cloud is not Google or Amazon; it&rsquo;s any cluster of virtualized systems, abstracted from their hardware interfaces and centrally managed.</p>
        
         </div>
     </a>
@@ -215,7 +215,7 @@ Kubernetes and GitlabCI are the central components of our DevOps toolchain and h
 	
         <div class="post-content-preview">
 	
-            Reverse proxies are standard components in many web architectures, from Nginx in front of php-fpm serving Drupal or Wordpress, to endless mixtures of load balancers, security appliances, and popular firewall applications. Reverse proxies differ from forward proxies in little but their intended implementation, be it service-side or client side. The following information is useful in either context. However, I focus on a service-side architecture. Further down this article, I&rsquo;ll be going over the reasonably simple go code needed to develop a basic, yet production quality proxy, but first I&rsquo;ll give you my take on why they solve so many problems and offer up my little workhorse, n2proxy.
+            <p>Reverse proxies are standard components in many web architectures, from <a href="https://www.nginx.com/">Nginx</a> in front of <a href="https://php-fpm.org/">php-fpm</a> serving <a href="http://www.drupal.com/">Drupal</a> or <a href="https://wordpress.org/">Wordpress</a>, to endless mixtures of load balancers, security appliances, and popular firewall applications. <a href="https://www.jscape.com/blog/bid/87783/Forward-Proxy-vs-Reverse-Proxy">Reverse proxies differ from forward proxies</a> in little but their intended implementation, be it service-side or client side. The following information is useful in either context. However, I focus on a service-side architecture. Further down this article, I&rsquo;ll be going over the reasonably simple <a href="https://golang.org/">go</a> code needed to develop a basic, yet production quality proxy, but first I&rsquo;ll give you my take on why they solve so many problems and offer up my little workhorse, <a href="https://github.com/txn2/n2proxy">n2proxy</a>.</p>
        
         </div>
     </a>
@@ -248,6 +248,8 @@ Kubernetes and GitlabCI are the central components of our DevOps toolchain and h
             
             
             
+            
+            
             <a href="/tags/blockchain" title="blockchain">
             blockchain
             </a>
@@ -264,8 +266,8 @@ Kubernetes and GitlabCI are the central components of our DevOps toolchain and h
             
             
             
-            <a href="/tags/data-science" title="data-science">
-            data-science
+            <a href="/tags/data-science" title="data science">
+            data science
             </a>
             
             
@@ -340,9 +342,17 @@ Kubernetes and GitlabCI are the central components of our DevOps toolchain and h
             
             
             
+            <a href="/tags/kubefwd" title="kubefwd">
+            kubefwd
+            </a>
+            
+            
+            
             <a href="/tags/kubernetes" title="kubernetes">
             kubernetes
             </a>
+            
+            
             
             
             
@@ -376,8 +386,8 @@ Kubernetes and GitlabCI are the central components of our DevOps toolchain and h
             
             
             
-            <a href="/tags/raspberry-pi" title="raspberry-pi">
-            raspberry-pi
+            <a href="/tags/raspberry-pi" title="raspberry pi">
+            raspberry pi
             </a>
             
             
@@ -414,13 +424,13 @@ Kubernetes and GitlabCI are the central components of our DevOps toolchain and h
             <a href="/about/"><img src="https://imti.co/img/craig_johnston_cjimti.jpg"/></a>
             
             
-            <p>I lead a talented team of software development and creative engineers, covering many industries looking to collect, analyze, move, buffer, queue, process and present data in significant ways. My expertise and that of my team revolve around microservices, artificial intelligence, algorithms, machine learning and blockchain technologies.</p>
+            <p>I lead a talented team of software development and creative engineers, covering many industries looking to collect, analyze, move, buffer, queue, process and present data in significant ways. My expertise and that of my team revolve around microservices, artificial intelligence, algorithms, and machine learning.</p>
             
             
             <ul class="list-inline">
                 
                 <li>
-                    <a href="https://imti.co/tags/devops/index.xml" rel="alternate" type="application/rss+xml"
+                    <a href="/tags/devops/index.xml" rel="alternate" type="application/rss+xml"
                        title="IMTI" >
                     <span class="fa-stack fa-lg">
                            <i class="fa fa-circle fa-stack-2x"></i>
@@ -476,8 +486,6 @@ Kubernetes and GitlabCI are the central components of our DevOps toolchain and h
         
         <li><a target="_blank" href="https://www.amazon.com/Craig-Johnston/e/B001K80LWI/ref=ntt_dp_epwbk_0">Author</a></li>
         
-        <li><a target="_blank" href="https://deasilcognitive.com/">Deasil Cognitive</a></li>
-        
         <li><a target="_blank" href="https://deasil.works/">Deasil Works</a></li>
         
         <li><a target="_blank" href="https://github.com/txn2">TXN2 Microservices</a></li>
@@ -487,8 +495,6 @@ Kubernetes and GitlabCI are the central components of our DevOps toolchain and h
         <li><a target="_blank" href="https://news.ycombinator.com/">Hacker News</a></li>
         
         <li><a target="_blank" href="https://news.ycombinator.com/submitted?id=cjimti">Hacker News (cjimti)</a></li>
-        
-        <li><a target="_blank" href="https://sourcerer.io/cjimti">Sourcerer (cjimti)</a></li>
         
     </ul>
 
@@ -511,10 +517,6 @@ Kubernetes and GitlabCI are the central components of our DevOps toolchain and h
         <li><a target="_blank" href="https://www.reddit.com/r/elasticsearch/">r/elasticsearch</a></li>
         
         <li><a target="_blank" href="https://www.reddit.com/r/apachekafka/">r/apachekafka</a></li>
-        
-        <li><a target="_blank" href="https://www.reddit.com/r/ethereum/">r/ethereum</a></li>
-        
-        <li><a target="_blank" href="https://www.reddit.com/r/blockchain/">r/blockchain</a></li>
         
     </ul>
 
@@ -567,7 +569,7 @@ Kubernetes and GitlabCI are the central components of our DevOps toolchain and h
                 <ul class="list-inline text-center">
                    
                    <li>
-                       <a href="https://imti.co/tags/devops/index.xml" rel="alternate" type="application/rss+xml" title="IMTI" >
+                       <a href="/tags/devops/index.xml" rel="alternate" type="application/rss+xml" title="IMTI" >
                            <span class="fa-stack fa-lg">
                                <i class="fa fa-circle fa-stack-2x"></i>
                                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>

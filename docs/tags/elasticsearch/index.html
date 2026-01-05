@@ -8,9 +8,9 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
-    <meta name="description" content="I lead a talented team of software development and creative engineers, covering many industries looking to collect, analyze, move, buffer, queue, process and present data in significant ways. My expertise and that of my team revolve around microservices, artificial intelligence, algorithms, machine learning and blockchain technologies.">
+    <meta name="description" content="I lead a talented team of software development and creative engineers, covering many industries looking to collect, analyze, move, buffer, queue, process and present data in significant ways. My expertise and that of my team revolve around microservices, artificial intelligence, algorithms, and machine learning.">
     
-    <meta name="keyword"  content="Go, Kubernetes, Elasticsearch, Python, Docker, Big Data, Artificial Intelligence, Machine Learning, Blockchain">
+    <meta name="keyword"  content="Go, Kubernetes, Elasticsearch, Python, Docker, Big Data, Artificial Intelligence, Machine Learning">
     <link rel="shortcut icon" href="https://imti.co/img/favicon.ico">
 
     <title>Elasticsearch - IMTI - Craig Johnston</title>
@@ -57,6 +57,7 @@
 
 
     
+
 </head></head>
 
 <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
@@ -69,7 +70,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="https://imti.co/">IMTI</a>
+            <a class="navbar-brand" href="https://imti.co//">IMTI</a>
         </div>
 
         
@@ -78,10 +79,10 @@
             <div class="navbar-collapse">
                 <ul class="nav navbar-nav navbar-right">
                     <li>
-                        <a href="https://imti.co/">Home</a>
+                        <a href="https://imti.co//">Home</a>
                     </li>
                     <li>
-                        <a href="https://imti.co/about/">About</a>
+                        <a href="https://imti.co//about/">About</a>
                     </li>
                     <li>
                         <a href="https://twitter.com/cjimti">Follow</a>
@@ -134,8 +135,7 @@
                 <div class="site-heading">
                     <h1>IMTI</h1>
                     
-		            <span class="subheading">(I Make Things Interesting)
-Architecting, Developing, nixCraft, DevOps, AI/ML, Blockchain</span>
+		            <span class="subheading">Architecting, Developing, SRE, DevOps, AI/ML</span>
                 </div>
             </div>
         </div>
@@ -170,7 +170,7 @@ Architecting, Developing, nixCraft, DevOps, AI/ML, Blockchain</span>
 	
         <div class="post-content-preview">
 	
-            FaaS or Function as a Service also known as Serverless computing implementations are gaining popularity. Discussed often are the cost savings and each implementations relationship to the physical and network architecture of a specific platform or vendor. While many of the cost and infrastructure advantages of FaaS are compelling, its only one of many advantages. Below, I hope to demonstrate how easy it is to develop and deploy FaaS components into a custom Kubernetes cluster.
+            <p>FaaS or <a href="https://en.wikipedia.org/wiki/Function_as_a_service">Function as a Service</a> also known as <a href="https://en.wikipedia.org/wiki/Serverless_computing">Serverless computing</a> implementations are gaining popularity. Discussed often are the cost savings and each implementations relationship to the physical and network architecture of a specific platform or vendor. While many of the <a href="https://martinfowler.com/articles/serverless.html#ReducedOperationalCost">cost and infrastructure</a> advantages of FaaS are compelling, its only one of many advantages. Below, I hope to demonstrate how easy it is to develop and deploy FaaS components into a custom Kubernetes cluster. The functions I develop are nearly all business logic, and I believe therein lies the advantage, <strong>high-density business logic</strong>. Functions can have a higher degree of focus directly on business logic and communication with other services. Functions can communicate with other functions, microservices or monoliths. In this article, I demonstrate this with <a href="/kubernetes-production-elasticsearch/">Elasticsearch</a>.</p>
        
         </div>
     </a>
@@ -192,9 +192,51 @@ Architecting, Developing, nixCraft, DevOps, AI/ML, Blockchain</span>
 	
         <div class="post-content-preview">
 	
-            The following is an overview for querying Elasticsearch. Over the years I have tried to assemble developer notes for myself and my team on a variety of platforms, languages and frameworks, a type of cheat-sheet but with context, not a comprehensive how-to, but a decent 15-minute overview of the features we are most likely to implement in a given iteration.
-Explore the Elasticsearch official documentation: Search in Depth.
- Contents   Motivation Following Along with Elasticsearch and Kubernetes Vocabulary Basic CRUD API  Delete an Index Create an Index Create or Update a Document (Upsert) Get a Document   Mappings, Types and Metadata  Get Mapping Create a Mapping   Searching Range Filtering Aggregations  Counts Averages, Minimums and Maximums Percentile Percent by Rank Percent by Rank Interval   Resources     Support this blog!
+            <p>The following is an overview for querying <a href="https://www.elastic.co/products/elasticsearch">Elasticsearch</a>. Over the years I have tried to assemble developer notes for myself and my team on a variety of platforms, languages and frameworks, a type of cheat-sheet but with context, not a comprehensive how-to, but a decent 15-minute overview of the features we are most likely to implement in a given iteration.</p>
+<p>Explore the <a href="https://www.elastic.co/guide/en/elasticsearch/guide/current/search-in-depth.html">Elasticsearch official documentation</a>: <a href="https://www.elastic.co/guide/en/elasticsearch/guide/current/search-in-depth.html">Search in Depth</a>.</p>
+<aside class="toc">
+    <header>
+        <h2>Contents</h2>
+    </header>
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#motivation">Motivation</a></li>
+    <li><a href="#following-along-with-elasticsearch-and-kubernetes">Following Along with Elasticsearch and Kubernetes</a></li>
+    <li><a href="#vocabulary">Vocabulary</a></li>
+    <li><a href="#basic-crud-api">Basic CRUD API</a>
+      <ul>
+        <li><a href="#delete-an-index">Delete an Index</a></li>
+        <li><a href="#create-an-index">Create an Index</a></li>
+        <li><a href="#create-or-update-a-document-upsert">Create or Update a Document (Upsert)</a></li>
+        <li><a href="#get-a-document">Get a Document</a></li>
+      </ul>
+    </li>
+    <li><a href="#mappings-types-and-metadata">Mappings, Types and Metadata</a>
+      <ul>
+        <li><a href="#get-mapping">Get Mapping</a></li>
+        <li><a href="#create-a-mapping">Create a Mapping</a></li>
+      </ul>
+    </li>
+    <li><a href="#searching">Searching</a></li>
+    <li><a href="#range">Range</a></li>
+    <li><a href="#filtering">Filtering</a></li>
+    <li><a href="#aggregations">Aggregations</a>
+      <ul>
+        <li><a href="#counts">Counts</a></li>
+        <li><a href="#averages-minimums-and-maximums">Averages, Minimums and Maximums</a></li>
+        <li><a href="#percentile">Percentile</a></li>
+        <li><a href="#percent-by-rank">Percent by Rank</a></li>
+        <li><a href="#percent-by-rank-interval">Percent by Rank Interval</a></li>
+      </ul>
+    </li>
+    <li><a href="#resources">Resources</a></li>
+  </ul>
+</nav>
+</aside>
+
+
+<h2 id="motivation">Motivation</h2>
+<p>My team and I work with a lot of SQL-based data, from MySQL, SQLite and even our large Cassandra cluster, however, our reporting systems are built on <a href="https://www.elastic.co/products/elasticsearch">Elasticsearch</a>. Transitioning our thinking from SQL to the <a href="https://blog.parse.ly/post/1691/lucene/">Lucene</a> syntax on occasion requires hitting the docs. However, most technical documentation is either for getting started or gives you every variation of every feature, which is great when you are neck deep and need a specific problem solved.</p>
        
         </div>
     </a>
@@ -216,8 +258,8 @@ Explore the Elasticsearch official documentation: Search in Depth.
 	
         <div class="post-content-preview">
 	
-            Developing on our local workstations has always been a conceptual challenge for my team when it comes to remote data access. Local workstation-based development of services that intend to connect to a wide range of remote services that may have no options for external connections poses a challenge. Mirroring the entire development environment is possible in many cases, just not practical.
-In days before Kubernetes, writing code in IDEs on our local workstation meant we had only a few options for developing server-side-API-style services that needed to connect to a database.
+            <p>Developing on our local workstations has always been a conceptual challenge for my team when it comes to remote data access.  Local workstation-based development of services that intend to connect to a wide range of remote services that may have no options for external connections poses a challenge. Mirroring the entire development environment is possible in many cases, just not practical.</p>
+<p>In days before Kubernetes, writing code in IDEs on our local workstation meant we had only a few options for developing server-side-API-style services that needed to connect to a database. We could set up a database server on our local workstation manually or use packages like <a href="https://www.mamp.info/en/">MAMP</a>/<a href="http://www.wampserver.com/en/">WAMP</a>, or run big virtual servers managed with <a href="https://www.vagrantup.com/">Vagrant</a>. Even after we got the database running, we needed a good set of data to work with, and that often meant asking a DBA or Sysadmin for SQL dumps from an environment in which we have no access.</p>
        
         </div>
     </a>
@@ -239,8 +281,46 @@ In days before Kubernetes, writing code in IDEs on our local workstation meant w
 	
         <div class="post-content-preview">
 	
-            IOT devices, Point-of-Sale systems, application events or any client that sends data destined for indexing in Elasticsearch often need to send and forget, however, unless that data is of low value there needs to be assurance that arrives at its final destination. Back-pressure and database outages can pose a considerable threat to data integrity.
- Contents   Background Overview Development Environment  the-project Namespace   The Project: Weather (wx) Data rxtx for Store-and-Forward  wx-rxtx Service wx-rxtx StatefulSet   rtBeat to Collect, Buffer and Publish  wx-rtbeat Service wx-rtbeat ConfigMap wx-rtbeat Deployment   Client Simulation / Kubernetes Cron Performance Conclusion Port Forwarding / Local Development Reference     Support this blog!
+            <p>IOT devices, Point-of-Sale systems, application events or any client that sends data destined for indexing in Elasticsearch often need to send and forget, however, unless that data is of low value there needs to be assurance that arrives at its final destination. Back-pressure and database outages can pose a considerable threat to data integrity.</p>
+<aside class="toc">
+    <header>
+        <h2>Contents</h2>
+    </header>
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#background">Background</a></li>
+    <li><a href="#overview">Overview</a></li>
+    <li><a href="#development-environment">Development Environment</a>
+      <ul>
+        <li><a href="#the-project-namespace">the-project Namespace</a></li>
+      </ul>
+    </li>
+    <li><a href="#the-project-weather-wx-data">The Project: Weather (wx) Data</a></li>
+    <li><a href="#rxtx-for-store-and-forward">rxtx for Store-and-Forward</a>
+      <ul>
+        <li><a href="#wx-rxtx-service">wx-rxtx Service</a></li>
+        <li><a href="#wx-rxtx-statefulset">wx-rxtx StatefulSet</a></li>
+      </ul>
+    </li>
+    <li><a href="#rtbeat-to-collect-buffer-and-publish">rtBeat to Collect, Buffer and Publish</a>
+      <ul>
+        <li><a href="#wx-rtbeat-service">wx-rtbeat Service</a></li>
+        <li><a href="#wx-rtbeat-configmap">wx-rtbeat ConfigMap</a></li>
+        <li><a href="#wx-rtbeat-deployment">wx-rtbeat Deployment</a></li>
+      </ul>
+    </li>
+    <li><a href="#client-simulation--kubernetes-cron">Client Simulation / Kubernetes Cron</a></li>
+    <li><a href="#performance">Performance</a></li>
+    <li><a href="#conclusion">Conclusion</a></li>
+    <li><a href="#port-forwarding--local-development">Port Forwarding / Local Development</a></li>
+    <li><a href="#reference">Reference</a></li>
+  </ul>
+</nav>
+</aside>
+
+
+<h2 id="background">Background</h2>
+<p>High availability and high performance often mean burdensome complexity. Data replication, application, network and infrastructure redundancy, anything we can do to avoid a single point of failure. However, what happens when one of those points do fail? Alternatively, a cascade of problems causing slowdowns and back pressure builds to constant far too high for indexing to catch up?</p>
        
         </div>
     </a>
@@ -262,8 +342,30 @@ In days before Kubernetes, writing code in IDEs on our local workstation meant w
 	
         <div class="post-content-preview">
 	
-            This guide walks through a process for setting up Kibana within a namespace on a Kubernetes cluster. If you followed along with Production Grade Elasticsearch on Kubernetes then aside from personal or corporate preferences, little modifications are necessary for the configurations below.
- Contents   Project Namespace Service Kibana ConfigMap Deployment Basic Auth (Optional) TLS Certificate (Optional) Ingress Conclusion Port Forwarding / Local Development Resources     Support this blog!
+            <p>This guide walks through a process for setting up <a href="https://www.elastic.co/products/kibana">Kibana</a> within a <a href="/kubernetes-production-elasticsearch/#project-namespace">namespace</a> on a Kubernetes cluster. If you followed along with <a href="/kubernetes-production-elasticsearch/">Production Grade Elasticsearch on Kubernetes</a> then aside from personal or corporate preferences, little modifications are necessary for the configurations below.</p>
+<aside class="toc">
+    <header>
+        <h2>Contents</h2>
+    </header>
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#project-namespace">Project Namespace</a></li>
+    <li><a href="#service">Service</a></li>
+    <li><a href="#kibana-configmap">Kibana ConfigMap</a></li>
+    <li><a href="#deployment">Deployment</a></li>
+    <li><a href="#basic-auth-optional">Basic Auth (Optional)</a></li>
+    <li><a href="#tls-certificate-optional">TLS Certificate (Optional)</a></li>
+    <li><a href="#ingress">Ingress</a></li>
+    <li><a href="#conclusion">Conclusion</a></li>
+    <li><a href="#port-forwarding--local-development">Port Forwarding / Local Development</a></li>
+    <li><a href="#resources">Resources</a></li>
+  </ul>
+</nav>
+</aside>
+
+
+<h2 id="project-namespace">Project <a href="/kubernetes-production-elasticsearch/#project-namespace">Namespace</a></h2>
+<p>I use <code>the-project</code> as a namespace for all my examples and testing. <a href="https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/">Kubernetes Namespaces</a> are the main delimiter I use for security and organization. Configuration files are organized by project, and in Kubernetes, these projects are separated by namespace; therefore I always include a namespace configuration. There is no harm in asking Kubernetes to create a namespace that already exists; an error is returned confirming its existence.</p>
        
         </div>
     </a>
@@ -285,8 +387,8 @@ In days before Kubernetes, writing code in IDEs on our local workstation meant w
 	
         <div class="post-content-preview">
 	
-            Installing production ready, Elasticsearch 6.2 on Kubernetes requires a hand full of simple configurations. The following guide is a high-level overview of an installation process using Elastic&rsquo;s recommendations for best practices. The Github project kubernetes-elasticsearch-cluster is used for the Elastic Docker container and built to operate Elasticsearch with nodes dedicated as Master, Data, and Client/Ingest.
-The Docker container docker-elasticsearch, a &ldquo;Ready to use, lean and highly configurable Elasticsearch container image.&rdquo; by pires is sufficient for use in this guide.
+            <p>Installing production ready, Elasticsearch 6.2 on Kubernetes requires a hand full of simple configurations. The following guide is a high-level overview of an installation process using Elastic&rsquo;s <a href="https://www.elastic.co/guide/en/elasticsearch/reference/6.2/modules-node.html">recommendations for best practices</a>. The Github project <a href="https://github.com/pires/kubernetes-elasticsearch-cluster">kubernetes-elasticsearch-cluster</a> is used for the Elastic Docker container and built to operate Elasticsearch with nodes dedicated as Master, Data, and Client/Ingest.</p>
+<p>The Docker container <a href="https://github.com/pires/docker-elasticsearch">docker-elasticsearch</a>, a &ldquo;Ready to use, lean and highly configurable Elasticsearch container image.&rdquo; by <a href="https://github.com/pires">pires</a> is sufficient for use in this guide. However, the <a href="https://github.com/txn2/k8s-es">txn2/k8s-es</a> wraps it with a few minor preset environment variables to simplify configuration. I use the docker image <a href="https://hub.docker.com/r/txn2/k8s-es/tags/">txn2/k8s-es:v6.2.3</a> in the examples below.</p>
        
         </div>
     </a>
@@ -319,6 +421,8 @@ The Docker container docker-elasticsearch, a &ldquo;Ready to use, lean and highl
             
             
             
+            
+            
             <a href="/tags/blockchain" title="blockchain">
             blockchain
             </a>
@@ -335,8 +439,8 @@ The Docker container docker-elasticsearch, a &ldquo;Ready to use, lean and highl
             
             
             
-            <a href="/tags/data-science" title="data-science">
-            data-science
+            <a href="/tags/data-science" title="data science">
+            data science
             </a>
             
             
@@ -411,9 +515,17 @@ The Docker container docker-elasticsearch, a &ldquo;Ready to use, lean and highl
             
             
             
+            <a href="/tags/kubefwd" title="kubefwd">
+            kubefwd
+            </a>
+            
+            
+            
             <a href="/tags/kubernetes" title="kubernetes">
             kubernetes
             </a>
+            
+            
             
             
             
@@ -447,8 +559,8 @@ The Docker container docker-elasticsearch, a &ldquo;Ready to use, lean and highl
             
             
             
-            <a href="/tags/raspberry-pi" title="raspberry-pi">
-            raspberry-pi
+            <a href="/tags/raspberry-pi" title="raspberry pi">
+            raspberry pi
             </a>
             
             
@@ -485,13 +597,13 @@ The Docker container docker-elasticsearch, a &ldquo;Ready to use, lean and highl
             <a href="/about/"><img src="https://imti.co/img/craig_johnston_cjimti.jpg"/></a>
             
             
-            <p>I lead a talented team of software development and creative engineers, covering many industries looking to collect, analyze, move, buffer, queue, process and present data in significant ways. My expertise and that of my team revolve around microservices, artificial intelligence, algorithms, machine learning and blockchain technologies.</p>
+            <p>I lead a talented team of software development and creative engineers, covering many industries looking to collect, analyze, move, buffer, queue, process and present data in significant ways. My expertise and that of my team revolve around microservices, artificial intelligence, algorithms, and machine learning.</p>
             
             
             <ul class="list-inline">
                 
                 <li>
-                    <a href="https://imti.co/tags/elasticsearch/index.xml" rel="alternate" type="application/rss+xml"
+                    <a href="/tags/elasticsearch/index.xml" rel="alternate" type="application/rss+xml"
                        title="IMTI" >
                     <span class="fa-stack fa-lg">
                            <i class="fa fa-circle fa-stack-2x"></i>
@@ -547,8 +659,6 @@ The Docker container docker-elasticsearch, a &ldquo;Ready to use, lean and highl
         
         <li><a target="_blank" href="https://www.amazon.com/Craig-Johnston/e/B001K80LWI/ref=ntt_dp_epwbk_0">Author</a></li>
         
-        <li><a target="_blank" href="https://deasilcognitive.com/">Deasil Cognitive</a></li>
-        
         <li><a target="_blank" href="https://deasil.works/">Deasil Works</a></li>
         
         <li><a target="_blank" href="https://github.com/txn2">TXN2 Microservices</a></li>
@@ -558,8 +668,6 @@ The Docker container docker-elasticsearch, a &ldquo;Ready to use, lean and highl
         <li><a target="_blank" href="https://news.ycombinator.com/">Hacker News</a></li>
         
         <li><a target="_blank" href="https://news.ycombinator.com/submitted?id=cjimti">Hacker News (cjimti)</a></li>
-        
-        <li><a target="_blank" href="https://sourcerer.io/cjimti">Sourcerer (cjimti)</a></li>
         
     </ul>
 
@@ -582,10 +690,6 @@ The Docker container docker-elasticsearch, a &ldquo;Ready to use, lean and highl
         <li><a target="_blank" href="https://www.reddit.com/r/elasticsearch/">r/elasticsearch</a></li>
         
         <li><a target="_blank" href="https://www.reddit.com/r/apachekafka/">r/apachekafka</a></li>
-        
-        <li><a target="_blank" href="https://www.reddit.com/r/ethereum/">r/ethereum</a></li>
-        
-        <li><a target="_blank" href="https://www.reddit.com/r/blockchain/">r/blockchain</a></li>
         
     </ul>
 
@@ -638,7 +742,7 @@ The Docker container docker-elasticsearch, a &ldquo;Ready to use, lean and highl
                 <ul class="list-inline text-center">
                    
                    <li>
-                       <a href="https://imti.co/tags/elasticsearch/index.xml" rel="alternate" type="application/rss+xml" title="IMTI" >
+                       <a href="/tags/elasticsearch/index.xml" rel="alternate" type="application/rss+xml" title="IMTI" >
                            <span class="fa-stack fa-lg">
                                <i class="fa fa-circle fa-stack-2x"></i>
                                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>

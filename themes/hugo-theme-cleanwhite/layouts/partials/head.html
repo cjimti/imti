@@ -15,7 +15,7 @@
 
     <title>{{ if and (.Title) (ne .Title "IMTI") }}{{ .Title }} - IMTI - Craig Johnston{{ else }}IMTI - Craig Johnston{{ end }}</title>
 
-    <link rel="canonical" href="{{ .URL | absURL }}">
+    <link rel="canonical" href="{{ .Permalink }}">
 	
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="{{ "css/bootstrap.min.css" | absURL }}">

@@ -1,31 +1,17 @@
 {{ if .IsPage }}
+{{ $schema := dict
+  "@context" "http://schema.org"
+  "@type" "Article"
+  "mainEntityOfPage" (dict "@type" "WebPage" "@id" .Permalink)
+  "headline" .Title
+  "image" (slice (.Params.twitter_image | absURL))
+  "datePublished" (.PublishDate.Format "2006-01-02T15:04:05")
+  "dateModified" (.PublishDate.Format "2006-01-02T15:04:05")
+  "author" (dict "@type" "Person" "name" "Craig Johnston")
+  "publisher" (dict "@type" "Organization" "name" "imti.co" "logo" (dict "@type" "ImageObject" "url" (.Site.Params.sidebar_avatar | absURL)))
+  "description" .Summary
+}}
 <script type="application/ld+json">
-{
-  "@context": "http://schema.org",
-  "@type": "Article",
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": "{{ .Permalink }}"
-  },
-  "headline": "{{ .Title }}",
-  "image": [
-    "{{ .Params.twitter_image | absURL }}"
-   ],
-  "datePublished": "{{ .PublishDate.Format "2006-01-02T15:04:05" }}",
-  "dateModified": "{{ .PublishDate.Format  "2006-01-02T15:04:05" }}",
-  "author": {
-    "@type": "Person",
-    "name": "Craig Johnston"
-  },
-   "publisher": {
-    "@type": "Organization",
-    "name": 'imti.co",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "{{ .Site.Params.sidebar_avatar  | absURL }}"
-    }
-  },
-  "description": "{{ .Summary }}"
-}
+{{ $schema | jsonify (dict "indent" "  ") | safeHTML }}
 </script>
 {{ end }}

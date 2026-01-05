@@ -60,24 +60,91 @@ header.container {
 }
 
 .toc {
-    margin-left: 0px;
-    padding-left: 0px;
+    margin: 1.5em 0;
+    padding: 1em 1.5em;
+    background-color: #f8f9fa;
+    border-radius: 4px;
 }
 
-#TableOfContents>ul {
-    list-style-type: none;
-    margin-left: 0px;
-    padding-left: 0px;
+.toc header h2 {
+    margin: 0 0 0.75em 0;
+    font-size: 1.1em;
 }
 
-#TableOfContents>ul>li>ul {
+#TableOfContents > ul {
     list-style-type: none;
-    margin-left: 0px;
-    padding-left: 0px;
+    margin: 0;
+    padding: 0;
+}
+
+#TableOfContents ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+#TableOfContents li {
+    margin: 0.25em 0;
+}
+
+#TableOfContents li li {
+    margin-left: 1.25em;
+}
+
+#TableOfContents li li li {
+    margin-left: 1.25em;
+}
+
+#TableOfContents a {
+    color: #333;
+    text-decoration: none;
+}
+
+#TableOfContents a:hover {
+    color: #0066cc;
+    text-decoration: underline;
 }
 
 .bookmarks {
     list-style-type: none;
     margin-left: 0px;
     padding-left: 0px;
+}
+
+/* Tighter spacing for post content */
+.post-container p {
+    margin: 1em 0;
+}
+
+.post-container p + p {
+    margin-top: 1em;
+}
+
+.post-container ul,
+.post-container ol {
+    margin: 0.75em 0 1em 1.5em;
+}
+
+.post-container p + ul,
+.post-container p + ol {
+    margin-top: 0.5em;
+}
+
+.post-container ul + p,
+.post-container ol + p {
+    margin-top: 1em;
+}
+
+
+/* Code blocks */
+.post-container pre {
+    margin: 1em 0;
+}
+
+/* Headings in post content */
+.post-container h2,
+.post-container h3,
+.post-container h4 {
+    margin-top: 1.5em;
+    margin-bottom: 0.5em;
 }

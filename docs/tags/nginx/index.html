@@ -8,12 +8,12 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
-    <meta name="description" content="I lead a talented team of software development and creative engineers, covering many industries looking to collect, analyze, move, buffer, queue, process and present data in significant ways. My expertise and that of my team revolve around microservices, artificial intelligence, algorithms, machine learning and blockchain technologies.">
+    <meta name="description" content="I lead a talented team of software development and creative engineers, covering many industries looking to collect, analyze, move, buffer, queue, process and present data in significant ways. My expertise and that of my team revolve around microservices, artificial intelligence, algorithms, and machine learning.">
     
-    <meta name="keyword"  content="Go, Kubernetes, Elasticsearch, Python, Docker, Big Data, Artificial Intelligence, Machine Learning, Blockchain">
+    <meta name="keyword"  content="Go, Kubernetes, Elasticsearch, Python, Docker, Big Data, Artificial Intelligence, Machine Learning">
     <link rel="shortcut icon" href="https://imti.co/img/favicon.ico">
 
-    <title>nginx - IMTI - Craig Johnston</title>
+    <title>Nginx - IMTI - Craig Johnston</title>
 
     <link rel="canonical" href="https://imti.co/tags/nginx/">
 	
@@ -57,6 +57,7 @@
 
 
     
+
 </head></head>
 
 <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
@@ -69,7 +70,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="https://imti.co/">IMTI</a>
+            <a class="navbar-brand" href="https://imti.co//">IMTI</a>
         </div>
 
         
@@ -78,10 +79,10 @@
             <div class="navbar-collapse">
                 <ul class="nav navbar-nav navbar-right">
                     <li>
-                        <a href="https://imti.co/">Home</a>
+                        <a href="https://imti.co//">Home</a>
                     </li>
                     <li>
-                        <a href="https://imti.co/about/">About</a>
+                        <a href="https://imti.co//about/">About</a>
                     </li>
                     <li>
                         <a href="https://twitter.com/cjimti">Follow</a>
@@ -134,8 +135,7 @@
                 <div class="site-heading">
                     <h1>IMTI</h1>
                     
-		            <span class="subheading">(I Make Things Interesting)
-Architecting, Developing, nixCraft, DevOps, AI/ML, Blockchain</span>
+		            <span class="subheading">Architecting, Developing, SRE, DevOps, AI/ML</span>
                 </div>
             </div>
         </div>
@@ -170,7 +170,8 @@ Architecting, Developing, nixCraft, DevOps, AI/ML, Blockchain</span>
 	
         <div class="post-content-preview">
 	
-            There are more than a handful of ways to set up port 80 and 443 web ingress on a custom Kubernetes cluster. Specifically a bare metal cluster. If you are looking to experiment or learn on a non-production cluster, but something more true to production than minikube, I suggest you check out my previous article Production Hobby Cluster, a step-by-step guide for setting up a custom production capable Kubernetes cluster.
+            <p>There are more than a handful of ways to set up port <strong>80</strong> and <strong>443</strong> web <a href="https://github.com/kubernetes/ingress-nginx">ingress</a> on a custom <a href="https://kubernetes.io/">Kubernetes</a> cluster. Specifically a bare metal cluster. If you are looking to experiment or learn on a non-production cluster, but something more true to production than <a href="https://kubernetes.io/docs/getting-started-guides/minikube/">minikube</a>, I suggest you check out my previous article <a href="/hobby-cluster/">Production Hobby Cluster</a>, a step-by-step guide for setting up a custom production capable Kubernetes cluster.</p>
+<p>This article builds on the <a href="/hobby-cluster/">Production Hobby Cluster</a> guide. The following closely the official <a href="https://github.com/kubernetes/ingress-nginx/blob/master/docs/deploy/index.md">deploy ingress</a> Installation Guide with a few adjustments suitable for the <a href="/hobby-cluster/">Production Hobby Cluster</a>, specifically the use of a <a href="https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/">DaemonSet</a> rather than a <a href="https://kubernetes.io/docs/concepts/workloads/controllers/deployment/">Deployment</a> and leveraging <strong>hostNetwork</strong> and <strong>hostPort</strong> for the <a href="https://kubernetes.io/docs/concepts/workloads/pods/pod/">Pod</a>s on our <a href="https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/">DaemonSet</a>. There are quite a few <a href="https://github.com/kubernetes/ingress-nginx/tree/master/docs/examples">ingress nginx examples</a> in the official repository if you are looking for a more specific implementation.</p>
        
         </div>
     </a>
@@ -192,8 +193,9 @@ Architecting, Developing, nixCraft, DevOps, AI/ML, Blockchain</span>
 	
         <div class="post-content-preview">
 	
-            When setting up nginx ingress on Kubernetes for a private Docker Registry, I ran into an error when trying to push an image to it.
-Error parsing HTTP response: invalid character '&lt;' looking for beginning of value: &quot;&lt;html&gt;\r\n&lt;head&gt;&lt;title&gt;413 Request Entity Too Large&lt;/title&gt;&lt;/head&gt;\r\n&lt;body bgcolor=\&quot;white\&quot;&gt;\r\n&lt;center&gt;&lt;h1&gt;413 Request Entity Too Large&lt;/h1&gt;&lt;/center&gt;\r\n&lt;hr&gt;&lt;center&gt;nginx/1.9.14&lt;/center&gt;\r\n&lt;/body&gt;\r\n&lt;/html&gt;\r\n&quot; The &ldquo;413 Request Entity Too Large&rdquo; error is something many accustomed to running nginx as a standard web server/proxy. nginx is configured to restrict the size of files it will allow over a post.
+            <p>When setting up <a href="https://github.com/kubernetes/ingress-nginx">nginx ingress</a> on <a href="https://kubernetes.io/">Kubernetes</a> for a private <a href="https://hub.docker.com/_/registry/">Docker Registry</a>, I ran into an error when trying to push an image to it.</p>
+<pre tabindex="0"><code>Error parsing HTTP response: invalid character &#39;&lt;&#39; looking for beginning of value: &#34;&lt;html&gt;\r\n&lt;head&gt;&lt;title&gt;413 Request Entity Too Large&lt;/title&gt;&lt;/head&gt;\r\n&lt;body bgcolor=\&#34;white\&#34;&gt;\r\n&lt;center&gt;&lt;h1&gt;413 Request Entity Too Large&lt;/h1&gt;&lt;/center&gt;\r\n&lt;hr&gt;&lt;center&gt;nginx/1.9.14&lt;/center&gt;\r\n&lt;/body&gt;\r\n&lt;/html&gt;\r\n&#34;
+</code></pre><p>The &ldquo;413 Request Entity Too Large&rdquo; error is something many accustomed to running <a href="https://www.nginx.com/">nginx</a> as a standard web server/proxy. <a href="https://www.nginx.com/">nginx</a> is configured to restrict the size of files it will allow over a post. This restriction helps avoid some DoS attacks. The default values are easy to adjust in the Nginx configuration. However, in the <a href="https://kubernetes.io/">Kubernetes</a> world things are a bit different. I prefer to do things the <a href="https://kubernetes.io/">Kubernetes</a> way; however, there is still a lack of established configuration idioms, since part of its appeal is flexibility. One thousand different ways of doing something means ten thousand variations of remedies to every potential problem. Googling errors in the <a href="https://kubernetes.io/">Kubernetes</a> world leads to a mess of solutions not always explicitly tied to an implementation. I am hoping that as <a href="https://kubernetes.io/">Kubernetes</a> continues to gain popularity more care will be taken to provide context for solutions to common problems.</p>
        
         </div>
     </a>
@@ -226,6 +228,8 @@ Error parsing HTTP response: invalid character '&lt;' looking for beginning of v
             
             
             
+            
+            
             <a href="/tags/blockchain" title="blockchain">
             blockchain
             </a>
@@ -242,8 +246,8 @@ Error parsing HTTP response: invalid character '&lt;' looking for beginning of v
             
             
             
-            <a href="/tags/data-science" title="data-science">
-            data-science
+            <a href="/tags/data-science" title="data science">
+            data science
             </a>
             
             
@@ -318,9 +322,17 @@ Error parsing HTTP response: invalid character '&lt;' looking for beginning of v
             
             
             
+            <a href="/tags/kubefwd" title="kubefwd">
+            kubefwd
+            </a>
+            
+            
+            
             <a href="/tags/kubernetes" title="kubernetes">
             kubernetes
             </a>
+            
+            
             
             
             
@@ -354,8 +366,8 @@ Error parsing HTTP response: invalid character '&lt;' looking for beginning of v
             
             
             
-            <a href="/tags/raspberry-pi" title="raspberry-pi">
-            raspberry-pi
+            <a href="/tags/raspberry-pi" title="raspberry pi">
+            raspberry pi
             </a>
             
             
@@ -392,13 +404,13 @@ Error parsing HTTP response: invalid character '&lt;' looking for beginning of v
             <a href="/about/"><img src="https://imti.co/img/craig_johnston_cjimti.jpg"/></a>
             
             
-            <p>I lead a talented team of software development and creative engineers, covering many industries looking to collect, analyze, move, buffer, queue, process and present data in significant ways. My expertise and that of my team revolve around microservices, artificial intelligence, algorithms, machine learning and blockchain technologies.</p>
+            <p>I lead a talented team of software development and creative engineers, covering many industries looking to collect, analyze, move, buffer, queue, process and present data in significant ways. My expertise and that of my team revolve around microservices, artificial intelligence, algorithms, and machine learning.</p>
             
             
             <ul class="list-inline">
                 
                 <li>
-                    <a href="https://imti.co/tags/nginx/index.xml" rel="alternate" type="application/rss+xml"
+                    <a href="/tags/nginx/index.xml" rel="alternate" type="application/rss+xml"
                        title="IMTI" >
                     <span class="fa-stack fa-lg">
                            <i class="fa fa-circle fa-stack-2x"></i>
@@ -454,8 +466,6 @@ Error parsing HTTP response: invalid character '&lt;' looking for beginning of v
         
         <li><a target="_blank" href="https://www.amazon.com/Craig-Johnston/e/B001K80LWI/ref=ntt_dp_epwbk_0">Author</a></li>
         
-        <li><a target="_blank" href="https://deasilcognitive.com/">Deasil Cognitive</a></li>
-        
         <li><a target="_blank" href="https://deasil.works/">Deasil Works</a></li>
         
         <li><a target="_blank" href="https://github.com/txn2">TXN2 Microservices</a></li>
@@ -465,8 +475,6 @@ Error parsing HTTP response: invalid character '&lt;' looking for beginning of v
         <li><a target="_blank" href="https://news.ycombinator.com/">Hacker News</a></li>
         
         <li><a target="_blank" href="https://news.ycombinator.com/submitted?id=cjimti">Hacker News (cjimti)</a></li>
-        
-        <li><a target="_blank" href="https://sourcerer.io/cjimti">Sourcerer (cjimti)</a></li>
         
     </ul>
 
@@ -489,10 +497,6 @@ Error parsing HTTP response: invalid character '&lt;' looking for beginning of v
         <li><a target="_blank" href="https://www.reddit.com/r/elasticsearch/">r/elasticsearch</a></li>
         
         <li><a target="_blank" href="https://www.reddit.com/r/apachekafka/">r/apachekafka</a></li>
-        
-        <li><a target="_blank" href="https://www.reddit.com/r/ethereum/">r/ethereum</a></li>
-        
-        <li><a target="_blank" href="https://www.reddit.com/r/blockchain/">r/blockchain</a></li>
         
     </ul>
 
@@ -545,7 +549,7 @@ Error parsing HTTP response: invalid character '&lt;' looking for beginning of v
                 <ul class="list-inline text-center">
                    
                    <li>
-                       <a href="https://imti.co/tags/nginx/index.xml" rel="alternate" type="application/rss+xml" title="IMTI" >
+                       <a href="/tags/nginx/index.xml" rel="alternate" type="application/rss+xml" title="IMTI" >
                            <span class="fa-stack fa-lg">
                                <i class="fa fa-circle fa-stack-2x"></i>
                                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>

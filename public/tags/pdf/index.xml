@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>PDF on IMTI</title>
+    <link>http://localhost:1313/tags/pdf/</link>
+    <description>Recent content in PDF on IMTI</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 01 Jul 2018 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/pdf/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Webpage to PDF Microservice</title>
+      <link>http://localhost:1313/webpage-to-pdf-microservice/</link>
+      <pubDate>Sun, 01 Jul 2018 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/webpage-to-pdf-microservice/</guid>
+      <description>&lt;p&gt;I create a lot of data visualizations for clients, many of which are internal, portal-style websites that present data in real time, as well as give options for viewing reports from previous time-frames. PDFs are useful for data such as bank statements or any form of time-snapshot progress reporting. It is common for clients to want PDF versions generated on a regular basis for sharing through email or other technologies.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

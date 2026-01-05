@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Emacs on IMTI</title>
+    <link>http://localhost:1313/tags/emacs/</link>
+    <description>Recent content in Emacs on IMTI</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 01 Mar 2018 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/emacs/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Don&#39;t Install Emacs</title>
+      <link>http://localhost:1313/dont-install-emacs/</link>
+      <pubDate>Thu, 01 Mar 2018 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/dont-install-emacs/</guid>
+      <description>&lt;p&gt;I grew up on &lt;a href=&#34;https://www.gnu.org/software/emacs/&#34;&gt;emacs&lt;/a&gt;. One of my first jobs I sat down at a terminal and was editing some files with &lt;a href=&#34;https://en.wikipedia.org/wiki/Pico_(text_editor)&#34;&gt;pico&lt;/a&gt;, it&amp;rsquo;s what I knew since I used that fantastic email client &lt;a href=&#34;https://en.wikipedia.org/wiki/Pine_(email_client)&#34;&gt;pine&lt;/a&gt;. I was quickly told by my the lead developer that I need to use a &lt;strong&gt;real&lt;/strong&gt; text editor if I&amp;rsquo;m going to progress in my career. He told me I need to try &lt;a href=&#34;https://www.gnu.org/software/emacs/&#34;&gt;emacs&lt;/a&gt;, and after suffering through a few weeks of memorizing multi command-char sequences and &lt;a href=&#34;https://en.wikipedia.org/wiki/Emacs#Emacs_pinky&#34;&gt;training the muscle memory in my pinky to perform bizarre contortions&lt;/a&gt; of my left hand just to save my file, I became a convert. I found out a few months later that the developer who convinced me to use &lt;a href=&#34;https://www.gnu.org/software/emacs/&#34;&gt;emacs&lt;/a&gt; was a &lt;a href=&#34;https://en.wikipedia.org/wiki/Vi&#34;&gt;vi&lt;/a&gt; user all along. I think I was a victim of a cruel joke or hazing ritual, but I learned to love &lt;a href=&#34;https://www.gnu.org/software/emacs/&#34;&gt;emacs&lt;/a&gt;, and when I am not coding in a desktop IDE (&lt;a href=&#34;https://www.jetbrains.com/&#34;&gt;IntelliJ&lt;/a&gt;) then I am using &lt;a href=&#34;https://www.gnu.org/software/emacs/&#34;&gt;emacs&lt;/a&gt;.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

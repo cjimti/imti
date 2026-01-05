@@ -10,7 +10,7 @@
     
     <meta name="description" content="Customize upstream DNS resolution.">
     
-    <meta name="keyword"  content="Go, Kubernetes, Elasticsearch, Python, Docker, Big Data, Artificial Intelligence, Machine Learning, Blockchain">
+    <meta name="keyword"  content="Go, Kubernetes, Elasticsearch, Python, Docker, Big Data, Artificial Intelligence, Machine Learning">
     <link rel="shortcut icon" href="https://imti.co/img/favicon.ico">
 
     <title>Kubernetes Custom Upstream DNS - IMTI - Craig Johnston</title>
@@ -61,35 +61,11 @@
 
 
     
+
 <script type="application/ld+json">
-{
-  "@context": "http://schema.org",
-  "@type": "Article",
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": "https:\/\/imti.co\/kubernetes-custom-dns\/"
-  },
-  "headline": "Kubernetes Custom Upstream DNS",
-  "image": [
-    "https:\/\/imti.co\/img\/post\/cardindex_876_438.jpg"
-   ],
-  "datePublished": "2018-05-17T00:00:00",
-  "dateModified": "2018-05-17T00:00:00",
-  "author": {
-    "@type": "Person",
-    "name": "Craig Johnston"
-  },
-   "publisher": {
-    "@type": "Organization",
-    "name": 'imti.co",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "https:\/\/imti.co\/img\/craig_johnston_cjimti.jpg"
-    }
-  },
-  "description": "Customize the Upstream Nameservers used by kube-dns by Pods when looking up external hostnames from within a Kubernetes cluster. I found that adding custom Upstream Nameservers to my kube-dns solved many issues encountered in in the past with external hostname resolution on individual Pods.\nIf you want to experiment on a production-like cluster, I suggest reading my article \u0026ldquo;Production Hobby Cluster\u0026rdquo; for a guide on setting up a fun, cheap-yet-robust experimental cluster."
-}
+"{\n  \"@context\": \"http://schema.org\",\n  \"@type\": \"Article\",\n  \"author\": {\n    \"@type\": \"Person\",\n    \"name\": \"Craig Johnston\"\n  },\n  \"dateModified\": \"2018-05-17T00:00:00\",\n  \"datePublished\": \"2018-05-17T00:00:00\",\n  \"description\": \"\\u003cp\\u003eCustomize the \\u003ca href=\\\"https://kubernetes.io/docs/tasks/administer-cluster/dns-custom-nameservers/\\\"\\u003eUpstream Nameservers\\u003c/a\\u003e used by \\u003ca href=\\\"https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/\\\"\\u003ekube-dns\\u003c/a\\u003e by \\u003ca href=\\\"https://kubernetes.io/docs/concepts/workloads/pods/pod/\\\"\\u003ePods\\u003c/a\\u003e when looking up external hostnames from within a Kubernetes cluster. I found that adding custom \\u003ca href=\\\"https://kubernetes.io/docs/tasks/administer-cluster/dns-custom-nameservers/\\\"\\u003eUpstream Nameservers\\u003c/a\\u003e to my \\u003ca href=\\\"https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/\\\"\\u003ekube-dns\\u003c/a\\u003e solved many issues encountered in in the past with external hostname resolution on individual \\u003ca href=\\\"https://kubernetes.io/docs/concepts/workloads/pods/pod/\\\"\\u003ePods\\u003c/a\\u003e.\\u003c/p\\u003e\\n\\u003cp\\u003eIf you want to experiment on a production-like cluster, I suggest reading my article \\u0026ldquo;\\u003ca href=\\\"/hobby-cluster/\\\"\\u003eProduction Hobby Cluster\\u003c/a\\u003e\\u0026rdquo; for a guide on setting up a fun, cheap-yet-robust experimental cluster.\\u003c/p\\u003e\\n\\u003cp\\u003eThe following configuration sets the \\u003ca href=\\\"https://kubernetes.io/docs/tasks/administer-cluster/dns-custom-nameservers/\\\"\\u003eUpstream Nameservers\\u003c/a\\u003e to use Google\\u0026rsquo;s \\u003ca href=\\\"https://developers.google.com/speed/public-dns/\\\"\\u003eDNS servers\\u003c/a\\u003e 8.8.8.8 and 8.8.4.4.\\u003c/p\\u003e\",\n  \"headline\": \"Kubernetes Custom Upstream DNS\",\n  \"image\": [\n    \"https://imti.co/img/post/cardindex_876_438.jpg\"\n  ],\n  \"mainEntityOfPage\": {\n    \"@id\": \"https://imti.co/kubernetes-custom-dns/\",\n    \"@type\": \"WebPage\"\n  },\n  \"publisher\": {\n    \"@type\": \"Organization\",\n    \"logo\": {\n      \"@type\": \"ImageObject\",\n      \"url\": \"https://imti.co/img/craig_johnston_cjimti.jpg\"\n    },\n    \"name\": \"imti.co\"\n  }\n}"
 </script>
+
 
 </head></head>
 
@@ -103,7 +79,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="https://imti.co/">IMTI</a>
+            <a class="navbar-brand" href="https://imti.co//">IMTI</a>
         </div>
 
         
@@ -112,10 +88,10 @@
             <div class="navbar-collapse">
                 <ul class="nav navbar-nav navbar-right">
                     <li>
-                        <a href="https://imti.co/">Home</a>
+                        <a href="https://imti.co//">Home</a>
                     </li>
                     <li>
-                        <a href="https://imti.co/about/">About</a>
+                        <a href="https://imti.co//about/">About</a>
                     </li>
                     <li>
                         <a href="https://twitter.com/cjimti">Follow</a>
@@ -212,31 +188,13 @@
 <p>The following configuration sets the <a href="https://kubernetes.io/docs/tasks/administer-cluster/dns-custom-nameservers/">Upstream Nameservers</a> to use Google&rsquo;s <a href="https://developers.google.com/speed/public-dns/">DNS servers</a> 8.8.8.8 and 8.8.4.4.</p>
 <script src="https://gist.github.com/cjimti/3a500e8efffa1fcaedda8b844c7d6aa7.js"></script>
 <p>You can apply the above configuration with the following command:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl apply -f https://gist.githubusercontent.com/cjimti/3a500e8efffa1fcaedda8b844c7d6aa7/raw/ae7329733452dda8cce573fb78f33c22c65cb3fa/00-kube-dns-upstream.yml
-</code></pre></div><p>If you are having trouble with DNS on your Kubernetes cluster, you may want to read the official documentation on <a href="https://kubernetes.io/docs/tasks/administer-cluster/dns-debugging-resolution/">Debugging DNS Resolution</a>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl apply -f https://gist.githubusercontent.com/cjimti/3a500e8efffa1fcaedda8b844c7d6aa7/raw/ae7329733452dda8cce573fb78f33c22c65cb3fa/00-kube-dns-upstream.yml
+</span></span></code></pre></div><p>If you are having trouble with DNS on your Kubernetes cluster, you may want to read the official documentation on <a href="https://kubernetes.io/docs/tasks/administer-cluster/dns-debugging-resolution/">Debugging DNS Resolution</a>.</p>
 <h2 id="port-forwarding--local-development">Port Forwarding / Local Development</h2>
 <p>Check out <a href="https://github.com/txn2/kubefwd">kubefwd</a> for a simple command line utility that bulk forwards services of one or more namespaces to your local workstation.</p>
 <hr>
 <p>If in a few days you find yourself setting up a cluster in Japan or Germany on <a href="https://www.linode.com/?r=848a6b0b21dc8edd33124f05ec8f99207ccddfde">Linode</a>, and another two in Australia and France on <a href="https://www.vultr.com/?ref=7418713">vultr</a>, then you may have just joined the PHC (Performance <a href="/hobby-cluster/">Hobby Cluster</a>s) club. Some people tinker late at night on their truck, we benchmark and test the resilience of node failures on our overseas, budget kubernetes clusters. It&rsquo;s all about going big, on the cheap.</p>
-<div class="ad-div">
-    <a href="https://amzn.to/3hAZUvx">
-        <img src="/img/kubernetes_platform_development.jpg" style="padding:0; margin: 0; width: 50%; float: left"/>
-    </a>
 
-    <div style="padding-left: 15px; overflow:auto;">
-        <a href="https://amzn.to/3hAZUvx">Support this blog! Buy my new book:
-            <h4>Advanced Platform Development with Kubernetes</h4>
-        </a>
-        <h5>What You'll Learn</h5>
-        <ul style="padding-bottom: 0; margin: 0">
-            <li>Build data pipelines with <b>MQTT, NiFi, Logstash, MinIO, Hive, Presto, Kafka and Elasticsearch</b></li>
-            <li>Leverage <b>Serverless</b> ETL with <b>OpenFaaS</b></li>
-            <li>Explore <b>Blockchain</b> networking with <b>Ethereum</b></li>
-            <li>Support a multi-tenant <b>Data Science</b> platform with <b>JupyterHub, MLflow and Seldon Core</b></li>
-            <li>Build a <b>Multi-cloud</b>, <b>Hybrid cluster</b>, securely bridging <b>on-premise</b> and cloud-based Kubernetes nodes</li>
-        </ul>
-    </div>
-</div>
 
 
 
@@ -244,35 +202,6 @@
                    This blog post, titled: "<span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">Kubernetes Custom Upstream DNS: Customize upstream DNS resolution.</span>" by <a xmlns:cc="http://creativecommons.org/ns#" href="https://twitter.com/cjimti" property="cc:attributionName" rel="cc:attributionURL">Craig Johnston</a>, is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
                     <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a>
                 </p>
-
-                <h5>SUPPORT</h5>
-                <p>
-                    Order my new Kubernetes book: <a href="https://amzn.to/34D56v6">Advanced Platform Development with Kubernetes: Enabling Data Management, the Internet of Things, Blockchain, and Machine Learning</a>
-                </p>
-                <script type="text/javascript">
-                  amzn_assoc_tracking_id = "imti-20";
-                  amzn_assoc_ad_mode = "manual";
-                  amzn_assoc_ad_type = "smart";
-                  amzn_assoc_marketplace = "amazon";
-                  amzn_assoc_region = "US";
-                  amzn_assoc_design = "enhanced_links";
-                  amzn_assoc_asins = "1484256107";
-                  amzn_assoc_placement = "adunit";
-                  amzn_assoc_linkid = "14a9d8b8d1b0bd44e9256e0e0a948015";
-                </script>
-                <script src="//z-na.amazon-adsystem.com/widgets/onejs?MarketPlace=US"></script>
-
-                
-                <hr>
-                <h5>SHARE</h5>
-                <ul class="list-inline">
-                    <li><div class="addthis_inline_share_toolbox"></div></li>
-                </ul>
-
-                <h5>FOLLOW</h5>
-                <ul class="list-inline">
-                    <li><div class="addthis_inline_follow_toolbox"></div></li>
-                </ul>
 
             </div>
             
@@ -286,6 +215,8 @@
                     <hr class="hidden-sm hidden-xs">
                     <h5><a href="/tags/">FEATURED TAGS</a></h5>
                     <div class="tags">
+                        
+                        
                         
                         
                         
@@ -305,8 +236,8 @@
                         
                         
                         
-                        <a href="/tags/data-science" title="data-science">
-                        data-science
+                        <a href="/tags/data-science" title="data science">
+                        data science
                         </a>
                         
                         
@@ -381,9 +312,17 @@
                         
                         
                         
+                        <a href="/tags/kubefwd" title="kubefwd">
+                        kubefwd
+                        </a>
+                        
+                        
+                        
                         <a href="/tags/kubernetes" title="kubernetes">
                         kubernetes
                         </a>
+                        
+                        
                         
                         
                         
@@ -417,8 +356,8 @@
                         
                         
                         
-                        <a href="/tags/raspberry-pi" title="raspberry-pi">
-                        raspberry-pi
+                        <a href="/tags/raspberry-pi" title="raspberry pi">
+                        raspberry pi
                         </a>
                         
                         
@@ -466,7 +405,7 @@
                 <ul class="list-inline text-center">
                    
                    <li>
-                       <a href="" rel="alternate" type="application/rss+xml" title="IMTI" >
+                       <a href="/index.xml" rel="alternate" type="application/rss+xml" title="IMTI" >
                            <span class="fa-stack fa-lg">
                                <i class="fa fa-circle fa-stack-2x"></i>
                                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>

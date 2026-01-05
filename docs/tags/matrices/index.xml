@@ -4,18 +4,16 @@
     <title>Matrices on IMTI</title>
     <link>https://imti.co/tags/matrices/</link>
     <description>Recent content in Matrices on IMTI</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 08 Dec 2018 00:00:00 +0000</lastBuildDate><atom:link href="https://imti.co/tags/matrices/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 08 Dec 2018 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://imti.co/tags/matrices/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Linear Algebra: Matrices 1</title>
       <link>https://imti.co/linear-algebra-matrices/</link>
       <pubDate>Sat, 08 Dec 2018 00:00:00 +0000</pubDate>
-      
       <guid>https://imti.co/linear-algebra-matrices/</guid>
-      <description>This article on matrices is part two of an ongoing crash course on programming with linear algebra, demonstrating concepts and implementations in Python. The following examples will demonstrate some of the various mathematical notations and their corresponding implementations, easily translatable to any programming language with mature math libraries.
-This series began with Linear Algebra: Vectors Crash Course for Python Programmers Part 1. Vectors are the building blocks of matrices, and a good foundational understanding of vectors is essential to understanding matrices.</description>
+      <description>&lt;p&gt;This article on &lt;strong&gt;matrices&lt;/strong&gt; is part two of an ongoing crash course on programming with linear algebra, demonstrating concepts and implementations in Python. The following examples will demonstrate some of the various mathematical notations and their corresponding implementations, easily translatable to any programming language with mature math libraries.&lt;/p&gt;&#xA;&lt;p&gt;This series began with &lt;a href=&#34;https://imti.co/linear-algebra-vectors/&#34;&gt;Linear Algebra: Vectors Crash Course for Python Programmers Part 1&lt;/a&gt;. Vectors are the building blocks of matrices, and a good foundational understanding of vectors is essential to understanding matrices.&lt;/p&gt;</description>
     </item>
-    
   </channel>
 </rss>

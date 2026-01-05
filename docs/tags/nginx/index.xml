@@ -1,30 +1,26 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>nginx on IMTI</title>
+    <title>Nginx on IMTI</title>
     <link>https://imti.co/tags/nginx/</link>
-    <description>Recent content in nginx on IMTI</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <description>Recent content in Nginx on IMTI</description>
+    <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 15 May 2018 00:00:00 +0000</lastBuildDate><atom:link href="https://imti.co/tags/nginx/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 15 May 2018 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://imti.co/tags/nginx/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Ingress on Custom Kubernetes</title>
       <link>https://imti.co/web-cluster-ingress/</link>
       <pubDate>Tue, 15 May 2018 00:00:00 +0000</pubDate>
-      
       <guid>https://imti.co/web-cluster-ingress/</guid>
-      <description>There are more than a handful of ways to set up port 80 and 443 web ingress on a custom Kubernetes cluster. Specifically a bare metal cluster. If you are looking to experiment or learn on a non-production cluster, but something more true to production than minikube, I suggest you check out my previous article Production Hobby Cluster, a step-by-step guide for setting up a custom production capable Kubernetes cluster.</description>
+      <description>&lt;p&gt;There are more than a handful of ways to set up port &lt;strong&gt;80&lt;/strong&gt; and &lt;strong&gt;443&lt;/strong&gt; web &lt;a href=&#34;https://github.com/kubernetes/ingress-nginx&#34;&gt;ingress&lt;/a&gt; on a custom &lt;a href=&#34;https://kubernetes.io/&#34;&gt;Kubernetes&lt;/a&gt; cluster. Specifically a bare metal cluster. If you are looking to experiment or learn on a non-production cluster, but something more true to production than &lt;a href=&#34;https://kubernetes.io/docs/getting-started-guides/minikube/&#34;&gt;minikube&lt;/a&gt;, I suggest you check out my previous article &lt;a href=&#34;https://imti.co/hobby-cluster/&#34;&gt;Production Hobby Cluster&lt;/a&gt;, a step-by-step guide for setting up a custom production capable Kubernetes cluster.&lt;/p&gt;&#xA;&lt;p&gt;This article builds on the &lt;a href=&#34;https://imti.co/hobby-cluster/&#34;&gt;Production Hobby Cluster&lt;/a&gt; guide. The following closely the official &lt;a href=&#34;https://github.com/kubernetes/ingress-nginx/blob/master/docs/deploy/index.md&#34;&gt;deploy ingress&lt;/a&gt; Installation Guide with a few adjustments suitable for the &lt;a href=&#34;https://imti.co/hobby-cluster/&#34;&gt;Production Hobby Cluster&lt;/a&gt;, specifically the use of a &lt;a href=&#34;https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/&#34;&gt;DaemonSet&lt;/a&gt; rather than a &lt;a href=&#34;https://kubernetes.io/docs/concepts/workloads/controllers/deployment/&#34;&gt;Deployment&lt;/a&gt; and leveraging &lt;strong&gt;hostNetwork&lt;/strong&gt; and &lt;strong&gt;hostPort&lt;/strong&gt; for the &lt;a href=&#34;https://kubernetes.io/docs/concepts/workloads/pods/pod/&#34;&gt;Pod&lt;/a&gt;s on our &lt;a href=&#34;https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/&#34;&gt;DaemonSet&lt;/a&gt;. There are quite a few &lt;a href=&#34;https://github.com/kubernetes/ingress-nginx/tree/master/docs/examples&#34;&gt;ingress nginx examples&lt;/a&gt; in the official repository if you are looking for a more specific implementation.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Kubernetes - 413 Request Entity Too Large</title>
       <link>https://imti.co/413-request-entity-too-large/</link>
       <pubDate>Sat, 24 Mar 2018 00:00:00 +0000</pubDate>
-      
       <guid>https://imti.co/413-request-entity-too-large/</guid>
-      <description>When setting up nginx ingress on Kubernetes for a private Docker Registry, I ran into an error when trying to push an image to it.
-Error parsing HTTP response: invalid character &#39;&amp;lt;&#39; looking for beginning of value: &amp;quot;&amp;lt;html&amp;gt;\r\n&amp;lt;head&amp;gt;&amp;lt;title&amp;gt;413 Request Entity Too Large&amp;lt;/title&amp;gt;&amp;lt;/head&amp;gt;\r\n&amp;lt;body bgcolor=\&amp;quot;white\&amp;quot;&amp;gt;\r\n&amp;lt;center&amp;gt;&amp;lt;h1&amp;gt;413 Request Entity Too Large&amp;lt;/h1&amp;gt;&amp;lt;/center&amp;gt;\r\n&amp;lt;hr&amp;gt;&amp;lt;center&amp;gt;nginx/1.9.14&amp;lt;/center&amp;gt;\r\n&amp;lt;/body&amp;gt;\r\n&amp;lt;/html&amp;gt;\r\n&amp;quot; The &amp;ldquo;413 Request Entity Too Large&amp;rdquo; error is something many accustomed to running nginx as a standard web server/proxy. nginx is configured to restrict the size of files it will allow over a post.</description>
+      <description>&lt;p&gt;When setting up &lt;a href=&#34;https://github.com/kubernetes/ingress-nginx&#34;&gt;nginx ingress&lt;/a&gt; on &lt;a href=&#34;https://kubernetes.io/&#34;&gt;Kubernetes&lt;/a&gt; for a private &lt;a href=&#34;https://hub.docker.com/_/registry/&#34;&gt;Docker Registry&lt;/a&gt;, I ran into an error when trying to push an image to it.&lt;/p&gt;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;Error parsing HTTP response: invalid character &amp;#39;&amp;lt;&amp;#39; looking for beginning of value: &amp;#34;&amp;lt;html&amp;gt;\r\n&amp;lt;head&amp;gt;&amp;lt;title&amp;gt;413 Request Entity Too Large&amp;lt;/title&amp;gt;&amp;lt;/head&amp;gt;\r\n&amp;lt;body bgcolor=\&amp;#34;white\&amp;#34;&amp;gt;\r\n&amp;lt;center&amp;gt;&amp;lt;h1&amp;gt;413 Request Entity Too Large&amp;lt;/h1&amp;gt;&amp;lt;/center&amp;gt;\r\n&amp;lt;hr&amp;gt;&amp;lt;center&amp;gt;nginx/1.9.14&amp;lt;/center&amp;gt;\r\n&amp;lt;/body&amp;gt;\r\n&amp;lt;/html&amp;gt;\r\n&amp;#34;&#xA;&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;The &amp;ldquo;413 Request Entity Too Large&amp;rdquo; error is something many accustomed to running &lt;a href=&#34;https://www.nginx.com/&#34;&gt;nginx&lt;/a&gt; as a standard web server/proxy. &lt;a href=&#34;https://www.nginx.com/&#34;&gt;nginx&lt;/a&gt; is configured to restrict the size of files it will allow over a post. This restriction helps avoid some DoS attacks. The default values are easy to adjust in the Nginx configuration. However, in the &lt;a href=&#34;https://kubernetes.io/&#34;&gt;Kubernetes&lt;/a&gt; world things are a bit different. I prefer to do things the &lt;a href=&#34;https://kubernetes.io/&#34;&gt;Kubernetes&lt;/a&gt; way; however, there is still a lack of established configuration idioms, since part of its appeal is flexibility. One thousand different ways of doing something means ten thousand variations of remedies to every potential problem. Googling errors in the &lt;a href=&#34;https://kubernetes.io/&#34;&gt;Kubernetes&lt;/a&gt; world leads to a mess of solutions not always explicitly tied to an implementation. I am hoping that as &lt;a href=&#34;https://kubernetes.io/&#34;&gt;Kubernetes&lt;/a&gt; continues to gain popularity more care will be taken to provide context for solutions to common problems.&lt;/p&gt;</description>
     </item>
-    
   </channel>
 </rss>

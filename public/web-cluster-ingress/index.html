@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><head>
+    <meta name="msvalidate.01" content="DBC34551F2DD1BA3DC0D62EE46D7448F" />
+    <meta name="google-site-verification" content="DrtKc88u9uc7iptd4LyURAKBmFcOn7Kuk6HcRk_kNmo" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <meta name="description" content="Setting up ingress-nginx on a custom cluster.">
+    
+    <meta name="keyword"  content="Go, Kubernetes, Elasticsearch, Python, Docker, Big Data, Artificial Intelligence, Machine Learning">
+    <link rel="shortcut icon" href="http://localhost:1313/img/favicon.ico">
+
+    <title>Ingress on Custom Kubernetes - IMTI - Craig Johnston</title>
+
+    <link rel="canonical" href="http://localhost:1313/web-cluster-ingress/">
+	
+    
+    <link rel="stylesheet" href="http://localhost:1313/css/bootstrap.min.css">
+
+    
+    <link rel="stylesheet" href="http://localhost:1313/css/hux-blog.min.css">
+
+    
+    <link rel="stylesheet" href="http://localhost:1313/css/syntax.css">
+
+    
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    
+    
+    <link rel="stylesheet" href="/css/imti.css">
+
+    
+    <script src="http://localhost:1313/js/jquery.min.js"></script>
+    
+    
+    <script src="http://localhost:1313/js/bootstrap.min.js"></script>
+    
+    
+    <script src="http://localhost:1313/js/hux-blog.min.js"></script>
+
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({
+            google_ad_client: "ca-pub-5984764595236029",
+            enable_page_level_ads: true
+        });
+    </script>
+
+    <meta name="twitter:site" content="@cjimti">
+<meta name="twitter:creator" content="@cjimti">
+
+<meta name="twitter:description" content="Setting up ingress-nginx on a custom cluster." />
+<meta name="twitter:title" content="Ingress on Custom Kubernetes" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="http://localhost:1313/img/post/hoses_876_438.jpg" />
+<meta property="og:image" content="http://localhost:1313/img/post/hoses_876_438.jpg" />
+
+
+
+    
+
+<script type="application/ld+json">
+"{\n  \"@context\": \"http://schema.org\",\n  \"@type\": \"Article\",\n  \"author\": {\n    \"@type\": \"Person\",\n    \"name\": \"Craig Johnston\"\n  },\n  \"dateModified\": \"2018-05-15T00:00:00\",\n  \"datePublished\": \"2018-05-15T00:00:00\",\n  \"description\": \"\\u003cp\\u003eThere are more than a handful of ways to set up port \\u003cstrong\\u003e80\\u003c/strong\\u003e and \\u003cstrong\\u003e443\\u003c/strong\\u003e web \\u003ca href=\\\"https://github.com/kubernetes/ingress-nginx\\\"\\u003eingress\\u003c/a\\u003e on a custom \\u003ca href=\\\"https://kubernetes.io/\\\"\\u003eKubernetes\\u003c/a\\u003e cluster. Specifically a bare metal cluster. If you are looking to experiment or learn on a non-production cluster, but something more true to production than \\u003ca href=\\\"https://kubernetes.io/docs/getting-started-guides/minikube/\\\"\\u003eminikube\\u003c/a\\u003e, I suggest you check out my previous article \\u003ca href=\\\"/hobby-cluster/\\\"\\u003eProduction Hobby Cluster\\u003c/a\\u003e, a step-by-step guide for setting up a custom production capable Kubernetes cluster.\\u003c/p\\u003e\\n\\u003cp\\u003eThis article builds on the \\u003ca href=\\\"/hobby-cluster/\\\"\\u003eProduction Hobby Cluster\\u003c/a\\u003e guide. The following closely the official \\u003ca href=\\\"https://github.com/kubernetes/ingress-nginx/blob/master/docs/deploy/index.md\\\"\\u003edeploy ingress\\u003c/a\\u003e Installation Guide with a few adjustments suitable for the \\u003ca href=\\\"/hobby-cluster/\\\"\\u003eProduction Hobby Cluster\\u003c/a\\u003e, specifically the use of a \\u003ca href=\\\"https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/\\\"\\u003eDaemonSet\\u003c/a\\u003e rather than a \\u003ca href=\\\"https://kubernetes.io/docs/concepts/workloads/controllers/deployment/\\\"\\u003eDeployment\\u003c/a\\u003e and leveraging \\u003cstrong\\u003ehostNetwork\\u003c/strong\\u003e and \\u003cstrong\\u003ehostPort\\u003c/strong\\u003e for the \\u003ca href=\\\"https://kubernetes.io/docs/concepts/workloads/pods/pod/\\\"\\u003ePod\\u003c/a\\u003es on our \\u003ca href=\\\"https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/\\\"\\u003eDaemonSet\\u003c/a\\u003e. There are quite a few \\u003ca href=\\\"https://github.com/kubernetes/ingress-nginx/tree/master/docs/examples\\\"\\u003eingress nginx examples\\u003c/a\\u003e in the official repository if you are looking for a more specific implementation.\\u003c/p\\u003e\",\n  \"headline\": \"Ingress on Custom Kubernetes\",\n  \"image\": [\n    \"http://localhost:1313/img/post/hoses_876_438.jpg\"\n  ],\n  \"mainEntityOfPage\": {\n    \"@id\": \"http://localhost:1313/web-cluster-ingress/\",\n    \"@type\": \"WebPage\"\n  },\n  \"publisher\": {\n    \"@type\": \"Organization\",\n    \"logo\": {\n      \"@type\": \"ImageObject\",\n      \"url\": \"http://localhost:1313/img/craig_johnston_cjimti.jpg\"\n    },\n    \"name\": \"imti.co\"\n  }\n}"
+</script>
+
+
+</head></head>
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="http://localhost:1313//">IMTI</a>
+        </div>
+
+        
+        
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="http://localhost:1313//">Home</a>
+                    </li>
+                    <li>
+                        <a href="http://localhost:1313//about/">About</a>
+                    </li>
+                    <li>
+                        <a href="https://twitter.com/cjimti">Follow</a>
+                    </li>
+                    
+
+                    
+                </ul>
+            </div>
+        </div>
+        
+    </div>
+    
+</nav>
+<script>
+    
+    
+    
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        
+            $navbar.className = " ";
+            
+            setTimeout(function(){
+                
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+
+
+<style type="text/css">
+    header.intro-header{
+        background-image: url('http://localhost:1313/img/post/hoses.jpg')
+    }
+</style>
+<header class="intro-header" >
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/kubernetes" title="Kubernetes">
+                        Kubernetes
+                        </a>
+                        
+                        <a class="tag" href="/tags/ingress" title="ingress">
+                        ingress
+                        </a>
+                        
+                        <a class="tag" href="/tags/nginx" title="nginx">
+                        nginx
+                        </a>
+                        
+                    </div>
+                    <h1>Ingress on Custom Kubernetes</h1>
+                    <h2 class="subheading">Setting up ingress-nginx on a custom cluster.</h2>
+                    <span  class="meta">Posted by <a href="https://twitter.com/cjimti">Craig Johnston</a> on Tuesday, May 15, 2018
+                        
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+<article>
+    <div class="container">
+        <div class="row">
+
+            
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <p>There are more than a handful of ways to set up port <strong>80</strong> and <strong>443</strong> web <a href="https://github.com/kubernetes/ingress-nginx">ingress</a> on a custom <a href="https://kubernetes.io/">Kubernetes</a> cluster. Specifically a bare metal cluster. If you are looking to experiment or learn on a non-production cluster, but something more true to production than <a href="https://kubernetes.io/docs/getting-started-guides/minikube/">minikube</a>, I suggest you check out my previous article <a href="/hobby-cluster/">Production Hobby Cluster</a>, a step-by-step guide for setting up a custom production capable Kubernetes cluster.</p>
+<p>This article builds on the <a href="/hobby-cluster/">Production Hobby Cluster</a> guide. The following closely the official <a href="https://github.com/kubernetes/ingress-nginx/blob/master/docs/deploy/index.md">deploy ingress</a> Installation Guide with a few adjustments suitable for the <a href="/hobby-cluster/">Production Hobby Cluster</a>, specifically the use of a <a href="https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/">DaemonSet</a> rather than a <a href="https://kubernetes.io/docs/concepts/workloads/controllers/deployment/">Deployment</a> and leveraging <strong>hostNetwork</strong> and <strong>hostPort</strong> for the <a href="https://kubernetes.io/docs/concepts/workloads/pods/pod/">Pod</a>s on our <a href="https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/">DaemonSet</a>. There are quite a few <a href="https://github.com/kubernetes/ingress-nginx/tree/master/docs/examples">ingress nginx examples</a> in the official repository if you are looking for a more specific implementation.</p>
+<p>By now you may be managing multiple clusters. <a href="https://kubernetes.io/docs/tasks/tools/install-kubectl/">kubectl</a> is a great tool to use on your local workstation to manage remote clusters, and with little effort you can quickly point it to a new cluster and switch between them all day. Check out my article <a href="/kubectl-remote-context/">kubectl Context Multiple Clusters</a> for a quick tutorial.</p>
+
+
+<h3 id="namespace">Namespace</h3>
+<p>Setup a new <a href="https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/">namespace</a> called <strong>ingress-nginx</strong></p>
+<script src="https://gist.github.com/cjimti/591d65a6940a87e7136bf0f51f438088.js"></script>
+<p>Create using the configuration:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl create -f https://gist.githubusercontent.com/cjimti/591d65a6940a87e7136bf0f51f438088/raw/0c5db06855d285d8a8b5bac1bfa6c9ed64b00c3b/00-namespace.yml
+</span></span></code></pre></div><h3 id="default-backend">Default Backend</h3>
+<p>Next, create a <a href="https://kubernetes.io/docs/concepts/workloads/controllers/deployment/">Deployment</a> and a <a href="https://kubernetes.io/docs/concepts/services-networking/service/">Service</a> for the ingress controller.</p>
+<script src="https://gist.github.com/cjimti/78a8ce1be09a9e874f6af54a6c8e4714.js"></script>
+<p>Create using the configuration:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl create -f https://gist.githubusercontent.com/cjimti/78a8ce1be09a9e874f6af54a6c8e4714/raw/95b172435fbc2b4551daf375e19f569bd9cc3aec/01-default-backend.yml
+</span></span></code></pre></div><h3 id="ingress-nginx-configmap">Ingress Nginx <a href="https://kubernetes.io/docs/tasks/configure-pod-container/configure-pod-configmap/">ConfigMap</a></h3>
+<p>Create an empty <a href="https://kubernetes.io/docs/tasks/configure-pod-container/configure-pod-configmap/">ConfigMap</a> for <strong>ingress-nginx</strong>.</p>
+<script src="https://gist.github.com/cjimti/dc2841651c68a463b8990e6ce2ddb0c8.js"></script>
+<p>Create using the configuration:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl create -f https://gist.githubusercontent.com/cjimti/dc2841651c68a463b8990e6ce2ddb0c8/raw/2d4af61ac416e7494dac37c2eaf8bb024a1306a2/02-empty-configmap.yml
+</span></span></code></pre></div><h3 id="tcp-services-configmap">TCP Services <a href="https://kubernetes.io/docs/tasks/configure-pod-container/configure-pod-configmap/">ConfigMap</a></h3>
+<p>Create an empty <a href="https://kubernetes.io/docs/tasks/configure-pod-container/configure-pod-configmap/">ConfigMap</a> for <strong>ingress-nginx</strong> TCP Services.</p>
+<script src="https://gist.github.com/cjimti/66605e303591b61e1baa347547336f2c.js"></script>
+<p>Create using the configuration:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl create -f https://gist.githubusercontent.com/cjimti/66605e303591b61e1baa347547336f2c/raw/eb6d3a6d1c5d0a47e4105a21d73573cb8e844406/03-tcp-services-configmap.yaml
+</span></span></code></pre></div><h3 id="udp-services-configmap">UDP Services <a href="https://kubernetes.io/docs/tasks/configure-pod-container/configure-pod-configmap/">ConfigMap</a></h3>
+<p>Create an empty <a href="https://kubernetes.io/docs/tasks/configure-pod-container/configure-pod-configmap/">ConfigMap</a> for <strong>ingress-nginx</strong> UDP Services.</p>
+<script src="https://gist.github.com/cjimti/ddb750c825e42ffd398da4590d4b61f7.js"></script>
+<p>Create using the configuration:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl create -f https://gist.githubusercontent.com/cjimti/ddb750c825e42ffd398da4590d4b61f7/raw/88061f9096e11be3457967b3ad5be6c2a1dcf68e/04-udp-services-configmap.yaml
+</span></span></code></pre></div><h3 id="rbac---ingress-roles-and-permissions">RBAC - Ingress Roles and Permissions</h3>
+<p>Here we setup a <a href="https://kubernetes.io/docs/admin/service-accounts-admin/">ServiceAccount</a> named <strong>nginx-ingress-serviceaccount</strong>, a <a href="https://kubernetes.io/docs/admin/authorization/rbac/#role-and-clusterrole">ClusterRole</a> named <strong>nginx-ingress-clusterrole</strong>, a <a href="https://kubernetes.io/docs/admin/authorization/rbac/#role-and-clusterrole">Role</a> named <strong>nginx-ingress-role</strong>, a <a href="https://kubernetes.io/docs/admin/authorization/rbac/#rolebinding-and-clusterrolebinding">RoleBinding</a> named <strong>nginx-ingress-role-nisa-binding</strong> and a <a href="https://kubernetes.io/docs/admin/authorization/rbac/#rolebinding-and-clusterrolebinding">ClusterRoleBinding</a> named
+<strong>nginx-ingress-clusterrole-nisa-binding</strong>:</p>
+<script src="https://gist.github.com/cjimti/b06886efc6313192282224d7c84c2151.js"></script>
+<p>Create using the configuration:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl create -f https://gist.githubusercontent.com/cjimti/b06886efc6313192282224d7c84c2151/raw/0c0c6501124c96d7229cafaeafe9f2a00db3fbea/05-rbac.yml
+</span></span></code></pre></div><h3 id="daemonset"><a href="https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/">DaemonSet</a></h3>
+<p>Creating a <a href="https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/">DaemonSet</a> ensures that we have one Ingress Nginx controller <a href="https://kubernetes.io/docs/concepts/workloads/pods/pod/">Pod</a> running on each node. Having an Ingress Controller on each node is crucial since we are using the host network and assigning the host ports 80 and 443 for HTTP and HTTPS ingress on each node. When adding a new node to the cluster, the <a href="https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/">DaemonSet</a> ensures it gets an Ingress Nginx controller <a href="https://kubernetes.io/docs/concepts/workloads/pods/pod/">Pod</a>.</p>
+<script src="https://gist.github.com/cjimti/b9e820a18b06bd8a735b3b0676724826.js"></script>
+<p>Create using the configuration:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl create -f https://gist.githubusercontent.com/cjimti/b9e820a18b06bd8a735b3b0676724826/raw/d4a0317cfe4ae4c4739d1d04e94c55b8d1426a98/06-ds.yaml
+</span></span></code></pre></div><h3 id="service">Service</h3>
+<p>Add an <strong>ingress-nginx</strong> <a href="https://kubernetes.io/docs/concepts/services-networking/service/">Service</a>.</p>
+<script src="https://gist.github.com/cjimti/d733ed08d59b3779233fb6edc175bb75.js"></script>
+<p>Create using the configuration:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl create -f https://gist.githubusercontent.com/cjimti/d733ed08d59b3779233fb6edc175bb75/raw/a62765921f4fff395032d0e1f0a6db2cb773ab1c/07-service-nodeport.yaml
+</span></span></code></pre></div><h3 id="test">Test</h3>
+<p>Make sure the <strong>default-http-backend</strong> <a href="https://kubernetes.io/docs/concepts/workloads/pods/pod/">pod</a> and <strong>nginx-ingress-controller</strong> controller <a href="https://kubernetes.io/docs/concepts/workloads/pods/pod/">pod</a>s are running, the <strong>nginx-ingress-controller</strong> should be running on each node.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl get pods -n ingress-nginx -o wide
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># example output</span>
+</span></span><span style="display:flex;"><span>NAME                                   READY     STATUS    RESTARTS   AGE       IP               NODE
+</span></span><span style="display:flex;"><span>default-http-backend-5c6d95c48-wbvw9   1/1       Running   <span style="color:#ae81ff">0</span>          1d        10.42.0.0        la2
+</span></span><span style="display:flex;"><span>nginx-ingress-controller-v44xz         1/1       Running   <span style="color:#ae81ff">0</span>          1d        45.77.71.39      la2
+</span></span><span style="display:flex;"><span>nginx-ingress-controller-wbb52         1/1       Running   <span style="color:#ae81ff">0</span>          1d        149.28.77.205    la3
+</span></span><span style="display:flex;"><span>nginx-ingress-controller-wjhcf         1/1       Running   <span style="color:#ae81ff">7</span>          1d        108.61.214.169   la1
+</span></span></code></pre></div><p>Test each node by issuing a simple <code>curl</code> call:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># Example call</span>
+</span></span><span style="display:flex;"><span>curl -v 45.77.71.39/
+</span></span><span style="display:flex;"><span>*   Trying 45.77.71.39...
+</span></span><span style="display:flex;"><span>* TCP_NODELAY set
+</span></span><span style="display:flex;"><span>* Connected to 45.77.71.39 <span style="color:#f92672">(</span>45.77.71.39<span style="color:#f92672">)</span> port <span style="color:#ae81ff">80</span> <span style="color:#f92672">(</span><span style="color:#75715e">#0)</span>
+</span></span><span style="display:flex;"><span>&gt; GET / HTTP/1.1
+</span></span><span style="display:flex;"><span>&gt; Host: 45.77.71.39
+</span></span><span style="display:flex;"><span>&gt; User-Agent: curl/7.54.0
+</span></span><span style="display:flex;"><span>&gt; Accept: */*
+</span></span><span style="display:flex;"><span>&gt; 
+</span></span><span style="display:flex;"><span>&lt; HTTP/1.1 <span style="color:#ae81ff">404</span> Not Found
+</span></span><span style="display:flex;"><span>&lt; Server: nginx/1.13.12
+</span></span><span style="display:flex;"><span>&lt; Date: Thu, <span style="color:#ae81ff">17</span> May <span style="color:#ae81ff">2018</span> 20:50:32 GMT
+</span></span><span style="display:flex;"><span>&lt; Content-Type: text/plain; charset<span style="color:#f92672">=</span>utf-8
+</span></span><span style="display:flex;"><span>&lt; Content-Length: <span style="color:#ae81ff">21</span>
+</span></span><span style="display:flex;"><span>&lt; Connection: keep-alive
+</span></span><span style="display:flex;"><span>&lt; 
+</span></span><span style="display:flex;"><span>* Connection <span style="color:#75715e">#0 to host 45.77.71.39 left intact</span>
+</span></span><span style="display:flex;"><span>default backend - <span style="color:#ae81ff">404</span>
+</span></span><span style="display:flex;"><span>~
+</span></span></code></pre></div><p>In this case, the <strong>nginx-ingress-controller</strong> <a href="https://kubernetes.io/docs/concepts/workloads/pods/pod/">Pod</a> running on 45.77.71.39 responded adequately by passing the unknown route to the <strong>default-http-backend</strong> which correctly output a basic 404 page. Issue a <code>curl</code> call (or browse to them in a web browser) to each of your Nodes to test them.</p>
+<h3 id="add-an-ingress">Add an Ingress</h3>
+<p>We are finally at a spot where we can start routing ingress to services. If you don&rsquo;t already have a service to route to, I recommend using the <a href="https://txn2.com">txn2</a> <strong><a href="https://github.com/txn2/ok">ok</a></strong> service. <a href="https://github.com/txn2/ok">ok</a> is specifically designed to give useful information when testing <a href="https://kubernetes.io/docs/concepts/workloads/pods/pod/">Pod</a> deployments.</p>
+<h4 id="ok-deployment"><a href="https://github.com/txn2/ok">ok</a> Deployment</h4>
+<p>Here we add a <a href="https://kubernetes.io/docs/concepts/workloads/controllers/deployment/">Deployment</a> of <a href="https://github.com/txn2/ok">ok</a> with one replica.</p>
+<script src="https://gist.github.com/cjimti/bc293996ddcc3bf0cb9e5c3514ef1853.js"></script>
+<p>Use the following command to add the <a href="https://kubernetes.io/docs/concepts/workloads/controllers/deployment/">Deployment</a>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl create -f https://gist.githubusercontent.com/cjimti/bc293996ddcc3bf0cb9e5c3514ef1853/raw/18a26df0df3d239b679446af8b7b55f29d2271ba/00-ok-deployment.yml
+</span></span></code></pre></div><h4 id="ok-service"><a href="https://github.com/txn2/ok">ok</a> Service</h4>
+<p>Create an <a href="https://github.com/txn2/ok">ok</a> service to front-end our new <a href="https://github.com/txn2/ok">ok</a> <a href="https://kubernetes.io/docs/concepts/workloads/controllers/deployment/">Deployment</a> above.</p>
+<script src="https://gist.github.com/cjimti/ae86bb7d3f777ac61e9ff9794ca52521.js"></script>
+<p>Use the following command to add the <a href="https://kubernetes.io/docs/concepts/services-networking/service/">Service</a>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl create -f https://gist.githubusercontent.com/cjimti/ae86bb7d3f777ac61e9ff9794ca52521/raw/b4f4bf26bf5526953bcc4e0c538887bfa7be1484/10-ok-service.yml
+</span></span></code></pre></div><h4 id="ok-ingress"><a href="https://github.com/txn2/ok">ok</a> Ingress</h4>
+<p>Finally, we have the easy task of creating an ingress route. The following is a minimal template since you need to point a domain name to your cluster:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">extensions/v1beta1</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Ingress</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">metadata</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">ok</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">labels</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">app</span>: <span style="color:#ae81ff">ok</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">system</span>: <span style="color:#ae81ff">test</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">spec</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">rules</span>:
+</span></span><span style="display:flex;"><span>  - <span style="color:#f92672">host</span>: <span style="color:#ae81ff">ok.la.txn2.net</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">http</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">paths</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#f92672">backend</span>:
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">serviceName</span>: <span style="color:#ae81ff">ok</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">servicePort</span>: <span style="color:#ae81ff">8080</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">path</span>: <span style="color:#ae81ff">/</span>
+</span></span></code></pre></div><p>I will go over https and managing certificates in future articles. For now you may want to checkout other <a href="https://github.com/kubernetes/ingress-nginx/tree/master/docs/examples">ingress nginx examples</a>.</p>
+<h2 id="port-forwarding--local-development">Port Forwarding / Local Development</h2>
+<p>Check out <a href="https://github.com/txn2/kubefwd">kubefwd</a> for a simple command line utility that bulk forwards services of one or more namespaces to your local workstation.</p>
+<hr>
+<p>If in a few days you find yourself setting up a cluster in Japan or Germany on <a href="https://www.linode.com/?r=848a6b0b21dc8edd33124f05ec8f99207ccddfde">Linode</a>, and another two in Australia and France on <a href="https://www.vultr.com/?ref=7418713">vultr</a>, then you may have just joined the PHC (Performance <a href="/hobby-cluster/">Hobby Cluster</a>s) club. Some people tinker late at night on their truck, we benchmark and test the resilience of node failures on our overseas, budget kubernetes clusters. It&rsquo;s all about going big, on the cheap.</p>
+<p><a href="https://amzn.to/2IOe8Yu"><img src="https://github.com/cjimti/mk/raw/master/images/content/k8s-tshirt-banner.jpg" alt="k8s performance hobby clusters"></a></p>
+<h2 id="resources">Resources</h2>
+<ul>
+<li>Kubernetes <a href="https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/">DaemonSet</a>.</li>
+<li><a href="https://github.com/kubernetes/ingress-nginx/blob/master/docs/deploy/index.md">deploy ingress</a> on Kubernetes.</li>
+<li>Nginx <a href="https://github.com/kubernetes/ingress-nginx">ingress</a> controller.</li>
+<li><a href="https://www.linode.com/?r=848a6b0b21dc8edd33124f05ec8f99207ccddfde">Linode</a> hosting.</li>
+<li><a href="https://m.do.co/c/97b733e7eba4">Digital Ocean</a> hosting.</li>
+<li><a href="https://www.vultr.com/?ref=7418713">Vultr</a> hosting.</li>
+<li>Using <a href="https://kubernetes.io/docs/concepts/configuration/organize-cluster-access-kubeconfig/">KUBECONFIG</a> for multiple configuration files.</li>
+<li><a href="https://wiki.ubuntu.com/systemd">systemd</a> help.</li>
+<li><a href="https://www.weave.works/oss/net/">Weave Net</a> container networking.</li>
+<li><a href="https://coreos.com/etcd/docs/latest/getting-started-with-etcd.html">Etcd</a> distributed keystore.</li>
+<li><a href="https://www.wireguard.io/">WireGuard</a> VPN.</li>
+<li><a href="https://kubernetes.io/docs/getting-started-guides/minikube/">minikube</a></li>
+<li><a href="https://github.com/hobby-kube/guide">Hobby Kube</a> A fantastic write-up (with terraform scripts) and how I got started.</li>
+</ul>
+
+
+                <p>
+                   This blog post, titled: "<span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">Ingress on Custom Kubernetes: Setting up ingress-nginx on a custom cluster.</span>" by <a xmlns:cc="http://creativecommons.org/ns#" href="https://twitter.com/cjimti" property="cc:attributionName" rel="cc:attributionURL">Craig Johnston</a>, is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+                    <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a>
+                </p>
+
+            </div>
+            
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                
+                <section>
+                    <hr class="hidden-sm hidden-xs">
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/blockchain" title="blockchain">
+                        blockchain
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/data" title="data">
+                        data
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/data-science" title="data science">
+                        data science
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/development" title="development">
+                        development
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/devops" title="devops">
+                        devops
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/docker" title="docker">
+                        docker
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/elasticsearch" title="elasticsearch">
+                        elasticsearch
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/golang" title="golang">
+                        golang
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/ingress" title="ingress">
+                        ingress
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/iot" title="iot">
+                        iot
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/kubectl" title="kubectl">
+                        kubectl
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/kubefwd" title="kubefwd">
+                        kubefwd
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/kubernetes" title="kubernetes">
+                        kubernetes
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/microservices" title="microservices">
+                        microservices
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/python" title="python">
+                        python
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/raspberry-pi" title="raspberry pi">
+                        raspberry pi
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/security" title="security">
+                        security
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/utils" title="utils">
+                        utils
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                    </div>
+                </section>
+
+                
+                <hr>
+                <h5>RELATED</h5>
+                <ul class="list-inline">
+                    
+                </ul>
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                   
+                   <li>
+                       <a href="/index.xml" rel="alternate" type="application/rss+xml" title="IMTI" >
+                           <span class="fa-stack fa-lg">
+                               <i class="fa fa-circle fa-stack-2x"></i>
+                               <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+                           </span>
+                       </a>
+                   </li>
+                   
+                    
+                    <li>
+                        <a href="mailto:cjimti@gmail.com">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                    
+                    
+                    <li>
+                        <a href="https://twitter.com/cjimti">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    
+
+                    
+
+		    
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/cjimti">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                    
+                    <li>
+                        <a target="_blank" href="https://www.linkedin.com/in/cjimti/">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                </ul>
+
+                
+                
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+
+
+
+
+<script>
+    
+    if($('#tag_cloud').length !== 0){
+        async("/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-R56SP4WLS2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-R56SP4WLS2');
+</script>
+
+</body>
+</html>

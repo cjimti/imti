@@ -8,12 +8,12 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
-    <meta name="description" content="I lead a talented team of software development and creative engineers, covering many industries looking to collect, analyze, move, buffer, queue, process and present data in significant ways. My expertise and that of my team revolve around microservices, artificial intelligence, algorithms, machine learning and blockchain technologies.">
+    <meta name="description" content="I lead a talented team of software development and creative engineers, covering many industries looking to collect, analyze, move, buffer, queue, process and present data in significant ways. My expertise and that of my team revolve around microservices, artificial intelligence, algorithms, and machine learning.">
     
-    <meta name="keyword"  content="Go, Kubernetes, Elasticsearch, Python, Docker, Big Data, Artificial Intelligence, Machine Learning, Blockchain">
+    <meta name="keyword"  content="Go, Kubernetes, Elasticsearch, Python, Docker, Big Data, Artificial Intelligence, Machine Learning">
     <link rel="shortcut icon" href="https://imti.co/img/favicon.ico">
 
-    <title>security - IMTI - Craig Johnston</title>
+    <title>Security - IMTI - Craig Johnston</title>
 
     <link rel="canonical" href="https://imti.co/tags/security/">
 	
@@ -57,6 +57,7 @@
 
 
     
+
 </head></head>
 
 <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
@@ -69,7 +70,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="https://imti.co/">IMTI</a>
+            <a class="navbar-brand" href="https://imti.co//">IMTI</a>
         </div>
 
         
@@ -78,10 +79,10 @@
             <div class="navbar-collapse">
                 <ul class="nav navbar-nav navbar-right">
                     <li>
-                        <a href="https://imti.co/">Home</a>
+                        <a href="https://imti.co//">Home</a>
                     </li>
                     <li>
-                        <a href="https://imti.co/about/">About</a>
+                        <a href="https://imti.co//about/">About</a>
                     </li>
                     <li>
                         <a href="https://twitter.com/cjimti">Follow</a>
@@ -134,8 +135,7 @@
                 <div class="site-heading">
                     <h1>IMTI</h1>
                     
-		            <span class="subheading">(I Make Things Interesting)
-Architecting, Developing, nixCraft, DevOps, AI/ML, Blockchain</span>
+		            <span class="subheading">Architecting, Developing, SRE, DevOps, AI/ML</span>
                 </div>
             </div>
         </div>
@@ -170,8 +170,8 @@ Architecting, Developing, nixCraft, DevOps, AI/ML, Blockchain</span>
 	
         <div class="post-content-preview">
 	
-            RBAC (Role Based Access Control) allows our Kubernetes clusters to provide the development team better visibility and access into the development, staging and production environments than it has have ever had in the past. Developers using the command line tool kubectl, can explore the network topology of running microservices, tail live server logs, proxy local ports directly to services or even execute shells into running pods.
-Kubernetes and GitlabCI are the central components of our DevOps toolchain and have increased our productivity by many multiples over the traditional approaches of the past.
+            <p>RBAC (Role Based Access Control) allows our Kubernetes clusters to provide the development team better visibility and access into the development, staging and production environments than it has have ever had in the past. Developers using the command line tool <strong><a href="https://kubernetes.io/docs/reference/kubectl/kubectl/">kubectl</a></strong>, can explore the network topology of running <a href="/microservices/">microservices</a>, tail live server logs, proxy local ports directly to services or even execute shells into running pods.</p>
+<p><a href="/gitlabci-golang-microservices/">Kubernetes and GitlabCI</a> are the central components of our DevOps toolchain and have increased our productivity by many multiples over the traditional approaches of the past.</p>
        
         </div>
     </a>
@@ -193,7 +193,7 @@ Kubernetes and GitlabCI are the central components of our DevOps toolchain and h
 	
         <div class="post-content-preview">
 	
-            Reverse proxies are standard components in many web architectures, from Nginx in front of php-fpm serving Drupal or Wordpress, to endless mixtures of load balancers, security appliances, and popular firewall applications. Reverse proxies differ from forward proxies in little but their intended implementation, be it service-side or client side. The following information is useful in either context. However, I focus on a service-side architecture. Further down this article, I&rsquo;ll be going over the reasonably simple go code needed to develop a basic, yet production quality proxy, but first I&rsquo;ll give you my take on why they solve so many problems and offer up my little workhorse, n2proxy.
+            <p>Reverse proxies are standard components in many web architectures, from <a href="https://www.nginx.com/">Nginx</a> in front of <a href="https://php-fpm.org/">php-fpm</a> serving <a href="http://www.drupal.com/">Drupal</a> or <a href="https://wordpress.org/">Wordpress</a>, to endless mixtures of load balancers, security appliances, and popular firewall applications. <a href="https://www.jscape.com/blog/bid/87783/Forward-Proxy-vs-Reverse-Proxy">Reverse proxies differ from forward proxies</a> in little but their intended implementation, be it service-side or client side. The following information is useful in either context. However, I focus on a service-side architecture. Further down this article, I&rsquo;ll be going over the reasonably simple <a href="https://golang.org/">go</a> code needed to develop a basic, yet production quality proxy, but first I&rsquo;ll give you my take on why they solve so many problems and offer up my little workhorse, <a href="https://github.com/txn2/n2proxy">n2proxy</a>.</p>
        
         </div>
     </a>
@@ -215,9 +215,34 @@ Kubernetes and GitlabCI are the central components of our DevOps toolchain and h
 	
         <div class="post-content-preview">
 	
-            Using ingress-nginx on Kubernetes makes adding CORS headers painless. Kubernetes ingress-nginx uses annotations as a quick way to allow you to specify the automatic generation of an extensive list of common nginx configuration options.
-Example ingress configuration enabling CORS:
-apiVersion: extensions/v1beta1 kind: Ingress metadata: name: api namespace: fuse labels: app: api annotations: nginx.ingress.kubernetes.io/enable-cors: &#34;true&#34; nginx.ingress.kubernetes.io/cors-allow-methods: &#34;PUT, GET, POST, OPTIONS&#34; nginx.ingress.kubernetes.io/cors-allow-origin: &#34;https://admin.example.com&#34; nginx.ingress.kubernetes.io/cors-allow-credentials: &#34;true&#34; spec: rules: - host: api.example.com http: paths: - backend: serviceName: api-example servicePort: 80 path: /api tls: - hosts: - api.
+            <p>Using <a href="/web-cluster-ingress/">ingress</a>-nginx on <a href="https://kubernetes.io/">Kubernetes</a> makes adding <a href="https://en.wikipedia.org/wiki/Cross-origin_resource_sharing">CORS</a> headers painless. Kubernetes <a href="/web-cluster-ingress/">ingress</a>-nginx uses <a href="https://github.com/kubernetes/ingress-nginx/blob/master/docs/user-guide/nginx-configuration/annotations.md">annotations</a> as a quick way to allow you to specify the automatic generation of an extensive list of common <a href="http://nginx.org/en/docs/beginners_guide.html">nginx</a> configuration options.</p>
+<p>Example <a href="/web-cluster-ingress/">ingress</a> configuration enabling <a href="https://en.wikipedia.org/wiki/Cross-origin_resource_sharing">CORS</a>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">extensions/v1beta1</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Ingress</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">metadata</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">api</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">namespace</span>: <span style="color:#ae81ff">fuse</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">labels</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">app</span>: <span style="color:#ae81ff">api</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">annotations</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">nginx.ingress.kubernetes.io/enable-cors</span>: <span style="color:#e6db74">&#34;true&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">nginx.ingress.kubernetes.io/cors-allow-methods</span>: <span style="color:#e6db74">&#34;PUT, GET, POST, OPTIONS&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">nginx.ingress.kubernetes.io/cors-allow-origin</span>: <span style="color:#e6db74">&#34;https://admin.example.com&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">nginx.ingress.kubernetes.io/cors-allow-credentials</span>: <span style="color:#e6db74">&#34;true&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">spec</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">rules</span>:
+</span></span><span style="display:flex;"><span>  - <span style="color:#f92672">host</span>: <span style="color:#ae81ff">api.example.com</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">http</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">paths</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#f92672">backend</span>:
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">serviceName</span>: <span style="color:#ae81ff">api-example</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">servicePort</span>: <span style="color:#ae81ff">80</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">path</span>: <span style="color:#ae81ff">/api</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">tls</span>:
+</span></span><span style="display:flex;"><span>  - <span style="color:#f92672">hosts</span>:
+</span></span><span style="display:flex;"><span>    - <span style="color:#ae81ff">api.example.com</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">secretName</span>: <span style="color:#ae81ff">example-tls</span>
+</span></span></code></pre></div><p>You can check the nginx configuration file generated by Kubernetes <a href="/web-cluster-ingress/">ingress</a>-nginx on any of the ingress controller pods.</p>
        
         </div>
     </a>
@@ -239,7 +264,7 @@ apiVersion: extensions/v1beta1 kind: Ingress metadata: name: api namespace: fuse
 	
         <div class="post-content-preview">
 	
-            Basic Auth is one of the oldest and easiest ways to secure a web page or API endpoint. Basic Auth does not have many features and lacks the sophistication of more modern access controls (see Ingress Nginx Auth Examples). However, Basic Auth is supported by nearly every major web client, library, and utility. Basic Auth is secure, stable and perfect for quick security on Kubernetes projects. Basic Auth can easily we swapped out later as requirements demand or provide a foundation for implementations such as OAuth 2 and JWT.
+            <p><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Authentication">Basic Auth</a> is one of the oldest and easiest ways to secure a web page or API endpoint. <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Authentication">Basic Auth</a> does not have many features and lacks the sophistication of more modern access controls (see <a href="https://github.com/kubernetes/ingress-nginx/tree/master/docs/examples/auth">Ingress Nginx Auth Examples</a>). However, <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Authentication">Basic Auth</a> is supported by nearly every major web client, library, and utility. <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Authentication">Basic Auth</a> is secure, stable and perfect for quick security on Kubernetes projects. <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Authentication">Basic Auth</a>  can easily we swapped out later as requirements demand or provide a foundation for implementations such as <a href="https://oauth.net/2/">OAuth 2</a> and <a href="https://jwt.io/">JWT</a>.</p>
        
         </div>
     </a>
@@ -261,7 +286,9 @@ apiVersion: extensions/v1beta1 kind: Ingress metadata: name: api namespace: fuse
 	
         <div class="post-content-preview">
 	
-            txToken is a small high performance microservice utility container. txToken is used for adding JSON Web Token based security to existing or new API development. txToken is specifically for systems that communicate in JSON over HTTP. txToken is called from a client with a JSON post body and passes received JSON to a remote endpoint. JSON retrieved from a remote endpoint is used to create a JWT token with an HS256 symmetrically encrypted signature.
+            <p><a href="https://github.com/txn2/txtoken">txToken</a> is a small high performance <a href="http://microservices.io/">microservice</a> utility container. <a href="https://github.com/txn2/txtoken">txToken</a> is used for adding <a href="https://jwt.io/">JSON Web Token</a> based security to existing or new API development. <a href="https://github.com/txn2/txtoken">txToken</a> is specifically for systems that communicate in JSON over HTTP. <a href="https://github.com/txn2/txtoken">txToken</a> is called from a client with a JSON post body and passes received JSON to a remote endpoint. JSON retrieved from a remote endpoint is used to create a <a href="https://jwt.io/">JWT</a> token with an <a href="https://community.auth0.com/t/jwt-signing-algorithms-rs256-vs-hs256/7720">HS256</a> symmetrically encrypted signature.</p>
+<h3 id="overview">Overview</h3>
+<p><img src="/images/content/txToken-00.png" alt="txToken Proxy"></p>
        
         </div>
     </a>
@@ -283,8 +310,13 @@ apiVersion: extensions/v1beta1 kind: Ingress metadata: name: api namespace: fuse
 	
         <div class="post-content-preview">
 	
-            Use cert-manager to get port 443/https running with signed x509 certificates for Ingress on your Kubernetes Production Hobby Cluster. cert-manager is the successor to kube-lego and the preferred way to &ldquo;automatically obtain browser-trusted certificates, without any human intervention.&rdquo; using Let&rsquo;s Encrypt.
-You need to install Helm first if you do not already have it. Otherwise, check out my article Helm on Custom Kubernetes, especially if you are following along with my Production Hobby Cluster guides.
+            <p>Use <a href="https://github.com/jetstack/cert-manager/">cert-manager</a> to get port 443/https running with signed x509 certificates for <a href="/web-cluster-ingress/">Ingress</a> on your Kubernetes <a href="/hobby-cluster/">Production Hobby Cluster</a>. <a href="https://github.com/jetstack/cert-manager/">cert-manager</a> is the successor to <strong>kube-lego</strong> and the preferred way to &ldquo;<a href="https://letsencrypt.org/how-it-works/">automatically obtain browser-trusted certificates, without any human intervention.</a>&rdquo; using <a href="https://letsencrypt.org/">Let&rsquo;s Encrypt</a>.</p>
+<p>You need to <a href="/helm-on-custom-cluster/">install Helm</a> first if you do not already have it. Otherwise, check out my article <a href="/helm-on-custom-cluster/">Helm on Custom Kubernetes</a>, especially if you are following along with my <a href="/hobby-cluster/">Production Hobby Cluster</a> guides.</p>
+
+
+<h3 id="install-cert-manager">Install <a href="https://github.com/jetstack/cert-manager/">cert-manager</a></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>helm install --name cert-manager --namespace kube-system stable/cert-manager
+</span></span></code></pre></div><p>After <a href="https://helm.sh/">Helm</a> installs <a href="https://github.com/jetstack/cert-manager/">cert-manager</a> you end up with a <a href="https://kubernetes.io/docs/admin/service-accounts-admin/">ServiceAccount</a> <a href="https://kubernetes.io/docs/admin/authorization/rbac/#role-and-clusterrole">ClusterRole</a>, <a href="https://kubernetes.io/docs/admin/authorization/rbac/#rolebinding-and-clusterrolebinding">ClusterRoleBinding</a>, <a href="https://kubernetes.io/docs/concepts/workloads/controllers/deployment/">Deployment</a> and a couple of <a href="https://kubernetes.io/docs/concepts/workloads/pods/pod/">Pod</a>s named <strong>cert-manager-cert-manager</strong> in the <strong>kube-system</strong> <a href="https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/">namespace</a>. <a href="https://helm.sh/">Helm</a> additionaly installs three <a href="https://kubernetes.io/docs/tasks/access-kubernetes-api/extend-api-custom-resource-definitions/">CustomResourceDefinition</a>s for <a href="https://github.com/jetstack/cert-manager/">cert-manager</a> (custom resources are not namespaced):</p>
        
         </div>
     </a>
@@ -306,8 +338,9 @@ You need to install Helm first if you do not already have it. Otherwise, check o
 	
         <div class="post-content-preview">
 	
-            Just set up a brand new cluster? Changed the domain or IP of your admin node? Then you may have encountered the error Unable to connect to the server: x509: certificate is valid for &hellip;. The following is a fix for this common issue. However, there are often other reasons to rebuild your cluster cert, and it&rsquo;s relatively easy.
-TL;DR: &ldquo;I don&rsquo;t care about the fix I need to remote control my cluster.
+            <p>Just set up a brand new cluster? Changed the domain or IP of your admin node? Then you may have encountered the error
+<strong>Unable to connect to the server: x509: certificate is valid for &hellip;</strong>. The following is a fix for this common issue. However, there are often other reasons to rebuild your cluster cert, and it&rsquo;s relatively easy.</p>
+<p>TL;DR: &ldquo;I don&rsquo;t care about the fix I need to remote control my cluster. Security? Whats that?&rdquo;:</p>
        
         </div>
     </a>
@@ -340,6 +373,8 @@ TL;DR: &ldquo;I don&rsquo;t care about the fix I need to remote control my clust
             
             
             
+            
+            
             <a href="/tags/blockchain" title="blockchain">
             blockchain
             </a>
@@ -356,8 +391,8 @@ TL;DR: &ldquo;I don&rsquo;t care about the fix I need to remote control my clust
             
             
             
-            <a href="/tags/data-science" title="data-science">
-            data-science
+            <a href="/tags/data-science" title="data science">
+            data science
             </a>
             
             
@@ -432,9 +467,17 @@ TL;DR: &ldquo;I don&rsquo;t care about the fix I need to remote control my clust
             
             
             
+            <a href="/tags/kubefwd" title="kubefwd">
+            kubefwd
+            </a>
+            
+            
+            
             <a href="/tags/kubernetes" title="kubernetes">
             kubernetes
             </a>
+            
+            
             
             
             
@@ -468,8 +511,8 @@ TL;DR: &ldquo;I don&rsquo;t care about the fix I need to remote control my clust
             
             
             
-            <a href="/tags/raspberry-pi" title="raspberry-pi">
-            raspberry-pi
+            <a href="/tags/raspberry-pi" title="raspberry pi">
+            raspberry pi
             </a>
             
             
@@ -506,13 +549,13 @@ TL;DR: &ldquo;I don&rsquo;t care about the fix I need to remote control my clust
             <a href="/about/"><img src="https://imti.co/img/craig_johnston_cjimti.jpg"/></a>
             
             
-            <p>I lead a talented team of software development and creative engineers, covering many industries looking to collect, analyze, move, buffer, queue, process and present data in significant ways. My expertise and that of my team revolve around microservices, artificial intelligence, algorithms, machine learning and blockchain technologies.</p>
+            <p>I lead a talented team of software development and creative engineers, covering many industries looking to collect, analyze, move, buffer, queue, process and present data in significant ways. My expertise and that of my team revolve around microservices, artificial intelligence, algorithms, and machine learning.</p>
             
             
             <ul class="list-inline">
                 
                 <li>
-                    <a href="https://imti.co/tags/security/index.xml" rel="alternate" type="application/rss+xml"
+                    <a href="/tags/security/index.xml" rel="alternate" type="application/rss+xml"
                        title="IMTI" >
                     <span class="fa-stack fa-lg">
                            <i class="fa fa-circle fa-stack-2x"></i>
@@ -568,8 +611,6 @@ TL;DR: &ldquo;I don&rsquo;t care about the fix I need to remote control my clust
         
         <li><a target="_blank" href="https://www.amazon.com/Craig-Johnston/e/B001K80LWI/ref=ntt_dp_epwbk_0">Author</a></li>
         
-        <li><a target="_blank" href="https://deasilcognitive.com/">Deasil Cognitive</a></li>
-        
         <li><a target="_blank" href="https://deasil.works/">Deasil Works</a></li>
         
         <li><a target="_blank" href="https://github.com/txn2">TXN2 Microservices</a></li>
@@ -579,8 +620,6 @@ TL;DR: &ldquo;I don&rsquo;t care about the fix I need to remote control my clust
         <li><a target="_blank" href="https://news.ycombinator.com/">Hacker News</a></li>
         
         <li><a target="_blank" href="https://news.ycombinator.com/submitted?id=cjimti">Hacker News (cjimti)</a></li>
-        
-        <li><a target="_blank" href="https://sourcerer.io/cjimti">Sourcerer (cjimti)</a></li>
         
     </ul>
 
@@ -603,10 +642,6 @@ TL;DR: &ldquo;I don&rsquo;t care about the fix I need to remote control my clust
         <li><a target="_blank" href="https://www.reddit.com/r/elasticsearch/">r/elasticsearch</a></li>
         
         <li><a target="_blank" href="https://www.reddit.com/r/apachekafka/">r/apachekafka</a></li>
-        
-        <li><a target="_blank" href="https://www.reddit.com/r/ethereum/">r/ethereum</a></li>
-        
-        <li><a target="_blank" href="https://www.reddit.com/r/blockchain/">r/blockchain</a></li>
         
     </ul>
 
@@ -659,7 +694,7 @@ TL;DR: &ldquo;I don&rsquo;t care about the fix I need to remote control my clust
                 <ul class="list-inline text-center">
                    
                    <li>
-                       <a href="https://imti.co/tags/security/index.xml" rel="alternate" type="application/rss+xml" title="IMTI" >
+                       <a href="/tags/security/index.xml" rel="alternate" type="application/rss+xml" title="IMTI" >
                            <span class="fa-stack fa-lg">
                                <i class="fa fa-circle fa-stack-2x"></i>
                                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>

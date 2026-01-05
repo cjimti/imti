@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><head>
+    <meta name="msvalidate.01" content="DBC34551F2DD1BA3DC0D62EE46D7448F" />
+    <meta name="google-site-verification" content="DrtKc88u9uc7iptd4LyURAKBmFcOn7Kuk6HcRk_kNmo" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <meta name="description" content="Enabling Data Management, the Internet of Things, Blockchain, and Machine Learning">
+    
+    <meta name="keyword"  content="Go, Kubernetes, Elasticsearch, Python, Docker, Big Data, Artificial Intelligence, Machine Learning">
+    <link rel="shortcut icon" href="http://localhost:1313/img/favicon.ico">
+
+    <title>Advanced Platform Development with Kubernetes - IMTI - Craig Johnston</title>
+
+    <link rel="canonical" href="http://localhost:1313/kubernetes-platform-book/">
+	
+    
+    <link rel="stylesheet" href="http://localhost:1313/css/bootstrap.min.css">
+
+    
+    <link rel="stylesheet" href="http://localhost:1313/css/hux-blog.min.css">
+
+    
+    <link rel="stylesheet" href="http://localhost:1313/css/syntax.css">
+
+    
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    
+    
+    <link rel="stylesheet" href="/css/imti.css">
+
+    
+    <script src="http://localhost:1313/js/jquery.min.js"></script>
+    
+    
+    <script src="http://localhost:1313/js/bootstrap.min.js"></script>
+    
+    
+    <script src="http://localhost:1313/js/hux-blog.min.js"></script>
+
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({
+            google_ad_client: "ca-pub-5984764595236029",
+            enable_page_level_ads: true
+        });
+    </script>
+
+    <meta name="twitter:site" content="@cjimti">
+<meta name="twitter:creator" content="@cjimti">
+
+<meta name="twitter:description" content="Enabling Data Management, the Internet of Things, Blockchain, and Machine Learning" />
+<meta name="twitter:title" content="Advanced Platform Development with Kubernetes" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="http://localhost:1313/img/post/apk8sdiag_876_438-3.jpg" />
+<meta property="og:image" content="http://localhost:1313/img/post/apk8sdiag_876_438-3.jpg" />
+
+
+
+    
+
+<script type="application/ld+json">
+"{\n  \"@context\": \"http://schema.org\",\n  \"@type\": \"Article\",\n  \"author\": {\n    \"@type\": \"Person\",\n    \"name\": \"Craig Johnston\"\n  },\n  \"dateModified\": \"2020-08-30T00:00:00\",\n  \"datePublished\": \"2020-08-30T00:00:00\",\n  \"description\": \"\\u003cp\\u003eI\\u0026rsquo;ve been distracted for over a year now, writing a (~500 page) end-to-end tutorial on constructing data-centric platforms with Kubernetes. The book is titled \\u0026ldquo;\\u003ca href=\\\"https://amzn.to/3hAZUvx\\\"\\u003eAdvanced Platform Development with Kubernetes: Enabling Data Management, the Internet of Things, Blockchain, and Machine Learning\\u003c/a\\u003e\\u0026rdquo;\\u003c/p\\u003e\\n\\u003cp\\u003eA little more than a year ago, Apress reached out and asked if I would write a book on Kubernetes for them, mirroring the wide range of projects I develop (and write about) for my clients. I have been building data-centric platforms for almost twenty years, spanning everything from my early days on the aggregation of massive volumes of international log files for Disney to fan-driven location data for Nine Inch Nails. And in the last decade, retailers with point-of-sale, logistics, and inventory systems, marketers leveraging social media metrics, fleet operators with demanding telematics platforms, and manufacturers with advanced IIoT (industrial internet of things) networks.\\u003c/p\\u003e\",\n  \"headline\": \"Advanced Platform Development with Kubernetes\",\n  \"image\": [\n    \"http://localhost:1313/img/post/apk8sdiag_876_438-3.jpg\"\n  ],\n  \"mainEntityOfPage\": {\n    \"@id\": \"http://localhost:1313/kubernetes-platform-book/\",\n    \"@type\": \"WebPage\"\n  },\n  \"publisher\": {\n    \"@type\": \"Organization\",\n    \"logo\": {\n      \"@type\": \"ImageObject\",\n      \"url\": \"http://localhost:1313/img/craig_johnston_cjimti.jpg\"\n    },\n    \"name\": \"imti.co\"\n  }\n}"
+</script>
+
+
+</head></head>
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="http://localhost:1313//">IMTI</a>
+        </div>
+
+        
+        
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="http://localhost:1313//">Home</a>
+                    </li>
+                    <li>
+                        <a href="http://localhost:1313//about/">About</a>
+                    </li>
+                    <li>
+                        <a href="https://twitter.com/cjimti">Follow</a>
+                    </li>
+                    
+
+                    
+                </ul>
+            </div>
+        </div>
+        
+    </div>
+    
+</nav>
+<script>
+    
+    
+    
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        
+            $navbar.className = " ";
+            
+            setTimeout(function(){
+                
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+
+
+<style type="text/css">
+    header.intro-header{
+        background-image: url('http://localhost:1313/img/post/apk8s.jpg')
+    }
+</style>
+<header class="intro-header" >
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/kubernetes" title="Kubernetes">
+                        Kubernetes
+                        </a>
+                        
+                        <a class="tag" href="/tags/data" title="Data">
+                        Data
+                        </a>
+                        
+                        <a class="tag" href="/tags/machine-learning" title="Machine Learning">
+                        Machine Learning
+                        </a>
+                        
+                        <a class="tag" href="/tags/blockchain" title="Blockchain">
+                        Blockchain
+                        </a>
+                        
+                        <a class="tag" href="/tags/iot" title="IoT">
+                        IoT
+                        </a>
+                        
+                        <a class="tag" href="/tags/data-science" title="Data Science">
+                        Data Science
+                        </a>
+                        
+                    </div>
+                    <h1>Advanced Platform Development with Kubernetes</h1>
+                    <h2 class="subheading">Enabling Data Management, the Internet of Things, Blockchain, and Machine Learning</h2>
+                    <span  class="meta">Posted by <a href="https://twitter.com/cjimti">Craig Johnston</a> on Sunday, August 30, 2020
+                        
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+<article>
+    <div class="container">
+        <div class="row">
+
+            
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <p>I&rsquo;ve been distracted for over a year now, writing a (~500 page) end-to-end tutorial on constructing data-centric platforms with Kubernetes. The book is titled &ldquo;<a href="https://amzn.to/3hAZUvx">Advanced Platform Development with Kubernetes: Enabling Data Management, the Internet of Things, Blockchain, and Machine Learning</a>&rdquo;</p>
+<p>A little more than a year ago, Apress reached out and asked if I would write a book on Kubernetes for them, mirroring the wide range of projects I develop (and write about) for my clients. I have been building data-centric platforms for almost twenty years, spanning everything from my early days on the aggregation of massive volumes of international log files for Disney to fan-driven location data for Nine Inch Nails. And in the last decade, retailers with point-of-sale, logistics, and inventory systems, marketers leveraging social media metrics, fleet operators with demanding telematics platforms, and manufacturers with advanced IIoT (industrial internet of things) networks.</p>
+
+
+<p>Furthermore, the clients behind these verticals have begun looking for an edge, often found beyond standard PaaS offerings available today. Yet these clients from established organizations and age-old industries have little tolerance for the risk associated with a multi-year development on technologies whose value is speculative. Will blockchain revolutionize logistics and finance? Will machine learning produce artificial intelligence capable of replacing legacy decisions making systems? The safe bet is to wait. If there is gold in any of these mountains the hyper clouds will find it, and they will happily sell it to everyone, by the hour, megabyte, or IOPS.</p>
+<p>Not every organization should be developing custom software, let alone advanced data platforms. However, the barrier to entry is lowering every day. I have been building platforms for twenty years, and never has a single technology increased productivity in this practice more than Kubernetes has in the last five. Kubernetes is truly a platform for building platforms, capable of harnessing the wide breadth of new technologies released into the open-source landscape almost daily.</p>
+<p>On October 28, 2018, IBM announced a $34 billion deal to buy Red Hat, the company behind Red Hat Enterprise Linux (RHEL) and, more recently, Red Hat OpenShift, an enterprise Kubernetes-based application platform. What we see is $34 billion of evidence that Cloud-native and open source technologies centered on the Linux ecosystem and empowered by Kubernetes is leading disruption in enterprise software application development. IBM sells platforms, and yet it looks to capitalize on the value of a system tailored to platform development. IBM is speculating that the next trend in PaaS offerings is itself a platform for developing platforms. An organization does not spend $34 billion to on-board brand and technology without a market. Who is demanding the capabilities of OpenShift/Kubernetes? Systems, solutions, and software architects, full-stack developers, programmers, integrators, and DevOps engineers. These are the people and roles responsible for the technology that powers the business logic.</p>
+<p>I did not want to write a book on administering Kubernetes or how it works (although you&rsquo;ll likely learn this along the way). There are a ton of excellent books and tutorials on the matter. I wanted to write about what gets the lion&rsquo;s share of hits on my blog: &ldquo;How to run X on Kubernetes.&rdquo; I don&rsquo;t know why you want to run a Blockchain network on Kubernetes; I have my reasons for doing so. I don&rsquo;t know why you need to interconnect <a href="https://kafka.apache.org/">Kafka</a>, <a href="https://nifi.apache.org/">NiFi</a>, <a href="https://min.io/">MinIO</a>, <a href="https://hive.apache.org/">Hive</a>, <a href="https://www.keycloak.org/">Keycloak</a>, <a href="https://cassandra.apache.org/">Cassandra</a>, <a href="https://www.mysql.com/">MySQL</a>, <a href="https://zookeeper.apache.org/">Zookeeper</a>, <a href="https://mosquitto.org/">Mosquitto</a>, <a href="https://www.elastic.co/elasticsearch/">Elasticsearch</a>, <a href="https://www.elastic.co/logstash">Logstash</a>, <a href="https://www.elastic.co/kibana">Kibana</a>, <a href="https://prestodb.io/">Presto</a>, <a href="https://www.openfaas.com/">OpenFaaS</a>, <a href="https://ethereum.org/en/">Ethereum</a>, <a href="https://jupyter.org/">Jupyter</a>, <a href="https://mlflow.org/">MLflow</a>, and <a href="https://www.seldon.io/tech/products/core/">Seldon Core</a>. You don&rsquo;t need Kubernetes to run these excellent applications. You don&rsquo;t need Kubernetes to run containers networked across the globe on various cloud providers communicating over secure VPNs, on-premises, on a mix of bare metal servers and virtual machines. I know that I, and the many roles mentioned above want to, (evidenced by Kubernetes enormous success) and it&rsquo;s likely because they are building sophisticated and modern platforms and see the value Kubernetes brings to this endeavor.</p>
+<p>&ldquo;<a href="https://amzn.to/3hAZUvx">Advanced Platform Development with Kubernetes: Enabling Data Management, the Internet of Things, Blockchain, and Machine Learning</a>&rdquo; is a 500 page tutorial on the work I do daily. The examples are scaled-down yet real and fully functional. If you are an entrepreneur with dreams of building your own AWS or Azure or if constructing enterprise-capable data-centric platforms is what you do for work or hobby, my book is looking to inspire you and give you traction where I have found it myself.</p>
+<h2 id="weekend-projects">Weekend Projects</h2>
+<p><strong>All source code and configuration manifests are open source and available online at</strong>: <a href="https://github.com/apk8s/book-source">https://github.com/apk8s/book-source</a></p>
+<p>&ldquo;<a href="https://amzn.to/3hAZUvx">Advanced Platform Development with Kubernetes: Enabling Data Management, the Internet of Things, Blockchain, and Machine Learning</a>&rdquo; will give you an equivalent of ten weekend projects, covering all the technology mentioned above and more, broken down as follows:</p>
+<ul>
+<li>Week 1: DevOps Infrastructure</li>
+<li>Week 2: Development Environment</li>
+<li>Week 3: In-Platform CI/CD</li>
+<li>Week 4: Pipeline</li>
+<li>Week 5: Indexing and Analytics</li>
+<li>Week 6: Data Lakes</li>
+<li>Week 7: Data Warehouses</li>
+<li>Week 8: Routing and Transformation</li>
+<li>Week 9: Platforming Blockchain</li>
+<li>Week 10: Platforming AIML</li>
+</ul>
+<h2 id="custom-kubernetes">Custom Kubernetes</h2>
+<p>Quite a few books and how-tos specialize in AKS, EKS, and GKE.  &ldquo;<a href="https://amzn.to/3hAZUvx">Advanced Platform Development with Kubernetes: Enabling Data Management, the Internet of Things, Blockchain, and Machine Learning</a>&rdquo; focuses on building <strong>Custom Kubernetes</strong> clusters and illustrates this by using generic (and cheap) compute instances (VMs) offered by <a href="https://www.vultr.com/?ref=7418713">Vultr</a>, <a href="https://m.do.co/c/97b733e7eba4">Digital Ocean</a>, <a href="https://www.linode.com/?r=848a6b0b21dc8edd33124f05ec8f99207ccddfde">Linode</a>, <a href="https://hetzner.cloud/?ref=MKrfJcJkRliR">Hetzner</a> and <a href="https://www.scaleway.com/en/">Scaleway</a>.</p>
+<h2 id="technology">Technology</h2>
+<p>&ldquo;<a href="https://amzn.to/3hAZUvx">Advanced Platform Development with Kubernetes: Enabling Data Management, the Internet of Things, Blockchain, and Machine Learning</a>&rdquo; covers the following technology:</p>
+<ul>
+<li><a href="https://github.com/apk8s/book-source/tree/master/chapter-02">Chapter 2: <strong>DevOps Infrastructure</strong></a> (source)
+<ul>
+<li><a href="https://about.gitlab.com/">GitLab</a></li>
+<li><a href="https://k3s.io/">k3s</a></li>
+<li><a href="https://cert-manager.io/">Cert Manager</a></li>
+</ul>
+</li>
+<li><a href="https://github.com/apk8s/book-source/tree/master/chapter-03">Chapter 3: <strong>Development Environment</strong></a> (source)
+<ul>
+<li><a href="https://www.wireguard.com/">WireGuard</a></li>
+<li><a href="https://www.docker.com/">Docker</a></li>
+<li><a href="https://kubernetes.io/">Kubernetes</a> (<a href="https://kubernetes.io/docs/reference/command-line-tools-reference/kubelet/">kubelet</a>, <a href="https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/">kubeadm</a>, <a href="https://kubernetes.io/docs/reference/kubectl/overview/">kubectl</a>)</li>
+<li><a href="https://github.com/kubernetes/ingress-nginx">Ingress Nginx</a></li>
+<li><a href="https://rook.io/docs/rook/v1.4/ceph-storage.html">Rook Ceph</a>
+<ul>
+<li><a href="https://rook.io/docs/rook/v1.4/ceph-block.html">Ceph Block Storage</a></li>
+<li><a href="https://rook.io/docs/rook/v1.4/ceph-filesystem.html">Ceph Filesystem</a></li>
+</ul>
+</li>
+<li>Monitoring (<a href="https://github.com/prometheus-operator/kube-prometheus">kube-prometheus</a>)</li>
+</ul>
+</li>
+<li><a href="https://github.com/apk8s/book-source/tree/master/chapter-04">Chapter 4: <strong>In-Platform CI/CD</strong></a> (source)
+<ul>
+<li><a href="https://github.com/jupyterlab/jupyterlab">JupyterLab</a></li>
+<li><a href="https://docs.gitlab.com/ce/ci/">GitLab CI</a></li>
+<li><a href="https://github.com/GoogleContainerTools/kaniko">Kaniko</a></li>
+</ul>
+</li>
+<li><a href="https://github.com/apk8s/book-source/tree/master/chapter-05">Chapter 5: <strong>Pipeline</strong></a> (source)
+<ul>
+<li><a href="https://zookeeper.apache.org/">Apache Zookeeper</a></li>
+<li><a href="https://kafka.apache.org/">Apache Kafka</a></li>
+<li><a href="https://mosquitto.org/">Mosquitto</a> (MQTT)</li>
+</ul>
+</li>
+<li><a href="https://github.com/apk8s/book-source/tree/master/chapter-06">Chapter 6: <strong>Indexing and Analytics</strong></a> (source)
+<ul>
+<li><a href="https://www.elastic.co/elasticsearch/">Elasticsearch</a></li>
+<li><a href="https://www.elastic.co/logstash">Logstash</a></li>
+<li><a href="https://www.elastic.co/kibana">Kibana</a></li>
+<li><a href="https://www.keycloak.org/">Keycloak</a> (IAM)</li>
+<li><a href="https://jupyter.org/hub">JupyterHub</a></li>
+<li><a href="https://kubernetes.io/docs/concepts/overview/kubernetes-api/">Kubernetes API</a></li>
+</ul>
+</li>
+<li><a href="https://github.com/apk8s/book-source/tree/master/chapter-07">Chapter 7: <strong>Data Lakes</strong></a> (source)
+<ul>
+<li><a href="https://min.io/">MinIO</a></li>
+<li><a href="https://golang.org/">Golang</a></li>
+</ul>
+</li>
+<li><a href="https://github.com/apk8s/book-source/tree/master/chapter-08">Chapter 8: <strong>Data Warehouses</strong></a> (source)
+<ul>
+<li><a href="https://www.mysql.com/">MySQL</a></li>
+<li><a href="https://cassandra.apache.org/">Apache Cassandra</a></li>
+<li><a href="https://hive.apache.org/">Apache Hive</a></li>
+<li><a href="https://prestodb.io/">Presto</a></li>
+</ul>
+</li>
+<li><a href="https://github.com/apk8s/book-source/tree/master/chapter-09">Chapter 9: <strong>Routing and Transformation</strong></a> (source)
+<ul>
+<li><a href="https://www.openfaas.com/">OpenFaaS</a></li>
+<li><a href="https://nifi.apache.org/">Apache NiFi</a></li>
+</ul>
+</li>
+<li><a href="https://github.com/apk8s/book-source/tree/master/chapter-10">Chapter 10: <strong>Platforming Blockchain</strong></a> (source)
+<ul>
+<li><a href="https://ethereum.org/en/">Ethereum</a>
+<ul>
+<li><a href="https://geth.ethereum.org/">Geth</a></li>
+</ul>
+</li>
+<li><a href="https://github.com/cubedro/eth-netstats">Ethstats</a></li>
+</ul>
+</li>
+<li><a href="https://github.com/apk8s/book-source/tree/master/chapter-11">Chapter 11: <strong>Platforming AIML</strong></a> (source)
+<ul>
+<li><a href="https://github.com/squat/kilo">Kilo</a> (Automated <a href="https://www.wireguard.com/">WireGuard</a>)</li>
+<li><a href="https://www.nvidia.com/en-us/">Nvidia</a> / <a href="https://developer.nvidia.com/cuda-zone">CUDA</a></li>
+<li><a href="https://www.gnu.org/software/bash/">Bash</a> / Shell Scripting</li>
+<li><a href="https://www.raspberrypi.org/">Raspberry Pi</a></li>
+<li><a href="https://kubernetes.io/docs/concepts/workloads/controllers/cron-jobs/">CronJob</a> with <a href="https://www.python.org/">Python</a></li>
+<li><a href="https://mlflow.org/">MLflow</a></li>
+<li><a href="https://www.seldon.io/tech/products/core/">Seldon Core</a></li>
+</ul>
+</li>
+</ul>
+
+
+<hr>
+
+
+                <p>
+                   This blog post, titled: "<span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">Advanced Platform Development with Kubernetes: Enabling Data Management, the Internet of Things, Blockchain, and Machine Learning</span>" by <a xmlns:cc="http://creativecommons.org/ns#" href="https://twitter.com/cjimti" property="cc:attributionName" rel="cc:attributionURL">Craig Johnston</a>, is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+                    <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a>
+                </p>
+
+            </div>
+            
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                
+                <section>
+                    <hr class="hidden-sm hidden-xs">
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/blockchain" title="blockchain">
+                        blockchain
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/data" title="data">
+                        data
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/data-science" title="data science">
+                        data science
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/development" title="development">
+                        development
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/devops" title="devops">
+                        devops
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/docker" title="docker">
+                        docker
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/elasticsearch" title="elasticsearch">
+                        elasticsearch
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/golang" title="golang">
+                        golang
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/ingress" title="ingress">
+                        ingress
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/iot" title="iot">
+                        iot
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/kubectl" title="kubectl">
+                        kubectl
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/kubefwd" title="kubefwd">
+                        kubefwd
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/kubernetes" title="kubernetes">
+                        kubernetes
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/microservices" title="microservices">
+                        microservices
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/python" title="python">
+                        python
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/raspberry-pi" title="raspberry pi">
+                        raspberry pi
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/security" title="security">
+                        security
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/utils" title="utils">
+                        utils
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                    </div>
+                </section>
+
+                
+                <hr>
+                <h5>RELATED</h5>
+                <ul class="list-inline">
+                    
+                </ul>
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                   
+                   <li>
+                       <a href="/index.xml" rel="alternate" type="application/rss+xml" title="IMTI" >
+                           <span class="fa-stack fa-lg">
+                               <i class="fa fa-circle fa-stack-2x"></i>
+                               <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+                           </span>
+                       </a>
+                   </li>
+                   
+                    
+                    <li>
+                        <a href="mailto:cjimti@gmail.com">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                    
+                    
+                    <li>
+                        <a href="https://twitter.com/cjimti">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    
+
+                    
+
+		    
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/cjimti">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                    
+                    <li>
+                        <a target="_blank" href="https://www.linkedin.com/in/cjimti/">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                </ul>
+
+                
+                
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+
+
+
+
+<script>
+    
+    if($('#tag_cloud').length !== 0){
+        async("/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-R56SP4WLS2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-R56SP4WLS2');
+</script>
+
+</body>
+</html>

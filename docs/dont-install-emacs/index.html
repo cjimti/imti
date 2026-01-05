@@ -10,7 +10,7 @@
     
     <meta name="description" content="Containers as utility applications">
     
-    <meta name="keyword"  content="Go, Kubernetes, Elasticsearch, Python, Docker, Big Data, Artificial Intelligence, Machine Learning, Blockchain">
+    <meta name="keyword"  content="Go, Kubernetes, Elasticsearch, Python, Docker, Big Data, Artificial Intelligence, Machine Learning">
     <link rel="shortcut icon" href="https://imti.co/img/favicon.ico">
 
     <title>Don&#39;t Install Emacs - IMTI - Craig Johnston</title>
@@ -61,35 +61,11 @@
 
 
     
+
 <script type="application/ld+json">
-{
-  "@context": "http://schema.org",
-  "@type": "Article",
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": "https:\/\/imti.co\/dont-install-emacs\/"
-  },
-  "headline": "Don\u0027t Install Emacs",
-  "image": [
-    "https:\/\/imti.co\/img\/post\/gnu_876_438.jpg"
-   ],
-  "datePublished": "2018-03-01T00:00:00",
-  "dateModified": "2018-03-01T00:00:00",
-  "author": {
-    "@type": "Person",
-    "name": "Craig Johnston"
-  },
-   "publisher": {
-    "@type": "Organization",
-    "name": 'imti.co",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "https:\/\/imti.co\/img\/craig_johnston_cjimti.jpg"
-    }
-  },
-  "description": "I grew up on emacs. One of my first jobs I sat down at a terminal and was editing some files with pico, it\u0026rsquo;s what I knew since I used that fantastic email client pine. I was quickly told by my the lead developer that I need to use a real text editor if I\u0026rsquo;m going to progress in my career. He told me I need to try emacs, and after suffering through a few weeks of memorizing multi command-char sequences and training the muscle memory in my pinky to perform bizarre contortions of my left hand just to save my file, I became a convert."
-}
+"{\n  \"@context\": \"http://schema.org\",\n  \"@type\": \"Article\",\n  \"author\": {\n    \"@type\": \"Person\",\n    \"name\": \"Craig Johnston\"\n  },\n  \"dateModified\": \"2018-03-01T00:00:00\",\n  \"datePublished\": \"2018-03-01T00:00:00\",\n  \"description\": \"\\u003cp\\u003eI grew up on \\u003ca href=\\\"https://www.gnu.org/software/emacs/\\\"\\u003eemacs\\u003c/a\\u003e. One of my first jobs I sat down at a terminal and was editing some files with \\u003ca href=\\\"https://en.wikipedia.org/wiki/Pico_(text_editor)\\\"\\u003epico\\u003c/a\\u003e, it\\u0026rsquo;s what I knew since I used that fantastic email client \\u003ca href=\\\"https://en.wikipedia.org/wiki/Pine_(email_client)\\\"\\u003epine\\u003c/a\\u003e. I was quickly told by my the lead developer that I need to use a \\u003cstrong\\u003ereal\\u003c/strong\\u003e text editor if I\\u0026rsquo;m going to progress in my career. He told me I need to try \\u003ca href=\\\"https://www.gnu.org/software/emacs/\\\"\\u003eemacs\\u003c/a\\u003e, and after suffering through a few weeks of memorizing multi command-char sequences and \\u003ca href=\\\"https://en.wikipedia.org/wiki/Emacs#Emacs_pinky\\\"\\u003etraining the muscle memory in my pinky to perform bizarre contortions\\u003c/a\\u003e of my left hand just to save my file, I became a convert. I found out a few months later that the developer who convinced me to use \\u003ca href=\\\"https://www.gnu.org/software/emacs/\\\"\\u003eemacs\\u003c/a\\u003e was a \\u003ca href=\\\"https://en.wikipedia.org/wiki/Vi\\\"\\u003evi\\u003c/a\\u003e user all along. I think I was a victim of a cruel joke or hazing ritual, but I learned to love \\u003ca href=\\\"https://www.gnu.org/software/emacs/\\\"\\u003eemacs\\u003c/a\\u003e, and when I am not coding in a desktop IDE (\\u003ca href=\\\"https://www.jetbrains.com/\\\"\\u003eIntelliJ\\u003c/a\\u003e) then I am using \\u003ca href=\\\"https://www.gnu.org/software/emacs/\\\"\\u003eemacs\\u003c/a\\u003e.\\u003c/p\\u003e\",\n  \"headline\": \"Don't Install Emacs\",\n  \"image\": [\n    \"https://imti.co/img/post/gnu_876_438.jpg\"\n  ],\n  \"mainEntityOfPage\": {\n    \"@id\": \"https://imti.co/dont-install-emacs/\",\n    \"@type\": \"WebPage\"\n  },\n  \"publisher\": {\n    \"@type\": \"Organization\",\n    \"logo\": {\n      \"@type\": \"ImageObject\",\n      \"url\": \"https://imti.co/img/craig_johnston_cjimti.jpg\"\n    },\n    \"name\": \"imti.co\"\n  }\n}"
 </script>
+
 
 </head></head>
 
@@ -103,7 +79,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="https://imti.co/">IMTI</a>
+            <a class="navbar-brand" href="https://imti.co//">IMTI</a>
         </div>
 
         
@@ -112,10 +88,10 @@
             <div class="navbar-collapse">
                 <ul class="nav navbar-nav navbar-right">
                     <li>
-                        <a href="https://imti.co/">Home</a>
+                        <a href="https://imti.co//">Home</a>
                     </li>
                     <li>
-                        <a href="https://imti.co/about/">About</a>
+                        <a href="https://imti.co//about/">About</a>
                     </li>
                     <li>
                         <a href="https://twitter.com/cjimti">Follow</a>
@@ -212,8 +188,8 @@
 <p>As the world, and my company has been rapidly moving to containerization, I find <a href="https://www.docker.com/">Docker</a> installed on more servers. <a href="https://www.docker.com/">Docker</a> lets me leverage something I have been doing a lot of lately: container-as-command. Like monolithic or microservices, websites, databases, and on and on, containers give us dependency isolation. So with the only requirement being <a href="https://www.docker.com/">Docker</a>, I can run any utility that I can slide into a little <a href="https://alpinelinux.org/">Alpine Linux</a> container.</p>
 <h2 id="running-emacs">Running <a href="https://www.gnu.org/software/emacs/">emacs</a></h2>
 <p>Since I don&rsquo;t want to type out a long <code>docker run</code> command every time I want <a href="https://www.gnu.org/software/emacs/">emacs</a> I give my <code>.bashrc</code> an alias command.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">alias emacs<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;docker run --rm -it -v &#34;$PWD&#34;:/src -v &#34;$HOME&#34;:/root cjimti/emacs&#39;</span>
-</code></pre></div><p>Now I source my <code>.bashrc</code> with <code>source ~/.bashrc</code> and I instantly have <a href="https://www.gnu.org/software/emacs/">emacs</a> on any <a href="https://www.docker.com/">Docker</a> installed server or workstation. I use this on my local workstation as well as servers.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>alias emacs<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;docker run --rm -it -v &#34;$PWD&#34;:/src -v &#34;$HOME&#34;:/root cjimti/emacs&#39;</span>
+</span></span></code></pre></div><p>Now I source my <code>.bashrc</code> with <code>source ~/.bashrc</code> and I instantly have <a href="https://www.gnu.org/software/emacs/">emacs</a> on any <a href="https://www.docker.com/">Docker</a> installed server or workstation. I use this on my local workstation as well as servers.</p>
 <p><strong>WARNING:</strong> Mounting a home directory with an unknown container can be a big security problem, and you would need a lot of trust in the container you are letting mount this directory.</p>
 <ol>
 <li>You can use the <a href="https://hub.docker.com/r/cjimti/emacs/">cjimti/emacs</a> container as-is and trust me.</li>
@@ -227,35 +203,6 @@
                     <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a>
                 </p>
 
-                <h5>SUPPORT</h5>
-                <p>
-                    Order my new Kubernetes book: <a href="https://amzn.to/34D56v6">Advanced Platform Development with Kubernetes: Enabling Data Management, the Internet of Things, Blockchain, and Machine Learning</a>
-                </p>
-                <script type="text/javascript">
-                  amzn_assoc_tracking_id = "imti-20";
-                  amzn_assoc_ad_mode = "manual";
-                  amzn_assoc_ad_type = "smart";
-                  amzn_assoc_marketplace = "amazon";
-                  amzn_assoc_region = "US";
-                  amzn_assoc_design = "enhanced_links";
-                  amzn_assoc_asins = "1484256107";
-                  amzn_assoc_placement = "adunit";
-                  amzn_assoc_linkid = "14a9d8b8d1b0bd44e9256e0e0a948015";
-                </script>
-                <script src="//z-na.amazon-adsystem.com/widgets/onejs?MarketPlace=US"></script>
-
-                
-                <hr>
-                <h5>SHARE</h5>
-                <ul class="list-inline">
-                    <li><div class="addthis_inline_share_toolbox"></div></li>
-                </ul>
-
-                <h5>FOLLOW</h5>
-                <ul class="list-inline">
-                    <li><div class="addthis_inline_follow_toolbox"></div></li>
-                </ul>
-
             </div>
             
             <div class="
@@ -268,6 +215,8 @@
                     <hr class="hidden-sm hidden-xs">
                     <h5><a href="/tags/">FEATURED TAGS</a></h5>
                     <div class="tags">
+                        
+                        
                         
                         
                         
@@ -287,8 +236,8 @@
                         
                         
                         
-                        <a href="/tags/data-science" title="data-science">
-                        data-science
+                        <a href="/tags/data-science" title="data science">
+                        data science
                         </a>
                         
                         
@@ -363,9 +312,17 @@
                         
                         
                         
+                        <a href="/tags/kubefwd" title="kubefwd">
+                        kubefwd
+                        </a>
+                        
+                        
+                        
                         <a href="/tags/kubernetes" title="kubernetes">
                         kubernetes
                         </a>
+                        
+                        
                         
                         
                         
@@ -399,8 +356,8 @@
                         
                         
                         
-                        <a href="/tags/raspberry-pi" title="raspberry-pi">
-                        raspberry-pi
+                        <a href="/tags/raspberry-pi" title="raspberry pi">
+                        raspberry pi
                         </a>
                         
                         
@@ -448,7 +405,7 @@
                 <ul class="list-inline text-center">
                    
                    <li>
-                       <a href="" rel="alternate" type="application/rss+xml" title="IMTI" >
+                       <a href="/index.xml" rel="alternate" type="application/rss+xml" title="IMTI" >
                            <span class="fa-stack fa-lg">
                                <i class="fa fa-circle fa-stack-2x"></i>
                                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>

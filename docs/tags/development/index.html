@@ -8,9 +8,9 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
-    <meta name="description" content="I lead a talented team of software development and creative engineers, covering many industries looking to collect, analyze, move, buffer, queue, process and present data in significant ways. My expertise and that of my team revolve around microservices, artificial intelligence, algorithms, machine learning and blockchain technologies.">
+    <meta name="description" content="I lead a talented team of software development and creative engineers, covering many industries looking to collect, analyze, move, buffer, queue, process and present data in significant ways. My expertise and that of my team revolve around microservices, artificial intelligence, algorithms, and machine learning.">
     
-    <meta name="keyword"  content="Go, Kubernetes, Elasticsearch, Python, Docker, Big Data, Artificial Intelligence, Machine Learning, Blockchain">
+    <meta name="keyword"  content="Go, Kubernetes, Elasticsearch, Python, Docker, Big Data, Artificial Intelligence, Machine Learning">
     <link rel="shortcut icon" href="https://imti.co/img/favicon.ico">
 
     <title>Development - IMTI - Craig Johnston</title>
@@ -57,6 +57,7 @@
 
 
     
+
 </head></head>
 
 <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
@@ -69,7 +70,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="https://imti.co/">IMTI</a>
+            <a class="navbar-brand" href="https://imti.co//">IMTI</a>
         </div>
 
         
@@ -78,10 +79,10 @@
             <div class="navbar-collapse">
                 <ul class="nav navbar-nav navbar-right">
                     <li>
-                        <a href="https://imti.co/">Home</a>
+                        <a href="https://imti.co//">Home</a>
                     </li>
                     <li>
-                        <a href="https://imti.co/about/">About</a>
+                        <a href="https://imti.co//about/">About</a>
                     </li>
                     <li>
                         <a href="https://twitter.com/cjimti">Follow</a>
@@ -134,8 +135,7 @@
                 <div class="site-heading">
                     <h1>IMTI</h1>
                     
-		            <span class="subheading">(I Make Things Interesting)
-Architecting, Developing, nixCraft, DevOps, AI/ML, Blockchain</span>
+		            <span class="subheading">Architecting, Developing, SRE, DevOps, AI/ML</span>
                 </div>
             </div>
         </div>
@@ -159,6 +159,72 @@ Architecting, Developing, nixCraft, DevOps, AI/ML, Blockchain</span>
             
 
 <div class="post-preview">
+    <a href="https://imti.co/kubefwd-launch/">
+        <h2 class="post-title">
+            kubefwd: Forward Kubernetes Services to Localhost by Name
+        </h2>
+	
+        <h3 class="post-subtitle">
+            One command, no configuration, automatic reconnection
+        </h3>
+	
+        <div class="post-content-preview">
+	
+            kubefwd bulk-forwards Kubernetes services so they&#39;re accessible by their real hostnames. Your app connects to postgres:5432 and redis:6379 locally, using the same hostnames it would use inside the cluster.
+        
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by <a href="https://twitter.com/cjimti">Craig Johnston</a> Sunday, January 4, 2026
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="https://imti.co/kubefwd-2026/">
+        <h2 class="post-title">
+            kubefwd in 2026: Interactive TUI and Auto-Reconnect
+        </h2>
+	
+        <h3 class="post-subtitle">
+            The complete guide to kubefwd&#39;s new features
+        </h3>
+	
+        <div class="post-content-preview">
+	
+            kubefwd now includes an interactive terminal UI, automatic reconnection that survives pod restarts and VPN drops, and a REST API for programmatic control. This guide covers all the new features.
+        
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by <a href="https://twitter.com/cjimti">Craig Johnston</a> Sunday, January 4, 2026
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="https://imti.co/kubefwd-mcp/">
+        <h2 class="post-title">
+            AI-Assisted Kubernetes Development with kubefwd
+        </h2>
+	
+        <h3 class="post-subtitle">
+            Let your AI assistant manage cluster connections
+        </h3>
+	
+        <div class="post-content-preview">
+	
+            kubefwd includes an MCP server that lets AI assistants like Claude Code manage Kubernetes port forwarding on your behalf. Your AI can discover cluster services, forward them as needed, and read pod logs to help debug issues.
+        
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by <a href="https://twitter.com/cjimti">Craig Johnston</a> Sunday, January 4, 2026
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
     <a href="https://imti.co/kubernetes-port-forwarding/">
         <h2 class="post-title">
             Kubernetes Port Forwarding for Local Development
@@ -170,8 +236,11 @@ Architecting, Developing, nixCraft, DevOps, AI/ML, Blockchain</span>
 	
         <div class="post-content-preview">
 	
-            kubefwd helps to enable a seamless and efficient way to develop applications and services on a local workstation. Locally develop applications that intend to interact with other services in a Kubernetes cluster. kubefwd allows applications with connection strings like http://elasticsearch:9200/ or tcp://db:3306 to communicate into the remote cluster. kubefwd can be used to reduce or eliminate the need for local environment specific connection configurations.
-I don&#39;t run Kubernetes locally, but I do depend on services running in remote clusters.
+            <p><a href="https://github.com/txn2/kubefwd">kubefwd</a> helps to enable a seamless and efficient way to develop applications and services on a local workstation. Locally develop applications that intend to interact with other services in a Kubernetes cluster. <a href="https://github.com/txn2/kubefwd">kubefwd</a> allows applications with connection strings like http://elasticsearch:9200/ or tcp://db:3306 to communicate into the remote cluster. <a href="https://github.com/txn2/kubefwd">kubefwd</a> can be used to reduce or eliminate the need for local environment specific connection configurations.</p>
+
+
+
+<p>Developing services in a <a href="https://microservices.io/">Microservices</a> architecture presents local development challenges, especially when the service you are developing needs to interact with a mixture of other services. <a href="https://microservices.io/">Microservices</a>, like any other applications are rarely ever self-contained and often need access to databases, authentication services, and other public or private APIs. Loosely-coupled applications still have couplings, they happen on a higher layer of the application stack and often through TCP networking.</p>
        
         </div>
     </a>
@@ -193,10 +262,13 @@ I don&#39;t run Kubernetes locally, but I do depend on services running in remot
 	
         <div class="post-content-preview">
 	
-            Getting the unique serial number from a Raspberry Pi.
-cat /proc/cpuinfo | grep ^Serial | cut -d&quot;:&quot; -f2  Example output:
- 00000000e215b4a2  An interesting use for this is &ldquo;binding&rdquo; software, encryption or other servcies to a specific Pi. Found this in a suggestion on the Stack Overflow question &ldquo;Securing data on SD card Raspberry Pi&rdquo;
- Support this blog! Buy my new book: Advanced Platform Development with Kubernetes  What You'll Learn Build data pipelines with MQTT, NiFi, Logstash, MinIO, Hive, Presto, Kafka and Elasticsearch Leverage Serverless ETL with OpenFaaS Explore Blockchain networking with Ethereum Support a multi-tenant Data Science platform with JupyterHub, MLflow and Seldon Core Build a Multi-cloud, Hybrid cluster, securely bridging on-premise and cloud-based Kubernetes nodes    
+            <p>Getting the unique serial number from a Raspberry Pi.</p>
+<pre><code>cat /proc/cpuinfo | grep ^Serial | cut -d&quot;:&quot; -f2
+</code></pre>
+<p>Example output:</p>
+<pre><code> 00000000e215b4a2
+</code></pre>
+<p>An interesting use for this is &ldquo;binding&rdquo; software, encryption or other servcies to a specific Pi. Found this in a suggestion on the Stack Overflow question <a href="http://stackoverflow.com/questions/27730877/securing-data-on-sd-card-raspberry-pi">&ldquo;Securing data on SD card Raspberry Pi&rdquo;</a></p>
        
         </div>
     </a>
@@ -229,6 +301,8 @@ cat /proc/cpuinfo | grep ^Serial | cut -d&quot;:&quot; -f2  Example output:
             
             
             
+            
+            
             <a href="/tags/blockchain" title="blockchain">
             blockchain
             </a>
@@ -245,8 +319,8 @@ cat /proc/cpuinfo | grep ^Serial | cut -d&quot;:&quot; -f2  Example output:
             
             
             
-            <a href="/tags/data-science" title="data-science">
-            data-science
+            <a href="/tags/data-science" title="data science">
+            data science
             </a>
             
             
@@ -321,9 +395,17 @@ cat /proc/cpuinfo | grep ^Serial | cut -d&quot;:&quot; -f2  Example output:
             
             
             
+            <a href="/tags/kubefwd" title="kubefwd">
+            kubefwd
+            </a>
+            
+            
+            
             <a href="/tags/kubernetes" title="kubernetes">
             kubernetes
             </a>
+            
+            
             
             
             
@@ -357,8 +439,8 @@ cat /proc/cpuinfo | grep ^Serial | cut -d&quot;:&quot; -f2  Example output:
             
             
             
-            <a href="/tags/raspberry-pi" title="raspberry-pi">
-            raspberry-pi
+            <a href="/tags/raspberry-pi" title="raspberry pi">
+            raspberry pi
             </a>
             
             
@@ -395,13 +477,13 @@ cat /proc/cpuinfo | grep ^Serial | cut -d&quot;:&quot; -f2  Example output:
             <a href="/about/"><img src="https://imti.co/img/craig_johnston_cjimti.jpg"/></a>
             
             
-            <p>I lead a talented team of software development and creative engineers, covering many industries looking to collect, analyze, move, buffer, queue, process and present data in significant ways. My expertise and that of my team revolve around microservices, artificial intelligence, algorithms, machine learning and blockchain technologies.</p>
+            <p>I lead a talented team of software development and creative engineers, covering many industries looking to collect, analyze, move, buffer, queue, process and present data in significant ways. My expertise and that of my team revolve around microservices, artificial intelligence, algorithms, and machine learning.</p>
             
             
             <ul class="list-inline">
                 
                 <li>
-                    <a href="https://imti.co/tags/development/index.xml" rel="alternate" type="application/rss+xml"
+                    <a href="/tags/development/index.xml" rel="alternate" type="application/rss+xml"
                        title="IMTI" >
                     <span class="fa-stack fa-lg">
                            <i class="fa fa-circle fa-stack-2x"></i>
@@ -457,8 +539,6 @@ cat /proc/cpuinfo | grep ^Serial | cut -d&quot;:&quot; -f2  Example output:
         
         <li><a target="_blank" href="https://www.amazon.com/Craig-Johnston/e/B001K80LWI/ref=ntt_dp_epwbk_0">Author</a></li>
         
-        <li><a target="_blank" href="https://deasilcognitive.com/">Deasil Cognitive</a></li>
-        
         <li><a target="_blank" href="https://deasil.works/">Deasil Works</a></li>
         
         <li><a target="_blank" href="https://github.com/txn2">TXN2 Microservices</a></li>
@@ -468,8 +548,6 @@ cat /proc/cpuinfo | grep ^Serial | cut -d&quot;:&quot; -f2  Example output:
         <li><a target="_blank" href="https://news.ycombinator.com/">Hacker News</a></li>
         
         <li><a target="_blank" href="https://news.ycombinator.com/submitted?id=cjimti">Hacker News (cjimti)</a></li>
-        
-        <li><a target="_blank" href="https://sourcerer.io/cjimti">Sourcerer (cjimti)</a></li>
         
     </ul>
 
@@ -492,10 +570,6 @@ cat /proc/cpuinfo | grep ^Serial | cut -d&quot;:&quot; -f2  Example output:
         <li><a target="_blank" href="https://www.reddit.com/r/elasticsearch/">r/elasticsearch</a></li>
         
         <li><a target="_blank" href="https://www.reddit.com/r/apachekafka/">r/apachekafka</a></li>
-        
-        <li><a target="_blank" href="https://www.reddit.com/r/ethereum/">r/ethereum</a></li>
-        
-        <li><a target="_blank" href="https://www.reddit.com/r/blockchain/">r/blockchain</a></li>
         
     </ul>
 
@@ -548,7 +622,7 @@ cat /proc/cpuinfo | grep ^Serial | cut -d&quot;:&quot; -f2  Example output:
                 <ul class="list-inline text-center">
                    
                    <li>
-                       <a href="https://imti.co/tags/development/index.xml" rel="alternate" type="application/rss+xml" title="IMTI" >
+                       <a href="/tags/development/index.xml" rel="alternate" type="application/rss+xml" title="IMTI" >
                            <span class="fa-stack fa-lg">
                                <i class="fa fa-circle fa-stack-2x"></i>
                                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>

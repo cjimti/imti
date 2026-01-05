@@ -10,7 +10,7 @@
     
     <meta name="description" content="Basic Auth is supported by nearly every major web client, library, and utility.">
     
-    <meta name="keyword"  content="Go, Kubernetes, Elasticsearch, Python, Docker, Big Data, Artificial Intelligence, Machine Learning, Blockchain">
+    <meta name="keyword"  content="Go, Kubernetes, Elasticsearch, Python, Docker, Big Data, Artificial Intelligence, Machine Learning">
     <link rel="shortcut icon" href="https://imti.co/img/favicon.ico">
 
     <title>Basic Auth on Kubernetes Ingress - IMTI - Craig Johnston</title>
@@ -61,35 +61,11 @@
 
 
     
+
 <script type="application/ld+json">
-{
-  "@context": "http://schema.org",
-  "@type": "Article",
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": "https:\/\/imti.co\/kubernetes-ingress-basic-auth\/"
-  },
-  "headline": "Basic Auth on Kubernetes Ingress",
-  "image": [
-    "https:\/\/imti.co\/img\/post\/lock_876_438.jpg"
-   ],
-  "datePublished": "2018-05-19T00:00:00",
-  "dateModified": "2018-05-19T00:00:00",
-  "author": {
-    "@type": "Person",
-    "name": "Craig Johnston"
-  },
-   "publisher": {
-    "@type": "Organization",
-    "name": 'imti.co",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "https:\/\/imti.co\/img\/craig_johnston_cjimti.jpg"
-    }
-  },
-  "description": "Basic Auth is one of the oldest and easiest ways to secure a web page or API endpoint. Basic Auth does not have many features and lacks the sophistication of more modern access controls (see Ingress Nginx Auth Examples). However, Basic Auth is supported by nearly every major web client, library, and utility. Basic Auth is secure, stable and perfect for quick security on Kubernetes projects. Basic Auth can easily we swapped out later as requirements demand or provide a foundation for implementations such as OAuth 2 and JWT."
-}
+"{\n  \"@context\": \"http://schema.org\",\n  \"@type\": \"Article\",\n  \"author\": {\n    \"@type\": \"Person\",\n    \"name\": \"Craig Johnston\"\n  },\n  \"dateModified\": \"2018-05-19T00:00:00\",\n  \"datePublished\": \"2018-05-19T00:00:00\",\n  \"description\": \"\\u003cp\\u003e\\u003ca href=\\\"https://developer.mozilla.org/en-US/docs/Web/HTTP/Authentication\\\"\\u003eBasic Auth\\u003c/a\\u003e is one of the oldest and easiest ways to secure a web page or API endpoint. \\u003ca href=\\\"https://developer.mozilla.org/en-US/docs/Web/HTTP/Authentication\\\"\\u003eBasic Auth\\u003c/a\\u003e does not have many features and lacks the sophistication of more modern access controls (see \\u003ca href=\\\"https://github.com/kubernetes/ingress-nginx/tree/master/docs/examples/auth\\\"\\u003eIngress Nginx Auth Examples\\u003c/a\\u003e). However, \\u003ca href=\\\"https://developer.mozilla.org/en-US/docs/Web/HTTP/Authentication\\\"\\u003eBasic Auth\\u003c/a\\u003e is supported by nearly every major web client, library, and utility. \\u003ca href=\\\"https://developer.mozilla.org/en-US/docs/Web/HTTP/Authentication\\\"\\u003eBasic Auth\\u003c/a\\u003e is secure, stable and perfect for quick security on Kubernetes projects. \\u003ca href=\\\"https://developer.mozilla.org/en-US/docs/Web/HTTP/Authentication\\\"\\u003eBasic Auth\\u003c/a\\u003e  can easily we swapped out later as requirements demand or provide a foundation for implementations such as \\u003ca href=\\\"https://oauth.net/2/\\\"\\u003eOAuth 2\\u003c/a\\u003e and \\u003ca href=\\\"https://jwt.io/\\\"\\u003eJWT\\u003c/a\\u003e.\\u003c/p\\u003e\",\n  \"headline\": \"Basic Auth on Kubernetes Ingress\",\n  \"image\": [\n    \"https://imti.co/img/post/lock_876_438.jpg\"\n  ],\n  \"mainEntityOfPage\": {\n    \"@id\": \"https://imti.co/kubernetes-ingress-basic-auth/\",\n    \"@type\": \"WebPage\"\n  },\n  \"publisher\": {\n    \"@type\": \"Organization\",\n    \"logo\": {\n      \"@type\": \"ImageObject\",\n      \"url\": \"https://imti.co/img/craig_johnston_cjimti.jpg\"\n    },\n    \"name\": \"imti.co\"\n  }\n}"
 </script>
+
 
 </head></head>
 
@@ -103,7 +79,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="https://imti.co/">IMTI</a>
+            <a class="navbar-brand" href="https://imti.co//">IMTI</a>
         </div>
 
         
@@ -112,10 +88,10 @@
             <div class="navbar-collapse">
                 <ul class="nav navbar-nav navbar-right">
                     <li>
-                        <a href="https://imti.co/">Home</a>
+                        <a href="https://imti.co//">Home</a>
                     </li>
                     <li>
-                        <a href="https://imti.co/about/">About</a>
+                        <a href="https://imti.co//about/">About</a>
                     </li>
                     <li>
                         <a href="https://twitter.com/cjimti">Follow</a>
@@ -212,25 +188,7 @@
                 post-container">
 
                 <p><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Authentication">Basic Auth</a> is one of the oldest and easiest ways to secure a web page or API endpoint. <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Authentication">Basic Auth</a> does not have many features and lacks the sophistication of more modern access controls (see <a href="https://github.com/kubernetes/ingress-nginx/tree/master/docs/examples/auth">Ingress Nginx Auth Examples</a>). However, <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Authentication">Basic Auth</a> is supported by nearly every major web client, library, and utility. <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Authentication">Basic Auth</a> is secure, stable and perfect for quick security on Kubernetes projects. <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Authentication">Basic Auth</a>  can easily we swapped out later as requirements demand or provide a foundation for implementations such as <a href="https://oauth.net/2/">OAuth 2</a> and <a href="https://jwt.io/">JWT</a>.</p>
-<div class="ad-div">
-    <a href="https://amzn.to/3hAZUvx">
-        <img src="/img/kubernetes_platform_development.jpg" style="padding:0; margin: 0; width: 50%; float: left"/>
-    </a>
 
-    <div style="padding-left: 15px; overflow:auto;">
-        <a href="https://amzn.to/3hAZUvx">Support this blog! Buy my new book:
-            <h4>Advanced Platform Development with Kubernetes</h4>
-        </a>
-        <h5>What You'll Learn</h5>
-        <ul style="padding-bottom: 0; margin: 0">
-            <li>Build data pipelines with <b>MQTT, NiFi, Logstash, MinIO, Hive, Presto, Kafka and Elasticsearch</b></li>
-            <li>Leverage <b>Serverless</b> ETL with <b>OpenFaaS</b></li>
-            <li>Explore <b>Blockchain</b> networking with <b>Ethereum</b></li>
-            <li>Support a multi-tenant <b>Data Science</b> platform with <b>JupyterHub, MLflow and Seldon Core</b></li>
-            <li>Build a <b>Multi-cloud</b>, <b>Hybrid cluster</b>, securely bridging <b>on-premise</b> and cloud-based Kubernetes nodes</li>
-        </ul>
-    </div>
-</div>
 
 <p>First, you need an <a href="/web-cluster-ingress/">Ingress</a> controller on your Kubernetes cluster and at least one ingress rule that we can apply <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Authentication">Basic Auth</a>. If you are following along with my articles on building a <a href="/hobby-cluster/">Production Hobby Cluster</a> Kubernetes and do not yet have <a href="/web-cluster-ingress/">Ingress</a> installed, you should read <a href="/web-cluster-ingress/">Ingress on Custom Kubernetes</a> before getting started.</p>
 <h4 id="security">Security</h4>
@@ -238,82 +196,64 @@
 <p>For the <a href="/hobby-cluster/">Production Hobby Cluster</a> we use <a href="https://letsencrypt.org/">Let&rsquo;s Encrypt</a>, so if you have not done so already you can check out my article on setting up <a href="https://letsencrypt.org/">Let&rsquo;s Encrypt</a> for your custom cluster read: <a href="/lets-encrypt-kubernetes/">Let&rsquo;s Encrypt, Kubernetes</a>.</p>
 <h3 id="create-a-user-and-password">Create a User and Password</h3>
 <p>Start by creating an <a href="https://httpd.apache.org/docs/current/programs/htpasswd.html">htpasswd</a> file that contains the <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Authentication">Basic Auth</a> credentials. The following creates a user called <strong>sysop</strong>, choose whatever username you like.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">htpasswd -c ./auth sysop
-</code></pre></div><p>It is important to name the file <strong>auth</strong>. The filename is used as the key in the key-value pair under the <code>data</code> section of secret.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>htpasswd -c ./auth sysop
+</span></span></code></pre></div><p>It is important to name the file <strong>auth</strong>. The filename is used as the key in the key-value pair under the <code>data</code> section of secret.</p>
 <p>After entering a password for the new user twice, you end up with the file <code>auth</code>.</p>
 <h3 id="create-a-secret">Create a <a href="https://kubernetes.io/docs/concepts/configuration/secret/">Secret</a></h3>
 <p>Kubernetes can create a <strong><a href="https://kubernetes-v1-4.github.io/docs/user-guide/kubectl/kubectl_create_secret_generic/">generic</a></strong> <a href="https://kubernetes.io/docs/concepts/configuration/secret/">Secret</a> from the generated <code>auth</code> file, or from any file, however, the format of the htpasswd generated file is necessary for use with <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Authentication">Basic Auth</a>. The file name is used as the key in Basic Auth secret, therefore its best to name it <strong>auth</strong> and avoid having to edit the secret.  <a href="/web-cluster-ingress/">Ingress</a> uses the new <a href="https://kubernetes.io/docs/concepts/configuration/secret/">Secret</a> in it&rsquo;s annotation section to provide <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Authentication">Basic Auth</a>.</p>
 <p>The <a href="https://kubernetes-v1-4.github.io/docs/user-guide/kubectl/kubectl_create_secret/">kubectl create secret</a> command can create a secret from a local file, directory or literal value using the <strong><a href="https://kubernetes-v1-4.github.io/docs/user-guide/kubectl/kubectl_create_secret_generic/">generic</a></strong> directive. In the example below I call the new secret <strong>sysop</strong>, named after the single set of credentials stored in it. However, if you are grouping many credentials, it would be better to give it a more generic name.</p>
 <p>Create the <a href="https://kubernetes.io/docs/concepts/configuration/secret/">Secret</a>:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl create secret generic sysop --from-file auth
-</code></pre></div><p>Ensure the <a href="https://kubernetes.io/docs/concepts/configuration/secret/">Secret</a> was created successfully by viewing the details:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl get secret sysop -o yaml
-</code></pre></div><p>You should have a secret similar to the following:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">v1</span>
-<span style="color:#f92672">data</span>:
-  <span style="color:#f92672">auth</span>: <span style="color:#ae81ff">c3avb2A2GGFwcjEkMmo5SwoucC4kcWtDR3NTVUxSDXJmTVkwNUwxUlZYLbo=</span>
-<span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Secret</span>
-<span style="color:#f92672">metadata</span>:
-  <span style="color:#f92672">creationTimestamp</span>: <span style="color:#e6db74">2018-05-18T06:55:51Z</span>
-  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">sysop</span>
-  <span style="color:#f92672">namespace</span>: <span style="color:#ae81ff">default</span>
-  <span style="color:#f92672">resourceVersion</span>: <span style="color:#e6db74">&#34;265674&#34;</span>
-  <span style="color:#f92672">selfLink</span>: <span style="color:#ae81ff">/api/v1/namespaces/default/secrets/sysop</span>
-  <span style="color:#f92672">uid</span>: <span style="color:#ae81ff">2bfb399c-58d6-11e8-b11e-5600017e897a</span>
-<span style="color:#f92672">type</span>: <span style="color:#ae81ff">Opaque</span>
-</code></pre></div><p>Of course, you should avoid publishing your new <a href="https://kubernetes.io/docs/concepts/configuration/secret/">Secret</a> like I just did, since the <code>auth:</code> value under <code>data:</code> is only a <a href="https://en.wikipedia.org/wiki/Base64">base64</a> encoded version of the username and encoded password pair. The password may be reversed quickly with a dictionary attack or other password cracking utilities.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl create secret generic sysop --from-file auth
+</span></span></code></pre></div><p>Ensure the <a href="https://kubernetes.io/docs/concepts/configuration/secret/">Secret</a> was created successfully by viewing the details:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl get secret sysop -o yaml
+</span></span></code></pre></div><p>You should have a secret similar to the following:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">v1</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">data</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">auth</span>: <span style="color:#ae81ff">c3avb2A2GGFwcjEkMmo5SwoucC4kcWtDR3NTVUxSDXJmTVkwNUwxUlZYLbo=</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Secret</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">metadata</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">creationTimestamp</span>: <span style="color:#e6db74">2018-05-18T06:55:51Z</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">sysop</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">namespace</span>: <span style="color:#ae81ff">default</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">resourceVersion</span>: <span style="color:#e6db74">&#34;265674&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">selfLink</span>: <span style="color:#ae81ff">/api/v1/namespaces/default/secrets/sysop</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">uid</span>: <span style="color:#ae81ff">2bfb399c-58d6-11e8-b11e-5600017e897a</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">type</span>: <span style="color:#ae81ff">Opaque</span>
+</span></span></code></pre></div><p>Of course, you should avoid publishing your new <a href="https://kubernetes.io/docs/concepts/configuration/secret/">Secret</a> like I just did, since the <code>auth:</code> value under <code>data:</code> is only a <a href="https://en.wikipedia.org/wiki/Base64">base64</a> encoded version of the username and encoded password pair. The password may be reversed quickly with a dictionary attack or other password cracking utilities.</p>
 <h3 id="protect-ingress">Protect <a href="/web-cluster-ingress/">Ingress</a></h3>
 <p>The following is an example <a href="/web-cluster-ingress/">Ingress</a> configuration for a test application called <a href="https://github.com/txn2/ok">ok</a> running on the <a href="http://localhost:4000/tag/phc.txn2.net/">phc.txn2.net</a> test cluster.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"> <span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">extensions/v1beta1</span>
- <span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Ingress</span>
- <span style="color:#f92672">metadata</span>:
-   <span style="color:#f92672">name</span>: <span style="color:#ae81ff">ok-auth</span>
-   <span style="color:#f92672">labels</span>:
-     <span style="color:#f92672">app</span>: <span style="color:#ae81ff">ok-auth</span>
-     <span style="color:#f92672">system</span>: <span style="color:#ae81ff">test</span>
-   <span style="color:#f92672">annotations</span>:
-     <span style="color:#f92672">nginx.ingress.kubernetes.io/auth-type</span>: <span style="color:#ae81ff">basic</span>
-     <span style="color:#f92672">nginx.ingress.kubernetes.io/auth-secret</span>: <span style="color:#ae81ff">sysop</span>
-     <span style="color:#f92672">nginx.ingress.kubernetes.io/auth-realm</span>: <span style="color:#e6db74">&#34;Authentication Required - ok&#34;</span>
- <span style="color:#f92672">spec</span>:
-   <span style="color:#f92672">rules</span>:
-   - <span style="color:#f92672">host</span>: <span style="color:#ae81ff">ok-auth.la.txn2.net</span>
-     <span style="color:#f92672">http</span>:
-       <span style="color:#f92672">paths</span>:
-       - <span style="color:#f92672">backend</span>:
-           <span style="color:#f92672">serviceName</span>: <span style="color:#e6db74">&#34;ok&#34;</span>
-           <span style="color:#f92672">servicePort</span>: <span style="color:#ae81ff">5001</span>
-         <span style="color:#f92672">path</span>: <span style="color:#ae81ff">/</span>
-   <span style="color:#f92672">tls</span>:
-   - <span style="color:#f92672">hosts</span>:
-     - <span style="color:#ae81ff">ok-auth.la.txn2.net</span>
-     <span style="color:#f92672">secretName</span>: <span style="color:#ae81ff">la-txn2-net-tls</span>
-</code></pre></div><p>All that is needed are three <a href="/web-cluster-ingress/">Ingress</a> annotations:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span> <span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">extensions/v1beta1</span>
+</span></span><span style="display:flex;"><span> <span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Ingress</span>
+</span></span><span style="display:flex;"><span> <span style="color:#f92672">metadata</span>:
+</span></span><span style="display:flex;"><span>   <span style="color:#f92672">name</span>: <span style="color:#ae81ff">ok-auth</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#f92672">labels</span>:
+</span></span><span style="display:flex;"><span>     <span style="color:#f92672">app</span>: <span style="color:#ae81ff">ok-auth</span>
+</span></span><span style="display:flex;"><span>     <span style="color:#f92672">system</span>: <span style="color:#ae81ff">test</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#f92672">annotations</span>:
+</span></span><span style="display:flex;"><span>     <span style="color:#f92672">nginx.ingress.kubernetes.io/auth-type</span>: <span style="color:#ae81ff">basic</span>
+</span></span><span style="display:flex;"><span>     <span style="color:#f92672">nginx.ingress.kubernetes.io/auth-secret</span>: <span style="color:#ae81ff">sysop</span>
+</span></span><span style="display:flex;"><span>     <span style="color:#f92672">nginx.ingress.kubernetes.io/auth-realm</span>: <span style="color:#e6db74">&#34;Authentication Required - ok&#34;</span>
+</span></span><span style="display:flex;"><span> <span style="color:#f92672">spec</span>:
+</span></span><span style="display:flex;"><span>   <span style="color:#f92672">rules</span>:
+</span></span><span style="display:flex;"><span>   - <span style="color:#f92672">host</span>: <span style="color:#ae81ff">ok-auth.la.txn2.net</span>
+</span></span><span style="display:flex;"><span>     <span style="color:#f92672">http</span>:
+</span></span><span style="display:flex;"><span>       <span style="color:#f92672">paths</span>:
+</span></span><span style="display:flex;"><span>       - <span style="color:#f92672">backend</span>:
+</span></span><span style="display:flex;"><span>           <span style="color:#f92672">serviceName</span>: <span style="color:#e6db74">&#34;ok&#34;</span>
+</span></span><span style="display:flex;"><span>           <span style="color:#f92672">servicePort</span>: <span style="color:#ae81ff">5001</span>
+</span></span><span style="display:flex;"><span>         <span style="color:#f92672">path</span>: <span style="color:#ae81ff">/</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#f92672">tls</span>:
+</span></span><span style="display:flex;"><span>   - <span style="color:#f92672">hosts</span>:
+</span></span><span style="display:flex;"><span>     - <span style="color:#ae81ff">ok-auth.la.txn2.net</span>
+</span></span><span style="display:flex;"><span>     <span style="color:#f92672">secretName</span>: <span style="color:#ae81ff">la-txn2-net-tls</span>
+</span></span></code></pre></div><p>All that is needed are three <a href="/web-cluster-ingress/">Ingress</a> annotations:</p>
 <ul>
 <li>nginx.ingress.kubernetes.io/auth-type: basic</li>
 <li>nginx.ingress.kubernetes.io/auth-secret: sysop</li>
 <li>nginx.ingress.kubernetes.io/auth-realm: &ldquo;Authentication Required - ok.&rdquo;</li>
 </ul>
 <p>The <a href="/web-cluster-ingress/">Ingress</a> for <a href="https://ok-auth.la.txn2.net">ok-auth.la.txn2.net</a> is now <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Authentication">Basic Auth</a> protected using credentials in a <a href="https://kubernetes.io/docs/concepts/configuration/secret/">Secret</a> called <strong>sysop</strong>.</p>
-<div class="ad-div">
-    <a href="https://amzn.to/3hAZUvx">
-        <img src="/img/kubernetes_platform_development.jpg" style="padding:0; margin: 0; width: 50%; float: left"/>
-    </a>
 
-    <div style="padding-left: 15px; overflow:auto;">
-        <a href="https://amzn.to/3hAZUvx">Support this blog! Buy my new book:
-            <h4>Advanced Platform Development with Kubernetes</h4>
-        </a>
-        <h5>What You'll Learn</h5>
-        <ul style="padding-bottom: 0; margin: 0">
-            <li>Build data pipelines with <b>MQTT, NiFi, Logstash, MinIO, Hive, Presto, Kafka and Elasticsearch</b></li>
-            <li>Leverage <b>Serverless</b> ETL with <b>OpenFaaS</b></li>
-            <li>Explore <b>Blockchain</b> networking with <b>Ethereum</b></li>
-            <li>Support a multi-tenant <b>Data Science</b> platform with <b>JupyterHub, MLflow and Seldon Core</b></li>
-            <li>Build a <b>Multi-cloud</b>, <b>Hybrid cluster</b>, securely bridging <b>on-premise</b> and cloud-based Kubernetes nodes</li>
-        </ul>
-    </div>
-</div>
 
 <h2 id="port-forwarding--local-development">Port Forwarding / Local Development</h2>
 <p>Check out <a href="https://github.com/txn2/kubefwd">kubefwd</a> for a simple command line utility that bulk forwards services of one or more namespaces to your local workstation.</p>
@@ -330,35 +270,6 @@
                     <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a>
                 </p>
 
-                <h5>SUPPORT</h5>
-                <p>
-                    Order my new Kubernetes book: <a href="https://amzn.to/34D56v6">Advanced Platform Development with Kubernetes: Enabling Data Management, the Internet of Things, Blockchain, and Machine Learning</a>
-                </p>
-                <script type="text/javascript">
-                  amzn_assoc_tracking_id = "imti-20";
-                  amzn_assoc_ad_mode = "manual";
-                  amzn_assoc_ad_type = "smart";
-                  amzn_assoc_marketplace = "amazon";
-                  amzn_assoc_region = "US";
-                  amzn_assoc_design = "enhanced_links";
-                  amzn_assoc_asins = "1484256107";
-                  amzn_assoc_placement = "adunit";
-                  amzn_assoc_linkid = "14a9d8b8d1b0bd44e9256e0e0a948015";
-                </script>
-                <script src="//z-na.amazon-adsystem.com/widgets/onejs?MarketPlace=US"></script>
-
-                
-                <hr>
-                <h5>SHARE</h5>
-                <ul class="list-inline">
-                    <li><div class="addthis_inline_share_toolbox"></div></li>
-                </ul>
-
-                <h5>FOLLOW</h5>
-                <ul class="list-inline">
-                    <li><div class="addthis_inline_follow_toolbox"></div></li>
-                </ul>
-
             </div>
             
             <div class="
@@ -371,6 +282,8 @@
                     <hr class="hidden-sm hidden-xs">
                     <h5><a href="/tags/">FEATURED TAGS</a></h5>
                     <div class="tags">
+                        
+                        
                         
                         
                         
@@ -390,8 +303,8 @@
                         
                         
                         
-                        <a href="/tags/data-science" title="data-science">
-                        data-science
+                        <a href="/tags/data-science" title="data science">
+                        data science
                         </a>
                         
                         
@@ -466,9 +379,17 @@
                         
                         
                         
+                        <a href="/tags/kubefwd" title="kubefwd">
+                        kubefwd
+                        </a>
+                        
+                        
+                        
                         <a href="/tags/kubernetes" title="kubernetes">
                         kubernetes
                         </a>
+                        
+                        
                         
                         
                         
@@ -502,8 +423,8 @@
                         
                         
                         
-                        <a href="/tags/raspberry-pi" title="raspberry-pi">
-                        raspberry-pi
+                        <a href="/tags/raspberry-pi" title="raspberry pi">
+                        raspberry pi
                         </a>
                         
                         
@@ -551,7 +472,7 @@
                 <ul class="list-inline text-center">
                    
                    <li>
-                       <a href="" rel="alternate" type="application/rss+xml" title="IMTI" >
+                       <a href="/index.xml" rel="alternate" type="application/rss+xml" title="IMTI" >
                            <span class="fa-stack fa-lg">
                                <i class="fa fa-circle fa-stack-2x"></i>
                                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
