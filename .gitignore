@@ -3,3 +3,4 @@
 */.DS_Store
 content/.DS_Store
 CLAUDE.md
+.claude/settings.local.json
