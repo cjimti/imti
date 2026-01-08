@@ -1,0 +1,1050 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head><head>
+    <meta name="msvalidate.01" content="DBC34551F2DD1BA3DC0D62EE46D7448F" />
+    <meta name="google-site-verification" content="DrtKc88u9uc7iptd4LyURAKBmFcOn7Kuk6HcRk_kNmo" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <meta name="description" content="Local workstation-based microservices development">
+    
+    <meta name="keyword"  content="Go, Kubernetes, Elasticsearch, Python, Docker, Big Data, Artificial Intelligence, Machine Learning">
+    <link rel="shortcut icon" href="https://imti.co/img/favicon.ico">
+
+    <title>Remote Query Elasticsearch on Kubernetes - IMTI - Craig Johnston</title>
+
+    <link rel="canonical" href="https://imti.co/remote-query-kubernetes-elasticsearch/">
+	
+    
+    <link rel="stylesheet" href="https://imti.co/css/bootstrap.min.css">
+
+    
+    <link rel="stylesheet" href="https://imti.co/css/hux-blog.min.css">
+
+    
+    <link rel="stylesheet" href="https://imti.co/css/syntax.css">
+
+    
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    
+    
+    <link rel="stylesheet" href="/css/imti.css">
+
+    
+    <script src="https://imti.co/js/jquery.min.js"></script>
+    
+    
+    <script src="https://imti.co/js/bootstrap.min.js"></script>
+    
+    
+    <script src="https://imti.co/js/hux-blog.min.js"></script>
+
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({
+            google_ad_client: "ca-pub-5984764595236029",
+            enable_page_level_ads: true
+        });
+    </script>
+
+    <meta name="twitter:site" content="@cjimti">
+<meta name="twitter:creator" content="@cjimti">
+
+<meta name="twitter:description" content="Local workstation-based microservices development" />
+<meta name="twitter:title" content="Remote Query Elasticsearch on Kubernetes" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://imti.co/img/post/tel_876_438.jpg" />
+<meta property="og:image" content="https://imti.co/img/post/tel_876_438.jpg" />
+
+
+
+    
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https:\/\/imti.co\/remote-query-kubernetes-elasticsearch\/"
+  },
+  "headline": "Remote Query Elasticsearch on Kubernetes",
+  "image": ["https:\/\/imti.co\/img\/post\/tel_876_438.jpg"],
+  "datePublished": "2018-07-25T00:00:00Z",
+  "dateModified": "2018-07-25T00:00:00Z",
+  "author": {
+    "@type": "Person",
+    "name": "Craig Johnston"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "imti.co",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https:\/\/imti.co\/img\/craig_johnston_cjimti.jpg"
+    }
+  },
+  "description": "Developing on our local workstations has always been a conceptual challenge for my team when it comes to remote data access. Local workstation-based development …"
+}
+</script>
+
+
+</head></head>
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="https://imti.co//">IMTI</a>
+        </div>
+
+        
+        
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="https://imti.co//">Home</a>
+                    </li>
+                    <li>
+                        <a href="https://imti.co//about/">About</a>
+                    </li>
+                    <li>
+                        <a href="https://twitter.com/cjimti">Follow</a>
+                    </li>
+                    
+
+                    
+                </ul>
+            </div>
+        </div>
+        
+    </div>
+    
+</nav>
+<script>
+    
+    
+    
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        
+            $navbar.className = " ";
+            
+            setTimeout(function(){
+                
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+
+
+<style type="text/css">
+    header.intro-header{
+        background-image: url('https://imti.co/img/post/tel.jpg')
+    }
+</style>
+<header class="intro-header" >
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/kubernetes" title="Kubernetes">
+                        Kubernetes
+                        </a>
+                        
+                        <a class="tag" href="/tags/elasticsearch" title="Elasticsearch">
+                        Elasticsearch
+                        </a>
+                        
+                        <a class="tag" href="/tags/data" title="Data">
+                        Data
+                        </a>
+                        
+                    </div>
+                    <h1>Remote Query Elasticsearch on Kubernetes</h1>
+                    <h2 class="subheading">Local workstation-based microservices development</h2>
+                    <span  class="meta">Posted by <a href="https://twitter.com/cjimti">Craig Johnston</a> on Wednesday, July 25, 2018
+                        
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+<article>
+    <div class="container">
+        <div class="row">
+
+            
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <p>Developing on our local workstations has always been a conceptual challenge for my team when it comes to remote data access.  Local workstation-based development of services that intend to connect to a wide range of remote services that may have no options for external connections poses a challenge. Mirroring the entire development environment is possible in many cases, just not practical.</p>
+<p>In days before Kubernetes, writing code in IDEs on our local workstation meant we had only a few options for developing server-side-API-style services that needed to connect to a database. We could set up a database server on our local workstation manually or use packages like <a href="https://www.mamp.info/en/">MAMP</a>/<a href="http://www.wampserver.com/en/">WAMP</a>, or run big virtual servers managed with <a href="https://www.vagrantup.com/">Vagrant</a>. Even after we got the database running, we needed a good set of data to work with, and that often meant asking a DBA or Sysadmin for SQL dumps from an environment in which we have no access.</p>
+<p>Kubernetes gives us new ways to connect to remote services, some of these services are never intended to be connected to outside the cluster, having no ingress or firewall rules, yet we still need to connect from the outside when developing on a local workstation.</p>
+<p><strong>Port-forward a Kubernetes service:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl port-forward svc/elasticsearch 9200:9200 -n the-project
+</span></span></code></pre></div><p>In the command above, I&rsquo;m forwarding the Kubernetes Service <code>elasticsearch</code>, and it&rsquo;s port 9200 from <code>the-project</code> namespace to port 9200 on my local workstation. Studying this command may be enough to get you going, and if you followed my guide, <a href="/kubernetes-production-elasticsearch/">Production Grade Elasticsearch on Kubernetes</a>, you could run this same command.</p>
+<p>If you don&rsquo;t understand that command, or running it produces an error, read on.</p>
+<aside class="toc">
+    <header>
+        <h2>Contents</h2>
+    </header>
+    <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#port-forward-elasticsearch-kubernetes-service">Port Forward <code>elasticsearch</code> Kubernetes Service</a></li>
+        <li><a href="#postman">Postman</a></li>
+        <li><a href="#query-elasticsearch-indices-and-mappings">Query Elasticsearch Indices and Mappings</a></li>
+        <li><a href="#query-elasticsearch-data">Query Elasticsearch Data</a></li>
+      </ul>
+    </li>
+    <li><a href="#port-forwarding--local-development">Port Forwarding / Local Development</a></li>
+    <li><a href="#resources">Resources</a></li>
+  </ul>
+</nav>
+</aside>
+
+
+<h3 id="port-forward-elasticsearch-kubernetes-service">Port Forward <code>elasticsearch</code> Kubernetes Service</h3>
+<p>Since Kubernetes v1.10, the command <a href="https://kubernetes.io/docs/tasks/access-application-cluster/port-forward-access-application-cluster/#forward-a-local-port-to-a-port-on-the-pod">kubectl port-forward</a> &ldquo;allows using <a href="https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names">resource name</a>, such as a service name, to select a matching pod to port forward to.&rdquo;  <a href="https://kubernetes.io/docs/tasks/access-application-cluster/port-forward-access-application-cluster/#forward-a-local-port-to-a-port-on-the-pod">kubectl port-forward</a> also works with deployments, daemon sets, replica sets and so on.</p>
+<p>Get a list of services running in <code>the-project</code> namespace:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl get services -n the-project
+</span></span></code></pre></div><p><a href="https://kubernetes.io/docs/concepts/services-networking/service/">Service</a>s expose a port and map it to another port on a pod. In the case of connecting to Elasticsearch, we don&rsquo;t care what pod we are connecting to, in fact, we want to connect the same way or application will, and that is through a <a href="https://kubernetes.io/docs/concepts/services-networking/service/">Service</a>. It so happens that the <code>elasticsearch</code> Service in <code>the-project</code> namespace uses Port 9200, the default for elasticsearch; however this could have easily been customized to some other port, and this is why we always want to list our services and ports they expose.</p>
+<p><img src="/images/content/kubectl-cmd-getsvc.png" alt="kubectl get services"></p>
+<p>Now that we have the <a href="https://kubernetes.io/docs/concepts/services-networking/service/">Service</a> name and port we can issue a port-forward command with <code>kubectl</code>:</p>
+<p>To port-forward the Elasticsearch <a href="https://kubernetes.io/docs/concepts/services-networking/service/">Service</a> to my local workstation I need to provide a local port that is available. I would need to choose a port other than 9200 if I had something already on that port.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl port-forward svc/elasticsearch 9200:9200 -n the-project
+</span></span></code></pre></div><p>The following diagram is a breakdown of the <code>kubectl port-forward</code> command:</p>
+<p><img src="/images/content/kubectl-cmd-pf.png" alt="kubectl port-forward"></p>
+<p>If the above command is running without error, open another terminal and use Curl to get the cluster stats:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>curl <span style="color:#e6db74">&#34;http://localhost:9200/_cluster/stats?human&amp;pretty&#34;</span>
+</span></span></code></pre></div><p>If the command above returned a large JSON object describing the Elasticsearch cluster in your Kubernetes environment, congratulations. If you encountered an error, read on.</p>
+<p><strong>Permission Denied</strong></p>
+<p>If <code>kubectl port-forward</code> claims you don&rsquo;t have permission to port forward a <a href="https://kubernetes.io/docs/concepts/services-networking/service/">Service</a> on the cluster, you need to review the <a href="#port-forwarding-rbac-permissions">RBAC Permissions</a> for the credentials used for remote access to the Kubernetes cluster.</p>
+<p>If you are getting an error along the lines of <code>127.0.0.1:9200, 16): Connection refused</code> it is most likely that Elasticsearch is not binding to all local interfaces on the Pod and is defaulting to its hostname. Since you can not provide a hostname through simple port-forward, you want to check your <code>elasticsearch.yml</code> configuration and ensure that Elasticsearch listens on all interfaces by specifying <code>network.host: 0.0.0.0</code>. However, if you are using the configuration from the article <a href="/kubernetes-production-elasticsearch/">Production Grade Elasticsearch on Kubernetes</a>, the value of <strong>network.host</strong> is set from the environment variable <strong>NETWORK_HOST</strong> for the Pod. See the <a href="/kubernetes-production-elasticsearch/#deployment-for-client-and-ingest-nodes">Deployment for Client and Ingest Nodes</a> configuration, paying special attention to the <strong>env:</strong> section where the environment variable setting <strong>NETWORK_HOST</strong> is <strong>0.0.0.0</strong>.</p>
+<h4 id="port-forwarding-rbac-permissions">Port-forwarding RBAC Permissions</h4>
+<p>In the article, <a href="/team-kubernetes-remote-access/">Kubernetes Team Access - RBAC for developers and QA</a>, I set up the <a href="/team-kubernetes-remote-access/#role-and-rolebinding">Roles</a> <strong>developer</strong> and <strong>deployer</strong>. In this example, I am using the <code>kubectl config</code> context with the developer service account. Whatever Role you are bound to must have the following RBAC rules applied to port forward:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span>- <span style="color:#f92672">apiGroups</span>:
+</span></span><span style="display:flex;"><span>  - <span style="color:#e6db74">&#39;*&#39;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">resources</span>:
+</span></span><span style="display:flex;"><span>  - <span style="color:#e6db74">&#39;pods/portforward&#39;</span>
+</span></span><span style="display:flex;"><span>  - <span style="color:#e6db74">&#39;services/portforward&#39;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">verbs</span>:
+</span></span><span style="display:flex;"><span>  - <span style="color:#ae81ff">create</span>
+</span></span></code></pre></div><p>See <a href="/team-kubernetes-remote-access/#role-and-rolebinding">Roles and RoleBindings</a> for a better understanding of how these rules apply to our access.</p>
+<h3 id="postman">Postman</h3>
+<p>In the following examples, I use my favorite (and free) HTTP client, <a href="https://www.getpostman.com/">Postman</a>. When working with HTTP based APIs, I typically use <a href="https://www.getpostman.com/">Postman</a>. However, I&rsquo;ll be exporting the <a href="https://www.getpostman.com/">Postman</a> calls to <code>curl</code> commands so they can also be displayed here and tested on the command line.</p>
+<p>If you want access to my <a href="https://www.getpostman.com/">Postman</a> calls to run for yourself:</p>
+<p><a href="https://app.getpostman.com/run-collection/d5db089e68b44d01d046"><img src="https://run.pstmn.io/button.svg" alt="Run in Postman"></a></p>
+<h3 id="query-elasticsearch-indices-and-mappings">Query Elasticsearch Indices and Mappings</h3>
+<p>If the command <code>kubectl port-forward svc/elasticsearch 9200:9200 -n the-project</code> is running without error in a terminal we are ready to start working with Elasticsearch on our local workstation through port 9200.</p>
+<h4 id="get-indices">Get Indices</h4>
+<p>Get a list of <a href="https://www.elastic.co/blog/what-is-an-elasticsearch-index">Indices</a>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>curl -X GET <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#39;http://localhost:9200/_cat/indices?format=json&amp;pretty=true&#39;</span>
+</span></span></code></pre></div><p>Output:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>[
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;health&#34;</span>: <span style="color:#e6db74">&#34;green&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;status&#34;</span>: <span style="color:#e6db74">&#34;open&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;index&#34;</span>: <span style="color:#e6db74">&#34;.kibana&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;uuid&#34;</span>: <span style="color:#e6db74">&#34;9qr9qjD4T1-2KhWi70zcYw&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;pri&#34;</span>: <span style="color:#e6db74">&#34;1&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;rep&#34;</span>: <span style="color:#e6db74">&#34;0&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;docs.count&#34;</span>: <span style="color:#e6db74">&#34;6&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;docs.deleted&#34;</span>: <span style="color:#e6db74">&#34;0&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;store.size&#34;</span>: <span style="color:#e6db74">&#34;33.1kb&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;pri.store.size&#34;</span>: <span style="color:#e6db74">&#34;33.1kb&#34;</span>
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;health&#34;</span>: <span style="color:#e6db74">&#34;green&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;status&#34;</span>: <span style="color:#e6db74">&#34;open&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;index&#34;</span>: <span style="color:#e6db74">&#34;wx-rtbeat-2018.07&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;uuid&#34;</span>: <span style="color:#e6db74">&#34;nMHK2dxfTbmbnLubKvLTRQ&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;pri&#34;</span>: <span style="color:#e6db74">&#34;5&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;rep&#34;</span>: <span style="color:#e6db74">&#34;1&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;docs.count&#34;</span>: <span style="color:#e6db74">&#34;5566&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;docs.deleted&#34;</span>: <span style="color:#e6db74">&#34;0&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;store.size&#34;</span>: <span style="color:#e6db74">&#34;4.8mb&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;pri.store.size&#34;</span>: <span style="color:#e6db74">&#34;4.8mb&#34;</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>]
+</span></span></code></pre></div><p>The output of <code>_cat/indices</code> returns a JSON array of <a href="https://www.elastic.co/blog/what-is-an-elasticsearch-index">Indices</a>. In the article, <a href="/post-json-elasticsearch-kubernetes/">High Traffic JSON Data into Elasticsearch on Kubernetes</a> I demonstrate collecting weather data from the <a href="https://darksky.net/dev">Dark Sky API</a>. The weather data populates an Elasticssearch index based on the year and month. As of the time of this writing, I only have one index <strong>wx-rtbeat-2018.07</strong>. The index <strong>.kibana</strong> is used by my <a href="/kibana-kubernetes/">Kibana service</a>.</p>
+<h4 id="get-index-mapping">Get Index Mapping</h4>
+<p>The <a href="https://www.elastic.co/guide/en/elasticsearch/reference/6.3/indices-get-mapping.html#indices-get-mapping">Get Mapping</a> call gives us the field mapping of an index or a group of indexes. In this case, we want all of the fields any index starting with <strong><code>wx-rtbeat-*</code></strong> (* being a wildcard.) <a href="https://www.getpostman.com/">Postman</a> generates the Curl call with the URL encoding <strong>%2A</strong> for the * character.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>curl -X GET <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  http://localhost:9200/wx-rtbeat-%2A/_mapping
+</span></span></code></pre></div><p>Output:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;wx-rtbeat-2018.07&#34;</span>: {
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;mappings&#34;</span>: {
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;doc&#34;</span>: {
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&#34;_meta&#34;</span>: {
+</span></span><span style="display:flex;"><span>                    <span style="color:#f92672">&#34;version&#34;</span>: <span style="color:#e6db74">&#34;7.0.0-alpha1&#34;</span>
+</span></span><span style="display:flex;"><span>                },
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&#34;dynamic_templates&#34;</span>: [
+</span></span><span style="display:flex;"><span>                    {
+</span></span><span style="display:flex;"><span>                        <span style="color:#f92672">&#34;fields&#34;</span>: {
+</span></span><span style="display:flex;"><span>                            <span style="color:#f92672">&#34;path_match&#34;</span>: <span style="color:#e6db74">&#34;fields.*&#34;</span>,
+</span></span><span style="display:flex;"><span>                            <span style="color:#f92672">&#34;match_mapping_type&#34;</span>: <span style="color:#e6db74">&#34;string&#34;</span>,
+</span></span><span style="display:flex;"><span>                            <span style="color:#f92672">&#34;mapping&#34;</span>: {
+</span></span><span style="display:flex;"><span>                                <span style="color:#f92672">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;keyword&#34;</span>
+</span></span><span style="display:flex;"><span>                            }
+</span></span><span style="display:flex;"><span>                        }
+</span></span><span style="display:flex;"><span>                    },
+</span></span><span style="display:flex;"><span>                    {
+</span></span><span style="display:flex;"><span>                        <span style="color:#f92672">&#34;strings_as_keyword&#34;</span>: {
+</span></span><span style="display:flex;"><span>                            <span style="color:#f92672">&#34;match_mapping_type&#34;</span>: <span style="color:#e6db74">&#34;string&#34;</span>,
+</span></span><span style="display:flex;"><span>                            <span style="color:#f92672">&#34;mapping&#34;</span>: {
+</span></span><span style="display:flex;"><span>                                <span style="color:#f92672">&#34;ignore_above&#34;</span>: <span style="color:#ae81ff">1024</span>,
+</span></span><span style="display:flex;"><span>                                <span style="color:#f92672">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;keyword&#34;</span>
+</span></span><span style="display:flex;"><span>                            }
+</span></span><span style="display:flex;"><span>                        }
+</span></span><span style="display:flex;"><span>                    }
+</span></span><span style="display:flex;"><span>                ],
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&#34;date_detection&#34;</span>: <span style="color:#66d9ef">false</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&#34;properties&#34;</span>: {
+</span></span><span style="display:flex;"><span>                    <span style="color:#f92672">&#34;@timestamp&#34;</span>: {
+</span></span><span style="display:flex;"><span>                        <span style="color:#f92672">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;date&#34;</span>
+</span></span><span style="display:flex;"><span>                    },
+</span></span><span style="display:flex;"><span>                    <span style="color:#f92672">&#34;beat&#34;</span>: {
+</span></span><span style="display:flex;"><span>                        <span style="color:#f92672">&#34;properties&#34;</span>: {
+</span></span><span style="display:flex;"><span>                            <span style="color:#f92672">&#34;hostname&#34;</span>: {
+</span></span><span style="display:flex;"><span>                                <span style="color:#f92672">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;keyword&#34;</span>,
+</span></span><span style="display:flex;"><span>                                <span style="color:#f92672">&#34;ignore_above&#34;</span>: <span style="color:#ae81ff">1024</span>
+</span></span><span style="display:flex;"><span>                            },
+</span></span><span style="display:flex;"><span>                            <span style="color:#f92672">&#34;name&#34;</span>: {
+</span></span><span style="display:flex;"><span>                                <span style="color:#f92672">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;keyword&#34;</span>,
+</span></span><span style="display:flex;"><span>                                <span style="color:#f92672">&#34;ignore_above&#34;</span>: <span style="color:#ae81ff">1024</span>
+</span></span><span style="display:flex;"><span>                            },
+</span></span><span style="display:flex;"><span>                            <span style="color:#f92672">&#34;version&#34;</span>: {
+</span></span><span style="display:flex;"><span>                                <span style="color:#f92672">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;keyword&#34;</span>,
+</span></span><span style="display:flex;"><span>                                <span style="color:#f92672">&#34;ignore_above&#34;</span>: <span style="color:#ae81ff">1024</span>
+</span></span><span style="display:flex;"><span>                            }
+</span></span><span style="display:flex;"><span>                        }
+</span></span><span style="display:flex;"><span>                    },
+</span></span><span style="display:flex;"><span>                    <span style="color:#f92672">&#34;clientIp&#34;</span>: {
+</span></span><span style="display:flex;"><span>                        <span style="color:#f92672">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;keyword&#34;</span>,
+</span></span><span style="display:flex;"><span>                        <span style="color:#f92672">&#34;ignore_above&#34;</span>: <span style="color:#ae81ff">1024</span>
+</span></span><span style="display:flex;"><span>                    },
+</span></span><span style="display:flex;"><span>                    <span style="color:#f92672">&#34;error&#34;</span>: {
+</span></span><span style="display:flex;"><span>                        <span style="color:#f92672">&#34;properties&#34;</span>: {
+</span></span><span style="display:flex;"><span>                            <span style="color:#f92672">&#34;code&#34;</span>: {
+</span></span><span style="display:flex;"><span>                                <span style="color:#f92672">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;long&#34;</span>
+</span></span><span style="display:flex;"><span>                            },
+</span></span><span style="display:flex;"><span>                            <span style="color:#f92672">&#34;message&#34;</span>: {
+</span></span><span style="display:flex;"><span>                                <span style="color:#f92672">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;text&#34;</span>,
+</span></span><span style="display:flex;"><span>                                <span style="color:#f92672">&#34;norms&#34;</span>: <span style="color:#66d9ef">false</span>
+</span></span><span style="display:flex;"><span>                            },
+</span></span><span style="display:flex;"><span>                            <span style="color:#f92672">&#34;type&#34;</span>: {
+</span></span><span style="display:flex;"><span>                                <span style="color:#f92672">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;keyword&#34;</span>,
+</span></span><span style="display:flex;"><span>                                <span style="color:#f92672">&#34;ignore_above&#34;</span>: <span style="color:#ae81ff">1024</span>
+</span></span><span style="display:flex;"><span>                            }
+</span></span><span style="display:flex;"><span>                        }
+</span></span><span style="display:flex;"><span>                    },
+</span></span><span style="display:flex;"><span>                    <span style="color:#f92672">&#34;fields&#34;</span>: {
+</span></span><span style="display:flex;"><span>                        <span style="color:#f92672">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;object&#34;</span>
+</span></span><span style="display:flex;"><span>                    },
+</span></span><span style="display:flex;"><span>                    <span style="color:#f92672">&#34;rxtxMsg&#34;</span>: {
+</span></span><span style="display:flex;"><span>                        <span style="color:#f92672">&#34;properties&#34;</span>: {
+</span></span><span style="display:flex;"><span>                            <span style="color:#f92672">&#34;key&#34;</span>: {
+</span></span><span style="display:flex;"><span>                                <span style="color:#f92672">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;keyword&#34;</span>,
+</span></span><span style="display:flex;"><span>                                <span style="color:#f92672">&#34;ignore_above&#34;</span>: <span style="color:#ae81ff">1024</span>
+</span></span><span style="display:flex;"><span>                            },
+</span></span><span style="display:flex;"><span>                            <span style="color:#f92672">&#34;label&#34;</span>: {
+</span></span><span style="display:flex;"><span>                                <span style="color:#f92672">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;keyword&#34;</span>,
+</span></span><span style="display:flex;"><span>                                <span style="color:#f92672">&#34;ignore_above&#34;</span>: <span style="color:#ae81ff">1024</span>
+</span></span><span style="display:flex;"><span>                            },
+</span></span><span style="display:flex;"><span>                            <span style="color:#f92672">&#34;payload&#34;</span>: {
+</span></span><span style="display:flex;"><span>                                <span style="color:#f92672">&#34;properties&#34;</span>: {
+</span></span><span style="display:flex;"><span>                                    <span style="color:#f92672">&#34;alerts&#34;</span>: {
+</span></span><span style="display:flex;"><span>                                        <span style="color:#f92672">&#34;properties&#34;</span>: {
+</span></span><span style="display:flex;"><span>                                            <span style="color:#f92672">&#34;description&#34;</span>: {
+</span></span><span style="display:flex;"><span>                                                <span style="color:#f92672">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;keyword&#34;</span>,
+</span></span><span style="display:flex;"><span>                                                <span style="color:#f92672">&#34;ignore_above&#34;</span>: <span style="color:#ae81ff">1024</span>
+</span></span><span style="display:flex;"><span>                                            },
+</span></span><span style="display:flex;"><span>                                            <span style="color:#f92672">&#34;expires&#34;</span>: {
+</span></span><span style="display:flex;"><span>                                                <span style="color:#f92672">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;float&#34;</span>
+</span></span><span style="display:flex;"><span>                                            },
+</span></span><span style="display:flex;"><span>                                            <span style="color:#f92672">&#34;regions&#34;</span>: {
+</span></span><span style="display:flex;"><span>                                                <span style="color:#f92672">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;keyword&#34;</span>,
+</span></span><span style="display:flex;"><span>                                                <span style="color:#f92672">&#34;ignore_above&#34;</span>: <span style="color:#ae81ff">1024</span>
+</span></span><span style="display:flex;"><span>                                            },
+</span></span><span style="display:flex;"><span>                                            <span style="color:#f92672">&#34;severity&#34;</span>: {
+</span></span><span style="display:flex;"><span>                                                <span style="color:#f92672">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;keyword&#34;</span>,
+</span></span><span style="display:flex;"><span>                                                <span style="color:#f92672">&#34;ignore_above&#34;</span>: <span style="color:#ae81ff">1024</span>
+</span></span><span style="display:flex;"><span>                                            },
+</span></span><span style="display:flex;"><span>                                            <span style="color:#f92672">&#34;time&#34;</span>: {
+</span></span><span style="display:flex;"><span>                                                <span style="color:#f92672">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;float&#34;</span>
+</span></span><span style="display:flex;"><span>                                            },
+</span></span><span style="display:flex;"><span>                                            <span style="color:#f92672">&#34;title&#34;</span>: {
+</span></span><span style="display:flex;"><span>                                                <span style="color:#f92672">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;keyword&#34;</span>,
+</span></span><span style="display:flex;"><span>                                                <span style="color:#f92672">&#34;ignore_above&#34;</span>: <span style="color:#ae81ff">1024</span>
+</span></span><span style="display:flex;"><span>                                            },
+</span></span><span style="display:flex;"><span>                                            <span style="color:#f92672">&#34;uri&#34;</span>: {
+</span></span><span style="display:flex;"><span>                                                <span style="color:#f92672">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;keyword&#34;</span>,
+</span></span><span style="display:flex;"><span>                                                <span style="color:#f92672">&#34;ignore_above&#34;</span>: <span style="color:#ae81ff">1024</span>
+</span></span><span style="display:flex;"><span>                                            }
+</span></span><span style="display:flex;"><span>                                        }
+</span></span><span style="display:flex;"><span>                                    },
+</span></span><span style="display:flex;"><span>                                    <span style="color:#f92672">&#34;currently&#34;</span>: {
+</span></span><span style="display:flex;"><span>                                        <span style="color:#f92672">&#34;properties&#34;</span>: {
+</span></span><span style="display:flex;"><span>                                            <span style="color:#f92672">&#34;apparentTemperature&#34;</span>: {
+</span></span><span style="display:flex;"><span>                                                <span style="color:#f92672">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;half_float&#34;</span>
+</span></span><span style="display:flex;"><span>                                            },
+</span></span><span style="display:flex;"><span>                                            <span style="color:#f92672">&#34;cloudCover&#34;</span>: {
+</span></span><span style="display:flex;"><span>                                                <span style="color:#f92672">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;half_float&#34;</span>
+</span></span><span style="display:flex;"><span>                                            },
+</span></span><span style="display:flex;"><span>                                            <span style="color:#f92672">&#34;dewPoint&#34;</span>: {
+</span></span><span style="display:flex;"><span>                                                <span style="color:#f92672">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;half_float&#34;</span>
+</span></span><span style="display:flex;"><span>                                            },
+</span></span><span style="display:flex;"><span>                                            <span style="color:#f92672">&#34;humidity&#34;</span>: {
+</span></span><span style="display:flex;"><span>                                                <span style="color:#f92672">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;half_float&#34;</span>
+</span></span><span style="display:flex;"><span>                                            },
+</span></span><span style="display:flex;"><span>                                            <span style="color:#f92672">&#34;icon&#34;</span>: {
+</span></span><span style="display:flex;"><span>                                                <span style="color:#f92672">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;keyword&#34;</span>,
+</span></span><span style="display:flex;"><span>                                                <span style="color:#f92672">&#34;ignore_above&#34;</span>: <span style="color:#ae81ff">1024</span>
+</span></span><span style="display:flex;"><span>                                            },
+</span></span><span style="display:flex;"><span>                                            <span style="color:#f92672">&#34;nearestStormBearing&#34;</span>: {
+</span></span><span style="display:flex;"><span>                                                <span style="color:#f92672">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;long&#34;</span>
+</span></span><span style="display:flex;"><span>                                            },
+</span></span><span style="display:flex;"><span>                                            <span style="color:#f92672">&#34;nearestStormDistance&#34;</span>: {
+</span></span><span style="display:flex;"><span>                                                <span style="color:#f92672">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;long&#34;</span>
+</span></span><span style="display:flex;"><span>                                            },
+</span></span><span style="display:flex;"><span>                                            <span style="color:#f92672">&#34;ozone&#34;</span>: {
+</span></span><span style="display:flex;"><span>                                                <span style="color:#f92672">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;half_float&#34;</span>
+</span></span><span style="display:flex;"><span>                                            },
+</span></span><span style="display:flex;"><span>                                            <span style="color:#f92672">&#34;precipIntensity&#34;</span>: {
+</span></span><span style="display:flex;"><span>                                                <span style="color:#f92672">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;half_float&#34;</span>
+</span></span><span style="display:flex;"><span>                                            },
+</span></span><span style="display:flex;"><span>                                            <span style="color:#f92672">&#34;precipIntensityError&#34;</span>: {
+</span></span><span style="display:flex;"><span>                                                <span style="color:#f92672">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;half_float&#34;</span>
+</span></span><span style="display:flex;"><span>                                            },
+</span></span><span style="display:flex;"><span>                                            <span style="color:#f92672">&#34;precipProbability&#34;</span>: {
+</span></span><span style="display:flex;"><span>                                                <span style="color:#f92672">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;half_float&#34;</span>
+</span></span><span style="display:flex;"><span>                                            },
+</span></span><span style="display:flex;"><span>                                            <span style="color:#f92672">&#34;precipType&#34;</span>: {
+</span></span><span style="display:flex;"><span>                                                <span style="color:#f92672">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;keyword&#34;</span>,
+</span></span><span style="display:flex;"><span>                                                <span style="color:#f92672">&#34;ignore_above&#34;</span>: <span style="color:#ae81ff">1024</span>
+</span></span><span style="display:flex;"><span>                                            },
+</span></span><span style="display:flex;"><span>                                            <span style="color:#f92672">&#34;pressure&#34;</span>: {
+</span></span><span style="display:flex;"><span>                                                <span style="color:#f92672">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;half_float&#34;</span>
+</span></span><span style="display:flex;"><span>                                            },
+</span></span><span style="display:flex;"><span>                                            <span style="color:#f92672">&#34;summary&#34;</span>: {
+</span></span><span style="display:flex;"><span>                                                <span style="color:#f92672">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;keyword&#34;</span>,
+</span></span><span style="display:flex;"><span>                                                <span style="color:#f92672">&#34;ignore_above&#34;</span>: <span style="color:#ae81ff">1024</span>
+</span></span><span style="display:flex;"><span>                                            },
+</span></span><span style="display:flex;"><span>                                            <span style="color:#f92672">&#34;temperature&#34;</span>: {
+</span></span><span style="display:flex;"><span>                                                <span style="color:#f92672">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;half_float&#34;</span>
+</span></span><span style="display:flex;"><span>                                            },
+</span></span><span style="display:flex;"><span>                                            <span style="color:#f92672">&#34;time&#34;</span>: {
+</span></span><span style="display:flex;"><span>                                                <span style="color:#f92672">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;long&#34;</span>
+</span></span><span style="display:flex;"><span>                                            },
+</span></span><span style="display:flex;"><span>                                            <span style="color:#f92672">&#34;uvIndex&#34;</span>: {
+</span></span><span style="display:flex;"><span>                                                <span style="color:#f92672">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;half_float&#34;</span>
+</span></span><span style="display:flex;"><span>                                            },
+</span></span><span style="display:flex;"><span>                                            <span style="color:#f92672">&#34;visibility&#34;</span>: {
+</span></span><span style="display:flex;"><span>                                                <span style="color:#f92672">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;half_float&#34;</span>
+</span></span><span style="display:flex;"><span>                                            },
+</span></span><span style="display:flex;"><span>                                            <span style="color:#f92672">&#34;windBearing&#34;</span>: {
+</span></span><span style="display:flex;"><span>                                                <span style="color:#f92672">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;half_float&#34;</span>
+</span></span><span style="display:flex;"><span>                                            },
+</span></span><span style="display:flex;"><span>                                            <span style="color:#f92672">&#34;windGust&#34;</span>: {
+</span></span><span style="display:flex;"><span>                                                <span style="color:#f92672">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;half_float&#34;</span>
+</span></span><span style="display:flex;"><span>                                            },
+</span></span><span style="display:flex;"><span>                                            <span style="color:#f92672">&#34;windSpeed&#34;</span>: {
+</span></span><span style="display:flex;"><span>                                                <span style="color:#f92672">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;half_float&#34;</span>
+</span></span><span style="display:flex;"><span>                                            }
+</span></span><span style="display:flex;"><span>                                        }
+</span></span><span style="display:flex;"><span>                                    },
+</span></span><span style="display:flex;"><span>                                    <span style="color:#f92672">&#34;latitude&#34;</span>: {
+</span></span><span style="display:flex;"><span>                                        <span style="color:#f92672">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;half_float&#34;</span>
+</span></span><span style="display:flex;"><span>                                    },
+</span></span><span style="display:flex;"><span>                                    <span style="color:#f92672">&#34;longitude&#34;</span>: {
+</span></span><span style="display:flex;"><span>                                        <span style="color:#f92672">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;half_float&#34;</span>
+</span></span><span style="display:flex;"><span>                                    },
+</span></span><span style="display:flex;"><span>                                    <span style="color:#f92672">&#34;offset&#34;</span>: {
+</span></span><span style="display:flex;"><span>                                        <span style="color:#f92672">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;byte&#34;</span>
+</span></span><span style="display:flex;"><span>                                    },
+</span></span><span style="display:flex;"><span>                                    <span style="color:#f92672">&#34;timezone&#34;</span>: {
+</span></span><span style="display:flex;"><span>                                        <span style="color:#f92672">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;keyword&#34;</span>,
+</span></span><span style="display:flex;"><span>                                        <span style="color:#f92672">&#34;ignore_above&#34;</span>: <span style="color:#ae81ff">1024</span>
+</span></span><span style="display:flex;"><span>                                    }
+</span></span><span style="display:flex;"><span>                                }
+</span></span><span style="display:flex;"><span>                            },
+</span></span><span style="display:flex;"><span>                            <span style="color:#f92672">&#34;producer&#34;</span>: {
+</span></span><span style="display:flex;"><span>                                <span style="color:#f92672">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;keyword&#34;</span>,
+</span></span><span style="display:flex;"><span>                                <span style="color:#f92672">&#34;ignore_above&#34;</span>: <span style="color:#ae81ff">1024</span>
+</span></span><span style="display:flex;"><span>                            },
+</span></span><span style="display:flex;"><span>                            <span style="color:#f92672">&#34;seq&#34;</span>: {
+</span></span><span style="display:flex;"><span>                                <span style="color:#f92672">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;long&#34;</span>
+</span></span><span style="display:flex;"><span>                            },
+</span></span><span style="display:flex;"><span>                            <span style="color:#f92672">&#34;time&#34;</span>: {
+</span></span><span style="display:flex;"><span>                                <span style="color:#f92672">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;date&#34;</span>
+</span></span><span style="display:flex;"><span>                            },
+</span></span><span style="display:flex;"><span>                            <span style="color:#f92672">&#34;uuid&#34;</span>: {
+</span></span><span style="display:flex;"><span>                                <span style="color:#f92672">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;keyword&#34;</span>,
+</span></span><span style="display:flex;"><span>                                <span style="color:#f92672">&#34;ignore_above&#34;</span>: <span style="color:#ae81ff">1024</span>
+</span></span><span style="display:flex;"><span>                            }
+</span></span><span style="display:flex;"><span>                        }
+</span></span><span style="display:flex;"><span>                    },
+</span></span><span style="display:flex;"><span>                    <span style="color:#f92672">&#34;tags&#34;</span>: {
+</span></span><span style="display:flex;"><span>                        <span style="color:#f92672">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;keyword&#34;</span>,
+</span></span><span style="display:flex;"><span>                        <span style="color:#f92672">&#34;ignore_above&#34;</span>: <span style="color:#ae81ff">1024</span>
+</span></span><span style="display:flex;"><span>                    },
+</span></span><span style="display:flex;"><span>                    <span style="color:#f92672">&#34;type&#34;</span>: {
+</span></span><span style="display:flex;"><span>                        <span style="color:#f92672">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;keyword&#34;</span>,
+</span></span><span style="display:flex;"><span>                        <span style="color:#f92672">&#34;ignore_above&#34;</span>: <span style="color:#ae81ff">1024</span>
+</span></span><span style="display:flex;"><span>                    }
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>If you followed along with the <a href="/post-json-elasticsearch-kubernetes/">High Traffic JSON Data into Elasticsearch on Kubernetes</a> guide, the mapping returned by the <strong>_mapping</strong> call should match the <code>fields.yml</code> section of the <a href="/post-json-elasticsearch-kubernetes/#wx-rtbeat-configmap">wx-rtbeat ConfigMap</a>.</p>
+<h3 id="query-elasticsearch-data">Query Elasticsearch Data</h3>
+<p>Get the last ten minutes of weather data from our <code>wx-rtbeat-*</code> indices:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>curl -X POST <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  http://localhost:9200/wx-rtbeat-%2A/_search <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  -H <span style="color:#e6db74">&#39;Content-Type: application/json&#39;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  -d <span style="color:#e6db74">&#39;{ &#34;query&#34;: {
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">           &#34;range&#34; : {
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">              &#34;@timestamp&#34; : {
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">                 &#34;gt&#34; : &#34;now-5m&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">               }
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            }
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">         }
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      }&#39;</span>
+</span></span></code></pre></div><p>Output:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;took&#34;</span>: <span style="color:#ae81ff">19</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;timed_out&#34;</span>: <span style="color:#66d9ef">false</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;_shards&#34;</span>: {
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;total&#34;</span>: <span style="color:#ae81ff">5</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;successful&#34;</span>: <span style="color:#ae81ff">5</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;skipped&#34;</span>: <span style="color:#ae81ff">0</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;failed&#34;</span>: <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;hits&#34;</span>: {
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;total&#34;</span>: <span style="color:#ae81ff">3</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;max_score&#34;</span>: <span style="color:#ae81ff">1</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;hits&#34;</span>: [
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&#34;_index&#34;</span>: <span style="color:#e6db74">&#34;wx-rtbeat-2018.07&#34;</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&#34;_type&#34;</span>: <span style="color:#e6db74">&#34;doc&#34;</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&#34;_id&#34;</span>: <span style="color:#e6db74">&#34;pv8y2GQB4YMKAkYm7rjf&#34;</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&#34;_score&#34;</span>: <span style="color:#ae81ff">1</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&#34;_source&#34;</span>: {
+</span></span><span style="display:flex;"><span>                    <span style="color:#f92672">&#34;@timestamp&#34;</span>: <span style="color:#e6db74">&#34;2018-07-26T20:06:12.982Z&#34;</span>,
+</span></span><span style="display:flex;"><span>                    <span style="color:#f92672">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;wx-rtbeat-f744b8497-ch4ln&#34;</span>,
+</span></span><span style="display:flex;"><span>                    <span style="color:#f92672">&#34;rxtxMsg&#34;</span>: {
+</span></span><span style="display:flex;"><span>                        <span style="color:#f92672">&#34;producer&#34;</span>: <span style="color:#e6db74">&#34;cron&#34;</span>,
+</span></span><span style="display:flex;"><span>                        <span style="color:#f92672">&#34;label&#34;</span>: <span style="color:#e6db74">&#34;/wx-data&#34;</span>,
+</span></span><span style="display:flex;"><span>                        <span style="color:#f92672">&#34;key&#34;</span>: <span style="color:#e6db74">&#34;collector&#34;</span>,
+</span></span><span style="display:flex;"><span>                        <span style="color:#f92672">&#34;payload&#34;</span>: {
+</span></span><span style="display:flex;"><span>                            <span style="color:#f92672">&#34;longitude&#34;</span>: <span style="color:#ae81ff">-117.826581</span>,
+</span></span><span style="display:flex;"><span>                            <span style="color:#f92672">&#34;offset&#34;</span>: <span style="color:#ae81ff">-7</span>,
+</span></span><span style="display:flex;"><span>                            <span style="color:#f92672">&#34;timezone&#34;</span>: <span style="color:#e6db74">&#34;America/Los_Angeles&#34;</span>,
+</span></span><span style="display:flex;"><span>                            <span style="color:#f92672">&#34;currently&#34;</span>: {
+</span></span><span style="display:flex;"><span>                                <span style="color:#f92672">&#34;apparentTemperature&#34;</span>: <span style="color:#ae81ff">87.99</span>,
+</span></span><span style="display:flex;"><span>                                <span style="color:#f92672">&#34;nearestStormDistance&#34;</span>: <span style="color:#ae81ff">8</span>,
+</span></span><span style="display:flex;"><span>                                <span style="color:#f92672">&#34;windGust&#34;</span>: <span style="color:#ae81ff">10.26</span>,
+</span></span><span style="display:flex;"><span>                                <span style="color:#f92672">&#34;windSpeed&#34;</span>: <span style="color:#ae81ff">6.29</span>,
+</span></span><span style="display:flex;"><span>                                <span style="color:#f92672">&#34;uvIndex&#34;</span>: <span style="color:#ae81ff">11</span>,
+</span></span><span style="display:flex;"><span>                                <span style="color:#f92672">&#34;visibility&#34;</span>: <span style="color:#ae81ff">10</span>,
+</span></span><span style="display:flex;"><span>                                <span style="color:#f92672">&#34;cloudCover&#34;</span>: <span style="color:#ae81ff">0.15</span>,
+</span></span><span style="display:flex;"><span>                                <span style="color:#f92672">&#34;icon&#34;</span>: <span style="color:#e6db74">&#34;clear-day&#34;</span>,
+</span></span><span style="display:flex;"><span>                                <span style="color:#f92672">&#34;ozone&#34;</span>: <span style="color:#ae81ff">303.81</span>,
+</span></span><span style="display:flex;"><span>                                <span style="color:#f92672">&#34;precipIntensity&#34;</span>: <span style="color:#ae81ff">0</span>,
+</span></span><span style="display:flex;"><span>                                <span style="color:#f92672">&#34;summary&#34;</span>: <span style="color:#e6db74">&#34;Clear&#34;</span>,
+</span></span><span style="display:flex;"><span>                                <span style="color:#f92672">&#34;time&#34;</span>: <span style="color:#ae81ff">1532635571</span>,
+</span></span><span style="display:flex;"><span>                                <span style="color:#f92672">&#34;humidity&#34;</span>: <span style="color:#ae81ff">0.56</span>,
+</span></span><span style="display:flex;"><span>                                <span style="color:#f92672">&#34;temperature&#34;</span>: <span style="color:#ae81ff">84.9</span>,
+</span></span><span style="display:flex;"><span>                                <span style="color:#f92672">&#34;windBearing&#34;</span>: <span style="color:#ae81ff">221</span>,
+</span></span><span style="display:flex;"><span>                                <span style="color:#f92672">&#34;dewPoint&#34;</span>: <span style="color:#ae81ff">67.59</span>,
+</span></span><span style="display:flex;"><span>                                <span style="color:#f92672">&#34;nearestStormBearing&#34;</span>: <span style="color:#ae81ff">98</span>,
+</span></span><span style="display:flex;"><span>                                <span style="color:#f92672">&#34;precipProbability&#34;</span>: <span style="color:#ae81ff">0</span>,
+</span></span><span style="display:flex;"><span>                                <span style="color:#f92672">&#34;pressure&#34;</span>: <span style="color:#ae81ff">1013.35</span>
+</span></span><span style="display:flex;"><span>                            },
+</span></span><span style="display:flex;"><span>                            <span style="color:#f92672">&#34;latitude&#34;</span>: <span style="color:#ae81ff">33.8148455</span>
+</span></span><span style="display:flex;"><span>                        },
+</span></span><span style="display:flex;"><span>                        <span style="color:#f92672">&#34;seq&#34;</span>: <span style="color:#e6db74">&#34;2018726000000005612&#34;</span>,
+</span></span><span style="display:flex;"><span>                        <span style="color:#f92672">&#34;time&#34;</span>: <span style="color:#e6db74">&#34;2018-07-26T20:06:11.456058885Z&#34;</span>,
+</span></span><span style="display:flex;"><span>                        <span style="color:#f92672">&#34;uuid&#34;</span>: <span style="color:#e6db74">&#34;7bbb1b5b-a360-44bb-bd2e-9c0cce898623&#34;</span>
+</span></span><span style="display:flex;"><span>                    },
+</span></span><span style="display:flex;"><span>                    <span style="color:#f92672">&#34;clientIp&#34;</span>: <span style="color:#e6db74">&#34;192.168.247.255&#34;</span>,
+</span></span><span style="display:flex;"><span>                    <span style="color:#f92672">&#34;beat&#34;</span>: {
+</span></span><span style="display:flex;"><span>                        <span style="color:#f92672">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;wx-rtbeat-f744b8497-ch4ln&#34;</span>,
+</span></span><span style="display:flex;"><span>                        <span style="color:#f92672">&#34;hostname&#34;</span>: <span style="color:#e6db74">&#34;wx-rtbeat-f744b8497-ch4ln&#34;</span>,
+</span></span><span style="display:flex;"><span>                        <span style="color:#f92672">&#34;version&#34;</span>: <span style="color:#e6db74">&#34;7.0.0-alpha1&#34;</span>
+</span></span><span style="display:flex;"><span>                    }
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>            },
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&#34;_index&#34;</span>: <span style="color:#e6db74">&#34;wx-rtbeat-2018.07&#34;</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&#34;_type&#34;</span>: <span style="color:#e6db74">&#34;doc&#34;</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&#34;_id&#34;</span>: <span style="color:#e6db74">&#34;p_802GQB4YMKAkYmxLi4&#34;</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&#34;_score&#34;</span>: <span style="color:#ae81ff">1</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&#34;_source&#34;</span>: {
+</span></span><span style="display:flex;"><span>                    <span style="color:#f92672">&#34;@timestamp&#34;</span>: <span style="color:#e6db74">&#34;2018-07-26T20:08:13.263Z&#34;</span>,
+</span></span><span style="display:flex;"><span>                    <span style="color:#f92672">&#34;clientIp&#34;</span>: <span style="color:#e6db74">&#34;192.168.247.255&#34;</span>,
+</span></span><span style="display:flex;"><span>                    <span style="color:#f92672">&#34;beat&#34;</span>: {
+</span></span><span style="display:flex;"><span>                        <span style="color:#f92672">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;wx-rtbeat-f744b8497-ch4ln&#34;</span>,
+</span></span><span style="display:flex;"><span>                        <span style="color:#f92672">&#34;hostname&#34;</span>: <span style="color:#e6db74">&#34;wx-rtbeat-f744b8497-ch4ln&#34;</span>,
+</span></span><span style="display:flex;"><span>                        <span style="color:#f92672">&#34;version&#34;</span>: <span style="color:#e6db74">&#34;7.0.0-alpha1&#34;</span>
+</span></span><span style="display:flex;"><span>                    },
+</span></span><span style="display:flex;"><span>                    <span style="color:#f92672">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;wx-rtbeat-f744b8497-ch4ln&#34;</span>,
+</span></span><span style="display:flex;"><span>                    <span style="color:#f92672">&#34;rxtxMsg&#34;</span>: {
+</span></span><span style="display:flex;"><span>                        <span style="color:#f92672">&#34;seq&#34;</span>: <span style="color:#e6db74">&#34;2018726000000005613&#34;</span>,
+</span></span><span style="display:flex;"><span>                        <span style="color:#f92672">&#34;time&#34;</span>: <span style="color:#e6db74">&#34;2018-07-26T20:08:11.893558485Z&#34;</span>,
+</span></span><span style="display:flex;"><span>                        <span style="color:#f92672">&#34;uuid&#34;</span>: <span style="color:#e6db74">&#34;4fe80f2b-54d2-4df6-8b60-e9152e4c2754&#34;</span>,
+</span></span><span style="display:flex;"><span>                        <span style="color:#f92672">&#34;producer&#34;</span>: <span style="color:#e6db74">&#34;cron&#34;</span>,
+</span></span><span style="display:flex;"><span>                        <span style="color:#f92672">&#34;label&#34;</span>: <span style="color:#e6db74">&#34;/wx-data&#34;</span>,
+</span></span><span style="display:flex;"><span>                        <span style="color:#f92672">&#34;key&#34;</span>: <span style="color:#e6db74">&#34;collector&#34;</span>,
+</span></span><span style="display:flex;"><span>                        <span style="color:#f92672">&#34;payload&#34;</span>: {
+</span></span><span style="display:flex;"><span>                            <span style="color:#f92672">&#34;currently&#34;</span>: {
+</span></span><span style="display:flex;"><span>                                <span style="color:#f92672">&#34;pressure&#34;</span>: <span style="color:#ae81ff">1013.33</span>,
+</span></span><span style="display:flex;"><span>                                <span style="color:#f92672">&#34;uvIndex&#34;</span>: <span style="color:#ae81ff">11</span>,
+</span></span><span style="display:flex;"><span>                                <span style="color:#f92672">&#34;windSpeed&#34;</span>: <span style="color:#ae81ff">6.35</span>,
+</span></span><span style="display:flex;"><span>                                <span style="color:#f92672">&#34;precipIntensity&#34;</span>: <span style="color:#ae81ff">0</span>,
+</span></span><span style="display:flex;"><span>                                <span style="color:#f92672">&#34;time&#34;</span>: <span style="color:#ae81ff">1532635691</span>,
+</span></span><span style="display:flex;"><span>                                <span style="color:#f92672">&#34;visibility&#34;</span>: <span style="color:#ae81ff">10</span>,
+</span></span><span style="display:flex;"><span>                                <span style="color:#f92672">&#34;windBearing&#34;</span>: <span style="color:#ae81ff">221</span>,
+</span></span><span style="display:flex;"><span>                                <span style="color:#f92672">&#34;humidity&#34;</span>: <span style="color:#ae81ff">0.56</span>,
+</span></span><span style="display:flex;"><span>                                <span style="color:#f92672">&#34;nearestStormBearing&#34;</span>: <span style="color:#ae81ff">98</span>,
+</span></span><span style="display:flex;"><span>                                <span style="color:#f92672">&#34;nearestStormDistance&#34;</span>: <span style="color:#ae81ff">8</span>,
+</span></span><span style="display:flex;"><span>                                <span style="color:#f92672">&#34;ozone&#34;</span>: <span style="color:#ae81ff">303.8</span>,
+</span></span><span style="display:flex;"><span>                                <span style="color:#f92672">&#34;windGust&#34;</span>: <span style="color:#ae81ff">10.3</span>,
+</span></span><span style="display:flex;"><span>                                <span style="color:#f92672">&#34;cloudCover&#34;</span>: <span style="color:#ae81ff">0.15</span>,
+</span></span><span style="display:flex;"><span>                                <span style="color:#f92672">&#34;precipProbability&#34;</span>: <span style="color:#ae81ff">0</span>,
+</span></span><span style="display:flex;"><span>                                <span style="color:#f92672">&#34;summary&#34;</span>: <span style="color:#e6db74">&#34;Clear&#34;</span>,
+</span></span><span style="display:flex;"><span>                                <span style="color:#f92672">&#34;apparentTemperature&#34;</span>: <span style="color:#ae81ff">88.08</span>,
+</span></span><span style="display:flex;"><span>                                <span style="color:#f92672">&#34;dewPoint&#34;</span>: <span style="color:#ae81ff">67.58</span>,
+</span></span><span style="display:flex;"><span>                                <span style="color:#f92672">&#34;icon&#34;</span>: <span style="color:#e6db74">&#34;clear-day&#34;</span>,
+</span></span><span style="display:flex;"><span>                                <span style="color:#f92672">&#34;temperature&#34;</span>: <span style="color:#ae81ff">84.99</span>
+</span></span><span style="display:flex;"><span>                            },
+</span></span><span style="display:flex;"><span>                            <span style="color:#f92672">&#34;latitude&#34;</span>: <span style="color:#ae81ff">33.8148455</span>,
+</span></span><span style="display:flex;"><span>                            <span style="color:#f92672">&#34;longitude&#34;</span>: <span style="color:#ae81ff">-117.826581</span>,
+</span></span><span style="display:flex;"><span>                            <span style="color:#f92672">&#34;offset&#34;</span>: <span style="color:#ae81ff">-7</span>,
+</span></span><span style="display:flex;"><span>                            <span style="color:#f92672">&#34;timezone&#34;</span>: <span style="color:#e6db74">&#34;America/Los_Angeles&#34;</span>
+</span></span><span style="display:flex;"><span>                        }
+</span></span><span style="display:flex;"><span>                    }
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>            },
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&#34;_index&#34;</span>: <span style="color:#e6db74">&#34;wx-rtbeat-2018.07&#34;</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&#34;_type&#34;</span>: <span style="color:#e6db74">&#34;doc&#34;</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&#34;_id&#34;</span>: <span style="color:#e6db74">&#34;qP822GQB4YMKAkYmc7hg&#34;</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&#34;_score&#34;</span>: <span style="color:#ae81ff">1</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&#34;_source&#34;</span>: {
+</span></span><span style="display:flex;"><span>                    <span style="color:#f92672">&#34;@timestamp&#34;</span>: <span style="color:#e6db74">&#34;2018-07-26T20:10:03.510Z&#34;</span>,
+</span></span><span style="display:flex;"><span>                    <span style="color:#f92672">&#34;beat&#34;</span>: {
+</span></span><span style="display:flex;"><span>                        <span style="color:#f92672">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;wx-rtbeat-f744b8497-ch4ln&#34;</span>,
+</span></span><span style="display:flex;"><span>                        <span style="color:#f92672">&#34;hostname&#34;</span>: <span style="color:#e6db74">&#34;wx-rtbeat-f744b8497-ch4ln&#34;</span>,
+</span></span><span style="display:flex;"><span>                        <span style="color:#f92672">&#34;version&#34;</span>: <span style="color:#e6db74">&#34;7.0.0-alpha1&#34;</span>
+</span></span><span style="display:flex;"><span>                    },
+</span></span><span style="display:flex;"><span>                    <span style="color:#f92672">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;wx-rtbeat-f744b8497-ch4ln&#34;</span>,
+</span></span><span style="display:flex;"><span>                    <span style="color:#f92672">&#34;rxtxMsg&#34;</span>: {
+</span></span><span style="display:flex;"><span>                        <span style="color:#f92672">&#34;label&#34;</span>: <span style="color:#e6db74">&#34;/wx-data&#34;</span>,
+</span></span><span style="display:flex;"><span>                        <span style="color:#f92672">&#34;key&#34;</span>: <span style="color:#e6db74">&#34;collector&#34;</span>,
+</span></span><span style="display:flex;"><span>                        <span style="color:#f92672">&#34;payload&#34;</span>: {
+</span></span><span style="display:flex;"><span>                            <span style="color:#f92672">&#34;currently&#34;</span>: {
+</span></span><span style="display:flex;"><span>                                <span style="color:#f92672">&#34;nearestStormDistance&#34;</span>: <span style="color:#ae81ff">8</span>,
+</span></span><span style="display:flex;"><span>                                <span style="color:#f92672">&#34;pressure&#34;</span>: <span style="color:#ae81ff">1013.31</span>,
+</span></span><span style="display:flex;"><span>                                <span style="color:#f92672">&#34;summary&#34;</span>: <span style="color:#e6db74">&#34;Clear&#34;</span>,
+</span></span><span style="display:flex;"><span>                                <span style="color:#f92672">&#34;windBearing&#34;</span>: <span style="color:#ae81ff">221</span>,
+</span></span><span style="display:flex;"><span>                                <span style="color:#f92672">&#34;windGust&#34;</span>: <span style="color:#ae81ff">10.33</span>,
+</span></span><span style="display:flex;"><span>                                <span style="color:#f92672">&#34;humidity&#34;</span>: <span style="color:#ae81ff">0.56</span>,
+</span></span><span style="display:flex;"><span>                                <span style="color:#f92672">&#34;precipIntensity&#34;</span>: <span style="color:#ae81ff">0</span>,
+</span></span><span style="display:flex;"><span>                                <span style="color:#f92672">&#34;time&#34;</span>: <span style="color:#ae81ff">1532635802</span>,
+</span></span><span style="display:flex;"><span>                                <span style="color:#f92672">&#34;visibility&#34;</span>: <span style="color:#ae81ff">10</span>,
+</span></span><span style="display:flex;"><span>                                <span style="color:#f92672">&#34;icon&#34;</span>: <span style="color:#e6db74">&#34;clear-day&#34;</span>,
+</span></span><span style="display:flex;"><span>                                <span style="color:#f92672">&#34;dewPoint&#34;</span>: <span style="color:#ae81ff">67.57</span>,
+</span></span><span style="display:flex;"><span>                                <span style="color:#f92672">&#34;nearestStormBearing&#34;</span>: <span style="color:#ae81ff">98</span>,
+</span></span><span style="display:flex;"><span>                                <span style="color:#f92672">&#34;uvIndex&#34;</span>: <span style="color:#ae81ff">11</span>,
+</span></span><span style="display:flex;"><span>                                <span style="color:#f92672">&#34;windSpeed&#34;</span>: <span style="color:#ae81ff">6.4</span>,
+</span></span><span style="display:flex;"><span>                                <span style="color:#f92672">&#34;cloudCover&#34;</span>: <span style="color:#ae81ff">0.15</span>,
+</span></span><span style="display:flex;"><span>                                <span style="color:#f92672">&#34;ozone&#34;</span>: <span style="color:#ae81ff">303.79</span>,
+</span></span><span style="display:flex;"><span>                                <span style="color:#f92672">&#34;precipProbability&#34;</span>: <span style="color:#ae81ff">0</span>,
+</span></span><span style="display:flex;"><span>                                <span style="color:#f92672">&#34;temperature&#34;</span>: <span style="color:#ae81ff">85.06</span>,
+</span></span><span style="display:flex;"><span>                                <span style="color:#f92672">&#34;apparentTemperature&#34;</span>: <span style="color:#ae81ff">88.16</span>
+</span></span><span style="display:flex;"><span>                            },
+</span></span><span style="display:flex;"><span>                            <span style="color:#f92672">&#34;latitude&#34;</span>: <span style="color:#ae81ff">33.8148455</span>,
+</span></span><span style="display:flex;"><span>                            <span style="color:#f92672">&#34;longitude&#34;</span>: <span style="color:#ae81ff">-117.826581</span>,
+</span></span><span style="display:flex;"><span>                            <span style="color:#f92672">&#34;offset&#34;</span>: <span style="color:#ae81ff">-7</span>,
+</span></span><span style="display:flex;"><span>                            <span style="color:#f92672">&#34;timezone&#34;</span>: <span style="color:#e6db74">&#34;America/Los_Angeles&#34;</span>
+</span></span><span style="display:flex;"><span>                        },
+</span></span><span style="display:flex;"><span>                        <span style="color:#f92672">&#34;seq&#34;</span>: <span style="color:#e6db74">&#34;2018726000000005614&#34;</span>,
+</span></span><span style="display:flex;"><span>                        <span style="color:#f92672">&#34;time&#34;</span>: <span style="color:#e6db74">&#34;2018-07-26T20:10:02.217602453Z&#34;</span>,
+</span></span><span style="display:flex;"><span>                        <span style="color:#f92672">&#34;uuid&#34;</span>: <span style="color:#e6db74">&#34;9e10b07e-d618-4c71-940a-8634d35db682&#34;</span>,
+</span></span><span style="display:flex;"><span>                        <span style="color:#f92672">&#34;producer&#34;</span>: <span style="color:#e6db74">&#34;cron&#34;</span>
+</span></span><span style="display:flex;"><span>                    },
+</span></span><span style="display:flex;"><span>                    <span style="color:#f92672">&#34;clientIp&#34;</span>: <span style="color:#e6db74">&#34;192.168.247.255&#34;</span>
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        ]
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>Explore the Elasticsearch official documentation: <a href="https://www.elastic.co/guide/en/elasticsearch/guide/current/search-in-depth.html">Search in Depth</a>.</p>
+<h2 id="port-forwarding--local-development">Port Forwarding / Local Development</h2>
+<p>Check out <a href="https://github.com/txn2/kubefwd">kubefwd</a> for a simple command line utility that bulk forwards services of one or more namespaces to your local workstation.</p>
+<h2 id="resources">Resources</h2>
+<ul>
+<li>Setup a Custom Kubernetes <a href="/hobby-cluster/">Production Hobby Cluster</a> for a more production-like development environment.</li>
+<li>Implement <a href="/team-kubernetes-remote-access/">Kubernetes Team Access - RBAC for developers and QA</a> to use <code>kubectl</code> for token-based authentication for developing locally with remote clusters.</li>
+<li>Setup <a href="/kubernetes-production-elasticsearch/">Production Grade Elasticsearch on Kubernetes</a> for development, testing and production.</li>
+<li>Install <a href="/kibana-kubernetes/">Kibana on Kubernetes</a> for Elasticsearch data browsing and visualization.</li>
+<li>Support <a href="/post-json-elasticsearch-kubernetes/">High Traffic JSON Data into Elasticsearch on Kubernetes</a> with <a href="https://hub.docker.com/r/txn2/rxtx/">rxtx</a> and <a href="https://hub.docker.com/r/txn2/rtbeat/">rtBeat</a>.</li>
+</ul>
+
+
+                <p>
+                   This blog post, titled: "<span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">Remote Query Elasticsearch on Kubernetes: Local workstation-based microservices development</span>" by <a xmlns:cc="http://creativecommons.org/ns#" href="https://twitter.com/cjimti" property="cc:attributionName" rel="cc:attributionURL">Craig Johnston</a>, is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+                    <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a>
+                </p>
+
+            </div>
+            
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                
+                <section>
+                    <hr class="hidden-sm hidden-xs">
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/blockchain" title="blockchain">
+                        blockchain
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/data" title="data">
+                        data
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/data-science" title="data science">
+                        data science
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/development" title="development">
+                        development
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/devops" title="devops">
+                        devops
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/docker" title="docker">
+                        docker
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/elasticsearch" title="elasticsearch">
+                        elasticsearch
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/golang" title="golang">
+                        golang
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/ingress" title="ingress">
+                        ingress
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/iot" title="iot">
+                        iot
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/kubectl" title="kubectl">
+                        kubectl
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/kubefwd" title="kubefwd">
+                        kubefwd
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/kubernetes" title="kubernetes">
+                        kubernetes
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/microservices" title="microservices">
+                        microservices
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/python" title="python">
+                        python
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/raspberry-pi" title="raspberry pi">
+                        raspberry pi
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/security" title="security">
+                        security
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/utils" title="utils">
+                        utils
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                    </div>
+                </section>
+
+                
+                <hr>
+                <h5>RELATED</h5>
+                <ul class="list-inline">
+                    
+                </ul>
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                   
+                   <li>
+                       <a href="/index.xml" rel="alternate" type="application/rss+xml" title="IMTI" >
+                           <span class="fa-stack fa-lg">
+                               <i class="fa fa-circle fa-stack-2x"></i>
+                               <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+                           </span>
+                       </a>
+                   </li>
+                   
+                    
+                    <li>
+                        <a href="mailto:cjimti@gmail.com">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                    
+                    
+                    <li>
+                        <a href="https://twitter.com/cjimti">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    
+
+                    
+
+		    
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/cjimti">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                    
+                    <li>
+                        <a target="_blank" href="https://www.linkedin.com/in/cjimti/">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                </ul>
+
+                
+                
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+
+
+
+
+<script>
+    
+    if($('#tag_cloud').length !== 0){
+        async("/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-R56SP4WLS2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-R56SP4WLS2');
+</script>
+
+</body>
+</html>

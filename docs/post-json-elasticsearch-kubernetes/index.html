@@ -1,0 +1,1023 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head><head>
+    <meta name="msvalidate.01" content="DBC34551F2DD1BA3DC0D62EE46D7448F" />
+    <meta name="google-site-verification" content="DrtKc88u9uc7iptd4LyURAKBmFcOn7Kuk6HcRk_kNmo" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <meta name="description" content="Instant, reliable, send and forget.">
+    
+    <meta name="keyword"  content="Go, Kubernetes, Elasticsearch, Python, Docker, Big Data, Artificial Intelligence, Machine Learning">
+    <link rel="shortcut icon" href="https://imti.co/img/favicon.ico">
+
+    <title>High Traffic JSON Data into Elasticsearch on Kubernetes - IMTI - Craig Johnston</title>
+
+    <link rel="canonical" href="https://imti.co/post-json-elasticsearch-kubernetes/">
+	
+    
+    <link rel="stylesheet" href="https://imti.co/css/bootstrap.min.css">
+
+    
+    <link rel="stylesheet" href="https://imti.co/css/hux-blog.min.css">
+
+    
+    <link rel="stylesheet" href="https://imti.co/css/syntax.css">
+
+    
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    
+    
+    <link rel="stylesheet" href="/css/imti.css">
+
+    
+    <script src="https://imti.co/js/jquery.min.js"></script>
+    
+    
+    <script src="https://imti.co/js/bootstrap.min.js"></script>
+    
+    
+    <script src="https://imti.co/js/hux-blog.min.js"></script>
+
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({
+            google_ad_client: "ca-pub-5984764595236029",
+            enable_page_level_ads: true
+        });
+    </script>
+
+    <meta name="twitter:site" content="@cjimti">
+<meta name="twitter:creator" content="@cjimti">
+
+<meta name="twitter:description" content="Instant, reliable, send and forget." />
+<meta name="twitter:title" content="High Traffic JSON Data into Elasticsearch on Kubernetes" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://imti.co/img/post/firehose_876_438.jpg" />
+<meta property="og:image" content="https://imti.co/img/post/firehose_876_438.jpg" />
+
+
+
+    
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https:\/\/imti.co\/post-json-elasticsearch-kubernetes\/"
+  },
+  "headline": "High Traffic JSON Data into Elasticsearch on Kubernetes",
+  "image": ["https:\/\/imti.co\/img\/post\/firehose_876_438.jpg"],
+  "datePublished": "2018-07-18T00:00:00Z",
+  "dateModified": "2018-07-18T00:00:00Z",
+  "author": {
+    "@type": "Person",
+    "name": "Craig Johnston"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "imti.co",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https:\/\/imti.co\/img\/craig_johnston_cjimti.jpg"
+    }
+  },
+  "description": "IOT devices, Point-of-Sale systems, application events or any client that sends data destined for indexing in Elasticsearch often need to send and forget, …"
+}
+</script>
+
+
+</head></head>
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="https://imti.co//">IMTI</a>
+        </div>
+
+        
+        
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="https://imti.co//">Home</a>
+                    </li>
+                    <li>
+                        <a href="https://imti.co//about/">About</a>
+                    </li>
+                    <li>
+                        <a href="https://twitter.com/cjimti">Follow</a>
+                    </li>
+                    
+
+                    
+                </ul>
+            </div>
+        </div>
+        
+    </div>
+    
+</nav>
+<script>
+    
+    
+    
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        
+            $navbar.className = " ";
+            
+            setTimeout(function(){
+                
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+
+
+<style type="text/css">
+    header.intro-header{
+        background-image: url('https://imti.co/img/post/firehose.jpg')
+    }
+</style>
+<header class="intro-header" >
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/kubernetes" title="Kubernetes">
+                        Kubernetes
+                        </a>
+                        
+                        <a class="tag" href="/tags/elasticsearch" title="Elasticsearch">
+                        Elasticsearch
+                        </a>
+                        
+                        <a class="tag" href="/tags/data" title="Data">
+                        Data
+                        </a>
+                        
+                        <a class="tag" href="/tags/json" title="JSON">
+                        JSON
+                        </a>
+                        
+                    </div>
+                    <h1>High Traffic JSON Data into Elasticsearch on Kubernetes</h1>
+                    <h2 class="subheading">Instant, reliable, send and forget.</h2>
+                    <span  class="meta">Posted by <a href="https://twitter.com/cjimti">Craig Johnston</a> on Wednesday, July 18, 2018
+                        
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+<article>
+    <div class="container">
+        <div class="row">
+
+            
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <p>IOT devices, Point-of-Sale systems, application events or any client that sends data destined for indexing in Elasticsearch often need to send and forget, however, unless that data is of low value there needs to be assurance that arrives at its final destination. Back-pressure and database outages can pose a considerable threat to data integrity.</p>
+<aside class="toc">
+    <header>
+        <h2>Contents</h2>
+    </header>
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#background">Background</a></li>
+    <li><a href="#overview">Overview</a></li>
+    <li><a href="#development-environment">Development Environment</a>
+      <ul>
+        <li><a href="#the-project-namespace">the-project Namespace</a></li>
+      </ul>
+    </li>
+    <li><a href="#the-project-weather-wx-data">The Project: Weather (wx) Data</a></li>
+    <li><a href="#rxtx-for-store-and-forward">rxtx for Store-and-Forward</a>
+      <ul>
+        <li><a href="#wx-rxtx-service">wx-rxtx Service</a></li>
+        <li><a href="#wx-rxtx-statefulset">wx-rxtx StatefulSet</a></li>
+      </ul>
+    </li>
+    <li><a href="#rtbeat-to-collect-buffer-and-publish">rtBeat to Collect, Buffer and Publish</a>
+      <ul>
+        <li><a href="#wx-rtbeat-service">wx-rtbeat Service</a></li>
+        <li><a href="#wx-rtbeat-configmap">wx-rtbeat ConfigMap</a></li>
+        <li><a href="#wx-rtbeat-deployment">wx-rtbeat Deployment</a></li>
+      </ul>
+    </li>
+    <li><a href="#client-simulation--kubernetes-cron">Client Simulation / Kubernetes Cron</a></li>
+    <li><a href="#performance">Performance</a></li>
+    <li><a href="#conclusion">Conclusion</a></li>
+    <li><a href="#port-forwarding--local-development">Port Forwarding / Local Development</a></li>
+    <li><a href="#reference">Reference</a></li>
+  </ul>
+</nav>
+</aside>
+
+
+<h2 id="background">Background</h2>
+<p>High availability and high performance often mean burdensome complexity. Data replication, application, network and infrastructure redundancy, anything we can do to avoid a single point of failure. However, what happens when one of those points do fail? Alternatively, a cascade of problems causing slowdowns and back pressure builds to constant far too high for indexing to catch up?</p>
+<p><a href="https://en.wikipedia.org/wiki/Publish%E2%80%93subscribe_pattern">Pub-Sub</a> style message queues like Kafka are growing in popularity because they add incredible flexibility to data pipelines, yet these queues can also suffer from data loss and duplication unless you expend sufficient effort in expert tuning and configuration. <a href="https://en.wikipedia.org/wiki/Publish%E2%80%93subscribe_pattern">Pub-Sub</a> MQs can also over complicate the architecture depending on requirements. I found myself re-thinking some of my architectures after reading <a href="https://www.programmableweb.com/news/why-messaging-queues-suck/analysis/2017/02/13">Why Messaging Queues Suck</a> by Bob Reselman. I still use messaging queues but have pushed <a href="https://en.wikipedia.org/wiki/Publish%E2%80%93subscribe_pattern">Pub-Sub</a> further back from the edge of my stack.</p>
+<p>Over the years I have made conscious efforts to move complexity further from the edge. The edge, being the API endpoints relied upon by clients. If I can simplify and harden the edges, then the more sensitive and complex systems deeper down have less exposure to unknowns. An early layer of simplicity not only buffers API calls and data but moves complexity back a rung.</p>
+<h2 id="overview">Overview</h2>
+<p>In the process below I demonstrate a store and forward setup used for asynchronous data gathering. The clients need to send data, and I need assurance that data makes it to its destination. I don&rsquo;t need the clients waiting for confirmation.</p>
+<p><img src="/images/content/txn2/rxtx-rtbeat.png" alt=""></p>
+<p>I use <a href="https://hub.docker.com/r/txn2/rxtx/">rxtx</a> to store-and-forward data to <a href="https://hub.docker.com/r/txn2/rtbeat/">rtBeat</a> which publishes it into Elasticsearch. This process of store-and-forward achieved through a batching message queue that can function independently or as a first layer of buffering to larger message queue applications.</p>
+<p>Using <a href="https://hub.docker.com/r/txn2/rxtx/">rxtx</a> with <a href="https://hub.docker.com/r/txn2/rtbeat/">rtBeat</a> you can achieve high performance, highly available service for accepting JSON POST data and delivering it to Elasticsearch. <a href="https://hub.docker.com/r/txn2/rxtx/">rxtx</a> collects post data, writes it to a local <a href="https://github.com/coreos/bbolt">bbolt</a> database and sends batches on an interval to rtBeat. <a href="https://hub.docker.com/r/txn2/rtbeat/">rtBeat</a> processes the batches of POSTed JSON data and publishes them as events into Elasticsearch. <a href="https://hub.docker.com/r/txn2/rtbeat/">rtBeat</a> is an Elastic <a href="https://www.elastic.co/products/beats">beat</a> and can publish simultaneously to <a href="https://www.elastic.co/">elasticsearch</a>, <a href="https://www.elastic.co/products/logstash">logstash</a>, <a href="https://kafka.apache.org/">kafka</a> and <a href="https://redis.io/">redis</a>.</p>
+<h2 id="development-environment">Development Environment</h2>
+<p>You need a Kubernetes cluster and an Elasticsearch database running in it. If you don&rsquo;t have a Kubernetes cluster or would like to create a production-like cluster for development or research, I suggest the following articles:</p>
+<ul>
+<li><a href="/hobby-cluster/">Production Hobby Cluster</a></li>
+<li><a href="/kubernetes-production-elasticsearch/">Production Grade Elasticsearch on Kubernetes</a></li>
+<li><a href="/kibana-kubernetes/">Kibana on Kubernetes</a></li>
+</ul>
+<h3 id="the-project-namespace">the-project Namespace</h3>
+<p>In continuity with previous tutorials, I&rsquo;ll stick with <code>the-project</code> <a href="https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/">namespace</a>.</p>
+<p><code>00-namespace.yml</code>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">v1</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Namespace</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">metadata</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">the-project</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">labels</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">env</span>: <span style="color:#ae81ff">dev</span>
+</span></span></code></pre></div><p>Create the namespace:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl create -f 00-namespace.yml
+</span></span></code></pre></div><h2 id="the-project-weather-wx-data">The Project: Weather (wx) Data</h2>
+<p>In this tutorial, I use weather (wx) data from the <a href="https://darksky.net/dev">Dark Sky API</a>. Since the <a href="https://darksky.net/dev">Dark Sky API</a> is a service for pulling data, I use a Kubernetes <a href="#client-simulation--kubernetes-cron">cronjob</a> to pull from the <a href="https://darksky.net/dev">Dark Sky API</a> and push into the new service, simulating an IOT based weather client in Los Angeles. Pull and send is a familiar pattern for many data retrieval systems.</p>
+<h2 id="rxtx-for-store-and-forward"><a href="https://hub.docker.com/r/txn2/rxtx/">rxtx</a> for Store-and-Forward</h2>
+<p><a href="https://hub.docker.com/r/txn2/rxtx/"><img src="https://github.com/txn2/rxtx/raw/master/mast.jpg" alt=""></a>
+<a href="https://hub.docker.com/r/txn2/irsync/"><img src="https://shields.beevelop.com/docker/image/image-size/txn2/rxtx/latest.svg" alt="Docker Container Image Size"></a>
+<a href="https://hub.docker.com/r/txn2/irsync/"><img src="https://shields.beevelop.com/docker/image/layers/txn2/rxtx/latest.svg" alt="Docker Container Layers"></a>
+<a href="https://goreportcard.com/report/github.com/txn2/rxtx"><img src="https://goreportcard.com/badge/github.com/txn2/rxtx" alt="Go Report Card"></a></p>
+<p><a href="https://hub.docker.com/r/txn2/rxtx/">rxtx</a> is a queue based, store-and-forward data collector and data transmitter useful for online/offline data collection, back pressure buffering or general queuing. <a href="https://hub.docker.com/r/txn2/rxtx/">rxtx</a> uses the highly efficient and fast bbolt maintained by CoreOs. <a href="https://github.com/coreos/bbolt">bbolt</a> stores message awaiting an interval and the ability to send them.</p>
+<p><a href="https://hub.docker.com/r/txn2/rxtx/">rxtx</a> is written in Golang and originally designed to run in a Docker container on IOT devices with intermittent network connectivity. Because of its simplistic design and network tolerance, it can be a safety net during unexpected outages or slowdown deeper in the system.</p>
+<p><a href="https://hub.docker.com/r/txn2/rxtx/">rxtx</a> listens for HTTP POST requests with JSON data, it stores the data along with a timestamp and sequence number, on a defined interval <a href="https://hub.docker.com/r/txn2/rxtx/">rxtx</a> gathers a batch of JSON messages and in-turn POSTs them to a defined endpoint. <a href="https://hub.docker.com/r/txn2/rxtx/">rxtx</a> can POST to any endpoint accepting POST data yet is designed to work specifically with <a href="https://hub.docker.com/r/txn2/rtbeat/">rtBeat</a>, which we implement further down.</p>
+<h3 id="wx-rxtx-service">wx-rxtx Service</h3>
+<p>Kubernetes <a href="https://kubernetes.io/docs/concepts/services-networking/service/">Services</a> are the communication hub for a microservices architecture. Services are, and so it makes sense to set them up early on.</p>
+<p>Our <strong>wx-rxtx</strong> service look for Pods with the label <strong>app: wx-rxtx</strong> and direct traffic to them on port 80 to port 80 on the Pods.</p>
+<p><code>wx-rxtx/20-service.yml</code>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">v1</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Service</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">metadata</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">wx-rxtx</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">namespace</span>: <span style="color:#ae81ff">the-project</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">labels</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">app</span>: <span style="color:#ae81ff">wx-rxtx</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">env</span>: <span style="color:#ae81ff">dev</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">spec</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">selector</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">app</span>: <span style="color:#ae81ff">wx-rxtx</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">ports</span>:
+</span></span><span style="display:flex;"><span>  - <span style="color:#f92672">protocol</span>: <span style="color:#e6db74">&#34;TCP&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">port</span>: <span style="color:#ae81ff">80</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">targetPort</span>: <span style="color:#ae81ff">80</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">type</span>: <span style="color:#ae81ff">ClusterIP</span>
+</span></span></code></pre></div><p>Create the wx-rxtx service:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl create -f wx-rxtx/20-service.yml
+</span></span></code></pre></div><p>Although it won&rsquo;t do much, at this point we do have a service listening at http://wx-rxtx:80/ from inside the cluster; however, from outside <code>the-project</code> namespace it would need to be addressed <a href="http://the-project.wx">http://the-project.wx</a>-rxtx:80/.</p>
+<h3 id="wx-rxtx-statefulset">wx-rxtx StatefulSet</h3>
+<p>We use Kubernetes <a href="https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/">StatefulSet</a>s because unlike a Deployment, a <a href="https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/">StatefulSet</a> maintains a sticky identity for each of their Pods. <a href="https://hub.docker.com/r/txn2/rxtx/">rxtx</a> will use a <a href="https://kubernetes.io/docs/concepts/storage/persistent-volumes/">PersistentVolume</a> to store its <a href="https://github.com/coreos/bbolt">bbolt</a> database. If a Pod it restarted, or a Kubernetes node goes down, a new Pod eventually takes its place and attaches to the existing data.</p>
+<p>I recommend running <a href="https://ceph.com/">Ceph</a> managed by <a href="https://rook.io/">rook</a>. &ldquo;Ceph is a unified, distributed storage system designed for excellent performance, reliability, and scalability.&rdquo; and &ldquo;Rook orchestrates battle-tested open-source storage technologies including Ceph.&rdquo;</p>
+<p>Configuring <a href="https://ceph.com/">Ceph</a> to replicate your data ensures that with <a href="https://hub.docker.com/r/txn2/rxtx/">rxtx</a> every message is eventually sent, even with a catastrophic failure of multiple Kubernets nodes.</p>
+<p>Setting up <a href="https://ceph.com/">Ceph</a> and <a href="https://rook.io/">rook</a> is beyond the scope of this article, but quickly done with their excellent documentation.</p>
+<p><code>wx-rxtx/40-statefulset.yml</code>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">apps/v1</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">kind</span>: <span style="color:#ae81ff">StatefulSet</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">metadata</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">wx-rxtx</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">namespace</span>: <span style="color:#ae81ff">the-project</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">labels</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">app</span>: <span style="color:#ae81ff">wx-rxtx</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">env</span>: <span style="color:#ae81ff">dev</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">spec</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">serviceName</span>: <span style="color:#ae81ff">wx-rxtx</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">replicas</span>: <span style="color:#ae81ff">1</span> <span style="color:#75715e"># scale as desired</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">selector</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">matchLabels</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">app</span>: <span style="color:#ae81ff">wx-rxtx</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">template</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">metadata</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">labels</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">app</span>: <span style="color:#ae81ff">wx-rxtx</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">env</span>: <span style="color:#ae81ff">dev</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">spec</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">containers</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">wx-rxtx</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">image</span>: <span style="color:#ae81ff">txn2/rxtx:1.2.0</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">imagePullPolicy</span>: <span style="color:#ae81ff">Always</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">args</span>: [
+</span></span><span style="display:flex;"><span>          <span style="color:#e6db74">&#34;--ingest=http://wx-rtbeat:80/in&#34;</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#e6db74">&#34;--port=80&#34;</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#e6db74">&#34;--path=/data&#34;</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#e6db74">&#34;--interval=10&#34;</span>, <span style="color:#75715e"># seconds between intervals</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#e6db74">&#34;--batch=4000&#34;</span>,  <span style="color:#75715e"># maximum batch size</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#e6db74">&#34;--maxq=500000&#34;</span>] <span style="color:#75715e"># maximum message to store</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">volumeMounts</span>:
+</span></span><span style="display:flex;"><span>        - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">wx-rxtx-data-volume</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">mountPath</span>: <span style="color:#ae81ff">/data</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">ports</span>:
+</span></span><span style="display:flex;"><span>        - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">rxtx</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">containerPort</span>: <span style="color:#ae81ff">80</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">volumeClaimTemplates</span>:
+</span></span><span style="display:flex;"><span>  - <span style="color:#f92672">metadata</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">name</span>: <span style="color:#ae81ff">wx-rxtx-data-volume</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">spec</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">storageClassName</span>: <span style="color:#ae81ff">rook-block</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">accessModes</span>: [ <span style="color:#ae81ff">ReadWriteOnce ]</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">resources</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">requests</span>:
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">storage</span>: <span style="color:#ae81ff">1Gi</span> <span style="color:#75715e"># enough to hold maxq</span>
+</span></span></code></pre></div><p>Create the wx-rxtx statefulset:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl create -f wx-rxtx/40-statefulset.yml
+</span></span></code></pre></div><p>The <strong>wx-rxtx service</strong> should now be able to find <strong>wx-rxtx</strong> Pods deployed by the <a href="https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/">StatefulSet</a> and any data sent to the service http://wx-rxtx:80/ is send to them.</p>
+<h2 id="rtbeat-to-collect-buffer-and-publish"><a href="https://hub.docker.com/r/txn2/rtbeat/">rtBeat</a> to Collect, Buffer and Publish</h2>
+<p><a href="https://hub.docker.com/r/txn2/rtbeat/"><img src="https://raw.githubusercontent.com/txn2/rtbeat/master/mast-logo.jpg" alt=""></a>
+<a href="https://hub.docker.com/r/txn2/irsync/"><img src="https://shields.beevelop.com/docker/image/image-size/txn2/rtbeat/latest.svg" alt="Docker Container Image Size"></a>
+<a href="https://hub.docker.com/r/txn2/rtbeat/"><img src="https://shields.beevelop.com/docker/image/layers/txn2/rtbeat/latest.svg" alt="Docker Container Layers"></a>
+<a href="https://goreportcard.com/report/github.com/txn2/rtbeat"><img src="https://goreportcard.com/badge/github.com/txn2/rtbeat" alt="Go Report Card"></a></p>
+<p><a href="https://github.com/txn2/rtbeat">rtBeat</a> processes HTTP POST data from <a href="https://github.com/txn2/rxtx">rxtx</a> and publishes events into <a href="https://www.elastic.co/">Elasticsearch</a>, <a href="https://www.elastic.co/products/logstash">Logstash</a>, <a href="https://kafka.apache.org/">Kafka</a>, <a href="https://redis.io/">Redis</a> or directly to log files.</p>
+<p><a href="https://hub.docker.com/r/txn2/rtbeat/">rtBeat</a> is designed to accept batches of JSON data from <a href="https://hub.docker.com/r/txn2/rxtx/">rxtx</a> and publish these batches to Elasticsearch, Logstash, Kafka, and Redis. In this project, we are only publishing to <a href="https://www.elastic.co/">elasticsearch</a>. However, you can review the <a href="https://github.com/txn2/rtbeat/blob/master/rtbeat.reference.yml">rtBeat configuration</a> for these other systems.</p>
+<h3 id="wx-rtbeat-service">wx-rtbeat Service</h3>
+<p>wx-rtbeat listens internally on the cluster at http://wx-rtbeat:80, we can set up <a href="/web-cluster-ingress/">ingress</a> to point to this service in the future to allow external access.</p>
+<p><code>wx-rtbeat/20-service.yml</code>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">v1</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Service</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">metadata</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">wx-rtbeat</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">namespace</span>: <span style="color:#ae81ff">the-project</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">labels</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">app</span>: <span style="color:#ae81ff">wx-rtbeat</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">env</span>: <span style="color:#ae81ff">dev</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">spec</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">type</span>: <span style="color:#ae81ff">ClusterIP</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">selector</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">app</span>: <span style="color:#ae81ff">wx-rtbeat</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">ports</span>:
+</span></span><span style="display:flex;"><span>  - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">rtbeat</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">protocol</span>: <span style="color:#ae81ff">TCP</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">port</span>: <span style="color:#ae81ff">80</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">targetPort</span>: <span style="color:#ae81ff">80</span>
+</span></span></code></pre></div><p>Create the wx-rtbeat Service:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl create -f wx-rtbeat/20-service.yml
+</span></span></code></pre></div><h3 id="wx-rtbeat-configmap">wx-rtbeat ConfigMap</h3>
+<p>A significant part of configuring <a href="https://hub.docker.com/r/txn2/rtbeat/">rtbeat</a> involves mapping fields. Although Elastic search does a great job of detecting data types, it&rsquo;s best to be specific when you can. Since we are using data from the <a href="https://darksky.net/dev">Dark Sky API</a>, we can choose the most appropriate <a href="https://www.elastic.co/guide/en/elasticsearch/reference/6.3/mapping-types.html">Elasticsearch data types</a>.</p>
+<p>The following <a href="https://kubernetes.io/docs/tasks/configure-pod-container/configure-pod-configmap/">ConfigMap</a> mounts as a volume into the Pods running <a href="https://hub.docker.com/r/txn2/rtbeat/">rtbeat</a>.</p>
+<p>Within the <strong>rtbeat.yml</strong> section under <strong>output.elasticsearch:</strong> you find <strong>hosts:</strong> set to <strong>&ldquo;elasticsearch:9200&rdquo;</strong>. The elasticsearch service running on port 9200 is setup in the tutorial <a href="/kubernetes-production-elasticsearch/">Production Grade Elasticsearch on Kubernetes</a>.</p>
+<p><code>wx-rtbeat/30-configmap.yml</code>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">v1</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">kind</span>: <span style="color:#ae81ff">ConfigMap</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">metadata</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">wx-rtbeat</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">namespace</span>: <span style="color:#ae81ff">the-project</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">labels</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">app</span>: <span style="color:#ae81ff">wx-rtbeat</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">env</span>: <span style="color:#ae81ff">dev</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">data</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">rtbeat.yml</span>: |-<span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    rtbeat:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      # beat configuration
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      # see https://github.com/txn2/rtbeat/blob/master/rtbeat.reference.yml
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      port: &#34;80&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      timeout: 5
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      name: wx-rtbeat
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    output.elasticsearch:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      # Array of hosts to connect to.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      hosts: [&#34;elasticsearch:9200&#34;]
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      # Elasticsearch Index (new index each month)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      index: &#34;wx-rtbeat-%{+yyyy.MM}&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    setup:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      template.name: &#34;wx-rtbeat&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      template.pattern: &#34;wx-rtbeat-*&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      template.fields: &#34;/config/fields.yml&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      template.overwrite: true
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    #setup.kibana:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    #  protocol: &#34;http&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    #  host: &#34;kibana:80&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    #  ssl.enabled: false
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    # internal metrics through a HTTP endpoint
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    http.enabled: true
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    http.port: 5066</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">fields.yml</span>: |-<span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    - key: rxtx
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      title: rtbeat
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      # Data sent in from rxtx will be in batches of rxtxMsg objects where
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      # the payload will hold the original post data and will be prefixed as such,
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      # model the data here for proper indexing into Elasticsearch.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      # see https://www.elastic.co/guide/en/elasticsearch/reference/6.3/mapping-types.html
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      description: &gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        “Powered by Dark Sky” - https://darksky.net/poweredby/
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        The following fields are pulled from the Dark Sky API free tier allowing 1000 requests per day,
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        see https://darksky.net/dev/docs for API documentation. The fields below only
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        map to returned data excluding all but the &#34;currently&#34; key (exclude=minutely,hourly,daily,flags)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      fields:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      # rxtx standard fields (customizable)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      - name: rxtxMsg.seq
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        required: true
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        type: string
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      - name: rxtxMsg.time
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        required: true
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        type: date
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      - name: rxtxMsg.producer
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        required: true
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        type: keyword
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      - name: rxtxMsg.label
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        required: true
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        type: keyword
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      - name: rxtxMsg.key
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        required: true
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        type: keyword
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      # custom
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      - name: rxtxMsg.payload.latitude
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        required: true
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        type: half_float
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      - name: rxtxMsg.payload.longitude
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        required: true
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        type: half_float
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      - name: rxtxMsg.payload.timezone
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        required: true
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        type: keyword
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      - name: rxtxMsg.payload.offset
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        required: true
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        type: byte
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      - name: rxtxMsg.payload.currently.time
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        required: true
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        type: long
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      - name: rxtxMsg.payload.currently.summary
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        required: true
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        type: keyword
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      - name: rxtxMsg.payload.currently.icon
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        required: true
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        type: keyword
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      - name: rxtxMsg.payload.currently.nearestStormDistance
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        required: true
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        type: integer
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      - name: rxtxMsg.payload.currently.precipIntensity
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        required: true
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        type: half_float
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      - name: rxtxMsg.payload.currently.precipIntensityError
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        required: true
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        type: half_float
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      - name: rxtxMsg.payload.currently.precipProbability
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        required: true
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        type: half_float
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      - name: rxtxMsg.payload.currently.precipType
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        required: true
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        type: keyword
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      - name: rxtxMsg.payload.currently.temperature
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        required: true
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        type: half_float
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      - name: rxtxMsg.payload.currently.apparentTemperature
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        required: true
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        type: half_float
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      - name: rxtxMsg.payload.currently.dewPoint
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        required: true
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        type: half_float
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      - name: rxtxMsg.payload.currently.humidity
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        required: true
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        type: half_float
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      - name: rxtxMsg.payload.currently.pressure
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        required: true
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        type: half_float
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      - name: rxtxMsg.payload.currently.windSpeed
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        required: true
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        type: half_float
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      - name: rxtxMsg.payload.currently.windGust
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        required: true
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        type: half_float
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      - name: rxtxMsg.payload.currently.windBearing
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        required: true
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        type: half_float
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      - name: rxtxMsg.payload.currently.cloudCover
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        required: true
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        type: half_float
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      - name: rxtxMsg.payload.currently.uvIndex
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        required: true
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        type: half_float
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      - name: rxtxMsg.payload.currently.visibility
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        required: true
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        type: half_float
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      - name: rxtxMsg.payload.currently.ozone
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        required: true
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        type: half_float
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    - key: beat
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      title: Beat
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      description: &gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        Contains common beat fields available in all event types.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      fields:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        - name: beat.name
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">          description: &gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            The name of the Beat sending the log messages. If the Beat name is
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            set in the configuration file, then that value is used. If it is not
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            set, the hostname is used. To set the Beat name, use the `name`
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            option in the configuration file.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        - name: beat.hostname
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">          description: &gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            The hostname as returned by the operating system on which the Beat is running.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        - name: beat.version
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">          description: &gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            The version of the beat that generated this event.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        - name: &#34;@timestamp&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">          type: date
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">          required: true
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">          format: date
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">          example: August 26th 2016, 12:35:53.332
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">          description: &gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            The timestamp when the event log record was generated.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        - name: tags
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">          description: &gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            Arbitrary tags that can be set per Beat and per transaction
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            type.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        - name: fields
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">          type: object
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">          object_type: keyword
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">          description: &gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            Contains user configurable fields.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        - name: error
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">          type: group
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">          description: &gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            Error fields containing additional info in case of errors.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">          fields:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            - name: message
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">              type: text
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">              description: &gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">                Error message.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            - name: code
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">              type: long
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">              description: &gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">                Error code.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            - name: type
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">              type: keyword
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">              description: &gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">                Error type.</span>
+</span></span></code></pre></div><p>Create the wx-rtbeat ConfigMap:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl create -f wx-rtbeat/30-configmap.yml
+</span></span></code></pre></div><h3 id="wx-rtbeat-deployment">wx-rtbeat Deployment</h3>
+<p>The deployment creates a Pod running the <a href="https://hub.docker.com/r/txn2/rtbeat/">rtbeat</a> Docker container configured by the <a href="https://kubernetes.io/docs/tasks/configure-pod-container/configure-pod-configmap/">ConfigMap</a> we created above.</p>
+<p><code>wx-rtbeat/40-depoloyment.yml</code>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">apps/v1</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Deployment</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">metadata</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">wx-rtbeat</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">namespace</span>: <span style="color:#ae81ff">the-project</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">labels</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">app</span>: <span style="color:#ae81ff">wx-rtbeat</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">env</span>: <span style="color:#ae81ff">dev</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">spec</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">replicas</span>: <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">selector</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">matchLabels</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">app</span>: <span style="color:#ae81ff">wx-rtbeat</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">template</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">metadata</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">labels</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">app</span>: <span style="color:#ae81ff">wx-rtbeat</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">env</span>: <span style="color:#ae81ff">dev</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">spec</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">containers</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">wx-rtbeat</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">image</span>: <span style="color:#ae81ff">txn2/rtbeat:1.0.2</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">imagePullPolicy</span>: <span style="color:#ae81ff">Always</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">args</span>: [<span style="color:#e6db74">&#34;-e&#34;</span>, <span style="color:#e6db74">&#34;--path.config=/config&#34;</span>]
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">volumeMounts</span>:
+</span></span><span style="display:flex;"><span>        - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">wx-rtbeat-config-volume</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">mountPath</span>: <span style="color:#ae81ff">/config</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">ports</span>:
+</span></span><span style="display:flex;"><span>        - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">rtbeat</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">containerPort</span>: <span style="color:#ae81ff">80</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">volumes</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">wx-rtbeat-config-volume</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">configMap</span>:
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">name</span>: <span style="color:#ae81ff">wx-rtbeat</span>
+</span></span></code></pre></div><p>Create the wx-rtbeat <a href="https://kubernetes.io/docs/concepts/workloads/controllers/deployment/">Deployment</a>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl create -f wx-rtbeat/40-deployment.yml
+</span></span></code></pre></div><h2 id="client-simulation--kubernetes-cron">Client Simulation / Kubernetes Cron</h2>
+<p>We could add an <a href="/web-cluster-ingress/">ingress</a> configuration and expose our wx-rtbeat service to the outside world, allowing IOT devices like weather stations, machine sensors, or anything that can POST JSON data to us. However, for this tutorial, we can more easily simulate a client using a Kubernetes <a href="https://kubernetes.io/docs/concepts/workloads/controllers/cron-jobs/">CronJob</a>.</p>
+<p>We create a <a href="https://kubernetes.io/docs/concepts/workloads/controllers/cron-jobs/">CronJob</a> that issues a request to the <a href="https://darksky.net/dev">Dark Sky API</a>, receives JSON data and subsequently issues a POST directly to our <a href="https://hub.docker.com/r/txn2/rtbeat/">rtbeat</a> service.</p>
+<p>I keep my <a href="https://darksky.net/dev">Dark Sky API</a> in a Secret and mount the value of the secret to an environment variable accessible in the container used by the cron.</p>
+<ul>
+<li>Sign up for a <a href="https://darksky.net/dev">Dark Sky API</a> developer account (free).</li>
+<li>Create a file called <strong>apikey</strong> with your secret API key in it.</li>
+</ul>
+<p>Create the Kubernetes secret <strong>wx-data-api-key</strong> in <strong>the-project</strong> namespace:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl create secret generic wx-data-api-key --from-file<span style="color:#f92672">=</span>apikey -n the-project
+</span></span></code></pre></div><p><code>wx-data/40-cron.yml</code>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">batch/v1beta1</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">kind</span>: <span style="color:#ae81ff">CronJob</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">metadata</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">wx-data</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">namespace</span>: <span style="color:#ae81ff">the-project</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">labels</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">app</span>: <span style="color:#ae81ff">wx-data</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">env</span>: <span style="color:#ae81ff">dev</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">spec</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">schedule</span>: <span style="color:#e6db74">&#34;*/2 * * * *&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">concurrencyPolicy</span>: <span style="color:#ae81ff">Forbid</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">startingDeadlineSeconds</span>: <span style="color:#ae81ff">90</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">jobTemplate</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">spec</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">template</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">spec</span>:
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">containers</span>:
+</span></span><span style="display:flex;"><span>          - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">wx-data</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">image</span>: <span style="color:#ae81ff">txn2/curl:v3.0.0</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">env</span>:
+</span></span><span style="display:flex;"><span>            - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">API_KEY</span>
+</span></span><span style="display:flex;"><span>              <span style="color:#f92672">valueFrom</span>:
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">secretKeyRef</span>:
+</span></span><span style="display:flex;"><span>                  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">wx-data-api-key</span>
+</span></span><span style="display:flex;"><span>                  <span style="color:#f92672">key</span>: <span style="color:#ae81ff">apikey</span>
+</span></span><span style="display:flex;"><span>            - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">DATA_FROM</span>
+</span></span><span style="display:flex;"><span>              <span style="color:#f92672">value</span>: <span style="color:#e6db74">&#34;https://api.darksky.net/forecast/$(API_KEY)/33.8148455,-117.826581?exclude=minutely,hourly,daily,flags&#34;</span>
+</span></span><span style="display:flex;"><span>            - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">DATA_TO</span>
+</span></span><span style="display:flex;"><span>              <span style="color:#f92672">value</span>: <span style="color:#e6db74">&#34;http://wx-rxtx:80/rx/cron/collector/wx-data&#34;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">command</span>: [
+</span></span><span style="display:flex;"><span>              <span style="color:#e6db74">&#34;/bin/sh&#34;</span>,
+</span></span><span style="display:flex;"><span>              <span style="color:#e6db74">&#34;-c&#34;</span>,
+</span></span><span style="display:flex;"><span>              <span style="color:#e6db74">&#34;/usr/bin/curl -sX GET $(DATA_FROM) &gt; data &amp;&amp; /usr/bin/curl -sX POST -d @data $(DATA_TO)&#34;</span>
+</span></span><span style="display:flex;"><span>            ]
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">restartPolicy</span>: <span style="color:#ae81ff">OnFailure</span>
+</span></span></code></pre></div><p>Create the wx-data <a href="https://kubernetes.io/docs/concepts/workloads/controllers/cron-jobs/">CronJob</a>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl create -f wx-data/40-cron.yml
+</span></span></code></pre></div><h2 id="performance">Performance</h2>
+<p>Inserting one record every two minutes is only to demonstrate the process. I run this setup on a few production systems that handle around 200 messages per second and often up to 400 or 500 with only minimal resource used other than data storage.</p>
+<p>Scaled <a href="https://hub.docker.com/r/txn2/rtbeat/">rtBeat</a> and <a href="https://hub.docker.com/r/txn2/rxtx/">rxtx</a> by increasing the number of replicas to whatever your Kubernetes cluster can handle. <a href="https://hub.docker.com/r/txn2/rtbeat/">rtBeat</a> and <a href="https://hub.docker.com/r/txn2/rxtx/">rxtx</a> services run independently allowing infinite horizontal scaling.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>If you have setup <a href="/kibana-kubernetes/">Kibana on Kubernetes</a>, you should begin to see data. You are now able to set up an index, explore your data and create visualizations.</p>
+<p><img src="/images/content/txn2/wx-kibana.png" alt="Kibana Dashboard">
+<img src="/images/content/txn2/wx-discover.png" alt="Kibana Discover"></p>
+<h2 id="port-forwarding--local-development">Port Forwarding / Local Development</h2>
+<p>Check out <a href="https://github.com/txn2/kubefwd">kubefwd</a> for a simple command line utility that bulk forwards services of one or more namespaces to your local workstation.</p>
+<h2 id="reference">Reference</h2>
+<ul>
+<li><a href="/hobby-cluster/">Production Hobby Cluster</a></li>
+<li><a href="https://hub.docker.com/r/txn2/rtbeat/">rtBeat</a> Docker container</li>
+<li><a href="https://hub.docker.com/r/txn2/rxtx/">rxtx</a> Docker container</li>
+<li><a href="https://www.elastic.co/">Elasticsearch</a></li>
+<li>Elastic <a href="https://www.elastic.co/products/beats">beat</a></li>
+</ul>
+
+
+                <p>
+                   This blog post, titled: "<span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">High Traffic JSON Data into Elasticsearch on Kubernetes: Instant, reliable, send and forget.</span>" by <a xmlns:cc="http://creativecommons.org/ns#" href="https://twitter.com/cjimti" property="cc:attributionName" rel="cc:attributionURL">Craig Johnston</a>, is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+                    <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a>
+                </p>
+
+            </div>
+            
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                
+                <section>
+                    <hr class="hidden-sm hidden-xs">
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/blockchain" title="blockchain">
+                        blockchain
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/data" title="data">
+                        data
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/data-science" title="data science">
+                        data science
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/development" title="development">
+                        development
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/devops" title="devops">
+                        devops
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/docker" title="docker">
+                        docker
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/elasticsearch" title="elasticsearch">
+                        elasticsearch
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/golang" title="golang">
+                        golang
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/ingress" title="ingress">
+                        ingress
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/iot" title="iot">
+                        iot
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/kubectl" title="kubectl">
+                        kubectl
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/kubefwd" title="kubefwd">
+                        kubefwd
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/kubernetes" title="kubernetes">
+                        kubernetes
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/microservices" title="microservices">
+                        microservices
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/python" title="python">
+                        python
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/raspberry-pi" title="raspberry pi">
+                        raspberry pi
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/security" title="security">
+                        security
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/utils" title="utils">
+                        utils
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                    </div>
+                </section>
+
+                
+                <hr>
+                <h5>RELATED</h5>
+                <ul class="list-inline">
+                    
+                </ul>
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                   
+                   <li>
+                       <a href="/index.xml" rel="alternate" type="application/rss+xml" title="IMTI" >
+                           <span class="fa-stack fa-lg">
+                               <i class="fa fa-circle fa-stack-2x"></i>
+                               <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+                           </span>
+                       </a>
+                   </li>
+                   
+                    
+                    <li>
+                        <a href="mailto:cjimti@gmail.com">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                    
+                    
+                    <li>
+                        <a href="https://twitter.com/cjimti">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    
+
+                    
+
+		    
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/cjimti">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                    
+                    <li>
+                        <a target="_blank" href="https://www.linkedin.com/in/cjimti/">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                </ul>
+
+                
+                
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+
+
+
+
+<script>
+    
+    if($('#tag_cloud').length !== 0){
+        async("/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-R56SP4WLS2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-R56SP4WLS2');
+</script>
+
+</body>
+</html>

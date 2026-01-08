@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head><head>
+    <meta name="msvalidate.01" content="DBC34551F2DD1BA3DC0D62EE46D7448F" />
+    <meta name="google-site-verification" content="DrtKc88u9uc7iptd4LyURAKBmFcOn7Kuk6HcRk_kNmo" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <meta name="description" content="Kubeless, Python and Elasticsearch">
+    
+    <meta name="keyword"  content="Go, Kubernetes, Elasticsearch, Python, Docker, Big Data, Artificial Intelligence, Machine Learning">
+    <link rel="shortcut icon" href="https://imti.co/img/favicon.ico">
+
+    <title>FaaS on Kubernetes - IMTI - Craig Johnston</title>
+
+    <link rel="canonical" href="https://imti.co/fass-kubeless-kubernetes/">
+	
+    
+    <link rel="stylesheet" href="https://imti.co/css/bootstrap.min.css">
+
+    
+    <link rel="stylesheet" href="https://imti.co/css/hux-blog.min.css">
+
+    
+    <link rel="stylesheet" href="https://imti.co/css/syntax.css">
+
+    
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    
+    
+    <link rel="stylesheet" href="/css/imti.css">
+
+    
+    <script src="https://imti.co/js/jquery.min.js"></script>
+    
+    
+    <script src="https://imti.co/js/bootstrap.min.js"></script>
+    
+    
+    <script src="https://imti.co/js/hux-blog.min.js"></script>
+
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({
+            google_ad_client: "ca-pub-5984764595236029",
+            enable_page_level_ads: true
+        });
+    </script>
+
+    <meta name="twitter:site" content="@cjimti">
+<meta name="twitter:creator" content="@cjimti">
+
+<meta name="twitter:description" content="Kubeless, Python and Elasticsearch" />
+<meta name="twitter:title" content="FaaS on Kubernetes" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://imti.co/img/post/balloon_876_438.jpg" />
+<meta property="og:image" content="https://imti.co/img/post/balloon_876_438.jpg" />
+
+
+
+    
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https:\/\/imti.co\/fass-kubeless-kubernetes\/"
+  },
+  "headline": "FaaS on Kubernetes",
+  "image": ["https:\/\/imti.co\/img\/post\/balloon_876_438.jpg"],
+  "datePublished": "2018-07-28T00:00:00Z",
+  "dateModified": "2018-07-28T00:00:00Z",
+  "author": {
+    "@type": "Person",
+    "name": "Craig Johnston"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "imti.co",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https:\/\/imti.co\/img\/craig_johnston_cjimti.jpg"
+    }
+  },
+  "description": "FaaS or Function as a Service also known as Serverless computing implementations are gaining popularity. Discussed often are the cost savings and each …"
+}
+</script>
+
+
+</head></head>
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="https://imti.co//">IMTI</a>
+        </div>
+
+        
+        
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="https://imti.co//">Home</a>
+                    </li>
+                    <li>
+                        <a href="https://imti.co//about/">About</a>
+                    </li>
+                    <li>
+                        <a href="https://twitter.com/cjimti">Follow</a>
+                    </li>
+                    
+
+                    
+                </ul>
+            </div>
+        </div>
+        
+    </div>
+    
+</nav>
+<script>
+    
+    
+    
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        
+            $navbar.className = " ";
+            
+            setTimeout(function(){
+                
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+
+
+<style type="text/css">
+    header.intro-header{
+        background-image: url('https://imti.co/img/post/balloon.jpg')
+    }
+</style>
+<header class="intro-header" >
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/elasticsearch" title="Elasticsearch">
+                        Elasticsearch
+                        </a>
+                        
+                        <a class="tag" href="/tags/python" title="Python">
+                        Python
+                        </a>
+                        
+                        <a class="tag" href="/tags/kubernetes" title="Kubernetes">
+                        Kubernetes
+                        </a>
+                        
+                        <a class="tag" href="/tags/serverless" title="Serverless">
+                        Serverless
+                        </a>
+                        
+                    </div>
+                    <h1>FaaS on Kubernetes</h1>
+                    <h2 class="subheading">Kubeless, Python and Elasticsearch</h2>
+                    <span  class="meta">Posted by <a href="https://twitter.com/cjimti">Craig Johnston</a> on Saturday, July 28, 2018
+                        
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+<article>
+    <div class="container">
+        <div class="row">
+
+            
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <p>FaaS or <a href="https://en.wikipedia.org/wiki/Function_as_a_service">Function as a Service</a> also known as <a href="https://en.wikipedia.org/wiki/Serverless_computing">Serverless computing</a> implementations are gaining popularity. Discussed often are the cost savings and each implementations relationship to the physical and network architecture of a specific platform or vendor. While many of the <a href="https://martinfowler.com/articles/serverless.html#ReducedOperationalCost">cost and infrastructure</a> advantages of FaaS are compelling, its only one of many advantages. Below, I hope to demonstrate how easy it is to develop and deploy FaaS components into a custom Kubernetes cluster. The functions I develop are nearly all business logic, and I believe therein lies the advantage, <strong>high-density business logic</strong>. Functions can have a higher degree of focus directly on business logic and communication with other services. Functions can communicate with other functions, microservices or monoliths. In this article, I demonstrate this with <a href="/kubernetes-production-elasticsearch/">Elasticsearch</a>.</p>
+<p><img src="/images/content/faas_architecture.png" alt=""></p>
+<aside class="toc">
+    <header>
+        <h2>Contents</h2>
+    </header>
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#architecture">Architecture</a></li>
+    <li><a href="#terminology">Terminology</a></li>
+    <li><a href="#motivation">Motivation</a></li>
+    <li><a href="#kubeless-for-faas">Kubeless for FaaS</a>
+      <ul>
+        <li><a href="#install-kubeless">Install Kubeless</a></li>
+        <li><a href="#toolchain-and-local-development">Toolchain and Local Development</a></li>
+      </ul>
+    </li>
+    <li><a href="#python-function">Python Function</a>
+      <ul>
+        <li><a href="#script-wx-statspy">Script <code>wx-stats.py</code></a></li>
+        <li><a href="#dependencies-requirementstxt">Dependencies <code>requirements.txt</code></a></li>
+      </ul>
+    </li>
+    <li><a href="#local-development-and-testing">Local Development and Testing</a></li>
+    <li><a href="#deploy-and-update">Deploy and Update</a></li>
+    <li><a href="#testing">Testing</a></li>
+    <li><a href="#python-resources">Python Resources</a></li>
+    <li><a href="#port-forwarding--local-development">Port Forwarding / Local Development</a></li>
+  </ul>
+</nav>
+</aside>
+
+
+<h2 id="architecture">Architecture</h2>
+<p>Lately, I have been seeing a trend of comparisons for choosing between developing applications with Monoliths, Microservices, or FaaS. I believe this comparison in some context, is flawed. Unless you are on a desert island and can only choose one implementation in which to develop your application, you sill have a problem of definition. Even if you did have to limit your architecture to one concept, you would first need to define a standard of comparison, determining where a bloated Microservice is a monolith, or if a prewarmed FaaS is just a small Microservice. If you are following my point, they can all have a place regardless of definition, that is if the underlying platform can support them equally. All these concepts can work together seamlessly in one platform, by operating in networked containers, orchestrated by Kubernetes.</p>
+<p><img src="/images/content/k8s_micro_mono_func.png" alt=""></p>
+<h2 id="terminology">Terminology</h2>
+<p>In this article I will use the term <strong>Function</strong> to describe a <a href="https://kubeless.io/docs/quick-start/">Kubeless Function</a>. <a href="https://kubeless.io/">Kubeless</a> is an implementation of FaaS <a href="https://en.wikipedia.org/wiki/Function_as_a_service">Function as a Service</a> also known as <a href="https://en.wikipedia.org/wiki/Serverless_computing">Serverless computing</a>, <a href="https://serverless.com/">Serverless</a>, <a href="https://aws.amazon.com/lambda/">lambda</a>, <a href="https://cloud.google.com/functions/">Google functions</a> or even <a href="https://www.infoq.com/news/2014/05/nano-services">Nano Services</a>.</p>
+<h2 id="motivation">Motivation</h2>
+<p>While our industry sorts out the distinctive and vocabulary of these new architectures, please bear with me while I show you a simplified example, extracted from implementation I find successful. There are exciting and innovative ways to trigger and chain FaaS services. Implementations like Amazon&rsquo;s Alexa and its use of AWS lambdas are one successful example. However in this article I demonstrate a basic implementation; the everyday needs of an HTTP API stack.</p>
+<p>At this point most of my legacy systems are Monoliths; however they are containerized and live in the cluster as they would any hosting environment. I design most of my Microservices for generic or reusable functionality or more complex business logic not appropriate for pure functions. Functions are a great addition to data flow, and it&rsquo;s pipeline between monoliths, microservices and other functions. Kubeless Functions give me the <strong>ability to quickly inject business logic at any point in the platform without significant architectural changes.</strong></p>
+<h2 id="kubeless-for-faas">Kubeless for FaaS</h2>
+<p>I appreciate the simplicity and elegance of <a href="https://kubeless.io/">Kubeless</a> and its seamless integration into Kubernetes. <a href="https://kubeless.io/">Kubeless</a> is an extension of the Kubernetes API and takes advantage of its stability and architecture. This integration with Kubernetes makes <a href="https://kubeless.io/">Kubeless</a> incredibly easy if you are already familiar with Kubernetes.</p>
+<p><img src="/images/content/kubeless-overview.png" alt=""></p>
+<p><a href="https://kubeless.io/">Kubeless</a> comes with its own CLI for interacting with Functions, providing commands such as <code>kubeless function ls</code>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubeless <span style="color:#66d9ef">function</span> ls -n the-project
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>NAME        NAMESPACE      HANDLER           RUNTIME      DEPENDENCIES                STATUS
+</span></span><span style="display:flex;"><span>wx-stats    the-project    wx-stats.stats     python3.6    python-dateutil<span style="color:#f92672">==</span>2.7.3     1/1 READY
+</span></span><span style="display:flex;"><span>                                                           elasticsearch<span style="color:#f92672">==</span>6.3.0
+</span></span><span style="display:flex;"><span>                                                           elasticsearch-dsl<span style="color:#f92672">==</span>6.2.1
+</span></span></code></pre></div><p>However, due to  <a href="https://kubeless.io/">Kubeless</a> deep integration with Kubernetes, I often find myself executing kubectl commands simply out of habit:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl get functions -n the-project
+</span></span></code></pre></div><p>These commands are nearly synonymous, because Kubless Function are merely Kubernetes objects, or Custom Resources to be accurate, and many operations on them are as they would be with other resources in the cluster, like services, deployment or pods.</p>
+<h3 id="install-kubeless">Install Kubeless</h3>
+<p><a href="https://kubeless.io/">Kubeless</a> installs in the <code>kubeless</code> namespace by default and can be used to create functions in any namespace. I use <a href="https://kubernetes.io/docs/reference/access-authn-authz/rbac/">RBAC</a> for all my clusters, and if you are looking to set up a custom Kubernetes cluster, I recommend spending about an hour following my article <a href="/hobby-cluster/">Production Hobby Cluster</a>.</p>
+<p>Setting up Kubeless in your <a href="/hobby-cluster/">Production Hobby Cluster</a> or hosted solution is easy, and the <a href="https://kubeless.io/docs/quick-start/">official installation instructions</a> are clear.</p>
+<p>If you have a <a href="https://kubeless.io/">Kubeless</a> cluster already available and only need the CLI, then I suggest a <code>brew install kubeless</code> for the MacOs users.</p>
+<h3 id="toolchain-and-local-development">Toolchain and Local Development</h3>
+<p>Developing <a href="https://kubeless.io/">Kubeless</a> Functions can be performed with the same tools as any other services. I build my <a href="https://golang.org/">Golang</a> and <a href="https://www.python.org/">Python</a> functions with the commercial <a href="https://www.jetbrains.com/">Jet Brains</a> IDEs <a href="https://www.jetbrains.com/go/">Goland</a> and <a href="https://www.jetbrains.com/pycharm/">PyCharm</a> however free IDEs such as <a href="https://code.visualstudio.com/">Visual Studio Code</a> and <a href="https://atom.io/">Atom</a> work great as well.</p>
+<p>In this demo, my Functions are API endpoints that query <a href="/kubernetes-production-elasticsearch/">Elasticsearch</a>, check out my article <a href="/remote-query-kubernetes-elasticsearch/">Remote Query Elasticsearch on Kubernetes</a> on how I port-forward Kubernetes <a href="https://kubernetes.io/docs/concepts/services-networking/service/">Services</a> for remote access. If your Kubernetes cluster needs set up for remote access, I suggest reading <a href="/team-kubernetes-remote-access/">Kubernetes Team Access - RBAC for developers and QA</a>.</p>
+<h2 id="python-function">Python Function</h2>
+<p>The following Python code demonstrates a function that returns the last 24 hours of weather data for Los Angeles, specifically temperatures. The Elasticsearch query aggregates the data into buckets of two-degree Fahrenheit intervals for later use in histograms and further analysis.</p>
+<p>The <a href="https://elasticsearch-dsl.readthedocs.io/en/latest/search_dsl.html">Elasticsearch DSL</a> is an excellent library for working with Elasticsearch in <a href="https://www.python.org/">Python</a>. Although most of my Microservices are written in <a href="https://golang.org/">Golang</a>, <a href="https://www.python.org/">Python</a> provides a tremendous number of mature and well-documented libraries for working with data.</p>
+<h3 id="script-wx-statspy">Script <code>wx-stats.py</code></h3>
+<p>The following script <code>wx-stats.py</code> contains the function <code>stats</code>. Further down, I issue a <a href="https://kubeless.io/">Kubeless</a> deployment using this file and the function name to call.</p>
+<p><code>wx-stats.py</code>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e">#!/usr/bin/env python3</span>
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">Wx Stats from Elasticsearch
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">Local testing:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    kubectl port-forward service/elasticsearch 9200:9200 -n the-project
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    HOST=localhost:9200 python ./wx-stats.py
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>__author__ <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Craig Johnston&#34;</span>
+</span></span><span style="display:flex;"><span>__version__ <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;0.0.1&#34;</span>
+</span></span><span style="display:flex;"><span>__license__ <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;MIT&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> os
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> elasticsearch <span style="color:#f92672">import</span> Elasticsearch
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> elasticsearch_dsl <span style="color:#f92672">import</span> Search, connections
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>host <span style="color:#f92672">=</span> os<span style="color:#f92672">.</span>environ[<span style="color:#e6db74">&#39;HOST&#39;</span>]
+</span></span><span style="display:flex;"><span>connections<span style="color:#f92672">.</span>create_connection(hosts<span style="color:#f92672">=</span>[host], timeout<span style="color:#f92672">=</span><span style="color:#ae81ff">20</span>)
+</span></span><span style="display:flex;"><span>client <span style="color:#f92672">=</span> Elasticsearch()
+</span></span><span style="display:flex;"><span>s <span style="color:#f92672">=</span> Search(using<span style="color:#f92672">=</span>client)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">stats</span>(event, context):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        Return wx stats
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        Uses the Python Elasticsearch DSL
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        https://elasticsearch-dsl.readthedocs.io/en/latest/search_dsl.html
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">global</span> s
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    res <span style="color:#f92672">=</span> s<span style="color:#f92672">.</span>from_dict({
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;size&#34;</span>: <span style="color:#ae81ff">0</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;aggs&#34;</span>: {
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#34;temps&#34;</span>: {
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#34;histogram&#34;</span>: {
+</span></span><span style="display:flex;"><span>                    <span style="color:#e6db74">&#34;field&#34;</span>: <span style="color:#e6db74">&#34;rxtxMsg.payload.currently.temperature&#34;</span>,
+</span></span><span style="display:flex;"><span>                    <span style="color:#e6db74">&#34;interval&#34;</span>: <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        },
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;query&#34;</span>: {
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#34;range&#34;</span>: {
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#34;@timestamp&#34;</span>: {
+</span></span><span style="display:flex;"><span>                    <span style="color:#e6db74">&#34;gt&#34;</span>: <span style="color:#e6db74">&#34;now-24h&#34;</span>
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    })<span style="color:#f92672">.</span>execute()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> res<span style="color:#f92672">.</span>to_dict()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;__main__&#39;</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    Mock event and context for development
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    See: https://kubeless.io/docs/kubeless-functions/
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    event <span style="color:#f92672">=</span> {}
+</span></span><span style="display:flex;"><span>    context <span style="color:#f92672">=</span> {}
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># json is needed only for development and testing</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># not necessary to import for Kubeless functions</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">import</span> json
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    json_string <span style="color:#f92672">=</span> json<span style="color:#f92672">.</span>dumps(stats(event, context), indent<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>)
+</span></span><span style="display:flex;"><span>    print(json_string)
+</span></span></code></pre></div><p>At this point I am not taking advantage of the <a href="https://elasticsearch-dsl.readthedocs.io/en/latest/search_dsl.html">Elasticsearch DSL</a>, being flexible it allows me to write raw Elasticsearch queries. The <a href="https://elasticsearch-dsl.readthedocs.io/en/latest/search_dsl.html">Elasticsearch DSL</a> is excellent for quick ports from other systems or experimenting while you are learning the syntax.</p>
+<h3 id="dependencies-requirementstxt">Dependencies <code>requirements.txt</code></h3>
+<p>Python&rsquo;s <a href="https://pypi.org/project/pip/">pip</a> package manager can generate and use a <code>requirements.txt</code> file to manage dependencies.</p>
+<p><code>requirements.txt</code>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>elasticsearch==6.3.0
+</span></span><span style="display:flex;"><span>elasticsearch-dsl==6.2.1
+</span></span></code></pre></div><p>Ensure you meet these dependencies by issuing the <code>pip install</code> command:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>pip install -r requirements.txt
+</span></span></code></pre></div><p>The <code>requirements.txt</code> file is given to the Kubeless function on deployment and updates, to ensure the <a href="https://github.com/kubeless/kubeless/blob/master/docs/runtimes.md">Kubeless runtime</a> for Python contains the required packages.</p>
+<h2 id="local-development-and-testing">Local Development and Testing</h2>
+<p>The python script <code>wx-stats.py</code> can be run on the command line. In a separate terminal you need to port-forward the Elasticsearch service to your local workstation:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl port-forward service/elasticsearch 9200:9200 -n the-project
+</span></span></code></pre></div><p>At this point <strong>localhost:9200</strong> responds as a local Elasticsearch would. In another terminal you can run the python script, when run as a script the function specified in the <strong>if <strong>name</strong> == &lsquo;<strong>main</strong>&rsquo;:</strong> conditional is executed, in this case <strong>stats(event, context)</strong>.</p>
+<p>I wrap the returned <a href="https://docs.python.org/3/tutorial/datastructures.html#dictionaries">python dict</a> in <strong>json.dumps</strong> to encode as json as Kubeless will when called in the cluster.</p>
+<p>Running the following command sets the environment variable <strong>HOST</strong> to the location of the Elasticsearch service. Kubless supports any number of environment variables specified in the function&rsquo;s deployment.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>HOST<span style="color:#f92672">=</span>localhost:9200 python ./wx-stats.py
+</span></span></code></pre></div><h2 id="deploy-and-update">Deploy and Update</h2>
+<p>As of now, using the <code>kubeless</code> command is one of the easiest ways to deploy and update the Kubless function.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubeless <span style="color:#66d9ef">function</span> deploy wx-stats --runtime python3.6 <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>                                  --from-file wx-stats.py <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>                                  --dependencies requirements.txt <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>                                  --handler wx-stats.stats <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>                                  --env HOST<span style="color:#f92672">=</span>elasticsearch:9200 <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>                                  -n the-project
+</span></span></code></pre></div><p>The <code>kubeless</code> command provides many options for a function <strong>deploy</strong> and <strong>update</strong>, along with help for any sub-command:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubeless <span style="color:#66d9ef">function</span> deploy -h
+</span></span></code></pre></div><p>While it is acceptable to avoid the <code>kubeless</code> command and write <a href="https://github.com/kubeless/kubeless/blob/master/examples/python/function.yaml">Kubless Function resources in yml</a>, I find it easy enough to add <code>kubeless function update</code> to my build scripts. Want the best of both imperative and declarative and configuration? Add <code>kubeless function deploy</code> and <code>kubeless function update</code> command to a <a href="https://en.wikipedia.org/wiki/Makefile">Makefile</a>.</p>
+<h2 id="testing">Testing</h2>
+<p>Now that we have deployed the Kubless function, disconnect from port-forwarding the Elasticsearch service and test the new function by port-forward the new service pointing to it.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl port-forward service/wx-stats 8080:8080 -n the-project
+</span></span></code></pre></div><p>Now that I have port 8080 on my local workstation forwarding to port 8080 on the Kubernetes service <strong>wx-stats</strong> in <code>the-project</code> namespace, I use curl (or a web browser) to call the new <strong>wx-stats</strong> function.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>curl -s localhost:8080 | jsonpp
+</span></span></code></pre></div><p>Piping the curl output to <a href="https://jmhodges.github.io/jsonpp/">jsonpp</a> makes the JSON output a bit more readable for debugging.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;took&#34;</span>: <span style="color:#ae81ff">61</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;timed_out&#34;</span>: <span style="color:#66d9ef">false</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;_shards&#34;</span>: {
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;total&#34;</span>: <span style="color:#ae81ff">31</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;successful&#34;</span>: <span style="color:#ae81ff">31</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;skipped&#34;</span>: <span style="color:#ae81ff">0</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;failed&#34;</span>: <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>  },
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;hits&#34;</span>: {
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;total&#34;</span>: <span style="color:#ae81ff">719</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;max_score&#34;</span>: <span style="color:#ae81ff">0.0</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;hits&#34;</span>: []
+</span></span><span style="display:flex;"><span>  },
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;aggregations&#34;</span>: {
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;temps&#34;</span>: {
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;buckets&#34;</span>: [
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;key&#34;</span>: <span style="color:#ae81ff">68.0</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;doc_count&#34;</span>: <span style="color:#ae81ff">24</span>
+</span></span><span style="display:flex;"><span>        },
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;key&#34;</span>: <span style="color:#ae81ff">70.0</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;doc_count&#34;</span>: <span style="color:#ae81ff">101</span>
+</span></span><span style="display:flex;"><span>        },
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;key&#34;</span>: <span style="color:#ae81ff">72.0</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;doc_count&#34;</span>: <span style="color:#ae81ff">81</span>
+</span></span><span style="display:flex;"><span>        },
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;key&#34;</span>: <span style="color:#ae81ff">74.0</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;doc_count&#34;</span>: <span style="color:#ae81ff">93</span>
+</span></span><span style="display:flex;"><span>        },
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;key&#34;</span>: <span style="color:#ae81ff">76.0</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;doc_count&#34;</span>: <span style="color:#ae81ff">50</span>
+</span></span><span style="display:flex;"><span>        },
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;key&#34;</span>: <span style="color:#ae81ff">78.0</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;doc_count&#34;</span>: <span style="color:#ae81ff">38</span>
+</span></span><span style="display:flex;"><span>        },
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;key&#34;</span>: <span style="color:#ae81ff">80.0</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;doc_count&#34;</span>: <span style="color:#ae81ff">39</span>
+</span></span><span style="display:flex;"><span>        },
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;key&#34;</span>: <span style="color:#ae81ff">82.0</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;doc_count&#34;</span>: <span style="color:#ae81ff">44</span>
+</span></span><span style="display:flex;"><span>        },
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;key&#34;</span>: <span style="color:#ae81ff">84.0</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;doc_count&#34;</span>: <span style="color:#ae81ff">50</span>
+</span></span><span style="display:flex;"><span>        },
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;key&#34;</span>: <span style="color:#ae81ff">86.0</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;doc_count&#34;</span>: <span style="color:#ae81ff">88</span>
+</span></span><span style="display:flex;"><span>        },
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;key&#34;</span>: <span style="color:#ae81ff">88.0</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;doc_count&#34;</span>: <span style="color:#ae81ff">110</span>
+</span></span><span style="display:flex;"><span>        },
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;key&#34;</span>: <span style="color:#ae81ff">90.0</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;doc_count&#34;</span>: <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>      ]
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h2 id="python-resources">Python Resources</h2>
+<p>Kubless supports a variety of <a href="https://github.com/kubeless/kubeless/blob/master/docs/runtimes.md">runtimes</a>. In my case, most of my functions work with numbers, and It&rsquo;s tough to beat Python in simplifying the areas of statistics, analytics, and machine learning. Using <a href="https://kubeless.io/">Kubeless</a> means you don&rsquo;t need to become an expert on writing large Python stacks. You can spend more time focusing on individual packages that help you develop your business logic directly. I believe Python does a great job in supporting the advantage of FaaS its support of <strong>high-density business logic</strong>.</p>
+<ul>
+<li><a href="https://elasticsearch-dsl.readthedocs.io/en/latest/search_dsl.html">Elasticsearch DSL</a> delivers a clean <a href="https://blog.startifact.com/posts/older/what-is-pythonic.html">pythonic</a> syntax for working with Elasticsearch.</li>
+<li><a href="/python-data-essentials-numpy/">Python Data Essentials - Numpy</a> provides a wide variety of options for working with numbers, extraordinarily powerful N-dimensional array objects in which we can perform linear algebra.</li>
+<li><a href="/python-data-essentials-pandas/">Python Data Essentials - Pandas</a> is a data type equivalent to super-charged spreadsheets. Pandas add two highly expressive data structures to Python, Series, and DataFrame.</li>
+</ul>
+<h2 id="port-forwarding--local-development">Port Forwarding / Local Development</h2>
+<p>Check out <a href="https://github.com/txn2/kubefwd">kubefwd</a> for a simple command line utility that bulk forwards services of one or more namespaces to your local workstation.</p>
+
+
+                <p>
+                   This blog post, titled: "<span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">FaaS on Kubernetes: Kubeless, Python and Elasticsearch</span>" by <a xmlns:cc="http://creativecommons.org/ns#" href="https://twitter.com/cjimti" property="cc:attributionName" rel="cc:attributionURL">Craig Johnston</a>, is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+                    <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a>
+                </p>
+
+            </div>
+            
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                
+                <section>
+                    <hr class="hidden-sm hidden-xs">
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/blockchain" title="blockchain">
+                        blockchain
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/data" title="data">
+                        data
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/data-science" title="data science">
+                        data science
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/development" title="development">
+                        development
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/devops" title="devops">
+                        devops
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/docker" title="docker">
+                        docker
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/elasticsearch" title="elasticsearch">
+                        elasticsearch
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/golang" title="golang">
+                        golang
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/ingress" title="ingress">
+                        ingress
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/iot" title="iot">
+                        iot
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/kubectl" title="kubectl">
+                        kubectl
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/kubefwd" title="kubefwd">
+                        kubefwd
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/kubernetes" title="kubernetes">
+                        kubernetes
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/microservices" title="microservices">
+                        microservices
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/python" title="python">
+                        python
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/raspberry-pi" title="raspberry pi">
+                        raspberry pi
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/security" title="security">
+                        security
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/utils" title="utils">
+                        utils
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                    </div>
+                </section>
+
+                
+                <hr>
+                <h5>RELATED</h5>
+                <ul class="list-inline">
+                    
+                </ul>
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                   
+                   <li>
+                       <a href="/index.xml" rel="alternate" type="application/rss+xml" title="IMTI" >
+                           <span class="fa-stack fa-lg">
+                               <i class="fa fa-circle fa-stack-2x"></i>
+                               <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+                           </span>
+                       </a>
+                   </li>
+                   
+                    
+                    <li>
+                        <a href="mailto:cjimti@gmail.com">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                    
+                    
+                    <li>
+                        <a href="https://twitter.com/cjimti">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    
+
+                    
+
+		    
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/cjimti">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                    
+                    <li>
+                        <a target="_blank" href="https://www.linkedin.com/in/cjimti/">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                </ul>
+
+                
+                
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+
+
+
+
+<script>
+    
+    if($('#tag_cloud').length !== 0){
+        async("/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-R56SP4WLS2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-R56SP4WLS2');
+</script>
+
+</body>
+</html>

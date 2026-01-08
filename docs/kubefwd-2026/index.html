@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head><head>
+    <meta name="msvalidate.01" content="DBC34551F2DD1BA3DC0D62EE46D7448F" />
+    <meta name="google-site-verification" content="DrtKc88u9uc7iptd4LyURAKBmFcOn7Kuk6HcRk_kNmo" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <meta name="description" content="The complete guide to kubefwd&#39;s new features">
+    
+    <meta name="keyword"  content="Go, Kubernetes, Elasticsearch, Python, Docker, Big Data, Artificial Intelligence, Machine Learning">
+    <link rel="shortcut icon" href="https://imti.co/img/favicon.ico">
+
+    <title>kubefwd in 2026: Interactive TUI and Auto-Reconnect - IMTI - Craig Johnston</title>
+
+    <link rel="canonical" href="https://imti.co/kubefwd-2026/">
+	
+    
+    <link rel="stylesheet" href="https://imti.co/css/bootstrap.min.css">
+
+    
+    <link rel="stylesheet" href="https://imti.co/css/hux-blog.min.css">
+
+    
+    <link rel="stylesheet" href="https://imti.co/css/syntax.css">
+
+    
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    
+    
+    <link rel="stylesheet" href="/css/imti.css">
+
+    
+    <script src="https://imti.co/js/jquery.min.js"></script>
+    
+    
+    <script src="https://imti.co/js/bootstrap.min.js"></script>
+    
+    
+    <script src="https://imti.co/js/hux-blog.min.js"></script>
+
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({
+            google_ad_client: "ca-pub-5984764595236029",
+            enable_page_level_ads: true
+        });
+    </script>
+
+    <meta name="twitter:site" content="@cjimti">
+<meta name="twitter:creator" content="@cjimti">
+
+<meta name="twitter:description" content="The complete guide to kubefwd&#39;s new features" />
+<meta name="twitter:title" content="kubefwd in 2026: Interactive TUI and Auto-Reconnect" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://imti.co/img/post/patchbay_876_438.jpg" />
+<meta property="og:image" content="https://imti.co/img/post/patchbay_876_438.jpg" />
+
+
+
+    
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https:\/\/imti.co\/kubefwd-2026\/"
+  },
+  "headline": "kubefwd in 2026: Interactive TUI and Auto-Reconnect",
+  "image": ["https:\/\/imti.co\/img\/post\/patchbay_876_438.jpg"],
+  "datePublished": "2026-01-04T12:01:00Z",
+  "dateModified": "2026-01-04T12:01:00Z",
+  "author": {
+    "@type": "Person",
+    "name": "Craig Johnston"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "imti.co",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https:\/\/imti.co\/img\/craig_johnston_cjimti.jpg"
+    }
+  },
+  "description": "kubefwd now includes an interactive terminal UI, automatic reconnection that survives pod restarts and VPN drops, and a REST API for programmatic control. This …"
+}
+</script>
+
+
+</head></head>
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="https://imti.co//">IMTI</a>
+        </div>
+
+        
+        
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="https://imti.co//">Home</a>
+                    </li>
+                    <li>
+                        <a href="https://imti.co//about/">About</a>
+                    </li>
+                    <li>
+                        <a href="https://twitter.com/cjimti">Follow</a>
+                    </li>
+                    
+
+                    
+                </ul>
+            </div>
+        </div>
+        
+    </div>
+    
+</nav>
+<script>
+    
+    
+    
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        
+            $navbar.className = " ";
+            
+            setTimeout(function(){
+                
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+
+
+<style type="text/css">
+    header.intro-header{
+        background-image: url('https://imti.co/img/post/patchbay.jpg')
+    }
+</style>
+<header class="intro-header" >
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/kubernetes" title="Kubernetes">
+                        Kubernetes
+                        </a>
+                        
+                        <a class="tag" href="/tags/development" title="Development">
+                        Development
+                        </a>
+                        
+                        <a class="tag" href="/tags/kubefwd" title="kubefwd">
+                        kubefwd
+                        </a>
+                        
+                        <a class="tag" href="/tags/mcp" title="MCP">
+                        MCP
+                        </a>
+                        
+                        <a class="tag" href="/tags/ai" title="AI">
+                        AI
+                        </a>
+                        
+                    </div>
+                    <h1>kubefwd in 2026: Interactive TUI and Auto-Reconnect</h1>
+                    <h2 class="subheading">The complete guide to kubefwd&#39;s new features</h2>
+                    <span  class="meta">Posted by <a href="https://twitter.com/cjimti">Craig Johnston</a> on Sunday, January 4, 2026
+                        
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+<article>
+    <div class="container">
+        <div class="row">
+
+            
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <p><a href="https://github.com/txn2/kubefwd">kubefwd</a> has been a stable and useful tool for my team and me for almost eight years. It solves a simple but persistent problem: developing applications locally that need to communicate with services running in Kubernetes. Rather than juggling multiple <code>kubectl port-forward</code> commands or maintaining environment-specific connection strings, kubefwd bulk-forwards services so they&rsquo;re accessible by name, just like they would be inside the cluster.</p>
+<p>After years of reliable service (aside from Windows <code>/etc/hosts</code> limitations and reconnection logic that are now resolved), I finally added features that people had been requesting: auto-reconnect, an interactive terminal UI, and a REST API for programmatic control. This article covers what&rsquo;s new.</p>
+<aside class="toc">
+    <header>
+        <h2>Contents</h2>
+    </header>
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#getting-started">Getting Started</a>
+      <ul>
+        <li><a href="#idle-mode-new">Idle Mode (New)</a></li>
+      </ul>
+    </li>
+    <li><a href="#interactive-tui-mode">Interactive TUI Mode</a>
+      <ul>
+        <li><a href="#idle-mode-startup">Idle Mode Startup</a></li>
+        <li><a href="#keyboard-shortcuts">Keyboard Shortcuts</a></li>
+        <li><a href="#browse-namespaces">Browse Namespaces</a></li>
+        <li><a href="#browse-services">Browse Services</a></li>
+        <li><a href="#active-forwards">Active Forwards</a></li>
+        <li><a href="#service-detail-connection-strings">Service Detail: Connection Strings</a></li>
+        <li><a href="#service-detail-pod-logs">Service Detail: Pod Logs</a></li>
+        <li><a href="#service-detail-http-tracing">Service Detail: HTTP Tracing</a></li>
+      </ul>
+    </li>
+    <li><a href="#auto-reconnect">Auto-Reconnect</a></li>
+    <li><a href="#rest-api">REST API</a></li>
+    <li><a href="#installation">Installation</a>
+      <ul>
+        <li><a href="#macos-homebrew">macOS (Homebrew)</a></li>
+        <li><a href="#linux">Linux</a></li>
+        <li><a href="#windows-scoop">Windows (Scoop)</a></li>
+        <li><a href="#docker">Docker</a></li>
+      </ul>
+    </li>
+    <li><a href="#how-it-works">How It Works</a></li>
+    <li><a href="#requirements">Requirements</a></li>
+    <li><a href="#why-kubefwd-instead-of-telepresence">Why kubefwd Instead of Telepresence?</a></li>
+    <li><a href="#ai-integration">AI Integration</a></li>
+    <li><a href="#resources">Resources</a></li>
+  </ul>
+</nav>
+</aside>
+<h2 id="getting-started">Getting Started</h2>
+<p>kubefwd is fully backwards compatible. If you&rsquo;ve been using it the classic way, that still works:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># Classic mode - specify namespaces upfront</span>
+</span></span><span style="display:flex;"><span>sudo -E kubefwd svc -n ns1,ns2
+</span></span></code></pre></div><p>You can add the new features to classic mode with flags:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># Classic mode with TUI, API, and auto-reconnect</span>
+</span></span><span style="display:flex;"><span>sudo -E kubefwd svc -n ns1,ns2 --tui --api -a
+</span></span></code></pre></div><h3 id="idle-mode-new">Idle Mode (New)</h3>
+<p>The new <strong>idle mode</strong> starts kubefwd without forwarding any services, letting you add them interactively or via API:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># Idle mode - API and auto-reconnect enabled by default</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Control via API or MCP only</span>
+</span></span><span style="display:flex;"><span>sudo -E kubefwd
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Idle mode with TUI - full interactive control</span>
+</span></span><span style="display:flex;"><span>sudo -E kubefwd --tui
+</span></span></code></pre></div><p>Idle mode (no <code>svc</code> subcommand) enables the REST API and auto-reconnect by default. Add <code>--tui</code> for the interactive terminal interface.</p>
+<p>From the TUI, you can:</p>
+<ul>
+<li>Select one or more namespaces to forward</li>
+<li>Browse and forward individual services (press <code>f</code>)</li>
+<li>Stop forwarding specific services</li>
+<li>Switch Kubernetes contexts (clusters)</li>
+<li>Add namespaces and services from multiple clusters simultaneously</li>
+</ul>
+<p>No more specifying namespaces on the command line and restarting when you need to add more.</p>
+<h2 id="interactive-tui-mode">Interactive TUI Mode</h2>
+<p>The Terminal User Interface transforms kubefwd from a &ldquo;set it and forget it&rdquo; tool into an interactive development companion.</p>
+<h3 id="idle-mode-startup">Idle Mode Startup</h3>
+<p><img src="/images/content/kubefwd/100_TUI_idle-mode.png" alt="kubefwd TUI idle mode"></p>
+<p>When you start kubefwd with <code>sudo -E kubefwd --tui</code>, the TUI opens in idle mode with no services forwarded. The main view shows an empty Services table with columns for Hostname, Port, Status, and traffic metrics. The Logs panel displays startup messages including the REST API endpoint (<code>http://kubefwd.internal/api</code>) and interactive documentation URL (<code>http://kubefwd.internal/docs</code>). The status bar at the bottom shows forward counts and aggregate throughput. Press <code>?</code> for help or <code>f</code> to browse namespaces and start forwarding services.</p>
+<h3 id="keyboard-shortcuts">Keyboard Shortcuts</h3>
+<p><img src="/images/content/kubefwd/110_TUI_help.png" alt="kubefwd TUI help overlay"></p>
+<p>Press <code>?</code> to display the help overlay with all available keyboard shortcuts. Navigation uses vim-style keys (<code>j</code>/<code>k</code> for up/down, <code>g</code>/<code>G</code> for first/last). Actions include <code>f</code> to browse namespaces and services, <code>d</code> to remove a forward, <code>r</code> to reconnect errored services, and <code>/</code> to filter the service list. The browse modal has its own shortcuts for changing Kubernetes contexts (<code>x</code>) and selecting items. Display options let you toggle bandwidth columns (<code>b</code>) and compact view (<code>c</code>). In the detail view, number keys <code>1-9</code> copy connection strings to the clipboard.</p>
+<h3 id="browse-namespaces">Browse Namespaces</h3>
+<p><img src="/images/content/kubefwd/120_TUI_browse-namespaces.png" alt="kubefwd TUI browse namespaces"></p>
+<p>Press <code>f</code> to open the browse modal. The first screen lists all namespaces in your current Kubernetes context. Navigate with <code>j</code>/<code>k</code> or arrow keys, press <code>Enter</code> to browse services in a namespace, or press <code>x</code> to switch to a different cluster context. In this example, the <code>kfdemo</code> namespace is highlighted. You can browse namespaces from multiple clusters and forward services from all of them simultaneously.</p>
+<h3 id="browse-services">Browse Services</h3>
+<p><img src="/images/content/kubefwd/130_TUI_browse-services.png" alt="kubefwd TUI browse services"></p>
+<p>After selecting a namespace, the modal displays available services with their type and ports. The first option, &ldquo;Forward All Services,&rdquo; forwards every service in the namespace with one keystroke. Individual services show their ClusterIP type and port numbers. Select a service and press <code>Enter</code> to forward it, or navigate back with <code>Esc</code> to choose a different namespace.</p>
+<h3 id="active-forwards">Active Forwards</h3>
+<p><img src="/images/content/kubefwd/140_TUI_forwards.png" alt="kubefwd TUI active forwards"></p>
+<p>Once services are forwarded, the main view populates with active connections. Each row shows the service hostname, port, connection status, and real-time traffic statistics (Total In/Out in bytes, Rate In/Out in bytes per second). The Logs panel streams port-forward events as kubefwd establishes connections to pods. The status bar updates to show &ldquo;Forwards: 5/5&rdquo; indicating all five requested forwards are active. Select any service and press <code>Enter</code> to open its detail view.</p>
+<h3 id="service-detail-connection-strings">Service Detail: Connection Strings</h3>
+<p><img src="/images/content/kubefwd/150_TUI_forward_details_hostnames.png" alt="kubefwd TUI service detail with connection strings"></p>
+<p>The detail view&rsquo;s Info tab displays everything you need to connect to a forwarded service. The &ldquo;Connect Strings&rdquo; section lists all available hostnames, from the simple service name (<code>api-core:8080</code>) to fully qualified cluster DNS names (<code>api-core.kfdemo.svc.cluster.local:8080</code>). Press number keys <code>1-9</code> to copy any connection string directly to your clipboard. Below that, the Pod section shows which pod is handling the forward and how long it has been connected. The Bandwidth section displays traffic statistics with visual throughput bars.</p>
+<h3 id="service-detail-pod-logs">Service Detail: Pod Logs</h3>
+<p><img src="/images/content/kubefwd/150_TUI_forward_details_pod_logs.png" alt="kubefwd TUI service detail with pod logs"></p>
+<p>The Logs tab streams live output from the forwarded pod. This example shows gunicorn worker logs including startup messages, worker timeouts, and process restarts. Log streaming helps debug connection issues or understand service behavior without switching to a separate terminal window. Use <code>j</code>/<code>k</code> to scroll through log history. The log follows new output automatically when scrolled to the bottom.</p>
+<h3 id="service-detail-http-tracing">Service Detail: HTTP Tracing</h3>
+<p><img src="/images/content/kubefwd/160_TUI_forward_details_http.png" alt="kubefwd TUI service detail with HTTP requests"></p>
+<p>The HTTP tab captures HTTP requests flowing through the forward. Each line shows the timestamp, method, path, response code, latency, and response size. Color-coded status codes make it easy to spot errors at a glance (green for 2xx, red for 4xx/5xx). This view helps debug API calls, verify request routing, and measure response times without external tools. The tab header shows the total request count.</p>
+<h2 id="auto-reconnect">Auto-Reconnect</h2>
+<p>One of the most requested features was automatic reconnection. The previous behavior required manual intervention when pods restarted or network connectivity dropped.</p>
+<p>kubefwd now implements a two-level approach to reliability:</p>
+<p><strong>Level 1: Kubernetes Informers</strong> kubefwd watches pod lifecycle events through Kubernetes informers. When a pod restarts, gets rescheduled, or is replaced by a deployment update, kubefwd detects the change immediately and reconnects to the new pod.</p>
+<p><strong>Level 2: Connection Monitoring</strong> For issues that don&rsquo;t trigger Kubernetes events (network outages, VPN reconnections, transient failures), kubefwd monitors the actual TCP connections. When a connection fails, it retries with exponential backoff, preventing thundering herd problems while ensuring quick recovery when connectivity returns.</p>
+<p>Together, these mechanisms mean you can leave kubefwd running through pod deployments, cluster maintenance, and laptop sleep/wake cycles without manual intervention.</p>
+<h2 id="rest-api">REST API</h2>
+<p>kubefwd exposes 40+ HTTP endpoints for programmatic control:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># List forwarded services</span>
+</span></span><span style="display:flex;"><span>curl http://kubefwd.internal/api/v1/services
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Add a namespace dynamically</span>
+</span></span><span style="display:flex;"><span>curl -X POST http://kubefwd.internal/api/v1/namespaces/staging
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Get traffic metrics</span>
+</span></span><span style="display:flex;"><span>curl http://kubefwd.internal/api/v1/metrics
+</span></span></code></pre></div><p>The <code>kubefwd.internal</code> hostname is managed by kubefwd in <code>/etc/hosts</code>. Full API documentation is available at <a href="http://kubefwd.internal/docs">http://kubefwd.internal/docs</a> when kubefwd is running.</p>
+<p><img src="/images/content/kubefwd/API_docs.png" alt="kubefwd API documentation"></p>
+<p>The interactive documentation provides a complete reference for all endpoints organized into nine categories: Health (status and version info), Services (manage forwarded services), Forwards (individual port forward details), Namespaces (add/remove namespace watchers), Kubernetes (discover namespaces, services, pods, events, and endpoints from your clusters), Metrics (traffic statistics and history), Diagnostics (troubleshoot network and error states), Events (real-time SSE streaming), and History (reconnection and error logs). Each endpoint shows query parameters, request format, and response schema with example JSON.</p>
+<p>The REST API is the foundation for all programmatic interaction with kubefwd. It integrates with shell scripts, CI/CD pipelines, custom dashboards, and development automation tools. A pre-commit hook could verify required services are forwarded before running tests. A deployment script could dynamically forward services from a staging namespace during integration testing. The API makes kubefwd a building block for development workflows rather than just a standalone tool.</p>
+<h2 id="installation">Installation</h2>
+<h3 id="macos-homebrew">macOS (Homebrew)</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>brew install txn2/tap/kubefwd
+</span></span></code></pre></div><p>To update:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>brew update <span style="color:#f92672">&amp;&amp;</span> brew upgrade txn2/tap/kubefwd
+</span></span></code></pre></div><h3 id="linux">Linux</h3>
+<p>Download the latest release from the <a href="https://github.com/txn2/kubefwd/releases">releases page</a>.</p>
+<p><strong>Debian/Ubuntu (.deb)</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># Install</span>
+</span></span><span style="display:flex;"><span>sudo dpkg -i kubefwd_amd64.deb
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Update (download new .deb, then)</span>
+</span></span><span style="display:flex;"><span>sudo dpkg -i kubefwd_amd64.deb
+</span></span></code></pre></div><p><strong>RHEL/Fedora (.rpm)</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># Install</span>
+</span></span><span style="display:flex;"><span>sudo rpm -i kubefwd_amd64.rpm
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Update</span>
+</span></span><span style="display:flex;"><span>sudo rpm -U kubefwd_amd64.rpm
+</span></span></code></pre></div><p><strong>Manual installation (.tar.gz)</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># Install</span>
+</span></span><span style="display:flex;"><span>tar -xvzf kubefwd_Linux_amd64.tar.gz
+</span></span><span style="display:flex;"><span>sudo mv kubefwd /usr/local/bin/
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Update (download new tarball, then repeat the above)</span>
+</span></span></code></pre></div><h3 id="windows-scoop">Windows (Scoop)</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>scoop install kubefwd
+</span></span></code></pre></div><p>To update:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>scoop update kubefwd
+</span></span></code></pre></div><h3 id="docker">Docker</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>docker run -it --rm --privileged <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  -v <span style="color:#e6db74">&#34;</span>$HOME<span style="color:#e6db74">/.kube:/root/.kube:ro&#34;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  txn2/kubefwd --tui
+</span></span></code></pre></div><h2 id="how-it-works">How It Works</h2>
+<p>kubefwd creates a unique loopback IP address for each service (e.g., 127.1.27.1, 127.1.27.2). This allows multiple services to use the same port without conflicts.</p>
+<pre tabindex="0"><code>Your App → api-gateway:8080
+         → /etc/hosts: api-gateway = 127.1.27.1
+         → kubefwd listens on 127.1.27.1:8080
+         → forwards to pod in Kubernetes cluster
+</code></pre><p>The <code>/etc/hosts</code> modifications are temporary; kubefwd cleans them up on exit.</p>
+<h2 id="requirements">Requirements</h2>
+<ul>
+<li>A valid <code>kubectl</code> configuration with cluster access</li>
+<li>Root/sudo access (see below)</li>
+<li>Kubernetes 1.19+ recommended</li>
+</ul>
+<p><strong>Why sudo?</strong> Unlike <code>kubectl port-forward</code> which binds to unprivileged high ports, kubefwd needs to modify <code>/etc/hosts</code> so services are accessible by their real hostnames, and bind to loopback addresses (127.x.x.x) for each service. Both operations require root privileges on Unix systems. Windows uses a similar elevated privilege model. kubefwd cleans up all <code>/etc/hosts</code> entries and network bindings when it exits.</p>
+<h2 id="why-kubefwd-instead-of-telepresence">Why kubefwd Instead of Telepresence?</h2>
+<p>This question comes up often. They solve different problems.</p>
+<p><strong>kubefwd</strong> forwards cluster services to your local machine. Your app connects to <code>postgres:5432</code> or <code>api:8080</code> as if those services were running locally. Traffic flows one direction: local to cluster.</p>
+<p><strong>Telepresence</strong> can do that too, but its main feature is traffic interception: routing requests destined for a cluster service to your local machine instead. This enables powerful workflows like debugging with real traffic patterns, preview URLs for code review, and testing how your local changes handle production-like requests.</p>
+<p>Telepresence is popular for good reasons. It&rsquo;s backed by Ambassador Labs with enterprise support, IDE integrations, and comprehensive documentation. It solves genuinely hard problems that kubefwd doesn&rsquo;t attempt.</p>
+<p>kubefwd is intentionally simpler. No cluster components to install, no configuration, no account signup. One binary, one command. If you just need to forward services to your local machine quickly, kubefwd does that with minimal friction. If you need traffic interception, preview URLs, or deeper cluster integration, Telepresence is the better choice.</p>
+<h2 id="ai-integration">AI Integration</h2>
+<p>kubefwd includes an MCP (Model Context Protocol) server that lets AI assistants like Claude Code manage port forwarding on your behalf. Your AI can discover cluster services, forward them as needed during development, and read pod logs to help debug issues. For setup instructions and examples, see <a href="/kubefwd-mcp/">AI-Assisted Kubernetes Development with kubefwd</a>.</p>
+<h2 id="resources">Resources</h2>
+<ul>
+<li><a href="https://github.com/txn2/kubefwd">kubefwd on GitHub</a></li>
+<li><a href="https://kubefwd.com">kubefwd Documentation</a></li>
+<li><a href="https://github.com/txn2/kubefwd/releases">Release Downloads</a></li>
+<li><a href="/kubernetes-port-forwarding/">Original kubefwd Article (2018)</a></li>
+</ul>
+
+                <p>
+                   This blog post, titled: "<span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">kubefwd in 2026: Interactive TUI and Auto-Reconnect: The complete guide to kubefwd&#39;s new features</span>" by <a xmlns:cc="http://creativecommons.org/ns#" href="https://twitter.com/cjimti" property="cc:attributionName" rel="cc:attributionURL">Craig Johnston</a>, is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+                    <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a>
+                </p>
+
+            </div>
+            
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                
+                <section>
+                    <hr class="hidden-sm hidden-xs">
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/blockchain" title="blockchain">
+                        blockchain
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/data" title="data">
+                        data
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/data-science" title="data science">
+                        data science
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/development" title="development">
+                        development
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/devops" title="devops">
+                        devops
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/docker" title="docker">
+                        docker
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/elasticsearch" title="elasticsearch">
+                        elasticsearch
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/golang" title="golang">
+                        golang
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/ingress" title="ingress">
+                        ingress
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/iot" title="iot">
+                        iot
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/kubectl" title="kubectl">
+                        kubectl
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/kubefwd" title="kubefwd">
+                        kubefwd
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/kubernetes" title="kubernetes">
+                        kubernetes
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/microservices" title="microservices">
+                        microservices
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/python" title="python">
+                        python
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/raspberry-pi" title="raspberry pi">
+                        raspberry pi
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/security" title="security">
+                        security
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/utils" title="utils">
+                        utils
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                    </div>
+                </section>
+
+                
+                <hr>
+                <h5>RELATED</h5>
+                <ul class="list-inline">
+                    
+                </ul>
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                   
+                   <li>
+                       <a href="/index.xml" rel="alternate" type="application/rss+xml" title="IMTI" >
+                           <span class="fa-stack fa-lg">
+                               <i class="fa fa-circle fa-stack-2x"></i>
+                               <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+                           </span>
+                       </a>
+                   </li>
+                   
+                    
+                    <li>
+                        <a href="mailto:cjimti@gmail.com">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                    
+                    
+                    <li>
+                        <a href="https://twitter.com/cjimti">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    
+
+                    
+
+		    
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/cjimti">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                    
+                    <li>
+                        <a target="_blank" href="https://www.linkedin.com/in/cjimti/">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                </ul>
+
+                
+                
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+
+
+
+
+<script>
+    
+    if($('#tag_cloud').length !== 0){
+        async("/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-R56SP4WLS2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-R56SP4WLS2');
+</script>
+
+</body>
+</html>

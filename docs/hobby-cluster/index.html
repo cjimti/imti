@@ -1,0 +1,953 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head><head>
+    <meta name="msvalidate.01" content="DBC34551F2DD1BA3DC0D62EE46D7448F" />
+    <meta name="google-site-verification" content="DrtKc88u9uc7iptd4LyURAKBmFcOn7Kuk6HcRk_kNmo" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <meta name="description" content="Production-grade cluster on a hobby budget.">
+    
+    <meta name="keyword"  content="Go, Kubernetes, Elasticsearch, Python, Docker, Big Data, Artificial Intelligence, Machine Learning">
+    <link rel="shortcut icon" href="https://imti.co/img/favicon.ico">
+
+    <title>Production Hobby Cluster - IMTI - Craig Johnston</title>
+
+    <link rel="canonical" href="https://imti.co/hobby-cluster/">
+	
+    
+    <link rel="stylesheet" href="https://imti.co/css/bootstrap.min.css">
+
+    
+    <link rel="stylesheet" href="https://imti.co/css/hux-blog.min.css">
+
+    
+    <link rel="stylesheet" href="https://imti.co/css/syntax.css">
+
+    
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    
+    
+    <link rel="stylesheet" href="/css/imti.css">
+
+    
+    <script src="https://imti.co/js/jquery.min.js"></script>
+    
+    
+    <script src="https://imti.co/js/bootstrap.min.js"></script>
+    
+    
+    <script src="https://imti.co/js/hux-blog.min.js"></script>
+
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({
+            google_ad_client: "ca-pub-5984764595236029",
+            enable_page_level_ads: true
+        });
+    </script>
+
+    <meta name="twitter:site" content="@cjimti">
+<meta name="twitter:creator" content="@cjimti">
+
+<meta name="twitter:description" content="Production-grade cluster on a hobby budget." />
+<meta name="twitter:title" content="Production Hobby Cluster" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://imti.co/img/post/armor_876_438.jpg" />
+<meta property="og:image" content="https://imti.co/img/post/armor_876_438.jpg" />
+
+
+
+    
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https:\/\/imti.co\/hobby-cluster\/"
+  },
+  "headline": "Production Hobby Cluster",
+  "image": ["https:\/\/imti.co\/img\/post\/armor_876_438.jpg"],
+  "datePublished": "2018-05-09T00:00:00Z",
+  "dateModified": "2018-05-09T00:00:00Z",
+  "author": {
+    "@type": "Person",
+    "name": "Craig Johnston"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "imti.co",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https:\/\/imti.co\/img\/craig_johnston_cjimti.jpg"
+    }
+  },
+  "description": "Setting up a production-grade Kubernetes cluster can be done on a hobby budget, and if this is true why mess around with a lesser grade. If you are investing …"
+}
+</script>
+
+
+</head></head>
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="https://imti.co//">IMTI</a>
+        </div>
+
+        
+        
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="https://imti.co//">Home</a>
+                    </li>
+                    <li>
+                        <a href="https://imti.co//about/">About</a>
+                    </li>
+                    <li>
+                        <a href="https://twitter.com/cjimti">Follow</a>
+                    </li>
+                    
+
+                    
+                </ul>
+            </div>
+        </div>
+        
+    </div>
+    
+</nav>
+<script>
+    
+    
+    
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        
+            $navbar.className = " ";
+            
+            setTimeout(function(){
+                
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+
+
+<style type="text/css">
+    header.intro-header{
+        background-image: url('https://imti.co/img/post/armor.jpg')
+    }
+</style>
+<header class="intro-header" >
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/kubernetes" title="Kubernetes">
+                        Kubernetes
+                        </a>
+                        
+                    </div>
+                    <h1>Production Hobby Cluster</h1>
+                    <h2 class="subheading">Production-grade cluster on a hobby budget.</h2>
+                    <span  class="meta">Posted by <a href="https://twitter.com/cjimti">Craig Johnston</a> on Wednesday, May 9, 2018
+                        
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+<article>
+    <div class="container">
+        <div class="row">
+
+            
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <p>Setting up a production-grade Kubernetes cluster can be done on a hobby budget, and if this is true why mess around with a lesser grade. If you are investing time to learn distributed cloud computing or microservices, is the distance between $0 and <strong>15 dollars a month</strong> worth the time in translating best practices? Kubernetes is designed to host production applications. My personal web applications may only be hobbies, but they might as well be production grade hobbies.</p>
+<p><a href="https://amzn.to/2IOe8Yu"><img src="/images/content/k8s-tshirt-banner.jpg" alt="k8s performance hobby clusters"></a></p>
+<aside class="toc">
+    <header>
+        <h2>Contents</h2>
+    </header>
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#motivation">Motivation</a></li>
+    <li><a href="#infrastructure">Infrastructure</a>
+      <ul>
+        <li><a href="#security">Security</a></li>
+        <li><a href="#swap">Swap</a></li>
+        <li><a href="#vpn">VPN</a></li>
+      </ul>
+    </li>
+    <li><a href="#kubernetes">Kubernetes</a>
+      <ul>
+        <li><a href="#install-docker">Install Docker</a></li>
+        <li><a href="#install-etcd-in-cluster-mode">Install Etcd (in cluster mode)</a></li>
+        <li><a href="#install-kubernetes">Install Kubernetes</a></li>
+        <li><a href="#joining-the-cluster">Joining the Cluster</a></li>
+        <li><a href="#permissions-rbac-role-based-access-control">Permissions: RBAC (Role Based Access Control)</a></li>
+        <li><a href="#kubectl-remote-access">kubectl: Remote Access</a></li>
+        <li><a href="#deploy-an-application">Deploy an Application</a></li>
+      </ul>
+    </li>
+    <li><a href="#port-forwarding--local-development">Port Forwarding / Local Development</a></li>
+    <li><a href="#resources">Resources</a></li>
+  </ul>
+</nav>
+</aside>
+
+
+<h2 id="motivation">Motivation</h2>
+<p>I have read my thousandth tutorial on how to do things the wrong way; well, the not-good-for-production-way, you know for &ldquo;learning.&rdquo; The following are my notes as I unlearn the &ldquo;not for production&rdquo; tutorial way and re-apply my production notes to a 15 dollar-a-month production grade hobby way.</p>
+<p>In this article, I&rsquo;ll be using three $5 servers from <a href="https://www.vultr.com/?ref=7418713">Vultr</a> (referral link).
+There are a handful of cheap cloud providers these days, and in keeping competitive, they keep getting cheaper and better. Another good pick is <a href="https://m.do.co/c/97b733e7eba4">Digital Ocean</a>. You might want to run a <a href="https://www.vultr.com/?ref=7418713">Vultr</a> cluster in LA with a set of services and a <a href="https://m.do.co/c/97b733e7eba4">Digital Ocean</a> cluster in New York with another set of services.</p>
+<p>For my 15 dollars a month I am getting three 1 vCore, 1G ram and 25G of storage each. I host application primarily written in Go and Python, and they make very efficient use of their resources.</p>
+<h2 id="infrastructure">Infrastructure</h2>
+<p>Start with three <strong><a href="https://www.vultr.com/?ref=7418713">Ubuntu 18.04 x64</a></strong> boxes of 1 vCore, 1G ram and 25G of storage each in Los Angeles (because I work in Los Angeles).</p>
+<p>I am calling my new servers lax1, lax2, and lax3.</p>
+<h3 id="security">Security</h3>
+<p>I don&rsquo;t need my hobby cluster turning into a <a href="https://news.bitcoin.com/hackers-target-400000-computers-with-mining-malware/">crypto-mining platform while I sleep</a>.</p>
+<h4 id="firewall">Firewall</h4>
+<p><a href="https://help.ubuntu.com/community/UFW">ufw</a> makes easy work of security. Fine-grained <code>iptables</code> rules are nice (and
+complicated, and easy to get wrong) but <code>ufw</code> is just dead-simple, and it&rsquo;s production grade security since it&rsquo;s just
+wrapping more complicated <code>iptables</code> rules.</p>
+<p>Login to the box and setup security:</p>
+<script src="https://gist.github.com/cjimti/4088e76e5016202a8da93fd041dd9fae.js"></script>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># you can run the gist above directly if you wish</span>
+</span></span><span style="display:flex;"><span>curl -L https://git.io/vpDYI | sh
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># enable the firewall</span>
+</span></span><span style="display:flex;"><span>ufw enable
+</span></span></code></pre></div><h3 id="swap">Swap</h3>
+<p><a href="https://askubuntu.com/questions/259739/kswapd0-is-taking-a-lot-of-cpu?utm_medium=organic&amp;utm_source=google_rich_qa&amp;utm_campaign=google_rich_qa">Only move stuff to SWAP when you are completely OUT of RAM.</a></p>
+<p>Run the following on each server:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>echo vm.swappiness<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span> | sudo tee -a /etc/sysctl.conf
+</span></span></code></pre></div><h3 id="vpn">VPN</h3>
+<p><a href="https://www.wireguard.io/">WireGuard</a> is the VPN I use for cluster communication security. <a href="https://www.wireguard.com/install/">Install WireGuard</a>
+by following their instructions for Ubuntu below:</p>
+<script src="https://gist.github.com/cjimti/3402964e0a2a89c076f9fb0430028dff.js"></script>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># run each command manually or pipe the gist to sh</span>
+</span></span><span style="display:flex;"><span>curl -L https://git.io/vpDYE | sh
+</span></span></code></pre></div><p>Although according to the documentation it&rsquo;s okay to run <a href="https://www.wireguard.io/">WireGuard</a> over the public interface; if your host allows it, you might as well set up a private network. On <a href="https://www.vultr.com/?ref=7418713">Vultr</a> it is as simple as checking a box setup or clicking on &ldquo;Add Private Network&rdquo; in the server settings. However on <a href="https://www.vultr.com/?ref=7418713">Vultr</a> servers you need to add the new private network interface manually, this is not the case with <a href="https://m.do.co/c/97b733e7eba4">Digital Ocean</a>:</p>
+<p>In <code>/etc/netplan/10-ens7.yaml</code> add the following lines (replace 10.99.0.200/16 with the assigned private IP and range):</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">network</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">version</span>: <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">renderer</span>: <span style="color:#ae81ff">networkd</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">ethernets</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">ens7</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">mtu</span>: <span style="color:#ae81ff">1450</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">dhcp4</span>: <span style="color:#66d9ef">no</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">addresses</span>: [<span style="color:#ae81ff">10.5.96.4</span><span style="color:#ae81ff">/20]</span>
+</span></span></code></pre></div><p>In my case, the subnet mask is 255.255.240.0 which equates to a /20.
+<a href="https://www.aelius.com/njh/subnet_sheet.html">Check out this cheat sheet for a quick IP range refrence</a></p>
+<p>Then run the command:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>netplan apply
+</span></span></code></pre></div><p>You should now be able to run <code>ifconfig</code> and get a new interface like this:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>ens7: flags=4163&lt;UP,BROADCAST,RUNNING,MULTICAST&gt;  mtu 1500
+</span></span><span style="display:flex;"><span>        inet 10.5.96.3  netmask 255.255.240.0  broadcast 10.5.111.255
+</span></span><span style="display:flex;"><span>        inet6 fe80::5800:1ff:fe7c:d24a  prefixlen 64  scopeid 0x20&lt;link&gt;
+</span></span><span style="display:flex;"><span>        ether 5a:00:01:7c:d2:4a  txqueuelen 1000  (Ethernet)
+</span></span><span style="display:flex;"><span>        RX packets 7  bytes 726 (726.0 B)
+</span></span><span style="display:flex;"><span>        RX errors 0  dropped 0  overruns 0  frame 0
+</span></span><span style="display:flex;"><span>        TX packets 2  bytes 176 (176.0 B)
+</span></span><span style="display:flex;"><span>        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+</span></span></code></pre></div><p>You should be able to ping the private IPs of other servers on the same private network out the new interface,
+in my case <strong>ens7</strong>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ping -I ens7 10.5.96.4
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>PING 10.5.96.4 <span style="color:#f92672">(</span>10.5.96.4<span style="color:#f92672">)</span> from 10.5.96.3 ens7: 56<span style="color:#f92672">(</span>84<span style="color:#f92672">)</span> bytes of data.
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">64</span> bytes from 10.5.96.4: icmp_seq<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span> ttl<span style="color:#f92672">=</span><span style="color:#ae81ff">64</span> time<span style="color:#f92672">=</span>1.48 ms
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">64</span> bytes from 10.5.96.4: icmp_seq<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span> ttl<span style="color:#f92672">=</span><span style="color:#ae81ff">64</span> time<span style="color:#f92672">=</span>0.808 ms
+</span></span><span style="display:flex;"><span>^C
+</span></span><span style="display:flex;"><span>--- 10.5.96.4 ping statistics ---
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span> packets transmitted, <span style="color:#ae81ff">2</span> received, 0% packet loss, time 1001ms
+</span></span><span style="display:flex;"><span>rtt min/avg/max/mdev <span style="color:#f92672">=</span> 0.808/1.144/1.481/0.338 ms
+</span></span></code></pre></div><p><strong>Configuring <a href="https://www.wireguard.io/">WireGuard</a></strong></p>
+<p>You will need a public and private key for each server. Here is a simple bash script for generating the key
+pairs all at once (thanks <a href="https://github.com/hobby-kube/">Hobby Kube</a>]:</p>
+<script src="https://gist.github.com/cjimti/d04392fb9c726d4b2612f24599b28251.js"></script>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># you can run the gist directly with a pipe from curl to sh</span>
+</span></span><span style="display:flex;"><span>curl -L https://git.io/vpDYP |sh
+</span></span></code></pre></div><p>Example output</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>Server 1 private key: cB8gRedh0f03ndqmQZCbFPL2D9zEyi101kF3xeRRwGI=
+</span></span><span style="display:flex;"><span>Server 1 public key:  BXIF16yXX9F5yR0uYxpAbT1TbDXTsfXH+pi2nQgtz10=
+</span></span><span style="display:flex;"><span>Server 2 private key: OB2rLNluGmM9XlYOErTaZV/hD41dVKX1cH5jl7HV0Gg=
+</span></span><span style="display:flex;"><span>Server 2 public key:  rJd1kLa3Ru51c3bpsPfGZhCfT7sjBtj93nlOKG+oako=
+</span></span><span style="display:flex;"><span>Server 3 private key: qKhwlt8Hhwl+YCvr6cQzvC+ByzySEVpm3WgnAOhHAHk=
+</span></span><span style="display:flex;"><span>Server 3 public key:  7n07YYLqTWxokR8Tg2q2Vs7aGe++5YAhr2fAFz2EVDY=
+</span></span></code></pre></div><p>Cut and paste the output somewhere safe as you will need it for configuring each server.</p>
+<p>The <a href="https://www.wireguard.io/">WireGuard</a> VPN Configuration will setup another interface, <strong>wg0</strong> Each server will have a configuration file similar to this:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># /etc/wireguard/wg0.conf</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>Interface<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>Address <span style="color:#f92672">=</span> 10.0.1.1
+</span></span><span style="display:flex;"><span>PrivateKey <span style="color:#f92672">=</span> &lt;PRIVATE_KEY_KUBE1&gt;
+</span></span><span style="display:flex;"><span>ListenPort <span style="color:#f92672">=</span> <span style="color:#ae81ff">51820</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>Peer<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>PublicKey <span style="color:#f92672">=</span> &lt;PUBLIC_KEY_KUBE2&gt;
+</span></span><span style="display:flex;"><span>AllowedIps <span style="color:#f92672">=</span> 10.0.1.2/32
+</span></span><span style="display:flex;"><span>Endpoint <span style="color:#f92672">=</span> 10.8.23.94:51820
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>Peer<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>PublicKey <span style="color:#f92672">=</span> &lt;PUBLIC_KEY_KUBE3&gt;
+</span></span><span style="display:flex;"><span>AllowedIps <span style="color:#f92672">=</span> 10.0.1.3/32
+</span></span><span style="display:flex;"><span>Endpoint <span style="color:#f92672">=</span> 10.8.23.95:51820
+</span></span></code></pre></div><p>You will need to open up the port 51820 on the new private interface for each server. On my new servers, the interface is <strong>ens7</strong> as seen when we ran <code>ifconfig</code> above.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ufw allow in on ens7 to any port <span style="color:#ae81ff">51820</span>
+</span></span><span style="display:flex;"><span>ufw allow in on wg0
+</span></span><span style="display:flex;"><span>ufw reload
+</span></span></code></pre></div><p>Next ensure that ip forwarding is enabled. If running <code>sysctl net.ipv4.ip_forward</code> returns 0 then you will need to run
+the following commands:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>echo <span style="color:#e6db74">&#34;net.ipv4.ip_forward=1&#34;</span> &gt;&gt; /etc/sysctl.conf <span style="color:#75715e"># enable ip4 forwarding</span>
+</span></span><span style="display:flex;"><span>sysctl -p <span style="color:#75715e"># apply settings from /etc/sysctl.conf</span>
+</span></span></code></pre></div><p>To enable the VPN and run on startup, execute the following commands on each server:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>systemctl start wg-quick@wg0
+</span></span><span style="display:flex;"><span>systemctl enable wg-quick@wg0
+</span></span></code></pre></div><h2 id="kubernetes">Kubernetes</h2>
+<h3 id="install-docker">Install Docker</h3>
+<p>On each server run:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>apt-get install docker.io -y
+</span></span></code></pre></div><p>Ensure the proper <strong>DOCKER_OPS</strong> are set by creating the file
+<code>/etc/systemd/system/docker.service.d/10-docker-opts.conf</code> and adding
+the following line:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>Environment=&#34;DOCKER_OPTS=--iptables=false --ip-masq=false&#34;
+</span></span></code></pre></div><p>You will need to restart Docker and reload daemons:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>systemctl restart docker
+</span></span><span style="display:flex;"><span>systemctl daemon-reload
+</span></span></code></pre></div><h3 id="install-etcd-in-cluster-mode">Install <a href="https://coreos.com/etcd/docs/latest/getting-started-with-etcd.html">Etcd</a> (in cluster mode)</h3>
+<p>Maunally install version 3.2.13:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>export ETCD_VERSION<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;v3.2.13&#34;</span>
+</span></span><span style="display:flex;"><span>mkdir -p /opt/etcd
+</span></span><span style="display:flex;"><span>curl -L https://storage.googleapis.com/etcd/<span style="color:#e6db74">${</span>ETCD_VERSION<span style="color:#e6db74">}</span>/etcd-<span style="color:#e6db74">${</span>ETCD_VERSION<span style="color:#e6db74">}</span>-linux-amd64.tar.gz <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  -o /opt/etcd-<span style="color:#e6db74">${</span>ETCD_VERSION<span style="color:#e6db74">}</span>-linux-amd64.tar.gz
+</span></span><span style="display:flex;"><span>tar xzvf /opt/etcd-<span style="color:#e6db74">${</span>ETCD_VERSION<span style="color:#e6db74">}</span>-linux-amd64.tar.gz -C /opt/etcd --strip-components<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>
+</span></span></code></pre></div><p>Creating the systemd unit file <code>/etc/systemd/system/etcd.service</code> on each server. We are configuring <a href="https://coreos.com/etcd/docs/latest/getting-started-with-etcd.html">Etcd</a> to communicate
+over our new VPN, so we don&rsquo;t need many of the provided security options.</p>
+<p>On our three node cluster, the configuration for lax1 looks like this:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#f92672">[</span>Unit<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>Description<span style="color:#f92672">=</span>etcd
+</span></span><span style="display:flex;"><span>After<span style="color:#f92672">=</span>network.target wg-quick@wg0.service
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>Service<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>Type<span style="color:#f92672">=</span>notify
+</span></span><span style="display:flex;"><span>ExecStart<span style="color:#f92672">=</span>/opt/etcd/etcd --name lax1 <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  --data-dir /var/lib/etcd <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  --listen-client-urls <span style="color:#e6db74">&#34;http://10.0.1.1:2379,http://localhost:2379&#34;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  --advertise-client-urls <span style="color:#e6db74">&#34;http://10.0.1.1:2379&#34;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  --listen-peer-urls <span style="color:#e6db74">&#34;http://10.0.1.1:2380&#34;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  --initial-cluster <span style="color:#e6db74">&#34;lax1=http://10.0.1.1:2380,lax2=http://10.0.1.2:2380,lax3=http://10.0.1.3:2380&#34;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  --initial-advertise-peer-urls <span style="color:#e6db74">&#34;http://10.0.1.1:2380&#34;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  --heartbeat-interval <span style="color:#ae81ff">200</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  --election-timeout <span style="color:#ae81ff">5000</span>
+</span></span><span style="display:flex;"><span>Restart<span style="color:#f92672">=</span>always
+</span></span><span style="display:flex;"><span>RestartSec<span style="color:#f92672">=</span><span style="color:#ae81ff">5</span>
+</span></span><span style="display:flex;"><span>TimeoutStartSec<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>StartLimitInterval<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>Install<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>WantedBy<span style="color:#f92672">=</span>multi-user.target
+</span></span></code></pre></div><p>The config key <code>--initial-cluster</code> is just the initial cluster. You can quickly add more nodes in the future without modifying this value.</p>
+<p>Enable startup and run <a href="https://coreos.com/etcd/docs/latest/getting-started-with-etcd.html">Etcd</a> on each server:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>systemctl enable etcd.service <span style="color:#75715e"># launch etcd during system boot</span>
+</span></span><span style="display:flex;"><span>systemctl start etcd.service
+</span></span></code></pre></div><p>Run the command <code>journalctl -xe</code> if you encounter any errors. The first time I started up <a href="https://coreos.com/etcd/docs/latest/getting-started-with-etcd.html">etcd</a>, it failed due to a typo.</p>
+<p>Check the status of the new <a href="https://coreos.com/etcd/docs/latest/getting-started-with-etcd.html">Etcd</a> cluster:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>/opt/etcd/etcdctl member list
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>83520a64ae261035: name<span style="color:#f92672">=</span>lax1 peerURLs<span style="color:#f92672">=</span>http://10.0.1.1:2380 clientURLs<span style="color:#f92672">=</span>http://10.0.1.1:2379 isLeader<span style="color:#f92672">=</span>true
+</span></span><span style="display:flex;"><span>920054c1ee3bca8a: name<span style="color:#f92672">=</span>lax3 peerURLs<span style="color:#f92672">=</span>http://10.0.1.3:2380 clientURLs<span style="color:#f92672">=</span>http://10.0.1.3:2379 isLeader<span style="color:#f92672">=</span>false
+</span></span><span style="display:flex;"><span>950feae803ed7835: name<span style="color:#f92672">=</span>lax2 peerURLs<span style="color:#f92672">=</span>http://10.0.1.2:2380 clientURLs<span style="color:#f92672">=</span>http://10.0.1.2:2379 isLeader<span style="color:#f92672">=</span>false
+</span></span></code></pre></div><h3 id="install-kubernetes">Install Kubernetes</h3>
+<p>Run the following commands on each server:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>cat <span style="color:#e6db74">&lt;&lt;EOF &gt; /etc/apt/sources.list.d/kubernetes.list
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">deb http://apt.kubernetes.io/ kubernetes-xenial-unstable main
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">EOF</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>apt-get update
+</span></span><span style="display:flex;"><span>apt-get install -y kubelet kubeadm kubectl kubernetes-cni
+</span></span></code></pre></div><h4 id="initialize-the-master-node">Initialize the master node</h4>
+<p>Create the configuration file <code>/tmp/master-configuration.yml</code> and
+replace PUBLIC_IP_LAX1 with the servers public ip address:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">kubeadm.k8s.io/v1alpha1</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">kind</span>: <span style="color:#ae81ff">MasterConfiguration</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">api</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">advertiseAddress</span>: <span style="color:#ae81ff">10.0.1.1</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">etcd</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">endpoints</span>:
+</span></span><span style="display:flex;"><span>  - <span style="color:#ae81ff">http://10.0.1.1:2379</span>
+</span></span><span style="display:flex;"><span>  - <span style="color:#ae81ff">http://10.0.1.2:2379</span>
+</span></span><span style="display:flex;"><span>  - <span style="color:#ae81ff">http://10.0.1.3:2379</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">apiServerCertSANs</span>:
+</span></span><span style="display:flex;"><span>  - <span style="color:#ae81ff">&lt;PUBLIC_IP_LAX1&gt;</span>
+</span></span></code></pre></div><p>Run the following command on lax1:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubeadm init --config /tmp/master-configuration.yml
+</span></span></code></pre></div><p>After running <code>kubeadm init</code> make sure you copy the output, specifically the <code>--token</code>, it will look something like
+this <code>3b1e9s.t21tgbbyx1yt7lrp</code>.</p>
+<p>Next, we will use <a href="https://www.weave.works/oss/net/">Weave Net</a> to create a Pod network. <a href="https://www.weave.works/oss/net/">Weave Net</a> is excellent since it is stable, production ready
+and has no configuration.</p>
+<p>Create a <code>.kube</code> directory for the current user (in my case root).  <code>kubectl</code> will access the local Kubernetes with a
+symlinked config file in the logged-in users home path.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#f92672">[</span> -d $HOME/.kube <span style="color:#f92672">]</span> <span style="color:#f92672">||</span> mkdir -p $HOME/.kube
+</span></span><span style="display:flex;"><span>ln -s /etc/kubernetes/admin.conf $HOME/.kube/config
+</span></span></code></pre></div><p>Install <a href="https://www.weave.works/oss/net/">Weave Net</a>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl apply -f <span style="color:#e6db74">&#34;https://cloud.weave.works/k8s/net?k8s-version=</span><span style="color:#66d9ef">$(</span>kubectl version | base64 | tr -d <span style="color:#e6db74">&#39;\n&#39;</span><span style="color:#66d9ef">)</span><span style="color:#e6db74">&#34;</span>
+</span></span></code></pre></div><p>Open the firewall for weave:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ufw allow in on weave
+</span></span><span style="display:flex;"><span>ufw reload
+</span></span></code></pre></div><p>Check your rules on each server:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ufw status
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Status: active
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>To                         Action      From
+</span></span><span style="display:flex;"><span>--                         ------      ----
+</span></span><span style="display:flex;"><span>22/tcp                     ALLOW       Anywhere
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">6443</span>                       ALLOW       Anywhere
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">80</span>                         ALLOW       Anywhere
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">443</span>                        ALLOW       Anywhere
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">51820</span> on eth1              ALLOW       Anywhere
+</span></span><span style="display:flex;"><span>Anywhere on wg0            ALLOW       Anywhere
+</span></span><span style="display:flex;"><span>Anywhere on weave          ALLOW       Anywhere
+</span></span><span style="display:flex;"><span>22/tcp <span style="color:#f92672">(</span>v6<span style="color:#f92672">)</span>                ALLOW       Anywhere <span style="color:#f92672">(</span>v6<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">6443</span> <span style="color:#f92672">(</span>v6<span style="color:#f92672">)</span>                  ALLOW       Anywhere <span style="color:#f92672">(</span>v6<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">80</span> <span style="color:#f92672">(</span>v6<span style="color:#f92672">)</span>                    ALLOW       Anywhere <span style="color:#f92672">(</span>v6<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">443</span> <span style="color:#f92672">(</span>v6<span style="color:#f92672">)</span>                   ALLOW       Anywhere <span style="color:#f92672">(</span>v6<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">51820</span> <span style="color:#f92672">(</span>v6<span style="color:#f92672">)</span> on eth1         ALLOW       Anywhere <span style="color:#f92672">(</span>v6<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>Anywhere <span style="color:#f92672">(</span>v6<span style="color:#f92672">)</span> on wg0       ALLOW       Anywhere <span style="color:#f92672">(</span>v6<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>Anywhere <span style="color:#f92672">(</span>v6<span style="color:#f92672">)</span> on weave     ALLOW       Anywhere <span style="color:#f92672">(</span>v6<span style="color:#f92672">)</span>
+</span></span></code></pre></div><p>We need <a href="https://www.weave.works/oss/net/">Weave Net</a> to route traffic over our VPN. With the following commands, we can set <strong>10.96.0.0/16</strong>
+as an overlay network route for Wireguard.</p>
+<p>On each of the servers run the following command replacing the 10.0.1.1 with .2 and .3 to match the server&rsquo;s VPN IP.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ip route add 10.96.0.0/16 dev wg0 src 10.0.1.1 <span style="color:#75715e"># .2, .3 etc..</span>
+</span></span></code></pre></div><p>Add the <a href="https://wiki.ubuntu.com/systemd">systemd</a> service unit file <code>/etc/systemd/system/overlay-route.service</code> to ensure this network configuration happens on boot.</p>
+<p>Make sure to change 10.0.1.1 to 10.0.1.2 and 10.0.1.3 for the corresponding servers.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#f92672">[</span>Unit<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>Description<span style="color:#f92672">=</span>Overlay network route <span style="color:#66d9ef">for</span> Wireguard
+</span></span><span style="display:flex;"><span>After<span style="color:#f92672">=</span>wg-quick@wg0.service
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>Service<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>Type<span style="color:#f92672">=</span>oneshot
+</span></span><span style="display:flex;"><span>User<span style="color:#f92672">=</span>root
+</span></span><span style="display:flex;"><span>ExecStart<span style="color:#f92672">=</span>/sbin/ip route add 10.96.0.0/16 dev wg0 src 10.0.1.1
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>Install<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>WantedBy<span style="color:#f92672">=</span>multi-user.target
+</span></span></code></pre></div><p>Enable the new service on each node:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>systemctl enable overlay-route.service
+</span></span></code></pre></div><h3 id="joining-the-cluster">Joining the Cluster</h3>
+<p>Use the token we received after running the <code>kubeadm init</code> command in the &ldquo;Initialize the master node&rdquo; section above.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubeadm join --token<span style="color:#f92672">=</span>&lt;TOKEN&gt; 10.0.1.1:6443 --discovery-token-unsafe-skip-ca-verification
+</span></span></code></pre></div><h3 id="permissions-rbac-role-based-access-control">Permissions: RBAC (Role Based Access Control)</h3>
+<p>Setup permissive RBAC. A permissive RBAC does not affect a clusters ability to be &ldquo;production grade&rdquo; since security models can change based on the requirements of the cluster. You want a secure cluster, and you get that with the security setup in the steps above. What you don&rsquo;t need in a small cluster is a complicated security model. You can add that later.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl create clusterrolebinding permissive-binding <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  --clusterrole<span style="color:#f92672">=</span>cluster-admin <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  --user<span style="color:#f92672">=</span>admin <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  --user<span style="color:#f92672">=</span>kubelet <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  --group<span style="color:#f92672">=</span>system:serviceaccounts
+</span></span></code></pre></div><h3 id="kubectl-remote-access">kubectl: Remote Access</h3>
+<p>The easiest way to connect to the new cluster is to download and use its configuration file.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># if you don&#39;t have kubectl installed use homebrew (https://brew.sh/) to install it.</span>
+</span></span><span style="display:flex;"><span>brew install kubectl
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># on your local workstation</span>
+</span></span><span style="display:flex;"><span>cd ~/.kube
+</span></span><span style="display:flex;"><span>scp root@lax1.example.com:./.kube/config lax1_config
+</span></span></code></pre></div><p>Edit the new lax1_config file and change the yaml key <strong>server</strong> under the <strong>cluster</strong>
+section to the location of your server <code>server: https://lax1.example.com:6443</code> you may also
+want to change the context name to something more descriptive like <strong>lax1</strong>.</p>
+<p>The environment variable <strong><a href="https://kubernetes.io/docs/concepts/configuration/organize-cluster-access-kubeconfig/">KUBECONFIG</a></strong> holds paths to config files for <code>kubectl</code>. In your shell profile
+(<code>.bash_profile</code> or <code>.bashrc</code>) add:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>export KUBECONFIG=$KUBECONFIG:$HOME/.kube/config:$HOME/.kube/lax1_config
+</span></span></code></pre></div><p>Logging in to a new terminal on your workstation and try switching between contexts
+(<code>kubectl config use-context lax1</code>):</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># kubectl configuration help</span>
+</span></span><span style="display:flex;"><span>kubectl config -h
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># display the configs visible to kubectl</span>
+</span></span><span style="display:flex;"><span>kubectl config view
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># get the current context</span>
+</span></span><span style="display:flex;"><span>kubectl config current-context
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># use the new lax1 context</span>
+</span></span><span style="display:flex;"><span>kubectl config use-context lax1
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># get the list of nodes from lax</span>
+</span></span><span style="display:flex;"><span>kubectl get nodes
+</span></span></code></pre></div><h3 id="deploy-an-application">Deploy an Application</h3>
+<p>Create a file called <code>tcp-echo-service.yml</code></p>
+<script src="https://gist.github.com/cjimti/cb051976caa20f5c53311a7a75e85487.js"></script>
+<p>kubectl can use URLs or local files for input:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># create a service</span>
+</span></span><span style="display:flex;"><span>kubectl create -f https://bit.ly/tcp-echo-service
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># list services</span>
+</span></span><span style="display:flex;"><span>kubectl get services
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>NAME         TYPE        CLUSTER-IP      EXTERNAL-IP   PORT<span style="color:#f92672">(</span>S<span style="color:#f92672">)</span>          AGE
+</span></span><span style="display:flex;"><span>kubernetes   ClusterIP   10.96.0.1       &lt;none&gt;        443/TCP          1d
+</span></span><span style="display:flex;"><span>tcp-echo     NodePort    10.109.249.93   &lt;none&gt;        5000:30552/TCP   3m
+</span></span></code></pre></div><p>In my case, the port <strong>32413</strong> was assigned to the new TCP echo service.</p>
+<p>Create a deployment configuration called <code>tcp-echo-deployment.yml</code>:</p>
+<script src="https://gist.github.com/cjimti/f936f728b28cdaf3f0edb26b2a7b8c99.js"></script>
+<p>kubectl can use URLs or local files for input:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl create -f http://bit.ly/tcp-echo-deployment
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># describe the deployment</span>
+</span></span><span style="display:flex;"><span>kubectl describe deployment tcp-echo
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># ensure that your pods are up and running</span>
+</span></span><span style="display:flex;"><span>Replicas: <span style="color:#ae81ff">2</span> desired | <span style="color:#ae81ff">2</span> updated | <span style="color:#ae81ff">2</span> total | <span style="color:#ae81ff">2</span> available | <span style="color:#ae81ff">0</span> unavailable
+</span></span></code></pre></div><blockquote>
+<p>Pods not communicating? If you run a <code>kubectl describe pod NAMEOFPOD</code> and get back <strong>unreachable:NoExecute</strong> under the <strong>Tolerations</strong> section, you may need to check your <code>ufw</code> status.</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>Tolerations:     node.kubernetes.io/not-ready:NoExecute for 300s
+</span></span><span style="display:flex;"><span>                 node.kubernetes.io/unreachable:NoExecute for 300s
+</span></span></code></pre></div><p>Run <code>ufw status</code> again and ensure that you have <strong>Anywhere on wg0</strong> and <strong>Anywhere on weave</strong> rules in place.</p>
+<pre tabindex="0"><code>Anywhere on wg0            ALLOW       Anywhere
+Anywhere on weave          ALLOW       Anywhere
+</code></pre><p>If these rules are not there run:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ufw allow in on wg0
+</span></span><span style="display:flex;"><span>ufw allow in on weave
+</span></span><span style="display:flex;"><span>ufw reload
+</span></span></code></pre></div><p>If everything looks correct but the pods are still not communicating, disable the firewall and re-deploy in order to rule out any firewall issues.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># disable the firewall</span>
+</span></span><span style="display:flex;"><span>ufw disable
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># delete deployment</span>
+</span></span><span style="display:flex;"><span>kubectl delete -f http://bit.ly/tcp-echo-deployment
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># re-create deployment</span>
+</span></span><span style="display:flex;"><span>kubectl create -f http://bit.ly/tcp-echo-deployment
+</span></span></code></pre></div><h4 id="testing-the-cluster">Testing the Cluster</h4>
+<p>In my case, using NodePort without specifying a port, lets the cluster assign one at random. The <code>tcp-echo</code> service got port 30552. If networking is set up, currently we should be able to contact the new TCP echo server at that port on all three servers.</p>
+<p>Use netcat to test the new TCP echo service. This test service returns some useful diagnostic information, namely the node we connected to (lax2 in the case below lax2,) the specific pod name, the pod IP access, the namespace and the data we sent to it.</p>
+<p>First, we can test the port on the physical node with netcat:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>nc -vz lax1.example.com <span style="color:#ae81ff">30552</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>found <span style="color:#ae81ff">0</span> associations
+</span></span><span style="display:flex;"><span>found <span style="color:#ae81ff">1</span> connections:
+</span></span><span style="display:flex;"><span>     1:    flags<span style="color:#f92672">=</span>82&lt;CONNECTED,PREFERRED&gt;
+</span></span><span style="display:flex;"><span>    outif en0
+</span></span><span style="display:flex;"><span>    src 192.168.86.24 port <span style="color:#ae81ff">54133</span>
+</span></span><span style="display:flex;"><span>    dst 206.189.232.176 port <span style="color:#ae81ff">30552</span>
+</span></span><span style="display:flex;"><span>    rank info not available
+</span></span><span style="display:flex;"><span>    TCP aux info available
+</span></span></code></pre></div><p>In my case, lax1 is at 206.189.232.176 (at the moment), and we were able to connect to the port. Next, we can send some data and review the output from the tcp-echo server.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>echo <span style="color:#e6db74">&#34;testing 1,2,3...&#34;</span> | nc lax1.example <span style="color:#ae81ff">30552</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Welcome, you are connected to node lax2.
+</span></span><span style="display:flex;"><span>Running on Pod tcp-echo-5f7fdcf7bc-rm6qt.
+</span></span><span style="display:flex;"><span>In namespace default.
+</span></span><span style="display:flex;"><span>With IP address 10.34.0.1.
+</span></span><span style="display:flex;"><span>Service default.
+</span></span><span style="display:flex;"><span>testing 1,2,3...
+</span></span></code></pre></div><p>No pods are running on lax1, lax2 serviced the request. The output demonstrates that our network is operating as intended and the <code>tcp-echo</code> service passed along the message to a <code>tcp-echo</code> pod running on lax2.</p>
+<p>Let&rsquo;s scale our two <code>tcp-echo</code> pods to four.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl scale deployments/tcp-echo --replicas<span style="color:#f92672">=</span><span style="color:#ae81ff">4</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>kubectl get pods -o wide
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>NAME                        READY     STATUS    RESTARTS   AGE       IP          NODE
+</span></span><span style="display:flex;"><span>tcp-echo-5f7fdcf7bc-7v5tc   1/1       Running   <span style="color:#ae81ff">0</span>          1h        10.40.0.2   lax2
+</span></span><span style="display:flex;"><span>tcp-echo-5f7fdcf7bc-h4k7z   1/1       Running   <span style="color:#ae81ff">0</span>          24m       10.34.0.2   lax3
+</span></span><span style="display:flex;"><span>tcp-echo-5f7fdcf7bc-rm6qt   1/1       Running   <span style="color:#ae81ff">0</span>          1h        10.34.0.1   lax3
+</span></span><span style="display:flex;"><span>tcp-echo-5f7fdcf7bc-tkmhl   1/1       Running   <span style="color:#ae81ff">0</span>          24m       10.40.0.3   lax2
+</span></span></code></pre></div><p>The scaling works, but I don&rsquo;t want my extra $5 a month node to go to waste merely hosting the master. To allow the master to run pods, it must be untainted.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl taint nodes --all node-role.kubernetes.io/master-
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>node <span style="color:#e6db74">&#34;lax1&#34;</span> untainted
+</span></span><span style="display:flex;"><span>taint <span style="color:#e6db74">&#34;node-role.kubernetes.io/master:&#34;</span> not found
+</span></span><span style="display:flex;"><span>taint <span style="color:#e6db74">&#34;node-role.kubernetes.io/master:&#34;</span> not found
+</span></span></code></pre></div><p>In order to test our lax1 node as a pod host, we need give the cluster a reason to use it.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># scale back our tcp-echo </span>
+</span></span><span style="display:flex;"><span>kubectl scale deployments/tcp-echo --replicas<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># then scale up again to 4</span>
+</span></span><span style="display:flex;"><span>kubectl scale deployments/tcp-echo --replicas<span style="color:#f92672">=</span><span style="color:#ae81ff">4</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>kubectl get pods -o wide
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>NAME                        READY     STATUS    RESTARTS   AGE       IP          NODE
+</span></span><span style="display:flex;"><span>tcp-echo-5f7fdcf7bc-7v5tc   1/1       Running   <span style="color:#ae81ff">0</span>          1h        10.40.0.2   lax2
+</span></span><span style="display:flex;"><span>tcp-echo-5f7fdcf7bc-86tpz   1/1       Running   <span style="color:#ae81ff">0</span>          4s        10.32.0.2   lax1
+</span></span><span style="display:flex;"><span>tcp-echo-5f7fdcf7bc-c47z5   1/1       Running   <span style="color:#ae81ff">0</span>          4s        10.40.0.3   lax2
+</span></span><span style="display:flex;"><span>tcp-echo-5f7fdcf7bc-rm6qt   1/1       Running   <span style="color:#ae81ff">0</span>          1h        10.34.0.1   lax3
+</span></span></code></pre></div><p>We now have two pods running on lax2, one on each lax1 and lax3.</p>
+<p>I am going to end this post here at a good place. The example above is not the fastest cluster on earth, but that has everything to do with the budgeted $5 instances and not much in regards to configuration. If we needed this to handle an enterprise workload all we need to do is upgrade the server instances, not re-architect our entire infrastructure. Scaling to handle enterprise workloads might take only an hour or two of adding nodes.</p>
+<p>If in a few days you find yourself setting up a cluster in Japan or Germany on <a href="https://www.linode.com/?r=848a6b0b21dc8edd33124f05ec8f99207ccddfde">Linode</a>, and another two in Australia and France on <a href="https://www.vultr.com/?ref=7418713">vultr</a>, then you may have just joined the PHC (Performance Hobby Clusters) club. Some people tinker late at night on their truck, we benchmark and test the resilience of node failures on our overseas, budget kubernetes clusters. It&rsquo;s all about going big, on the cheap.</p>
+<p><a href="https://amzn.to/2IOe8Yu"><img src="/images/content/k8s-tshirt-banner.jpg" alt="k8s performance hobby clusters"></a></p>
+<p>I maintain three personal hobby clusters, one with <a href="https://m.do.co/c/97b733e7eba4">Digital Ocean</a> hosted in New York and one with <a href="https://www.vultr.com/?ref=7418713">Vultr</a> hosted in Los Angeles and another with <a href="https://www.linode.com/?r=848a6b0b21dc8edd33124f05ec8f99207ccddfde">Linode</a> in Japan. I recommend my employer Deasil. If you need enterprise-level hosting including co-location, data center, and NOC services, Contact <a href="https://deasil.network/about">Deasil Networks</a>. If you need any software development check out <a href="https://deasil.works/">Deasil Works</a>.</p>
+<p>Are you in the business or collecting, moving, buffering, queueing, processing or presenting data on your cluster? If so, check out <a href="https://txn2.com/">txn2.com</a>.</p>
+<h2 id="port-forwarding--local-development">Port Forwarding / Local Development</h2>
+<p>Check out <a href="https://github.com/txn2/kubefwd">kubefwd</a> for a simple command line utility that bulk forwards services of one or more namespaces to your local workstation.</p>
+<h2 id="resources">Resources</h2>
+<ul>
+<li><a href="https://www.linode.com/?r=848a6b0b21dc8edd33124f05ec8f99207ccddfde">Linode</a></li>
+<li><a href="https://m.do.co/c/97b733e7eba4">Digital Ocean</a></li>
+<li><a href="https://www.vultr.com/?ref=7418713">Vultr</a></li>
+<li><a href="https://kubernetes.io/docs/concepts/configuration/organize-cluster-access-kubeconfig/">KUBECONFIG</a></li>
+<li><a href="https://wiki.ubuntu.com/systemd">systemd</a></li>
+<li><a href="https://www.weave.works/oss/net/">Weave Net</a></li>
+<li><a href="https://coreos.com/etcd/docs/latest/getting-started-with-etcd.html">Etcd</a></li>
+<li><a href="https://www.wireguard.io/">WireGuard</a></li>
+<li><a href="https://github.com/hobby-kube/guide">Hobby Kube</a> A fantastic write-up (with teraform scripts) and how I got started.</li>
+</ul>
+
+
+                <p>
+                   This blog post, titled: "<span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">Production Hobby Cluster: Production-grade cluster on a hobby budget.</span>" by <a xmlns:cc="http://creativecommons.org/ns#" href="https://twitter.com/cjimti" property="cc:attributionName" rel="cc:attributionURL">Craig Johnston</a>, is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+                    <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a>
+                </p>
+
+            </div>
+            
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                
+                <section>
+                    <hr class="hidden-sm hidden-xs">
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/blockchain" title="blockchain">
+                        blockchain
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/data" title="data">
+                        data
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/data-science" title="data science">
+                        data science
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/development" title="development">
+                        development
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/devops" title="devops">
+                        devops
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/docker" title="docker">
+                        docker
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/elasticsearch" title="elasticsearch">
+                        elasticsearch
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/golang" title="golang">
+                        golang
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/ingress" title="ingress">
+                        ingress
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/iot" title="iot">
+                        iot
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/kubectl" title="kubectl">
+                        kubectl
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/kubefwd" title="kubefwd">
+                        kubefwd
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/kubernetes" title="kubernetes">
+                        kubernetes
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/microservices" title="microservices">
+                        microservices
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/python" title="python">
+                        python
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/raspberry-pi" title="raspberry pi">
+                        raspberry pi
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/security" title="security">
+                        security
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/utils" title="utils">
+                        utils
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                    </div>
+                </section>
+
+                
+                <hr>
+                <h5>RELATED</h5>
+                <ul class="list-inline">
+                    
+                </ul>
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                   
+                   <li>
+                       <a href="/index.xml" rel="alternate" type="application/rss+xml" title="IMTI" >
+                           <span class="fa-stack fa-lg">
+                               <i class="fa fa-circle fa-stack-2x"></i>
+                               <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+                           </span>
+                       </a>
+                   </li>
+                   
+                    
+                    <li>
+                        <a href="mailto:cjimti@gmail.com">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                    
+                    
+                    <li>
+                        <a href="https://twitter.com/cjimti">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    
+
+                    
+
+		    
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/cjimti">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                    
+                    <li>
+                        <a target="_blank" href="https://www.linkedin.com/in/cjimti/">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                </ul>
+
+                
+                
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+
+
+
+
+<script>
+    
+    if($('#tag_cloud').length !== 0){
+        async("/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-R56SP4WLS2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-R56SP4WLS2');
+</script>
+
+</body>
+</html>

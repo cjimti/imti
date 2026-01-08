@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Kubectl on IMTI</title>
+    <link>https://imti.co/tags/kubectl/</link>
+    <description>Recent content in Kubectl on IMTI</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 10 Jul 2018 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://imti.co/tags/kubectl/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Kubernetes Team Access - RBAC for developers and QA</title>
+      <link>https://imti.co/team-kubernetes-remote-access/</link>
+      <pubDate>Tue, 10 Jul 2018 00:00:00 +0000</pubDate>
+      <guid>https://imti.co/team-kubernetes-remote-access/</guid>
+      <description>&lt;p&gt;RBAC (Role Based Access Control) allows our Kubernetes clusters to provide the development team better visibility and access into the development, staging and production environments than it has have ever had in the past. Developers using the command line tool &lt;strong&gt;&lt;a href=&#34;https://kubernetes.io/docs/reference/kubectl/kubectl/&#34;&gt;kubectl&lt;/a&gt;&lt;/strong&gt;, can explore the network topology of running &lt;a href=&#34;https://imti.co/microservices/&#34;&gt;microservices&lt;/a&gt;, tail live server logs, proxy local ports directly to services or even execute shells into running pods.&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://imti.co/gitlabci-golang-microservices/&#34;&gt;Kubernetes and GitlabCI&lt;/a&gt; are the central components of our DevOps toolchain and have increased our productivity by many multiples over the traditional approaches of the past.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>kubectl Context Multiple Clusters</title>
+      <link>https://imti.co/kubectl-remote-context/</link>
+      <pubDate>Tue, 15 May 2018 00:00:00 +0000</pubDate>
+      <guid>https://imti.co/kubectl-remote-context/</guid>
+      <description>&lt;p&gt;I use a few Kubernetes clusters on a daily basis, and I use &lt;a href=&#34;https://kubernetes.io/docs/reference/kubectl/cheatsheet/&#34;&gt;kubectl&lt;/a&gt; to access and configure them from my workstation. There are dozens of ways to configure &lt;a href=&#34;https://kubernetes.io/docs/reference/kubectl/cheatsheet/&#34;&gt;kubectl&lt;/a&gt; however I find the following method the easiest for me to manage and not make a mess.&lt;/p&gt;&#xA;&lt;p&gt;I also set up test clusters from time-to-time, and so keeping my configs organized is, so I don&amp;rsquo;t confuse myself or make a mess.&lt;/p&gt;&#xA;&lt;p&gt;For this post, I&amp;rsquo;ll talk about four clusters and how I have them organized. The following is a list of the clusters I am managing:&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Kubectl x509 Unable to Connect</title>
+      <link>https://imti.co/kubectl-remote-x509-valid/</link>
+      <pubDate>Thu, 10 May 2018 00:00:00 +0000</pubDate>
+      <guid>https://imti.co/kubectl-remote-x509-valid/</guid>
+      <description>&lt;p&gt;Just set up a brand new cluster? Changed the domain or IP of your admin node? Then you may have encountered the error&#xA;&lt;strong&gt;Unable to connect to the server: x509: certificate is valid for &amp;hellip;&lt;/strong&gt;. The following is a fix for this common issue. However, there are often other reasons to rebuild your cluster cert, and it&amp;rsquo;s relatively easy.&lt;/p&gt;&#xA;&lt;p&gt;TL;DR: &amp;ldquo;I don&amp;rsquo;t care about the fix I need to remote control my cluster. Security? Whats that?&amp;rdquo;:&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Kubernetes Remote Control</title>
+      <link>https://imti.co/kubectl-remote/</link>
+      <pubDate>Sat, 24 Mar 2018 00:00:00 +0000</pubDate>
+      <guid>https://imti.co/kubectl-remote/</guid>
+      <description>&lt;p&gt;I use &lt;a href=&#34;https://kubernetes.io/docs/getting-started-guides/minikube/&#34;&gt;Minikube&lt;/a&gt; to run a local &lt;a href=&#34;https://kubernetes.io/&#34;&gt;Kubernetes&lt;/a&gt; single node cluster (cluster?). However, I also work with a custom production cluster for work. This cluster consists of development and production nodes. I often need to switch between working on my local &lt;a href=&#34;https://kubernetes.io/docs/getting-started-guides/minikube/&#34;&gt;Minikube&lt;/a&gt; and the online &lt;a href=&#34;https://kubernetes.io/&#34;&gt;Kubernetes&lt;/a&gt; cluster.&lt;/p&gt;&#xA;&lt;p&gt;TIP: Visit the &lt;a href=&#34;https://kubernetes.io/docs/reference/kubectl/cheatsheet/&#34;&gt;kubectl Cheat Sheet&lt;/a&gt; often.&lt;/p&gt;&#xA;&#xA;&#xA;&lt;p&gt;The default configuration &lt;code&gt;kubectl&lt;/code&gt; is stored in &lt;code&gt;~/.kube/config&lt;/code&gt; and&#xA;if you have &lt;a href=&#34;https://kubernetes.io/docs/getting-started-guides/minikube/&#34;&gt;Minikube&lt;/a&gt; installed, it added the context &lt;strong&gt;minikube&lt;/strong&gt; to your config.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>
