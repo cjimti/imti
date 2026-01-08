@@ -5,10 +5,11 @@ languageCode = "en-us"
 disqusShortname = ""
 googleAnalytics = "UA-78786435-1"
 preserveTaxonomyNames = true
-[pagination]
-  pagerSize = 30 #frontpage pagination
 hasCJKLanguage = true
 publishDir = "docs"
+
+[pagination]
+  pagerSize = 30 #frontpage pagination
 
 displayMath = [['$','$'], ['$$','$$'], ['\\[','\\]']]
 
