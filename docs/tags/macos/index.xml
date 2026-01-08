@@ -2,24 +2,24 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>MacOs on IMTI</title>
-    <link>http://localhost:1313/tags/macos/</link>
+    <link>https://imti.co/tags/macos/</link>
     <description>Recent content in MacOs on IMTI</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Sat, 12 May 2018 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://localhost:1313/tags/macos/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://imti.co/tags/macos/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Formatting Drives on MacOS</title>
-      <link>http://localhost:1313/mac-format-command-line/</link>
+      <link>https://imti.co/mac-format-command-line/</link>
       <pubDate>Sat, 12 May 2018 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/mac-format-command-line/</guid>
+      <guid>https://imti.co/mac-format-command-line/</guid>
       <description>&lt;p&gt;I have had this collection of old external drives hanging around for years. There was a time I was having terrible luck with hard drives. It turned out I managed to amass a collection of about eight drives from one terabyte to four terabytes.&lt;/p&gt;&#xA;&lt;p&gt;Fortunately, I keep copies of nearly all my files on cloud drives, split between &lt;a href=&#34;https://amzn.to/2KiZ31d&#34;&gt;Amazon&lt;/a&gt;, Google and DropBox. I had a sneaking suspicion that the discs themselves were ok and somehow my Mac was communicating with the RAID controllers in a way that caused them to fail.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Burn SD Images on MacOs</title>
-      <link>http://localhost:1313/mac-cli-burn-images/</link>
+      <link>https://imti.co/mac-cli-burn-images/</link>
       <pubDate>Sun, 01 Apr 2018 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/mac-cli-burn-images/</guid>
+      <guid>https://imti.co/mac-cli-burn-images/</guid>
       <description>&lt;p&gt;Use your terminal to burn images fast and easy with &lt;strong&gt;&lt;a href=&#34;https://en.wikipedia.org/wiki/Dd_(Unix)&#34;&gt;dd&lt;/a&gt;&lt;/strong&gt;. I do a lot of professional and hobby development for projects using devices such as &lt;a href=&#34;https://amzn.to/2JwJeEu&#34;&gt;Raspberry Pi&lt;/a&gt;, &lt;a href=&#34;https://amzn.to/2H5DL9v&#34;&gt;Orange Pi&lt;/a&gt;, &lt;a href=&#34;https://amzn.to/2GLp8Vg&#34;&gt;Libre Computer&lt;/a&gt;, &lt;a href=&#34;https://amzn.to/2HiX9NZ&#34;&gt;Tinker Board&lt;/a&gt;, etc. I run across a lot of tutorials with people downloading and using big GUI apps with clunky drag and drop interfaces to burn images.&lt;/p&gt;&#xA;&lt;p&gt;It&amp;rsquo;s one command in your terminal. Technically, it&amp;rsquo;s three, but I don&amp;rsquo;t count listing and unmounting as the final act of burning.&lt;/p&gt;</description>
     </item>
   </channel>

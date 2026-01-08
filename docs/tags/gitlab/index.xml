@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Gitlab on IMTI</title>
-    <link>http://localhost:1313/tags/gitlab/</link>
+    <link>https://imti.co/tags/gitlab/</link>
     <description>Recent content in Gitlab on IMTI</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Fri, 22 Jun 2018 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://localhost:1313/tags/gitlab/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://imti.co/tags/gitlab/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>A Microservices Workflow with Golang and Gitlab CI</title>
-      <link>http://localhost:1313/gitlabci-golang-microservices/</link>
+      <link>https://imti.co/gitlabci-golang-microservices/</link>
       <pubDate>Fri, 22 Jun 2018 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/gitlabci-golang-microservices/</guid>
-      <description>&lt;p&gt;Many of the resources on Cloud Native &lt;a href=&#34;http://localhost:1313/microservices/&#34;&gt;Microservices&lt;/a&gt; show you how easy it is to get up and running with AWS or GKE. I think this is great but for the fact that I see a trend (in my clients at least) of associating concepts with particular products or worse, companies. I love Amazon, but it&amp;rsquo;s not THE cloud). In my opinion, to embrace Cloud Native and &lt;a href=&#34;http://localhost:1313/microservices/&#34;&gt;Microservices&lt;/a&gt; you should develop some, and host them yourself. The cloud is not Google or Amazon; it&amp;rsquo;s any cluster of virtualized systems, abstracted from their hardware interfaces and centrally managed.&lt;/p&gt;</description>
+      <guid>https://imti.co/gitlabci-golang-microservices/</guid>
+      <description>&lt;p&gt;Many of the resources on Cloud Native &lt;a href=&#34;https://imti.co/microservices/&#34;&gt;Microservices&lt;/a&gt; show you how easy it is to get up and running with AWS or GKE. I think this is great but for the fact that I see a trend (in my clients at least) of associating concepts with particular products or worse, companies. I love Amazon, but it&amp;rsquo;s not THE cloud). In my opinion, to embrace Cloud Native and &lt;a href=&#34;https://imti.co/microservices/&#34;&gt;Microservices&lt;/a&gt; you should develop some, and host them yourself. The cloud is not Google or Amazon; it&amp;rsquo;s any cluster of virtualized systems, abstracted from their hardware interfaces and centrally managed.&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>
