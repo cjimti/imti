@@ -2,38 +2,38 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Blockchain on IMTI</title>
-    <link>https://imti.co/tags/blockchain/</link>
+    <link>http://localhost:1313/tags/blockchain/</link>
     <description>Recent content in Blockchain on IMTI</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Sun, 30 Aug 2020 00:00:00 +0000</lastBuildDate>
-    <atom:link href="https://imti.co/tags/blockchain/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/tags/blockchain/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Advanced Platform Development with Kubernetes</title>
-      <link>https://imti.co/kubernetes-platform-book/</link>
+      <link>http://localhost:1313/kubernetes-platform-book/</link>
       <pubDate>Sun, 30 Aug 2020 00:00:00 +0000</pubDate>
-      <guid>https://imti.co/kubernetes-platform-book/</guid>
+      <guid>http://localhost:1313/kubernetes-platform-book/</guid>
       <description>&lt;p&gt;I&amp;rsquo;ve been distracted for over a year now, writing a (~500 page) end-to-end tutorial on constructing data-centric platforms with Kubernetes. The book is titled &amp;ldquo;&lt;a href=&#34;https://amzn.to/3hAZUvx&#34;&gt;Advanced Platform Development with Kubernetes: Enabling Data Management, the Internet of Things, Blockchain, and Machine Learning&lt;/a&gt;&amp;rdquo;&lt;/p&gt;&#xA;&lt;p&gt;A little more than a year ago, Apress reached out and asked if I would write a book on Kubernetes for them, mirroring the wide range of projects I develop (and write about) for my clients. I have been building data-centric platforms for almost twenty years, spanning everything from my early days on the aggregation of massive volumes of international log files for Disney to fan-driven location data for Nine Inch Nails. And in the last decade, retailers with point-of-sale, logistics, and inventory systems, marketers leveraging social media metrics, fleet operators with demanding telematics platforms, and manufacturers with advanced IIoT (industrial internet of things) networks.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Ethereum Ethstats</title>
-      <link>https://imti.co/ethereum-ethstats/</link>
+      <link>http://localhost:1313/ethereum-ethstats/</link>
       <pubDate>Sat, 22 Sep 2018 00:00:00 +0000</pubDate>
-      <guid>https://imti.co/ethereum-ethstats/</guid>
+      <guid>http://localhost:1313/ethereum-ethstats/</guid>
       <description>&lt;p&gt;The &lt;a href=&#34;https://github.com/cubedro/eth-netstats&#34;&gt;eth-netstats&lt;/a&gt; project provides a great dashboard interface for monitoring the status of an Ethereum Blockchain from the perspective of its nodes. The website &lt;a href=&#34;https://ethstats.net/&#34;&gt;https://ethstats.net/&lt;/a&gt; reports statistics from an extensive list of Ethereum nodes on the public &lt;a href=&#34;https://ethereum.org&#34;&gt;Ethereum&lt;/a&gt; Blockchain, however, the &lt;a href=&#34;https://github.com/cubedro/eth-netstats&#34;&gt;eth-netstats&lt;/a&gt; software that drives &lt;a href=&#34;https://ethstats.net/&#34;&gt;https://ethstats.net/&lt;/a&gt; can also be used to monitor a &lt;a href=&#34;https://imti.co/ethereum-kubernetes/&#34;&gt;Private Ethereum Blockchchain&lt;/a&gt; as I demonstrate in the previous article &lt;a href=&#34;https://imti.co/ethereum-kubernetes/&#34;&gt;Deploy a Private Ethereum Blockchain on a Custom Kubernetes Cluster&lt;/a&gt;.&lt;/p&gt;&#xA;&lt;p&gt;The &lt;a href=&#34;https://github.com/cubedro/eth-netstats&#34;&gt;eth-netstats&lt;/a&gt; service consumes Ethereum statistical metrics provided by individual Ethereum nodes. Check out the documentation on &lt;a href=&#34;https://github.com/ethereum/go-ethereum/wiki/geth&#34;&gt;Geth&lt;/a&gt; if you are interested in running an Ethereum miner or transaction only node and pointing it&amp;rsquo;s statistical output to an &lt;a href=&#34;https://github.com/cubedro/eth-netstats&#34;&gt;eth-netstats&lt;/a&gt; instance.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Ethereum Blockchain on Kubernetes</title>
-      <link>https://imti.co/ethereum-kubernetes/</link>
+      <link>http://localhost:1313/ethereum-kubernetes/</link>
       <pubDate>Tue, 04 Sep 2018 00:00:00 +0000</pubDate>
-      <guid>https://imti.co/ethereum-kubernetes/</guid>
+      <guid>http://localhost:1313/ethereum-kubernetes/</guid>
       <description>&lt;p&gt;Blockchain technologies have been made famous by Cryptocurrencies such as Bitcoin and &lt;a href=&#34;https://www.ethereum.org/&#34;&gt;Ethereum&lt;/a&gt;. However, the concepts behind &lt;a href=&#34;http://imti.co/blockchain/&#34;&gt;Blockchain&lt;/a&gt; are far more reaching than their support for cryptocurrency. Blockchain technologies now support any digital asset, from signal data to complex messaging, to the execution of business logic through code. Blockchain technologies are rapidly forming a new decentralized internet of transactions.&lt;/p&gt;&#xA;&#xA;&#xA;&lt;p&gt;&lt;a href=&#34;https://kubernetes.io/&#34;&gt;Kubernetes&lt;/a&gt; is an efficient and productive platform for the configuration, deployment, and management of private blockchains. Blockchain technology is intended to provide a decentralized transaction ledger, making it a perfect fit for the distributed nature of Kubernetes Pod deployments. The Kubernetes network infrastructure provides the necessary elements for security, scalability and fault tolerance needed for private or protected Blockchains.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Blockchain</title>
-      <link>https://imti.co/blockchain/</link>
+      <link>http://localhost:1313/blockchain/</link>
       <pubDate>Sat, 01 Sep 2018 00:00:00 +0000</pubDate>
-      <guid>https://imti.co/blockchain/</guid>
+      <guid>http://localhost:1313/blockchain/</guid>
       <description>&lt;h3 id=&#34;the-internet-of-transactions&#34;&gt;The Internet of Transactions&lt;/h3&gt;&#xA;&lt;p&gt;Blockchain may be a recent entry to the technology landscape. However, it has quickly become an essential iteration in the evolution of peer-to-peer communication and distributed computing. Originally developed as a way to protect digital currency, Blockchain technologies now support any digital asset, from signal data to complex messaging, to the execution of business logic through code. Blockchain technologies are rapidly forming a new decentralized internet of transactions.&lt;/p&gt;</description>
     </item>
   </channel>

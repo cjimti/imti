@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Serverless on IMTI</title>
-    <link>https://imti.co/tags/serverless/</link>
+    <link>http://localhost:1313/tags/serverless/</link>
     <description>Recent content in Serverless on IMTI</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Sat, 28 Jul 2018 00:00:00 +0000</lastBuildDate>
-    <atom:link href="https://imti.co/tags/serverless/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/tags/serverless/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>FaaS on Kubernetes</title>
-      <link>https://imti.co/fass-kubeless-kubernetes/</link>
+      <link>http://localhost:1313/fass-kubeless-kubernetes/</link>
       <pubDate>Sat, 28 Jul 2018 00:00:00 +0000</pubDate>
-      <guid>https://imti.co/fass-kubeless-kubernetes/</guid>
-      <description>&lt;p&gt;FaaS or &lt;a href=&#34;https://en.wikipedia.org/wiki/Function_as_a_service&#34;&gt;Function as a Service&lt;/a&gt; also known as &lt;a href=&#34;https://en.wikipedia.org/wiki/Serverless_computing&#34;&gt;Serverless computing&lt;/a&gt; implementations are gaining popularity. Discussed often are the cost savings and each implementations relationship to the physical and network architecture of a specific platform or vendor. While many of the &lt;a href=&#34;https://martinfowler.com/articles/serverless.html#ReducedOperationalCost&#34;&gt;cost and infrastructure&lt;/a&gt; advantages of FaaS are compelling, its only one of many advantages. Below, I hope to demonstrate how easy it is to develop and deploy FaaS components into a custom Kubernetes cluster. The functions I develop are nearly all business logic, and I believe therein lies the advantage, &lt;strong&gt;high-density business logic&lt;/strong&gt;. Functions can have a higher degree of focus directly on business logic and communication with other services. Functions can communicate with other functions, microservices or monoliths. In this article, I demonstrate this with &lt;a href=&#34;https://imti.co/kubernetes-production-elasticsearch/&#34;&gt;Elasticsearch&lt;/a&gt;.&lt;/p&gt;</description>
+      <guid>http://localhost:1313/fass-kubeless-kubernetes/</guid>
+      <description>&lt;p&gt;FaaS or &lt;a href=&#34;https://en.wikipedia.org/wiki/Function_as_a_service&#34;&gt;Function as a Service&lt;/a&gt; also known as &lt;a href=&#34;https://en.wikipedia.org/wiki/Serverless_computing&#34;&gt;Serverless computing&lt;/a&gt; implementations are gaining popularity. Discussed often are the cost savings and each implementations relationship to the physical and network architecture of a specific platform or vendor. While many of the &lt;a href=&#34;https://martinfowler.com/articles/serverless.html#ReducedOperationalCost&#34;&gt;cost and infrastructure&lt;/a&gt; advantages of FaaS are compelling, its only one of many advantages. Below, I hope to demonstrate how easy it is to develop and deploy FaaS components into a custom Kubernetes cluster. The functions I develop are nearly all business logic, and I believe therein lies the advantage, &lt;strong&gt;high-density business logic&lt;/strong&gt;. Functions can have a higher degree of focus directly on business logic and communication with other services. Functions can communicate with other functions, microservices or monoliths. In this article, I demonstrate this with &lt;a href=&#34;http://localhost:1313/kubernetes-production-elasticsearch/&#34;&gt;Elasticsearch&lt;/a&gt;.&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>

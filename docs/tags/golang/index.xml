@@ -2,39 +2,39 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Golang on IMTI</title>
-    <link>https://imti.co/tags/golang/</link>
+    <link>http://localhost:1313/tags/golang/</link>
     <description>Recent content in Golang on IMTI</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Fri, 22 Jun 2018 00:00:00 +0000</lastBuildDate>
-    <atom:link href="https://imti.co/tags/golang/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/tags/golang/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>A Microservices Workflow with Golang and Gitlab CI</title>
-      <link>https://imti.co/gitlabci-golang-microservices/</link>
+      <link>http://localhost:1313/gitlabci-golang-microservices/</link>
       <pubDate>Fri, 22 Jun 2018 00:00:00 +0000</pubDate>
-      <guid>https://imti.co/gitlabci-golang-microservices/</guid>
-      <description>&lt;p&gt;Many of the resources on Cloud Native &lt;a href=&#34;https://imti.co/microservices/&#34;&gt;Microservices&lt;/a&gt; show you how easy it is to get up and running with AWS or GKE. I think this is great but for the fact that I see a trend (in my clients at least) of associating concepts with particular products or worse, companies. I love Amazon, but it&amp;rsquo;s not THE cloud). In my opinion, to embrace Cloud Native and &lt;a href=&#34;https://imti.co/microservices/&#34;&gt;Microservices&lt;/a&gt; you should develop some, and host them yourself. The cloud is not Google or Amazon; it&amp;rsquo;s any cluster of virtualized systems, abstracted from their hardware interfaces and centrally managed.&lt;/p&gt;</description>
+      <guid>http://localhost:1313/gitlabci-golang-microservices/</guid>
+      <description>&lt;p&gt;Many of the resources on Cloud Native &lt;a href=&#34;http://localhost:1313/microservices/&#34;&gt;Microservices&lt;/a&gt; show you how easy it is to get up and running with AWS or GKE. I think this is great but for the fact that I see a trend (in my clients at least) of associating concepts with particular products or worse, companies. I love Amazon, but it&amp;rsquo;s not THE cloud). In my opinion, to embrace Cloud Native and &lt;a href=&#34;http://localhost:1313/microservices/&#34;&gt;Microservices&lt;/a&gt; you should develop some, and host them yourself. The cloud is not Google or Amazon; it&amp;rsquo;s any cluster of virtualized systems, abstracted from their hardware interfaces and centrally managed.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Reverse Proxy in Golang</title>
-      <link>https://imti.co/golang-reverse-proxy/</link>
+      <link>http://localhost:1313/golang-reverse-proxy/</link>
       <pubDate>Fri, 15 Jun 2018 00:00:00 +0000</pubDate>
-      <guid>https://imti.co/golang-reverse-proxy/</guid>
+      <guid>http://localhost:1313/golang-reverse-proxy/</guid>
       <description>&lt;p&gt;Reverse proxies are standard components in many web architectures, from &lt;a href=&#34;https://www.nginx.com/&#34;&gt;Nginx&lt;/a&gt; in front of &lt;a href=&#34;https://php-fpm.org/&#34;&gt;php-fpm&lt;/a&gt; serving &lt;a href=&#34;http://www.drupal.com/&#34;&gt;Drupal&lt;/a&gt; or &lt;a href=&#34;https://wordpress.org/&#34;&gt;Wordpress&lt;/a&gt;, to endless mixtures of load balancers, security appliances, and popular firewall applications. &lt;a href=&#34;https://www.jscape.com/blog/bid/87783/Forward-Proxy-vs-Reverse-Proxy&#34;&gt;Reverse proxies differ from forward proxies&lt;/a&gt; in little but their intended implementation, be it service-side or client side. The following information is useful in either context. However, I focus on a service-side architecture. Further down this article, I&amp;rsquo;ll be going over the reasonably simple &lt;a href=&#34;https://golang.org/&#34;&gt;go&lt;/a&gt; code needed to develop a basic, yet production quality proxy, but first I&amp;rsquo;ll give you my take on why they solve so many problems and offer up my little workhorse, &lt;a href=&#34;https://github.com/txn2/n2proxy&#34;&gt;n2proxy&lt;/a&gt;.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Golang to Jupyter</title>
-      <link>https://imti.co/golang-to-jupyter/</link>
+      <link>http://localhost:1313/golang-to-jupyter/</link>
       <pubDate>Sun, 10 Jun 2018 00:00:00 +0000</pubDate>
-      <guid>https://imti.co/golang-to-jupyter/</guid>
+      <guid>http://localhost:1313/golang-to-jupyter/</guid>
       <description>&lt;p&gt;&lt;a href=&#34;http://jupyter.org/&#34;&gt;Jupyter Notbooks&lt;/a&gt; have been a popular technology in the Python data science community for a while now, especially in academics. Jupyter Notebooks are a way to mix inline, executable code with documentation in a presentation format. Best practices in organizing source code are not always the most efficient at communicating it&amp;rsquo;s functionality to a user.&lt;/p&gt;&#xA;&lt;p&gt;While the intention of a programming language is the abstraction of computational complexity into a simplified language humans can read and write, they must always weigh toward the efficiency of the primary interpreter, the computer. Jupyter Notebooks are intended to communicate source code to humans first and computers second. We can use Jupyter Notebooks to communicate to humans not only the source but the interpreted result.&lt;/p&gt;</description>
     </item>
     <item>
       <title>JWT Microservice, Tokenize Remote APIs</title>
-      <link>https://imti.co/jwt-microservice/</link>
+      <link>http://localhost:1313/jwt-microservice/</link>
       <pubDate>Fri, 18 May 2018 00:00:00 +0000</pubDate>
-      <guid>https://imti.co/jwt-microservice/</guid>
-      <description>&lt;p&gt;&lt;a href=&#34;https://github.com/txn2/txtoken&#34;&gt;txToken&lt;/a&gt; is a small high performance &lt;a href=&#34;http://microservices.io/&#34;&gt;microservice&lt;/a&gt; utility container. &lt;a href=&#34;https://github.com/txn2/txtoken&#34;&gt;txToken&lt;/a&gt; is used for adding &lt;a href=&#34;https://jwt.io/&#34;&gt;JSON Web Token&lt;/a&gt; based security to existing or new API development. &lt;a href=&#34;https://github.com/txn2/txtoken&#34;&gt;txToken&lt;/a&gt; is specifically for systems that communicate in JSON over HTTP. &lt;a href=&#34;https://github.com/txn2/txtoken&#34;&gt;txToken&lt;/a&gt; is called from a client with a JSON post body and passes received JSON to a remote endpoint. JSON retrieved from a remote endpoint is used to create a &lt;a href=&#34;https://jwt.io/&#34;&gt;JWT&lt;/a&gt; token with an &lt;a href=&#34;https://community.auth0.com/t/jwt-signing-algorithms-rs256-vs-hs256/7720&#34;&gt;HS256&lt;/a&gt; symmetrically encrypted signature.&lt;/p&gt;&#xA;&lt;h3 id=&#34;overview&#34;&gt;Overview&lt;/h3&gt;&#xA;&lt;p&gt;&lt;img src=&#34;https://imti.co/images/content/txToken-00.png&#34; alt=&#34;txToken Proxy&#34;&gt;&lt;/p&gt;</description>
+      <guid>http://localhost:1313/jwt-microservice/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://github.com/txn2/txtoken&#34;&gt;txToken&lt;/a&gt; is a small high performance &lt;a href=&#34;http://microservices.io/&#34;&gt;microservice&lt;/a&gt; utility container. &lt;a href=&#34;https://github.com/txn2/txtoken&#34;&gt;txToken&lt;/a&gt; is used for adding &lt;a href=&#34;https://jwt.io/&#34;&gt;JSON Web Token&lt;/a&gt; based security to existing or new API development. &lt;a href=&#34;https://github.com/txn2/txtoken&#34;&gt;txToken&lt;/a&gt; is specifically for systems that communicate in JSON over HTTP. &lt;a href=&#34;https://github.com/txn2/txtoken&#34;&gt;txToken&lt;/a&gt; is called from a client with a JSON post body and passes received JSON to a remote endpoint. JSON retrieved from a remote endpoint is used to create a &lt;a href=&#34;https://jwt.io/&#34;&gt;JWT&lt;/a&gt; token with an &lt;a href=&#34;https://community.auth0.com/t/jwt-signing-algorithms-rs256-vs-hs256/7720&#34;&gt;HS256&lt;/a&gt; symmetrically encrypted signature.&lt;/p&gt;&#xA;&lt;h3 id=&#34;overview&#34;&gt;Overview&lt;/h3&gt;&#xA;&lt;p&gt;&lt;img src=&#34;http://localhost:1313/images/content/txToken-00.png&#34; alt=&#34;txToken Proxy&#34;&gt;&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>
