@@ -8,7 +8,7 @@ preserveTaxonomyNames = true
 [pagination]
   pagerSize = 30 #frontpage pagination
 hasCJKLanguage = true
-publishdir = "docs"
+publishDir = "docs"
 
 displayMath = [['$','$'], ['$$','$$'], ['\\[','\\]']]
 

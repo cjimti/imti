@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en-us">
-<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><head>
+<head><head>
     <meta name="msvalidate.01" content="DBC34551F2DD1BA3DC0D62EE46D7448F" />
     <meta name="google-site-verification" content="DrtKc88u9uc7iptd4LyURAKBmFcOn7Kuk6HcRk_kNmo" />
     <meta charset="utf-8">
@@ -11,20 +11,20 @@
     <meta name="description" content="Container Orchestration &amp; Microservices">
     
     <meta name="keyword"  content="Go, Kubernetes, Elasticsearch, Python, Docker, Big Data, Artificial Intelligence, Machine Learning">
-    <link rel="shortcut icon" href="http://localhost:1313/img/favicon.ico">
+    <link rel="shortcut icon" href="https://imti.co/img/favicon.ico">
 
     <title>Kubernetes Overview - IMTI - Craig Johnston</title>
 
-    <link rel="canonical" href="http://localhost:1313/kubernetes/">
+    <link rel="canonical" href="https://imti.co/kubernetes/">
 	
     
-    <link rel="stylesheet" href="http://localhost:1313/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://imti.co/css/bootstrap.min.css">
 
     
-    <link rel="stylesheet" href="http://localhost:1313/css/hux-blog.min.css">
+    <link rel="stylesheet" href="https://imti.co/css/hux-blog.min.css">
 
     
-    <link rel="stylesheet" href="http://localhost:1313/css/syntax.css">
+    <link rel="stylesheet" href="https://imti.co/css/syntax.css">
 
     
     <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
@@ -33,13 +33,13 @@
     <link rel="stylesheet" href="/css/imti.css">
 
     
-    <script src="http://localhost:1313/js/jquery.min.js"></script>
+    <script src="https://imti.co/js/jquery.min.js"></script>
     
     
-    <script src="http://localhost:1313/js/bootstrap.min.js"></script>
+    <script src="https://imti.co/js/bootstrap.min.js"></script>
     
     
-    <script src="http://localhost:1313/js/hux-blog.min.js"></script>
+    <script src="https://imti.co/js/hux-blog.min.js"></script>
 
     <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
     <script>
@@ -55,15 +55,39 @@
 <meta name="twitter:description" content="Container Orchestration &amp; Microservices" />
 <meta name="twitter:title" content="Kubernetes Overview" />
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:image" content="http://localhost:1313/img/post/containers_876_438.jpg" />
-<meta property="og:image" content="http://localhost:1313/img/post/containers_876_438.jpg" />
+<meta name="twitter:image" content="https://imti.co/img/post/containers_876_438.jpg" />
+<meta property="og:image" content="https://imti.co/img/post/containers_876_438.jpg" />
 
 
 
     
 
 <script type="application/ld+json">
-"{\n  \"@context\": \"http://schema.org\",\n  \"@type\": \"Article\",\n  \"author\": {\n    \"@type\": \"Person\",\n    \"name\": \"Craig Johnston\"\n  },\n  \"dateModified\": \"2018-03-01T00:00:00\",\n  \"datePublished\": \"2018-03-01T00:00:00\",\n  \"description\": \"\\u003cp\\u003eGetting started with Kubernetes for local development. I develop on a Mac however much of this is easily translated to windows.\\u003c/p\\u003e\\n\\u003cp\\u003eThe following is primarily a getting started guide wrapped around my personal development notes. This set of notes are specifically for my co-workers in helping them get up to speed quickly. If you see an error feel free to make a pull request or just add an issue.\\u003c/p\\u003e\\n\\u003ch1 id=\\\"contents\\\"\\u003eContents\\u003c/h1\\u003e\\n\\u003cul\\u003e\\n\\u003cli\\u003e\\u003ca href=\\\"#deeper-reading-and-resources\\\"\\u003eDeeper Reading and Resources\\u003c/a\\u003e\\n\\u003cul\\u003e\\n\\u003cli\\u003e\\u003ca href=\\\"#free-courses\\\"\\u003eFree Courses\\u003c/a\\u003e\\u003c/li\\u003e\\n\\u003cli\\u003e\\u003ca href=\\\"#paid-courses\\\"\\u003ePaid Courses\\u003c/a\\u003e\\u003c/li\\u003e\\n\\u003c/ul\\u003e\\n\\u003c/li\\u003e\\n\\u003cli\\u003e\\u003ca href=\\\"#prerequisites\\\"\\u003ePrerequisites\\u003c/a\\u003e\\u003c/li\\u003e\\n\\u003cli\\u003e\\u003ca href=\\\"#test-installation\\\"\\u003eTest Installation\\u003c/a\\u003e\\u003c/li\\u003e\\n\\u003cli\\u003e\\u003ca href=\\\"#get-some-status\\\"\\u003eGet some status\\u003c/a\\u003e\\n\\u003cul\\u003e\\n\\u003cli\\u003e\\u003ca href=\\\"#architecture\\\"\\u003eArchitecture\\u003c/a\\u003e\\u003c/li\\u003e\\n\\u003c/ul\\u003e\\n\\u003c/li\\u003e\\n\\u003cli\\u003e\\u003ca href=\\\"#create-a-deployment\\\"\\u003eCreate a Deployment\\u003c/a\\u003e\\u003c/li\\u003e\\n\\u003cli\\u003e\\u003ca href=\\\"#useful-commands\\\"\\u003eUseful Commands\\u003c/a\\u003e\\u003c/li\\u003e\\n\\u003c/ul\\u003e\\n\\n\\n\\u003ch2 id=\\\"deeper-reading-and-resources\\\"\\u003eDeeper Reading and Resources\\u003c/h2\\u003e\\n\\u003ch3 id=\\\"free-courses\\\"\\u003eFree Courses\\u003c/h3\\u003e\\n\\u003cul\\u003e\\n\\u003cli\\u003e\\u003ca href=\\\"https://kubernetes.io/docs/tutorials/\\\"\\u003eOfficial Kubernetes Tutorials\\u003c/a\\u003e\\u003c/li\\u003e\\n\\u003cli\\u003eUdacity: \\u003ca href=\\\"https://www.udacity.com/course/scalable-microservices-with-kubernetes--ud615\\\"\\u003eScalable Microservices with Kubernetes\\u003c/a\\u003e\\u003c/li\\u003e\\n\\u003cli\\u003e\\u003ca href=\\\"https://github.com/kelseyhightower/kubernetes-the-hard-way\\\"\\u003eKubernetes The Hard Way\\u003c/a\\u003e\\nFor anyone planning to support a production Kubernetes cluster and wants to understand how everything fits together.\\u003c/li\\u003e\\n\\u003c/ul\\u003e\\n\\u003ch3 id=\\\"paid-courses\\\"\\u003ePaid Courses\\u003c/h3\\u003e\\n\\u003cul\\u003e\\n\\u003cli\\u003eLynda: \\u003ca href=\\\"https://www.lynda.com/Kubernetes-tutorials/Learning-Kubernetes/647663-2.html\\\"\\u003eLearning Kubernetes\\u003c/a\\u003e\\u003c/li\\u003e\\n\\u003cli\\u003eLynda: \\u003ca href=\\\"https://www.lynda.com/Kubernetes-tutorials/Kubernetes-Native-Tools/661764-2.html\\\"\\u003eKubernetes: Native Tools\\u003c/a\\u003e\\u003c/li\\u003e\\n\\u003cli\\u003eUdemy: \\u003ca href=\\\"https://www.udemy.com/learn-devops-the-complete-kubernetes-course/learn/v4/content\\\"\\u003eLearn DevOps: The Complete Kubernetes Course\\u003c/a\\u003e\\u003c/li\\u003e\\n\\u003cli\\u003eUdemy: \\u003ca href=\\\"https://www.udemy.com/learn-devops-advanced-kubernetes-usage\\\"\\u003eLearn DevOps: Advanced Kubernetes Usage\\u003c/a\\u003e\\u003c/li\\u003e\\n\\u003c/ul\\u003e\\n\\u003ch2 id=\\\"prerequisites\\\"\\u003ePrerequisites\\u003c/h2\\u003e\\n\\u003cul\\u003e\\n\\u003cli\\u003eInstall \\u003ca href=\\\"https://store.docker.com/search?type=edition\\u0026amp;offering=community\\\"\\u003eDocker\\u003c/a\\u003e\\u003c/li\\u003e\\n\\u003cli\\u003eInstall \\u003ca href=\\\"https://www.virtualbox.org/\\\"\\u003eVirtualbox\\u003c/a\\u003e\\u003c/li\\u003e\\n\\u003cli\\u003eInstall \\u003ca href=\\\"https://kubernetes.io/docs/tasks/tools/install-kubectl/\\\"\\u003eKubectl\\u003c/a\\u003e\\u003c/li\\u003e\\n\\u003cli\\u003eInstall \\u003ca href=\\\"https://kubernetes.io/docs/tasks/tools/install-minikube/#install-minikube\\\"\\u003eMinikube\\u003c/a\\u003e\\u003c/li\\u003e\\n\\u003c/ul\\u003e\\n\\u003ch2 id=\\\"test-installation\\\"\\u003eTest Installation\\u003c/h2\\u003e\\n\\u003cpre tabindex=\\\"0\\\"\\u003e\\u003ccode\\u003e$ minikube version\\nminikube version: v0.25.0\\n\\n$ minikube start\\nStarting local Kubernetes v1.9.0 cluster...\\nStarting VM...\\nGetting VM IP address...\\nMoving files into cluster...\\nSetting up certs...\\nConnecting to cluster...\\nSetting up kubeconfig...\\nStarting cluster components...\\nKubectl is now configured to use the cluster.\\nLoading cached images from config file.\\n\\n$ minikube addons list\\n- addon-manager: enabled\\n- coredns: disabled\\n- dashboard: enabled\\n- default-storageclass: enabled\\n- efk: disabled\\n- freshpod: disabled\\n- heapster: disabled\\n- ingress: disabled\\n- kube-dns: enabled\\n- registry: disabled\\n- registry-creds: disabled\\n- storage-provisioner: enabled\\n\\n\\n# enable heapster for CPU and mem\\n$ minikube addons enable heapster\\nheapster was successfully enabled\\n\\n# open the dashboard (in a browser)\\n$ minikube dashboard\\n\\u003c/code\\u003e\\u003c/pre\\u003e\\u003ch2 id=\\\"get-some-status\\\"\\u003eGet some status\\u003c/h2\\u003e\\n\\u003cdiv class=\\\"highlight\\\"\\u003e\\u003cpre tabindex=\\\"0\\\" style=\\\"color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;\\\"\\u003e\\u003ccode class=\\\"language-bash\\\" data-lang=\\\"bash\\\"\\u003e\\u003cspan style=\\\"display:flex;\\\"\\u003e\\u003cspan\\u003e\\u003cspan style=\\\"color:#75715e\\\"\\u003e# are we running a cluster?\\u003c/span\\u003e\\n\\u003c/span\\u003e\\u003c/span\\u003e\\u003cspan style=\\\"display:flex;\\\"\\u003e\\u003cspan\\u003e$ kubectl cluster-info\\n\\u003c/span\\u003e\\u003c/span\\u003e\\u003cspan style=\\\"display:flex;\\\"\\u003e\\u003cspan\\u003eKubernetes master is running at https://192.168.99.100:8443\\n\\u003c/span\\u003e\\u003c/span\\u003e\\u003cspan style=\\\"display:flex;\\\"\\u003e\\u003cspan\\u003e\\n\\u003c/span\\u003e\\u003c/span\\u003e\\u003cspan style=\\\"display:flex;\\\"\\u003e\\u003cspan\\u003e\\u003cspan style=\\\"color:#75715e\\\"\\u003e# we should have a minikube node\\u003c/span\\u003e\\n\\u003c/span\\u003e\\u003c/span\\u003e\\u003cspan style=\\\"display:flex;\\\"\\u003e\\u003cspan\\u003e$ kubectl get nodes\\n\\u003c/span\\u003e\\u003c/span\\u003e\\u003cspan style=\\\"display:flex;\\\"\\u003e\\u003cspan\\u003eNAME       STATUS    ROLES     AGE       VERSION\\n\\u003c/span\\u003e\\u003c/span\\u003e\\u003cspan style=\\\"display:flex;\\\"\\u003e\\u003cspan\\u003eminikube   Ready     \\u0026lt;none\\u0026gt;    2d        v1.9.0\\n\\u003c/span\\u003e\\u003c/span\\u003e\\u003c/code\\u003e\\u003c/pre\\u003e\\u003c/div\\u003e\\u003ch3 id=\\\"architecture\\\"\\u003eArchitecture\\u003c/h3\\u003e\\n\\u003cp\\u003eRead \\u003ca href=\\\"https://kubernetes.io/docs/tutorials/kubernetes-basics/\\\"\\u003eKubernetes Basics\\u003c/a\\u003e for a better understanding.\\u003c/p\\u003e\",\n  \"headline\": \"Kubernetes Overview\",\n  \"image\": [\n    \"http://localhost:1313/img/post/containers_876_438.jpg\"\n  ],\n  \"mainEntityOfPage\": {\n    \"@id\": \"http://localhost:1313/kubernetes/\",\n    \"@type\": \"WebPage\"\n  },\n  \"publisher\": {\n    \"@type\": \"Organization\",\n    \"logo\": {\n      \"@type\": \"ImageObject\",\n      \"url\": \"http://localhost:1313/img/craig_johnston_cjimti.jpg\"\n    },\n    \"name\": \"imti.co\"\n  }\n}"
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https:\/\/imti.co\/kubernetes\/"
+  },
+  "headline": "Kubernetes Overview",
+  "image": ["https:\/\/imti.co\/img\/post\/containers_876_438.jpg"],
+  "datePublished": "2018-03-01T00:00:00Z",
+  "dateModified": "2018-03-01T00:00:00Z",
+  "author": {
+    "@type": "Person",
+    "name": "Craig Johnston"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "imti.co",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https:\/\/imti.co\/img\/craig_johnston_cjimti.jpg"
+    }
+  },
+  "description": "Getting started with Kubernetes for local development. I develop on a Mac however much of this is easily translated to windows.\nThe following is primarily a …"
+}
 </script>
 
 
@@ -79,7 +103,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="http://localhost:1313//">IMTI</a>
+            <a class="navbar-brand" href="https://imti.co//">IMTI</a>
         </div>
 
         
@@ -88,10 +112,10 @@
             <div class="navbar-collapse">
                 <ul class="nav navbar-nav navbar-right">
                     <li>
-                        <a href="http://localhost:1313//">Home</a>
+                        <a href="https://imti.co//">Home</a>
                     </li>
                     <li>
-                        <a href="http://localhost:1313//about/">About</a>
+                        <a href="https://imti.co//about/">About</a>
                     </li>
                     <li>
                         <a href="https://twitter.com/cjimti">Follow</a>
@@ -140,7 +164,7 @@
 
 <style type="text/css">
     header.intro-header{
-        background-image: url('http://localhost:1313/img/post/containers.jpg')
+        background-image: url('https://imti.co/img/post/containers.jpg')
     }
 </style>
 <header class="intro-header" >

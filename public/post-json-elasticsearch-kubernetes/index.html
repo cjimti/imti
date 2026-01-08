@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en-us">
-<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><head>
+<head><head>
     <meta name="msvalidate.01" content="DBC34551F2DD1BA3DC0D62EE46D7448F" />
     <meta name="google-site-verification" content="DrtKc88u9uc7iptd4LyURAKBmFcOn7Kuk6HcRk_kNmo" />
     <meta charset="utf-8">
@@ -11,20 +11,20 @@
     <meta name="description" content="Instant, reliable, send and forget.">
     
     <meta name="keyword"  content="Go, Kubernetes, Elasticsearch, Python, Docker, Big Data, Artificial Intelligence, Machine Learning">
-    <link rel="shortcut icon" href="http://localhost:1313/img/favicon.ico">
+    <link rel="shortcut icon" href="https://imti.co/img/favicon.ico">
 
     <title>High Traffic JSON Data into Elasticsearch on Kubernetes - IMTI - Craig Johnston</title>
 
-    <link rel="canonical" href="http://localhost:1313/post-json-elasticsearch-kubernetes/">
+    <link rel="canonical" href="https://imti.co/post-json-elasticsearch-kubernetes/">
 	
     
-    <link rel="stylesheet" href="http://localhost:1313/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://imti.co/css/bootstrap.min.css">
 
     
-    <link rel="stylesheet" href="http://localhost:1313/css/hux-blog.min.css">
+    <link rel="stylesheet" href="https://imti.co/css/hux-blog.min.css">
 
     
-    <link rel="stylesheet" href="http://localhost:1313/css/syntax.css">
+    <link rel="stylesheet" href="https://imti.co/css/syntax.css">
 
     
     <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
@@ -33,13 +33,13 @@
     <link rel="stylesheet" href="/css/imti.css">
 
     
-    <script src="http://localhost:1313/js/jquery.min.js"></script>
+    <script src="https://imti.co/js/jquery.min.js"></script>
     
     
-    <script src="http://localhost:1313/js/bootstrap.min.js"></script>
+    <script src="https://imti.co/js/bootstrap.min.js"></script>
     
     
-    <script src="http://localhost:1313/js/hux-blog.min.js"></script>
+    <script src="https://imti.co/js/hux-blog.min.js"></script>
 
     <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
     <script>
@@ -55,15 +55,39 @@
 <meta name="twitter:description" content="Instant, reliable, send and forget." />
 <meta name="twitter:title" content="High Traffic JSON Data into Elasticsearch on Kubernetes" />
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:image" content="http://localhost:1313/img/post/firehose_876_438.jpg" />
-<meta property="og:image" content="http://localhost:1313/img/post/firehose_876_438.jpg" />
+<meta name="twitter:image" content="https://imti.co/img/post/firehose_876_438.jpg" />
+<meta property="og:image" content="https://imti.co/img/post/firehose_876_438.jpg" />
 
 
 
     
 
 <script type="application/ld+json">
-"{\n  \"@context\": \"http://schema.org\",\n  \"@type\": \"Article\",\n  \"author\": {\n    \"@type\": \"Person\",\n    \"name\": \"Craig Johnston\"\n  },\n  \"dateModified\": \"2018-07-18T00:00:00\",\n  \"datePublished\": \"2018-07-18T00:00:00\",\n  \"description\": \"\\u003cp\\u003eIOT devices, Point-of-Sale systems, application events or any client that sends data destined for indexing in Elasticsearch often need to send and forget, however, unless that data is of low value there needs to be assurance that arrives at its final destination. Back-pressure and database outages can pose a considerable threat to data integrity.\\u003c/p\\u003e\\n\\u003caside class=\\\"toc\\\"\\u003e\\n    \\u003cheader\\u003e\\n        \\u003ch2\\u003eContents\\u003c/h2\\u003e\\n    \\u003c/header\\u003e\\n    \\u003cnav id=\\\"TableOfContents\\\"\\u003e\\n  \\u003cul\\u003e\\n    \\u003cli\\u003e\\u003ca href=\\\"#background\\\"\\u003eBackground\\u003c/a\\u003e\\u003c/li\\u003e\\n    \\u003cli\\u003e\\u003ca href=\\\"#overview\\\"\\u003eOverview\\u003c/a\\u003e\\u003c/li\\u003e\\n    \\u003cli\\u003e\\u003ca href=\\\"#development-environment\\\"\\u003eDevelopment Environment\\u003c/a\\u003e\\n      \\u003cul\\u003e\\n        \\u003cli\\u003e\\u003ca href=\\\"#the-project-namespace\\\"\\u003ethe-project Namespace\\u003c/a\\u003e\\u003c/li\\u003e\\n      \\u003c/ul\\u003e\\n    \\u003c/li\\u003e\\n    \\u003cli\\u003e\\u003ca href=\\\"#the-project-weather-wx-data\\\"\\u003eThe Project: Weather (wx) Data\\u003c/a\\u003e\\u003c/li\\u003e\\n    \\u003cli\\u003e\\u003ca href=\\\"#rxtx-for-store-and-forward\\\"\\u003erxtx for Store-and-Forward\\u003c/a\\u003e\\n      \\u003cul\\u003e\\n        \\u003cli\\u003e\\u003ca href=\\\"#wx-rxtx-service\\\"\\u003ewx-rxtx Service\\u003c/a\\u003e\\u003c/li\\u003e\\n        \\u003cli\\u003e\\u003ca href=\\\"#wx-rxtx-statefulset\\\"\\u003ewx-rxtx StatefulSet\\u003c/a\\u003e\\u003c/li\\u003e\\n      \\u003c/ul\\u003e\\n    \\u003c/li\\u003e\\n    \\u003cli\\u003e\\u003ca href=\\\"#rtbeat-to-collect-buffer-and-publish\\\"\\u003ertBeat to Collect, Buffer and Publish\\u003c/a\\u003e\\n      \\u003cul\\u003e\\n        \\u003cli\\u003e\\u003ca href=\\\"#wx-rtbeat-service\\\"\\u003ewx-rtbeat Service\\u003c/a\\u003e\\u003c/li\\u003e\\n        \\u003cli\\u003e\\u003ca href=\\\"#wx-rtbeat-configmap\\\"\\u003ewx-rtbeat ConfigMap\\u003c/a\\u003e\\u003c/li\\u003e\\n        \\u003cli\\u003e\\u003ca href=\\\"#wx-rtbeat-deployment\\\"\\u003ewx-rtbeat Deployment\\u003c/a\\u003e\\u003c/li\\u003e\\n      \\u003c/ul\\u003e\\n    \\u003c/li\\u003e\\n    \\u003cli\\u003e\\u003ca href=\\\"#client-simulation--kubernetes-cron\\\"\\u003eClient Simulation / Kubernetes Cron\\u003c/a\\u003e\\u003c/li\\u003e\\n    \\u003cli\\u003e\\u003ca href=\\\"#performance\\\"\\u003ePerformance\\u003c/a\\u003e\\u003c/li\\u003e\\n    \\u003cli\\u003e\\u003ca href=\\\"#conclusion\\\"\\u003eConclusion\\u003c/a\\u003e\\u003c/li\\u003e\\n    \\u003cli\\u003e\\u003ca href=\\\"#port-forwarding--local-development\\\"\\u003ePort Forwarding / Local Development\\u003c/a\\u003e\\u003c/li\\u003e\\n    \\u003cli\\u003e\\u003ca href=\\\"#reference\\\"\\u003eReference\\u003c/a\\u003e\\u003c/li\\u003e\\n  \\u003c/ul\\u003e\\n\\u003c/nav\\u003e\\n\\u003c/aside\\u003e\\n\\n\\n\\u003ch2 id=\\\"background\\\"\\u003eBackground\\u003c/h2\\u003e\\n\\u003cp\\u003eHigh availability and high performance often mean burdensome complexity. Data replication, application, network and infrastructure redundancy, anything we can do to avoid a single point of failure. However, what happens when one of those points do fail? Alternatively, a cascade of problems causing slowdowns and back pressure builds to constant far too high for indexing to catch up?\\u003c/p\\u003e\",\n  \"headline\": \"High Traffic JSON Data into Elasticsearch on Kubernetes\",\n  \"image\": [\n    \"http://localhost:1313/img/post/firehose_876_438.jpg\"\n  ],\n  \"mainEntityOfPage\": {\n    \"@id\": \"http://localhost:1313/post-json-elasticsearch-kubernetes/\",\n    \"@type\": \"WebPage\"\n  },\n  \"publisher\": {\n    \"@type\": \"Organization\",\n    \"logo\": {\n      \"@type\": \"ImageObject\",\n      \"url\": \"http://localhost:1313/img/craig_johnston_cjimti.jpg\"\n    },\n    \"name\": \"imti.co\"\n  }\n}"
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https:\/\/imti.co\/post-json-elasticsearch-kubernetes\/"
+  },
+  "headline": "High Traffic JSON Data into Elasticsearch on Kubernetes",
+  "image": ["https:\/\/imti.co\/img\/post\/firehose_876_438.jpg"],
+  "datePublished": "2018-07-18T00:00:00Z",
+  "dateModified": "2018-07-18T00:00:00Z",
+  "author": {
+    "@type": "Person",
+    "name": "Craig Johnston"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "imti.co",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https:\/\/imti.co\/img\/craig_johnston_cjimti.jpg"
+    }
+  },
+  "description": "IOT devices, Point-of-Sale systems, application events or any client that sends data destined for indexing in Elasticsearch often need to send and forget, …"
+}
 </script>
 
 
@@ -79,7 +103,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="http://localhost:1313//">IMTI</a>
+            <a class="navbar-brand" href="https://imti.co//">IMTI</a>
         </div>
 
         
@@ -88,10 +112,10 @@
             <div class="navbar-collapse">
                 <ul class="nav navbar-nav navbar-right">
                     <li>
-                        <a href="http://localhost:1313//">Home</a>
+                        <a href="https://imti.co//">Home</a>
                     </li>
                     <li>
-                        <a href="http://localhost:1313//about/">About</a>
+                        <a href="https://imti.co//about/">About</a>
                     </li>
                     <li>
                         <a href="https://twitter.com/cjimti">Follow</a>
@@ -140,7 +164,7 @@
 
 <style type="text/css">
     header.intro-header{
-        background-image: url('http://localhost:1313/img/post/firehose.jpg')
+        background-image: url('https://imti.co/img/post/firehose.jpg')
     }
 </style>
 <header class="intro-header" >

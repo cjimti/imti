@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en-us">
-<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><head>
+<head><head>
     <meta name="msvalidate.01" content="DBC34551F2DD1BA3DC0D62EE46D7448F" />
     <meta name="google-site-verification" content="DrtKc88u9uc7iptd4LyURAKBmFcOn7Kuk6HcRk_kNmo" />
     <meta charset="utf-8">
@@ -11,20 +11,20 @@
     <meta name="description" content="Configuring the NGINX Ingress Controller">
     
     <meta name="keyword"  content="Go, Kubernetes, Elasticsearch, Python, Docker, Big Data, Artificial Intelligence, Machine Learning">
-    <link rel="shortcut icon" href="http://localhost:1313/img/favicon.ico">
+    <link rel="shortcut icon" href="https://imti.co/img/favicon.ico">
 
     <title>Kubernetes - 413 Request Entity Too Large - IMTI - Craig Johnston</title>
 
-    <link rel="canonical" href="http://localhost:1313/413-request-entity-too-large/">
+    <link rel="canonical" href="https://imti.co/413-request-entity-too-large/">
 	
     
-    <link rel="stylesheet" href="http://localhost:1313/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://imti.co/css/bootstrap.min.css">
 
     
-    <link rel="stylesheet" href="http://localhost:1313/css/hux-blog.min.css">
+    <link rel="stylesheet" href="https://imti.co/css/hux-blog.min.css">
 
     
-    <link rel="stylesheet" href="http://localhost:1313/css/syntax.css">
+    <link rel="stylesheet" href="https://imti.co/css/syntax.css">
 
     
     <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
@@ -33,13 +33,13 @@
     <link rel="stylesheet" href="/css/imti.css">
 
     
-    <script src="http://localhost:1313/js/jquery.min.js"></script>
+    <script src="https://imti.co/js/jquery.min.js"></script>
     
     
-    <script src="http://localhost:1313/js/bootstrap.min.js"></script>
+    <script src="https://imti.co/js/bootstrap.min.js"></script>
     
     
-    <script src="http://localhost:1313/js/hux-blog.min.js"></script>
+    <script src="https://imti.co/js/hux-blog.min.js"></script>
 
     <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
     <script>
@@ -55,15 +55,39 @@
 <meta name="twitter:description" content="Configuring the NGINX Ingress Controller" />
 <meta name="twitter:title" content="Kubernetes - 413 Request Entity Too Large" />
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:image" content="http://localhost:1313/img/post/tooth_876_438.jpg" />
-<meta property="og:image" content="http://localhost:1313/img/post/tooth_876_438.jpg" />
+<meta name="twitter:image" content="https://imti.co/img/post/tooth_876_438.jpg" />
+<meta property="og:image" content="https://imti.co/img/post/tooth_876_438.jpg" />
 
 
 
     
 
 <script type="application/ld+json">
-"{\n  \"@context\": \"http://schema.org\",\n  \"@type\": \"Article\",\n  \"author\": {\n    \"@type\": \"Person\",\n    \"name\": \"Craig Johnston\"\n  },\n  \"dateModified\": \"2018-03-24T00:00:00\",\n  \"datePublished\": \"2018-03-24T00:00:00\",\n  \"description\": \"\\u003cp\\u003eWhen setting up \\u003ca href=\\\"https://github.com/kubernetes/ingress-nginx\\\"\\u003enginx ingress\\u003c/a\\u003e on \\u003ca href=\\\"https://kubernetes.io/\\\"\\u003eKubernetes\\u003c/a\\u003e for a private \\u003ca href=\\\"https://hub.docker.com/_/registry/\\\"\\u003eDocker Registry\\u003c/a\\u003e, I ran into an error when trying to push an image to it.\\u003c/p\\u003e\\n\\u003cpre tabindex=\\\"0\\\"\\u003e\\u003ccode\\u003eError parsing HTTP response: invalid character \\u0026#39;\\u0026lt;\\u0026#39; looking for beginning of value: \\u0026#34;\\u0026lt;html\\u0026gt;\\\\r\\\\n\\u0026lt;head\\u0026gt;\\u0026lt;title\\u0026gt;413 Request Entity Too Large\\u0026lt;/title\\u0026gt;\\u0026lt;/head\\u0026gt;\\\\r\\\\n\\u0026lt;body bgcolor=\\\\\\u0026#34;white\\\\\\u0026#34;\\u0026gt;\\\\r\\\\n\\u0026lt;center\\u0026gt;\\u0026lt;h1\\u0026gt;413 Request Entity Too Large\\u0026lt;/h1\\u0026gt;\\u0026lt;/center\\u0026gt;\\\\r\\\\n\\u0026lt;hr\\u0026gt;\\u0026lt;center\\u0026gt;nginx/1.9.14\\u0026lt;/center\\u0026gt;\\\\r\\\\n\\u0026lt;/body\\u0026gt;\\\\r\\\\n\\u0026lt;/html\\u0026gt;\\\\r\\\\n\\u0026#34;\\n\\u003c/code\\u003e\\u003c/pre\\u003e\\u003cp\\u003eThe \\u0026ldquo;413 Request Entity Too Large\\u0026rdquo; error is something many accustomed to running \\u003ca href=\\\"https://www.nginx.com/\\\"\\u003enginx\\u003c/a\\u003e as a standard web server/proxy. \\u003ca href=\\\"https://www.nginx.com/\\\"\\u003enginx\\u003c/a\\u003e is configured to restrict the size of files it will allow over a post. This restriction helps avoid some DoS attacks. The default values are easy to adjust in the Nginx configuration. However, in the \\u003ca href=\\\"https://kubernetes.io/\\\"\\u003eKubernetes\\u003c/a\\u003e world things are a bit different. I prefer to do things the \\u003ca href=\\\"https://kubernetes.io/\\\"\\u003eKubernetes\\u003c/a\\u003e way; however, there is still a lack of established configuration idioms, since part of its appeal is flexibility. One thousand different ways of doing something means ten thousand variations of remedies to every potential problem. Googling errors in the \\u003ca href=\\\"https://kubernetes.io/\\\"\\u003eKubernetes\\u003c/a\\u003e world leads to a mess of solutions not always explicitly tied to an implementation. I am hoping that as \\u003ca href=\\\"https://kubernetes.io/\\\"\\u003eKubernetes\\u003c/a\\u003e continues to gain popularity more care will be taken to provide context for solutions to common problems.\\u003c/p\\u003e\",\n  \"headline\": \"Kubernetes - 413 Request Entity Too Large\",\n  \"image\": [\n    \"http://localhost:1313/img/post/tooth_876_438.jpg\"\n  ],\n  \"mainEntityOfPage\": {\n    \"@id\": \"http://localhost:1313/413-request-entity-too-large/\",\n    \"@type\": \"WebPage\"\n  },\n  \"publisher\": {\n    \"@type\": \"Organization\",\n    \"logo\": {\n      \"@type\": \"ImageObject\",\n      \"url\": \"http://localhost:1313/img/craig_johnston_cjimti.jpg\"\n    },\n    \"name\": \"imti.co\"\n  }\n}"
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https:\/\/imti.co\/413-request-entity-too-large\/"
+  },
+  "headline": "Kubernetes - 413 Request Entity Too Large",
+  "image": ["https:\/\/imti.co\/img\/post\/tooth_876_438.jpg"],
+  "datePublished": "2018-03-24T00:00:00Z",
+  "dateModified": "2018-03-24T00:00:00Z",
+  "author": {
+    "@type": "Person",
+    "name": "Craig Johnston"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "imti.co",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https:\/\/imti.co\/img\/craig_johnston_cjimti.jpg"
+    }
+  },
+  "description": "When setting up nginx ingress on Kubernetes for a private Docker Registry, I ran into an error when trying to push an image to it.\nError parsing HTTP response: …"
+}
 </script>
 
 
@@ -79,7 +103,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="http://localhost:1313//">IMTI</a>
+            <a class="navbar-brand" href="https://imti.co//">IMTI</a>
         </div>
 
         
@@ -88,10 +112,10 @@
             <div class="navbar-collapse">
                 <ul class="nav navbar-nav navbar-right">
                     <li>
-                        <a href="http://localhost:1313//">Home</a>
+                        <a href="https://imti.co//">Home</a>
                     </li>
                     <li>
-                        <a href="http://localhost:1313//about/">About</a>
+                        <a href="https://imti.co//about/">About</a>
                     </li>
                     <li>
                         <a href="https://twitter.com/cjimti">Follow</a>
@@ -140,7 +164,7 @@
 
 <style type="text/css">
     header.intro-header{
-        background-image: url('http://localhost:1313/img/post/tooth.jpg')
+        background-image: url('https://imti.co/img/post/tooth.jpg')
     }
 </style>
 <header class="intro-header" >

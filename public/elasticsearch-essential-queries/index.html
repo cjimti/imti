@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en-us">
-<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><head>
+<head><head>
     <meta name="msvalidate.01" content="DBC34551F2DD1BA3DC0D62EE46D7448F" />
     <meta name="google-site-verification" content="DrtKc88u9uc7iptd4LyURAKBmFcOn7Kuk6HcRk_kNmo" />
     <meta charset="utf-8">
@@ -11,20 +11,20 @@
     <meta name="description" content="Getting started with Elasticsearch">
     
     <meta name="keyword"  content="Go, Kubernetes, Elasticsearch, Python, Docker, Big Data, Artificial Intelligence, Machine Learning">
-    <link rel="shortcut icon" href="http://localhost:1313/img/favicon.ico">
+    <link rel="shortcut icon" href="https://imti.co/img/favicon.ico">
 
     <title>Elasticsearch Essential Queries - IMTI - Craig Johnston</title>
 
-    <link rel="canonical" href="http://localhost:1313/elasticsearch-essential-queries/">
+    <link rel="canonical" href="https://imti.co/elasticsearch-essential-queries/">
 	
     
-    <link rel="stylesheet" href="http://localhost:1313/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://imti.co/css/bootstrap.min.css">
 
     
-    <link rel="stylesheet" href="http://localhost:1313/css/hux-blog.min.css">
+    <link rel="stylesheet" href="https://imti.co/css/hux-blog.min.css">
 
     
-    <link rel="stylesheet" href="http://localhost:1313/css/syntax.css">
+    <link rel="stylesheet" href="https://imti.co/css/syntax.css">
 
     
     <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
@@ -33,13 +33,13 @@
     <link rel="stylesheet" href="/css/imti.css">
 
     
-    <script src="http://localhost:1313/js/jquery.min.js"></script>
+    <script src="https://imti.co/js/jquery.min.js"></script>
     
     
-    <script src="http://localhost:1313/js/bootstrap.min.js"></script>
+    <script src="https://imti.co/js/bootstrap.min.js"></script>
     
     
-    <script src="http://localhost:1313/js/hux-blog.min.js"></script>
+    <script src="https://imti.co/js/hux-blog.min.js"></script>
 
     <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
     <script>
@@ -55,15 +55,39 @@
 <meta name="twitter:description" content="Getting started with Elasticsearch" />
 <meta name="twitter:title" content="Elasticsearch Essential Queries" />
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:image" content="http://localhost:1313/img/post/net_876_438.jpg" />
-<meta property="og:image" content="http://localhost:1313/img/post/net_876_438.jpg" />
+<meta name="twitter:image" content="https://imti.co/img/post/net_876_438.jpg" />
+<meta property="og:image" content="https://imti.co/img/post/net_876_438.jpg" />
 
 
 
     
 
 <script type="application/ld+json">
-"{\n  \"@context\": \"http://schema.org\",\n  \"@type\": \"Article\",\n  \"author\": {\n    \"@type\": \"Person\",\n    \"name\": \"Craig Johnston\"\n  },\n  \"dateModified\": \"2018-07-26T00:00:00\",\n  \"datePublished\": \"2018-07-26T00:00:00\",\n  \"description\": \"\\u003cp\\u003eThe following is an overview for querying \\u003ca href=\\\"https://www.elastic.co/products/elasticsearch\\\"\\u003eElasticsearch\\u003c/a\\u003e. Over the years I have tried to assemble developer notes for myself and my team on a variety of platforms, languages and frameworks, a type of cheat-sheet but with context, not a comprehensive how-to, but a decent 15-minute overview of the features we are most likely to implement in a given iteration.\\u003c/p\\u003e\\n\\u003cp\\u003eExplore the \\u003ca href=\\\"https://www.elastic.co/guide/en/elasticsearch/guide/current/search-in-depth.html\\\"\\u003eElasticsearch official documentation\\u003c/a\\u003e: \\u003ca href=\\\"https://www.elastic.co/guide/en/elasticsearch/guide/current/search-in-depth.html\\\"\\u003eSearch in Depth\\u003c/a\\u003e.\\u003c/p\\u003e\\n\\u003caside class=\\\"toc\\\"\\u003e\\n    \\u003cheader\\u003e\\n        \\u003ch2\\u003eContents\\u003c/h2\\u003e\\n    \\u003c/header\\u003e\\n    \\u003cnav id=\\\"TableOfContents\\\"\\u003e\\n  \\u003cul\\u003e\\n    \\u003cli\\u003e\\u003ca href=\\\"#motivation\\\"\\u003eMotivation\\u003c/a\\u003e\\u003c/li\\u003e\\n    \\u003cli\\u003e\\u003ca href=\\\"#following-along-with-elasticsearch-and-kubernetes\\\"\\u003eFollowing Along with Elasticsearch and Kubernetes\\u003c/a\\u003e\\u003c/li\\u003e\\n    \\u003cli\\u003e\\u003ca href=\\\"#vocabulary\\\"\\u003eVocabulary\\u003c/a\\u003e\\u003c/li\\u003e\\n    \\u003cli\\u003e\\u003ca href=\\\"#basic-crud-api\\\"\\u003eBasic CRUD API\\u003c/a\\u003e\\n      \\u003cul\\u003e\\n        \\u003cli\\u003e\\u003ca href=\\\"#delete-an-index\\\"\\u003eDelete an Index\\u003c/a\\u003e\\u003c/li\\u003e\\n        \\u003cli\\u003e\\u003ca href=\\\"#create-an-index\\\"\\u003eCreate an Index\\u003c/a\\u003e\\u003c/li\\u003e\\n        \\u003cli\\u003e\\u003ca href=\\\"#create-or-update-a-document-upsert\\\"\\u003eCreate or Update a Document (Upsert)\\u003c/a\\u003e\\u003c/li\\u003e\\n        \\u003cli\\u003e\\u003ca href=\\\"#get-a-document\\\"\\u003eGet a Document\\u003c/a\\u003e\\u003c/li\\u003e\\n      \\u003c/ul\\u003e\\n    \\u003c/li\\u003e\\n    \\u003cli\\u003e\\u003ca href=\\\"#mappings-types-and-metadata\\\"\\u003eMappings, Types and Metadata\\u003c/a\\u003e\\n      \\u003cul\\u003e\\n        \\u003cli\\u003e\\u003ca href=\\\"#get-mapping\\\"\\u003eGet Mapping\\u003c/a\\u003e\\u003c/li\\u003e\\n        \\u003cli\\u003e\\u003ca href=\\\"#create-a-mapping\\\"\\u003eCreate a Mapping\\u003c/a\\u003e\\u003c/li\\u003e\\n      \\u003c/ul\\u003e\\n    \\u003c/li\\u003e\\n    \\u003cli\\u003e\\u003ca href=\\\"#searching\\\"\\u003eSearching\\u003c/a\\u003e\\u003c/li\\u003e\\n    \\u003cli\\u003e\\u003ca href=\\\"#range\\\"\\u003eRange\\u003c/a\\u003e\\u003c/li\\u003e\\n    \\u003cli\\u003e\\u003ca href=\\\"#filtering\\\"\\u003eFiltering\\u003c/a\\u003e\\u003c/li\\u003e\\n    \\u003cli\\u003e\\u003ca href=\\\"#aggregations\\\"\\u003eAggregations\\u003c/a\\u003e\\n      \\u003cul\\u003e\\n        \\u003cli\\u003e\\u003ca href=\\\"#counts\\\"\\u003eCounts\\u003c/a\\u003e\\u003c/li\\u003e\\n        \\u003cli\\u003e\\u003ca href=\\\"#averages-minimums-and-maximums\\\"\\u003eAverages, Minimums and Maximums\\u003c/a\\u003e\\u003c/li\\u003e\\n        \\u003cli\\u003e\\u003ca href=\\\"#percentile\\\"\\u003ePercentile\\u003c/a\\u003e\\u003c/li\\u003e\\n        \\u003cli\\u003e\\u003ca href=\\\"#percent-by-rank\\\"\\u003ePercent by Rank\\u003c/a\\u003e\\u003c/li\\u003e\\n        \\u003cli\\u003e\\u003ca href=\\\"#percent-by-rank-interval\\\"\\u003ePercent by Rank Interval\\u003c/a\\u003e\\u003c/li\\u003e\\n      \\u003c/ul\\u003e\\n    \\u003c/li\\u003e\\n    \\u003cli\\u003e\\u003ca href=\\\"#resources\\\"\\u003eResources\\u003c/a\\u003e\\u003c/li\\u003e\\n  \\u003c/ul\\u003e\\n\\u003c/nav\\u003e\\n\\u003c/aside\\u003e\\n\\n\\n\\u003ch2 id=\\\"motivation\\\"\\u003eMotivation\\u003c/h2\\u003e\\n\\u003cp\\u003eMy team and I work with a lot of SQL-based data, from MySQL, SQLite and even our large Cassandra cluster, however, our reporting systems are built on \\u003ca href=\\\"https://www.elastic.co/products/elasticsearch\\\"\\u003eElasticsearch\\u003c/a\\u003e. Transitioning our thinking from SQL to the \\u003ca href=\\\"https://blog.parse.ly/post/1691/lucene/\\\"\\u003eLucene\\u003c/a\\u003e syntax on occasion requires hitting the docs. However, most technical documentation is either for getting started or gives you every variation of every feature, which is great when you are neck deep and need a specific problem solved.\\u003c/p\\u003e\",\n  \"headline\": \"Elasticsearch Essential Queries\",\n  \"image\": [\n    \"http://localhost:1313/img/post/net_876_438.jpg\"\n  ],\n  \"mainEntityOfPage\": {\n    \"@id\": \"http://localhost:1313/elasticsearch-essential-queries/\",\n    \"@type\": \"WebPage\"\n  },\n  \"publisher\": {\n    \"@type\": \"Organization\",\n    \"logo\": {\n      \"@type\": \"ImageObject\",\n      \"url\": \"http://localhost:1313/img/craig_johnston_cjimti.jpg\"\n    },\n    \"name\": \"imti.co\"\n  }\n}"
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https:\/\/imti.co\/elasticsearch-essential-queries\/"
+  },
+  "headline": "Elasticsearch Essential Queries",
+  "image": ["https:\/\/imti.co\/img\/post\/net_876_438.jpg"],
+  "datePublished": "2018-07-26T00:00:00Z",
+  "dateModified": "2018-07-26T00:00:00Z",
+  "author": {
+    "@type": "Person",
+    "name": "Craig Johnston"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "imti.co",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https:\/\/imti.co\/img\/craig_johnston_cjimti.jpg"
+    }
+  },
+  "description": "The following is an overview for querying Elasticsearch. Over the years I have tried to assemble developer notes for myself and my team on a variety of …"
+}
 </script>
 
 
@@ -79,7 +103,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="http://localhost:1313//">IMTI</a>
+            <a class="navbar-brand" href="https://imti.co//">IMTI</a>
         </div>
 
         
@@ -88,10 +112,10 @@
             <div class="navbar-collapse">
                 <ul class="nav navbar-nav navbar-right">
                     <li>
-                        <a href="http://localhost:1313//">Home</a>
+                        <a href="https://imti.co//">Home</a>
                     </li>
                     <li>
-                        <a href="http://localhost:1313//about/">About</a>
+                        <a href="https://imti.co//about/">About</a>
                     </li>
                     <li>
                         <a href="https://twitter.com/cjimti">Follow</a>
@@ -140,7 +164,7 @@
 
 <style type="text/css">
     header.intro-header{
-        background-image: url('http://localhost:1313/img/post/net.jpg')
+        background-image: url('https://imti.co/img/post/net.jpg')
     }
 </style>
 <header class="intro-header" >

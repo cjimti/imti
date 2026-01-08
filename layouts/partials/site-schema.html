@@ -1,17 +1,30 @@
 {{ if .IsPage }}
-{{ $schema := dict
-  "@context" "http://schema.org"
-  "@type" "Article"
-  "mainEntityOfPage" (dict "@type" "WebPage" "@id" .Permalink)
-  "headline" .Title
-  "image" (slice (.Params.twitter_image | absURL))
-  "datePublished" (.PublishDate.Format "2006-01-02T15:04:05")
-  "dateModified" (.PublishDate.Format "2006-01-02T15:04:05")
-  "author" (dict "@type" "Person" "name" "Craig Johnston")
-  "publisher" (dict "@type" "Organization" "name" "imti.co" "logo" (dict "@type" "ImageObject" "url" (.Site.Params.sidebar_avatar | absURL)))
-  "description" .Summary
-}}
+{{ $desc := .Params.description | default .Summary | plainify | truncate 160 }}
 <script type="application/ld+json">
-{{ $schema | jsonify (dict "indent" "  ") | safeHTML }}
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "{{ .Permalink }}"
+  },
+  "headline": "{{ .Title | htmlUnescape }}",
+  "image": ["{{ .Params.twitter_image | absURL }}"],
+  "datePublished": "{{ .PublishDate.Format "2006-01-02T15:04:05Z07:00" }}",
+  "dateModified": "{{ .Lastmod.Format "2006-01-02T15:04:05Z07:00" }}",
+  "author": {
+    "@type": "Person",
+    "name": "Craig Johnston"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "imti.co",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "{{ .Site.Params.sidebar_avatar | absURL }}"
+    }
+  },
+  "description": "{{ $desc | htmlUnescape }}"
+}
 </script>
 {{ end }}

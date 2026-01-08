@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en-us">
-<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><head>
+<head><head>
     <meta name="msvalidate.01" content="DBC34551F2DD1BA3DC0D62EE46D7448F" />
     <meta name="google-site-verification" content="DrtKc88u9uc7iptd4LyURAKBmFcOn7Kuk6HcRk_kNmo" />
     <meta charset="utf-8">
@@ -11,20 +11,20 @@
     <meta name="description" content="Kubeless, Python and Elasticsearch">
     
     <meta name="keyword"  content="Go, Kubernetes, Elasticsearch, Python, Docker, Big Data, Artificial Intelligence, Machine Learning">
-    <link rel="shortcut icon" href="http://localhost:1313/img/favicon.ico">
+    <link rel="shortcut icon" href="https://imti.co/img/favicon.ico">
 
     <title>FaaS on Kubernetes - IMTI - Craig Johnston</title>
 
-    <link rel="canonical" href="http://localhost:1313/fass-kubeless-kubernetes/">
+    <link rel="canonical" href="https://imti.co/fass-kubeless-kubernetes/">
 	
     
-    <link rel="stylesheet" href="http://localhost:1313/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://imti.co/css/bootstrap.min.css">
 
     
-    <link rel="stylesheet" href="http://localhost:1313/css/hux-blog.min.css">
+    <link rel="stylesheet" href="https://imti.co/css/hux-blog.min.css">
 
     
-    <link rel="stylesheet" href="http://localhost:1313/css/syntax.css">
+    <link rel="stylesheet" href="https://imti.co/css/syntax.css">
 
     
     <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
@@ -33,13 +33,13 @@
     <link rel="stylesheet" href="/css/imti.css">
 
     
-    <script src="http://localhost:1313/js/jquery.min.js"></script>
+    <script src="https://imti.co/js/jquery.min.js"></script>
     
     
-    <script src="http://localhost:1313/js/bootstrap.min.js"></script>
+    <script src="https://imti.co/js/bootstrap.min.js"></script>
     
     
-    <script src="http://localhost:1313/js/hux-blog.min.js"></script>
+    <script src="https://imti.co/js/hux-blog.min.js"></script>
 
     <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
     <script>
@@ -55,15 +55,39 @@
 <meta name="twitter:description" content="Kubeless, Python and Elasticsearch" />
 <meta name="twitter:title" content="FaaS on Kubernetes" />
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:image" content="http://localhost:1313/img/post/balloon_876_438.jpg" />
-<meta property="og:image" content="http://localhost:1313/img/post/balloon_876_438.jpg" />
+<meta name="twitter:image" content="https://imti.co/img/post/balloon_876_438.jpg" />
+<meta property="og:image" content="https://imti.co/img/post/balloon_876_438.jpg" />
 
 
 
     
 
 <script type="application/ld+json">
-"{\n  \"@context\": \"http://schema.org\",\n  \"@type\": \"Article\",\n  \"author\": {\n    \"@type\": \"Person\",\n    \"name\": \"Craig Johnston\"\n  },\n  \"dateModified\": \"2018-07-28T00:00:00\",\n  \"datePublished\": \"2018-07-28T00:00:00\",\n  \"description\": \"\\u003cp\\u003eFaaS or \\u003ca href=\\\"https://en.wikipedia.org/wiki/Function_as_a_service\\\"\\u003eFunction as a Service\\u003c/a\\u003e also known as \\u003ca href=\\\"https://en.wikipedia.org/wiki/Serverless_computing\\\"\\u003eServerless computing\\u003c/a\\u003e implementations are gaining popularity. Discussed often are the cost savings and each implementations relationship to the physical and network architecture of a specific platform or vendor. While many of the \\u003ca href=\\\"https://martinfowler.com/articles/serverless.html#ReducedOperationalCost\\\"\\u003ecost and infrastructure\\u003c/a\\u003e advantages of FaaS are compelling, its only one of many advantages. Below, I hope to demonstrate how easy it is to develop and deploy FaaS components into a custom Kubernetes cluster. The functions I develop are nearly all business logic, and I believe therein lies the advantage, \\u003cstrong\\u003ehigh-density business logic\\u003c/strong\\u003e. Functions can have a higher degree of focus directly on business logic and communication with other services. Functions can communicate with other functions, microservices or monoliths. In this article, I demonstrate this with \\u003ca href=\\\"/kubernetes-production-elasticsearch/\\\"\\u003eElasticsearch\\u003c/a\\u003e.\\u003c/p\\u003e\",\n  \"headline\": \"FaaS on Kubernetes\",\n  \"image\": [\n    \"http://localhost:1313/img/post/balloon_876_438.jpg\"\n  ],\n  \"mainEntityOfPage\": {\n    \"@id\": \"http://localhost:1313/fass-kubeless-kubernetes/\",\n    \"@type\": \"WebPage\"\n  },\n  \"publisher\": {\n    \"@type\": \"Organization\",\n    \"logo\": {\n      \"@type\": \"ImageObject\",\n      \"url\": \"http://localhost:1313/img/craig_johnston_cjimti.jpg\"\n    },\n    \"name\": \"imti.co\"\n  }\n}"
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https:\/\/imti.co\/fass-kubeless-kubernetes\/"
+  },
+  "headline": "FaaS on Kubernetes",
+  "image": ["https:\/\/imti.co\/img\/post\/balloon_876_438.jpg"],
+  "datePublished": "2018-07-28T00:00:00Z",
+  "dateModified": "2018-07-28T00:00:00Z",
+  "author": {
+    "@type": "Person",
+    "name": "Craig Johnston"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "imti.co",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https:\/\/imti.co\/img\/craig_johnston_cjimti.jpg"
+    }
+  },
+  "description": "FaaS or Function as a Service also known as Serverless computing implementations are gaining popularity. Discussed often are the cost savings and each …"
+}
 </script>
 
 
@@ -79,7 +103,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="http://localhost:1313//">IMTI</a>
+            <a class="navbar-brand" href="https://imti.co//">IMTI</a>
         </div>
 
         
@@ -88,10 +112,10 @@
             <div class="navbar-collapse">
                 <ul class="nav navbar-nav navbar-right">
                     <li>
-                        <a href="http://localhost:1313//">Home</a>
+                        <a href="https://imti.co//">Home</a>
                     </li>
                     <li>
-                        <a href="http://localhost:1313//about/">About</a>
+                        <a href="https://imti.co//about/">About</a>
                     </li>
                     <li>
                         <a href="https://twitter.com/cjimti">Follow</a>
@@ -140,7 +164,7 @@
 
 <style type="text/css">
     header.intro-header{
-        background-image: url('http://localhost:1313/img/post/balloon.jpg')
+        background-image: url('https://imti.co/img/post/balloon.jpg')
     }
 </style>
 <header class="intro-header" >

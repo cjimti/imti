@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en-us">
-<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><head>
+<head><head>
     <meta name="msvalidate.01" content="DBC34551F2DD1BA3DC0D62EE46D7448F" />
     <meta name="google-site-verification" content="DrtKc88u9uc7iptd4LyURAKBmFcOn7Kuk6HcRk_kNmo" />
     <meta charset="utf-8">
@@ -11,20 +11,20 @@
     <meta name="description" content="Setup a fast, custom production grade Elasticsearch cluster.">
     
     <meta name="keyword"  content="Go, Kubernetes, Elasticsearch, Python, Docker, Big Data, Artificial Intelligence, Machine Learning">
-    <link rel="shortcut icon" href="http://localhost:1313/img/favicon.ico">
+    <link rel="shortcut icon" href="https://imti.co/img/favicon.ico">
 
     <title>Production Grade Elasticsearch on Kubernetes - IMTI - Craig Johnston</title>
 
-    <link rel="canonical" href="http://localhost:1313/kubernetes-production-elasticsearch/">
+    <link rel="canonical" href="https://imti.co/kubernetes-production-elasticsearch/">
 	
     
-    <link rel="stylesheet" href="http://localhost:1313/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://imti.co/css/bootstrap.min.css">
 
     
-    <link rel="stylesheet" href="http://localhost:1313/css/hux-blog.min.css">
+    <link rel="stylesheet" href="https://imti.co/css/hux-blog.min.css">
 
     
-    <link rel="stylesheet" href="http://localhost:1313/css/syntax.css">
+    <link rel="stylesheet" href="https://imti.co/css/syntax.css">
 
     
     <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
@@ -33,13 +33,13 @@
     <link rel="stylesheet" href="/css/imti.css">
 
     
-    <script src="http://localhost:1313/js/jquery.min.js"></script>
+    <script src="https://imti.co/js/jquery.min.js"></script>
     
     
-    <script src="http://localhost:1313/js/bootstrap.min.js"></script>
+    <script src="https://imti.co/js/bootstrap.min.js"></script>
     
     
-    <script src="http://localhost:1313/js/hux-blog.min.js"></script>
+    <script src="https://imti.co/js/hux-blog.min.js"></script>
 
     <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
     <script>
@@ -55,15 +55,39 @@
 <meta name="twitter:description" content="Setup a fast, custom production grade Elasticsearch cluster." />
 <meta name="twitter:title" content="Production Grade Elasticsearch on Kubernetes" />
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:image" content="http://localhost:1313/img/post/nav_876_438.jpg?card" />
-<meta property="og:image" content="http://localhost:1313/img/post/nav_876_438.jpg?card" />
+<meta name="twitter:image" content="https://imti.co/img/post/nav_876_438.jpg?card" />
+<meta property="og:image" content="https://imti.co/img/post/nav_876_438.jpg?card" />
 
 
 
     
 
 <script type="application/ld+json">
-"{\n  \"@context\": \"http://schema.org\",\n  \"@type\": \"Article\",\n  \"author\": {\n    \"@type\": \"Person\",\n    \"name\": \"Craig Johnston\"\n  },\n  \"dateModified\": \"2018-07-14T00:00:00\",\n  \"datePublished\": \"2018-07-14T00:00:00\",\n  \"description\": \"\\u003cp\\u003eInstalling production ready, Elasticsearch 6.2 on Kubernetes requires a hand full of simple configurations. The following guide is a high-level overview of an installation process using Elastic\\u0026rsquo;s \\u003ca href=\\\"https://www.elastic.co/guide/en/elasticsearch/reference/6.2/modules-node.html\\\"\\u003erecommendations for best practices\\u003c/a\\u003e. The Github project \\u003ca href=\\\"https://github.com/pires/kubernetes-elasticsearch-cluster\\\"\\u003ekubernetes-elasticsearch-cluster\\u003c/a\\u003e is used for the Elastic Docker container and built to operate Elasticsearch with nodes dedicated as Master, Data, and Client/Ingest.\\u003c/p\\u003e\\n\\u003cp\\u003eThe Docker container \\u003ca href=\\\"https://github.com/pires/docker-elasticsearch\\\"\\u003edocker-elasticsearch\\u003c/a\\u003e, a \\u0026ldquo;Ready to use, lean and highly configurable Elasticsearch container image.\\u0026rdquo; by \\u003ca href=\\\"https://github.com/pires\\\"\\u003epires\\u003c/a\\u003e is sufficient for use in this guide. However, the \\u003ca href=\\\"https://github.com/txn2/k8s-es\\\"\\u003etxn2/k8s-es\\u003c/a\\u003e wraps it with a few minor preset environment variables to simplify configuration. I use the docker image \\u003ca href=\\\"https://hub.docker.com/r/txn2/k8s-es/tags/\\\"\\u003etxn2/k8s-es:v6.2.3\\u003c/a\\u003e in the examples below.\\u003c/p\\u003e\",\n  \"headline\": \"Production Grade Elasticsearch on Kubernetes\",\n  \"image\": [\n    \"http://localhost:1313/img/post/nav_876_438.jpg?card\"\n  ],\n  \"mainEntityOfPage\": {\n    \"@id\": \"http://localhost:1313/kubernetes-production-elasticsearch/\",\n    \"@type\": \"WebPage\"\n  },\n  \"publisher\": {\n    \"@type\": \"Organization\",\n    \"logo\": {\n      \"@type\": \"ImageObject\",\n      \"url\": \"http://localhost:1313/img/craig_johnston_cjimti.jpg\"\n    },\n    \"name\": \"imti.co\"\n  }\n}"
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https:\/\/imti.co\/kubernetes-production-elasticsearch\/"
+  },
+  "headline": "Production Grade Elasticsearch on Kubernetes",
+  "image": ["https:\/\/imti.co\/img\/post\/nav_876_438.jpg?card"],
+  "datePublished": "2018-07-14T00:00:00Z",
+  "dateModified": "2018-07-14T00:00:00Z",
+  "author": {
+    "@type": "Person",
+    "name": "Craig Johnston"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "imti.co",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https:\/\/imti.co\/img\/craig_johnston_cjimti.jpg"
+    }
+  },
+  "description": "Installing production ready, Elasticsearch 6.2 on Kubernetes requires a hand full of simple configurations. The following guide is a high-level overview of an …"
+}
 </script>
 
 
@@ -79,7 +103,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="http://localhost:1313//">IMTI</a>
+            <a class="navbar-brand" href="https://imti.co//">IMTI</a>
         </div>
 
         
@@ -88,10 +112,10 @@
             <div class="navbar-collapse">
                 <ul class="nav navbar-nav navbar-right">
                     <li>
-                        <a href="http://localhost:1313//">Home</a>
+                        <a href="https://imti.co//">Home</a>
                     </li>
                     <li>
-                        <a href="http://localhost:1313//about/">About</a>
+                        <a href="https://imti.co//about/">About</a>
                     </li>
                     <li>
                         <a href="https://twitter.com/cjimti">Follow</a>
@@ -140,7 +164,7 @@
 
 <style type="text/css">
     header.intro-header{
-        background-image: url('http://localhost:1313/img/post/nav.jpg')
+        background-image: url('https://imti.co/img/post/nav.jpg')
     }
 </style>
 <header class="intro-header" >

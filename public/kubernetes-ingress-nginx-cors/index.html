@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en-us">
-<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><head>
+<head><head>
     <meta name="msvalidate.01" content="DBC34551F2DD1BA3DC0D62EE46D7448F" />
     <meta name="google-site-verification" content="DrtKc88u9uc7iptd4LyURAKBmFcOn7Kuk6HcRk_kNmo" />
     <meta charset="utf-8">
@@ -11,20 +11,20 @@
     <meta name="description" content="Painless CORS header configuration in Kubernetes">
     
     <meta name="keyword"  content="Go, Kubernetes, Elasticsearch, Python, Docker, Big Data, Artificial Intelligence, Machine Learning">
-    <link rel="shortcut icon" href="http://localhost:1313/img/favicon.ico">
+    <link rel="shortcut icon" href="https://imti.co/img/favicon.ico">
 
     <title>CORS on Kubernetes Ingress Nginx - IMTI - Craig Johnston</title>
 
-    <link rel="canonical" href="http://localhost:1313/kubernetes-ingress-nginx-cors/">
+    <link rel="canonical" href="https://imti.co/kubernetes-ingress-nginx-cors/">
 	
     
-    <link rel="stylesheet" href="http://localhost:1313/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://imti.co/css/bootstrap.min.css">
 
     
-    <link rel="stylesheet" href="http://localhost:1313/css/hux-blog.min.css">
+    <link rel="stylesheet" href="https://imti.co/css/hux-blog.min.css">
 
     
-    <link rel="stylesheet" href="http://localhost:1313/css/syntax.css">
+    <link rel="stylesheet" href="https://imti.co/css/syntax.css">
 
     
     <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
@@ -33,13 +33,13 @@
     <link rel="stylesheet" href="/css/imti.css">
 
     
-    <script src="http://localhost:1313/js/jquery.min.js"></script>
+    <script src="https://imti.co/js/jquery.min.js"></script>
     
     
-    <script src="http://localhost:1313/js/bootstrap.min.js"></script>
+    <script src="https://imti.co/js/bootstrap.min.js"></script>
     
     
-    <script src="http://localhost:1313/js/hux-blog.min.js"></script>
+    <script src="https://imti.co/js/hux-blog.min.js"></script>
 
     <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
     <script>
@@ -55,15 +55,39 @@
 <meta name="twitter:description" content="Painless CORS header configuration in Kubernetes" />
 <meta name="twitter:title" content="CORS on Kubernetes Ingress Nginx" />
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:image" content="http://localhost:1313/img/post/bwire_876_438.jpg" />
-<meta property="og:image" content="http://localhost:1313/img/post/bwire_876_438.jpg" />
+<meta name="twitter:image" content="https://imti.co/img/post/bwire_876_438.jpg" />
+<meta property="og:image" content="https://imti.co/img/post/bwire_876_438.jpg" />
 
 
 
     
 
 <script type="application/ld+json">
-"{\n  \"@context\": \"http://schema.org\",\n  \"@type\": \"Article\",\n  \"author\": {\n    \"@type\": \"Person\",\n    \"name\": \"Craig Johnston\"\n  },\n  \"dateModified\": \"2018-05-28T00:00:00\",\n  \"datePublished\": \"2018-05-28T00:00:00\",\n  \"description\": \"\\u003cp\\u003eUsing \\u003ca href=\\\"/web-cluster-ingress/\\\"\\u003eingress\\u003c/a\\u003e-nginx on \\u003ca href=\\\"https://kubernetes.io/\\\"\\u003eKubernetes\\u003c/a\\u003e makes adding \\u003ca href=\\\"https://en.wikipedia.org/wiki/Cross-origin_resource_sharing\\\"\\u003eCORS\\u003c/a\\u003e headers painless. Kubernetes \\u003ca href=\\\"/web-cluster-ingress/\\\"\\u003eingress\\u003c/a\\u003e-nginx uses \\u003ca href=\\\"https://github.com/kubernetes/ingress-nginx/blob/master/docs/user-guide/nginx-configuration/annotations.md\\\"\\u003eannotations\\u003c/a\\u003e as a quick way to allow you to specify the automatic generation of an extensive list of common \\u003ca href=\\\"http://nginx.org/en/docs/beginners_guide.html\\\"\\u003enginx\\u003c/a\\u003e configuration options.\\u003c/p\\u003e\\n\\u003cp\\u003eExample \\u003ca href=\\\"/web-cluster-ingress/\\\"\\u003eingress\\u003c/a\\u003e configuration enabling \\u003ca href=\\\"https://en.wikipedia.org/wiki/Cross-origin_resource_sharing\\\"\\u003eCORS\\u003c/a\\u003e:\\u003c/p\\u003e\\n\\u003cdiv class=\\\"highlight\\\"\\u003e\\u003cpre tabindex=\\\"0\\\" style=\\\"color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;\\\"\\u003e\\u003ccode class=\\\"language-yaml\\\" data-lang=\\\"yaml\\\"\\u003e\\u003cspan style=\\\"display:flex;\\\"\\u003e\\u003cspan\\u003e\\u003cspan style=\\\"color:#f92672\\\"\\u003eapiVersion\\u003c/span\\u003e: \\u003cspan style=\\\"color:#ae81ff\\\"\\u003eextensions/v1beta1\\u003c/span\\u003e\\n\\u003c/span\\u003e\\u003c/span\\u003e\\u003cspan style=\\\"display:flex;\\\"\\u003e\\u003cspan\\u003e\\u003cspan style=\\\"color:#f92672\\\"\\u003ekind\\u003c/span\\u003e: \\u003cspan style=\\\"color:#ae81ff\\\"\\u003eIngress\\u003c/span\\u003e\\n\\u003c/span\\u003e\\u003c/span\\u003e\\u003cspan style=\\\"display:flex;\\\"\\u003e\\u003cspan\\u003e\\u003cspan style=\\\"color:#f92672\\\"\\u003emetadata\\u003c/span\\u003e:\\n\\u003c/span\\u003e\\u003c/span\\u003e\\u003cspan style=\\\"display:flex;\\\"\\u003e\\u003cspan\\u003e  \\u003cspan style=\\\"color:#f92672\\\"\\u003ename\\u003c/span\\u003e: \\u003cspan style=\\\"color:#ae81ff\\\"\\u003eapi\\u003c/span\\u003e\\n\\u003c/span\\u003e\\u003c/span\\u003e\\u003cspan style=\\\"display:flex;\\\"\\u003e\\u003cspan\\u003e  \\u003cspan style=\\\"color:#f92672\\\"\\u003enamespace\\u003c/span\\u003e: \\u003cspan style=\\\"color:#ae81ff\\\"\\u003efuse\\u003c/span\\u003e\\n\\u003c/span\\u003e\\u003c/span\\u003e\\u003cspan style=\\\"display:flex;\\\"\\u003e\\u003cspan\\u003e  \\u003cspan style=\\\"color:#f92672\\\"\\u003elabels\\u003c/span\\u003e:\\n\\u003c/span\\u003e\\u003c/span\\u003e\\u003cspan style=\\\"display:flex;\\\"\\u003e\\u003cspan\\u003e    \\u003cspan style=\\\"color:#f92672\\\"\\u003eapp\\u003c/span\\u003e: \\u003cspan style=\\\"color:#ae81ff\\\"\\u003eapi\\u003c/span\\u003e\\n\\u003c/span\\u003e\\u003c/span\\u003e\\u003cspan style=\\\"display:flex;\\\"\\u003e\\u003cspan\\u003e  \\u003cspan style=\\\"color:#f92672\\\"\\u003eannotations\\u003c/span\\u003e:\\n\\u003c/span\\u003e\\u003c/span\\u003e\\u003cspan style=\\\"display:flex;\\\"\\u003e\\u003cspan\\u003e    \\u003cspan style=\\\"color:#f92672\\\"\\u003enginx.ingress.kubernetes.io/enable-cors\\u003c/span\\u003e: \\u003cspan style=\\\"color:#e6db74\\\"\\u003e\\u0026#34;true\\u0026#34;\\u003c/span\\u003e\\n\\u003c/span\\u003e\\u003c/span\\u003e\\u003cspan style=\\\"display:flex;\\\"\\u003e\\u003cspan\\u003e    \\u003cspan style=\\\"color:#f92672\\\"\\u003enginx.ingress.kubernetes.io/cors-allow-methods\\u003c/span\\u003e: \\u003cspan style=\\\"color:#e6db74\\\"\\u003e\\u0026#34;PUT, GET, POST, OPTIONS\\u0026#34;\\u003c/span\\u003e\\n\\u003c/span\\u003e\\u003c/span\\u003e\\u003cspan style=\\\"display:flex;\\\"\\u003e\\u003cspan\\u003e    \\u003cspan style=\\\"color:#f92672\\\"\\u003enginx.ingress.kubernetes.io/cors-allow-origin\\u003c/span\\u003e: \\u003cspan style=\\\"color:#e6db74\\\"\\u003e\\u0026#34;https://admin.example.com\\u0026#34;\\u003c/span\\u003e\\n\\u003c/span\\u003e\\u003c/span\\u003e\\u003cspan style=\\\"display:flex;\\\"\\u003e\\u003cspan\\u003e    \\u003cspan style=\\\"color:#f92672\\\"\\u003enginx.ingress.kubernetes.io/cors-allow-credentials\\u003c/span\\u003e: \\u003cspan style=\\\"color:#e6db74\\\"\\u003e\\u0026#34;true\\u0026#34;\\u003c/span\\u003e\\n\\u003c/span\\u003e\\u003c/span\\u003e\\u003cspan style=\\\"display:flex;\\\"\\u003e\\u003cspan\\u003e\\u003cspan style=\\\"color:#f92672\\\"\\u003espec\\u003c/span\\u003e:\\n\\u003c/span\\u003e\\u003c/span\\u003e\\u003cspan style=\\\"display:flex;\\\"\\u003e\\u003cspan\\u003e  \\u003cspan style=\\\"color:#f92672\\\"\\u003erules\\u003c/span\\u003e:\\n\\u003c/span\\u003e\\u003c/span\\u003e\\u003cspan style=\\\"display:flex;\\\"\\u003e\\u003cspan\\u003e  - \\u003cspan style=\\\"color:#f92672\\\"\\u003ehost\\u003c/span\\u003e: \\u003cspan style=\\\"color:#ae81ff\\\"\\u003eapi.example.com\\u003c/span\\u003e\\n\\u003c/span\\u003e\\u003c/span\\u003e\\u003cspan style=\\\"display:flex;\\\"\\u003e\\u003cspan\\u003e    \\u003cspan style=\\\"color:#f92672\\\"\\u003ehttp\\u003c/span\\u003e:\\n\\u003c/span\\u003e\\u003c/span\\u003e\\u003cspan style=\\\"display:flex;\\\"\\u003e\\u003cspan\\u003e      \\u003cspan style=\\\"color:#f92672\\\"\\u003epaths\\u003c/span\\u003e:\\n\\u003c/span\\u003e\\u003c/span\\u003e\\u003cspan style=\\\"display:flex;\\\"\\u003e\\u003cspan\\u003e      - \\u003cspan style=\\\"color:#f92672\\\"\\u003ebackend\\u003c/span\\u003e:\\n\\u003c/span\\u003e\\u003c/span\\u003e\\u003cspan style=\\\"display:flex;\\\"\\u003e\\u003cspan\\u003e          \\u003cspan style=\\\"color:#f92672\\\"\\u003eserviceName\\u003c/span\\u003e: \\u003cspan style=\\\"color:#ae81ff\\\"\\u003eapi-example\\u003c/span\\u003e\\n\\u003c/span\\u003e\\u003c/span\\u003e\\u003cspan style=\\\"display:flex;\\\"\\u003e\\u003cspan\\u003e          \\u003cspan style=\\\"color:#f92672\\\"\\u003eservicePort\\u003c/span\\u003e: \\u003cspan style=\\\"color:#ae81ff\\\"\\u003e80\\u003c/span\\u003e\\n\\u003c/span\\u003e\\u003c/span\\u003e\\u003cspan style=\\\"display:flex;\\\"\\u003e\\u003cspan\\u003e        \\u003cspan style=\\\"color:#f92672\\\"\\u003epath\\u003c/span\\u003e: \\u003cspan style=\\\"color:#ae81ff\\\"\\u003e/api\\u003c/span\\u003e\\n\\u003c/span\\u003e\\u003c/span\\u003e\\u003cspan style=\\\"display:flex;\\\"\\u003e\\u003cspan\\u003e  \\u003cspan style=\\\"color:#f92672\\\"\\u003etls\\u003c/span\\u003e:\\n\\u003c/span\\u003e\\u003c/span\\u003e\\u003cspan style=\\\"display:flex;\\\"\\u003e\\u003cspan\\u003e  - \\u003cspan style=\\\"color:#f92672\\\"\\u003ehosts\\u003c/span\\u003e:\\n\\u003c/span\\u003e\\u003c/span\\u003e\\u003cspan style=\\\"display:flex;\\\"\\u003e\\u003cspan\\u003e    - \\u003cspan style=\\\"color:#ae81ff\\\"\\u003eapi.example.com\\u003c/span\\u003e\\n\\u003c/span\\u003e\\u003c/span\\u003e\\u003cspan style=\\\"display:flex;\\\"\\u003e\\u003cspan\\u003e    \\u003cspan style=\\\"color:#f92672\\\"\\u003esecretName\\u003c/span\\u003e: \\u003cspan style=\\\"color:#ae81ff\\\"\\u003eexample-tls\\u003c/span\\u003e\\n\\u003c/span\\u003e\\u003c/span\\u003e\\u003c/code\\u003e\\u003c/pre\\u003e\\u003c/div\\u003e\\u003cp\\u003eYou can check the nginx configuration file generated by Kubernetes \\u003ca href=\\\"/web-cluster-ingress/\\\"\\u003eingress\\u003c/a\\u003e-nginx on any of the ingress controller pods.\\u003c/p\\u003e\",\n  \"headline\": \"CORS on Kubernetes Ingress Nginx\",\n  \"image\": [\n    \"http://localhost:1313/img/post/bwire_876_438.jpg\"\n  ],\n  \"mainEntityOfPage\": {\n    \"@id\": \"http://localhost:1313/kubernetes-ingress-nginx-cors/\",\n    \"@type\": \"WebPage\"\n  },\n  \"publisher\": {\n    \"@type\": \"Organization\",\n    \"logo\": {\n      \"@type\": \"ImageObject\",\n      \"url\": \"http://localhost:1313/img/craig_johnston_cjimti.jpg\"\n    },\n    \"name\": \"imti.co\"\n  }\n}"
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https:\/\/imti.co\/kubernetes-ingress-nginx-cors\/"
+  },
+  "headline": "CORS on Kubernetes Ingress Nginx",
+  "image": ["https:\/\/imti.co\/img\/post\/bwire_876_438.jpg"],
+  "datePublished": "2018-05-28T00:00:00Z",
+  "dateModified": "2018-05-28T00:00:00Z",
+  "author": {
+    "@type": "Person",
+    "name": "Craig Johnston"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "imti.co",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https:\/\/imti.co\/img\/craig_johnston_cjimti.jpg"
+    }
+  },
+  "description": "Using ingress-nginx on Kubernetes makes adding CORS headers painless. Kubernetes ingress-nginx uses annotations as a quick way to allow you to specify the …"
+}
 </script>
 
 
@@ -79,7 +103,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="http://localhost:1313//">IMTI</a>
+            <a class="navbar-brand" href="https://imti.co//">IMTI</a>
         </div>
 
         
@@ -88,10 +112,10 @@
             <div class="navbar-collapse">
                 <ul class="nav navbar-nav navbar-right">
                     <li>
-                        <a href="http://localhost:1313//">Home</a>
+                        <a href="https://imti.co//">Home</a>
                     </li>
                     <li>
-                        <a href="http://localhost:1313//about/">About</a>
+                        <a href="https://imti.co//about/">About</a>
                     </li>
                     <li>
                         <a href="https://twitter.com/cjimti">Follow</a>
@@ -140,7 +164,7 @@
 
 <style type="text/css">
     header.intro-header{
-        background-image: url('http://localhost:1313/img/post/bwire.jpg')
+        background-image: url('https://imti.co/img/post/bwire.jpg')
     }
 </style>
 <header class="intro-header" >

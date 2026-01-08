@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en-us">
-<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><head>
+<head><head>
     <meta name="msvalidate.01" content="DBC34551F2DD1BA3DC0D62EE46D7448F" />
     <meta name="google-site-verification" content="DrtKc88u9uc7iptd4LyURAKBmFcOn7Kuk6HcRk_kNmo" />
     <meta charset="utf-8">
@@ -11,20 +11,20 @@
     <meta name="description" content="Overview">
     
     <meta name="keyword"  content="Go, Kubernetes, Elasticsearch, Python, Docker, Big Data, Artificial Intelligence, Machine Learning">
-    <link rel="shortcut icon" href="http://localhost:1313/img/favicon.ico">
+    <link rel="shortcut icon" href="https://imti.co/img/favicon.ico">
 
     <title>Microservices &amp; Kubernetes - IMTI - Craig Johnston</title>
 
-    <link rel="canonical" href="http://localhost:1313/microservices/">
+    <link rel="canonical" href="https://imti.co/microservices/">
 	
     
-    <link rel="stylesheet" href="http://localhost:1313/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://imti.co/css/bootstrap.min.css">
 
     
-    <link rel="stylesheet" href="http://localhost:1313/css/hux-blog.min.css">
+    <link rel="stylesheet" href="https://imti.co/css/hux-blog.min.css">
 
     
-    <link rel="stylesheet" href="http://localhost:1313/css/syntax.css">
+    <link rel="stylesheet" href="https://imti.co/css/syntax.css">
 
     
     <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
@@ -33,13 +33,13 @@
     <link rel="stylesheet" href="/css/imti.css">
 
     
-    <script src="http://localhost:1313/js/jquery.min.js"></script>
+    <script src="https://imti.co/js/jquery.min.js"></script>
     
     
-    <script src="http://localhost:1313/js/bootstrap.min.js"></script>
+    <script src="https://imti.co/js/bootstrap.min.js"></script>
     
     
-    <script src="http://localhost:1313/js/hux-blog.min.js"></script>
+    <script src="https://imti.co/js/hux-blog.min.js"></script>
 
     <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
     <script>
@@ -55,15 +55,39 @@
 <meta name="twitter:description" content="Overview" />
 <meta name="twitter:title" content="Microservices &amp; Kubernetes" />
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:image" content="http://localhost:1313/img/post/cars_876_438.jpg" />
-<meta property="og:image" content="http://localhost:1313/img/post/cars_876_438.jpg" />
+<meta name="twitter:image" content="https://imti.co/img/post/cars_876_438.jpg" />
+<meta property="og:image" content="https://imti.co/img/post/cars_876_438.jpg" />
 
 
 
     
 
 <script type="application/ld+json">
-"{\n  \"@context\": \"http://schema.org\",\n  \"@type\": \"Article\",\n  \"author\": {\n    \"@type\": \"Person\",\n    \"name\": \"Craig Johnston\"\n  },\n  \"dateModified\": \"2018-03-24T00:00:00\",\n  \"datePublished\": \"2018-03-24T00:00:00\",\n  \"description\": \"\\u003cp\\u003eThe following is a collection of articles, videos, and notes on \\u003ca href=\\\"https://en.wikipedia.org/wiki/Microservices\\\"\\u003eMicroservices\\u003c/a\\u003e. The \\u003ca href=\\\"https://en.wikipedia.org/wiki/Microservices\\\"\\u003eMicroservices\\u003c/a\\u003e architecture is a variant of the \\u003ca href=\\\"https://en.wikipedia.org/wiki/Service-oriented_architecture\\\"\\u003eservice-oriented architecture\\u003c/a\\u003e (SOA), a collection of loosely coupled services.\\u003c/p\\u003e\\n\\n\\n\\u003ch2 id=\\\"articles\\\"\\u003eArticles\\u003c/h2\\u003e\\n\\u003cul\\u003e\\n\\u003cli\\u003eBackground concept - \\u003ca href=\\\"http://radar.oreilly.com/2006/09/open-data-small-pieces-loosely.html\\\"\\u003e\\u0026ldquo;Open Data: Small Pieces Loosely Joined\\u0026rdquo;\\u003c/a\\u003e, Tim O’Reilly\\u003c/li\\u003e\\n\\u003cli\\u003eModern software design problems and solutions - \\u003ca href=\\\"https://medium.com/@kelseyhightower/12-fractured-apps-1080c73d481c\\\"\\u003e\\u0026ldquo;12-Fractured Apps\\u0026rdquo;\\u003c/a\\u003e, Kelsey Hightower (SysAdmin @ Google)\\u003c/li\\u003e\\n\\u003cli\\u003e12-Factor Defined - \\u003ca href=\\\"https://12factor.net/\\\"\\u003e\\u0026ldquo;The 12-Factor App\\u0026rdquo;\\u003c/a\\u003e, Adam Wiggins\\u003c/li\\u003e\\n\\u003cli\\u003ePros and Cons of Microservices - \\u003ca href=\\\"https://martinfowler.com/articles/microservices.html\\\"\\u003e\\u0026ldquo;Microservices\\u0026rdquo;\\u003c/a\\u003e and \\u003ca href=\\\"https://martinfowler.com/articles/microservice-trade-offs.html\\\"\\u003eMicroservice Trade-Offs\\u003c/a\\u003e, Martin Fowler\\u003c/li\\u003e\\n\\u003cli\\u003e\\u003ca href=\\\"https://www.cio.com/article/2924995/software/what-are-containers-and-why-do-you-need-them.html\\\"\\u003e\\u0026ldquo;What are containers and why do you need them?\\u0026rdquo;\\u003c/a\\u003e - CIO\\u003c/li\\u003e\\n\\u003cli\\u003e\\u003ca href=\\\"http://www.itworld.com/article/2698646/virtualization/containers-bring-a-skinny-new-world-of-virtualization-to-linux.html\\\"\\u003e\\u0026ldquo;Containers bring a skinny new world of virtualization to Linux\\u0026rdquo;\\u003c/a\\u003e - ITWorld\\u003c/li\\u003e\\n\\u003c/ul\\u003e\\n\\u003ch2 id=\\\"videos\\\"\\u003eVideos\\u003c/h2\\u003e\\n\\u003cul\\u003e\\n\\u003cli\\u003e\\u003ca href=\\\"https://www.youtube.com/watch?v=wgdBVIX9ifA\\\"\\u003e\\u0026ldquo;Microservices\\u0026rdquo;\\u003c/a\\u003e, Martin Fowler\\u003c/li\\u003e\\n\\u003cli\\u003e\\u003ca href=\\\"http://www.ustream.tv/recorded/86151804\\\"\\u003e\\u0026ldquo;The Evolution of Microservices\\u0026rdquo;\\u003c/a\\u003e, Martin Fowler\\u003c/li\\u003e\\n\\u003cli\\u003e\\u003ca href=\\\"https://www.youtube.com/watch?v=pwpxq9-uw_0\\\"\\u003e\\u0026ldquo;The State of the Art in Microservices\\u0026rdquo;\\u003c/a\\u003e with Docker, Adrian Cockroft\\u003c/li\\u003e\\n\\u003c/ul\\u003e\\n\\u003ch2 id=\\\"notes\\\"\\u003eNotes\\u003c/h2\\u003e\\n\\u003ch4 id=\\\"key-goals-of-microservices\\\"\\u003eKey Goals of Microservices\\u003c/h4\\u003e\\n\\u003cul\\u003e\\n\\u003cli\\u003eRapid development\\u003c/li\\u003e\\n\\u003cli\\u003eContinuous deployment\\u003c/li\\u003e\\n\\u003c/ul\\u003e\\n\\u003ch4 id=\\\"best-practices\\\"\\u003eBest Practices\\u003c/h4\\u003e\\n\\u003cul\\u003e\\n\\u003cli\\u003e\\u003ca href=\\\"https://12factor.net/codebase\\\"\\u003eVersion Control\\u003c/a\\u003e - All code and \\u003cstrong\\u003econfiguration\\u003c/strong\\u003e should be versioned.\\u003c/li\\u003e\\n\\u003cli\\u003e\\u003ca href=\\\"https://12factor.net/logs\\\"\\u003eLog to Standard Out\\u003c/a\\u003e - This unifies the log collection process.\\u003c/li\\u003e\\n\\u003cli\\u003e\\u003ca href=\\\"https://12factor.net/dependencies\\\"\\u003ePackage Dependencies\\u003c/a\\u003e - Ensure the stability of the build process.\\u003c/li\\u003e\\n\\u003c/ul\\u003e\\n\\u003ch4 id=\\\"twelve-factor-principles\\\"\\u003eTwelve-Factor Principles\\u003c/h4\\u003e\\n\\u003cul\\u003e\\n\\u003cli\\u003ePortable - Service (container) should be able to be run anywhere.\\u003c/li\\u003e\\n\\u003cli\\u003eContinually Deployable - Able to deploy any time without disruption.\\u003c/li\\u003e\\n\\u003cli\\u003eScalable - Multiple copies should be able to run concurrently (stateless)\\u003c/li\\u003e\\n\\u003c/ul\\u003e\\n\\u003ch4 id=\\\"json-web-tokens-jwt---client---server-trust\\\"\\u003eJSON Web Tokens (JWT) - Client -\\u0026gt; Server trust.\\u003c/h4\\u003e\\n\\u003cul\\u003e\\n\\u003cli\\u003eCompact, self-contained method for transferring secure data as a JSON object.\\u003c/li\\u003e\\n\\u003cli\\u003eUse for Authentication and Information Exchange\\u003c/li\\u003e\\n\\u003cli\\u003eSee \\u003ca href=\\\"https://jwt.io/\\\"\\u003ehttps://jwt.io/\\u003c/a\\u003e\\u003c/li\\u003e\\n\\u003cli\\u003eA server creates a token, and the client uses token to make requests.\\u003c/li\\u003e\\n\\u003c/ul\\u003e\\n\\u003ch4 id=\\\"containers---docker\\\"\\u003eContainers - Docker\\u003c/h4\\u003e\\n\\u003cul\\u003e\\n\\u003cli\\u003eDocker is simply an API on top of existing process isolation technology.\\u003c/li\\u003e\\n\\u003cli\\u003eIndependent packages\\u003c/li\\u003e\\n\\u003cli\\u003eNamespace Isolation\\u003c/li\\u003e\\n\\u003c/ul\\u003e\\n\\u003ch4 id=\\\"alpine-linux\\\"\\u003eAlpine Linux\\u003c/h4\\u003e\\n\\u003cp\\u003e\\u003ca href=\\\"https://alpinelinux.org/\\\"\\u003eAlpine Linux\\u003c/a\\u003e \\u003cstrong\\u003eSmall. Simple. Secure.\\u003c/strong\\u003e Alpine Linux is a security-oriented, lightweight Linux distribution based on musl libc and busybox.\\u003c/p\\u003e\",\n  \"headline\": \"Microservices \\u0026 Kubernetes\",\n  \"image\": [\n    \"http://localhost:1313/img/post/cars_876_438.jpg\"\n  ],\n  \"mainEntityOfPage\": {\n    \"@id\": \"http://localhost:1313/microservices/\",\n    \"@type\": \"WebPage\"\n  },\n  \"publisher\": {\n    \"@type\": \"Organization\",\n    \"logo\": {\n      \"@type\": \"ImageObject\",\n      \"url\": \"http://localhost:1313/img/craig_johnston_cjimti.jpg\"\n    },\n    \"name\": \"imti.co\"\n  }\n}"
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https:\/\/imti.co\/microservices\/"
+  },
+  "headline": "Microservices \u0026 Kubernetes",
+  "image": ["https:\/\/imti.co\/img\/post\/cars_876_438.jpg"],
+  "datePublished": "2018-03-24T00:00:00Z",
+  "dateModified": "2018-03-24T00:00:00Z",
+  "author": {
+    "@type": "Person",
+    "name": "Craig Johnston"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "imti.co",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https:\/\/imti.co\/img\/craig_johnston_cjimti.jpg"
+    }
+  },
+  "description": "The following is a collection of articles, videos, and notes on Microservices. The Microservices architecture is a variant of the service-oriented architecture …"
+}
 </script>
 
 
@@ -79,7 +103,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="http://localhost:1313//">IMTI</a>
+            <a class="navbar-brand" href="https://imti.co//">IMTI</a>
         </div>
 
         
@@ -88,10 +112,10 @@
             <div class="navbar-collapse">
                 <ul class="nav navbar-nav navbar-right">
                     <li>
-                        <a href="http://localhost:1313//">Home</a>
+                        <a href="https://imti.co//">Home</a>
                     </li>
                     <li>
-                        <a href="http://localhost:1313//about/">About</a>
+                        <a href="https://imti.co//about/">About</a>
                     </li>
                     <li>
                         <a href="https://twitter.com/cjimti">Follow</a>
@@ -140,7 +164,7 @@
 
 <style type="text/css">
     header.intro-header{
-        background-image: url('http://localhost:1313/img/post/cars.jpg')
+        background-image: url('https://imti.co/img/post/cars.jpg')
     }
 </style>
 <header class="intro-header" >
