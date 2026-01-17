@@ -1,0 +1,56 @@
+<head>
+    <meta name="msvalidate.01" content="DBC34551F2DD1BA3DC0D62EE46D7448F" />
+    <meta name="google-site-verification" content="DrtKc88u9uc7iptd4LyURAKBmFcOn7Kuk6HcRk_kNmo" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {{ if .Params.subtitle }}
+    <meta name="description" content="{{ .Params.subtitle }}">
+    {{ else }}
+    <meta name="description" content="{{ .Site.Params.description }}">
+    {{ end }}
+    <meta name="keyword"  content="{{ .Site.Params.keyword }}">
+    <link rel="shortcut icon" href="{{ "img/favicon.ico" | relURL }}">
+
+    <title>{{ if and (.Title) (ne .Title "IMTI") }}{{ .Title }} - IMTI - Craig Johnston{{ else }}IMTI - Craig Johnston{{ end }}</title>
+
+    <link rel="canonical" href="{{ .Permalink }}">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="{{ "css/bootstrap.min.css" | relURL }}">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ "css/hux-blog.min.css" | relURL }}">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="{{ "css/syntax.css" | relURL }}">
+
+    <!-- Custom Fonts -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <!--
+    <script src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+    -->
+    <!-- imti Custom Theme -->
+    <link rel="stylesheet" href="{{ "/css/imti.css" | relURL }}">
+
+    <!-- jQuery -->
+    <script src="{{ "js/jquery.min.js" | relURL }}"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="{{ "js/bootstrap.min.js" | relURL }}"></script>
+
+    <!-- Custom Theme JavaScript -->
+    <script src="{{ "js/hux-blog.min.js" | relURL }}"></script>
+
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({
+            google_ad_client: "ca-pub-5984764595236029",
+            enable_page_level_ads: true
+        });
+    </script>
+
+    {{ partial "meta" . }}
+    {{ partial "site-schema" . }}
+</head>

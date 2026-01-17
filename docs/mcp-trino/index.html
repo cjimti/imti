@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head><head>
+    <meta name="msvalidate.01" content="DBC34551F2DD1BA3DC0D62EE46D7448F" />
+    <meta name="google-site-verification" content="DrtKc88u9uc7iptd4LyURAKBmFcOn7Kuk6HcRk_kNmo" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <meta name="description" content="Building composable MCP servers for enterprise data">
+    
+    <meta name="keyword"  content="Go, Kubernetes, Elasticsearch, Python, Docker, Big Data, Artificial Intelligence, Machine Learning">
+    <link rel="shortcut icon" href="../img/favicon.ico">
+
+    <title>AI Data Warehouse Access with MCP and Trino - IMTI - Craig Johnston</title>
+
+    <link rel="canonical" href="https://imti.co/mcp-trino/">
+
+    
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+
+    
+    <link rel="stylesheet" href="../css/hux-blog.min.css">
+
+    
+    <link rel="stylesheet" href="../css/syntax.css">
+
+    
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    
+    
+    <link rel="stylesheet" href="../css/imti.css">
+
+    
+    <script src="../js/jquery.min.js"></script>
+
+    
+    <script src="../js/bootstrap.min.js"></script>
+
+    
+    <script src="../js/hux-blog.min.js"></script>
+
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({
+            google_ad_client: "ca-pub-5984764595236029",
+            enable_page_level_ads: true
+        });
+    </script>
+
+    <meta name="twitter:site" content="@cjimti">
+<meta name="twitter:creator" content="@cjimti">
+
+<meta name="twitter:description" content="Building composable MCP servers for enterprise data" />
+<meta name="twitter:title" content="AI Data Warehouse Access with MCP and Trino" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://imti.co/img/post/columns_876_438.jpg" />
+<meta property="og:image" content="https://imti.co/img/post/columns_876_438.jpg" />
+
+
+
+    
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https:\/\/imti.co\/mcp-trino\/"
+  },
+  "headline": "AI Data Warehouse Access with MCP and Trino",
+  "image": ["https:\/\/imti.co\/img\/post\/columns_876_438.jpg"],
+  "datePublished": "2026-01-17T00:00:00Z",
+  "dateModified": "2026-01-17T00:00:00Z",
+  "author": {
+    "@type": "Person",
+    "name": "Craig Johnston",
+    "url": "https://imti.co/about/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "imti.co",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https:\/\/imti.co\/img\/craig_johnston_cjimti.jpg"
+    }
+  },
+  "description": "mcp-trino exposes Trino\u0027s federated SQL engine to AI assistants via MCP. Use it standalone or import it as a Go library to build custom MCP servers with …"
+}
+</script>
+
+
+</head>
+</head>
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="../">IMTI</a>
+        </div>
+
+        
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="../">Home</a>
+                    </li>
+                    <li>
+                        <a href="../about/">About</a>
+                    </li>
+                    <li>
+                        <a href="https://twitter.com/cjimti">Follow</a>
+                    </li>
+                    
+
+                    
+                </ul>
+            </div>
+        </div>
+        
+    </div>
+    
+</nav>
+<script>
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+            $navbar.className = " ";
+            setTimeout(function(){
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+
+
+<style type="text/css">
+    header.intro-header{
+        background-image: url('https://imti.co/img/post/columns.jpg')
+    }
+</style>
+<header class="intro-header" >
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="../tags/mcp" title="MCP">
+                        MCP
+                        </a>
+                        
+                        <a class="tag" href="../tags/ai" title="AI">
+                        AI
+                        </a>
+                        
+                        <a class="tag" href="../tags/data" title="Data">
+                        Data
+                        </a>
+                        
+                        <a class="tag" href="../tags/trino" title="Trino">
+                        Trino
+                        </a>
+                        
+                        <a class="tag" href="../tags/go" title="Go">
+                        Go
+                        </a>
+                        
+                    </div>
+                    <h1>AI Data Warehouse Access with MCP and Trino</h1>
+                    <h2 class="subheading">Building composable MCP servers for enterprise data</h2>
+                    <span  class="meta">Posted by <a href="https://twitter.com/cjimti">Craig Johnston</a> on Saturday, January 17, 2026
+                        
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+<article>
+    <div class="container">
+        <div class="row">
+
+            
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <p>Every organization wants AI assistants to answer questions from their data. The problem is that data lives everywhere: PostgreSQL for transactions, MySQL for legacy systems, S3 for analytics, Kafka for streams. Writing custom integrations for each source is unsustainable. <a href="https://github.com/txn2/mcp-trino">mcp-trino</a> solves this by exposing Trino&rsquo;s federated query engine to AI assistants through MCP.</p>
+<aside class="toc">
+    <header>
+        <h2>Contents</h2>
+    </header>
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#what-is-mcp">What is MCP?</a></li>
+    <li><a href="#what-is-trino">What is Trino?</a></li>
+    <li><a href="#mcp-trino-the-bridge">mcp-trino: The Bridge</a></li>
+    <li><a href="#how-it-works">How It Works</a></li>
+    <li><a href="#standalone-usage">Standalone Usage</a>
+      <ul>
+        <li><a href="#example-conversation">Example Conversation</a></li>
+      </ul>
+    </li>
+    <li><a href="#mcp-trino-as-a-go-library">mcp-trino as a Go Library</a>
+      <ul>
+        <li><a href="#what-you-can-add">What You Can Add</a></li>
+      </ul>
+    </li>
+    <li><a href="#why-composable-mcps-matter">Why Composable MCPs Matter</a></li>
+    <li><a href="#quick-trino-setup">Quick Trino Setup</a></li>
+    <li><a href="#why-mcp-is-the-new-digital-transformation">Why MCP is the New Digital Transformation</a></li>
+    <li><a href="#resources">Resources</a></li>
+  </ul>
+</nav>
+</aside>
+<h2 id="what-is-mcp">What is MCP?</h2>
+<p>MCP (Model Context Protocol) is a standard for AI assistants to interact with external tools and data sources. Instead of every AI vendor building proprietary integrations, MCP provides a common interface. OpenAI, Google, and Microsoft adopted it in 2025.</p>
+<p>An MCP server exposes capabilities through three primitives:</p>
+<ul>
+<li><strong>Tools</strong>: Functions the AI can call (execute SQL, list schemas)</li>
+<li><strong>Resources</strong>: Data the AI can read (query results, table definitions)</li>
+<li><strong>Prompts</strong>: Pre-built instructions for common tasks</li>
+</ul>
+<p>The AI assistant spawns the MCP server as a subprocess, communicates over stdio, and calls tools as needed. No API keys, no network configuration, no cloud dependencies.</p>
+<h2 id="what-is-trino">What is Trino?</h2>
+<p><a href="https://trino.io">Trino</a> is a distributed SQL query engine. It does not store data. Instead, it connects to your existing data sources through connectors and lets you query them with standard SQL.</p>
+<pre class="mermaid">
+graph TD
+    T[Trino] --> PG[PostgreSQL]
+    T --> MY[MySQL]
+    T --> S3[S3/Object Storage]
+    T --> KA[Kafka]
+    T --> IC[Iceberg]
+</pre>
+<p>One SQL query can join data across PostgreSQL, MySQL, and S3. Trino handles the federation, optimization, and execution. Your AI assistant does not need to know where data lives; it just writes SQL.</p>
+<p>Common connectors include:</p>
+<ul>
+<li><strong>Relational</strong>: PostgreSQL, MySQL, SQL Server, Oracle</li>
+<li><strong>Data Lakes</strong>: Iceberg, Delta Lake, Hive, S3</li>
+<li><strong>Streaming</strong>: Kafka, Kinesis</li>
+<li><strong>NoSQL</strong>: MongoDB, Elasticsearch, Redis</li>
+</ul>
+<h2 id="mcp-trino-the-bridge">mcp-trino: The Bridge</h2>
+<p><a href="https://github.com/txn2/mcp-trino">mcp-trino</a> is an MCP server that exposes Trino to AI assistants. Install it, configure your Trino connection, and your AI can query your data warehouse.</p>
+<p><strong>Install:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>go install github.com/txn2/mcp-trino@latest
+</span></span></code></pre></div><p><strong>Configure Claude Code:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>claude mcp add --transport stdio mcp-trino -- <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  mcp-trino --host trino.example.com --port <span style="color:#ae81ff">8080</span> --user analyst
+</span></span></code></pre></div><p>Your AI assistant now has access to every data source connected to your Trino cluster.</p>
+<h2 id="how-it-works">How It Works</h2>
+<pre class="mermaid">
+graph LR
+    AI[AI Assistant] -->|MCP stdio| MCP[mcp-trino]
+    MCP -->|SQL/HTTP| TR[Trino]
+    TR --> DS[Data Sources]
+</pre>
+<p>The AI assistant spawns <code>mcp-trino</code> as a subprocess. When it needs data, it calls the <code>execute_sql</code> tool with a query. mcp-trino sends the query to Trino over HTTP, formats the results, and returns them to the AI.</p>
+<p><strong>Core tools:</strong></p>
+<ul>
+<li><code>execute_sql</code>: Run any SQL query against Trino</li>
+<li><code>list_catalogs</code>: Show available data sources</li>
+<li><code>list_schemas</code>: Show schemas in a catalog</li>
+<li><code>list_tables</code>: Show tables in a schema</li>
+<li><code>describe_table</code>: Get column definitions</li>
+</ul>
+<p>Read-only by default. The AI can explore and query but not modify data.</p>
+<h2 id="standalone-usage">Standalone Usage</h2>
+<p>Configure mcp-trino with environment variables or command-line flags:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>export TRINO_HOST<span style="color:#f92672">=</span>trino.example.com
+</span></span><span style="display:flex;"><span>export TRINO_PORT<span style="color:#f92672">=</span><span style="color:#ae81ff">8080</span>
+</span></span><span style="display:flex;"><span>export TRINO_USER<span style="color:#f92672">=</span>analyst
+</span></span><span style="display:flex;"><span>export TRINO_CATALOG<span style="color:#f92672">=</span>hive
+</span></span><span style="display:flex;"><span>export TRINO_SCHEMA<span style="color:#f92672">=</span>analytics
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>mcp-trino
+</span></span></code></pre></div><p>Or pass flags directly:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>mcp-trino --host trino.example.com --port <span style="color:#ae81ff">8080</span> --user analyst
+</span></span></code></pre></div><h3 id="example-conversation">Example Conversation</h3>
+<p>Here is Claude Code with mcp-trino answering questions from a data warehouse:</p>
+<pre tabindex="0"><code>&gt; What were our top 10 products by revenue last quarter?
+
+I&#39;ll query the sales data to find the top products.
+
+⏺ mcp-trino:execute_sql
+  ⎿  Running: SELECT product_name, SUM(revenue) as total_revenue
+              FROM hive.analytics.sales
+              WHERE sale_date &gt;= DATE &#39;2025-10-01&#39;
+                AND sale_date &lt; DATE &#39;2026-01-01&#39;
+              GROUP BY product_name
+              ORDER BY total_revenue DESC
+              LIMIT 10
+
+Here are the top 10 products by revenue for Q4 2025:
+
+| Product              | Revenue      |
+|---------------------|--------------|
+| Enterprise License  | $2,340,000   |
+| Professional Plan   | $1,890,000   |
+| Team Subscription   | $1,245,000   |
+...
+
+The Enterprise License drove the most revenue at $2.34M,
+followed by Professional Plan at $1.89M.
+
+&gt; How does that compare to the same quarter last year?
+
+⏺ mcp-trino:execute_sql
+  ⎿  Running: WITH current AS (...), previous AS (...)
+              SELECT c.product_name, c.revenue, p.revenue as prev_revenue,
+                     (c.revenue - p.revenue) / p.revenue * 100 as growth
+              FROM current c JOIN previous p ON ...
+
+Year-over-year comparison for Q4:
+
+| Product              | Q4 2025      | Q4 2024      | Growth  |
+|---------------------|--------------|--------------|---------|
+| Enterprise License  | $2,340,000   | $1,950,000   | +20.0%  |
+| Professional Plan   | $1,890,000   | $2,100,000   | -10.0%  |
+...
+
+Enterprise License grew 20% year-over-year. Professional Plan
+declined 10%, which may warrant investigation into pricing or
+competitive pressure.
+</code></pre><p>The AI writes SQL, executes it against Trino, and interprets the results. No manual data exports, no dashboard building, no waiting for analyst availability.</p>
+<h2 id="mcp-trino-as-a-go-library">mcp-trino as a Go Library</h2>
+<p>This is where mcp-trino differs from most MCP servers. It is not just a binary; it is a composable Go library. Import it into your own MCP server and extend it with custom middleware.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> (
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;github.com/txn2/mcp-trino/pkg/trino&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;github.com/mark3labs/mcp-go/server&#34;</span>
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Create the Trino MCP tools</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">trinoTools</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">trino</span>.<span style="color:#a6e22e">NewTools</span>(<span style="color:#a6e22e">trino</span>.<span style="color:#a6e22e">Config</span>{
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">Host</span>:    <span style="color:#e6db74">&#34;trino.example.com&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">Port</span>:    <span style="color:#ae81ff">8080</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">User</span>:    <span style="color:#e6db74">&#34;analyst&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">Catalog</span>: <span style="color:#e6db74">&#34;hive&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">Schema</span>:  <span style="color:#e6db74">&#34;analytics&#34;</span>,
+</span></span><span style="display:flex;"><span>    })
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Create your MCP server</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">s</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">server</span>.<span style="color:#a6e22e">NewMCPServer</span>(<span style="color:#e6db74">&#34;my-data-server&#34;</span>, <span style="color:#e6db74">&#34;1.0.0&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Add Trino tools with your middleware</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> <span style="color:#a6e22e">_</span>, <span style="color:#a6e22e">tool</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">trinoTools</span>.<span style="color:#a6e22e">GetTools</span>() {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">s</span>.<span style="color:#a6e22e">AddTool</span>(<span style="color:#a6e22e">tool</span>, <span style="color:#a6e22e">withAuditLog</span>(<span style="color:#a6e22e">withAuth</span>(<span style="color:#a6e22e">trinoTools</span>.<span style="color:#a6e22e">Handler</span>(<span style="color:#a6e22e">tool</span>))))
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Add your own custom tools</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">s</span>.<span style="color:#a6e22e">AddTool</span>(<span style="color:#a6e22e">myCustomTool</span>, <span style="color:#a6e22e">myCustomHandler</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">s</span>.<span style="color:#a6e22e">Start</span>()
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><pre class="mermaid">
+graph TD
+    CS[Your Custom MCP Server] --> MT[mcp-trino library]
+    CS --> YH[Your Handlers]
+    MT --> AU[Auth Middleware]
+    MT --> AD[Audit Middleware]
+    MT --> FI[Query Filter]
+</pre>
+<h3 id="what-you-can-add">What You Can Add</h3>
+<p><strong>Authentication</strong>: Verify the user before executing queries.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">withAuth</span>(<span style="color:#a6e22e">next</span> <span style="color:#a6e22e">server</span>.<span style="color:#a6e22e">ToolHandler</span>) <span style="color:#a6e22e">server</span>.<span style="color:#a6e22e">ToolHandler</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">ctx</span> <span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">Context</span>, <span style="color:#a6e22e">req</span> <span style="color:#a6e22e">server</span>.<span style="color:#a6e22e">ToolRequest</span>) (<span style="color:#f92672">*</span><span style="color:#a6e22e">server</span>.<span style="color:#a6e22e">ToolResponse</span>, <span style="color:#66d9ef">error</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">user</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">getUserFromContext</span>(<span style="color:#a6e22e">ctx</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> !<span style="color:#a6e22e">isAuthorized</span>(<span style="color:#a6e22e">user</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">nil</span>, <span style="color:#a6e22e">errors</span>.<span style="color:#a6e22e">New</span>(<span style="color:#e6db74">&#34;unauthorized&#34;</span>)
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">next</span>(<span style="color:#a6e22e">ctx</span>, <span style="color:#a6e22e">req</span>)
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p><strong>Audit logging</strong>: Record every query for compliance.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">withAuditLog</span>(<span style="color:#a6e22e">next</span> <span style="color:#a6e22e">server</span>.<span style="color:#a6e22e">ToolHandler</span>) <span style="color:#a6e22e">server</span>.<span style="color:#a6e22e">ToolHandler</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">ctx</span> <span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">Context</span>, <span style="color:#a6e22e">req</span> <span style="color:#a6e22e">server</span>.<span style="color:#a6e22e">ToolRequest</span>) (<span style="color:#f92672">*</span><span style="color:#a6e22e">server</span>.<span style="color:#a6e22e">ToolResponse</span>, <span style="color:#66d9ef">error</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;User %s executing: %s&#34;</span>, <span style="color:#a6e22e">getUser</span>(<span style="color:#a6e22e">ctx</span>), <span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">Params</span>[<span style="color:#e6db74">&#34;query&#34;</span>])
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">next</span>(<span style="color:#a6e22e">ctx</span>, <span style="color:#a6e22e">req</span>)
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p><strong>Query filtering</strong>: Block dangerous patterns or enforce row-level security.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">withQueryFilter</span>(<span style="color:#a6e22e">next</span> <span style="color:#a6e22e">server</span>.<span style="color:#a6e22e">ToolHandler</span>) <span style="color:#a6e22e">server</span>.<span style="color:#a6e22e">ToolHandler</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">ctx</span> <span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">Context</span>, <span style="color:#a6e22e">req</span> <span style="color:#a6e22e">server</span>.<span style="color:#a6e22e">ToolRequest</span>) (<span style="color:#f92672">*</span><span style="color:#a6e22e">server</span>.<span style="color:#a6e22e">ToolResponse</span>, <span style="color:#66d9ef">error</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">query</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">Params</span>[<span style="color:#e6db74">&#34;query&#34;</span>].(<span style="color:#66d9ef">string</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">containsDangerousPattern</span>(<span style="color:#a6e22e">query</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">nil</span>, <span style="color:#a6e22e">errors</span>.<span style="color:#a6e22e">New</span>(<span style="color:#e6db74">&#34;query blocked by policy&#34;</span>)
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">next</span>(<span style="color:#a6e22e">ctx</span>, <span style="color:#a6e22e">req</span>)
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p><strong>Custom tools</strong>: Add domain-specific operations alongside Trino.</p>
+<p>You control the server. No forking, no patching, no waiting for upstream features.</p>
+<h2 id="why-composable-mcps-matter">Why Composable MCPs Matter</h2>
+<p>Most MCP servers are monolithic binaries. You configure them, run them, and hope they do what you need. When they do not, you fork the project or file a feature request.</p>
+<p>Composable MCPs are building blocks. mcp-trino provides the Trino integration; you provide the policy layer. This matters for enterprise adoption:</p>
+<ul>
+<li><strong>Security</strong>: Add authentication without modifying mcp-trino source</li>
+<li><strong>Compliance</strong>: Audit every query without custom logging patches</li>
+<li><strong>Integration</strong>: Combine multiple MCP tools in one server</li>
+<li><strong>Customization</strong>: Add company-specific tools alongside standard ones</li>
+</ul>
+<p>The MCP ecosystem is young. The projects that provide composable libraries will become infrastructure. The ones that only ship binaries will be replaced when requirements change.</p>
+<h2 id="quick-trino-setup">Quick Trino Setup</h2>
+<p>If you do not have Trino running, start one locally with Docker:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>docker run -d -p 8080:8080 --name trino trinodb/trino
+</span></span></code></pre></div><p>This gives you a single-node Trino with memory and TPC-H connectors for testing. Point mcp-trino at <code>localhost:8080</code> and you can immediately query sample data.</p>
+<p>For production, see the <a href="https://trino.io/docs/current/">Trino documentation</a> for connector configuration. Common setups include:</p>
+<ul>
+<li>PostgreSQL connector for transactional data</li>
+<li>Hive/Iceberg connector for data lake tables</li>
+<li>Kafka connector for streaming data</li>
+</ul>
+<p>Each connector requires adding a properties file to Trino&rsquo;s <code>etc/catalog/</code> directory.</p>
+<h2 id="why-mcp-is-the-new-digital-transformation">Why MCP is the New Digital Transformation</h2>
+<p>APIs were the last wave of integration. RESTful services let systems talk to each other, enabling the SaaS explosion of the 2010s. But APIs require developers to write integration code. Every new data source means new endpoints, new clients, new maintenance.</p>
+<p>MCP is the AI-native interface layer. Instead of developers writing integration code, AI assistants call standardized tools. The integration happens at runtime, driven by natural language.</p>
+<p>This changes the economics of data access:</p>
+<ul>
+<li><strong>Before</strong>: Analysts wait for engineers to build dashboards</li>
+<li><strong>After</strong>: Analysts ask questions directly to AI assistants with data access</li>
+</ul>
+<p>mcp-trino is one piece of this shift. It gives AI assistants access to federated data without custom development. Combined with other MCP servers for CRM, ticketing, and observability, organizations can build AI assistants that understand their entire operation.</p>
+<p>The companies building composable MCP infrastructure now will have significant advantages when AI assistants become the primary interface for enterprise data.</p>
+<h2 id="resources">Resources</h2>
+<ul>
+<li><a href="https://github.com/txn2/mcp-trino">mcp-trino on GitHub</a></li>
+<li><a href="https://trino.io/docs/current/">Trino Documentation</a></li>
+<li><a href="https://modelcontextprotocol.io">Model Context Protocol Specification</a></li>
+<li><a href="https://github.com/mark3labs/mcp-go">mcp-go: Go SDK for MCP servers</a></li>
+<li><a href="../kubefwd-mcp/">AI-Assisted Kubernetes Development with kubefwd</a></li>
+</ul>
+
+                <p>
+                   This blog post, titled: "<span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">AI Data Warehouse Access with MCP and Trino: Building composable MCP servers for enterprise data</span>" by <a xmlns:cc="http://creativecommons.org/ns#" href="https://twitter.com/cjimti" property="cc:attributionName" rel="cc:attributionURL">Craig Johnston</a>, is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+                    <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a>
+                </p>
+
+            </div>
+            
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                
+                <section>
+                    <hr class="hidden-sm hidden-xs">
+                    <h5><a href="../tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                        
+                        
+                        
+                        <a href="../tags/ai" title="ai">
+                        ai
+                        </a>
+                        
+                        
+                        
+                        <a href="../tags/blockchain" title="blockchain">
+                        blockchain
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="../tags/data" title="data">
+                        data
+                        </a>
+                        
+                        
+                        
+                        <a href="../tags/data-science" title="data science">
+                        data science
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="../tags/development" title="development">
+                        development
+                        </a>
+                        
+                        
+                        
+                        <a href="../tags/devops" title="devops">
+                        devops
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="../tags/docker" title="docker">
+                        docker
+                        </a>
+                        
+                        
+                        
+                        <a href="../tags/elasticsearch" title="elasticsearch">
+                        elasticsearch
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="../tags/golang" title="golang">
+                        golang
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="../tags/ingress" title="ingress">
+                        ingress
+                        </a>
+                        
+                        
+                        
+                        <a href="../tags/iot" title="iot">
+                        iot
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="../tags/kubectl" title="kubectl">
+                        kubectl
+                        </a>
+                        
+                        
+                        
+                        <a href="../tags/kubefwd" title="kubefwd">
+                        kubefwd
+                        </a>
+                        
+                        
+                        
+                        <a href="../tags/kubernetes" title="kubernetes">
+                        kubernetes
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="../tags/mcp" title="mcp">
+                        mcp
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="../tags/microservices" title="microservices">
+                        microservices
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="../tags/python" title="python">
+                        python
+                        </a>
+                        
+                        
+                        
+                        <a href="../tags/raspberry-pi" title="raspberry pi">
+                        raspberry pi
+                        </a>
+                        
+                        
+                        
+                        <a href="../tags/security" title="security">
+                        security
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="../tags/utils" title="utils">
+                        utils
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                    </div>
+                </section>
+
+                
+                <hr>
+                <h5>RELATED</h5>
+                <ul class="list-inline">
+                    
+                </ul>
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                   
+                   <li>
+                       <a href="../index.xml" rel="alternate" type="application/rss+xml" title="IMTI" >
+                           <span class="fa-stack fa-lg">
+                               <i class="fa fa-circle fa-stack-2x"></i>
+                               <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+                           </span>
+                       </a>
+                   </li>
+                   
+                    
+                    <li>
+                        <a href="mailto:cjimti@gmail.com">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                    
+                    <li>
+                        <a href="https://twitter.com/cjimti">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/cjimti">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                    
+                    <li>
+                        <a target="_blank" href="https://www.linkedin.com/in/cjimti/">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+<script>
+    if($('#tag_cloud').length !== 0){
+        async("/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-R56SP4WLS2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-R56SP4WLS2');
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+<script>
+  mermaid.initialize({ startOnLoad: true, theme: 'neutral' });
+</script>
+
+</body>
+</html>

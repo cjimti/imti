@@ -11,35 +11,35 @@
     <meta name="description" content="Role Based Access Control">
     
     <meta name="keyword"  content="Go, Kubernetes, Elasticsearch, Python, Docker, Big Data, Artificial Intelligence, Machine Learning">
-    <link rel="shortcut icon" href="https://imti.co/img/favicon.ico">
+    <link rel="shortcut icon" href="../img/favicon.ico">
 
     <title>Kubernetes Team Access - RBAC for developers and QA - IMTI - Craig Johnston</title>
 
     <link rel="canonical" href="https://imti.co/team-kubernetes-remote-access/">
-	
-    
-    <link rel="stylesheet" href="https://imti.co/css/bootstrap.min.css">
 
     
-    <link rel="stylesheet" href="https://imti.co/css/hux-blog.min.css">
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
 
     
-    <link rel="stylesheet" href="https://imti.co/css/syntax.css">
+    <link rel="stylesheet" href="../css/hux-blog.min.css">
+
+    
+    <link rel="stylesheet" href="../css/syntax.css">
 
     
     <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     
     
-    <link rel="stylesheet" href="/css/imti.css">
+    <link rel="stylesheet" href="../css/imti.css">
 
     
-    <script src="https://imti.co/js/jquery.min.js"></script>
+    <script src="../js/jquery.min.js"></script>
+
     
+    <script src="../js/bootstrap.min.js"></script>
+
     
-    <script src="https://imti.co/js/bootstrap.min.js"></script>
-    
-    
-    <script src="https://imti.co/js/hux-blog.min.js"></script>
+    <script src="../js/hux-blog.min.js"></script>
 
     <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
     <script>
@@ -92,7 +92,8 @@
 </script>
 
 
-</head></head>
+</head>
+</head>
 
 <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
     <div class="container-fluid">
@@ -104,19 +105,18 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="https://imti.co//">IMTI</a>
+            <a class="navbar-brand" href="../">IMTI</a>
         </div>
 
-        
         
         <div id="huxblog_navbar">
             <div class="navbar-collapse">
                 <ul class="nav navbar-nav navbar-right">
                     <li>
-                        <a href="https://imti.co//">Home</a>
+                        <a href="../">Home</a>
                     </li>
                     <li>
-                        <a href="https://imti.co//about/">About</a>
+                        <a href="../about/">About</a>
                     </li>
                     <li>
                         <a href="https://twitter.com/cjimti">Follow</a>
@@ -132,9 +132,6 @@
     
 </nav>
 <script>
-    
-    
-    
     var $body   = document.body;
     var $toggle = document.querySelector('.navbar-toggle');
     var $navbar = document.querySelector('#huxblog_navbar');
@@ -143,17 +140,13 @@
     $toggle.addEventListener('click', handleMagic)
     function handleMagic(e){
         if ($navbar.className.indexOf('in') > 0) {
-        
             $navbar.className = " ";
-            
             setTimeout(function(){
-                
                 if($navbar.className.indexOf('in') < 0) {
                     $collapse.style.height = "0px"
                 }
             },400)
         }else{
-        
             $collapse.style.height = "auto"
             $navbar.className += " in";
         }
@@ -175,19 +168,19 @@
                 <div class="post-heading">
                     <div class="tags">
                         
-                        <a class="tag" href="/tags/kubernetes" title="Kubernetes">
+                        <a class="tag" href="../tags/kubernetes" title="Kubernetes">
                         Kubernetes
                         </a>
                         
-                        <a class="tag" href="/tags/devops" title="DevOps">
+                        <a class="tag" href="../tags/devops" title="DevOps">
                         DevOps
                         </a>
                         
-                        <a class="tag" href="/tags/security" title="Security">
+                        <a class="tag" href="../tags/security" title="Security">
                         Security
                         </a>
                         
-                        <a class="tag" href="/tags/kubectl" title="kubectl">
+                        <a class="tag" href="../tags/kubectl" title="kubectl">
                         kubectl
                         </a>
                         
@@ -216,9 +209,9 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <p>RBAC (Role Based Access Control) allows our Kubernetes clusters to provide the development team better visibility and access into the development, staging and production environments than it has have ever had in the past. Developers using the command line tool <strong><a href="https://kubernetes.io/docs/reference/kubectl/kubectl/">kubectl</a></strong>, can explore the network topology of running <a href="/microservices/">microservices</a>, tail live server logs, proxy local ports directly to services or even execute shells into running pods.</p>
-<p><a href="/gitlabci-golang-microservices/">Kubernetes and GitlabCI</a> are the central components of our DevOps toolchain and have increased our productivity by many multiples over the traditional approaches of the past.</p>
-<p>If you don&rsquo;t already have a Kubernetes cluster up and running, then I highly suggest you read my article <a href="/hobby-cluster/">Production Hobby Cluster</a> to get you up and running in a custom, vendor-neutral production capable cluster.</p>
+                <p>RBAC (Role Based Access Control) allows our Kubernetes clusters to provide the development team better visibility and access into the development, staging and production environments than it has have ever had in the past. Developers using the command line tool <strong><a href="https://kubernetes.io/docs/reference/kubectl/kubectl/">kubectl</a></strong>, can explore the network topology of running <a href="../microservices/">microservices</a>, tail live server logs, proxy local ports directly to services or even execute shells into running pods.</p>
+<p><a href="../gitlabci-golang-microservices/">Kubernetes and GitlabCI</a> are the central components of our DevOps toolchain and have increased our productivity by many multiples over the traditional approaches of the past.</p>
+<p>If you don&rsquo;t already have a Kubernetes cluster up and running, then I highly suggest you read my article <a href="../hobby-cluster/">Production Hobby Cluster</a> to get you up and running in a custom, vendor-neutral production capable cluster.</p>
 <blockquote>
 <p>TLDR: If you are reading this article because you received a <strong>token</strong> and the URL of a cluster from your Kubernetes administrator, you can skip ahead to the section <a href="#accessing-a-remote-kubernetes-cluster">Accessing a Remote Kubernetes Cluster</a>.</p>
 </blockquote>
@@ -253,12 +246,12 @@
 <p>Development and staging environments share a cluster across many clients and projects. On the production front, more extensive projects and clients get a dedicated cluster, and smaller projects might share a cluster.</p>
 <p>We use Kubernetes <a href="https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/">namespaces</a> to separate clients. All of our security revolves around <a href="https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/">namespaces</a>, and when <a href="https://kubernetes.io/docs/reference/access-authn-authz/rbac/">RBAC</a> is set up correctly, a context in which access granted to a developer can only operate and view within the assigned namespace.</p>
 <p>We grant developers read-level access to one common developer account per <a href="https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/">namespace</a> on the development cluster. We tighten access to some resources on production.</p>
-<p>We create a separate deployment account for our continuous integration/deployment solution, see my article, <a href="/gitlabci-golang-microservices/">A Microservices Workflow with Golang and Gitlab CI</a> to get a high-level view of our toolchain and how it integrates cleanly with Kubernetes <a href="https://kubernetes.io/docs/reference/access-authn-authz/rbac/">RBAC</a> security model.</p>
+<p>We create a separate deployment account for our continuous integration/deployment solution, see my article, <a href="../gitlabci-golang-microservices/">A Microservices Workflow with Golang and Gitlab CI</a> to get a high-level view of our toolchain and how it integrates cleanly with Kubernetes <a href="https://kubernetes.io/docs/reference/access-authn-authz/rbac/">RBAC</a> security model.</p>
 <h2 id="cluster-setup">Cluster Setup</h2>
-<p>These cluster setup steps assume you are a cluster administrator if you are only looking to set up <a href="https://kubernetes.io/docs/reference/kubectl/kubectl/">kubectl</a> access on your local workstation to an existing cluster skip ahead to the section: <a href="#accessing-a-remote-kubernetes-cluster">Accessing a Remote Kubernetes Cluster</a>, otherwise I suggestion that you set up a <a href="/hobby-cluster/">Production Hobby Cluster</a> to help you follow along.</p>
+<p>These cluster setup steps assume you are a cluster administrator if you are only looking to set up <a href="https://kubernetes.io/docs/reference/kubectl/kubectl/">kubectl</a> access on your local workstation to an existing cluster skip ahead to the section: <a href="#accessing-a-remote-kubernetes-cluster">Accessing a Remote Kubernetes Cluster</a>, otherwise I suggestion that you set up a <a href="../hobby-cluster/">Production Hobby Cluster</a> to help you follow along.</p>
 <h3 id="example-microservice">Example Microservice</h3>
 <p>You can skip the following steps and head directly to <a href="#setup-remote-access">Setup Remote Access</a> if you already have a <a href="https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/">namespace</a> with projects you plan to provide remote access <a href="https://kubernetes.io/docs/reference/kubectl/kubectl/">kubectl</a>.</p>
-<p>To demonstrate team access control we need some pods running in the namespace <code>the-project</code>. The example below uses a pre-built Docker container designed specifically for testing called <a href="https://github.com/txn2/ok">txn2/ok</a>. If you are curious about how to automate subsequent deployments using the free and open source <a href="https://about.gitlab.com/features/gitlab-ci-cd/">GitlabCI</a>, check out <a href="/gitlabci-golang-microservices/">A Microservices Workflow with Golang and Gitlab CI</a>.</p>
+<p>To demonstrate team access control we need some pods running in the namespace <code>the-project</code>. The example below uses a pre-built Docker container designed specifically for testing called <a href="https://github.com/txn2/ok">txn2/ok</a>. If you are curious about how to automate subsequent deployments using the free and open source <a href="https://about.gitlab.com/features/gitlab-ci-cd/">GitlabCI</a>, check out <a href="../gitlabci-golang-microservices/">A Microservices Workflow with Golang and Gitlab CI</a>.</p>
 <p>We don&rsquo;t automate the initial configuration, and so the following steps are part of the setup stage of any new project. It is easy to automate this process with the Kubernetes package manager <a href="https://helm.sh/">Helm</a>, but that would be overkill for most of our projects and abstract away some welcome verbosity. <a href="https://helm.sh/">Helm</a> is a great tool but better-used adjacent to our initial development process. In fact, we use <a href="https://helm.sh/">Helm</a> to create charts from our initial development configurations, but that is outside the scope of this article.</p>
 <h4 id="namespace">Namespace</h4>
 <p>I use the term <code>the-project</code> as a fictional <a href="https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/">namespace</a> for the examples going forward. If you want to follow along, use the following configuration to create the example <a href="https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/">namespace</a>.</p>
@@ -330,7 +323,7 @@
 </span></span></code></pre></div><p>Create the Kubernetes <a href="https://kubernetes.io/docs/concepts/workloads/controllers/deployment/">Deployment</a> object:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl create -f 10-deployment-ok.yml
 </span></span></code></pre></div><h4 id="service">Service</h4>
-<p>Kubernetes <a href="https://kubernetes.io/docs/concepts/workloads/controllers/deployment/">Deployment</a>s manage <a href="https://kubernetes.io/docs/concepts/workloads/pods/pod/">Pods</a>. Consider <a href="https://kubernetes.io/docs/concepts/workloads/pods/pod/">Pods</a> ephemeral, being moved from one node to another, destroyed or re-created at any time. <a href="https://kubernetes.io/docs/concepts/services-networking/service/">Service</a>s are persistent and give us a point to attach our network <a href="https://kubernetes.io/docs/concepts/services-networking/ingress/">ingress</a>. If you don&rsquo;t already have ingress setup, you might want to read my article <a href="/web-cluster-ingress/">Ingress on Custom Kubernetes</a> to get started. <a href="https://kubernetes.io/docs/concepts/services-networking/ingress/">Ingress</a> needs a <a href="https://kubernetes.io/docs/concepts/services-networking/service/">service</a> to attach to; however you don&rsquo;t need ingress to set up a service.</p>
+<p>Kubernetes <a href="https://kubernetes.io/docs/concepts/workloads/controllers/deployment/">Deployment</a>s manage <a href="https://kubernetes.io/docs/concepts/workloads/pods/pod/">Pods</a>. Consider <a href="https://kubernetes.io/docs/concepts/workloads/pods/pod/">Pods</a> ephemeral, being moved from one node to another, destroyed or re-created at any time. <a href="https://kubernetes.io/docs/concepts/services-networking/service/">Service</a>s are persistent and give us a point to attach our network <a href="https://kubernetes.io/docs/concepts/services-networking/ingress/">ingress</a>. If you don&rsquo;t already have ingress setup, you might want to read my article <a href="../web-cluster-ingress/">Ingress on Custom Kubernetes</a> to get started. <a href="https://kubernetes.io/docs/concepts/services-networking/ingress/">Ingress</a> needs a <a href="https://kubernetes.io/docs/concepts/services-networking/service/">service</a> to attach to; however you don&rsquo;t need ingress to set up a service.</p>
 <p><code>50-service-ok.yml</code>:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">v1</span>
 </span></span><span style="display:flex;"><span><span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Service</span>
@@ -374,7 +367,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#f92672">path</span>: <span style="color:#ae81ff">/</span>
 </span></span></code></pre></div><p>Create the <a href="https://kubernetes.io/docs/concepts/services-networking/ingress/">ingress</a>:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl create -f 80-ingress-ok.yml
-</span></span></code></pre></div><p>Adding TLS support is easy but out the scope of this article. If you are interested in setting up free, automated TLS certificate using <a href="https://letsencrypt.org/">Let&rsquo;s Encrypt</a> on Kubernetes, check out my article: <a href="/lets-encrypt-kubernetes/">Let&rsquo;s Encrypt, Kubernetes</a>. Setting up <a href="/lets-encrypt-kubernetes/">Let&rsquo;s Encrypt, Kubernetes</a> should only have to be done once and take only about twenty minutes.</p>
+</span></span></code></pre></div><p>Adding TLS support is easy but out the scope of this article. If you are interested in setting up free, automated TLS certificate using <a href="https://letsencrypt.org/">Let&rsquo;s Encrypt</a> on Kubernetes, check out my article: <a href="../lets-encrypt-kubernetes/">Let&rsquo;s Encrypt, Kubernetes</a>. Setting up <a href="../lets-encrypt-kubernetes/">Let&rsquo;s Encrypt, Kubernetes</a> should only have to be done once and take only about twenty minutes.</p>
 <p>We now have a fully functional test API service answering at <a href="http://ok.d4ldev.txn2.com/">http://ok.d4ldev.txn2.com/</a>. In the next few steps, we create Kubernetes <a href="https://kubernetes.io/docs/reference/access-authn-authz/rbac/">RBAC</a> tokens for deployment and ready-only developer access.</p>
 <h3 id="setup-remote-access">Setup Remote Access</h3>
 <p>If you skipped setting up the <a href="#example-microservice">Example Microservice</a> this example limits access to the namespace <code>the-project</code> exclusively, you could do the same with the <code>default</code> <a href="https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/">namespace</a> by simply not providing a <code>namespace</code> key in the configuration or setting it to <code>default</code>.</p>
@@ -509,8 +502,8 @@
 <li><a href="https://kubernetes.io/docs/reference/kubectl/kubectl/">kubectl</a> is the essential Kubernetes command line administration utility.</li>
 <li><a href="https://kubernetes.io/docs/reference/kubectl/cheatsheet/#viewing-finding-resources">kubectl Cheat Sheet</a></li>
 <li><a href="https://kubernetes.io/docs/reference/access-authn-authz/rbac/">RBAC</a> on Kubernetes for role-based access control</li>
-<li>Setup a <a href="/hobby-cluster/">Production Hobby Cluster</a>, a production capable kubernetes on the cheap.</li>
-<li><a href="/gitlabci-golang-microservices/">A Microservices Workflow with Golang and Gitlab CI</a></li>
+<li>Setup a <a href="../hobby-cluster/">Production Hobby Cluster</a>, a production capable kubernetes on the cheap.</li>
+<li><a href="../gitlabci-golang-microservices/">A Microservices Workflow with Golang and Gitlab CI</a></li>
 <li><a href="https://about.gitlab.com/features/gitlab-ci-cd/">GitlabCI</a> for Continuous Integration &amp; Deployment</li>
 </ul>
 
@@ -530,14 +523,18 @@
                 
                 <section>
                     <hr class="hidden-sm hidden-xs">
-                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <h5><a href="../tags/">FEATURED TAGS</a></h5>
                     <div class="tags">
                         
                         
                         
+                        <a href="../tags/ai" title="ai">
+                        ai
+                        </a>
                         
                         
-                        <a href="/tags/blockchain" title="blockchain">
+                        
+                        <a href="../tags/blockchain" title="blockchain">
                         blockchain
                         </a>
                         
@@ -547,13 +544,13 @@
                         
                         
                         
-                        <a href="/tags/data" title="data">
+                        <a href="../tags/data" title="data">
                         data
                         </a>
                         
                         
                         
-                        <a href="/tags/data-science" title="data science">
+                        <a href="../tags/data-science" title="data science">
                         data science
                         </a>
                         
@@ -563,13 +560,13 @@
                         
                         
                         
-                        <a href="/tags/development" title="development">
+                        <a href="../tags/development" title="development">
                         development
                         </a>
                         
                         
                         
-                        <a href="/tags/devops" title="devops">
+                        <a href="../tags/devops" title="devops">
                         devops
                         </a>
                         
@@ -577,13 +574,13 @@
                         
                         
                         
-                        <a href="/tags/docker" title="docker">
+                        <a href="../tags/docker" title="docker">
                         docker
                         </a>
                         
                         
                         
-                        <a href="/tags/elasticsearch" title="elasticsearch">
+                        <a href="../tags/elasticsearch" title="elasticsearch">
                         elasticsearch
                         </a>
                         
@@ -595,7 +592,9 @@
                         
                         
                         
-                        <a href="/tags/golang" title="golang">
+                        
+                        
+                        <a href="../tags/golang" title="golang">
                         golang
                         </a>
                         
@@ -603,13 +602,13 @@
                         
                         
                         
-                        <a href="/tags/ingress" title="ingress">
+                        <a href="../tags/ingress" title="ingress">
                         ingress
                         </a>
                         
                         
                         
-                        <a href="/tags/iot" title="iot">
+                        <a href="../tags/iot" title="iot">
                         iot
                         </a>
                         
@@ -623,19 +622,19 @@
                         
                         
                         
-                        <a href="/tags/kubectl" title="kubectl">
+                        <a href="../tags/kubectl" title="kubectl">
                         kubectl
                         </a>
                         
                         
                         
-                        <a href="/tags/kubefwd" title="kubefwd">
+                        <a href="../tags/kubefwd" title="kubefwd">
                         kubefwd
                         </a>
                         
                         
                         
-                        <a href="/tags/kubernetes" title="kubernetes">
+                        <a href="../tags/kubernetes" title="kubernetes">
                         kubernetes
                         </a>
                         
@@ -651,11 +650,15 @@
                         
                         
                         
+                        <a href="../tags/mcp" title="mcp">
+                        mcp
+                        </a>
                         
                         
                         
                         
-                        <a href="/tags/microservices" title="microservices">
+                        
+                        <a href="../tags/microservices" title="microservices">
                         microservices
                         </a>
                         
@@ -667,19 +670,19 @@
                         
                         
                         
-                        <a href="/tags/python" title="python">
+                        <a href="../tags/python" title="python">
                         python
                         </a>
                         
                         
                         
-                        <a href="/tags/raspberry-pi" title="raspberry pi">
+                        <a href="../tags/raspberry-pi" title="raspberry pi">
                         raspberry pi
                         </a>
                         
                         
                         
-                        <a href="/tags/security" title="security">
+                        <a href="../tags/security" title="security">
                         security
                         </a>
                         
@@ -689,7 +692,9 @@
                         
                         
                         
-                        <a href="/tags/utils" title="utils">
+                        
+                        
+                        <a href="../tags/utils" title="utils">
                         utils
                         </a>
                         
@@ -722,7 +727,7 @@
                 <ul class="list-inline text-center">
                    
                    <li>
-                       <a href="/index.xml" rel="alternate" type="application/rss+xml" title="IMTI" >
+                       <a href="../index.xml" rel="alternate" type="application/rss+xml" title="IMTI" >
                            <span class="fa-stack fa-lg">
                                <i class="fa fa-circle fa-stack-2x"></i>
                                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
@@ -741,7 +746,6 @@
                     </li>
 		    
                     
-                    
                     <li>
                         <a href="https://twitter.com/cjimti">
                             <span class="fa-stack fa-lg">
@@ -750,13 +754,6 @@
                             </span>
                         </a>
                     </li>
-                    
-                    
-                    
-
-                    
-
-		    
                     
                     
                     <li>
@@ -779,15 +776,10 @@
                     </li>
 		    
                 </ul>
-
-                
-                
             </div>
         </div>
     </div>
 </footer>
-
-
 
 
 <script>
@@ -802,16 +794,10 @@
 </script>
 
 
-
-
-
-
 <script>
-    
     if($('#tag_cloud').length !== 0){
         async("/js/jquery.tagcloud.js",function(){
             $.fn.tagcloud.defaults = {
-                
                 color: {start: '#bbbbee', end: '#0085a1'},
             };
             $('#tag_cloud a').tagcloud();
@@ -825,8 +811,13 @@
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-
   gtag('config', 'G-R56SP4WLS2');
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+<script>
+  mermaid.initialize({ startOnLoad: true, theme: 'neutral' });
 </script>
 
 </body>

@@ -11,35 +11,35 @@
     <meta name="description" content="Golang with Jupyter Notebooks">
     
     <meta name="keyword"  content="Go, Kubernetes, Elasticsearch, Python, Docker, Big Data, Artificial Intelligence, Machine Learning">
-    <link rel="shortcut icon" href="https://imti.co/img/favicon.ico">
+    <link rel="shortcut icon" href="../img/favicon.ico">
 
     <title>Golang to Jupyter - IMTI - Craig Johnston</title>
 
     <link rel="canonical" href="https://imti.co/golang-to-jupyter/">
-	
-    
-    <link rel="stylesheet" href="https://imti.co/css/bootstrap.min.css">
 
     
-    <link rel="stylesheet" href="https://imti.co/css/hux-blog.min.css">
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
 
     
-    <link rel="stylesheet" href="https://imti.co/css/syntax.css">
+    <link rel="stylesheet" href="../css/hux-blog.min.css">
+
+    
+    <link rel="stylesheet" href="../css/syntax.css">
 
     
     <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     
     
-    <link rel="stylesheet" href="/css/imti.css">
+    <link rel="stylesheet" href="../css/imti.css">
 
     
-    <script src="https://imti.co/js/jquery.min.js"></script>
+    <script src="../js/jquery.min.js"></script>
+
     
+    <script src="../js/bootstrap.min.js"></script>
+
     
-    <script src="https://imti.co/js/bootstrap.min.js"></script>
-    
-    
-    <script src="https://imti.co/js/hux-blog.min.js"></script>
+    <script src="../js/hux-blog.min.js"></script>
 
     <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
     <script>
@@ -92,7 +92,8 @@
 </script>
 
 
-</head></head>
+</head>
+</head>
 
 <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
     <div class="container-fluid">
@@ -104,19 +105,18 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="https://imti.co//">IMTI</a>
+            <a class="navbar-brand" href="../">IMTI</a>
         </div>
 
-        
         
         <div id="huxblog_navbar">
             <div class="navbar-collapse">
                 <ul class="nav navbar-nav navbar-right">
                     <li>
-                        <a href="https://imti.co//">Home</a>
+                        <a href="../">Home</a>
                     </li>
                     <li>
-                        <a href="https://imti.co//about/">About</a>
+                        <a href="../about/">About</a>
                     </li>
                     <li>
                         <a href="https://twitter.com/cjimti">Follow</a>
@@ -132,9 +132,6 @@
     
 </nav>
 <script>
-    
-    
-    
     var $body   = document.body;
     var $toggle = document.querySelector('.navbar-toggle');
     var $navbar = document.querySelector('#huxblog_navbar');
@@ -143,17 +140,13 @@
     $toggle.addEventListener('click', handleMagic)
     function handleMagic(e){
         if ($navbar.className.indexOf('in') > 0) {
-        
             $navbar.className = " ";
-            
             setTimeout(function(){
-                
                 if($navbar.className.indexOf('in') < 0) {
                     $collapse.style.height = "0px"
                 }
             },400)
         }else{
-        
             $collapse.style.height = "auto"
             $navbar.className += " in";
         }
@@ -175,11 +168,11 @@
                 <div class="post-heading">
                     <div class="tags">
                         
-                        <a class="tag" href="/tags/golang" title="Golang">
+                        <a class="tag" href="../tags/golang" title="Golang">
                         Golang
                         </a>
                         
-                        <a class="tag" href="/tags/jupyter-notebooks" title="Jupyter Notebooks">
+                        <a class="tag" href="../tags/jupyter-notebooks" title="Jupyter Notebooks">
                         Jupyter Notebooks
                         </a>
                         
@@ -219,7 +212,7 @@
 <li>Leveraging static site generators like <a href="https://jekyllrb.com/">Jekyll</a> and <a href="https://gohugo.io/">Hugo</a></li>
 </ul>
 <p>Beyond the ability to execute code in-line, the most useful features to me are exporting these notebooks as Markdown. Site builders like <a href="https://jekyllrb.com/">Jekyll</a> and <a href="https://gohugo.io/">Hugo</a> use <a href="https://daringfireball.net/projects/markdown/syntax">Markdown</a> to generate <a href="https://gohugo.io/showcase/">beautiful static websites and blogs</a>.</p>
-<p><img src="/images/content/GolangToJupyter-screen.png" alt="Notebook Screenshot"></p>
+<p><img src="../images/content/GolangToJupyter-screen.png" alt="Notebook Screenshot"></p>
 
 
 <h2 id="example">Example</h2>
@@ -263,15 +256,15 @@ Raw JSON: {
 289 &lt;nil&gt;
 </code></pre>
 <p>If you are reading this article on <a href="https://mk.imti.co">https://mk.imti.co</a> then what you see here was exported from Jupyter Notebooks on my Mac in the Markdown format and saved to Github repository for this site. <a href="https://mk.imti.co">https://mk.imti.co</a> is a static website <a href="https://pages.github.com/">automatically generated by Github</a> using <a href="https://jekyllrb.com/">Jekyll</a>.</p>
-<p><img src="/images/content/GolangToJupyter-markdown.png" alt="Notebook Screenshot Markdown"></p>
+<p><img src="../images/content/GolangToJupyter-markdown.png" alt="Notebook Screenshot Markdown"></p>
 <p>Although I could easily save this Notebook as HTML, site builders like <a href="https://jekyllrb.com/">Jekyll</a> and <a href="https://gohugo.io/">Hugo</a> use Markdown to transform the content into the structure and style of my site. Markdown along with a sitebuilder allows me to present the notebook in a format that fits my site. Other options include:</p>
 <ul>
 <li><a href="https://raw.githubusercontent.com/cjimti/mk/master/notebooks/GolangToJupyter.ipynb">providing the Notebook for download</a>.</li>
 <li>linking to Jupyter&rsquo;s <a href="https://nbviewer.jupyter.org/github/cjimti/mk/blob/master/notebooks/GolangToJupyter.ipynb">nbviewer</a></li>
 <li>exported Markdown: <a href="https://github.com/cjimti/mk/blob/master/_posts/2018-06-10-golang-to-jupyter.md">2018-06-10-golang-to-jupyter.md</a></li>
-<li>&hellip;and of course <a href="/golang-to-jupyter/">the page you are reading</a>.</li>
+<li>&hellip;and of course <a href="../golang-to-jupyter/">the page you are reading</a>.</li>
 </ul>
-<p>You can run, modify or extend <a href="/notebooks/GolangToJupyter.ipynb">this article</a> in a Jupyter Notebook server on your local workstation.</p>
+<p>You can run, modify or extend <a href="../notebooks/GolangToJupyter.ipynb">this article</a> in a Jupyter Notebook server on your local workstation.</p>
 <h2 id="getting-started-with-go-in-jupyter-notebooks">Getting Started with GO in Jupyter Notebooks</h2>
 <ol>
 <li>Install the <a href="https://www.anaconda.com/download/#macos">Anaconda</a> package manager.
@@ -322,14 +315,18 @@ Raw JSON: {
                 
                 <section>
                     <hr class="hidden-sm hidden-xs">
-                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <h5><a href="../tags/">FEATURED TAGS</a></h5>
                     <div class="tags">
                         
                         
                         
+                        <a href="../tags/ai" title="ai">
+                        ai
+                        </a>
                         
                         
-                        <a href="/tags/blockchain" title="blockchain">
+                        
+                        <a href="../tags/blockchain" title="blockchain">
                         blockchain
                         </a>
                         
@@ -339,13 +336,13 @@ Raw JSON: {
                         
                         
                         
-                        <a href="/tags/data" title="data">
+                        <a href="../tags/data" title="data">
                         data
                         </a>
                         
                         
                         
-                        <a href="/tags/data-science" title="data science">
+                        <a href="../tags/data-science" title="data science">
                         data science
                         </a>
                         
@@ -355,13 +352,13 @@ Raw JSON: {
                         
                         
                         
-                        <a href="/tags/development" title="development">
+                        <a href="../tags/development" title="development">
                         development
                         </a>
                         
                         
                         
-                        <a href="/tags/devops" title="devops">
+                        <a href="../tags/devops" title="devops">
                         devops
                         </a>
                         
@@ -369,13 +366,13 @@ Raw JSON: {
                         
                         
                         
-                        <a href="/tags/docker" title="docker">
+                        <a href="../tags/docker" title="docker">
                         docker
                         </a>
                         
                         
                         
-                        <a href="/tags/elasticsearch" title="elasticsearch">
+                        <a href="../tags/elasticsearch" title="elasticsearch">
                         elasticsearch
                         </a>
                         
@@ -387,7 +384,9 @@ Raw JSON: {
                         
                         
                         
-                        <a href="/tags/golang" title="golang">
+                        
+                        
+                        <a href="../tags/golang" title="golang">
                         golang
                         </a>
                         
@@ -395,13 +394,13 @@ Raw JSON: {
                         
                         
                         
-                        <a href="/tags/ingress" title="ingress">
+                        <a href="../tags/ingress" title="ingress">
                         ingress
                         </a>
                         
                         
                         
-                        <a href="/tags/iot" title="iot">
+                        <a href="../tags/iot" title="iot">
                         iot
                         </a>
                         
@@ -415,19 +414,19 @@ Raw JSON: {
                         
                         
                         
-                        <a href="/tags/kubectl" title="kubectl">
+                        <a href="../tags/kubectl" title="kubectl">
                         kubectl
                         </a>
                         
                         
                         
-                        <a href="/tags/kubefwd" title="kubefwd">
+                        <a href="../tags/kubefwd" title="kubefwd">
                         kubefwd
                         </a>
                         
                         
                         
-                        <a href="/tags/kubernetes" title="kubernetes">
+                        <a href="../tags/kubernetes" title="kubernetes">
                         kubernetes
                         </a>
                         
@@ -443,11 +442,15 @@ Raw JSON: {
                         
                         
                         
+                        <a href="../tags/mcp" title="mcp">
+                        mcp
+                        </a>
                         
                         
                         
                         
-                        <a href="/tags/microservices" title="microservices">
+                        
+                        <a href="../tags/microservices" title="microservices">
                         microservices
                         </a>
                         
@@ -459,19 +462,19 @@ Raw JSON: {
                         
                         
                         
-                        <a href="/tags/python" title="python">
+                        <a href="../tags/python" title="python">
                         python
                         </a>
                         
                         
                         
-                        <a href="/tags/raspberry-pi" title="raspberry pi">
+                        <a href="../tags/raspberry-pi" title="raspberry pi">
                         raspberry pi
                         </a>
                         
                         
                         
-                        <a href="/tags/security" title="security">
+                        <a href="../tags/security" title="security">
                         security
                         </a>
                         
@@ -481,7 +484,9 @@ Raw JSON: {
                         
                         
                         
-                        <a href="/tags/utils" title="utils">
+                        
+                        
+                        <a href="../tags/utils" title="utils">
                         utils
                         </a>
                         
@@ -514,7 +519,7 @@ Raw JSON: {
                 <ul class="list-inline text-center">
                    
                    <li>
-                       <a href="/index.xml" rel="alternate" type="application/rss+xml" title="IMTI" >
+                       <a href="../index.xml" rel="alternate" type="application/rss+xml" title="IMTI" >
                            <span class="fa-stack fa-lg">
                                <i class="fa fa-circle fa-stack-2x"></i>
                                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
@@ -533,7 +538,6 @@ Raw JSON: {
                     </li>
 		    
                     
-                    
                     <li>
                         <a href="https://twitter.com/cjimti">
                             <span class="fa-stack fa-lg">
@@ -542,13 +546,6 @@ Raw JSON: {
                             </span>
                         </a>
                     </li>
-                    
-                    
-                    
-
-                    
-
-		    
                     
                     
                     <li>
@@ -571,15 +568,10 @@ Raw JSON: {
                     </li>
 		    
                 </ul>
-
-                
-                
             </div>
         </div>
     </div>
 </footer>
-
-
 
 
 <script>
@@ -594,16 +586,10 @@ Raw JSON: {
 </script>
 
 
-
-
-
-
 <script>
-    
     if($('#tag_cloud').length !== 0){
         async("/js/jquery.tagcloud.js",function(){
             $.fn.tagcloud.defaults = {
-                
                 color: {start: '#bbbbee', end: '#0085a1'},
             };
             $('#tag_cloud a').tagcloud();
@@ -617,8 +603,13 @@ Raw JSON: {
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-
   gtag('config', 'G-R56SP4WLS2');
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+<script>
+  mermaid.initialize({ startOnLoad: true, theme: 'neutral' });
 </script>
 
 </body>

@@ -11,35 +11,35 @@
     <meta name="description" content="Using kubefwd">
     
     <meta name="keyword"  content="Go, Kubernetes, Elasticsearch, Python, Docker, Big Data, Artificial Intelligence, Machine Learning">
-    <link rel="shortcut icon" href="https://imti.co/img/favicon.ico">
+    <link rel="shortcut icon" href="../img/favicon.ico">
 
     <title>Kubernetes Port Forwarding for Local Development - IMTI - Craig Johnston</title>
 
     <link rel="canonical" href="https://imti.co/kubernetes-port-forwarding/">
-	
-    
-    <link rel="stylesheet" href="https://imti.co/css/bootstrap.min.css">
 
     
-    <link rel="stylesheet" href="https://imti.co/css/hux-blog.min.css">
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
 
     
-    <link rel="stylesheet" href="https://imti.co/css/syntax.css">
+    <link rel="stylesheet" href="../css/hux-blog.min.css">
+
+    
+    <link rel="stylesheet" href="../css/syntax.css">
 
     
     <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     
     
-    <link rel="stylesheet" href="/css/imti.css">
+    <link rel="stylesheet" href="../css/imti.css">
 
     
-    <script src="https://imti.co/js/jquery.min.js"></script>
+    <script src="../js/jquery.min.js"></script>
+
     
+    <script src="../js/bootstrap.min.js"></script>
+
     
-    <script src="https://imti.co/js/bootstrap.min.js"></script>
-    
-    
-    <script src="https://imti.co/js/hux-blog.min.js"></script>
+    <script src="../js/hux-blog.min.js"></script>
 
     <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
     <script>
@@ -92,7 +92,8 @@
 </script>
 
 
-</head></head>
+</head>
+</head>
 
 <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
     <div class="container-fluid">
@@ -104,19 +105,18 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="https://imti.co//">IMTI</a>
+            <a class="navbar-brand" href="../">IMTI</a>
         </div>
 
-        
         
         <div id="huxblog_navbar">
             <div class="navbar-collapse">
                 <ul class="nav navbar-nav navbar-right">
                     <li>
-                        <a href="https://imti.co//">Home</a>
+                        <a href="../">Home</a>
                     </li>
                     <li>
-                        <a href="https://imti.co//about/">About</a>
+                        <a href="../about/">About</a>
                     </li>
                     <li>
                         <a href="https://twitter.com/cjimti">Follow</a>
@@ -132,9 +132,6 @@
     
 </nav>
 <script>
-    
-    
-    
     var $body   = document.body;
     var $toggle = document.querySelector('.navbar-toggle');
     var $navbar = document.querySelector('#huxblog_navbar');
@@ -143,17 +140,13 @@
     $toggle.addEventListener('click', handleMagic)
     function handleMagic(e){
         if ($navbar.className.indexOf('in') > 0) {
-        
             $navbar.className = " ";
-            
             setTimeout(function(){
-                
                 if($navbar.className.indexOf('in') < 0) {
                     $collapse.style.height = "0px"
                 }
             },400)
         }else{
-        
             $collapse.style.height = "auto"
             $navbar.className += " in";
         }
@@ -175,15 +168,15 @@
                 <div class="post-heading">
                     <div class="tags">
                         
-                        <a class="tag" href="/tags/development" title="Development">
+                        <a class="tag" href="../tags/development" title="Development">
                         Development
                         </a>
                         
-                        <a class="tag" href="/tags/kubernetes" title="Kubernetes">
+                        <a class="tag" href="../tags/kubernetes" title="Kubernetes">
                         Kubernetes
                         </a>
                         
-                        <a class="tag" href="/tags/coding" title="Coding">
+                        <a class="tag" href="../tags/coding" title="Coding">
                         Coding
                         </a>
                         
@@ -228,7 +221,7 @@
 
 <h2 id="kubefwd"><a href="https://github.com/txn2/kubefwd">kubefwd</a></h2>
 <p><a href="https://github.com/txn2/kubefwd">kubefwd</a> was developed as a command line utility to forward Kubernetes <a href="https://kubernetes.io/docs/concepts/services-networking/service/">Service</a>s as they appear from within a <a href="https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/">Namespace</a>. Running <a href="https://github.com/txn2/kubefwd">kubefwd</a> allows you to access any <a href="https://kubernetes.io/docs/concepts/services-networking/service/">Service</a> from your local workstation just as you would from within another <a href="https://kubernetes.io/docs/concepts/workloads/pods/pod/">Pod</a> in the same Namespace on the cluster.</p>
-<p><img src="/images/content/kubefwd-net.png" alt="kubefwd - Kubernetes port forwarding"></p>
+<p><img src="../images/content/kubefwd-net.png" alt="kubefwd - Kubernetes port forwarding"></p>
 <p>In the following example I forward services from <code>the-project</code> namespace:</p>
 <p><img src="https://raw.githubusercontent.com/txn2/kubefwd/master/kubefwd_ani.gif" alt="ubefwd - example"></p>
 <p>The example above issues the following command:</p>
@@ -262,10 +255,10 @@
 <ul>
 <li><a href="https://github.com/txn2/kubefwd">kubefwd</a> on <a href="https://github.com/txn2/kubefwd">Github</a></li>
 <li>kubectl <a href="https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#port-forward">port-forward</a> command</li>
-<li>Setting up a <a href="/hobby-cluster/">Production Hobby Cluster</a></li>
-<li><a href="/team-kubernetes-remote-access/">Kubernetes Team Access - RBAC for developers and QA</a></li>
-<li><a href="/gitlabci-golang-microservices/">A Microservices Workflow with Golang and Gitlab CI</a></li>
-<li><a href="/fass-kubeless-kubernetes/">Kubernetes FaaS - Kubeless Python and Elasticsearch</a></li>
+<li>Setting up a <a href="../hobby-cluster/">Production Hobby Cluster</a></li>
+<li><a href="../team-kubernetes-remote-access/">Kubernetes Team Access - RBAC for developers and QA</a></li>
+<li><a href="../gitlabci-golang-microservices/">A Microservices Workflow with Golang and Gitlab CI</a></li>
+<li><a href="../fass-kubeless-kubernetes/">Kubernetes FaaS - Kubeless Python and Elasticsearch</a></li>
 </ul>
 <p><a href="https://amzn.to/2IOe8Yu"><img src="https://github.com/cjimti/mk/raw/master/images/content/k8s-tshirt-banner.jpg" alt="k8s performance hobby clusters"></a></p>
 
@@ -285,14 +278,18 @@
                 
                 <section>
                     <hr class="hidden-sm hidden-xs">
-                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <h5><a href="../tags/">FEATURED TAGS</a></h5>
                     <div class="tags">
                         
                         
                         
+                        <a href="../tags/ai" title="ai">
+                        ai
+                        </a>
                         
                         
-                        <a href="/tags/blockchain" title="blockchain">
+                        
+                        <a href="../tags/blockchain" title="blockchain">
                         blockchain
                         </a>
                         
@@ -302,13 +299,13 @@
                         
                         
                         
-                        <a href="/tags/data" title="data">
+                        <a href="../tags/data" title="data">
                         data
                         </a>
                         
                         
                         
-                        <a href="/tags/data-science" title="data science">
+                        <a href="../tags/data-science" title="data science">
                         data science
                         </a>
                         
@@ -318,13 +315,13 @@
                         
                         
                         
-                        <a href="/tags/development" title="development">
+                        <a href="../tags/development" title="development">
                         development
                         </a>
                         
                         
                         
-                        <a href="/tags/devops" title="devops">
+                        <a href="../tags/devops" title="devops">
                         devops
                         </a>
                         
@@ -332,13 +329,13 @@
                         
                         
                         
-                        <a href="/tags/docker" title="docker">
+                        <a href="../tags/docker" title="docker">
                         docker
                         </a>
                         
                         
                         
-                        <a href="/tags/elasticsearch" title="elasticsearch">
+                        <a href="../tags/elasticsearch" title="elasticsearch">
                         elasticsearch
                         </a>
                         
@@ -350,7 +347,9 @@
                         
                         
                         
-                        <a href="/tags/golang" title="golang">
+                        
+                        
+                        <a href="../tags/golang" title="golang">
                         golang
                         </a>
                         
@@ -358,13 +357,13 @@
                         
                         
                         
-                        <a href="/tags/ingress" title="ingress">
+                        <a href="../tags/ingress" title="ingress">
                         ingress
                         </a>
                         
                         
                         
-                        <a href="/tags/iot" title="iot">
+                        <a href="../tags/iot" title="iot">
                         iot
                         </a>
                         
@@ -378,19 +377,19 @@
                         
                         
                         
-                        <a href="/tags/kubectl" title="kubectl">
+                        <a href="../tags/kubectl" title="kubectl">
                         kubectl
                         </a>
                         
                         
                         
-                        <a href="/tags/kubefwd" title="kubefwd">
+                        <a href="../tags/kubefwd" title="kubefwd">
                         kubefwd
                         </a>
                         
                         
                         
-                        <a href="/tags/kubernetes" title="kubernetes">
+                        <a href="../tags/kubernetes" title="kubernetes">
                         kubernetes
                         </a>
                         
@@ -406,11 +405,15 @@
                         
                         
                         
+                        <a href="../tags/mcp" title="mcp">
+                        mcp
+                        </a>
                         
                         
                         
                         
-                        <a href="/tags/microservices" title="microservices">
+                        
+                        <a href="../tags/microservices" title="microservices">
                         microservices
                         </a>
                         
@@ -422,19 +425,19 @@
                         
                         
                         
-                        <a href="/tags/python" title="python">
+                        <a href="../tags/python" title="python">
                         python
                         </a>
                         
                         
                         
-                        <a href="/tags/raspberry-pi" title="raspberry pi">
+                        <a href="../tags/raspberry-pi" title="raspberry pi">
                         raspberry pi
                         </a>
                         
                         
                         
-                        <a href="/tags/security" title="security">
+                        <a href="../tags/security" title="security">
                         security
                         </a>
                         
@@ -444,7 +447,9 @@
                         
                         
                         
-                        <a href="/tags/utils" title="utils">
+                        
+                        
+                        <a href="../tags/utils" title="utils">
                         utils
                         </a>
                         
@@ -477,7 +482,7 @@
                 <ul class="list-inline text-center">
                    
                    <li>
-                       <a href="/index.xml" rel="alternate" type="application/rss+xml" title="IMTI" >
+                       <a href="../index.xml" rel="alternate" type="application/rss+xml" title="IMTI" >
                            <span class="fa-stack fa-lg">
                                <i class="fa fa-circle fa-stack-2x"></i>
                                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
@@ -496,7 +501,6 @@
                     </li>
 		    
                     
-                    
                     <li>
                         <a href="https://twitter.com/cjimti">
                             <span class="fa-stack fa-lg">
@@ -505,13 +509,6 @@
                             </span>
                         </a>
                     </li>
-                    
-                    
-                    
-
-                    
-
-		    
                     
                     
                     <li>
@@ -534,15 +531,10 @@
                     </li>
 		    
                 </ul>
-
-                
-                
             </div>
         </div>
     </div>
 </footer>
-
-
 
 
 <script>
@@ -557,16 +549,10 @@
 </script>
 
 
-
-
-
-
 <script>
-    
     if($('#tag_cloud').length !== 0){
         async("/js/jquery.tagcloud.js",function(){
             $.fn.tagcloud.defaults = {
-                
                 color: {start: '#bbbbee', end: '#0085a1'},
             };
             $('#tag_cloud a').tagcloud();
@@ -580,8 +566,13 @@
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-
   gtag('config', 'G-R56SP4WLS2');
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+<script>
+  mermaid.initialize({ startOnLoad: true, theme: 'neutral' });
 </script>
 
 </body>

@@ -11,35 +11,35 @@
     <meta name="description" content="Kubeless, Python and Elasticsearch">
     
     <meta name="keyword"  content="Go, Kubernetes, Elasticsearch, Python, Docker, Big Data, Artificial Intelligence, Machine Learning">
-    <link rel="shortcut icon" href="https://imti.co/img/favicon.ico">
+    <link rel="shortcut icon" href="../img/favicon.ico">
 
     <title>FaaS on Kubernetes - IMTI - Craig Johnston</title>
 
     <link rel="canonical" href="https://imti.co/fass-kubeless-kubernetes/">
-	
-    
-    <link rel="stylesheet" href="https://imti.co/css/bootstrap.min.css">
 
     
-    <link rel="stylesheet" href="https://imti.co/css/hux-blog.min.css">
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
 
     
-    <link rel="stylesheet" href="https://imti.co/css/syntax.css">
+    <link rel="stylesheet" href="../css/hux-blog.min.css">
+
+    
+    <link rel="stylesheet" href="../css/syntax.css">
 
     
     <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     
     
-    <link rel="stylesheet" href="/css/imti.css">
+    <link rel="stylesheet" href="../css/imti.css">
 
     
-    <script src="https://imti.co/js/jquery.min.js"></script>
+    <script src="../js/jquery.min.js"></script>
+
     
+    <script src="../js/bootstrap.min.js"></script>
+
     
-    <script src="https://imti.co/js/bootstrap.min.js"></script>
-    
-    
-    <script src="https://imti.co/js/hux-blog.min.js"></script>
+    <script src="../js/hux-blog.min.js"></script>
 
     <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
     <script>
@@ -92,7 +92,8 @@
 </script>
 
 
-</head></head>
+</head>
+</head>
 
 <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
     <div class="container-fluid">
@@ -104,19 +105,18 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="https://imti.co//">IMTI</a>
+            <a class="navbar-brand" href="../">IMTI</a>
         </div>
 
-        
         
         <div id="huxblog_navbar">
             <div class="navbar-collapse">
                 <ul class="nav navbar-nav navbar-right">
                     <li>
-                        <a href="https://imti.co//">Home</a>
+                        <a href="../">Home</a>
                     </li>
                     <li>
-                        <a href="https://imti.co//about/">About</a>
+                        <a href="../about/">About</a>
                     </li>
                     <li>
                         <a href="https://twitter.com/cjimti">Follow</a>
@@ -132,9 +132,6 @@
     
 </nav>
 <script>
-    
-    
-    
     var $body   = document.body;
     var $toggle = document.querySelector('.navbar-toggle');
     var $navbar = document.querySelector('#huxblog_navbar');
@@ -143,17 +140,13 @@
     $toggle.addEventListener('click', handleMagic)
     function handleMagic(e){
         if ($navbar.className.indexOf('in') > 0) {
-        
             $navbar.className = " ";
-            
             setTimeout(function(){
-                
                 if($navbar.className.indexOf('in') < 0) {
                     $collapse.style.height = "0px"
                 }
             },400)
         }else{
-        
             $collapse.style.height = "auto"
             $navbar.className += " in";
         }
@@ -175,19 +168,19 @@
                 <div class="post-heading">
                     <div class="tags">
                         
-                        <a class="tag" href="/tags/elasticsearch" title="Elasticsearch">
+                        <a class="tag" href="../tags/elasticsearch" title="Elasticsearch">
                         Elasticsearch
                         </a>
                         
-                        <a class="tag" href="/tags/python" title="Python">
+                        <a class="tag" href="../tags/python" title="Python">
                         Python
                         </a>
                         
-                        <a class="tag" href="/tags/kubernetes" title="Kubernetes">
+                        <a class="tag" href="../tags/kubernetes" title="Kubernetes">
                         Kubernetes
                         </a>
                         
-                        <a class="tag" href="/tags/serverless" title="Serverless">
+                        <a class="tag" href="../tags/serverless" title="Serverless">
                         Serverless
                         </a>
                         
@@ -216,8 +209,8 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <p>FaaS or <a href="https://en.wikipedia.org/wiki/Function_as_a_service">Function as a Service</a> also known as <a href="https://en.wikipedia.org/wiki/Serverless_computing">Serverless computing</a> implementations are gaining popularity. Discussed often are the cost savings and each implementations relationship to the physical and network architecture of a specific platform or vendor. While many of the <a href="https://martinfowler.com/articles/serverless.html#ReducedOperationalCost">cost and infrastructure</a> advantages of FaaS are compelling, its only one of many advantages. Below, I hope to demonstrate how easy it is to develop and deploy FaaS components into a custom Kubernetes cluster. The functions I develop are nearly all business logic, and I believe therein lies the advantage, <strong>high-density business logic</strong>. Functions can have a higher degree of focus directly on business logic and communication with other services. Functions can communicate with other functions, microservices or monoliths. In this article, I demonstrate this with <a href="/kubernetes-production-elasticsearch/">Elasticsearch</a>.</p>
-<p><img src="/images/content/faas_architecture.png" alt=""></p>
+                <p>FaaS or <a href="https://en.wikipedia.org/wiki/Function_as_a_service">Function as a Service</a> also known as <a href="https://en.wikipedia.org/wiki/Serverless_computing">Serverless computing</a> implementations are gaining popularity. Discussed often are the cost savings and each implementations relationship to the physical and network architecture of a specific platform or vendor. While many of the <a href="https://martinfowler.com/articles/serverless.html#ReducedOperationalCost">cost and infrastructure</a> advantages of FaaS are compelling, its only one of many advantages. Below, I hope to demonstrate how easy it is to develop and deploy FaaS components into a custom Kubernetes cluster. The functions I develop are nearly all business logic, and I believe therein lies the advantage, <strong>high-density business logic</strong>. Functions can have a higher degree of focus directly on business logic and communication with other services. Functions can communicate with other functions, microservices or monoliths. In this article, I demonstrate this with <a href="../kubernetes-production-elasticsearch/">Elasticsearch</a>.</p>
+<p><img src="../images/content/faas_architecture.png" alt=""></p>
 <aside class="toc">
     <header>
         <h2>Contents</h2>
@@ -251,7 +244,7 @@
 
 <h2 id="architecture">Architecture</h2>
 <p>Lately, I have been seeing a trend of comparisons for choosing between developing applications with Monoliths, Microservices, or FaaS. I believe this comparison in some context, is flawed. Unless you are on a desert island and can only choose one implementation in which to develop your application, you sill have a problem of definition. Even if you did have to limit your architecture to one concept, you would first need to define a standard of comparison, determining where a bloated Microservice is a monolith, or if a prewarmed FaaS is just a small Microservice. If you are following my point, they can all have a place regardless of definition, that is if the underlying platform can support them equally. All these concepts can work together seamlessly in one platform, by operating in networked containers, orchestrated by Kubernetes.</p>
-<p><img src="/images/content/k8s_micro_mono_func.png" alt=""></p>
+<p><img src="../images/content/k8s_micro_mono_func.png" alt=""></p>
 <h2 id="terminology">Terminology</h2>
 <p>In this article I will use the term <strong>Function</strong> to describe a <a href="https://kubeless.io/docs/quick-start/">Kubeless Function</a>. <a href="https://kubeless.io/">Kubeless</a> is an implementation of FaaS <a href="https://en.wikipedia.org/wiki/Function_as_a_service">Function as a Service</a> also known as <a href="https://en.wikipedia.org/wiki/Serverless_computing">Serverless computing</a>, <a href="https://serverless.com/">Serverless</a>, <a href="https://aws.amazon.com/lambda/">lambda</a>, <a href="https://cloud.google.com/functions/">Google functions</a> or even <a href="https://www.infoq.com/news/2014/05/nano-services">Nano Services</a>.</p>
 <h2 id="motivation">Motivation</h2>
@@ -259,7 +252,7 @@
 <p>At this point most of my legacy systems are Monoliths; however they are containerized and live in the cluster as they would any hosting environment. I design most of my Microservices for generic or reusable functionality or more complex business logic not appropriate for pure functions. Functions are a great addition to data flow, and it&rsquo;s pipeline between monoliths, microservices and other functions. Kubeless Functions give me the <strong>ability to quickly inject business logic at any point in the platform without significant architectural changes.</strong></p>
 <h2 id="kubeless-for-faas">Kubeless for FaaS</h2>
 <p>I appreciate the simplicity and elegance of <a href="https://kubeless.io/">Kubeless</a> and its seamless integration into Kubernetes. <a href="https://kubeless.io/">Kubeless</a> is an extension of the Kubernetes API and takes advantage of its stability and architecture. This integration with Kubernetes makes <a href="https://kubeless.io/">Kubeless</a> incredibly easy if you are already familiar with Kubernetes.</p>
-<p><img src="/images/content/kubeless-overview.png" alt=""></p>
+<p><img src="../images/content/kubeless-overview.png" alt=""></p>
 <p><a href="https://kubeless.io/">Kubeless</a> comes with its own CLI for interacting with Functions, providing commands such as <code>kubeless function ls</code>:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubeless <span style="color:#66d9ef">function</span> ls -n the-project
 </span></span><span style="display:flex;"><span>
@@ -271,12 +264,12 @@
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl get functions -n the-project
 </span></span></code></pre></div><p>These commands are nearly synonymous, because Kubless Function are merely Kubernetes objects, or Custom Resources to be accurate, and many operations on them are as they would be with other resources in the cluster, like services, deployment or pods.</p>
 <h3 id="install-kubeless">Install Kubeless</h3>
-<p><a href="https://kubeless.io/">Kubeless</a> installs in the <code>kubeless</code> namespace by default and can be used to create functions in any namespace. I use <a href="https://kubernetes.io/docs/reference/access-authn-authz/rbac/">RBAC</a> for all my clusters, and if you are looking to set up a custom Kubernetes cluster, I recommend spending about an hour following my article <a href="/hobby-cluster/">Production Hobby Cluster</a>.</p>
-<p>Setting up Kubeless in your <a href="/hobby-cluster/">Production Hobby Cluster</a> or hosted solution is easy, and the <a href="https://kubeless.io/docs/quick-start/">official installation instructions</a> are clear.</p>
+<p><a href="https://kubeless.io/">Kubeless</a> installs in the <code>kubeless</code> namespace by default and can be used to create functions in any namespace. I use <a href="https://kubernetes.io/docs/reference/access-authn-authz/rbac/">RBAC</a> for all my clusters, and if you are looking to set up a custom Kubernetes cluster, I recommend spending about an hour following my article <a href="../hobby-cluster/">Production Hobby Cluster</a>.</p>
+<p>Setting up Kubeless in your <a href="../hobby-cluster/">Production Hobby Cluster</a> or hosted solution is easy, and the <a href="https://kubeless.io/docs/quick-start/">official installation instructions</a> are clear.</p>
 <p>If you have a <a href="https://kubeless.io/">Kubeless</a> cluster already available and only need the CLI, then I suggest a <code>brew install kubeless</code> for the MacOs users.</p>
 <h3 id="toolchain-and-local-development">Toolchain and Local Development</h3>
 <p>Developing <a href="https://kubeless.io/">Kubeless</a> Functions can be performed with the same tools as any other services. I build my <a href="https://golang.org/">Golang</a> and <a href="https://www.python.org/">Python</a> functions with the commercial <a href="https://www.jetbrains.com/">Jet Brains</a> IDEs <a href="https://www.jetbrains.com/go/">Goland</a> and <a href="https://www.jetbrains.com/pycharm/">PyCharm</a> however free IDEs such as <a href="https://code.visualstudio.com/">Visual Studio Code</a> and <a href="https://atom.io/">Atom</a> work great as well.</p>
-<p>In this demo, my Functions are API endpoints that query <a href="/kubernetes-production-elasticsearch/">Elasticsearch</a>, check out my article <a href="/remote-query-kubernetes-elasticsearch/">Remote Query Elasticsearch on Kubernetes</a> on how I port-forward Kubernetes <a href="https://kubernetes.io/docs/concepts/services-networking/service/">Services</a> for remote access. If your Kubernetes cluster needs set up for remote access, I suggest reading <a href="/team-kubernetes-remote-access/">Kubernetes Team Access - RBAC for developers and QA</a>.</p>
+<p>In this demo, my Functions are API endpoints that query <a href="../kubernetes-production-elasticsearch/">Elasticsearch</a>, check out my article <a href="../remote-query-kubernetes-elasticsearch/">Remote Query Elasticsearch on Kubernetes</a> on how I port-forward Kubernetes <a href="https://kubernetes.io/docs/concepts/services-networking/service/">Services</a> for remote access. If your Kubernetes cluster needs set up for remote access, I suggest reading <a href="../team-kubernetes-remote-access/">Kubernetes Team Access - RBAC for developers and QA</a>.</p>
 <h2 id="python-function">Python Function</h2>
 <p>The following Python code demonstrates a function that returns the last 24 hours of weather data for Los Angeles, specifically temperatures. The Elasticsearch query aggregates the data into buckets of two-degree Fahrenheit intervals for later use in histograms and further analysis.</p>
 <p>The <a href="https://elasticsearch-dsl.readthedocs.io/en/latest/search_dsl.html">Elasticsearch DSL</a> is an excellent library for working with Elasticsearch in <a href="https://www.python.org/">Python</a>. Although most of my Microservices are written in <a href="https://golang.org/">Golang</a>, <a href="https://www.python.org/">Python</a> provides a tremendous number of mature and well-documented libraries for working with data.</p>
@@ -455,8 +448,8 @@
 <p>Kubless supports a variety of <a href="https://github.com/kubeless/kubeless/blob/master/docs/runtimes.md">runtimes</a>. In my case, most of my functions work with numbers, and It&rsquo;s tough to beat Python in simplifying the areas of statistics, analytics, and machine learning. Using <a href="https://kubeless.io/">Kubeless</a> means you don&rsquo;t need to become an expert on writing large Python stacks. You can spend more time focusing on individual packages that help you develop your business logic directly. I believe Python does a great job in supporting the advantage of FaaS its support of <strong>high-density business logic</strong>.</p>
 <ul>
 <li><a href="https://elasticsearch-dsl.readthedocs.io/en/latest/search_dsl.html">Elasticsearch DSL</a> delivers a clean <a href="https://blog.startifact.com/posts/older/what-is-pythonic.html">pythonic</a> syntax for working with Elasticsearch.</li>
-<li><a href="/python-data-essentials-numpy/">Python Data Essentials - Numpy</a> provides a wide variety of options for working with numbers, extraordinarily powerful N-dimensional array objects in which we can perform linear algebra.</li>
-<li><a href="/python-data-essentials-pandas/">Python Data Essentials - Pandas</a> is a data type equivalent to super-charged spreadsheets. Pandas add two highly expressive data structures to Python, Series, and DataFrame.</li>
+<li><a href="../python-data-essentials-numpy/">Python Data Essentials - Numpy</a> provides a wide variety of options for working with numbers, extraordinarily powerful N-dimensional array objects in which we can perform linear algebra.</li>
+<li><a href="../python-data-essentials-pandas/">Python Data Essentials - Pandas</a> is a data type equivalent to super-charged spreadsheets. Pandas add two highly expressive data structures to Python, Series, and DataFrame.</li>
 </ul>
 <h2 id="port-forwarding--local-development">Port Forwarding / Local Development</h2>
 <p>Check out <a href="https://github.com/txn2/kubefwd">kubefwd</a> for a simple command line utility that bulk forwards services of one or more namespaces to your local workstation.</p>
@@ -477,14 +470,18 @@
                 
                 <section>
                     <hr class="hidden-sm hidden-xs">
-                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <h5><a href="../tags/">FEATURED TAGS</a></h5>
                     <div class="tags">
                         
                         
                         
+                        <a href="../tags/ai" title="ai">
+                        ai
+                        </a>
                         
                         
-                        <a href="/tags/blockchain" title="blockchain">
+                        
+                        <a href="../tags/blockchain" title="blockchain">
                         blockchain
                         </a>
                         
@@ -494,13 +491,13 @@
                         
                         
                         
-                        <a href="/tags/data" title="data">
+                        <a href="../tags/data" title="data">
                         data
                         </a>
                         
                         
                         
-                        <a href="/tags/data-science" title="data science">
+                        <a href="../tags/data-science" title="data science">
                         data science
                         </a>
                         
@@ -510,13 +507,13 @@
                         
                         
                         
-                        <a href="/tags/development" title="development">
+                        <a href="../tags/development" title="development">
                         development
                         </a>
                         
                         
                         
-                        <a href="/tags/devops" title="devops">
+                        <a href="../tags/devops" title="devops">
                         devops
                         </a>
                         
@@ -524,13 +521,13 @@
                         
                         
                         
-                        <a href="/tags/docker" title="docker">
+                        <a href="../tags/docker" title="docker">
                         docker
                         </a>
                         
                         
                         
-                        <a href="/tags/elasticsearch" title="elasticsearch">
+                        <a href="../tags/elasticsearch" title="elasticsearch">
                         elasticsearch
                         </a>
                         
@@ -542,7 +539,9 @@
                         
                         
                         
-                        <a href="/tags/golang" title="golang">
+                        
+                        
+                        <a href="../tags/golang" title="golang">
                         golang
                         </a>
                         
@@ -550,13 +549,13 @@
                         
                         
                         
-                        <a href="/tags/ingress" title="ingress">
+                        <a href="../tags/ingress" title="ingress">
                         ingress
                         </a>
                         
                         
                         
-                        <a href="/tags/iot" title="iot">
+                        <a href="../tags/iot" title="iot">
                         iot
                         </a>
                         
@@ -570,19 +569,19 @@
                         
                         
                         
-                        <a href="/tags/kubectl" title="kubectl">
+                        <a href="../tags/kubectl" title="kubectl">
                         kubectl
                         </a>
                         
                         
                         
-                        <a href="/tags/kubefwd" title="kubefwd">
+                        <a href="../tags/kubefwd" title="kubefwd">
                         kubefwd
                         </a>
                         
                         
                         
-                        <a href="/tags/kubernetes" title="kubernetes">
+                        <a href="../tags/kubernetes" title="kubernetes">
                         kubernetes
                         </a>
                         
@@ -598,11 +597,15 @@
                         
                         
                         
+                        <a href="../tags/mcp" title="mcp">
+                        mcp
+                        </a>
                         
                         
                         
                         
-                        <a href="/tags/microservices" title="microservices">
+                        
+                        <a href="../tags/microservices" title="microservices">
                         microservices
                         </a>
                         
@@ -614,19 +617,19 @@
                         
                         
                         
-                        <a href="/tags/python" title="python">
+                        <a href="../tags/python" title="python">
                         python
                         </a>
                         
                         
                         
-                        <a href="/tags/raspberry-pi" title="raspberry pi">
+                        <a href="../tags/raspberry-pi" title="raspberry pi">
                         raspberry pi
                         </a>
                         
                         
                         
-                        <a href="/tags/security" title="security">
+                        <a href="../tags/security" title="security">
                         security
                         </a>
                         
@@ -636,7 +639,9 @@
                         
                         
                         
-                        <a href="/tags/utils" title="utils">
+                        
+                        
+                        <a href="../tags/utils" title="utils">
                         utils
                         </a>
                         
@@ -669,7 +674,7 @@
                 <ul class="list-inline text-center">
                    
                    <li>
-                       <a href="/index.xml" rel="alternate" type="application/rss+xml" title="IMTI" >
+                       <a href="../index.xml" rel="alternate" type="application/rss+xml" title="IMTI" >
                            <span class="fa-stack fa-lg">
                                <i class="fa fa-circle fa-stack-2x"></i>
                                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
@@ -688,7 +693,6 @@
                     </li>
 		    
                     
-                    
                     <li>
                         <a href="https://twitter.com/cjimti">
                             <span class="fa-stack fa-lg">
@@ -697,13 +701,6 @@
                             </span>
                         </a>
                     </li>
-                    
-                    
-                    
-
-                    
-
-		    
                     
                     
                     <li>
@@ -726,15 +723,10 @@
                     </li>
 		    
                 </ul>
-
-                
-                
             </div>
         </div>
     </div>
 </footer>
-
-
 
 
 <script>
@@ -749,16 +741,10 @@
 </script>
 
 
-
-
-
-
 <script>
-    
     if($('#tag_cloud').length !== 0){
         async("/js/jquery.tagcloud.js",function(){
             $.fn.tagcloud.defaults = {
-                
                 color: {start: '#bbbbee', end: '#0085a1'},
             };
             $('#tag_cloud a').tagcloud();
@@ -772,8 +758,13 @@
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-
   gtag('config', 'G-R56SP4WLS2');
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+<script>
+  mermaid.initialize({ startOnLoad: true, theme: 'neutral' });
 </script>
 
 </body>

@@ -1,4 +1,5 @@
 baseurl = "https://imti.co"
+relativeURLs = true
 title = "IMTI"
 theme = "hugo-theme-cleanwhite"
 languageCode = "en-us"

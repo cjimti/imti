@@ -6,8 +6,15 @@
     <description>Recent content in MCP on IMTI</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 04 Jan 2026 12:01:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 17 Jan 2026 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://imti.co/tags/mcp/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>AI Data Warehouse Access with MCP and Trino</title>
+      <link>https://imti.co/mcp-trino/</link>
+      <pubDate>Sat, 17 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>https://imti.co/mcp-trino/</guid>
+      <description>&lt;p&gt;Every organization wants AI assistants to answer questions from their data. The problem is that data lives everywhere: PostgreSQL for transactions, MySQL for legacy systems, S3 for analytics, Kafka for streams. Writing custom integrations for each source is unsustainable. &lt;a href=&#34;https://github.com/txn2/mcp-trino&#34;&gt;mcp-trino&lt;/a&gt; solves this by exposing Trino&amp;rsquo;s federated query engine to AI assistants through MCP.&lt;/p&gt;</description>
+    </item>
     <item>
       <title>kubefwd in 2026: Interactive TUI and Auto-Reconnect</title>
       <link>https://imti.co/kubefwd-2026/</link>
@@ -20,7 +27,7 @@
       <link>https://imti.co/kubefwd-mcp/</link>
       <pubDate>Sun, 04 Jan 2026 12:00:00 +0000</pubDate>
       <guid>https://imti.co/kubefwd-mcp/</guid>
-      <description>&lt;p&gt;&lt;a href=&#34;https://github.com/txn2/kubefwd&#34;&gt;kubefwd&lt;/a&gt; is a tool that bulk-forwards Kubernetes services to your local machine, making them accessible by their real hostnames. Instead of juggling &lt;code&gt;kubectl port-forward&lt;/code&gt; commands, you run &lt;code&gt;sudo kubefwd svc -n mynamespace&lt;/code&gt; and your app can connect to &lt;code&gt;postgres:5432&lt;/code&gt; or &lt;code&gt;api:8080&lt;/code&gt; as if those services were running locally. For full details on kubefwd&amp;rsquo;s features, see &lt;a href=&#34;https://imti.co/kubefwd-2026/&#34;&gt;kubefwd in 2026: Interactive TUI and Auto-Reconnect&lt;/a&gt;.&lt;/p&gt;&#xA;&lt;p&gt;This article focuses on kubefwd&amp;rsquo;s MCP integration, which lets AI assistants manage port forwarding on your behalf.&lt;/p&gt;</description>
+      <description>&lt;p&gt;&lt;a href=&#34;https://github.com/txn2/kubefwd&#34;&gt;kubefwd&lt;/a&gt; is a tool that bulk-forwards Kubernetes services to your local machine, making them accessible by their real hostnames. Instead of juggling &lt;code&gt;kubectl port-forward&lt;/code&gt; commands, you run &lt;code&gt;sudo kubefwd svc -n mynamespace&lt;/code&gt; and your app can connect to &lt;code&gt;postgres:5432&lt;/code&gt; or &lt;code&gt;api:8080&lt;/code&gt; as if those services were running locally. For full details on kubefwd&amp;rsquo;s features, see &lt;a href=&#34;../../kubefwd-2026/&#34;&gt;kubefwd in 2026: Interactive TUI and Auto-Reconnect&lt;/a&gt;.&lt;/p&gt;&#xA;&lt;p&gt;This article focuses on kubefwd&amp;rsquo;s MCP integration, which lets AI assistants manage port forwarding on your behalf.&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>

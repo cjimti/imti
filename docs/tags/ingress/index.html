@@ -11,35 +11,35 @@
     <meta name="description" content="I lead a talented team of software development and creative engineers, covering many industries looking to collect, analyze, move, buffer, queue, process and present data in significant ways. My expertise and that of my team revolve around microservices, artificial intelligence, algorithms, and machine learning.">
     
     <meta name="keyword"  content="Go, Kubernetes, Elasticsearch, Python, Docker, Big Data, Artificial Intelligence, Machine Learning">
-    <link rel="shortcut icon" href="https://imti.co/img/favicon.ico">
+    <link rel="shortcut icon" href="../../img/favicon.ico">
 
     <title>Ingress - IMTI - Craig Johnston</title>
 
     <link rel="canonical" href="https://imti.co/tags/ingress/">
-	
-    
-    <link rel="stylesheet" href="https://imti.co/css/bootstrap.min.css">
 
     
-    <link rel="stylesheet" href="https://imti.co/css/hux-blog.min.css">
+    <link rel="stylesheet" href="../../css/bootstrap.min.css">
 
     
-    <link rel="stylesheet" href="https://imti.co/css/syntax.css">
+    <link rel="stylesheet" href="../../css/hux-blog.min.css">
+
+    
+    <link rel="stylesheet" href="../../css/syntax.css">
 
     
     <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     
     
-    <link rel="stylesheet" href="/css/imti.css">
+    <link rel="stylesheet" href="../../css/imti.css">
 
     
-    <script src="https://imti.co/js/jquery.min.js"></script>
+    <script src="../../js/jquery.min.js"></script>
+
     
+    <script src="../../js/bootstrap.min.js"></script>
+
     
-    <script src="https://imti.co/js/bootstrap.min.js"></script>
-    
-    
-    <script src="https://imti.co/js/hux-blog.min.js"></script>
+    <script src="../../js/hux-blog.min.js"></script>
 
     <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
     <script>
@@ -58,7 +58,8 @@
 
     
 
-</head></head>
+</head>
+</head>
 
 <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
     <div class="container-fluid">
@@ -70,19 +71,18 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="https://imti.co//">IMTI</a>
+            <a class="navbar-brand" href="../../">IMTI</a>
         </div>
 
-        
         
         <div id="huxblog_navbar">
             <div class="navbar-collapse">
                 <ul class="nav navbar-nav navbar-right">
                     <li>
-                        <a href="https://imti.co//">Home</a>
+                        <a href="../../">Home</a>
                     </li>
                     <li>
-                        <a href="https://imti.co//about/">About</a>
+                        <a href="../../about/">About</a>
                     </li>
                     <li>
                         <a href="https://twitter.com/cjimti">Follow</a>
@@ -98,9 +98,6 @@
     
 </nav>
 <script>
-    
-    
-    
     var $body   = document.body;
     var $toggle = document.querySelector('.navbar-toggle');
     var $navbar = document.querySelector('#huxblog_navbar');
@@ -109,17 +106,13 @@
     $toggle.addEventListener('click', handleMagic)
     function handleMagic(e){
         if ($navbar.className.indexOf('in') > 0) {
-        
             $navbar.className = " ";
-            
             setTimeout(function(){
-                
                 if($navbar.className.indexOf('in') < 0) {
                     $collapse.style.height = "0px"
                 }
             },400)
         }else{
-        
             $collapse.style.height = "auto"
             $navbar.className += " in";
         }
@@ -170,8 +163,8 @@
 	
         <div class="post-content-preview">
 	
-            <p>Using <a href="/web-cluster-ingress/">ingress</a>-nginx on <a href="https://kubernetes.io/">Kubernetes</a> makes adding <a href="https://en.wikipedia.org/wiki/Cross-origin_resource_sharing">CORS</a> headers painless. Kubernetes <a href="/web-cluster-ingress/">ingress</a>-nginx uses <a href="https://github.com/kubernetes/ingress-nginx/blob/master/docs/user-guide/nginx-configuration/annotations.md">annotations</a> as a quick way to allow you to specify the automatic generation of an extensive list of common <a href="http://nginx.org/en/docs/beginners_guide.html">nginx</a> configuration options.</p>
-<p>Example <a href="/web-cluster-ingress/">ingress</a> configuration enabling <a href="https://en.wikipedia.org/wiki/Cross-origin_resource_sharing">CORS</a>:</p>
+            <p>Using <a href="../../web-cluster-ingress/">ingress</a>-nginx on <a href="https://kubernetes.io/">Kubernetes</a> makes adding <a href="https://en.wikipedia.org/wiki/Cross-origin_resource_sharing">CORS</a> headers painless. Kubernetes <a href="../../web-cluster-ingress/">ingress</a>-nginx uses <a href="https://github.com/kubernetes/ingress-nginx/blob/master/docs/user-guide/nginx-configuration/annotations.md">annotations</a> as a quick way to allow you to specify the automatic generation of an extensive list of common <a href="http://nginx.org/en/docs/beginners_guide.html">nginx</a> configuration options.</p>
+<p>Example <a href="../../web-cluster-ingress/">ingress</a> configuration enabling <a href="https://en.wikipedia.org/wiki/Cross-origin_resource_sharing">CORS</a>:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">extensions/v1beta1</span>
 </span></span><span style="display:flex;"><span><span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Ingress</span>
 </span></span><span style="display:flex;"><span><span style="color:#f92672">metadata</span>:
@@ -197,7 +190,7 @@
 </span></span><span style="display:flex;"><span>  - <span style="color:#f92672">hosts</span>:
 </span></span><span style="display:flex;"><span>    - <span style="color:#ae81ff">api.example.com</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#f92672">secretName</span>: <span style="color:#ae81ff">example-tls</span>
-</span></span></code></pre></div><p>You can check the nginx configuration file generated by Kubernetes <a href="/web-cluster-ingress/">ingress</a>-nginx on any of the ingress controller pods.</p>
+</span></span></code></pre></div><p>You can check the nginx configuration file generated by Kubernetes <a href="../../web-cluster-ingress/">ingress</a>-nginx on any of the ingress controller pods.</p>
        
         </div>
     </a>
@@ -243,7 +236,7 @@
 	
             <p><a href="https://github.com/txn2/txtoken">txToken</a> is a small high performance <a href="http://microservices.io/">microservice</a> utility container. <a href="https://github.com/txn2/txtoken">txToken</a> is used for adding <a href="https://jwt.io/">JSON Web Token</a> based security to existing or new API development. <a href="https://github.com/txn2/txtoken">txToken</a> is specifically for systems that communicate in JSON over HTTP. <a href="https://github.com/txn2/txtoken">txToken</a> is called from a client with a JSON post body and passes received JSON to a remote endpoint. JSON retrieved from a remote endpoint is used to create a <a href="https://jwt.io/">JWT</a> token with an <a href="https://community.auth0.com/t/jwt-signing-algorithms-rs256-vs-hs256/7720">HS256</a> symmetrically encrypted signature.</p>
 <h3 id="overview">Overview</h3>
-<p><img src="/images/content/txToken-00.png" alt="txToken Proxy"></p>
+<p><img src="../../images/content/txToken-00.png" alt="txToken Proxy"></p>
        
         </div>
     </a>
@@ -265,8 +258,8 @@
 	
         <div class="post-content-preview">
 	
-            <p>Use <a href="https://github.com/jetstack/cert-manager/">cert-manager</a> to get port 443/https running with signed x509 certificates for <a href="/web-cluster-ingress/">Ingress</a> on your Kubernetes <a href="/hobby-cluster/">Production Hobby Cluster</a>. <a href="https://github.com/jetstack/cert-manager/">cert-manager</a> is the successor to <strong>kube-lego</strong> and the preferred way to &ldquo;<a href="https://letsencrypt.org/how-it-works/">automatically obtain browser-trusted certificates, without any human intervention.</a>&rdquo; using <a href="https://letsencrypt.org/">Let&rsquo;s Encrypt</a>.</p>
-<p>You need to <a href="/helm-on-custom-cluster/">install Helm</a> first if you do not already have it. Otherwise, check out my article <a href="/helm-on-custom-cluster/">Helm on Custom Kubernetes</a>, especially if you are following along with my <a href="/hobby-cluster/">Production Hobby Cluster</a> guides.</p>
+            <p>Use <a href="https://github.com/jetstack/cert-manager/">cert-manager</a> to get port 443/https running with signed x509 certificates for <a href="../../web-cluster-ingress/">Ingress</a> on your Kubernetes <a href="../../hobby-cluster/">Production Hobby Cluster</a>. <a href="https://github.com/jetstack/cert-manager/">cert-manager</a> is the successor to <strong>kube-lego</strong> and the preferred way to &ldquo;<a href="https://letsencrypt.org/how-it-works/">automatically obtain browser-trusted certificates, without any human intervention.</a>&rdquo; using <a href="https://letsencrypt.org/">Let&rsquo;s Encrypt</a>.</p>
+<p>You need to <a href="../../helm-on-custom-cluster/">install Helm</a> first if you do not already have it. Otherwise, check out my article <a href="../../helm-on-custom-cluster/">Helm on Custom Kubernetes</a>, especially if you are following along with my <a href="../../hobby-cluster/">Production Hobby Cluster</a> guides.</p>
 
 
 <h3 id="install-cert-manager">Install <a href="https://github.com/jetstack/cert-manager/">cert-manager</a></h3>
@@ -293,8 +286,8 @@
 	
         <div class="post-content-preview">
 	
-            <p>There are more than a handful of ways to set up port <strong>80</strong> and <strong>443</strong> web <a href="https://github.com/kubernetes/ingress-nginx">ingress</a> on a custom <a href="https://kubernetes.io/">Kubernetes</a> cluster. Specifically a bare metal cluster. If you are looking to experiment or learn on a non-production cluster, but something more true to production than <a href="https://kubernetes.io/docs/getting-started-guides/minikube/">minikube</a>, I suggest you check out my previous article <a href="/hobby-cluster/">Production Hobby Cluster</a>, a step-by-step guide for setting up a custom production capable Kubernetes cluster.</p>
-<p>This article builds on the <a href="/hobby-cluster/">Production Hobby Cluster</a> guide. The following closely the official <a href="https://github.com/kubernetes/ingress-nginx/blob/master/docs/deploy/index.md">deploy ingress</a> Installation Guide with a few adjustments suitable for the <a href="/hobby-cluster/">Production Hobby Cluster</a>, specifically the use of a <a href="https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/">DaemonSet</a> rather than a <a href="https://kubernetes.io/docs/concepts/workloads/controllers/deployment/">Deployment</a> and leveraging <strong>hostNetwork</strong> and <strong>hostPort</strong> for the <a href="https://kubernetes.io/docs/concepts/workloads/pods/pod/">Pod</a>s on our <a href="https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/">DaemonSet</a>. There are quite a few <a href="https://github.com/kubernetes/ingress-nginx/tree/master/docs/examples">ingress nginx examples</a> in the official repository if you are looking for a more specific implementation.</p>
+            <p>There are more than a handful of ways to set up port <strong>80</strong> and <strong>443</strong> web <a href="https://github.com/kubernetes/ingress-nginx">ingress</a> on a custom <a href="https://kubernetes.io/">Kubernetes</a> cluster. Specifically a bare metal cluster. If you are looking to experiment or learn on a non-production cluster, but something more true to production than <a href="https://kubernetes.io/docs/getting-started-guides/minikube/">minikube</a>, I suggest you check out my previous article <a href="../../hobby-cluster/">Production Hobby Cluster</a>, a step-by-step guide for setting up a custom production capable Kubernetes cluster.</p>
+<p>This article builds on the <a href="../../hobby-cluster/">Production Hobby Cluster</a> guide. The following closely the official <a href="https://github.com/kubernetes/ingress-nginx/blob/master/docs/deploy/index.md">deploy ingress</a> Installation Guide with a few adjustments suitable for the <a href="../../hobby-cluster/">Production Hobby Cluster</a>, specifically the use of a <a href="https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/">DaemonSet</a> rather than a <a href="https://kubernetes.io/docs/concepts/workloads/controllers/deployment/">Deployment</a> and leveraging <strong>hostNetwork</strong> and <strong>hostPort</strong> for the <a href="https://kubernetes.io/docs/concepts/workloads/pods/pod/">Pod</a>s on our <a href="https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/">DaemonSet</a>. There are quite a few <a href="https://github.com/kubernetes/ingress-nginx/tree/master/docs/examples">ingress nginx examples</a> in the official repository if you are looking for a more specific implementation.</p>
        
         </div>
     </a>
@@ -351,9 +344,13 @@
             
             
             
+            <a href="../../tags/ai" title="ai">
+            ai
+            </a>
             
             
-            <a href="/tags/blockchain" title="blockchain">
+            
+            <a href="../../tags/blockchain" title="blockchain">
             blockchain
             </a>
             
@@ -363,13 +360,13 @@
             
             
             
-            <a href="/tags/data" title="data">
+            <a href="../../tags/data" title="data">
             data
             </a>
             
             
             
-            <a href="/tags/data-science" title="data science">
+            <a href="../../tags/data-science" title="data science">
             data science
             </a>
             
@@ -379,13 +376,13 @@
             
             
             
-            <a href="/tags/development" title="development">
+            <a href="../../tags/development" title="development">
             development
             </a>
             
             
             
-            <a href="/tags/devops" title="devops">
+            <a href="../../tags/devops" title="devops">
             devops
             </a>
             
@@ -393,13 +390,13 @@
             
             
             
-            <a href="/tags/docker" title="docker">
+            <a href="../../tags/docker" title="docker">
             docker
             </a>
             
             
             
-            <a href="/tags/elasticsearch" title="elasticsearch">
+            <a href="../../tags/elasticsearch" title="elasticsearch">
             elasticsearch
             </a>
             
@@ -411,7 +408,9 @@
             
             
             
-            <a href="/tags/golang" title="golang">
+            
+            
+            <a href="../../tags/golang" title="golang">
             golang
             </a>
             
@@ -419,13 +418,13 @@
             
             
             
-            <a href="/tags/ingress" title="ingress">
+            <a href="../../tags/ingress" title="ingress">
             ingress
             </a>
             
             
             
-            <a href="/tags/iot" title="iot">
+            <a href="../../tags/iot" title="iot">
             iot
             </a>
             
@@ -439,19 +438,19 @@
             
             
             
-            <a href="/tags/kubectl" title="kubectl">
+            <a href="../../tags/kubectl" title="kubectl">
             kubectl
             </a>
             
             
             
-            <a href="/tags/kubefwd" title="kubefwd">
+            <a href="../../tags/kubefwd" title="kubefwd">
             kubefwd
             </a>
             
             
             
-            <a href="/tags/kubernetes" title="kubernetes">
+            <a href="../../tags/kubernetes" title="kubernetes">
             kubernetes
             </a>
             
@@ -467,11 +466,15 @@
             
             
             
+            <a href="../../tags/mcp" title="mcp">
+            mcp
+            </a>
             
             
             
             
-            <a href="/tags/microservices" title="microservices">
+            
+            <a href="../../tags/microservices" title="microservices">
             microservices
             </a>
             
@@ -483,19 +486,19 @@
             
             
             
-            <a href="/tags/python" title="python">
+            <a href="../../tags/python" title="python">
             python
             </a>
             
             
             
-            <a href="/tags/raspberry-pi" title="raspberry pi">
+            <a href="../../tags/raspberry-pi" title="raspberry pi">
             raspberry pi
             </a>
             
             
             
-            <a href="/tags/security" title="security">
+            <a href="../../tags/security" title="security">
             security
             </a>
             
@@ -505,7 +508,9 @@
             
             
             
-            <a href="/tags/utils" title="utils">
+            
+            
+            <a href="../../tags/utils" title="utils">
             utils
             </a>
             
@@ -521,10 +526,10 @@
     
     <section class="visible-md visible-lg">
         <hr>
-        <h5><a href="/about/">ABOUT ME</a></h5>
+        <h5><a href="../../about/">ABOUT ME</a></h5>
         <div class="short-about">
             
-            <a href="/about/"><img src="https://imti.co/img/craig_johnston_cjimti.jpg"/></a>
+            <a href="../../about/"><img src="https://imti.co/img/craig_johnston_cjimti.jpg"/></a>
             
             
             <p>I lead a talented team of software development and creative engineers, covering many industries looking to collect, analyze, move, buffer, queue, process and present data in significant ways. My expertise and that of my team revolve around microservices, artificial intelligence, algorithms, and machine learning.</p>
@@ -533,7 +538,7 @@
             <ul class="list-inline">
                 
                 <li>
-                    <a href="/tags/ingress/index.xml" rel="alternate" type="application/rss+xml"
+                    <a href="../../tags/ingress/index.xml" rel="alternate" type="application/rss+xml"
                        title="IMTI" >
                     <span class="fa-stack fa-lg">
                            <i class="fa fa-circle fa-stack-2x"></i>
@@ -672,7 +677,7 @@
                 <ul class="list-inline text-center">
                    
                    <li>
-                       <a href="/tags/ingress/index.xml" rel="alternate" type="application/rss+xml" title="IMTI" >
+                       <a href="../../tags/ingress/index.xml" rel="alternate" type="application/rss+xml" title="IMTI" >
                            <span class="fa-stack fa-lg">
                                <i class="fa fa-circle fa-stack-2x"></i>
                                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
@@ -691,7 +696,6 @@
                     </li>
 		    
                     
-                    
                     <li>
                         <a href="https://twitter.com/cjimti">
                             <span class="fa-stack fa-lg">
@@ -700,13 +704,6 @@
                             </span>
                         </a>
                     </li>
-                    
-                    
-                    
-
-                    
-
-		    
                     
                     
                     <li>
@@ -729,15 +726,10 @@
                     </li>
 		    
                 </ul>
-
-                
-                
             </div>
         </div>
     </div>
 </footer>
-
-
 
 
 <script>
@@ -752,16 +744,10 @@
 </script>
 
 
-
-
-
-
 <script>
-    
     if($('#tag_cloud').length !== 0){
         async("/js/jquery.tagcloud.js",function(){
             $.fn.tagcloud.defaults = {
-                
                 color: {start: '#bbbbee', end: '#0085a1'},
             };
             $('#tag_cloud a').tagcloud();
@@ -775,8 +761,13 @@
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-
   gtag('config', 'G-R56SP4WLS2');
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+<script>
+  mermaid.initialize({ startOnLoad: true, theme: 'neutral' });
 </script>
 
 </body>

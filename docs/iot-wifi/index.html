@@ -11,35 +11,35 @@
     <meta name="description" content="IOT hotspot based configuration API.">
     
     <meta name="keyword"  content="Go, Kubernetes, Elasticsearch, Python, Docker, Big Data, Artificial Intelligence, Machine Learning">
-    <link rel="shortcut icon" href="https://imti.co/img/favicon.ico">
+    <link rel="shortcut icon" href="../img/favicon.ico">
 
     <title>Raspberry Pi 3 - WiFi Station&#43;AP - IMTI - Craig Johnston</title>
 
     <link rel="canonical" href="https://imti.co/iot-wifi/">
-	
-    
-    <link rel="stylesheet" href="https://imti.co/css/bootstrap.min.css">
 
     
-    <link rel="stylesheet" href="https://imti.co/css/hux-blog.min.css">
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
 
     
-    <link rel="stylesheet" href="https://imti.co/css/syntax.css">
+    <link rel="stylesheet" href="../css/hux-blog.min.css">
+
+    
+    <link rel="stylesheet" href="../css/syntax.css">
 
     
     <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     
     
-    <link rel="stylesheet" href="/css/imti.css">
+    <link rel="stylesheet" href="../css/imti.css">
 
     
-    <script src="https://imti.co/js/jquery.min.js"></script>
+    <script src="../js/jquery.min.js"></script>
+
     
+    <script src="../js/bootstrap.min.js"></script>
+
     
-    <script src="https://imti.co/js/bootstrap.min.js"></script>
-    
-    
-    <script src="https://imti.co/js/hux-blog.min.js"></script>
+    <script src="../js/hux-blog.min.js"></script>
 
     <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
     <script>
@@ -92,7 +92,8 @@
 </script>
 
 
-</head></head>
+</head>
+</head>
 
 <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
     <div class="container-fluid">
@@ -104,19 +105,18 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="https://imti.co//">IMTI</a>
+            <a class="navbar-brand" href="../">IMTI</a>
         </div>
 
-        
         
         <div id="huxblog_navbar">
             <div class="navbar-collapse">
                 <ul class="nav navbar-nav navbar-right">
                     <li>
-                        <a href="https://imti.co//">Home</a>
+                        <a href="../">Home</a>
                     </li>
                     <li>
-                        <a href="https://imti.co//about/">About</a>
+                        <a href="../about/">About</a>
                     </li>
                     <li>
                         <a href="https://twitter.com/cjimti">Follow</a>
@@ -132,9 +132,6 @@
     
 </nav>
 <script>
-    
-    
-    
     var $body   = document.body;
     var $toggle = document.querySelector('.navbar-toggle');
     var $navbar = document.querySelector('#huxblog_navbar');
@@ -143,17 +140,13 @@
     $toggle.addEventListener('click', handleMagic)
     function handleMagic(e){
         if ($navbar.className.indexOf('in') > 0) {
-        
             $navbar.className = " ";
-            
             setTimeout(function(){
-                
                 if($navbar.className.indexOf('in') < 0) {
                     $collapse.style.height = "0px"
                 }
             },400)
         }else{
-        
             $collapse.style.height = "auto"
             $navbar.className += " in";
         }
@@ -175,23 +168,23 @@
                 <div class="post-heading">
                     <div class="tags">
                         
-                        <a class="tag" href="/tags/development" title="Development">
+                        <a class="tag" href="../tags/development" title="Development">
                         Development
                         </a>
                         
-                        <a class="tag" href="/tags/raspberry-pi" title="Raspberry Pi">
+                        <a class="tag" href="../tags/raspberry-pi" title="Raspberry Pi">
                         Raspberry Pi
                         </a>
                         
-                        <a class="tag" href="/tags/docker" title="Docker">
+                        <a class="tag" href="../tags/docker" title="Docker">
                         Docker
                         </a>
                         
-                        <a class="tag" href="/tags/iot" title="IOT">
+                        <a class="tag" href="../tags/iot" title="IOT">
                         IOT
                         </a>
                         
-                        <a class="tag" href="/tags/wifi" title="Wifi">
+                        <a class="tag" href="../tags/wifi" title="Wifi">
                         Wifi
                         </a>
                         
@@ -241,7 +234,7 @@
 IOT Wifi exposes a simple JSON based REST API for controlling the wireless network interface. This container allows the Raspberry Pi to accept wifi connections as an access point (aka AP) while at the same time connecting to an existing wifi network (station mode).</p>
 <p>Go (Golang) was used to develop the main application code, to produce a minimal <a href="https://www.docker.com/">docker</a> image with great performance. The container runs <a href="https://alpinelinux.org/">Alpine Linux</a> with small, optimized versions of <a href="https://w1.fi/hostapd/">hostapd</a>, <a href="https://w1.fi/wpa_supplicant/">wpa_supplicant</a> and <a href="http://www.thekelleys.org.uk/dnsmasq/doc.html">dnsmasq</a>, controlled by the container&rsquo;s API endpoints.</p>
 <p>If you have a Raspberry Pi 3 and you want to provide wifi based configuration abilities, all you need is Docker installed and a little over 8MB of free drive space.</p>
-<p><a href="https://amzn.to/2jfXhCA"><img src="/img/iot-wifi-assets/pi.jpg" alt="Raspberry Pi AP + Client"></a></p>
+<p><a href="https://amzn.to/2jfXhCA"><img src="../img/iot-wifi-assets/pi.jpg" alt="Raspberry Pi AP + Client"></a></p>
 <aside class="toc">
     <header>
         <h2>Contents</h2>
@@ -314,10 +307,10 @@ with the <strong>IOT Wifi</strong> container.</p>
 to get a Bash shell.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># Docker install script</span>
 </span></span><span style="display:flex;"><span>$ curl -sSL https://get.docker.com | sh
-</span></span></code></pre></div><p><img src="/img/iot-wifi-assets/install_docker.gif" alt="Install Docker"></p>
+</span></span></code></pre></div><p><img src="../img/iot-wifi-assets/install_docker.gif" alt="Install Docker"></p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># add pi user to Docker user group</span>
 </span></span><span style="display:flex;"><span>$ sudo usermod -aG docker pi
-</span></span></code></pre></div><p><img src="/img/iot-wifi-assets/usermod.gif" alt="Usermod Docker"></p>
+</span></span></code></pre></div><p><img src="../img/iot-wifi-assets/usermod.gif" alt="Usermod Docker"></p>
 <p>Reboot the Pi and test Docker.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ sudo reboot
 </span></span></code></pre></div><p>After reboot, ensure Docker is installed correctly by running a Hello World
@@ -325,7 +318,7 @@ Docker container.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># run the Docker Hello World container and remove the container</span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e"># when finished (the --rm flag)</span>
 </span></span><span style="display:flex;"><span>$ docker run --rm hello-world
-</span></span></code></pre></div><p><img src="/img/iot-wifi-assets/docker-hello-world.gif" alt="Docker Hello World on Raspberry Pi"></p>
+</span></span></code></pre></div><p><img src="../img/iot-wifi-assets/docker-hello-world.gif" alt="Docker Hello World on Raspberry Pi"></p>
 <h3 id="pull-the-iot-wifi-docker-image">Pull the IOT Wifi Docker Image</h3>
 <p>You can optionally clone and build the entire project, however, to get
 started quickly I&rsquo;ll show you how to use a pre-built Docker Image. At
@@ -335,7 +328,7 @@ is based on <a href="https://alpinelinux.org/">Alpine Linux</a> and contains <a 
 the source is found in this repository: <a href="https://github.com/cjimti/iotwifi">https://github.com/cjimti/iotwifi</a>.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># Pull the IOT Wifi Docker Image</span>
 </span></span><span style="display:flex;"><span>$ docker pull cjimti/iotwifi
-</span></span></code></pre></div><p><img src="/img/iot-wifi-assets/docker-pull-image.gif" alt="Docker IOT Wifi Image"></p>
+</span></span></code></pre></div><p><img src="../img/iot-wifi-assets/docker-pull-image.gif" alt="Docker IOT Wifi Image"></p>
 <h3 id="iot-wifi-configuration">IOT Wifi Configuration</h3>
 <p>You will need a configuration JSON file. You can download a default as
 a template or just it unmodified for testing. You can mount the
@@ -345,7 +338,7 @@ an environment variable.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># Download the default configuration file</span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>$ wget https://raw.githubusercontent.com/cjimti/iotwifi/master/cfg/wificfg.json
-</span></span></code></pre></div><p><img src="/img/iot-wifi-assets/download-config.gif" alt="Download Configuration"></p>
+</span></span></code></pre></div><p><img src="../img/iot-wifi-assets/download-config.gif" alt="Download Configuration"></p>
 <p>The default configuration looks like this:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
 </span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;dnsmasq_cfg&#34;</span>: {
@@ -411,7 +404,7 @@ take a look the network interfaces on the Raspberry Pi.</p>
 </span></span><span style="display:flex;"><span>        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
 </span></span></code></pre></div><h3 id="connect-to-the-pi-over-wifi">Connect to the Pi over Wifi</h3>
 <p>On your laptop or phone, you should now see a Wifi Network named <strong>iot-wifi-cfg-3</strong> assuming you did not change it from the default. The default password for this network is <strong>iotwifipass</strong>. Once connected to this network you should get an IP address assigned to the range specified in the config: <code>192.168.27.100,192.168.27.150,1h</code>.</p>
-<p><img src="/img/iot-wifi-assets/phone.jpg" alt="Coeect Phone"></p>
+<p><img src="../img/iot-wifi-assets/phone.jpg" alt="Coeect Phone"></p>
 <p>Once connected open a web browser and go to http://192.168.27.1:8080/status. You can access this API endpoint on the Raspberry Pi device itself from <code>localhost</code>*. On on Pi try the curl command <code>curl http://localhost:8080/status</code>.</p>
 <p>You should receive a JSON message similar to the following:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{<span style="color:#f92672">&#34;status&#34;</span>:<span style="color:#e6db74">&#34;OK&#34;</span>,<span style="color:#f92672">&#34;message&#34;</span>:<span style="color:#e6db74">&#34;status&#34;</span>,<span style="color:#f92672">&#34;payload&#34;</span>:{<span style="color:#f92672">&#34;address&#34;</span>:<span style="color:#e6db74">&#34;b8:27:eb:fe:c8:ab&#34;</span>,<span style="color:#f92672">&#34;uuid&#34;</span>:<span style="color:#e6db74">&#34;a736659a-ae85-5e03-9754-dd808ea0d7f2&#34;</span>,<span style="color:#f92672">&#34;wpa_state&#34;</span>:<span style="color:#e6db74">&#34;INACTIVE&#34;</span>}}
@@ -508,12 +501,12 @@ started with tiny a static web container suitable for building user interfaces f
 <pre><code>ifconfig
 </code></pre>
 <p>You should see wlan0 has received an ip address from the network it connected to:</p>
-<p><img src="/img/iot-wifi-assets/ifconfig.png" alt="ifconfig"></p>
+<p><img src="../img/iot-wifi-assets/ifconfig.png" alt="ifconfig"></p>
 <p>Use <a href="https://wireless.wiki.kernel.org/en/users/documentation/iw">iw</a> to check the wireless status of wlan0.</p>
 <pre><code>iw dev wlan0 link
 </code></pre>
 <p>You see the SSId of the network you are connected to like this:</p>
-<p><img src="/img/iot-wifi-assets/ssid.png" alt="iw dev wlan0 link"></p>
+<p><img src="../img/iot-wifi-assets/ssid.png" alt="iw dev wlan0 link"></p>
 <h3 id="ap-setup">AP Setup</h3>
 <p>Install <a href="https://w1.fi/hostapd/">hostapd</a> and <a href="http://www.thekelleys.org.uk/dnsmasq/doc.html">dnsmasq</a>:</p>
 <pre><code>sudo apt-get install hostapd dnsmasq
@@ -527,7 +520,7 @@ started with tiny a static web container suitable for building user interfaces f
 <pre><code>iwlist wlan0 channel
 </code></pre>
 <p>In this example output the Pi is using Channel 11:</p>
-<p><img src="/img/iot-wifi-assets/chan.png" alt="iwlist output"></p>
+<p><img src="../img/iot-wifi-assets/chan.png" alt="iwlist output"></p>
 <p>Next you will need to modify the hostapd default configuration to use your new configuration file:</p>
 <pre><code>sudo vi /etc/default/hostapd
 </code></pre>
@@ -589,14 +582,18 @@ started with tiny a static web container suitable for building user interfaces f
                 
                 <section>
                     <hr class="hidden-sm hidden-xs">
-                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <h5><a href="../tags/">FEATURED TAGS</a></h5>
                     <div class="tags">
                         
                         
                         
+                        <a href="../tags/ai" title="ai">
+                        ai
+                        </a>
                         
                         
-                        <a href="/tags/blockchain" title="blockchain">
+                        
+                        <a href="../tags/blockchain" title="blockchain">
                         blockchain
                         </a>
                         
@@ -606,13 +603,13 @@ started with tiny a static web container suitable for building user interfaces f
                         
                         
                         
-                        <a href="/tags/data" title="data">
+                        <a href="../tags/data" title="data">
                         data
                         </a>
                         
                         
                         
-                        <a href="/tags/data-science" title="data science">
+                        <a href="../tags/data-science" title="data science">
                         data science
                         </a>
                         
@@ -622,13 +619,13 @@ started with tiny a static web container suitable for building user interfaces f
                         
                         
                         
-                        <a href="/tags/development" title="development">
+                        <a href="../tags/development" title="development">
                         development
                         </a>
                         
                         
                         
-                        <a href="/tags/devops" title="devops">
+                        <a href="../tags/devops" title="devops">
                         devops
                         </a>
                         
@@ -636,13 +633,13 @@ started with tiny a static web container suitable for building user interfaces f
                         
                         
                         
-                        <a href="/tags/docker" title="docker">
+                        <a href="../tags/docker" title="docker">
                         docker
                         </a>
                         
                         
                         
-                        <a href="/tags/elasticsearch" title="elasticsearch">
+                        <a href="../tags/elasticsearch" title="elasticsearch">
                         elasticsearch
                         </a>
                         
@@ -654,7 +651,9 @@ started with tiny a static web container suitable for building user interfaces f
                         
                         
                         
-                        <a href="/tags/golang" title="golang">
+                        
+                        
+                        <a href="../tags/golang" title="golang">
                         golang
                         </a>
                         
@@ -662,13 +661,13 @@ started with tiny a static web container suitable for building user interfaces f
                         
                         
                         
-                        <a href="/tags/ingress" title="ingress">
+                        <a href="../tags/ingress" title="ingress">
                         ingress
                         </a>
                         
                         
                         
-                        <a href="/tags/iot" title="iot">
+                        <a href="../tags/iot" title="iot">
                         iot
                         </a>
                         
@@ -682,19 +681,19 @@ started with tiny a static web container suitable for building user interfaces f
                         
                         
                         
-                        <a href="/tags/kubectl" title="kubectl">
+                        <a href="../tags/kubectl" title="kubectl">
                         kubectl
                         </a>
                         
                         
                         
-                        <a href="/tags/kubefwd" title="kubefwd">
+                        <a href="../tags/kubefwd" title="kubefwd">
                         kubefwd
                         </a>
                         
                         
                         
-                        <a href="/tags/kubernetes" title="kubernetes">
+                        <a href="../tags/kubernetes" title="kubernetes">
                         kubernetes
                         </a>
                         
@@ -710,11 +709,15 @@ started with tiny a static web container suitable for building user interfaces f
                         
                         
                         
+                        <a href="../tags/mcp" title="mcp">
+                        mcp
+                        </a>
                         
                         
                         
                         
-                        <a href="/tags/microservices" title="microservices">
+                        
+                        <a href="../tags/microservices" title="microservices">
                         microservices
                         </a>
                         
@@ -726,19 +729,19 @@ started with tiny a static web container suitable for building user interfaces f
                         
                         
                         
-                        <a href="/tags/python" title="python">
+                        <a href="../tags/python" title="python">
                         python
                         </a>
                         
                         
                         
-                        <a href="/tags/raspberry-pi" title="raspberry pi">
+                        <a href="../tags/raspberry-pi" title="raspberry pi">
                         raspberry pi
                         </a>
                         
                         
                         
-                        <a href="/tags/security" title="security">
+                        <a href="../tags/security" title="security">
                         security
                         </a>
                         
@@ -748,7 +751,9 @@ started with tiny a static web container suitable for building user interfaces f
                         
                         
                         
-                        <a href="/tags/utils" title="utils">
+                        
+                        
+                        <a href="../tags/utils" title="utils">
                         utils
                         </a>
                         
@@ -781,7 +786,7 @@ started with tiny a static web container suitable for building user interfaces f
                 <ul class="list-inline text-center">
                    
                    <li>
-                       <a href="/index.xml" rel="alternate" type="application/rss+xml" title="IMTI" >
+                       <a href="../index.xml" rel="alternate" type="application/rss+xml" title="IMTI" >
                            <span class="fa-stack fa-lg">
                                <i class="fa fa-circle fa-stack-2x"></i>
                                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
@@ -800,7 +805,6 @@ started with tiny a static web container suitable for building user interfaces f
                     </li>
 		    
                     
-                    
                     <li>
                         <a href="https://twitter.com/cjimti">
                             <span class="fa-stack fa-lg">
@@ -809,13 +813,6 @@ started with tiny a static web container suitable for building user interfaces f
                             </span>
                         </a>
                     </li>
-                    
-                    
-                    
-
-                    
-
-		    
                     
                     
                     <li>
@@ -838,15 +835,10 @@ started with tiny a static web container suitable for building user interfaces f
                     </li>
 		    
                 </ul>
-
-                
-                
             </div>
         </div>
     </div>
 </footer>
-
-
 
 
 <script>
@@ -861,16 +853,10 @@ started with tiny a static web container suitable for building user interfaces f
 </script>
 
 
-
-
-
-
 <script>
-    
     if($('#tag_cloud').length !== 0){
         async("/js/jquery.tagcloud.js",function(){
             $.fn.tagcloud.defaults = {
-                
                 color: {start: '#bbbbee', end: '#0085a1'},
             };
             $('#tag_cloud a').tagcloud();
@@ -884,8 +870,13 @@ started with tiny a static web container suitable for building user interfaces f
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-
   gtag('config', 'G-R56SP4WLS2');
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+<script>
+  mermaid.initialize({ startOnLoad: true, theme: 'neutral' });
 </script>
 
 </body>

@@ -2,10 +2,34 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://imti.co/tags/development/</loc>
-    <lastmod>2026-01-04T12:02:00+00:00</lastmod>
+    <loc>https://imti.co/tags/ai/</loc>
+    <lastmod>2026-01-17T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://imti.co/mcp-trino/</loc>
+    <lastmod>2026-01-17T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://imti.co/tags/data/</loc>
+    <lastmod>2026-01-17T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://imti.co/tags/go/</loc>
+    <lastmod>2026-01-17T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://imti.co/</loc>
+    <lastmod>2026-01-17T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://imti.co/tags/mcp/</loc>
+    <lastmod>2026-01-17T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://imti.co/post/</loc>
+    <lastmod>2026-01-17T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://imti.co/tags/</loc>
+    <lastmod>2026-01-17T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://imti.co/tags/trino/</loc>
+    <lastmod>2026-01-17T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://imti.co/tags/development/</loc>
     <lastmod>2026-01-04T12:02:00+00:00</lastmod>
   </url><url>
     <loc>https://imti.co/tags/kubefwd/</loc>
@@ -17,19 +41,7 @@
     <loc>https://imti.co/tags/kubernetes/</loc>
     <lastmod>2026-01-04T12:02:00+00:00</lastmod>
   </url><url>
-    <loc>https://imti.co/post/</loc>
-    <lastmod>2026-01-04T12:02:00+00:00</lastmod>
-  </url><url>
-    <loc>https://imti.co/tags/</loc>
-    <lastmod>2026-01-04T12:02:00+00:00</lastmod>
-  </url><url>
-    <loc>https://imti.co/tags/ai/</loc>
-    <lastmod>2026-01-04T12:01:00+00:00</lastmod>
-  </url><url>
     <loc>https://imti.co/kubefwd-2026/</loc>
-    <lastmod>2026-01-04T12:01:00+00:00</lastmod>
-  </url><url>
-    <loc>https://imti.co/tags/mcp/</loc>
     <lastmod>2026-01-04T12:01:00+00:00</lastmod>
   </url><url>
     <loc>https://imti.co/kubefwd-mcp/</loc>
@@ -39,9 +51,6 @@
     <lastmod>2020-08-30T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://imti.co/tags/blockchain/</loc>
-    <lastmod>2020-08-30T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://imti.co/tags/data/</loc>
     <lastmod>2020-08-30T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://imti.co/tags/data-science/</loc>
