@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
     <!-- Theme detection - runs before page renders to prevent flash -->
-    <script>
+    <script data-cfasync="false">
         (function() {
             var savedTheme = localStorage.getItem('theme');
             var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
