@@ -216,22 +216,6 @@ header.container {
     color: var(--link-color);
 }
 
-/* Navbar dark mode */
-[data-theme="dark"] .navbar-default {
-    background-color: var(--navbar-bg);
-    border-color: var(--border-color);
-}
-
-[data-theme="dark"] .navbar-default .navbar-brand,
-[data-theme="dark"] .navbar-default .navbar-nav > li > a {
-    color: var(--navbar-text);
-}
-
-[data-theme="dark"] .navbar-default .navbar-nav > li > a:hover,
-[data-theme="dark"] .navbar-default .navbar-nav > li > a:focus {
-    color: var(--link-color);
-}
-
 /* Post content and containers */
 [data-theme="dark"] .container-fluid,
 [data-theme="dark"] .container {
