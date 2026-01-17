@@ -216,6 +216,17 @@ header.container {
     color: var(--link-color);
 }
 
+/* Navbar dark mode - only for fixed/scrolled state */
+[data-theme="dark"] .navbar-custom.is-fixed {
+    background-color: rgba(26, 26, 26, 0.95);
+    border-bottom-color: var(--border-color);
+}
+
+[data-theme="dark"] .navbar-custom.is-fixed .navbar-brand,
+[data-theme="dark"] .navbar-custom.is-fixed .nav li a {
+    color: var(--text-primary);
+}
+
 /* Post content and containers */
 [data-theme="dark"] .container-fluid,
 [data-theme="dark"] .container {
