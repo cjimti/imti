@@ -45,7 +45,7 @@ home = ["HTML", "RSS"]
 
   # Sidebar settings
   sidebar_about_description = "I lead a talented team of software development and creative engineers, covering many industries looking to collect, analyze, move, buffer, queue, process and present data in significant ways. My expertise and that of my team revolve around microservices, artificial intelligence, algorithms, and machine learning."
-  sidebar_avatar = "/img/craig_johnston_cjimti.jpg"      # use absolute URL, seeing it's used in both `/` and `/about/`
+  sidebar_avatar = "/img/avatar-cj.jpg"      # use absolute URL, seeing it's used in both `/` and `/about/`
 
   featured_tags = true
   featured_condition_size = 2
