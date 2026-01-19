@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Kafka on IMTI</title>
-    <link>https://imti.co/tags/kafka/</link>
+    <link>http://localhost:1313/tags/kafka/</link>
     <description>Recent content in Kafka on IMTI</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Tue, 25 Sep 2018 00:00:00 +0000</lastBuildDate>
-    <atom:link href="https://imti.co/tags/kafka/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/tags/kafka/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Kafka on Kubernetes</title>
-      <link>https://imti.co/kafka-kubernetes/</link>
+      <link>http://localhost:1313/kafka-kubernetes/</link>
       <pubDate>Tue, 25 Sep 2018 00:00:00 +0000</pubDate>
-      <guid>https://imti.co/kafka-kubernetes/</guid>
+      <guid>http://localhost:1313/kafka-kubernetes/</guid>
       <description>&lt;p&gt;&lt;a href=&#34;https://kafka.apache.org/&#34;&gt;Kafka&lt;/a&gt; is a fast, horizontally scalable, fault-tolerant, message queue service. &lt;a href=&#34;https://kafka.apache.org/&#34;&gt;Kafka&lt;/a&gt; is used for building real-time data pipelines and streaming apps.&lt;/p&gt;&#xA;&lt;p&gt;There are a few &lt;a href=&#34;https://helm.sh/&#34;&gt;Helm&lt;/a&gt; based installers out there including the official Kubernetes &lt;a href=&#34;https://github.com/helm/charts/tree/master/incubator/kafka&#34;&gt;incubator/kafka&lt;/a&gt;. However, in this article, I walk through applying a surprisingly small set of Kubernetes configuration files needed to stand up high performance, highly available Kafka. Manually applying Kubernetes configurations gives you a step-by-step understanding of the system you are deploying and limitless opportunities to customize.&lt;/p&gt;</description>
     </item>
   </channel>

@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>DNS on IMTI</title>
-    <link>https://imti.co/tags/dns/</link>
+    <link>http://localhost:1313/tags/dns/</link>
     <description>Recent content in DNS on IMTI</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Thu, 17 May 2018 00:00:00 +0000</lastBuildDate>
-    <atom:link href="https://imti.co/tags/dns/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/tags/dns/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Kubernetes Custom Upstream DNS</title>
-      <link>https://imti.co/kubernetes-custom-dns/</link>
+      <link>http://localhost:1313/kubernetes-custom-dns/</link>
       <pubDate>Thu, 17 May 2018 00:00:00 +0000</pubDate>
-      <guid>https://imti.co/kubernetes-custom-dns/</guid>
+      <guid>http://localhost:1313/kubernetes-custom-dns/</guid>
       <description>&lt;p&gt;Customize the &lt;a href=&#34;https://kubernetes.io/docs/tasks/administer-cluster/dns-custom-nameservers/&#34;&gt;Upstream Nameservers&lt;/a&gt; used by &lt;a href=&#34;https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/&#34;&gt;kube-dns&lt;/a&gt; by &lt;a href=&#34;https://kubernetes.io/docs/concepts/workloads/pods/pod/&#34;&gt;Pods&lt;/a&gt; when looking up external hostnames from within a Kubernetes cluster. I found that adding custom &lt;a href=&#34;https://kubernetes.io/docs/tasks/administer-cluster/dns-custom-nameservers/&#34;&gt;Upstream Nameservers&lt;/a&gt; to my &lt;a href=&#34;https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/&#34;&gt;kube-dns&lt;/a&gt; solved many issues encountered in in the past with external hostname resolution on individual &lt;a href=&#34;https://kubernetes.io/docs/concepts/workloads/pods/pod/&#34;&gt;Pods&lt;/a&gt;.&lt;/p&gt;&#xA;&lt;p&gt;If you want to experiment on a production-like cluster, I suggest reading my article &amp;ldquo;&lt;a href=&#34;../../hobby-cluster/&#34;&gt;Production Hobby Cluster&lt;/a&gt;&amp;rdquo; for a guide on setting up a fun, cheap-yet-robust experimental cluster.&lt;/p&gt;&#xA;&lt;p&gt;The following configuration sets the &lt;a href=&#34;https://kubernetes.io/docs/tasks/administer-cluster/dns-custom-nameservers/&#34;&gt;Upstream Nameservers&lt;/a&gt; to use Google&amp;rsquo;s &lt;a href=&#34;https://developers.google.com/speed/public-dns/&#34;&gt;DNS servers&lt;/a&gt; 8.8.8.8 and 8.8.4.4.&lt;/p&gt;</description>
     </item>
   </channel>

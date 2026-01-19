@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Cassandra on IMTI</title>
-    <link>https://imti.co/tags/cassandra/</link>
+    <link>http://localhost:1313/tags/cassandra/</link>
     <description>Recent content in Cassandra on IMTI</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Thu, 01 Mar 2018 00:00:00 +0000</lastBuildDate>
-    <atom:link href="https://imti.co/tags/cassandra/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/tags/cassandra/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Don&#39;t Install cqlsh</title>
-      <link>https://imti.co/dont-install-cqlsh/</link>
+      <link>http://localhost:1313/dont-install-cqlsh/</link>
       <pubDate>Thu, 01 Mar 2018 00:00:00 +0000</pubDate>
-      <guid>https://imti.co/dont-install-cqlsh/</guid>
+      <guid>http://localhost:1313/dont-install-cqlsh/</guid>
       <description>&lt;p&gt;We live in a world of process isolation and tools that make utilizing it extremely simple, with apps like &lt;a href=&#34;https://www.docker.com/&#34;&gt;Docker&lt;/a&gt; we can perform dependency management with &lt;strong&gt;dependency isolation&lt;/strong&gt;. As I am slowly becoming a fanboy of containerization, I look forward to the day when typing &lt;code&gt;ps&lt;/code&gt; on my local workstation or remote server is nearly synonymous with commands like &lt;code&gt;docker ps&lt;/code&gt; or &lt;code&gt;kubectl get services&lt;/code&gt;.&lt;/p&gt;&#xA;&lt;p&gt;Case: &lt;strong&gt;Cassandra development and your local workstation.&lt;/strong&gt;&lt;/p&gt;</description>
     </item>
   </channel>

@@ -2,31 +2,31 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>IOT on IMTI</title>
-    <link>https://imti.co/tags/iot/</link>
+    <link>http://localhost:1313/tags/iot/</link>
     <description>Recent content in IOT on IMTI</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Sun, 30 Aug 2020 00:00:00 +0000</lastBuildDate>
-    <atom:link href="https://imti.co/tags/iot/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/tags/iot/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Advanced Platform Development with Kubernetes</title>
-      <link>https://imti.co/kubernetes-platform-book/</link>
+      <link>http://localhost:1313/kubernetes-platform-book/</link>
       <pubDate>Sun, 30 Aug 2020 00:00:00 +0000</pubDate>
-      <guid>https://imti.co/kubernetes-platform-book/</guid>
+      <guid>http://localhost:1313/kubernetes-platform-book/</guid>
       <description>&lt;p&gt;I&amp;rsquo;ve been distracted for over a year now, writing a (~500 page) end-to-end tutorial on constructing data-centric platforms with Kubernetes. The book is titled &amp;ldquo;&lt;a href=&#34;https://amzn.to/3hAZUvx&#34;&gt;Advanced Platform Development with Kubernetes: Enabling Data Management, the Internet of Things, Blockchain, and Machine Learning&lt;/a&gt;&amp;rdquo;&lt;/p&gt;&#xA;&lt;p&gt;A little more than a year ago, Apress reached out and asked if I would write a book on Kubernetes for them, mirroring the wide range of projects I develop (and write about) for my clients. I have been building data-centric platforms for almost twenty years, spanning everything from my early days on the aggregation of massive volumes of international log files for Disney to fan-driven location data for Nine Inch Nails. And in the last decade, retailers with point-of-sale, logistics, and inventory systems, marketers leveraging social media metrics, fleet operators with demanding telematics platforms, and manufacturers with advanced IIoT (industrial internet of things) networks.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Raspberry Pi 3 - WiFi Station&#43;AP</title>
-      <link>https://imti.co/iot-wifi/</link>
+      <link>http://localhost:1313/iot-wifi/</link>
       <pubDate>Thu, 15 Mar 2018 00:00:00 +0000</pubDate>
-      <guid>https://imti.co/iot-wifi/</guid>
+      <guid>http://localhost:1313/iot-wifi/</guid>
       <description>&lt;p&gt;&lt;strong&gt;Update&lt;/strong&gt;: Looking for contributors.&lt;/p&gt;&#xA;&lt;table&gt;&#xA;  &lt;thead&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;th&gt;Golang&lt;/th&gt;&#xA;          &lt;th&gt;Size&lt;/th&gt;&#xA;          &lt;th&gt;Pulls&lt;/th&gt;&#xA;      &lt;/tr&gt;&#xA;  &lt;/thead&gt;&#xA;  &lt;tbody&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;&lt;a href=&#34;https://goreportcard.com/report/github.com/cjimti/iotwifi&#34;&gt;&lt;img src=&#34;https://goreportcard.com/badge/github.com/cjimti/iotwifi&#34; alt=&#34;Go Report Card&#34;&gt;&lt;/a&gt;&lt;/td&gt;&#xA;          &lt;td&gt;&lt;a href=&#34;https://hub.docker.com/r/cjimti/iotwifi/&#34;&gt;&lt;img src=&#34;https://shields.beevelop.com/docker/image/image-size/cjimti/iotwifi/latest.svg&#34; alt=&#34;Docker Container Image Size&#34;&gt;&lt;/a&gt;&lt;/td&gt;&#xA;          &lt;td&gt;&lt;a href=&#34;https://hub.docker.com/r/cjimti/iotwifi/&#34;&gt;&lt;img src=&#34;https://img.shields.io/docker/pulls/cjimti/iotwifi.svg&#34; alt=&#34;Docker Container Pulls&#34;&gt;&lt;/a&gt;&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;  &lt;/tbody&gt;&#xA;&lt;/table&gt;&#xA;&lt;p&gt;IOT Wifi is very small/8MB &lt;a href=&#34;https://www.docker.com/&#34;&gt;Docker&lt;/a&gt; Container built for the &lt;a href=&#34;https://amzn.to/2jfXhCA&#34;&gt;Raspberry Pi 3&lt;/a&gt;.&#xA;IOT Wifi exposes a simple JSON based REST API for controlling the wireless network interface. This container allows the Raspberry Pi to accept wifi connections as an access point (aka AP) while at the same time connecting to an existing wifi network (station mode).&lt;/p&gt;</description>
     </item>
     <item>
       <title>Raspberry Pi - Serial Number</title>
-      <link>https://imti.co/raspberry-pi-serial/</link>
+      <link>http://localhost:1313/raspberry-pi-serial/</link>
       <pubDate>Mon, 13 Feb 2017 00:00:00 +0000</pubDate>
-      <guid>https://imti.co/raspberry-pi-serial/</guid>
+      <guid>http://localhost:1313/raspberry-pi-serial/</guid>
       <description>&lt;p&gt;Getting the unique serial number from a Raspberry Pi.&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;cat /proc/cpuinfo | grep ^Serial | cut -d&amp;quot;:&amp;quot; -f2&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;Example output:&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt; 00000000e215b4a2&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;An interesting use for this is &amp;ldquo;binding&amp;rdquo; software, encryption or other servcies to a specific Pi. Found this in a suggestion on the Stack Overflow question &lt;a href=&#34;http://stackoverflow.com/questions/27730877/securing-data-on-sd-card-raspberry-pi&#34;&gt;&amp;ldquo;Securing data on SD card Raspberry Pi&amp;rdquo;&lt;/a&gt;&lt;/p&gt;</description>
     </item>
   </channel>

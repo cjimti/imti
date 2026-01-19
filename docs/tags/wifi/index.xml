@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Wifi on IMTI</title>
-    <link>https://imti.co/tags/wifi/</link>
+    <link>http://localhost:1313/tags/wifi/</link>
     <description>Recent content in Wifi on IMTI</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Thu, 15 Mar 2018 00:00:00 +0000</lastBuildDate>
-    <atom:link href="https://imti.co/tags/wifi/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/tags/wifi/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Raspberry Pi 3 - WiFi Station&#43;AP</title>
-      <link>https://imti.co/iot-wifi/</link>
+      <link>http://localhost:1313/iot-wifi/</link>
       <pubDate>Thu, 15 Mar 2018 00:00:00 +0000</pubDate>
-      <guid>https://imti.co/iot-wifi/</guid>
+      <guid>http://localhost:1313/iot-wifi/</guid>
       <description>&lt;p&gt;&lt;strong&gt;Update&lt;/strong&gt;: Looking for contributors.&lt;/p&gt;&#xA;&lt;table&gt;&#xA;  &lt;thead&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;th&gt;Golang&lt;/th&gt;&#xA;          &lt;th&gt;Size&lt;/th&gt;&#xA;          &lt;th&gt;Pulls&lt;/th&gt;&#xA;      &lt;/tr&gt;&#xA;  &lt;/thead&gt;&#xA;  &lt;tbody&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;&lt;a href=&#34;https://goreportcard.com/report/github.com/cjimti/iotwifi&#34;&gt;&lt;img src=&#34;https://goreportcard.com/badge/github.com/cjimti/iotwifi&#34; alt=&#34;Go Report Card&#34;&gt;&lt;/a&gt;&lt;/td&gt;&#xA;          &lt;td&gt;&lt;a href=&#34;https://hub.docker.com/r/cjimti/iotwifi/&#34;&gt;&lt;img src=&#34;https://shields.beevelop.com/docker/image/image-size/cjimti/iotwifi/latest.svg&#34; alt=&#34;Docker Container Image Size&#34;&gt;&lt;/a&gt;&lt;/td&gt;&#xA;          &lt;td&gt;&lt;a href=&#34;https://hub.docker.com/r/cjimti/iotwifi/&#34;&gt;&lt;img src=&#34;https://img.shields.io/docker/pulls/cjimti/iotwifi.svg&#34; alt=&#34;Docker Container Pulls&#34;&gt;&lt;/a&gt;&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;  &lt;/tbody&gt;&#xA;&lt;/table&gt;&#xA;&lt;p&gt;IOT Wifi is very small/8MB &lt;a href=&#34;https://www.docker.com/&#34;&gt;Docker&lt;/a&gt; Container built for the &lt;a href=&#34;https://amzn.to/2jfXhCA&#34;&gt;Raspberry Pi 3&lt;/a&gt;.&#xA;IOT Wifi exposes a simple JSON based REST API for controlling the wireless network interface. This container allows the Raspberry Pi to accept wifi connections as an access point (aka AP) while at the same time connecting to an existing wifi network (station mode).&lt;/p&gt;</description>
     </item>
   </channel>

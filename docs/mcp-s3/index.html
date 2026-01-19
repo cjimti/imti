@@ -1,0 +1,978 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><head>
+    <meta name="msvalidate.01" content="DBC34551F2DD1BA3DC0D62EE46D7448F" />
+    <meta name="google-site-verification" content="DrtKc88u9uc7iptd4LyURAKBmFcOn7Kuk6HcRk_kNmo" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    
+    <script data-cfasync="false">
+        (function() {
+            var savedTheme = localStorage.getItem('theme');
+            var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+            var theme = savedTheme || (prefersDark ? 'dark' : 'light');
+            if (theme === 'dark') {
+                document.documentElement.setAttribute('data-theme', 'dark');
+            }
+        })();
+    </script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <meta name="description" content="Building composable MCP servers for object storage">
+    
+    <meta name="keyword"  content="Go, Kubernetes, Elasticsearch, Python, Docker, Big Data, Artificial Intelligence, Machine Learning">
+    <link rel="shortcut icon" href="../img/favicon.ico">
+
+    <title>AI Data Lake Access with MCP and S3 - IMTI - Craig Johnston</title>
+
+    <link rel="canonical" href="http://localhost:1313/mcp-s3/">
+
+    
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+
+    
+    <link rel="stylesheet" href="../css/hux-blog.min.css">
+
+    
+    <link rel="stylesheet" href="../css/syntax.css">
+
+    
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    
+    
+    <link rel="stylesheet" href="../css/imti.css">
+
+    
+    <script src="../js/jquery.min.js"></script>
+
+    
+    <script src="../js/bootstrap.min.js"></script>
+
+    
+    <script src="../js/hux-blog.min.js"></script>
+
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({
+            google_ad_client: "ca-pub-5984764595236029",
+            enable_page_level_ads: true
+        });
+    </script>
+
+    <meta name="twitter:site" content="@cjimti">
+<meta name="twitter:creator" content="@cjimti">
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="AI Data Lake Access with MCP and S3" />
+<meta name="twitter:description" content="Building composable MCP servers for object storage" />
+<meta name="twitter:image" content="http://localhost:1313/img/post/buckets-beach_876_438.png" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/mcp-s3/" />
+<meta property="og:title" content="AI Data Lake Access with MCP and S3" />
+<meta property="og:description" content="Building composable MCP servers for object storage" />
+<meta property="og:image" content="http://localhost:1313/img/post/buckets-beach_876_438.png" />
+
+
+    
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "http:\/\/localhost:1313\/mcp-s3\/"
+  },
+  "headline": "AI Data Lake Access with MCP and S3",
+  "image": ["http:\/\/localhost:1313\/img\/post\/buckets-beach_876_438.png"],
+  "datePublished": "2026-01-19T00:00:00Z",
+  "dateModified": "2026-01-19T00:00:00Z",
+  "author": {
+    "@type": "Person",
+    "name": "Craig Johnston",
+    "url": "https://imti.co/about/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "imti.co",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "http:\/\/localhost:1313\/img\/avatar-cj.jpg"
+    }
+  },
+  "description": "mcp-s3 exposes S3 and S3-compatible storage to AI assistants via MCP. Use it standalone or import it as a Go library to build custom MCP servers with …"
+}
+</script>
+
+
+</head>
+</head>
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="../">IMTI</a>
+        </div>
+
+        
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="../">Home</a>
+                    </li>
+                    <li>
+                        <a href="../about/">About</a>
+                    </li>
+                    <li>
+                        <a href="https://twitter.com/cjimti">Follow</a>
+                    </li>
+                    
+
+                    
+                    <li>
+                        <a href="javascript:void(0)" class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode" title="Toggle dark/light mode">
+                            <i class="fa fa-moon-o" id="theme-icon"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        
+    </div>
+    
+</nav>
+<script>
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+            $navbar.className = " ";
+            setTimeout(function(){
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+
+
+<style type="text/css">
+    header.intro-header{
+        background-image: url('http://localhost:1313/img/post/buckets-beach.png')
+    }
+</style>
+<header class="intro-header" >
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="../tags/mcp" title="MCP">
+                        MCP
+                        </a>
+                        
+                        <a class="tag" href="../tags/ai" title="AI">
+                        AI
+                        </a>
+                        
+                        <a class="tag" href="../tags/data" title="Data">
+                        Data
+                        </a>
+                        
+                        <a class="tag" href="../tags/s3" title="S3">
+                        S3
+                        </a>
+                        
+                        <a class="tag" href="../tags/go" title="Go">
+                        Go
+                        </a>
+                        
+                    </div>
+                    <h1>AI Data Lake Access with MCP and S3</h1>
+                    <h2 class="subheading">Building composable MCP servers for object storage</h2>
+                    <span  class="meta">Posted by <a href="https://twitter.com/cjimti">Craig Johnston</a> on Monday, January 19, 2026
+                        
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+<article>
+    <div class="container">
+        <div class="row">
+
+            
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <p>Data warehouses handle structured queries. Data lakes handle everything else: documents, images, logs, backups, ML model weights, that CSV someone exported three years ago and never deleted. The S3 API has become the universal interface for object storage. AWS built it, and now MinIO, SeaweedFS, Ceph, and dozens of others implement it. [txn2/mcp-s3] brings this storage layer to AI assistants through MCP, working alongside <a href="../mcp-trino/">txn2/mcp-trino</a>.</p>
+<aside class="toc">
+    <header>
+        <h2>Contents</h2>
+    </header>
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#the-problem">The problem</a></li>
+    <li><a href="#txn2mcp-s3">txn2/mcp-s3</a></li>
+    <li><a href="#how-it-works">How it works</a></li>
+    <li><a href="#example-conversation">Example conversation</a></li>
+    <li><a href="#txn2mcp-s3-as-a-go-library">txn2/mcp-s3 as a Go library</a>
+      <ul>
+        <li><a href="#what-ships-in-the-box">What ships in the box</a></li>
+        <li><a href="#writing-your-own-middleware">Writing your own middleware</a></li>
+      </ul>
+    </li>
+    <li><a href="#tools-are-just-the-surface">Tools are just the surface</a></li>
+    <li><a href="#the-txn2-mcp-ecosystem">The TXN2 MCP ecosystem</a></li>
+    <li><a href="#multi-provider-support">Multi-provider support</a></li>
+    <li><a href="#safe-defaults">Safe defaults</a></li>
+    <li><a href="#try-it-with-localstack">Try it with LocalStack</a></li>
+    <li><a href="#why-composable-wins">Why composable wins</a></li>
+    <li><a href="#resources">Resources</a></li>
+  </ul>
+</nav>
+</aside>
+<h2 id="the-problem">The problem</h2>
+<p>AI assistants can write code and answer questions, but they can&rsquo;t see your data. Your sales reports live in S3. Configuration files sit in MinIO. ML artifacts are scattered across buckets. Without access to this storage layer, AI assistants work blind.</p>
+<p>Most MCP servers expose a fixed set of tools and call it done. You configure credentials, run the binary, hope it does what you need. When requirements change, you fork.</p>
+<p>I built txn2/mcp-s3 differently. The tools are just the surface. The library underneath is what matters.</p>
+<h2 id="txn2mcp-s3">txn2/mcp-s3</h2>
+<p>[txn2/mcp-s3] is an MCP server that gives AI assistants access to S3-compatible storage. Install it, configure credentials, and your AI can browse buckets, read objects, and manage files.</p>
+<p>Install:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>go install github.com/txn2/mcp-s3/cmd/mcp-s3@latest
+</span></span></code></pre></div><p>Configure Claude Code:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>claude mcp add --transport stdio mcp-s3 -- <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  mcp-s3 --access-key AKIAIOSFODNN7EXAMPLE <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>         --secret-key wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>         --region us-west-2
+</span></span></code></pre></div><p>Your AI now has access to your S3 buckets.</p>
+<h2 id="how-it-works">How it works</h2>
+<pre class="mermaid">
+graph LR
+    AI[AI Assistant] -->|MCP stdio| MCP[mcp-s3]
+    MCP -->|S3 API| S3[Object Storage]
+    S3 --> AWS[AWS S3]
+    S3 --> MIN[MinIO]
+    S3 --> SEA[SeaweedFS]
+</pre>
+<p>The AI spawns <code>mcp-s3</code> as a subprocess. When it needs storage access, it calls tools like <code>s3_list_objects</code> or <code>s3_get_object</code>. txn2/mcp-s3 translates these to S3 API operations and returns results.</p>
+<p>The tools:</p>
+<table>
+  <thead>
+      <tr>
+          <th>Tool</th>
+          <th>What it does</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>s3_list_buckets</code></td>
+          <td>List accessible buckets</td>
+      </tr>
+      <tr>
+          <td><code>s3_list_objects</code></td>
+          <td>Browse objects with prefix filtering</td>
+      </tr>
+      <tr>
+          <td><code>s3_get_object</code></td>
+          <td>Download object content</td>
+      </tr>
+      <tr>
+          <td><code>s3_get_object_metadata</code></td>
+          <td>Get metadata without downloading</td>
+      </tr>
+      <tr>
+          <td><code>s3_put_object</code></td>
+          <td>Upload (disabled in read-only mode)</td>
+      </tr>
+      <tr>
+          <td><code>s3_delete_object</code></td>
+          <td>Delete (disabled in read-only mode)</td>
+      </tr>
+      <tr>
+          <td><code>s3_copy_object</code></td>
+          <td>Copy between buckets</td>
+      </tr>
+      <tr>
+          <td><code>s3_presign_url</code></td>
+          <td>Generate temporary access URLs</td>
+      </tr>
+      <tr>
+          <td><code>s3_list_connections</code></td>
+          <td>Show configured connections</td>
+      </tr>
+  </tbody>
+</table>
+<p>Read-only by default. The AI can explore and retrieve but not modify unless you explicitly enable writes.</p>
+<h2 id="example-conversation">Example conversation</h2>
+<p>Here&rsquo;s Claude Code with txn2/mcp-s3 analyzing data in a storage bucket:</p>
+<pre tabindex="0"><code>&gt; What CSV files are in the analytics bucket and what do they contain?
+
+I&#39;ll explore the analytics bucket to find CSV files.
+
+⏺ mcp-s3:s3_list_objects
+  ⎿  Running: bucket=analytics, prefix=reports/
+
+Found 3 CSV files in reports/:
+- reports/monthly_revenue_2025.csv
+- reports/customer_segments.csv
+- reports/product_performance.csv
+
+Let me examine each one:
+
+⏺ mcp-s3:s3_get_object
+  ⎿  Fetching: analytics/reports/monthly_revenue_2025.csv
+
+The monthly revenue file contains 12 rows with columns:
+month, revenue, costs, profit_margin
+
+Key findings:
+- December 2025 had the highest revenue at $4.2M
+- Profit margins averaged 23% across the year
+- Q4 showed 15% growth over Q3
+
+⏺ mcp-s3:s3_get_object
+  ⎿  Fetching: analytics/reports/customer_segments.csv
+
+Customer segments breakdown:
+| Segment     | Count  | Avg Revenue |
+|-------------|--------|-------------|
+| Enterprise  | 142    | $28,400     |
+| Mid-Market  | 891    | $4,200      |
+| SMB         | 3,247  | $840        |
+
+Enterprise customers represent 8% of accounts but 45% of revenue.
+
+&gt; Generate a presigned URL for the revenue report so I can share it
+
+⏺ mcp-s3:s3_presign_url
+  ⎿  Creating: bucket=analytics, key=reports/monthly_revenue_2025.csv,
+              expires=3600
+
+Here&#39;s a temporary URL valid for 1 hour:
+https://analytics.s3.us-west-2.amazonaws.com/reports/monthly_revenue_2025.csv?...
+
+Anyone with this link can download the file. The URL expires
+automatically, so no permanent access is granted.
+</code></pre><p>The AI navigates storage, reads files, interprets content, generates sharing links. No manual downloads, no local file juggling.</p>
+<h2 id="txn2mcp-s3-as-a-go-library">txn2/mcp-s3 as a Go library</h2>
+<p>Here&rsquo;s where txn2/mcp-s3 differs from most MCP servers. It&rsquo;s not just a binary. It&rsquo;s a Go library you can import and extend.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> (
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;github.com/txn2/mcp-s3/pkg/client&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;github.com/txn2/mcp-s3/pkg/tools&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;github.com/txn2/mcp-s3/pkg/extensions&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;github.com/mark3labs/mcp-go/server&#34;</span>
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Create the S3 client</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">cfg</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">client</span>.<span style="color:#a6e22e">Config</span>{
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">AccessKey</span>: <span style="color:#e6db74">&#34;AKIAIOSFODNN7EXAMPLE&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">SecretKey</span>: <span style="color:#e6db74">&#34;wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">Region</span>:    <span style="color:#e6db74">&#34;us-west-2&#34;</span>,
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">s3Client</span>, <span style="color:#a6e22e">_</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">client</span>.<span style="color:#a6e22e">New</span>(<span style="color:#a6e22e">ctx</span>, <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">cfg</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Create toolkit with built-in interceptors</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">toolkit</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">tools</span>.<span style="color:#a6e22e">NewToolkit</span>(<span style="color:#a6e22e">s3Client</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">tools</span>.<span style="color:#a6e22e">WithReadOnly</span>(<span style="color:#66d9ef">true</span>),
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">tools</span>.<span style="color:#a6e22e">WithMaxGetSize</span>(<span style="color:#ae81ff">10</span><span style="color:#f92672">*</span><span style="color:#ae81ff">1024</span><span style="color:#f92672">*</span><span style="color:#ae81ff">1024</span>), <span style="color:#75715e">// 10MB limit</span>
+</span></span><span style="display:flex;"><span>    )
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Create your MCP server</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">s</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">server</span>.<span style="color:#a6e22e">NewMCPServer</span>(<span style="color:#e6db74">&#34;my-storage-server&#34;</span>, <span style="color:#e6db74">&#34;1.0.0&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Add S3 tools with your middleware</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">toolkit</span>.<span style="color:#a6e22e">RegisterToolsWithMiddleware</span>(<span style="color:#a6e22e">s</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">withAuditLog</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">withTenantIsolation</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">withContentFilter</span>,
+</span></span><span style="display:flex;"><span>    )
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Add your own custom tools</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">s</span>.<span style="color:#a6e22e">AddTool</span>(<span style="color:#a6e22e">myCustomTool</span>, <span style="color:#a6e22e">myCustomHandler</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">s</span>.<span style="color:#a6e22e">Start</span>()
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><pre class="mermaid">
+graph TD
+    CS[Your Custom MCP Server] --> S3[mcp-s3 library]
+    CS --> YH[Your Handlers]
+    S3 --> RO[ReadOnly Interceptor]
+    S3 --> SL[SizeLimit Interceptor]
+    S3 --> LG[Logging Middleware]
+</pre>
+<h3 id="what-ships-in-the-box">What ships in the box</h3>
+<p>The library includes middleware you&rsquo;ll probably need:</p>
+<p>The <code>ReadOnlyInterceptor</code> blocks all write operations:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#a6e22e">readonly</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">extensions</span>.<span style="color:#a6e22e">NewReadOnlyInterceptor</span>(<span style="color:#66d9ef">true</span>)
+</span></span></code></pre></div><p>The <code>SizeLimitInterceptor</code> caps object sizes:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#a6e22e">sizelimit</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">extensions</span>.<span style="color:#a6e22e">NewSizeLimitInterceptor</span>(
+</span></span><span style="display:flex;"><span>    <span style="color:#ae81ff">10</span><span style="color:#f92672">*</span><span style="color:#ae81ff">1024</span><span style="color:#f92672">*</span><span style="color:#ae81ff">1024</span>,   <span style="color:#75715e">// 10MB get limit</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ae81ff">100</span><span style="color:#f92672">*</span><span style="color:#ae81ff">1024</span><span style="color:#f92672">*</span><span style="color:#ae81ff">1024</span>,  <span style="color:#75715e">// 100MB put limit</span>
+</span></span><span style="display:flex;"><span>)
+</span></span></code></pre></div><p>The <code>LoggingMiddleware</code> records operations:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#a6e22e">logging</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">extensions</span>.<span style="color:#a6e22e">NewLoggingMiddleware</span>(<span style="color:#a6e22e">logger</span>)
+</span></span></code></pre></div><h3 id="writing-your-own-middleware">Writing your own middleware</h3>
+<p>You can add whatever policy layers you need.</p>
+<p>Tenant isolation that restricts access to specific bucket prefixes:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">withTenantIsolation</span>(<span style="color:#a6e22e">next</span> <span style="color:#a6e22e">server</span>.<span style="color:#a6e22e">ToolHandler</span>) <span style="color:#a6e22e">server</span>.<span style="color:#a6e22e">ToolHandler</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">ctx</span> <span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">Context</span>, <span style="color:#a6e22e">req</span> <span style="color:#a6e22e">server</span>.<span style="color:#a6e22e">ToolRequest</span>) (<span style="color:#f92672">*</span><span style="color:#a6e22e">server</span>.<span style="color:#a6e22e">ToolResponse</span>, <span style="color:#66d9ef">error</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">tenant</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">getTenantFromContext</span>(<span style="color:#a6e22e">ctx</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">bucket</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">Params</span>[<span style="color:#e6db74">&#34;bucket&#34;</span>].(<span style="color:#66d9ef">string</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> !<span style="color:#a6e22e">strings</span>.<span style="color:#a6e22e">HasPrefix</span>(<span style="color:#a6e22e">bucket</span>, <span style="color:#a6e22e">tenant</span><span style="color:#f92672">+</span><span style="color:#e6db74">&#34;-&#34;</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">nil</span>, <span style="color:#a6e22e">errors</span>.<span style="color:#a6e22e">New</span>(<span style="color:#e6db74">&#34;access denied: bucket not in tenant scope&#34;</span>)
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">next</span>(<span style="color:#a6e22e">ctx</span>, <span style="color:#a6e22e">req</span>)
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>Content filtering that blocks sensitive file types:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">withContentFilter</span>(<span style="color:#a6e22e">next</span> <span style="color:#a6e22e">server</span>.<span style="color:#a6e22e">ToolHandler</span>) <span style="color:#a6e22e">server</span>.<span style="color:#a6e22e">ToolHandler</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">ctx</span> <span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">Context</span>, <span style="color:#a6e22e">req</span> <span style="color:#a6e22e">server</span>.<span style="color:#a6e22e">ToolRequest</span>) (<span style="color:#f92672">*</span><span style="color:#a6e22e">server</span>.<span style="color:#a6e22e">ToolResponse</span>, <span style="color:#66d9ef">error</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">key</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">Params</span>[<span style="color:#e6db74">&#34;key&#34;</span>].(<span style="color:#66d9ef">string</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">strings</span>.<span style="color:#a6e22e">HasSuffix</span>(<span style="color:#a6e22e">key</span>, <span style="color:#e6db74">&#34;.env&#34;</span>) <span style="color:#f92672">||</span> <span style="color:#a6e22e">strings</span>.<span style="color:#a6e22e">Contains</span>(<span style="color:#a6e22e">key</span>, <span style="color:#e6db74">&#34;credentials&#34;</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">nil</span>, <span style="color:#a6e22e">errors</span>.<span style="color:#a6e22e">New</span>(<span style="color:#e6db74">&#34;access to sensitive files blocked&#34;</span>)
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">next</span>(<span style="color:#a6e22e">ctx</span>, <span style="color:#a6e22e">req</span>)
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>Audit logging for compliance:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">withAuditLog</span>(<span style="color:#a6e22e">next</span> <span style="color:#a6e22e">server</span>.<span style="color:#a6e22e">ToolHandler</span>) <span style="color:#a6e22e">server</span>.<span style="color:#a6e22e">ToolHandler</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">ctx</span> <span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">Context</span>, <span style="color:#a6e22e">req</span> <span style="color:#a6e22e">server</span>.<span style="color:#a6e22e">ToolRequest</span>) (<span style="color:#f92672">*</span><span style="color:#a6e22e">server</span>.<span style="color:#a6e22e">ToolResponse</span>, <span style="color:#66d9ef">error</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">auditLog</span>.<span style="color:#a6e22e">Record</span>(<span style="color:#a6e22e">AuditEntry</span>{
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">User</span>:      <span style="color:#a6e22e">getUserFromContext</span>(<span style="color:#a6e22e">ctx</span>),
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">Tool</span>:      <span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">Name</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">Bucket</span>:    <span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">Params</span>[<span style="color:#e6db74">&#34;bucket&#34;</span>],
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">Key</span>:       <span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">Params</span>[<span style="color:#e6db74">&#34;key&#34;</span>],
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">Timestamp</span>: <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Now</span>(),
+</span></span><span style="display:flex;"><span>        })
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">next</span>(<span style="color:#a6e22e">ctx</span>, <span style="color:#a6e22e">req</span>)
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>You control the server. No forking, no patching, no waiting for upstream.</p>
+<h2 id="tools-are-just-the-surface">Tools are just the surface</h2>
+<p>Most MCP discussions focus on tools: what functions the server exposes, what parameters they accept. This misses what actually matters.</p>
+<p>Tools are the API surface. The interesting part is what happens between the AI&rsquo;s request and the underlying system.</p>
+<pre class="mermaid">
+graph TB
+    AI[AI Assistant] --> T[Tool Call]
+    T --> AUTH[Authentication Layer]
+    AUTH --> AUDIT[Audit Logging]
+    AUDIT --> FILTER[Content Filtering]
+    FILTER --> TRANSFORM[Response Transform]
+    TRANSFORM --> S3[S3 API]
+</pre>
+<p>Think about what a composable MCP library lets you do.</p>
+<p>You can build semantic layers that transform raw S3 keys into business concepts. <code>reports/2025/q4/revenue.csv</code> becomes &ldquo;Q4 2025 Revenue Report&rdquo; with metadata about owners, freshness, and data quality.</p>
+<p>You can enforce access control at whatever granularity you need: tenant boundaries, time-based access windows, row-level security. The AI sees only what the current user should see.</p>
+<p>You can transform responses before they reach the AI. Redact PII from documents. Summarize large files. Convert formats. The AI gets processed, policy-compliant data.</p>
+<p>You can correlate across systems. &ldquo;Show me all reports created by the finance team&rdquo; requires understanding both S3 and your identity system. A composable library makes that possible.</p>
+<p>None of this works with a black-box binary. You need a library with the right extension points.</p>
+<h2 id="the-txn2-mcp-ecosystem">The TXN2 MCP ecosystem</h2>
+<p>I built txn2/mcp-s3 alongside <a href="../mcp-trino/">txn2/mcp-trino</a>. Together they cover two patterns of data access that enterprises actually need:</p>
+<pre class="mermaid">
+graph LR
+    AI[AI Assistant] --> TR[mcp-trino]
+    AI --> S3[mcp-s3]
+    TR --> DW[Data Warehouse]
+    S3 --> DL[Data Lake]
+    DW --> PG[PostgreSQL]
+    DW --> MY[MySQL]
+    DW --> IC[Iceberg]
+    DL --> AWS[AWS S3]
+    DL --> MIN[MinIO]
+    DL --> SEA[SeaweedFS]
+</pre>
+<p>txn2/mcp-trino handles structured data: SQL queries, joins across databases, aggregations. When the AI needs &ldquo;What were our top products last quarter?&rdquo;, txn2/mcp-trino queries the data warehouse.</p>
+<p>txn2/mcp-s3 handles unstructured data: documents, images, logs, exports. When the AI needs &ldquo;Find the architecture diagram for the payments service&rdquo;, txn2/mcp-s3 searches object storage.</p>
+<p>Both are designed as composable libraries. Both support the same middleware patterns. You can build one custom MCP server that combines Trino queries with S3 storage, wrapped in your authentication and audit logging:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#75715e">// Combine txn2/mcp-trino and txn2/mcp-s3 in one server</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">trinoTools</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">trino</span>.<span style="color:#a6e22e">NewTools</span>(<span style="color:#a6e22e">trinoConfig</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">s3Toolkit</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">tools</span>.<span style="color:#a6e22e">NewToolkit</span>(<span style="color:#a6e22e">s3Client</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">s</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">server</span>.<span style="color:#a6e22e">NewMCPServer</span>(<span style="color:#e6db74">&#34;enterprise-data-server&#34;</span>, <span style="color:#e6db74">&#34;1.0.0&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">trinoTools</span>.<span style="color:#a6e22e">RegisterToolsWithMiddleware</span>(<span style="color:#a6e22e">s</span>, <span style="color:#a6e22e">withAuth</span>, <span style="color:#a6e22e">withAudit</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">s3Toolkit</span>.<span style="color:#a6e22e">RegisterToolsWithMiddleware</span>(<span style="color:#a6e22e">s</span>, <span style="color:#a6e22e">withAuth</span>, <span style="color:#a6e22e">withAudit</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">s</span>.<span style="color:#a6e22e">Start</span>()
+</span></span></code></pre></div><p>One server, two data access patterns, unified policy layer.</p>
+<h2 id="multi-provider-support">Multi-provider support</h2>
+<p>S3 isn&rsquo;t just AWS anymore. The API has become an industry standard:</p>
+<ul>
+<li>AWS S3 (the original)</li>
+<li>MinIO (popular for self-hosted)</li>
+<li>SeaweedFS (distributed file system with S3 gateway)</li>
+<li>Ceph (enterprise storage with S3-compatible RADOS Gateway)</li>
+<li>LocalStack (S3 emulation for local dev)</li>
+<li>Backblaze B2 (cheap cloud storage with S3 compatibility)</li>
+</ul>
+<p>txn2/mcp-s3 works with all of them. Configure multiple connections and your AI can access objects across providers:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>mcp-s3 --connections config.yaml
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">connections</span>:
+</span></span><span style="display:flex;"><span>  - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">production</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">endpoint</span>: <span style="color:#ae81ff">s3.amazonaws.com</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">access_key</span>: <span style="color:#ae81ff">${AWS_ACCESS_KEY}</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">secret_key</span>: <span style="color:#ae81ff">${AWS_SECRET_KEY}</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">region</span>: <span style="color:#ae81ff">us-west-2</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">development</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">endpoint</span>: <span style="color:#ae81ff">localhost:9000</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">access_key</span>: <span style="color:#ae81ff">minioadmin</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">secret_key</span>: <span style="color:#ae81ff">minioadmin</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">force_path_style</span>: <span style="color:#66d9ef">true</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">archive</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">endpoint</span>: <span style="color:#ae81ff">s3.us-west-002.backblazeb2.com</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">access_key</span>: <span style="color:#ae81ff">${B2_ACCESS_KEY}</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">secret_key</span>: <span style="color:#ae81ff">${B2_SECRET_KEY}</span>
+</span></span></code></pre></div><p>The AI can query across all configured connections. It understands that &ldquo;production&rdquo; contains live data while &ldquo;archive&rdquo; holds historical backups.</p>
+<h2 id="safe-defaults">Safe defaults</h2>
+<p>txn2/mcp-s3 ships read-only with size limits. Sensible defaults matter when you&rsquo;re giving an AI access to storage.</p>
+<p>Writes are disabled unless you explicitly enable them. Size limits prevent downloading multi-gigabyte files. Prefix restrictions limit access to specific paths. Credentials never get exposed to the AI.</p>
+<p>Enable writes when you need them:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>mcp-s3 --read-only<span style="color:#f92672">=</span>false --max-put-size<span style="color:#f92672">=</span>100MB
+</span></span></code></pre></div><p>Restrict to specific prefixes:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>mcp-s3 --allowed-prefixes<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;reports/,exports/&#34;</span>
+</span></span></code></pre></div><p>With this flag, the AI can only access objects under <code>reports/</code> or <code>exports/</code>, no matter what it asks for.</p>
+<h2 id="try-it-with-localstack">Try it with LocalStack</h2>
+<p>You can test txn2/mcp-s3 without cloud credentials using LocalStack:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># Start LocalStack</span>
+</span></span><span style="display:flex;"><span>docker run -d -p 4566:4566 localstack/localstack
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Configure AWS CLI for LocalStack</span>
+</span></span><span style="display:flex;"><span>export AWS_ACCESS_KEY_ID<span style="color:#f92672">=</span>test
+</span></span><span style="display:flex;"><span>export AWS_SECRET_ACCESS_KEY<span style="color:#f92672">=</span>test
+</span></span><span style="display:flex;"><span>export AWS_DEFAULT_REGION<span style="color:#f92672">=</span>us-east-1
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Create a test bucket</span>
+</span></span><span style="display:flex;"><span>aws --endpoint-url<span style="color:#f92672">=</span>http://localhost:4566 s3 mb s3://test-bucket
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Upload test data</span>
+</span></span><span style="display:flex;"><span>echo <span style="color:#e6db74">&#34;Hello from S3&#34;</span> | aws --endpoint-url<span style="color:#f92672">=</span>http://localhost:4566 <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  s3 cp - s3://test-bucket/hello.txt
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Configure mcp-s3</span>
+</span></span><span style="display:flex;"><span>claude mcp add --transport stdio mcp-s3 -- <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  mcp-s3 --endpoint http://localhost:4566 <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>         --access-key test --secret-key test <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>         --force-path-style
+</span></span></code></pre></div><p>Now ask your AI to explore the test bucket.</p>
+<h2 id="why-composable-wins">Why composable wins</h2>
+<p>The MCP ecosystem is young. Everyone is shipping binaries that expose tools. But tools are commodity work. Any project can implement <code>list_buckets</code> and <code>get_object</code>.</p>
+<p>What matters is the library architecture. Can you intercept requests? Transform responses? Compose multiple data sources? Add enterprise policy without forking?</p>
+<p>Projects that can do this become infrastructure. Projects that ship fixed binaries become dependencies you replace when requirements change.</p>
+<p>txn2/mcp-s3 and txn2/mcp-trino bet on composability. Use them as binaries for quick starts. Import them as libraries for production. Same codebase, both use cases.</p>
+<h2 id="resources">Resources</h2>
+<ul>
+<li><a href="https://github.com/txn2/mcp-s3">txn2/mcp-s3 on GitHub</a></li>
+<li><a href="https://mcp-s3.txn2.com">txn2/mcp-s3 documentation</a></li>
+<li><a href="../mcp-trino/">txn2/mcp-trino: AI data warehouse access</a></li>
+<li><a href="https://modelcontextprotocol.io">Model Context Protocol specification</a></li>
+<li><a href="https://github.com/mark3labs/mcp-go">mcp-go: Go SDK for MCP servers</a></li>
+<li><a href="../kubefwd-mcp/">AI-assisted Kubernetes development with kubefwd</a></li>
+</ul>
+
+                <p>
+                   This blog post, titled: "<span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">AI Data Lake Access with MCP and S3: Building composable MCP servers for object storage</span>" by <a xmlns:cc="http://creativecommons.org/ns#" href="https://twitter.com/cjimti" property="cc:attributionName" rel="cc:attributionURL">Craig Johnston</a>, is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+                    <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a>
+                </p>
+
+            </div>
+            
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                
+                <section>
+                    <hr class="hidden-sm hidden-xs">
+                    <h5><a href="../tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                        
+                        
+                        
+                        <a href="../tags/ai" title="ai">
+                        ai
+                        </a>
+                        
+                        
+                        
+                        <a href="../tags/blockchain" title="blockchain">
+                        blockchain
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="../tags/data" title="data">
+                        data
+                        </a>
+                        
+                        
+                        
+                        <a href="../tags/data-science" title="data science">
+                        data science
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="../tags/development" title="development">
+                        development
+                        </a>
+                        
+                        
+                        
+                        <a href="../tags/devops" title="devops">
+                        devops
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="../tags/docker" title="docker">
+                        docker
+                        </a>
+                        
+                        
+                        
+                        <a href="../tags/elasticsearch" title="elasticsearch">
+                        elasticsearch
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="../tags/golang" title="golang">
+                        golang
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="../tags/ingress" title="ingress">
+                        ingress
+                        </a>
+                        
+                        
+                        
+                        <a href="../tags/iot" title="iot">
+                        iot
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="../tags/kubectl" title="kubectl">
+                        kubectl
+                        </a>
+                        
+                        
+                        
+                        <a href="../tags/kubefwd" title="kubefwd">
+                        kubefwd
+                        </a>
+                        
+                        
+                        
+                        <a href="../tags/kubernetes" title="kubernetes">
+                        kubernetes
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="../tags/mcp" title="mcp">
+                        mcp
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="../tags/microservices" title="microservices">
+                        microservices
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="../tags/python" title="python">
+                        python
+                        </a>
+                        
+                        
+                        
+                        <a href="../tags/raspberry-pi" title="raspberry pi">
+                        raspberry pi
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="../tags/security" title="security">
+                        security
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="../tags/utils" title="utils">
+                        utils
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                    </div>
+                </section>
+
+                
+                <hr>
+                <h5>RELATED</h5>
+                <ul class="list-inline">
+                    
+                </ul>
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                   
+                   <li>
+                       <a href="../index.xml" rel="alternate" type="application/rss+xml" title="IMTI" >
+                           <span class="fa-stack fa-lg">
+                               <i class="fa fa-circle fa-stack-2x"></i>
+                               <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+                           </span>
+                       </a>
+                   </li>
+                   
+                    
+                    <li>
+                        <a href="mailto:cjimti@gmail.com">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                    
+                    <li>
+                        <a href="https://twitter.com/cjimti">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/cjimti">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                    
+                    <li>
+                        <a target="_blank" href="https://www.linkedin.com/in/cjimti/">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+<script>
+    if($('#tag_cloud').length !== 0){
+        async("/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-R56SP4WLS2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-R56SP4WLS2');
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+<script>
+  mermaid.initialize({ theme: 'neutral' });
+  mermaid.run();
+</script>
+
+
+<script data-cfasync="false">
+(function() {
+    var themeToggle = document.getElementById('theme-toggle');
+    var themeIcon = document.getElementById('theme-icon');
+
+    function getCurrentTheme() {
+        return document.documentElement.getAttribute('data-theme') || 'light';
+    }
+
+    function updateIcon() {
+        var currentTheme = getCurrentTheme();
+        if (themeIcon) {
+            if (currentTheme === 'dark') {
+                themeIcon.className = 'fa fa-sun-o';
+            } else {
+                themeIcon.className = 'fa fa-moon-o';
+            }
+        }
+    }
+
+    function toggleTheme() {
+        var currentTheme = getCurrentTheme();
+        var newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+
+        if (newTheme === 'dark') {
+            document.documentElement.setAttribute('data-theme', 'dark');
+        } else {
+            document.documentElement.removeAttribute('data-theme');
+        }
+
+        localStorage.setItem('theme', newTheme);
+        updateIcon();
+    }
+
+    updateIcon();
+
+    if (themeToggle) {
+        themeToggle.addEventListener('click', toggleTheme);
+    }
+
+    if (window.matchMedia) {
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e) {
+            if (!localStorage.getItem('theme')) {
+                if (e.matches) {
+                    document.documentElement.setAttribute('data-theme', 'dark');
+                } else {
+                    document.documentElement.removeAttribute('data-theme');
+                }
+                updateIcon();
+            }
+        });
+    }
+})();
+</script>
+
+</body>
+</html>

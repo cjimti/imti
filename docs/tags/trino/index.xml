@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Trino on IMTI</title>
-    <link>https://imti.co/tags/trino/</link>
+    <link>http://localhost:1313/tags/trino/</link>
     <description>Recent content in Trino on IMTI</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Sat, 17 Jan 2026 00:00:00 +0000</lastBuildDate>
-    <atom:link href="https://imti.co/tags/trino/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/tags/trino/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>AI Data Warehouse Access with MCP and Trino</title>
-      <link>https://imti.co/mcp-trino/</link>
+      <link>http://localhost:1313/mcp-trino/</link>
       <pubDate>Sat, 17 Jan 2026 00:00:00 +0000</pubDate>
-      <guid>https://imti.co/mcp-trino/</guid>
+      <guid>http://localhost:1313/mcp-trino/</guid>
       <description>&lt;p&gt;Every organization wants AI assistants to answer questions from their data. The problem is that data lives everywhere: PostgreSQL for transactions, MySQL for legacy systems, S3 for analytics, Kafka for streams. Writing custom integrations for each source is unsustainable. &lt;a href=&#34;https://github.com/txn2/mcp-trino&#34;&gt;mcp-trino&lt;/a&gt; solves this by exposing Trino&amp;rsquo;s federated query engine to AI assistants through MCP.&lt;/p&gt;</description>
     </item>
   </channel>
