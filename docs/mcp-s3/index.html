@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en-us">
-<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><head>
+<head><head>
     <meta name="msvalidate.01" content="DBC34551F2DD1BA3DC0D62EE46D7448F" />
     <meta name="google-site-verification" content="DrtKc88u9uc7iptd4LyURAKBmFcOn7Kuk6HcRk_kNmo" />
     <meta charset="utf-8">
@@ -27,7 +27,7 @@
 
     <title>AI Data Lake Access with MCP and S3 - IMTI - Craig Johnston</title>
 
-    <link rel="canonical" href="http://localhost:1313/mcp-s3/">
+    <link rel="canonical" href="https://imti.co/mcp-s3/">
 
     
     <link rel="stylesheet" href="../css/bootstrap.min.css">
@@ -67,12 +67,12 @@
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="AI Data Lake Access with MCP and S3" />
 <meta name="twitter:description" content="Building composable MCP servers for object storage" />
-<meta name="twitter:image" content="http://localhost:1313/img/post/buckets-beach_876_438.png" />
+<meta name="twitter:image" content="https://imti.co/img/post/buckets-beach_876_438.png" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="http://localhost:1313/mcp-s3/" />
+<meta property="og:url" content="https://imti.co/mcp-s3/" />
 <meta property="og:title" content="AI Data Lake Access with MCP and S3" />
 <meta property="og:description" content="Building composable MCP servers for object storage" />
-<meta property="og:image" content="http://localhost:1313/img/post/buckets-beach_876_438.png" />
+<meta property="og:image" content="https://imti.co/img/post/buckets-beach_876_438.png" />
 
 
     
@@ -83,10 +83,10 @@
   "@type": "Article",
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "http:\/\/localhost:1313\/mcp-s3\/"
+    "@id": "https:\/\/imti.co\/mcp-s3\/"
   },
   "headline": "AI Data Lake Access with MCP and S3",
-  "image": ["http:\/\/localhost:1313\/img\/post\/buckets-beach_876_438.png"],
+  "image": ["https:\/\/imti.co\/img\/post\/buckets-beach_876_438.png"],
   "datePublished": "2026-01-19T00:00:00Z",
   "dateModified": "2026-01-19T00:00:00Z",
   "author": {
@@ -99,7 +99,7 @@
     "name": "imti.co",
     "logo": {
       "@type": "ImageObject",
-      "url": "http:\/\/localhost:1313\/img\/avatar-cj.jpg"
+      "url": "https:\/\/imti.co\/img\/avatar-cj.jpg"
     }
   },
   "description": "mcp-s3 exposes S3 and S3-compatible storage to AI assistants via MCP. Use it standalone or import it as a Go library to build custom MCP servers with …"
@@ -178,7 +178,7 @@
 
 <style type="text/css">
     header.intro-header{
-        background-image: url('http://localhost:1313/img/post/buckets-beach.png')
+        background-image: url('https://imti.co/img/post/buckets-beach.png')
     }
 </style>
 <header class="intro-header" >
@@ -233,7 +233,7 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <p>Data warehouses handle structured queries. Data lakes handle everything else: documents, images, logs, backups, ML model weights, that CSV someone exported three years ago and never deleted. The S3 API has become the universal interface for object storage. AWS built it, and now MinIO, SeaweedFS, Ceph, and dozens of others implement it. [txn2/mcp-s3] brings this storage layer to AI assistants through MCP, working alongside <a href="../mcp-trino/">txn2/mcp-trino</a>.</p>
+                <p>Data warehouses handle structured queries. Data lakes handle everything else: documents, images, logs, backups, ML model weights, that CSV someone exported three years ago and never deleted. The S3 API has become the universal interface for object storage. AWS built it, and now MinIO, SeaweedFS, Ceph, and dozens of others implement it. <a href="https://github.com/txn2/mcp-s3">txn2/mcp-s3</a> brings this storage layer to AI assistants through MCP, working alongside <a href="../mcp-trino/">txn2/mcp-trino</a>.</p>
 <aside class="toc">
     <header>
         <h2>Contents</h2>
@@ -265,7 +265,7 @@
 <p>Most MCP servers expose a fixed set of tools and call it done. You configure credentials, run the binary, hope it does what you need. When requirements change, you fork.</p>
 <p>I built txn2/mcp-s3 differently. The tools are just the surface. The library underneath is what matters.</p>
 <h2 id="txn2mcp-s3">txn2/mcp-s3</h2>
-<p>[txn2/mcp-s3] is an MCP server that gives AI assistants access to S3-compatible storage. Install it, configure credentials, and your AI can browse buckets, read objects, and manage files.</p>
+<p><a href="https://github.com/txn2/mcp-s3">txn2/mcp-s3</a> is an MCP server that gives AI assistants access to S3-compatible storage. Install it, configure credentials, and your AI can browse buckets, read objects, and manage files.</p>
 <p>Install:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>go install github.com/txn2/mcp-s3/cmd/mcp-s3@latest
 </span></span></code></pre></div><p>Configure Claude Code:</p>

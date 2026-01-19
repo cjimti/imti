@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Data Visualization on IMTI</title>
-    <link>http://localhost:1313/tags/data-visualization/</link>
+    <link>https://imti.co/tags/data-visualization/</link>
     <description>Recent content in Data Visualization on IMTI</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Sun, 08 Jul 2018 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://localhost:1313/tags/data-visualization/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://imti.co/tags/data-visualization/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Python Data Essentials - Matplotlib and Seaborn</title>
-      <link>http://localhost:1313/python-data-essentials-matplotlib-seaborn/</link>
+      <link>https://imti.co/python-data-essentials-matplotlib-seaborn/</link>
       <pubDate>Sun, 08 Jul 2018 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/python-data-essentials-matplotlib-seaborn/</guid>
+      <guid>https://imti.co/python-data-essentials-matplotlib-seaborn/</guid>
       <description>&lt;p&gt;There is an overwhelming number of options for developers needing to provide data visualization. The most popular library for data visualization in Python is &lt;a href=&#34;https://matplotlib.org/&#34;&gt;Matplotlib&lt;/a&gt;, and built directly on top of Matplotlib is &lt;a href=&#34;https://seaborn.pydata.org/&#34;&gt;Seaborn&lt;/a&gt;. The Seaborn library is &amp;ldquo;tightly integrated with the &lt;a href=&#34;https://pydata.org/&#34;&gt;PyData&lt;/a&gt; stack, including support for &lt;a href=&#34;../../python-data-essentials-numpy/&#34;&gt;numpy&lt;/a&gt; and &lt;a href=&#34;../../python-data-essentials-pandas/&#34;&gt;pandas&lt;/a&gt; data structures and statistical routines from &lt;a href=&#34;https://www.scipy.org/&#34;&gt;scipy&lt;/a&gt; and &lt;a href=&#34;https://www.statsmodels.org/stable/index.html&#34;&gt;statsmodels&lt;/a&gt;.&amp;rdquo;&lt;/p&gt;&#xA;&lt;p&gt;This article is only intended to get you started with &lt;a href=&#34;https://matplotlib.org/&#34;&gt;Matplotlib&lt;/a&gt; and &lt;a href=&#34;https://seaborn.pydata.org/&#34;&gt;Seaborn&lt;/a&gt;. Both libraries have extensive and mature documentation.&lt;/p&gt;</description>
     </item>
   </channel>

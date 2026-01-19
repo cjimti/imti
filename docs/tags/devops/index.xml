@@ -2,31 +2,31 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>DevOps on IMTI</title>
-    <link>http://localhost:1313/tags/devops/</link>
+    <link>https://imti.co/tags/devops/</link>
     <description>Recent content in DevOps on IMTI</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Tue, 10 Jul 2018 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://localhost:1313/tags/devops/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://imti.co/tags/devops/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Kubernetes Team Access - RBAC for developers and QA</title>
-      <link>http://localhost:1313/team-kubernetes-remote-access/</link>
+      <link>https://imti.co/team-kubernetes-remote-access/</link>
       <pubDate>Tue, 10 Jul 2018 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/team-kubernetes-remote-access/</guid>
+      <guid>https://imti.co/team-kubernetes-remote-access/</guid>
       <description>&lt;p&gt;RBAC (Role Based Access Control) allows our Kubernetes clusters to provide the development team better visibility and access into the development, staging and production environments than it has have ever had in the past. Developers using the command line tool &lt;strong&gt;&lt;a href=&#34;https://kubernetes.io/docs/reference/kubectl/kubectl/&#34;&gt;kubectl&lt;/a&gt;&lt;/strong&gt;, can explore the network topology of running &lt;a href=&#34;../../microservices/&#34;&gt;microservices&lt;/a&gt;, tail live server logs, proxy local ports directly to services or even execute shells into running pods.&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;../../gitlabci-golang-microservices/&#34;&gt;Kubernetes and GitlabCI&lt;/a&gt; are the central components of our DevOps toolchain and have increased our productivity by many multiples over the traditional approaches of the past.&lt;/p&gt;</description>
     </item>
     <item>
       <title>A Microservices Workflow with Golang and Gitlab CI</title>
-      <link>http://localhost:1313/gitlabci-golang-microservices/</link>
+      <link>https://imti.co/gitlabci-golang-microservices/</link>
       <pubDate>Fri, 22 Jun 2018 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/gitlabci-golang-microservices/</guid>
+      <guid>https://imti.co/gitlabci-golang-microservices/</guid>
       <description>&lt;p&gt;Many of the resources on Cloud Native &lt;a href=&#34;../../microservices/&#34;&gt;Microservices&lt;/a&gt; show you how easy it is to get up and running with AWS or GKE. I think this is great but for the fact that I see a trend (in my clients at least) of associating concepts with particular products or worse, companies. I love Amazon, but it&amp;rsquo;s not THE cloud). In my opinion, to embrace Cloud Native and &lt;a href=&#34;../../microservices/&#34;&gt;Microservices&lt;/a&gt; you should develop some, and host them yourself. The cloud is not Google or Amazon; it&amp;rsquo;s any cluster of virtualized systems, abstracted from their hardware interfaces and centrally managed.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Reverse Proxy in Golang</title>
-      <link>http://localhost:1313/golang-reverse-proxy/</link>
+      <link>https://imti.co/golang-reverse-proxy/</link>
       <pubDate>Fri, 15 Jun 2018 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/golang-reverse-proxy/</guid>
+      <guid>https://imti.co/golang-reverse-proxy/</guid>
       <description>&lt;p&gt;Reverse proxies are standard components in many web architectures, from &lt;a href=&#34;https://www.nginx.com/&#34;&gt;Nginx&lt;/a&gt; in front of &lt;a href=&#34;https://php-fpm.org/&#34;&gt;php-fpm&lt;/a&gt; serving &lt;a href=&#34;http://www.drupal.com/&#34;&gt;Drupal&lt;/a&gt; or &lt;a href=&#34;https://wordpress.org/&#34;&gt;Wordpress&lt;/a&gt;, to endless mixtures of load balancers, security appliances, and popular firewall applications. &lt;a href=&#34;https://www.jscape.com/blog/bid/87783/Forward-Proxy-vs-Reverse-Proxy&#34;&gt;Reverse proxies differ from forward proxies&lt;/a&gt; in little but their intended implementation, be it service-side or client side. The following information is useful in either context. However, I focus on a service-side architecture. Further down this article, I&amp;rsquo;ll be going over the reasonably simple &lt;a href=&#34;https://golang.org/&#34;&gt;go&lt;/a&gt; code needed to develop a basic, yet production quality proxy, but first I&amp;rsquo;ll give you my take on why they solve so many problems and offer up my little workhorse, &lt;a href=&#34;https://github.com/txn2/n2proxy&#34;&gt;n2proxy&lt;/a&gt;.&lt;/p&gt;</description>
     </item>
   </channel>

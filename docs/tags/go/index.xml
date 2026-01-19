@@ -2,24 +2,24 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Go on IMTI</title>
-    <link>http://localhost:1313/tags/go/</link>
+    <link>https://imti.co/tags/go/</link>
     <description>Recent content in Go on IMTI</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Mon, 19 Jan 2026 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://localhost:1313/tags/go/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://imti.co/tags/go/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>AI Data Lake Access with MCP and S3</title>
-      <link>http://localhost:1313/mcp-s3/</link>
+      <link>https://imti.co/mcp-s3/</link>
       <pubDate>Mon, 19 Jan 2026 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/mcp-s3/</guid>
-      <description>&lt;p&gt;Data warehouses handle structured queries. Data lakes handle everything else: documents, images, logs, backups, ML model weights, that CSV someone exported three years ago and never deleted. The S3 API has become the universal interface for object storage. AWS built it, and now MinIO, SeaweedFS, Ceph, and dozens of others implement it. [txn2/mcp-s3] brings this storage layer to AI assistants through MCP, working alongside &lt;a href=&#34;../../mcp-trino/&#34;&gt;txn2/mcp-trino&lt;/a&gt;.&lt;/p&gt;</description>
+      <guid>https://imti.co/mcp-s3/</guid>
+      <description>&lt;p&gt;Data warehouses handle structured queries. Data lakes handle everything else: documents, images, logs, backups, ML model weights, that CSV someone exported three years ago and never deleted. The S3 API has become the universal interface for object storage. AWS built it, and now MinIO, SeaweedFS, Ceph, and dozens of others implement it. &lt;a href=&#34;https://github.com/txn2/mcp-s3&#34;&gt;txn2/mcp-s3&lt;/a&gt; brings this storage layer to AI assistants through MCP, working alongside &lt;a href=&#34;../../mcp-trino/&#34;&gt;txn2/mcp-trino&lt;/a&gt;.&lt;/p&gt;</description>
     </item>
     <item>
       <title>AI Data Warehouse Access with MCP and Trino</title>
-      <link>http://localhost:1313/mcp-trino/</link>
+      <link>https://imti.co/mcp-trino/</link>
       <pubDate>Sat, 17 Jan 2026 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/mcp-trino/</guid>
+      <guid>https://imti.co/mcp-trino/</guid>
       <description>&lt;p&gt;Every organization wants AI assistants to answer questions from their data. The problem is that data lives everywhere: PostgreSQL for transactions, MySQL for legacy systems, S3 for analytics, Kafka for streams. Writing custom integrations for each source is unsustainable. &lt;a href=&#34;https://github.com/txn2/mcp-trino&#34;&gt;mcp-trino&lt;/a&gt; solves this by exposing Trino&amp;rsquo;s federated query engine to AI assistants through MCP.&lt;/p&gt;</description>
     </item>
   </channel>
