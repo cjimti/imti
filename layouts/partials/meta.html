@@ -1,13 +1,20 @@
 <meta name="twitter:site" content="@cjimti">
 <meta name="twitter:creator" content="@cjimti">
 {{ if .IsPage }}
-<meta name="twitter:description" content="{{ .Params.subtitle }}" />
-<meta name="twitter:title" content="{{ .Title }}" />
 <meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="{{ .Title }}" />
+<meta name="twitter:description" content="{{ .Params.subtitle }}" />
 <meta name="twitter:image" content="{{ .Params.twitter_image | absURL }}" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="{{ .Permalink }}" />
+<meta property="og:title" content="{{ .Title }}" />
+<meta property="og:description" content="{{ .Params.subtitle }}" />
 <meta property="og:image" content="{{ .Params.twitter_image | absURL }}" />
-
 {{ else }}
+<meta name="twitter:card" content="summary" />
 <meta name="twitter:title" content="{{ .Site.Title }}" />
 <meta name="twitter:description" content="{{ .Description }}" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="{{ .Site.Title }}" />
+<meta property="og:description" content="{{ .Description }}" />
 {{ end }}
