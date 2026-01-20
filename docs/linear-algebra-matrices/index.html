@@ -1,0 +1,2123 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head><head>
+    <meta name="msvalidate.01" content="DBC34551F2DD1BA3DC0D62EE46D7448F" />
+    <meta name="google-site-verification" content="DrtKc88u9uc7iptd4LyURAKBmFcOn7Kuk6HcRk_kNmo" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    
+    <script data-cfasync="false">
+        (function() {
+            var savedTheme = localStorage.getItem('theme');
+            var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+            var theme = savedTheme || (prefersDark ? 'dark' : 'light');
+            if (theme === 'dark') {
+                document.documentElement.setAttribute('data-theme', 'dark');
+            }
+        })();
+    </script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <meta name="description" content="Linear Algebra Crash Course for Programmers Part 2a">
+    
+    <meta name="keyword"  content="Go, Kubernetes, Elasticsearch, Python, Docker, Big Data, Artificial Intelligence, Machine Learning">
+    <link rel="shortcut icon" href="../img/favicon.ico">
+
+    <title>Linear Algebra: Matrices 1 - IMTI - Craig Johnston</title>
+
+    <link rel="canonical" href="https://imti.co/linear-algebra-matrices/">
+
+    
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+
+    
+    <link rel="stylesheet" href="../css/hux-blog.min.css">
+
+    
+    <link rel="stylesheet" href="../css/syntax.css">
+
+    
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    
+    
+    <link rel="stylesheet" href="../css/imti.css">
+
+    
+    <script src="../js/jquery.min.js"></script>
+
+    
+    <script src="../js/bootstrap.min.js"></script>
+
+    
+    <script src="../js/hux-blog.min.js"></script>
+
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({
+            google_ad_client: "ca-pub-5984764595236029",
+            enable_page_level_ads: true
+        });
+    </script>
+
+    <meta name="twitter:site" content="@cjimti">
+<meta name="twitter:creator" content="@cjimti">
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Linear Algebra: Matrices 1" />
+<meta name="twitter:description" content="Linear Algebra Crash Course for Programmers Part 2a" />
+<meta name="twitter:image" content="https://imti.co/img/post/matrix_876_438.jpg" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://imti.co/linear-algebra-matrices/" />
+<meta property="og:title" content="Linear Algebra: Matrices 1" />
+<meta property="og:description" content="Linear Algebra Crash Course for Programmers Part 2a" />
+<meta property="og:image" content="https://imti.co/img/post/matrix_876_438.jpg" />
+
+
+    
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https:\/\/imti.co\/linear-algebra-matrices\/"
+  },
+  "headline": "Linear Algebra: Matrices 1",
+  "image": ["https:\/\/imti.co\/img\/post\/matrix_876_438.jpg"],
+  "datePublished": "2018-12-08T00:00:00Z",
+  "dateModified": "2018-12-08T00:00:00Z",
+  "author": {
+    "@type": "Person",
+    "name": "Craig Johnston",
+    "url": "https://imti.co/about/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "imti.co",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https:\/\/imti.co\/img\/avatar-cj.jpg"
+    }
+  },
+  "description": "This article on matrices is part two of an ongoing crash course on programming with linear algebra, demonstrating concepts and implementations in Python. The …"
+}
+</script>
+
+
+</head>
+</head>
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="../">IMTI</a>
+        </div>
+
+        
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="../">Home</a>
+                    </li>
+                    <li>
+                        <a href="../about/">About</a>
+                    </li>
+                    <li>
+                        <a href="https://twitter.com/cjimti">Follow</a>
+                    </li>
+                    
+
+                    
+                    <li>
+                        <a href="javascript:void(0)" class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode" title="Toggle dark/light mode">
+                            <i class="fa fa-moon-o" id="theme-icon"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        
+    </div>
+    
+</nav>
+<script>
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+            $navbar.className = " ";
+            setTimeout(function(){
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+
+
+<style type="text/css">
+    header.intro-header{
+        background-image: url('https://imti.co/img/post/matrix.jpg')
+    }
+</style>
+<header class="intro-header" >
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="../tags/linear-algebra" title="Linear Algebra">
+                        Linear Algebra
+                        </a>
+                        
+                        <a class="tag" href="../tags/matrices" title="Matrices">
+                        Matrices
+                        </a>
+                        
+                        <a class="tag" href="../tags/math" title="Math">
+                        Math
+                        </a>
+                        
+                        <a class="tag" href="../tags/python" title="Python">
+                        Python
+                        </a>
+                        
+                        <a class="tag" href="../tags/data-science" title="Data Science">
+                        Data Science
+                        </a>
+                        
+                    </div>
+                    <h1>Linear Algebra: Matrices 1</h1>
+                    <h2 class="subheading">Linear Algebra Crash Course for Programmers Part 2a</h2>
+                    <span  class="meta">Posted by <a href="https://twitter.com/cjimti">Craig Johnston</a> on Saturday, December 8, 2018
+                        
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+<article>
+    <div class="container">
+        <div class="row">
+
+            
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <p>This article on <strong>matrices</strong> is part two of an ongoing crash course on programming with linear algebra, demonstrating concepts and implementations in Python. The following examples will demonstrate some of the various mathematical notations and their corresponding implementations, easily translatable to any programming language with mature math libraries.</p>
+<p>This series began with <a href="https://imti.co/linear-algebra-vectors/">Linear Algebra: Vectors Crash Course for Python Programmers Part 1</a>. Vectors are the building blocks of matrices, and a good foundational understanding of vectors is essential to understanding matrices.</p>
+<p>This article covers some matrix notation, common matrix types, methods of addition and multiplication and rank.  Future articles will cover additional concepts.</p>
+<p>This small series of articles on linear algebra is meant to help in preparation for learning the more profound concepts related to Machine Learning, AI and math that drives the higher level abstractions provided by many of the libraries available today.</p>
+<blockquote>
+<p>Python examples in this article make use of the <a href="https://imti.co/python-data-essentials-numpy/">Numpy</a> library. Read the article <a href="https://imti.co/python-data-essentials-numpy/">Python Data Essentials - Numpy</a> if you want a quick overview of this important Python library along with the <a href="https://imti.co/python-data-essentials-matplotlib-seaborn/">Matplotlib</a> Python library for visualizations. For a beginners guide to <a href="https://imti.co/python-data-essentials-matplotlib-seaborn/">Matplotlib</a> might try my article <a href="https://imti.co/python-data-essentials-matplotlib-seaborn/">Python Data Essentials - Matplotlib and Seaborn</a></p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> numpy <span style="color:#66d9ef">as</span> np
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> matplotlib.pyplot <span style="color:#66d9ef">as</span> plt
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> math
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> mpl_toolkits.mplot3d <span style="color:#f92672">import</span> Axes3D
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> seaborn <span style="color:#66d9ef">as</span> sb
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">%</span>matplotlib inline
+</span></span></code></pre></div><p><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS_HTML" type="text/javascript">
+</script>
+<script type="text/javascript">
+    init_mathjax = function() {
+        if (window.MathJax) {
+            
+            MathJax.Hub.Config({
+                TeX: {
+                    equationNumbers: {
+                        autoNumber: "AMS",
+                        useLabelIds: true
+                    }
+                },
+                tex2jax: {
+                    inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+                    displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+                    processEscapes: true,
+                    processEnvironments: true
+                },
+                displayAlign: 'center',
+                "HTML-CSS": {
+                    styles: {'.MathJax_Display': {"margin": 0}},
+                    linebreaks: { automatic: true }
+                }
+            });
+            MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+        }
+    }
+    init_mathjax();
+</script>
+
+<aside class="toc">
+    <header>
+        <h2>Contents</h2>
+    </header>
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#matrix-notation">Matrix Notation</a></li>
+    <li><a href="#accessing-elements">Accessing Elements</a></li>
+    <li><a href="#common-matrix-types">Common Matrix Types</a>
+      <ul>
+        <li><a href="#square-and-rectangular-matrices">Square and Rectangular Matrices</a></li>
+        <li><a href="#zero-null-matricies">Zero (null) Matricies</a></li>
+        <li><a href="#diagonal-matricies">Diagonal Matricies</a></li>
+        <li><a href="#identity-matricies">Identity Matricies</a></li>
+        <li><a href="#triangular-matricies">Triangular Matricies</a></li>
+        <li><a href="#transposed-matrix">Transposed Matrix</a></li>
+        <li><a href="#symmetric--skew-symetric-matricies">Symmetric &amp; Skew-symetric Matricies</a></li>
+        <li><a href="#augmented-matricies">Augmented Matricies</a></li>
+        <li><a href="#complex-matricies">Complex Matricies</a></li>
+      </ul>
+    </li>
+    <li><a href="#matrix-addition">Matrix Addition</a></li>
+    <li><a href="#matrix-scalar-multiplication">Matrix Scalar Multiplication</a></li>
+    <li><a href="#trace">Trace</a></li>
+    <li><a href="#matrix-multiplication">Matrix Multiplication</a>
+      <ul>
+        <li><a href="#standard-matrix-multiplication">Standard Matrix Multiplication</a></li>
+        <li><a href="#vector-dot-product">Vector Dot Product</a></li>
+        <li><a href="#matrix-vector-multiplication">Matrix-Vector Multiplication</a></li>
+        <li><a href="#geometric-vector-transformation">Geometric Vector Transformation</a></li>
+        <li><a href="#multiplication-with-a-diagonal-matrix">Multiplication with a Diagonal Matrix</a></li>
+        <li><a href="#order-of-operations">Order of Operations</a></li>
+        <li><a href="#hadamard-multiplication-element-wise">Hadamard Multiplication (element-wise)</a></li>
+        <li><a href="#vectorizing-a-matrix">Vectorizing a Matrix</a></li>
+        <li><a href="#frobenius-dot-product-inner-product">Frobenius Dot Product (inner product)</a></li>
+        <li><a href="#frobenius-norm-euclidean-norm">Frobenius Norm (Euclidean Norm)</a></li>
+      </ul>
+    </li>
+    <li><a href="#rank">Rank</a>
+      <ul>
+        <li><a href="#shifting">Shifting</a></li>
+        <li><a href="#vector-span-with-rank">Vector Span with Rank</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+</aside>
+
+</p>
+<h2 id="matrix-notation">Matrix Notation</h2>
+<p>It is common to note a matrix with a capital letter. The following is a three by two matrix of <a href="https://en.wikipedia.org/wiki/Real_number">Real number</a>s.</p>
+<p><div>
+$
+\boldsymbol{A} =
+\begin{pmatrix}
+    10 & 5 \\
+    -20 & 2 \\
+    \pi & 1.5 \\
+\end{pmatrix} =
+\begin{bmatrix}
+    10 & 5 \\
+    -20 & 2 \\
+    \pi & 1.5 \\
+\end{bmatrix} =
+\begin{matrix}
+    10 & 5 \\
+    -20 & 2 \\
+    \pi & 1.5 \\
+\end{matrix}
+= \mathbb{R}^{3\times2}
+$
+</div></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># python matrix </span>
+</span></span><span style="display:flex;"><span>c <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array([[<span style="color:#ae81ff">10</span>,<span style="color:#ae81ff">5</span>],[<span style="color:#f92672">-</span><span style="color:#ae81ff">20</span>,<span style="color:#ae81ff">2</span>],[np<span style="color:#f92672">.</span>pi,<span style="color:#ae81ff">1.5</span>]])
+</span></span><span style="display:flex;"><span>c
+</span></span></code></pre></div><pre><code>array([[ 10.        ,   5.        ],
+       [-20.        ,   2.        ],
+       [  3.14159265,   1.5       ]])
+</code></pre>
+<p>Matrix dimensions are noted by row first and then column. The matrix $\boldsymbol{D}^{3\times4}$ contains three rows and four columns.</p>
+<p><div>
+$
+\boldsymbol{D} =
+\begin{pmatrix}
+    10  & 5 & 2 & 1 \\
+    -20 & 2 & 3 & 6.6 \\
+    \pi & 1.5 & 2 & 0 \\
+\end{pmatrix}
+= \mathbb{R}^{3\times4}
+$
+</div></p>
+<h2 id="accessing-elements">Accessing Elements</h2>
+<p>Subscript numbers represent an element in a matrix by row and column. Access elements of the matrix $\boldsymbol{D}$ with the notation $d_{ij}$ where ${i}$ is the row and ${j}$ is the column.</p>
+<p><div>
+$
+{d}_{2,4} = 6.6
+$
+</div></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>d <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array([[<span style="color:#ae81ff">10</span>,<span style="color:#ae81ff">5</span>,<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">1</span>],[<span style="color:#f92672">-</span><span style="color:#ae81ff">20</span>,<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">6.6</span>],[np<span style="color:#f92672">.</span>pi,<span style="color:#ae81ff">1.5</span>,<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">0</span>]])
+</span></span><span style="display:flex;"><span>d
+</span></span></code></pre></div><pre><code>array([[ 10.        ,   5.        ,   2.        ,   1.        ],
+       [-20.        ,   2.        ,   3.        ,   6.6       ],
+       [  3.14159265,   1.5       ,   2.        ,   0.        ]])
+</code></pre>
+<p>Python, like many computer languages, starts indexing at zero. The example below implements ${d}_{2,4} = 6.6$ in Python.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>d[<span style="color:#ae81ff">1</span>][<span style="color:#ae81ff">3</span>]
+</span></span></code></pre></div><pre><code>6.5999999999999996
+</code></pre>
+<h2 id="common-matrix-types">Common Matrix Types</h2>
+<p>The following section describes a hand full of matrix types.</p>
+<h3 id="square-and-rectangular-matrices">Square and Rectangular Matrices</h3>
+<p>Matricies are <a href="https://en.wikipedia.org/wiki/Square_matrix">Square</a> (${m} = {n}$) or <a href="https://www.mathdoubts.com/matrix/types/rectangular/">Rectangular</a> (${m} \neq {n}$)</p>
+<p>The following is a square matrix of fives, where ${m}=2$ and ${n}=2$:</p>
+<p><div>
+$
+\boldsymbol{L} =
+\begin{pmatrix}
+    5 & 5 \\
+    5 & 5 \\
+\end{pmatrix}
+= \mathbb{R}^{2\times2}
+$
+</div></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># numpy.full(shape, fill_value, dtype=None, order=&#39;C&#39;)[source]</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Returns a new array of given shape and type, filled with fill_value.</span>
+</span></span><span style="display:flex;"><span>l <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>full((<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">2</span>), <span style="color:#ae81ff">5</span>)
+</span></span><span style="display:flex;"><span>l
+</span></span></code></pre></div><pre><code>array([[5, 5],
+       [5, 5]])
+</code></pre>
+<p>The following is a rectangular matrix $\boldsymbol{P}_{3,2}$ of fours, where ${m}=3$ and ${n}=2$:</p>
+<p><div>
+$
+\boldsymbol{P} =
+\begin{pmatrix}
+    4 & 4 \\
+    4 & 4 \\
+    4 & 4 \\
+\end{pmatrix}
+= \mathbb{R}^{3\times2}
+$
+</div></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>p <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>full((<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">2</span>), <span style="color:#ae81ff">4</span>)
+</span></span><span style="display:flex;"><span>p
+</span></span></code></pre></div><pre><code>array([[4, 4],
+       [4, 4],
+       [4, 4]])
+</code></pre>
+<h3 id="zero-null-matricies">Zero (null) Matricies</h3>
+<p>A <a href="https://www.khanacademy.org/math/precalculus/precalc-matrices/properties-of-matrix-addition-and-scalar-multiplication/a/intro-to-zero-matrices">Zero</a> matrix only contains zeros and may be square (${m} = {n}$) or rectangular (${m} \neq {n}$).</p>
+<p><div>
+$
+\boldsymbol{Z} =
+\begin{pmatrix}
+    0 & 0 \\
+    0 & 0 \\
+\end{pmatrix}
+= \mathbb{R}^{2\times2}
+$
+</div></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>np<span style="color:#f92672">.</span>zeros((<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">2</span>))
+</span></span></code></pre></div><pre><code>array([[ 0.,  0.],
+       [ 0.,  0.]])
+</code></pre>
+<h3 id="diagonal-matricies">Diagonal Matricies</h3>
+<p><a href="http://mathonline.wikidot.com/diagonal-matrices">Diagonal</a> matrices may be <a href="https://en.wikipedia.org/wiki/Square_matrix">Square</a> or <a href="https://www.mathdoubts.com/matrix/types/rectangular/">Rectangular</a> contain only zeros for off-diagonal entries, however, elements in the main diagonal are unrestricted and may also be zero.</p>
+<p><div>
+$
+\boldsymbol{W} =
+\begin{pmatrix}
+    2 & 0 & 0 & 0 & 0 \\
+    0 & 3 & 0 & 0 & 0 \\
+    0 & 0 & 5 & 0 & 0 \\
+    0 & 0 & 0 & 7 & 0 \\
+    0 & 0 & 0 & 0 & 9 \\
+\end{pmatrix}
+= \mathbb{R}^{5\times5}
+$
+</div></p>
+<p>The above matrix $\boldsymbol{W}$ is diagonal in that every ${w}_{i}$ row and $w_{ij}$ column in the range $1, 2, \ldots, n$ where $i \ne j$ then $w_{i,j} = 0$.</p>
+<p>$\forall i,j \in {1, 2, \ldots, n}, i \ne j \implies w_{i,j} = 0$</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># create the square diagonal matrix W </span>
+</span></span><span style="display:flex;"><span>w <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>diag([<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">5</span>,<span style="color:#ae81ff">7</span>,<span style="color:#ae81ff">9</span>])
+</span></span><span style="display:flex;"><span>w
+</span></span></code></pre></div><pre><code>array([[2, 0, 0, 0, 0],
+       [0, 3, 0, 0, 0],
+       [0, 0, 5, 0, 0],
+       [0, 0, 0, 7, 0],
+       [0, 0, 0, 0, 9]])
+</code></pre>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>w<span style="color:#f92672">.</span>shape
+</span></span></code></pre></div><pre><code>(5, 5)
+</code></pre>
+<p>Diagonal elements in a rectangular matrix.</p>
+<p><div>
+$
+\boldsymbol{G} =
+\begin{pmatrix}
+    2 & 0 & 0 & 0 & 0 & 0 \\
+    0 & 3 & 0 & 0 & 0 & 0 \\
+    0 & 0 & 5 & 0 & 0 & 0 \\
+    0 & 0 & 0 & 7 & 0 & 0 \\
+    0 & 0 & 0 & 0 & 9 & 0 \\
+\end{pmatrix}
+= \mathbb{R}^{5\times6}
+$
+</div></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># Create the rectangular diagonal matrix G</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># by appending a column vector of zeros</span>
+</span></span><span style="display:flex;"><span>cz <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>full((w<span style="color:#f92672">.</span>shape[<span style="color:#ae81ff">0</span>],<span style="color:#ae81ff">1</span>), <span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># by appending a column by axis=1</span>
+</span></span><span style="display:flex;"><span>g <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>append(w, cz, axis<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>g
+</span></span></code></pre></div><pre><code>array([[2, 0, 0, 0, 0, 0],
+       [0, 3, 0, 0, 0, 0],
+       [0, 0, 5, 0, 0, 0],
+       [0, 0, 0, 7, 0, 0],
+       [0, 0, 0, 0, 9, 0]])
+</code></pre>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>g<span style="color:#f92672">.</span>shape
+</span></span></code></pre></div><pre><code>(5, 6)
+</code></pre>
+<h3 id="identity-matricies">Identity Matricies</h3>
+<p><a href="https://www.web-formulas.com/Math_Formulas/Linear_Algebra_Definition_of_Identity_Matrix.aspx">Identity</a> matricies are square (${m} = {n}$) and contain ones across the diagonal with zeros elsewhere. <a href="https://www.web-formulas.com/Math_Formulas/Linear_Algebra_Definition_of_Identity_Matrix.aspx">Identity</a> matricies are noted with the symbol $\boldsymbol{I}$</p>
+<p><div>
+$
+\boldsymbol{I} =
+\begin{pmatrix}
+    1 & 0 & 0 \\
+    0 & \ddots & 0 \\
+    0 & 0 & 1 \\
+\end{pmatrix}
+$
+</div></p>
+<p>$\forall i,j \in {1, 2, \ldots, n}, i \ne j \implies w_{i,j} = 0$</p>
+<p>$\forall i,j \in {1, 2, \ldots, n}, i = j \implies w_{i,j} = 1$</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>eye <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>eye(<span style="color:#ae81ff">5</span>)
+</span></span><span style="display:flex;"><span>eye
+</span></span></code></pre></div><pre><code>array([[ 1.,  0.,  0.,  0.,  0.],
+       [ 0.,  1.,  0.,  0.,  0.],
+       [ 0.,  0.,  1.,  0.,  0.],
+       [ 0.,  0.,  0.,  1.,  0.],
+       [ 0.,  0.,  0.,  0.,  1.]])
+</code></pre>
+<p>It is common to see a constant value next to the identity matrix symbol $\boldsymbol{I}$ such as $5\boldsymbol{I}$.</p>
+<p><div>
+$
+5\boldsymbol{I} =
+\begin{pmatrix}
+    5 & 0 & 0 \\
+    0 & \ddots & 0 \\
+    0 & 0 & 5 \\
+\end{pmatrix}
+$
+</div></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#ae81ff">5</span> <span style="color:#f92672">*</span> eye
+</span></span></code></pre></div><pre><code>array([[ 5.,  0.,  0.,  0.,  0.],
+       [ 0.,  5.,  0.,  0.,  0.],
+       [ 0.,  0.,  5.,  0.,  0.],
+       [ 0.,  0.,  0.,  5.,  0.],
+       [ 0.,  0.,  0.,  0.,  5.]])
+</code></pre>
+<h3 id="triangular-matricies">Triangular Matricies</h3>
+<p><a href="https://en.wikipedia.org/wiki/Triangular_matrix">Triangular</a> matrices are categorized as upper or lower with zeros above or below the diagonal.</p>
+<p>Upper triangular matrix:</p>
+<p><div>
+$
+\boldsymbol{U} =
+\begin{pmatrix}
+    1 & 2 & 3 \\
+    0 & 5 & 6 \\
+    0 & 0 & 9 \\
+\end{pmatrix}
+$
+</div></p>
+<p>Lower triangular matrix:</p>
+<p><div>
+$
+\boldsymbol{L} =
+\begin{pmatrix}
+    1 & 0 & 0 \\
+    4 & 5 & 0 \\
+    7 & 8 & 9 \\
+\end{pmatrix}
+$
+</div></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># create an array of numbers, 1...9</span>
+</span></span><span style="display:flex;"><span>nums <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>arange(<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">10</span>)
+</span></span><span style="display:flex;"><span>nums
+</span></span></code></pre></div><pre><code>array([1, 2, 3, 4, 5, 6, 7, 8, 9])
+</code></pre>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># reshape the array into a 3x3 matrix</span>
+</span></span><span style="display:flex;"><span>mx <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>reshape(nums, (<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">3</span>))
+</span></span><span style="display:flex;"><span>mx
+</span></span></code></pre></div><pre><code>array([[1, 2, 3],
+       [4, 5, 6],
+       [7, 8, 9]])
+</code></pre>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># create an upper triangular matrix</span>
+</span></span><span style="display:flex;"><span>u <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>triu(mx)
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;matrix U:</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">{</span>u<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;</span>)
+</span></span></code></pre></div><pre><code>matrix U:
+[[1 2 3]
+ [0 5 6]
+ [0 0 9]]
+</code></pre>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># create a lower triangular matrix</span>
+</span></span><span style="display:flex;"><span>l <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>tril(mx)
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;matrix L:</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">{</span>l<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;</span>)
+</span></span></code></pre></div><pre><code>matrix L:
+[[1 0 0]
+ [4 5 0]
+ [7 8 9]]
+</code></pre>
+<h3 id="transposed-matrix">Transposed Matrix</h3>
+<p>Transposing flips a matrix over its diagonal. A transposed matrix may be noted as $\boldsymbol{I}^T$ or $\boldsymbol{I}&rsquo;$. Transposing is easy to see when using one of the triangular matrices above.</p>
+<p>Lower triangular matrix:</p>
+<p><div>
+$
+\boldsymbol{L} =
+\begin{pmatrix}
+    1 & 0 & 0 \\
+    4 & 5 & 0 \\
+    7 & 8 & 9 \\
+\end{pmatrix}
+$
+</div></p>
+<p>Transposed:</p>
+<p><div>
+$
+\boldsymbol{L}^T =
+\begin{pmatrix}
+    1 & 4 & 7 \\
+    0 & 5 & 8 \\
+    0 & 0 & 9 \\
+\end{pmatrix}
+$
+</div></p>
+<p>Every i-th row, j-th column have been transposed:</p>
+<p>$\boldsymbol{L}^T_{i j} = \boldsymbol{L}_{j i}$</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;matrix L:</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">{</span>l<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;</span>)
+</span></span></code></pre></div><pre><code>matrix L:
+[[1 0 0]
+ [4 5 0]
+ [7 8 9]]
+</code></pre>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># note: zero based index</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># i (row 3) and j (colum 1) </span>
+</span></span><span style="display:flex;"><span>l[<span style="color:#ae81ff">2</span>][<span style="color:#ae81ff">0</span>]
+</span></span></code></pre></div><pre><code>7
+</code></pre>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># transpose L (also. np.transpose(l))</span>
+</span></span><span style="display:flex;"><span>l<span style="color:#f92672">.</span>T
+</span></span></code></pre></div><pre><code>array([[1, 4, 7],
+       [0, 5, 8],
+       [0, 0, 9]])
+</code></pre>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># i (row 1) and j (colum 3) </span>
+</span></span><span style="display:flex;"><span>l<span style="color:#f92672">.</span>T[<span style="color:#ae81ff">0</span>][<span style="color:#ae81ff">2</span>]
+</span></span></code></pre></div><pre><code>7
+</code></pre>
+<h3 id="symmetric--skew-symetric-matricies">Symmetric &amp; Skew-symetric Matricies</h3>
+<p><a href="https://byjus.com/maths/what-is-symmetric-matrix-and-skew-symmetric-matrix/">Symmetric &amp; Skew-symetric</a> matricies have values that correlate to the transposed position above and below the diagonal. A symmetrical matrix can be expressed as $\boldsymbol{V}^T = \boldsymbol{V}$. A skew-symetric matrix can be expressed as $\boldsymbol{W}^T = -\boldsymbol{W}$.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># Using the upper triangle matrix from above </span>
+</span></span><span style="display:flex;"><span>u
+</span></span></code></pre></div><pre><code>array([[1, 2, 3],
+       [0, 5, 6],
+       [0, 0, 9]])
+</code></pre>
+<p>$\boldsymbol{S} = \boldsymbol{U} + \boldsymbol{U}^T$</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># Add the upper triangle matrix to a transposed</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># version of itself. We are not concerned with the diagonal.</span>
+</span></span><span style="display:flex;"><span>s <span style="color:#f92672">=</span> u <span style="color:#f92672">+</span> u<span style="color:#f92672">.</span>T
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;matrix S:</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">{</span>s<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;</span>)
+</span></span></code></pre></div><pre><code>matrix S:
+[[ 2  2  3]
+ [ 2 10  6]
+ [ 3  6 18]]
+</code></pre>
+<p>Check the matrix $\boldsymbol{S}$ for symmetry. Does $\boldsymbol{S}^T = \boldsymbol{S}$ ?</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># is the s matrix is symmetric</span>
+</span></span><span style="display:flex;"><span>np<span style="color:#f92672">.</span>array_equal(s, s<span style="color:#f92672">.</span>T)
+</span></span></code></pre></div><pre><code>True
+</code></pre>
+<p>Another method for creating a symmetric matrix involves multiplying a matrix by its transpose.</p>
+<p><div>$\boldsymbol{G} =
+\begin{pmatrix}
+    1 & 2 & 3 \\
+    4 & 5 & 6 \\
+    7 & 8 & 9 \\
+\end{pmatrix}
+$</div></p>
+<p><div>$\boldsymbol{G}\boldsymbol{G}^T = \underbrace{
+\begin{pmatrix}
+    14 & \boldsymbol{32} & \boldsymbol{50} \\
+    \boldsymbol{32} & 77 & \boldsymbol{122} \\
+    \boldsymbol{50} & \boldsymbol{122} & 194 \\
+\end{pmatrix}}_{symmetric}
+$</div></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>G <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>arange(<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">10</span>)<span style="color:#f92672">.</span>reshape(<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">3</span>)
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>G <span style="color:#f92672">@</span> G<span style="color:#f92672">.</span>T
+</span></span></code></pre></div><pre><code>array([[ 14,  32,  50],
+       [ 32,  77, 122],
+       [ 50, 122, 194]])
+</code></pre>
+<p>Next, create a skew-symmetric matrix by using the same upper triangle matrix, and creating a transposed <a href="https://study.com/academy/lesson/additive-inverse-property-definition-examples.html">additive inverse</a> of it, then add the two matrices together.</p>
+<p>$\boldsymbol{V} = -\boldsymbol{U} + \boldsymbol{U}^T$</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>v <span style="color:#f92672">=</span> (u <span style="color:#f92672">*</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>) <span style="color:#f92672">+</span> u<span style="color:#f92672">.</span>T
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;matrix V:</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">{</span>v<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;</span>)
+</span></span></code></pre></div><pre><code>matrix V:
+[[ 0 -2 -3]
+ [ 2  0 -6]
+ [ 3  6  0]]
+</code></pre>
+<p>Check for skew-symmertic $\boldsymbol{V}^T = -\boldsymbol{V}$</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># is the s matrix skew-symmetric?</span>
+</span></span><span style="display:flex;"><span>np<span style="color:#f92672">.</span>array_equal(v<span style="color:#f92672">.</span>T, (v <span style="color:#f92672">*</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>))
+</span></span></code></pre></div><pre><code>True
+</code></pre>
+<h3 id="augmented-matricies">Augmented Matricies</h3>
+<p><a href="http://tutorial.math.lamar.edu/Classes/Alg/AugmentedMatrix.aspx">Augmented</a> matrices often used for solving a system of equations, they are the concatenation of two matrices with the <strong>same number of rows (${m} = {m}$)</strong>.</p>
+<p><div>
+$
+\boldsymbol{A} =
+\begin{pmatrix}
+    1 & 0 & 0 \\
+    4 & 5 & 0 \\
+    7 & 8 & 9 \\
+\end{pmatrix}
+\sqcup
+\begin{pmatrix}
+    1 & 4 & 7 \\
+    0 & 5 & 8 \\
+    0 & 0 & 9 \\
+\end{pmatrix}
+=
+\left(
+\begin{array}{ccc|ccc}
+    1 & 0 & 0 & 1 & 4 & 7 \\
+    4 & 5 & 0 & 0 & 5 & 8 \\
+    7 & 8 & 9 & 0 & 0 & 9 \\
+\end{array}
+\right)
+$
+</div></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;matrix L:</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">{</span>l<span style="color:#e6db74">}</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#39;</span>)
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;matrix U:</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">{</span>u<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;</span>)
+</span></span></code></pre></div><pre><code>matrix L:
+[[1 0 0]
+ [4 5 0]
+ [7 8 9]]
+
+matrix U:
+[[1 2 3]
+ [0 5 6]
+ [0 0 9]]
+</code></pre>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>a <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>append(l, u, axis<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;Augmented matrix A:</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">{</span>a<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;</span>)
+</span></span></code></pre></div><pre><code>Augmented matrix A:
+[[1 0 0 1 2 3]
+ [4 5 0 0 5 6]
+ [7 8 9 0 0 9]]
+</code></pre>
+<h3 id="complex-matricies">Complex Matricies</h3>
+<p><a href="http://mathworld.wolfram.com/ComplexMatrix.html">Complex</a> matricies, often noted as $\mathbb{C}$, contain <a href="http://mathworld.wolfram.com/ComplexNumber.html">complex numbers</a>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># create a zero matrix of the data type np.complex</span>
+</span></span><span style="display:flex;"><span>p <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>zeros((<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">3</span>), dtype<span style="color:#f92672">=</span>np<span style="color:#f92672">.</span>complex)
+</span></span><span style="display:flex;"><span>p[<span style="color:#ae81ff">0</span>][<span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">7</span>j
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;Complex matrix P:</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">{</span>p<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;</span>)
+</span></span></code></pre></div><pre><code>Complex matrix P:
+[[ 0.+0.j  2.+7.j  0.+0.j]
+ [ 0.+0.j  0.+0.j  0.+0.j]
+ [ 0.+0.j  0.+0.j  0.+0.j]]
+</code></pre>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>p[<span style="color:#ae81ff">0</span>][<span style="color:#ae81ff">0</span>]
+</span></span></code></pre></div><pre><code>0j
+</code></pre>
+<h2 id="matrix-addition">Matrix Addition</h2>
+<p>Matrix addition and subtraction works only with matrices of equal size (<strong>m</strong> by <strong>n</strong>). The entrywise sum is calculated by adding each value ${ij}$ of one matrix to the corresponding ${ij}$ of the other. Matrix addition is commutative and associative, for instance, the following are valid:</p>
+<p><div>
+$
+\boldsymbol{G} =
+\begin{pmatrix}
+    1 & 2 \\
+    3 & 4 \\
+\end{pmatrix}
+,
+ \boldsymbol{H} =
+\begin{pmatrix}
+    2 & 3 \\
+    3 & 3 \\
+\end{pmatrix}
+,
+ \boldsymbol{F} =
+\begin{pmatrix}
+    5 & 4 \\
+    3 & -1 \\
+\end{pmatrix}
+$
+</div></p>
+<p><div>
+$\boldsymbol{G} + \boldsymbol{H} = \boldsymbol{H} + \boldsymbol{G} =
+\begin{pmatrix}
+    3 & 5 \\
+    6 & 7 \\
+\end{pmatrix}
+$</div></p>
+<p><div>
+$\boldsymbol{G} + (\boldsymbol{H} + \boldsymbol{F}) = (\boldsymbol{G} + \boldsymbol{H}) + \boldsymbol{F} =
+\begin{pmatrix}
+    8 & 9 \\
+    9 & 6 \\
+\end{pmatrix}
+$</div></p>
+<p>There are other types of <a href="https://en.wikipedia.org/wiki/Matrix_addition">matrix addition opperations</a> including Direct Sum and Kronecker sum.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># construct a 2x2 matrix by reshaping a 1x4 array</span>
+</span></span><span style="display:flex;"><span>g <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array([<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">4</span>])<span style="color:#f92672">.</span>reshape(<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">2</span>)
+</span></span><span style="display:flex;"><span>g
+</span></span></code></pre></div><pre><code>array([[1, 2],
+       [3, 4]])
+</code></pre>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>h <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array([<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">3</span>])<span style="color:#f92672">.</span>reshape(<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">2</span>)
+</span></span><span style="display:flex;"><span>h
+</span></span></code></pre></div><pre><code>array([[2, 3],
+       [3, 3]])
+</code></pre>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>f <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array([<span style="color:#ae81ff">5</span>,<span style="color:#ae81ff">4</span>,<span style="color:#ae81ff">3</span>,<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>])<span style="color:#f92672">.</span>reshape(<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">2</span>)
+</span></span><span style="display:flex;"><span>f
+</span></span></code></pre></div><pre><code>array([[ 5,  4],
+       [ 3, -1]])
+</code></pre>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>g <span style="color:#f92672">+</span> h <span style="color:#f92672">==</span> h <span style="color:#f92672">+</span> g
+</span></span></code></pre></div><pre><code>array([[ True,  True],
+       [ True,  True]], dtype=bool)
+</code></pre>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (g <span style="color:#f92672">+</span> h <span style="color:#f92672">==</span> h <span style="color:#f92672">+</span> g)<span style="color:#f92672">.</span>all:
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">&#34;equasions are commutative&#34;</span>)
+</span></span></code></pre></div><pre><code>equations are commutative
+</code></pre>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (g <span style="color:#f92672">+</span> ( h <span style="color:#f92672">+</span> f ) <span style="color:#f92672">==</span> (g <span style="color:#f92672">+</span> h) <span style="color:#f92672">+</span> f)<span style="color:#f92672">.</span>all:
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">&#34;equasions are associative&#34;</span>)
+</span></span></code></pre></div><pre><code>equations are associative
+</code></pre>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>g <span style="color:#f92672">-</span> h <span style="color:#f92672">==</span> h <span style="color:#f92672">-</span> g
+</span></span></code></pre></div><pre><code>array([[False, False],
+       [ True, False]], dtype=bool)
+</code></pre>
+<h2 id="matrix-scalar-multiplication">Matrix Scalar Multiplication</h2>
+<p>Multiplying a scalar by a matrix multiplies each ${ij}$ element by the scalar.</p>
+<p><div>
+$\theta
+\begin{pmatrix}
+    {a} & {b}\\
+    {c} & {d} \\
+\end{pmatrix} =
+\begin{pmatrix}
+    \theta{a} & \theta{b}\\
+    \theta{c} & \theta{d} \\
+\end{pmatrix}
+$
+</div></p>
+<p>Scalar multiplication is commutative.</p>
+<p>$\boldsymbol{G}\theta = \theta\boldsymbol{G}$</p>
+<p><div>
+$
+\begin{pmatrix}
+    \theta{a} & \theta{b}\\
+    \theta{c} & \theta{d} \\
+\end{pmatrix}
+ =
+\begin{pmatrix}
+    {a} & {b}\\
+    {c} & {d} \\
+\end{pmatrix}
+\theta
+$
+</div></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>theta <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span>
+</span></span><span style="display:flex;"><span>g <span style="color:#f92672">*</span> theta
+</span></span></code></pre></div><pre><code>array([[ 5, 10],
+       [15, 20]])
+</code></pre>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>theta <span style="color:#f92672">*</span> g
+</span></span></code></pre></div><pre><code>array([[ 5, 10],
+       [15, 20]])
+</code></pre>
+<h2 id="trace">Trace</h2>
+<p>The trace of a matrix is the sum of the diagonal of a square ${n}$ x ${n}$ matrix, $\sum_{i=1}^n{a}_{ii}$.</p>
+<p><div>
+$\mathrm{tr}\left(\boldsymbol{A}\right) = \sum_{i=1}^n
+\begin{pmatrix}
+    \boldsymbol{1} & 2 & 3 \\
+    4 & \boldsymbol{5} & 6 \\
+    7 & 8 & \boldsymbol{9} \\
+\end{pmatrix}_{ii} = 15
+$
+</div></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>a <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array([<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">4</span>,<span style="color:#ae81ff">5</span>,<span style="color:#ae81ff">6</span>,<span style="color:#ae81ff">7</span>,<span style="color:#ae81ff">8</span>,<span style="color:#ae81ff">9</span>])<span style="color:#f92672">.</span>reshape(<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">3</span>)
+</span></span><span style="display:flex;"><span>a
+</span></span></code></pre></div><pre><code>array([[1, 2, 3],
+       [4, 5, 6],
+       [7, 8, 9]])
+</code></pre>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># use Numpy trace function</span>
+</span></span><span style="display:flex;"><span>np<span style="color:#f92672">.</span>trace(a)
+</span></span></code></pre></div><pre><code>15
+</code></pre>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># extract and diagonal and sum</span>
+</span></span><span style="display:flex;"><span>np<span style="color:#f92672">.</span>diag(a)<span style="color:#f92672">.</span>sum()
+</span></span></code></pre></div><pre><code>15
+</code></pre>
+<h2 id="matrix-multiplication">Matrix Multiplication</h2>
+<p>Matrix multiplication is <a href="https://www.mathwarehouse.com/dictionary/A-words/definition-of-associative-property.php">associative</a> and generaly non-<a href="https://demonstrations.wolfram.com/TheCommutativePropertyOfMultiplication/">commutative</a>.</p>
+<h3 id="standard-matrix-multiplication">Standard Matrix Multiplication</h3>
+<p>Left multiplies right, for example $\boldsymbol{T}\boldsymbol{U}$, $\boldsymbol{T}$ multiplies $\boldsymbol{U}$. Valid standard matrix multiplication requires the inner dimensions be the same, for instance, the number of columns (${n}$) in the left matrix must match the number of rows (${m}$) in the left matrix.</p>
+<p><div>
+$\boldsymbol{T} =
+\begin{pmatrix}
+    1 & 2 & 3 \\
+    4 & 5 & 6 \\
+    7 & 8 & 9 \\
+    10 & 11 & 12 \\
+\end{pmatrix} = \mathbb{R}^{4\times\boldsymbol{3}} $
+</div></p>
+<p><div>
+$\boldsymbol{U} =
+\begin{pmatrix}
+    -2 & 4 \\
+    -6 & 8 \\
+    -10 & 12 \\
+\end{pmatrix} = \mathbb{R}^{\boldsymbol{3}\times{2}} $
+</div></p>
+<p>$\boldsymbol{T}_{n} = \boldsymbol{U}_{m}$</p>
+<p>The product matrix produced when multiplying ${\boldsymbol{T}}^{\boldsymbol{4}x3}$ ${\boldsymbol{U}^{3x\boldsymbol{2}}}$ will have the size $m = {4}$ , n = ${2}$</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># create a range from 1 to 12 and reshape it into</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># a 4x3 matrix</span>
+</span></span><span style="display:flex;"><span>t <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>arange(<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">13</span>)<span style="color:#f92672">.</span>reshape(<span style="color:#ae81ff">4</span>,<span style="color:#ae81ff">3</span>)
+</span></span><span style="display:flex;"><span>t
+</span></span></code></pre></div><pre><code>array([[ 1,  2,  3],
+       [ 4,  5,  6],
+       [ 7,  8,  9],
+       [10, 11, 12]])
+</code></pre>
+<p>Next, we can construct the $\boldsymbol{U}$ matrix by using a <a href="https://www.programiz.com/python-programming/list-comprehension">list compreshesion</a> in Python.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># create a range in steps of 2 from 2 to 12</span>
+</span></span><span style="display:flex;"><span>u <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>arange(<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">14</span>,<span style="color:#ae81ff">2</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># use a list comprehension to convert every other</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># index in the array to a nagative</span>
+</span></span><span style="display:flex;"><span>u <span style="color:#f92672">=</span> [ i <span style="color:#66d9ef">if</span> idx <span style="color:#f92672">%</span> <span style="color:#ae81ff">2</span> <span style="color:#66d9ef">else</span> i <span style="color:#f92672">*</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span> <span style="color:#66d9ef">for</span> idx, i <span style="color:#f92672">in</span> enumerate(u)]
+</span></span><span style="display:flex;"><span>u <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array(u)<span style="color:#f92672">.</span>reshape(<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">2</span>)
+</span></span><span style="display:flex;"><span>u
+</span></span></code></pre></div><pre><code>array([[ -2,   4],
+       [ -6,   8],
+       [-10,  12]])
+</code></pre>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>t<span style="color:#f92672">.</span>shape
+</span></span></code></pre></div><pre><code>(4, 3)
+</code></pre>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>u<span style="color:#f92672">.</span>shape
+</span></span></code></pre></div><pre><code>(3, 2)
+</code></pre>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>d <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>matmul(t,u)
+</span></span><span style="display:flex;"><span>d
+</span></span></code></pre></div><pre><code>array([[ -44,   56],
+       [ -98,  128],
+       [-152,  200],
+       [-206,  272]])
+</code></pre>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># alternative</span>
+</span></span><span style="display:flex;"><span>t <span style="color:#f92672">@</span> u
+</span></span></code></pre></div><pre><code>array([[ -44,   56],
+       [ -98,  128],
+       [-152,  200],
+       [-206,  272]])
+</code></pre>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>d<span style="color:#f92672">.</span>shape
+</span></span></code></pre></div><pre><code>(4, 2)
+</code></pre>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># The @ operator calls the array&#39;s __matmul__ method</span>
+</span></span><span style="display:flex;"><span>t <span style="color:#f92672">@</span> u
+</span></span></code></pre></div><pre><code>array([[ -44,   56],
+       [ -98,  128],
+       [-152,  200],
+       [-206,  272]])
+</code></pre>
+<h3 id="vector-dot-product">Vector Dot Product</h3>
+<p><a href="https://www.khanacademy.org/math/linear-algebra/vectors-and-spaces/null-column-space/v/matrix-vector-products">Matrix vector products</a> will always be a row or column vector.</p>
+<p><div>
+$
+\begin{pmatrix}
+    a_{11} & a_{12} & a_{13} \\
+    a_{21} & a_{22} & a_{23} \\
+    a_{31} & a_{32} & a_{33} \\
+    a_{41} & a_{42} & a_{43} \\
+\end{pmatrix}
+\begin{bmatrix}
+    x_1 \\
+    x_2 \\
+    x_3 \\
+\end{bmatrix} =
+\begin{bmatrix}
+    a_{11}x_1 + a_{12}x_2 + a_{13}x_3 \\
+    a_{21}x_1 + a_{22}x_2 + a_{23}x_3 \\
+    a_{31}x_1 + a_{32}x_2 + a_{33}x_3 \\
+    a_{41}x_1 + a_{42}x_2 + a_{43}x_3 \\
+\end{bmatrix} =
+\begin{bmatrix}
+    b_1 \\
+    b_2 \\
+    b_3 \\
+    b_4 \\
+\end{bmatrix}
+$
+</div></p>
+<p><div>
+$
+\underbrace{
+\begin{pmatrix}
+    2 & 4 & 6 \\
+    8 & 10 & 12 \\
+    14 & 16 & 18 \\
+    20 & 22 & 24 \\
+\end{pmatrix}}_{\boldsymbol{A}}
+\underbrace{
+\begin{bmatrix}
+    1.5 \\
+    1 \\
+    .5 \\
+\end{bmatrix}
+}_{\vec{x}}
+= \underbrace{
+\begin{bmatrix}
+    10 \\
+    28 \\
+    46 \\
+    64 \\
+\end{bmatrix}
+}_{\boldsymbol{A}\vec{x}}
+$
+</div></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>a <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>matrix(np<span style="color:#f92672">.</span>arange(<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">26</span>,<span style="color:#ae81ff">2</span>)<span style="color:#f92672">.</span>reshape(<span style="color:#ae81ff">4</span>,<span style="color:#ae81ff">3</span>))
+</span></span><span style="display:flex;"><span>a
+</span></span></code></pre></div><pre><code>matrix([[ 2,  4,  6],
+        [ 8, 10, 12],
+        [14, 16, 18],
+        [20, 22, 24]])
+</code></pre>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>x <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>matrix(np<span style="color:#f92672">.</span>flip(np<span style="color:#f92672">.</span>arange(<span style="color:#ae81ff">.5</span>,<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">.5</span>), axis<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>))<span style="color:#f92672">.</span>T
+</span></span><span style="display:flex;"><span>x
+</span></span></code></pre></div><pre><code>matrix([[ 1.5],
+        [ 1. ],
+        [ 0.5]])
+</code></pre>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># vector dot product</span>
+</span></span><span style="display:flex;"><span>b <span style="color:#f92672">=</span> a <span style="color:#f92672">@</span> x
+</span></span><span style="display:flex;"><span>b
+</span></span></code></pre></div><pre><code>matrix([[ 10.],
+        [ 28.],
+        [ 46.],
+        [ 64.]])
+</code></pre>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>d <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>matrix(np<span style="color:#f92672">.</span>arange(<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">6</span>)<span style="color:#f92672">.</span>reshape(<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">5</span>))
+</span></span><span style="display:flex;"><span>d
+</span></span></code></pre></div><pre><code>matrix([[1, 2, 3, 4, 5]])
+</code></pre>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>w <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>matrix(np<span style="color:#f92672">.</span>arange(<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">6</span>)<span style="color:#f92672">.</span>reshape(<span style="color:#ae81ff">5</span>,<span style="color:#ae81ff">1</span>))
+</span></span><span style="display:flex;"><span>w
+</span></span></code></pre></div><pre><code>matrix([[1],
+        [2],
+        [3],
+        [4],
+        [5]])
+</code></pre>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>d <span style="color:#f92672">@</span> w
+</span></span></code></pre></div><pre><code>matrix([[55]])
+</code></pre>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>w <span style="color:#f92672">@</span> d
+</span></span></code></pre></div><pre><code>matrix([[ 1,  2,  3,  4,  5],
+        [ 2,  4,  6,  8, 10],
+        [ 3,  6,  9, 12, 15],
+        [ 4,  8, 12, 16, 20],
+        [ 5, 10, 15, 20, 25]])
+</code></pre>
+<h3 id="matrix-vector-multiplication">Matrix-Vector Multiplication</h3>
+<p>The result of multiplying a vector by a matrix or a matrix by a vector will always be a vector.</p>
+<p><div>
+$
+\begin{pmatrix}
+    a & b & c \\
+    d & e & f \\
+    g & h & i \\
+\end{pmatrix}
+\vec{
+\begin{bmatrix}
+    2 \\
+    3 \\
+    4 \\
+\end{bmatrix}}
+=
+\vec{
+\begin{bmatrix}
+    2a+3b+4c \\
+    2d+3e+4f \\
+    2g+3h+4i \\
+\end{bmatrix}
+}
+$
+</div></p>
+<p><div>
+$
+\vec{
+\begin{bmatrix}
+    2 & 3 & 4 \\
+\end{bmatrix}
+}
+\begin{pmatrix}
+    a & b & c \\
+    d & e & f \\
+    g & h & i \\
+\end{pmatrix}
+=
+\vec{
+\begin{bmatrix}
+    2a+3d+4g \\
+    2b+3e+4h \\
+    2c+3f+4i \\
+\end{bmatrix}
+}
+$
+</div></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># construct a column vector with numpy using octave / matlab style </span>
+</span></span><span style="display:flex;"><span>v <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>matrix(<span style="color:#e6db74">&#39;2; 3; 4&#39;</span>)
+</span></span><span style="display:flex;"><span>v
+</span></span></code></pre></div><pre><code>matrix([[2],
+        [3],
+        [4]])
+</code></pre>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>a <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>arange(<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">10</span>)<span style="color:#f92672">.</span>reshape(<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">3</span>)
+</span></span><span style="display:flex;"><span>a
+</span></span></code></pre></div><pre><code>array([[1, 2, 3],
+       [4, 5, 6],
+       [7, 8, 9]])
+</code></pre>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>a <span style="color:#f92672">*</span> v
+</span></span></code></pre></div><pre><code>matrix([[20],
+        [47],
+        [74]])
+</code></pre>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># transpose column vector v into a row vector</span>
+</span></span><span style="display:flex;"><span>v<span style="color:#f92672">.</span>T <span style="color:#f92672">*</span> a
+</span></span></code></pre></div><pre><code>matrix([[42, 51, 60]])
+</code></pre>
+<h3 id="geometric-vector-transformation">Geometric Vector Transformation</h3>
+<p>The following examples demonstrate 2d and 3d transformations.</p>
+<h4 id="2d-transformation">2d Transformation</h4>
+<p>Transforming a 2d vector with a 2x2 matrix:</p>
+<p><div>$
+\begin{pmatrix}
+    1 & -2 \\
+    3 & -1.5 \\
+\end{pmatrix}
+\vec{\begin{bmatrix}
+    3 \\
+    4 \\
+\end{bmatrix}}
+=
+\vec{\begin{bmatrix}
+    (3\times{1})+(4\times{-2})  \\
+    (3\times{3})+(4\times{-1.5})\\
+\end{bmatrix}}
+=
+\vec{\begin{bmatrix}
+    -5\\
+    3\\
+\end{bmatrix}}
+$</div></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>(<span style="color:#ae81ff">3</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">+</span> (<span style="color:#ae81ff">4</span> <span style="color:#f92672">*</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">2</span>)
+</span></span></code></pre></div><pre><code>-5
+</code></pre>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># a vector at position 3, 4</span>
+</span></span><span style="display:flex;"><span>v <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>matrix(<span style="color:#e6db74">&#39;3 ;4&#39;</span>)
+</span></span><span style="display:flex;"><span>v
+</span></span></code></pre></div><pre><code>matrix([[3],
+        [4]])
+</code></pre>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># plot the vector v in &#34;standard position&#34;</span>
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>plot([<span style="color:#ae81ff">0</span>,v[<span style="color:#ae81ff">0</span>]],[<span style="color:#ae81ff">0</span>,v[<span style="color:#ae81ff">1</span>]])
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># create a dashed line in the x axis</span>
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>plot([<span style="color:#f92672">-</span><span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">10</span>],[<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>],<span style="color:#e6db74">&#39;k--&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># create a dashed line in the y axis</span>
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>plot([<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>],[<span style="color:#f92672">-</span><span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">10</span>],<span style="color:#e6db74">&#39;k--&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># add some grid lines</span>
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>grid()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># fit the axis</span>
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>axis((<span style="color:#f92672">-</span><span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">10</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">10</span>))
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>show()
+</span></span></code></pre></div><p><img src="../images/content/matrix1/output_97_0.png" alt="png"></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># create a matrix to be used in transforming the vector v</span>
+</span></span><span style="display:flex;"><span>a <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>matrix(<span style="color:#e6db74">&#39;1 -2; 3 -1.5&#39;</span>)
+</span></span><span style="display:flex;"><span>c <span style="color:#f92672">=</span> a <span style="color:#f92672">@</span> v
+</span></span><span style="display:flex;"><span>c
+</span></span></code></pre></div><pre><code>matrix([[-5.],
+        [ 3.]])
+</code></pre>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># plot the vectors c and c in &#34;standard position&#34;</span>
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>plot([<span style="color:#ae81ff">0</span>,v[<span style="color:#ae81ff">0</span>]],[<span style="color:#ae81ff">0</span>,v[<span style="color:#ae81ff">1</span>]])
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>plot([<span style="color:#ae81ff">0</span>,c[<span style="color:#ae81ff">0</span>]],[<span style="color:#ae81ff">0</span>,c[<span style="color:#ae81ff">1</span>]])
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># create a dashed lines</span>
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>plot([<span style="color:#f92672">-</span><span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">10</span>],[<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>],<span style="color:#e6db74">&#39;k--&#39;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>plot([<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>],[<span style="color:#f92672">-</span><span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">10</span>],<span style="color:#e6db74">&#39;k--&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># add some grid lines</span>
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>grid()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># fit the axis</span>
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>axis((<span style="color:#f92672">-</span><span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">10</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">10</span>))
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>show()
+</span></span></code></pre></div><p><img src="../images/content/matrix1/output_99_0.png" alt="png"></p>
+<h4 id="3d-transformation">3d Transformation</h4>
+<p>Next, transform a 3d vector with a 3x3 matrix:</p>
+<p><div>$
+\begin{pmatrix}
+    1 & -4   & .5 \\
+    3 & -1.5 & 1.25 \\
+   -1 & .5   & -.5 \\
+\end{pmatrix}
+\vec{\begin{bmatrix}
+    3 \\
+    4 \\
+    5 \\
+\end{bmatrix}}
+=
+\vec{\begin{bmatrix}
+    (3\times{1})+(4\times{-2})+(5\times{.5}) \\
+    (3\times{3})+(4\times{-1.5})+(5\times{1.25}) \\
+    (3\times{-1})+(4\times{.5})+(5\times{-.5}) \\
+\end{bmatrix}}
+=
+\vec{\begin{bmatrix}
+    -10.5\\
+    9.25\\
+    -3.5
+\end{bmatrix}}
+$</div></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># a vector at position 3, 4, 5</span>
+</span></span><span style="display:flex;"><span>v <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>matrix(<span style="color:#e6db74">&#39;3 ;4; 5&#39;</span>)
+</span></span><span style="display:flex;"><span>v
+</span></span></code></pre></div><pre><code>matrix([[3],
+        [4],
+        [5]])
+</code></pre>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># plotting the 3-dimensional vector from the</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># standard position 0,0,0</span>
+</span></span><span style="display:flex;"><span>fig <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>figure()
+</span></span><span style="display:flex;"><span>ax <span style="color:#f92672">=</span> fig<span style="color:#f92672">.</span>gca(projection<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;3d&#39;</span>)
+</span></span><span style="display:flex;"><span>ax<span style="color:#f92672">.</span>plot([<span style="color:#ae81ff">0</span>, v[<span style="color:#ae81ff">0</span>]],[<span style="color:#ae81ff">0</span>, v[<span style="color:#ae81ff">1</span>]],[<span style="color:#ae81ff">0</span>, v[<span style="color:#ae81ff">2</span>]])
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># add some dashed lines across the x, y and z axis</span>
+</span></span><span style="display:flex;"><span>ax<span style="color:#f92672">.</span>plot([<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>],[<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>],[<span style="color:#f92672">-</span><span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">10</span>],<span style="color:#e6db74">&#39;k--&#39;</span>)
+</span></span><span style="display:flex;"><span>ax<span style="color:#f92672">.</span>plot([<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>],[<span style="color:#f92672">-</span><span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">10</span>],[<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>],<span style="color:#e6db74">&#39;k--&#39;</span>)
+</span></span><span style="display:flex;"><span>ax<span style="color:#f92672">.</span>plot([<span style="color:#f92672">-</span><span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">10</span>],[<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>],[<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>],<span style="color:#e6db74">&#39;k--&#39;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>show()
+</span></span></code></pre></div><p><img src="../images/content/matrix1/output_102_0.png" alt="png"></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>b <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>matrix(<span style="color:#e6db74">&#39;1 -4 .5; 3 -1.5 1.25; -1 .5 -.5&#39;</span>)
+</span></span><span style="display:flex;"><span>b
+</span></span></code></pre></div><pre><code>matrix([[ 1.  , -4.  ,  0.5 ],
+        [ 3.  , -1.5 ,  1.25],
+        [-1.  ,  0.5 , -0.5 ]])
+</code></pre>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>c <span style="color:#f92672">=</span> b <span style="color:#f92672">@</span> v
+</span></span><span style="display:flex;"><span>c
+</span></span></code></pre></div><pre><code>matrix([[-10.5 ],
+        [  9.25],
+        [ -3.5 ]])
+</code></pre>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># plotting the 3-dimensional vector from the</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># standard position 0,0,0</span>
+</span></span><span style="display:flex;"><span>fig <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>figure()
+</span></span><span style="display:flex;"><span>ax <span style="color:#f92672">=</span> fig<span style="color:#f92672">.</span>gca(projection<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;3d&#39;</span>)
+</span></span><span style="display:flex;"><span>ax<span style="color:#f92672">.</span>plot([<span style="color:#ae81ff">0</span>, v[<span style="color:#ae81ff">0</span>]],[<span style="color:#ae81ff">0</span>, v[<span style="color:#ae81ff">1</span>]],[<span style="color:#ae81ff">0</span>, v[<span style="color:#ae81ff">2</span>]])
+</span></span><span style="display:flex;"><span>ax<span style="color:#f92672">.</span>plot([<span style="color:#ae81ff">0</span>, c[<span style="color:#ae81ff">0</span>]],[<span style="color:#ae81ff">0</span>, c[<span style="color:#ae81ff">1</span>]],[<span style="color:#ae81ff">0</span>, c[<span style="color:#ae81ff">2</span>]])
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># add some dashed lines across the x, y and z axis</span>
+</span></span><span style="display:flex;"><span>ax<span style="color:#f92672">.</span>plot([<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>],[<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>],[<span style="color:#f92672">-</span><span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">10</span>],<span style="color:#e6db74">&#39;k--&#39;</span>)
+</span></span><span style="display:flex;"><span>ax<span style="color:#f92672">.</span>plot([<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>],[<span style="color:#f92672">-</span><span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">10</span>],[<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>],<span style="color:#e6db74">&#39;k--&#39;</span>)
+</span></span><span style="display:flex;"><span>ax<span style="color:#f92672">.</span>plot([<span style="color:#f92672">-</span><span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">10</span>],[<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>],[<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>],<span style="color:#e6db74">&#39;k--&#39;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>show()
+</span></span></code></pre></div><p><img src="../images/content/matrix1/output_105_0.png" alt="png"></p>
+<h3 id="multiplication-with-a-diagonal-matrix">Multiplication with a Diagonal Matrix</h3>
+<p>When a regular matrix ($\boldsymbol{F}$) multiplies a diagonal matrix ($\boldsymbol{D}$), it has the effect multiplying each column by the non-zero value in the corresponding diagonal matrix column.</p>
+<p><div>
+$
+\underbrace{\begin{pmatrix}
+    1 & 2 & 3 \\
+    4 & 5 & 6 \\
+    7 & 8 & 9 \\
+\end{pmatrix}}_{\boldsymbol{F}}
+\underbrace{\begin{pmatrix}
+    \boldsymbol{t} & 0 & 0 \\
+    0 & \boldsymbol{u} & 0 \\
+    0 & 0 & \boldsymbol{v} \\
+\end{pmatrix}}_{\boldsymbol{D}} = {
+\begin{pmatrix}
+    \boldsymbol{t}1 & \boldsymbol{u}2 & \boldsymbol{v}3 \\
+    \boldsymbol{t}4 & \boldsymbol{u}5 & \boldsymbol{v}6 \\
+    \boldsymbol{t}7 & \boldsymbol{u}8 & \boldsymbol{v}9 \\
+\end{pmatrix}
+}
+$
+</div></p>
+<p>When a diagonal matrix ($\boldsymbol{D}$) multiplies a regular matrix ($\boldsymbol{F}$), it has the effect multiplying each row by the non-zero value in the corresponding diagonal matrix row.</p>
+<p><div>
+$
+\underbrace{\begin{pmatrix}
+    \boldsymbol{t} & 0 & 0 \\
+    0 & \boldsymbol{u} & 0 \\
+    0 & 0 & \boldsymbol{v} \\
+\end{pmatrix}}_{\boldsymbol{D}}
+\underbrace{\begin{pmatrix}
+    1 & 2 & 3 \\
+    4 & 5 & 6 \\
+    7 & 8 & 9 \\
+\end{pmatrix}}_{\boldsymbol{F}} =
+{\begin{pmatrix}
+    \boldsymbol{t}1 & \boldsymbol{t}2 & \boldsymbol{t}3 \\
+    \boldsymbol{u}4 & \boldsymbol{u}5 & \boldsymbol{u}6 \\
+    \boldsymbol{v}7 & \boldsymbol{v}8 & \boldsymbol{v}9 \\
+\end{pmatrix}}
+$
+</div></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># create a 3x3 matrix with values from 1 to 10</span>
+</span></span><span style="display:flex;"><span>f <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>arange(<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">10</span>)<span style="color:#f92672">.</span>reshape(<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">3</span>)
+</span></span><span style="display:flex;"><span>f
+</span></span></code></pre></div><pre><code>array([[1, 2, 3],
+       [4, 5, 6],
+       [7, 8, 9]])
+</code></pre>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># create a diagonal matrix </span>
+</span></span><span style="display:flex;"><span>d <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>diag([<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">4</span>,<span style="color:#ae81ff">5</span>])
+</span></span><span style="display:flex;"><span>d
+</span></span></code></pre></div><pre><code>array([[2, 0, 0],
+       [0, 4, 0],
+       [0, 0, 5]])
+</code></pre>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>d <span style="color:#f92672">@</span> f
+</span></span></code></pre></div><pre><code>array([[ 2,  4,  6],
+       [16, 20, 24],
+       [35, 40, 45]])
+</code></pre>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>f <span style="color:#f92672">@</span> d
+</span></span></code></pre></div><pre><code>array([[ 2,  8, 15],
+       [ 8, 20, 30],
+       [14, 32, 45]])
+</code></pre>
+<h3 id="order-of-operations">Order of Operations</h3>
+<p>Reverse the matrix order when operating (such as transpose) on multiplied matrices.</p>
+<p>$\boldsymbol{X} = (\boldsymbol{A}\boldsymbol{B}\boldsymbol{C})^T = \boldsymbol{C}^T\boldsymbol{B}^T\boldsymbol{A}^T$</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># create 3, 3x3 matricies using octave/matlab style notation</span>
+</span></span><span style="display:flex;"><span>a <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>matrix(<span style="color:#e6db74">&#39;1 2 3; 4 5 6; 7 8 9&#39;</span>)
+</span></span><span style="display:flex;"><span>b <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>matrix(<span style="color:#e6db74">&#39;4 2 1; 7 8 2; 1 2 3&#39;</span>)
+</span></span><span style="display:flex;"><span>c <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>matrix(<span style="color:#e6db74">&#39;5 4 3; 2 1 2; 3 4 5&#39;</span>)
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;matrix A =</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">{</span>a<span style="color:#e6db74">}</span><span style="color:#ae81ff">\n\n</span><span style="color:#e6db74">matrix B =</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">{</span>b<span style="color:#e6db74">}</span><span style="color:#ae81ff">\n\n</span><span style="color:#e6db74">matrix C =</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">{</span>c<span style="color:#e6db74">}</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#39;</span>)
+</span></span></code></pre></div><pre><code>matrix A =
+[[1 2 3]
+ [4 5 6]
+ [7 8 9]]
+
+matrix B =
+[[4 2 1]
+ [7 8 2]
+ [1 2 3]]
+
+matrix C =
+[[5 4 3]
+ [2 1 2]
+ [3 4 5]]
+</code></pre>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>x <span style="color:#f92672">=</span> (a <span style="color:#f92672">*</span> b <span style="color:#f92672">*</span> c)<span style="color:#f92672">.</span>T
+</span></span><span style="display:flex;"><span>x
+</span></span></code></pre></div><pre><code>matrix([[195, 501, 807],
+        [164, 416, 668],
+        [181, 451, 721]])
+</code></pre>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>np<span style="color:#f92672">.</span>array_equal(x, (a<span style="color:#f92672">.</span>T <span style="color:#f92672">*</span> b<span style="color:#f92672">.</span>T <span style="color:#f92672">*</span> c<span style="color:#f92672">.</span>T))
+</span></span></code></pre></div><pre><code>False
+</code></pre>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>np<span style="color:#f92672">.</span>array_equal(x, (c<span style="color:#f92672">.</span>T <span style="color:#f92672">*</span> b<span style="color:#f92672">.</span>T <span style="color:#f92672">*</span> a<span style="color:#f92672">.</span>T))
+</span></span></code></pre></div><pre><code>True
+</code></pre>
+<h3 id="hadamard-multiplication-element-wise">Hadamard Multiplication (element-wise)</h3>
+<p>Hadamard multiplication multiplies an element in the first matrix by the corresponding element in another. The Hadamard product is <a href="https://demonstrations.wolfram.com/TheCommutativePropertyOfMultiplication/">commutative</a>, <a href="https://www.mathwarehouse.com/dictionary/A-words/definition-of-associative-property.php">associative</a> and <a href="https://en.wikipedia.org/wiki/Distributive_property">distributive</a>.</p>
+<p><div>
+$\underbrace{
+\begin{pmatrix}
+    a_{11} & a_{12} \\
+    a_{21} & a_{22} \\
+\end{pmatrix}
+}_{\boldsymbol{A}} \odot
+\underbrace{\begin{pmatrix}
+    b_{11} & b_{12} \\
+    b_{21} & d_{22} \\
+\end{pmatrix}
+}_{\boldsymbol{B}} \odot
+\underbrace{\begin{pmatrix}
+    c_{11} & c_{12} \\
+    c_{21} & c_{22} \\
+\end{pmatrix}}_{\boldsymbol{C}} =
+\begin{pmatrix}
+    a_{11}b_{11}c_{11} & a_{12}b_{12}c_{12} \\
+    a_{21}b_{21}c_{21} & a_{22}b_{22}c_{22} \\
+\end{pmatrix}
+$
+</div></p>
+<p><div>
+$\boldsymbol{A} \odot \boldsymbol{B} =  \boldsymbol{B} \odot \boldsymbol{A}$
+</div></p>
+<p><div>
+$\boldsymbol{A} \odot (\boldsymbol{B} \odot \boldsymbol{C}) = (\boldsymbol{A} \odot \boldsymbol{B}) \odot \boldsymbol{C}$
+</div></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>a <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>matrix(<span style="color:#e6db74">&#39;1 2; 3 4; 5 6&#39;</span>)
+</span></span><span style="display:flex;"><span>b <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>matrix(<span style="color:#e6db74">&#39;6 5; 5 4; 4 3&#39;</span>)
+</span></span><span style="display:flex;"><span>c <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>matrix(<span style="color:#e6db74">&#39;4 1; 3 2; 2 1&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;matrix A =</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">{</span>a<span style="color:#e6db74">}</span><span style="color:#ae81ff">\n\n</span><span style="color:#e6db74">matrix B =</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">{</span>b<span style="color:#e6db74">}</span><span style="color:#ae81ff">\n\n</span><span style="color:#e6db74">matrix C =</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">{</span>c<span style="color:#e6db74">}</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#39;</span>)
+</span></span></code></pre></div><pre><code>matrix A =
+[[1 2]
+ [3 4]
+ [5 6]]
+
+matrix B =
+[[6 5]
+ [5 4]
+ [4 3]]
+
+matrix C =
+[[4 1]
+ [3 2]
+ [2 1]]
+</code></pre>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>d <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>multiply(a,b)
+</span></span><span style="display:flex;"><span>d
+</span></span></code></pre></div><pre><code>matrix([[ 6, 10],
+        [15, 16],
+        [20, 18]])
+</code></pre>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>np<span style="color:#f92672">.</span>array_equal(d, np<span style="color:#f92672">.</span>multiply(b,a))
+</span></span></code></pre></div><pre><code>True
+</code></pre>
+<h3 id="vectorizing-a-matrix">Vectorizing a Matrix</h3>
+<p>Vectorizing a matrix is always done column-wise:</p>
+<p><div>$
+\begin{pmatrix}
+    a & b & c \\
+    d & e & f \\
+\end{pmatrix}
+= \vec{\begin{bmatrix}
+    a \\ d \\ b \\ e \\ c \\ f
+\end{bmatrix}}
+$</div></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>a <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>matrix(<span style="color:#e6db74">&#39;5 4 3; 2 1 0&#39;</span>)
+</span></span><span style="display:flex;"><span>a
+</span></span></code></pre></div><pre><code>matrix([[5, 4, 3],
+        [2, 1, 0]])
+</code></pre>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># order=‘F’ means to flatten in column-major order</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># see: https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.flatten.html</span>
+</span></span><span style="display:flex;"><span>a<span style="color:#f92672">.</span>flatten(order<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;F&#39;</span>)
+</span></span></code></pre></div><pre><code>matrix([[5, 2, 4, 1, 3, 0]])
+</code></pre>
+<h3 id="frobenius-dot-product-inner-product">Frobenius Dot Product (inner product)</h3>
+<p>The Frobenius dot product or inner product is an element-wise product of two matrices consisting of a single number (as though they are vectors.) The matrices can be square or rectangular. However, they must have the same number of rows and columns.</p>
+<p><div>
+$\mathbf {A} ={\begin{pmatrix}
+A_{11} & A_{12} & \cdots &A_{1m} \\
+A_{21} & A_{22} & \cdots &A_{2m} \\
+\vdots &\vdots &\ddots &\vdots   \\
+A_{n1} &A_{n2} &\cdots &A_{nm}   \\
+\end{pmatrix}} \,, \quad \mathbf {B} ={\begin{pmatrix}B_{11}&B_{12}&\cdots &B_{1m}\\B_{21}&B_{22}&\cdots &B_{2m}\\\vdots &\vdots &\ddots &\vdots \\B_{n1}&B_{n2}&\cdots &B_{nm}\\\end{pmatrix}}$
+</div></p>
+<p><div>
+$\langle \mathbf{A}, \mathbf{B} \rangle_\mathrm{F} =\sum_{i,j}A_{ij} B_{ij} \,, = \mathrm{tr}\left(\mathbf{A}^T \mathbf{B}\right)$
+</div></p>
+<p>see <a href="https://en.wikipedia.org/wiki/Frobenius_inner_product">Frobenius inner product on Wikipedia</a> for a detailed explanation.</p>
+<p>The Frobenius inner product is a sum over all the elements in a Hadamard (element-wise) multiplication.</p>
+<p><div>
+$
+\sum^m_{i=1}\sum^n_{j=1}\left(
+\underbrace{\begin{pmatrix}
+    1 & 2 & 3 & 4 \\
+    5 & 6 & 7 & 8 \\
+    9 & 10 & 11 & 12 \\
+\end{pmatrix}}_{\boldsymbol{A}}
+\odot
+\underbrace{\begin{pmatrix}
+    1 & 1.25 & 1.5 & 1.75 \\
+    2 & 2.25 & 2.5 & 2.75 \\
+    3 & 3.25 & 3.5 & 3.75 \\
+\end{pmatrix}}_{\boldsymbol{B}}
+\right)_{ij} = 221
+$
+</div></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>a <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>arange(<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">13</span>)<span style="color:#f92672">.</span>reshape(<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">4</span>)
+</span></span><span style="display:flex;"><span>b <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>arange(<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">4</span>,<span style="color:#ae81ff">.25</span>)<span style="color:#f92672">.</span>reshape(<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">4</span>)
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># sum over Hadamard (element-wise) multiplication</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># not as computationaly effecient as other methods below</span>
+</span></span><span style="display:flex;"><span>np<span style="color:#f92672">.</span>multiply(a, b)<span style="color:#f92672">.</span>sum()
+</span></span></code></pre></div><pre><code>221.0
+</code></pre>
+<p>The dot product of vectorized matrices can also determine the Frobenius inner product.</p>
+<p><div>
+$
+vec\left(
+\underbrace{\begin{bmatrix}
+    1 & 2 & 3 & 4 \\
+    5 & 6 & 7 & 8 \\
+    9 & 10 & 11 & 12 \\
+\end{bmatrix}}_{\boldsymbol{A}}
+\right)
+\cdot
+vec\left(
+\underbrace{\begin{bmatrix}
+    1 & 1.25 & 1.5 & 1.75 \\
+    2 & 2.25 & 2.5 & 2.75 \\
+    3 & 3.25 & 3.5 & 3.75 \\
+\end{bmatrix}}_{\boldsymbol{B}}
+\right) =
+\vec{\begin{bmatrix}
+    1 \\ 5 \\ 9 \\ 2 \\ 6 \\ 10 \\ 3 \\ 7 \\ 11 \\ 8 \\ 8 \\ 12
+\end{bmatrix}}
+\cdot
+\vec{\begin{bmatrix}
+    1 \\ 2 \\ 3 \\ 1.25 \\ 2.25 \\ 3.25 \\ 1.5 \\ 2.5 \\ 3.5 \\ 1.75 \\ 2.75 \\ 3.75
+\end{bmatrix}} = 221
+$
+</div></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>b<span style="color:#f92672">.</span>flatten(order<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;F&#39;</span>)<span style="color:#f92672">.</span>T
+</span></span></code></pre></div><pre><code>array([ 1.  ,  2.  ,  3.  ,  1.25,  2.25,  3.25,  1.5 ,  2.5 ,  3.5 ,
+        1.75,  2.75,  3.75])
+</code></pre>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># Frobenius product using vectors</span>
+</span></span><span style="display:flex;"><span>np<span style="color:#f92672">.</span>dot( a<span style="color:#f92672">.</span>flatten(order<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;F&#39;</span>),b<span style="color:#f92672">.</span>flatten(order<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;F&#39;</span>) )
+</span></span></code></pre></div><pre><code>221.0
+</code></pre>
+<p>Calculating the trace of $\mathbf{A}^T \mathbf{B}$ is more computationally efficient than the methods above.</p>
+<p><div>
+$\mathrm{tr}\left(
+\underbrace{\begin{pmatrix}
+    1 & 5 & 9 \\
+    2 & 6 & 10 \\
+    3 & 7 & 11 \\
+    4 & 8 & 12 \\
+\end{pmatrix}}_{\mathbf{A}^T}
+\underbrace{\begin{pmatrix}
+    1 & 1.25 & 1.5 & 1.75 \\
+    2 & 2.25 & 2.5 & 2.75 \\
+    3 & 3.25 & 3.5 & 3.75 \\
+\end{pmatrix}}_{\mathbf{B}}
+\right) = \underbrace{\sum^n_{i,j=1}\begin{pmatrix}
+ \boldsymbol{38}  &  41.75 &  45.5 &  49.25 \\
+ 44  &  \boldsymbol{48.5}  &  53   &  57.5  \\
+ 50  &  55.25 &  \boldsymbol{60.5} &  65.75 \\
+ 56  &  62    &  68  &  \boldsymbol{74}   \\
+\end{pmatrix}_{ij}}_{trace} = 221
+$
+</div></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># Frobenius product using trace</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># preferred method for computational performance</span>
+</span></span><span style="display:flex;"><span>np<span style="color:#f92672">.</span>trace( a<span style="color:#f92672">.</span>T<span style="color:#a6e22e">@b</span> )
+</span></span></code></pre></div><pre><code>221.0
+</code></pre>
+<h3 id="frobenius-norm-euclidean-norm">Frobenius Norm (Euclidean Norm)</h3>
+<p>The norm of a matrix is the square root of the Frobenius dot product with itself.</p>
+<p><div>
+$
+norm\left(\mathbf{A}\right) =
+\sqrt{\langle\mathbf{A},\mathbf{A}\rangle_F} =
+\sqrt{\left(\mathbf{A}^T\mathbf{A}\right)}
+$
+</div></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>np<span style="color:#f92672">.</span>sqrt( np<span style="color:#f92672">.</span>trace( a<span style="color:#f92672">.</span>T<span style="color:#a6e22e">@a</span> ) )
+</span></span></code></pre></div><pre><code>25.495097567963924
+</code></pre>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>np<span style="color:#f92672">.</span>linalg<span style="color:#f92672">.</span>norm(a, <span style="color:#e6db74">&#39;fro&#39;</span>)
+</span></span></code></pre></div><pre><code>25.495097567963924
+</code></pre>
+<h2 id="rank">Rank</h2>
+<p>The rank $rank\left(\mathbf{A}\right) = r\left(\mathbf{A}\right)$ of a matrix is the number dimensions of information, specifically the number of linearly independent rows or columns. Rank reveals the amount of information contained in a matrix and is always a non-negative integer as it is related to the dimensionality of the matrix.</p>
+<p><strong>Rules</strong>:</p>
+<ul>
+<li>$rank\left(\mathbf{A}\right) \leq min\left({m},{n}\right)$</li>
+<li>$rank\left(\mathbf{A}+\mathbf{B}\right) \leq rank\left(\mathbf{A}\right) + rank\left(\mathbf{B}\right)$</li>
+<li>$rank\left(\mathbf{AB}\right) \leq min\left( rank\left(\mathbf{A}\right), rank\left(\mathbf{B}\right) \right)$</li>
+<li>$rank\left(\mathbf{A}\right) = rank\left(\mathbf{A^T}\mathbf{A}\right) = rank\left(\mathbf{A^T}\right)  = rank\left(\mathbf{A}\mathbf{A^T}\right)$</li>
+</ul>
+<p><strong>Types</strong>:</p>
+<ul>
+<li>$rank\underset{{m}\times{m}}{\left(\mathbf{A}\right)} = {m} \implies $ Full Rank</li>
+<li>$rank\underset{{m}\gt{n}}{\left(\mathbf{A}\right)} = {n} \implies $ Full Column Rank</li>
+<li>$rank\underset{{m}\lt{n}}{\left(\mathbf{A}\right)} = {m} \implies $ Full Row Rank</li>
+<li>$rank\underset{{m}\times{n}}{\left(\mathbf{A}\right)} \lt {m,n} \implies $ Reduced / Deficient / Degenerate (Singular)</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>np<span style="color:#f92672">.</span>random<span style="color:#f92672">.</span>seed(<span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>a <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>random<span style="color:#f92672">.</span>randn(<span style="color:#ae81ff">6</span>,<span style="color:#ae81ff">3</span>)
+</span></span><span style="display:flex;"><span>a
+</span></span></code></pre></div><pre><code>array([[ 1.76405235,  0.40015721,  0.97873798],
+       [ 2.2408932 ,  1.86755799, -0.97727788],
+       [ 0.95008842, -0.15135721, -0.10321885],
+       [ 0.4105985 ,  0.14404357,  1.45427351],
+       [ 0.76103773,  0.12167502,  0.44386323],
+       [ 0.33367433,  1.49407907, -0.20515826]])
+</code></pre>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>np<span style="color:#f92672">.</span>linalg<span style="color:#f92672">.</span>matrix_rank(a)
+</span></span></code></pre></div><pre><code>3
+</code></pre>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>b <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>full((<span style="color:#ae81ff">5</span>,<span style="color:#ae81ff">5</span>), <span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>b
+</span></span></code></pre></div><pre><code>array([[1, 1, 1, 1, 1],
+       [1, 1, 1, 1, 1],
+       [1, 1, 1, 1, 1],
+       [1, 1, 1, 1, 1],
+       [1, 1, 1, 1, 1]])
+</code></pre>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>np<span style="color:#f92672">.</span>linalg<span style="color:#f92672">.</span>matrix_rank(b)
+</span></span></code></pre></div><pre><code>1
+</code></pre>
+<p>Create a matrix of any size of a specific rank. The rank cannot be greater than m or n. Using random numbers gives a high assurance that we will get a full rank for the number of columns in $\mathbf{A}$ and the number of rows in $\mathbf{B}$.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>rnk <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span>
+</span></span><span style="display:flex;"><span>m <span style="color:#f92672">=</span> <span style="color:#ae81ff">50</span>
+</span></span><span style="display:flex;"><span>n <span style="color:#f92672">=</span> <span style="color:#ae81ff">12</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>a <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>random<span style="color:#f92672">.</span>randn(m,rnk)
+</span></span><span style="display:flex;"><span>b <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>random<span style="color:#f92672">.</span>randn(rnk,n)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>c <span style="color:#f92672">=</span> a <span style="color:#f92672">@</span> b
+</span></span><span style="display:flex;"><span>np<span style="color:#f92672">.</span>linalg<span style="color:#f92672">.</span>matrix_rank(c)
+</span></span></code></pre></div><pre><code>5
+</code></pre>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>c<span style="color:#f92672">.</span>shape
+</span></span></code></pre></div><pre><code>(50, 12)
+</code></pre>
+<h3 id="shifting">Shifting</h3>
+<p>Transform a reduced rank matrix into a full-rank matrix without significant changes to the data.</p>
+<p><div>
+$
+\widetilde{\mathbf{A}} = \mathbf{A} + \lambda\mathbf{I}
+$
+</div></p>
+<p><div>
+$
+\underbrace{\begin{pmatrix}
+    2 & 4 & 5 \\
+    -2 & -4 & -2 \\
+    2 & 4 & 8 \\
+\end{pmatrix}}_{\mathbf{\underset{A}{Rank 2}}} +
+\underset{\lambda}{.0001}
+\underbrace{\begin{pmatrix}
+    1 & 0 & 0 \\
+    0 & 1 & 0 \\
+    0 & 0 & 1 \\
+\end{pmatrix}}_{Identity} =
+\underbrace{\begin{pmatrix}
+    2.0001 & 4 & 5 \\
+    -2 & -3.9999 & -2 \\
+    2 & 4 & -7.9999 \\
+\end{pmatrix}}_{\mathbf{\underset{B}{Rank 3}}}
+$
+</div></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>a <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>matrix(<span style="color:#e6db74">&#39;2 4 5; -2 -4 -2; 2 4 -8&#39;</span>)
+</span></span><span style="display:flex;"><span>np<span style="color:#f92672">.</span>linalg<span style="color:#f92672">.</span>matrix_rank(a)
+</span></span></code></pre></div><pre><code>2
+</code></pre>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>b <span style="color:#f92672">=</span> a <span style="color:#f92672">+</span> (<span style="color:#ae81ff">.0001</span> <span style="color:#f92672">*</span> np<span style="color:#f92672">.</span>eye(<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">3</span>))
+</span></span><span style="display:flex;"><span>b
+</span></span></code></pre></div><pre><code>matrix([[ 2.0001,  4.    ,  5.    ],
+        [-2.    , -3.9999, -2.    ],
+        [ 2.    ,  4.    , -7.9999]])
+</code></pre>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>np<span style="color:#f92672">.</span>linalg<span style="color:#f92672">.</span>matrix_rank(b)
+</span></span></code></pre></div><pre><code>3
+</code></pre>
+<h3 id="vector-span-with-rank">Vector Span with Rank</h3>
+<p>Using rank to determine if a set of vectors spans a matrix. If the rank of a matrix increases with the addition of a vector, then the vector was not in the span of the matrix.</p>
+<p><div>
+$
+\underbrace{\overset{\mathbf{A}}{\begin{pmatrix}
+    1 & 2 & 3 & 4 \\
+    4 & 5 & 6 & 7 \\
+    8 & 9 & 10 & 11 \\
+\end{pmatrix}}}_{r=2} \sqcup
+\overset{\vec{v}}{\begin{bmatrix}
+    5 \\
+    8 \\
+    12 \\
+\end{bmatrix}} =
+\underbrace{\overset{\mathbf{B}}{\left(
+\begin{array}{cccc|c}
+    1 & 2 & 3 & 4 & 5\\
+    4 & 5 & 6 & 7 & 8\\
+    8 & 9 & 10 & 11 & 12\\
+\end{array}\right)}}_{r=2}
+$
+</div></p>
+<p><div>
+$
+rank\left(\mathbf{B}\right) = rank\left(\mathbf{A}\right)
+$
+</div></p>
+<p>$\vec{v}$ is in the span of matrix $\mathbf{A}$.</p>
+<p><div>
+$
+\underbrace{\overset{\mathbf{A}}{\begin{pmatrix}
+    1 & 2 & 3 & 4 \\
+    4 & 5 & 6 & 7 \\
+    8 & 9 & 10 & 11 \\
+\end{pmatrix}}}_{r=2} \sqcup
+\overset{\vec{w}}{\begin{bmatrix}
+    0 \\
+    0 \\
+    2 \\
+\end{bmatrix}} =
+\underbrace{\overset{\mathbf{C}}{\left(
+\begin{array}{cccc|c}
+    1 & 2 & 3 & 4 & 0\\
+    4 & 5 & 6 & 7 & 0\\
+    8 & 9 & 10 & 11 & 2\\
+\end{array}\right)}}_{\mathbf{r=3}}
+$
+</div></p>
+<p><div>
+$
+rank\left(\mathbf{C}\right) > rank\left(\mathbf{A}\right)
+$
+</div></p>
+<p>$\vec{w}$ is <strong>not</strong> in the span of matrix $\mathbf{A}$.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>v <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array([[<span style="color:#ae81ff">5</span>], [<span style="color:#ae81ff">8</span>], [<span style="color:#ae81ff">12</span>]])
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>a <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>matrix(<span style="color:#e6db74">&#39;1 2 3 4; 4 5 6 7; 8 9 10 11&#39;</span>)
+</span></span><span style="display:flex;"><span>a
+</span></span></code></pre></div><pre><code>matrix([[ 1,  2,  3,  4],
+        [ 4,  5,  6,  7],
+        [ 8,  9, 10, 11]])
+</code></pre>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>np<span style="color:#f92672">.</span>linalg<span style="color:#f92672">.</span>matrix_rank(a)
+</span></span></code></pre></div><pre><code>2
+</code></pre>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>b <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>append(a, v, axis<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>b
+</span></span></code></pre></div><pre><code>matrix([[ 1,  2,  3,  4,  5],
+        [ 4,  5,  6,  7,  8],
+        [ 8,  9, 10, 11, 12]])
+</code></pre>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>np<span style="color:#f92672">.</span>linalg<span style="color:#f92672">.</span>matrix_rank(b)
+</span></span></code></pre></div><pre><code>2
+</code></pre>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>w <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array([[<span style="color:#ae81ff">0</span>], [<span style="color:#ae81ff">0</span>], [<span style="color:#ae81ff">2</span>]])
+</span></span><span style="display:flex;"><span>c <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>append(a, w, axis<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>np<span style="color:#f92672">.</span>linalg<span style="color:#f92672">.</span>matrix_rank(c)
+</span></span></code></pre></div><pre><code>3
+</code></pre>
+
+
+                <p>
+                   This blog post, titled: "<span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">Linear Algebra: Matrices 1: Linear Algebra Crash Course for Programmers Part 2a</span>" by <a xmlns:cc="http://creativecommons.org/ns#" href="https://twitter.com/cjimti" property="cc:attributionName" rel="cc:attributionURL">Craig Johnston</a>, is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+                    <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a>
+                </p>
+
+            </div>
+            
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                
+                <section>
+                    <hr class="hidden-sm hidden-xs">
+                    <h5><a href="../tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                        
+                        
+                        
+                        <a href="../tags/ai" title="ai">
+                        ai
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="../tags/blockchain" title="blockchain">
+                        blockchain
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="../tags/data" title="data">
+                        data
+                        </a>
+                        
+                        
+                        
+                        <a href="../tags/data-science" title="data science">
+                        data science
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="../tags/development" title="development">
+                        development
+                        </a>
+                        
+                        
+                        
+                        <a href="../tags/devops" title="devops">
+                        devops
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="../tags/docker" title="docker">
+                        docker
+                        </a>
+                        
+                        
+                        
+                        <a href="../tags/elasticsearch" title="elasticsearch">
+                        elasticsearch
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="../tags/golang" title="golang">
+                        golang
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="../tags/ingress" title="ingress">
+                        ingress
+                        </a>
+                        
+                        
+                        
+                        <a href="../tags/iot" title="iot">
+                        iot
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="../tags/kubectl" title="kubectl">
+                        kubectl
+                        </a>
+                        
+                        
+                        
+                        <a href="../tags/kubefwd" title="kubefwd">
+                        kubefwd
+                        </a>
+                        
+                        
+                        
+                        <a href="../tags/kubernetes" title="kubernetes">
+                        kubernetes
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="../tags/mcp" title="mcp">
+                        mcp
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="../tags/microservices" title="microservices">
+                        microservices
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="../tags/python" title="python">
+                        python
+                        </a>
+                        
+                        
+                        
+                        <a href="../tags/raspberry-pi" title="raspberry pi">
+                        raspberry pi
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="../tags/security" title="security">
+                        security
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="../tags/utils" title="utils">
+                        utils
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                    </div>
+                </section>
+
+                
+                <hr>
+                <h5>RELATED</h5>
+                <ul class="list-inline">
+                    
+                </ul>
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                   
+                   <li>
+                       <a href="../index.xml" rel="alternate" type="application/rss+xml" title="IMTI" >
+                           <span class="fa-stack fa-lg">
+                               <i class="fa fa-circle fa-stack-2x"></i>
+                               <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+                           </span>
+                       </a>
+                   </li>
+                   
+                    
+                    <li>
+                        <a href="mailto:cjimti@gmail.com">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                    
+                    <li>
+                        <a href="https://twitter.com/cjimti">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/cjimti">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                    
+                    <li>
+                        <a target="_blank" href="https://www.linkedin.com/in/cjimti/">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+<script>
+    if($('#tag_cloud').length !== 0){
+        async("/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-R56SP4WLS2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-R56SP4WLS2');
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+<script>
+  mermaid.initialize({ theme: 'neutral' });
+  mermaid.run();
+</script>
+
+
+<script data-cfasync="false">
+(function() {
+    var themeToggle = document.getElementById('theme-toggle');
+    var themeIcon = document.getElementById('theme-icon');
+
+    function getCurrentTheme() {
+        return document.documentElement.getAttribute('data-theme') || 'light';
+    }
+
+    function updateIcon() {
+        var currentTheme = getCurrentTheme();
+        if (themeIcon) {
+            if (currentTheme === 'dark') {
+                themeIcon.className = 'fa fa-sun-o';
+            } else {
+                themeIcon.className = 'fa fa-moon-o';
+            }
+        }
+    }
+
+    function toggleTheme() {
+        var currentTheme = getCurrentTheme();
+        var newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+
+        if (newTheme === 'dark') {
+            document.documentElement.setAttribute('data-theme', 'dark');
+        } else {
+            document.documentElement.removeAttribute('data-theme');
+        }
+
+        localStorage.setItem('theme', newTheme);
+        updateIcon();
+    }
+
+    updateIcon();
+
+    if (themeToggle) {
+        themeToggle.addEventListener('click', toggleTheme);
+    }
+
+    if (window.matchMedia) {
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e) {
+            if (!localStorage.getItem('theme')) {
+                if (e.matches) {
+                    document.documentElement.setAttribute('data-theme', 'dark');
+                } else {
+                    document.documentElement.removeAttribute('data-theme');
+                }
+                updateIcon();
+            }
+        });
+    }
+})();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head><head>
+    <meta name="msvalidate.01" content="DBC34551F2DD1BA3DC0D62EE46D7448F" />
+    <meta name="google-site-verification" content="DrtKc88u9uc7iptd4LyURAKBmFcOn7Kuk6HcRk_kNmo" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    
+    <script data-cfasync="false">
+        (function() {
+            var savedTheme = localStorage.getItem('theme');
+            var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+            var theme = savedTheme || (prefersDark ? 'dark' : 'light');
+            if (theme === 'dark') {
+                document.documentElement.setAttribute('data-theme', 'dark');
+            }
+        })();
+    </script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <meta name="description" content="Basic Auth is supported by nearly every major web client, library, and utility.">
+    
+    <meta name="keyword"  content="Go, Kubernetes, Elasticsearch, Python, Docker, Big Data, Artificial Intelligence, Machine Learning">
+    <link rel="shortcut icon" href="../img/favicon.ico">
+
+    <title>Basic Auth on Kubernetes Ingress - IMTI - Craig Johnston</title>
+
+    <link rel="canonical" href="https://imti.co/kubernetes-ingress-basic-auth/">
+
+    
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+
+    
+    <link rel="stylesheet" href="../css/hux-blog.min.css">
+
+    
+    <link rel="stylesheet" href="../css/syntax.css">
+
+    
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    
+    
+    <link rel="stylesheet" href="../css/imti.css">
+
+    
+    <script src="../js/jquery.min.js"></script>
+
+    
+    <script src="../js/bootstrap.min.js"></script>
+
+    
+    <script src="../js/hux-blog.min.js"></script>
+
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({
+            google_ad_client: "ca-pub-5984764595236029",
+            enable_page_level_ads: true
+        });
+    </script>
+
+    <meta name="twitter:site" content="@cjimti">
+<meta name="twitter:creator" content="@cjimti">
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Basic Auth on Kubernetes Ingress" />
+<meta name="twitter:description" content="Basic Auth is supported by nearly every major web client, library, and utility." />
+<meta name="twitter:image" content="https://imti.co/img/post/lock_876_438.jpg" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://imti.co/kubernetes-ingress-basic-auth/" />
+<meta property="og:title" content="Basic Auth on Kubernetes Ingress" />
+<meta property="og:description" content="Basic Auth is supported by nearly every major web client, library, and utility." />
+<meta property="og:image" content="https://imti.co/img/post/lock_876_438.jpg" />
+
+
+    
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https:\/\/imti.co\/kubernetes-ingress-basic-auth\/"
+  },
+  "headline": "Basic Auth on Kubernetes Ingress",
+  "image": ["https:\/\/imti.co\/img\/post\/lock_876_438.jpg"],
+  "datePublished": "2018-05-19T00:00:00Z",
+  "dateModified": "2018-05-19T00:00:00Z",
+  "author": {
+    "@type": "Person",
+    "name": "Craig Johnston",
+    "url": "https://imti.co/about/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "imti.co",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https:\/\/imti.co\/img\/avatar-cj.jpg"
+    }
+  },
+  "description": "Basic Auth is one of the oldest and easiest ways to secure a web page or API endpoint. Basic Auth does not have many features and lacks the sophistication of …"
+}
+</script>
+
+
+</head>
+</head>
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="../">IMTI</a>
+        </div>
+
+        
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="../">Home</a>
+                    </li>
+                    <li>
+                        <a href="../about/">About</a>
+                    </li>
+                    <li>
+                        <a href="https://twitter.com/cjimti">Follow</a>
+                    </li>
+                    
+
+                    
+                    <li>
+                        <a href="javascript:void(0)" class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode" title="Toggle dark/light mode">
+                            <i class="fa fa-moon-o" id="theme-icon"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        
+    </div>
+    
+</nav>
+<script>
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+            $navbar.className = " ";
+            setTimeout(function(){
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+
+
+<style type="text/css">
+    header.intro-header{
+        background-image: url('https://imti.co/img/post/lock.jpg')
+    }
+</style>
+<header class="intro-header" >
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="../tags/kubernetes" title="Kubernetes">
+                        Kubernetes
+                        </a>
+                        
+                        <a class="tag" href="../tags/security" title="Security">
+                        Security
+                        </a>
+                        
+                        <a class="tag" href="../tags/ingress" title="Ingress">
+                        Ingress
+                        </a>
+                        
+                    </div>
+                    <h1>Basic Auth on Kubernetes Ingress</h1>
+                    <h2 class="subheading">Basic Auth is supported by nearly every major web client, library, and utility.</h2>
+                    <span  class="meta">Posted by <a href="https://twitter.com/cjimti">Craig Johnston</a> on Saturday, May 19, 2018
+                        
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+<article>
+    <div class="container">
+        <div class="row">
+
+            
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <p><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Authentication">Basic Auth</a> is one of the oldest and easiest ways to secure a web page or API endpoint. <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Authentication">Basic Auth</a> does not have many features and lacks the sophistication of more modern access controls (see <a href="https://github.com/kubernetes/ingress-nginx/tree/master/docs/examples/auth">Ingress Nginx Auth Examples</a>). However, <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Authentication">Basic Auth</a> is supported by nearly every major web client, library, and utility. <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Authentication">Basic Auth</a> is secure, stable and perfect for quick security on Kubernetes projects. <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Authentication">Basic Auth</a>  can easily we swapped out later as requirements demand or provide a foundation for implementations such as <a href="https://oauth.net/2/">OAuth 2</a> and <a href="https://jwt.io/">JWT</a>.</p>
+
+
+<p>First, you need an <a href="../web-cluster-ingress/">Ingress</a> controller on your Kubernetes cluster and at least one ingress rule that we can apply <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Authentication">Basic Auth</a>. If you are following along with my articles on building a <a href="../hobby-cluster/">Production Hobby Cluster</a> Kubernetes and do not yet have <a href="../web-cluster-ingress/">Ingress</a> installed, you should read <a href="../web-cluster-ingress/">Ingress on Custom Kubernetes</a> before getting started.</p>
+<h4 id="security">Security</h4>
+<p>The <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Authentication">Basic Auth</a> process sends credentials to the server in the clear, although encrypted and <a href="https://en.wikipedia.org/wiki/Base64">base64</a>&rsquo;d, they can be quickly reversed back into a human-readable string. Because of this, it is essential we are issuing calls over <a href="https://letsencrypt.org/">SSL</a>. However, if the information or service being password protected should be hidden, then <a href="https://letsencrypt.org/">SSL</a> encrypted communication would already be required.</p>
+<p>For the <a href="../hobby-cluster/">Production Hobby Cluster</a> we use <a href="https://letsencrypt.org/">Let&rsquo;s Encrypt</a>, so if you have not done so already you can check out my article on setting up <a href="https://letsencrypt.org/">Let&rsquo;s Encrypt</a> for your custom cluster read: <a href="../lets-encrypt-kubernetes/">Let&rsquo;s Encrypt, Kubernetes</a>.</p>
+<h3 id="create-a-user-and-password">Create a User and Password</h3>
+<p>Start by creating an <a href="https://httpd.apache.org/docs/current/programs/htpasswd.html">htpasswd</a> file that contains the <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Authentication">Basic Auth</a> credentials. The following creates a user called <strong>sysop</strong>, choose whatever username you like.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>htpasswd -c ./auth sysop
+</span></span></code></pre></div><p>It is important to name the file <strong>auth</strong>. The filename is used as the key in the key-value pair under the <code>data</code> section of secret.</p>
+<p>After entering a password for the new user twice, you end up with the file <code>auth</code>.</p>
+<h3 id="create-a-secret">Create a <a href="https://kubernetes.io/docs/concepts/configuration/secret/">Secret</a></h3>
+<p>Kubernetes can create a <strong><a href="https://kubernetes-v1-4.github.io/docs/user-guide/kubectl/kubectl_create_secret_generic/">generic</a></strong> <a href="https://kubernetes.io/docs/concepts/configuration/secret/">Secret</a> from the generated <code>auth</code> file, or from any file, however, the format of the htpasswd generated file is necessary for use with <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Authentication">Basic Auth</a>. The file name is used as the key in Basic Auth secret, therefore its best to name it <strong>auth</strong> and avoid having to edit the secret.  <a href="../web-cluster-ingress/">Ingress</a> uses the new <a href="https://kubernetes.io/docs/concepts/configuration/secret/">Secret</a> in it&rsquo;s annotation section to provide <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Authentication">Basic Auth</a>.</p>
+<p>The <a href="https://kubernetes-v1-4.github.io/docs/user-guide/kubectl/kubectl_create_secret/">kubectl create secret</a> command can create a secret from a local file, directory or literal value using the <strong><a href="https://kubernetes-v1-4.github.io/docs/user-guide/kubectl/kubectl_create_secret_generic/">generic</a></strong> directive. In the example below I call the new secret <strong>sysop</strong>, named after the single set of credentials stored in it. However, if you are grouping many credentials, it would be better to give it a more generic name.</p>
+<p>Create the <a href="https://kubernetes.io/docs/concepts/configuration/secret/">Secret</a>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl create secret generic sysop --from-file auth
+</span></span></code></pre></div><p>Ensure the <a href="https://kubernetes.io/docs/concepts/configuration/secret/">Secret</a> was created successfully by viewing the details:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl get secret sysop -o yaml
+</span></span></code></pre></div><p>You should have a secret similar to the following:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">v1</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">data</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">auth</span>: <span style="color:#ae81ff">c3avb2A2GGFwcjEkMmo5SwoucC4kcWtDR3NTVUxSDXJmTVkwNUwxUlZYLbo=</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Secret</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">metadata</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">creationTimestamp</span>: <span style="color:#e6db74">2018-05-18T06:55:51Z</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">sysop</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">namespace</span>: <span style="color:#ae81ff">default</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">resourceVersion</span>: <span style="color:#e6db74">&#34;265674&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">selfLink</span>: <span style="color:#ae81ff">/api/v1/namespaces/default/secrets/sysop</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">uid</span>: <span style="color:#ae81ff">2bfb399c-58d6-11e8-b11e-5600017e897a</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">type</span>: <span style="color:#ae81ff">Opaque</span>
+</span></span></code></pre></div><p>Of course, you should avoid publishing your new <a href="https://kubernetes.io/docs/concepts/configuration/secret/">Secret</a> like I just did, since the <code>auth:</code> value under <code>data:</code> is only a <a href="https://en.wikipedia.org/wiki/Base64">base64</a> encoded version of the username and encoded password pair. The password may be reversed quickly with a dictionary attack or other password cracking utilities.</p>
+<h3 id="protect-ingress">Protect <a href="../web-cluster-ingress/">Ingress</a></h3>
+<p>The following is an example <a href="../web-cluster-ingress/">Ingress</a> configuration for a test application called <a href="https://github.com/txn2/ok">ok</a> running on the <a href="http://localhost:4000/tag/phc.txn2.net/">phc.txn2.net</a> test cluster.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span> <span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">extensions/v1beta1</span>
+</span></span><span style="display:flex;"><span> <span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Ingress</span>
+</span></span><span style="display:flex;"><span> <span style="color:#f92672">metadata</span>:
+</span></span><span style="display:flex;"><span>   <span style="color:#f92672">name</span>: <span style="color:#ae81ff">ok-auth</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#f92672">labels</span>:
+</span></span><span style="display:flex;"><span>     <span style="color:#f92672">app</span>: <span style="color:#ae81ff">ok-auth</span>
+</span></span><span style="display:flex;"><span>     <span style="color:#f92672">system</span>: <span style="color:#ae81ff">test</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#f92672">annotations</span>:
+</span></span><span style="display:flex;"><span>     <span style="color:#f92672">nginx.ingress.kubernetes.io/auth-type</span>: <span style="color:#ae81ff">basic</span>
+</span></span><span style="display:flex;"><span>     <span style="color:#f92672">nginx.ingress.kubernetes.io/auth-secret</span>: <span style="color:#ae81ff">sysop</span>
+</span></span><span style="display:flex;"><span>     <span style="color:#f92672">nginx.ingress.kubernetes.io/auth-realm</span>: <span style="color:#e6db74">&#34;Authentication Required - ok&#34;</span>
+</span></span><span style="display:flex;"><span> <span style="color:#f92672">spec</span>:
+</span></span><span style="display:flex;"><span>   <span style="color:#f92672">rules</span>:
+</span></span><span style="display:flex;"><span>   - <span style="color:#f92672">host</span>: <span style="color:#ae81ff">ok-auth.la.txn2.net</span>
+</span></span><span style="display:flex;"><span>     <span style="color:#f92672">http</span>:
+</span></span><span style="display:flex;"><span>       <span style="color:#f92672">paths</span>:
+</span></span><span style="display:flex;"><span>       - <span style="color:#f92672">backend</span>:
+</span></span><span style="display:flex;"><span>           <span style="color:#f92672">serviceName</span>: <span style="color:#e6db74">&#34;ok&#34;</span>
+</span></span><span style="display:flex;"><span>           <span style="color:#f92672">servicePort</span>: <span style="color:#ae81ff">5001</span>
+</span></span><span style="display:flex;"><span>         <span style="color:#f92672">path</span>: <span style="color:#ae81ff">/</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#f92672">tls</span>:
+</span></span><span style="display:flex;"><span>   - <span style="color:#f92672">hosts</span>:
+</span></span><span style="display:flex;"><span>     - <span style="color:#ae81ff">ok-auth.la.txn2.net</span>
+</span></span><span style="display:flex;"><span>     <span style="color:#f92672">secretName</span>: <span style="color:#ae81ff">la-txn2-net-tls</span>
+</span></span></code></pre></div><p>All that is needed are three <a href="../web-cluster-ingress/">Ingress</a> annotations:</p>
+<ul>
+<li>nginx.ingress.kubernetes.io/auth-type: basic</li>
+<li>nginx.ingress.kubernetes.io/auth-secret: sysop</li>
+<li>nginx.ingress.kubernetes.io/auth-realm: &ldquo;Authentication Required - ok.&rdquo;</li>
+</ul>
+<p>The <a href="../web-cluster-ingress/">Ingress</a> for <a href="https://ok-auth.la.txn2.net">ok-auth.la.txn2.net</a> is now <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Authentication">Basic Auth</a> protected using credentials in a <a href="https://kubernetes.io/docs/concepts/configuration/secret/">Secret</a> called <strong>sysop</strong>.</p>
+
+
+<h2 id="port-forwarding--local-development">Port Forwarding / Local Development</h2>
+<p>Check out <a href="https://github.com/txn2/kubefwd">kubefwd</a> for a simple command line utility that bulk forwards services of one or more namespaces to your local workstation.</p>
+<h2 id="resources">Resources</h2>
+<p>If you found this article useful, you may want to check out all the articles used to build on the <a href="../hobby-cluster/">Production Hobby Cluster</a> tagged with <a href="http://localhost:4000/tag/phc.txn2.net/">phc.txn2.net</a>.</p>
+<p>Additional examples of <a href="../web-cluster-ingress/">Ingress</a> authentication can be found at the official <a href="https://github.com/kubernetes/ingress-nginx/tree/master/docs/examples/auth">Ingress Nginx Auth Examples</a> repository.</p>
+<hr>
+<p>If in a few days you find yourself setting up a cluster in Japan or Germany on <a href="https://www.linode.com/?r=848a6b0b21dc8edd33124f05ec8f99207ccddfde">Linode</a>, and another two in Australia and France on <a href="https://www.vultr.com/?ref=7418713">vultr</a>, then you may have just joined the PHC (Performance <a href="../hobby-cluster/">Hobby Cluster</a>s) club. Some people tinker late at night on their truck, we benchmark and test the resilience of node failures on our overseas, budget kubernetes clusters. It&rsquo;s all about going big, on the cheap.</p>
+<p><a href="https://amzn.to/2IOe8Yu"><img src="https://github.com/cjimti/mk/raw/master/images/content/k8s-tshirt-banner.jpg" alt="k8s performance hobby clusters"></a></p>
+
+
+                <p>
+                   This blog post, titled: "<span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">Basic Auth on Kubernetes Ingress: Basic Auth is supported by nearly every major web client, library, and utility.</span>" by <a xmlns:cc="http://creativecommons.org/ns#" href="https://twitter.com/cjimti" property="cc:attributionName" rel="cc:attributionURL">Craig Johnston</a>, is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+                    <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a>
+                </p>
+
+            </div>
+            
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                
+                <section>
+                    <hr class="hidden-sm hidden-xs">
+                    <h5><a href="../tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                        
+                        
+                        
+                        <a href="../tags/ai" title="ai">
+                        ai
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="../tags/blockchain" title="blockchain">
+                        blockchain
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="../tags/data" title="data">
+                        data
+                        </a>
+                        
+                        
+                        
+                        <a href="../tags/data-science" title="data science">
+                        data science
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="../tags/development" title="development">
+                        development
+                        </a>
+                        
+                        
+                        
+                        <a href="../tags/devops" title="devops">
+                        devops
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="../tags/docker" title="docker">
+                        docker
+                        </a>
+                        
+                        
+                        
+                        <a href="../tags/elasticsearch" title="elasticsearch">
+                        elasticsearch
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="../tags/golang" title="golang">
+                        golang
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="../tags/ingress" title="ingress">
+                        ingress
+                        </a>
+                        
+                        
+                        
+                        <a href="../tags/iot" title="iot">
+                        iot
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="../tags/kubectl" title="kubectl">
+                        kubectl
+                        </a>
+                        
+                        
+                        
+                        <a href="../tags/kubefwd" title="kubefwd">
+                        kubefwd
+                        </a>
+                        
+                        
+                        
+                        <a href="../tags/kubernetes" title="kubernetes">
+                        kubernetes
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="../tags/mcp" title="mcp">
+                        mcp
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="../tags/microservices" title="microservices">
+                        microservices
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="../tags/python" title="python">
+                        python
+                        </a>
+                        
+                        
+                        
+                        <a href="../tags/raspberry-pi" title="raspberry pi">
+                        raspberry pi
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="../tags/security" title="security">
+                        security
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="../tags/utils" title="utils">
+                        utils
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                    </div>
+                </section>
+
+                
+                <hr>
+                <h5>RELATED</h5>
+                <ul class="list-inline">
+                    
+                </ul>
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                   
+                   <li>
+                       <a href="../index.xml" rel="alternate" type="application/rss+xml" title="IMTI" >
+                           <span class="fa-stack fa-lg">
+                               <i class="fa fa-circle fa-stack-2x"></i>
+                               <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+                           </span>
+                       </a>
+                   </li>
+                   
+                    
+                    <li>
+                        <a href="mailto:cjimti@gmail.com">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                    
+                    <li>
+                        <a href="https://twitter.com/cjimti">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/cjimti">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                    
+                    <li>
+                        <a target="_blank" href="https://www.linkedin.com/in/cjimti/">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+<script>
+    if($('#tag_cloud').length !== 0){
+        async("/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-R56SP4WLS2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-R56SP4WLS2');
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+<script>
+  mermaid.initialize({ theme: 'neutral' });
+  mermaid.run();
+</script>
+
+
+<script data-cfasync="false">
+(function() {
+    var themeToggle = document.getElementById('theme-toggle');
+    var themeIcon = document.getElementById('theme-icon');
+
+    function getCurrentTheme() {
+        return document.documentElement.getAttribute('data-theme') || 'light';
+    }
+
+    function updateIcon() {
+        var currentTheme = getCurrentTheme();
+        if (themeIcon) {
+            if (currentTheme === 'dark') {
+                themeIcon.className = 'fa fa-sun-o';
+            } else {
+                themeIcon.className = 'fa fa-moon-o';
+            }
+        }
+    }
+
+    function toggleTheme() {
+        var currentTheme = getCurrentTheme();
+        var newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+
+        if (newTheme === 'dark') {
+            document.documentElement.setAttribute('data-theme', 'dark');
+        } else {
+            document.documentElement.removeAttribute('data-theme');
+        }
+
+        localStorage.setItem('theme', newTheme);
+        updateIcon();
+    }
+
+    updateIcon();
+
+    if (themeToggle) {
+        themeToggle.addEventListener('click', toggleTheme);
+    }
+
+    if (window.matchMedia) {
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e) {
+            if (!localStorage.getItem('theme')) {
+                if (e.matches) {
+                    document.documentElement.setAttribute('data-theme', 'dark');
+                } else {
+                    document.documentElement.removeAttribute('data-theme');
+                }
+                updateIcon();
+            }
+        });
+    }
+})();
+</script>
+
+</body>
+</html>

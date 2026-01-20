@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head><head>
+    <meta name="msvalidate.01" content="DBC34551F2DD1BA3DC0D62EE46D7448F" />
+    <meta name="google-site-verification" content="DrtKc88u9uc7iptd4LyURAKBmFcOn7Kuk6HcRk_kNmo" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    
+    <script data-cfasync="false">
+        (function() {
+            var savedTheme = localStorage.getItem('theme');
+            var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+            var theme = savedTheme || (prefersDark ? 'dark' : 'light');
+            if (theme === 'dark') {
+                document.documentElement.setAttribute('data-theme', 'dark');
+            }
+        })();
+    </script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <meta name="description" content="Context has always been the hard problem. MCP forces you to solve it.">
+    
+    <meta name="keyword"  content="Go, Kubernetes, Elasticsearch, Python, Docker, Big Data, Artificial Intelligence, Machine Learning">
+    <link rel="shortcut icon" href="../img/favicon.ico">
+
+    <title>MCP Is Flawed. Build With It Anyway. - IMTI - Craig Johnston</title>
+
+    <link rel="canonical" href="https://imti.co/mcp-defense/">
+
+    
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+
+    
+    <link rel="stylesheet" href="../css/hux-blog.min.css">
+
+    
+    <link rel="stylesheet" href="../css/syntax.css">
+
+    
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    
+    
+    <link rel="stylesheet" href="../css/imti.css">
+
+    
+    <script src="../js/jquery.min.js"></script>
+
+    
+    <script src="../js/bootstrap.min.js"></script>
+
+    
+    <script src="../js/hux-blog.min.js"></script>
+
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({
+            google_ad_client: "ca-pub-5984764595236029",
+            enable_page_level_ads: true
+        });
+    </script>
+
+    <meta name="twitter:site" content="@cjimti">
+<meta name="twitter:creator" content="@cjimti">
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="MCP Is Flawed. Build With It Anyway." />
+<meta name="twitter:description" content="Context has always been the hard problem. MCP forces you to solve it." />
+<meta name="twitter:image" content="https://imti.co/img/post/cable-room_876_438.jpg" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://imti.co/mcp-defense/" />
+<meta property="og:title" content="MCP Is Flawed. Build With It Anyway." />
+<meta property="og:description" content="Context has always been the hard problem. MCP forces you to solve it." />
+<meta property="og:image" content="https://imti.co/img/post/cable-room_876_438.jpg" />
+
+
+    
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https:\/\/imti.co\/mcp-defense\/"
+  },
+  "headline": "MCP Is Flawed. Build With It Anyway.",
+  "image": ["https:\/\/imti.co\/img\/post\/cable-room_876_438.jpg"],
+  "datePublished": "2026-01-20T00:00:00Z",
+  "dateModified": "2026-01-20T00:00:00Z",
+  "author": {
+    "@type": "Person",
+    "name": "Craig Johnston",
+    "url": "https://imti.co/about/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "imti.co",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https:\/\/imti.co\/img\/avatar-cj.jpg"
+    }
+  },
+  "description": "The Model Context Protocol has real security issues, scalability limits, and rough edges. None of that changes the fact that building custom MCP servers for …"
+}
+</script>
+
+
+</head>
+</head>
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="../">IMTI</a>
+        </div>
+
+        
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="../">Home</a>
+                    </li>
+                    <li>
+                        <a href="../about/">About</a>
+                    </li>
+                    <li>
+                        <a href="https://twitter.com/cjimti">Follow</a>
+                    </li>
+                    
+
+                    
+                    <li>
+                        <a href="javascript:void(0)" class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode" title="Toggle dark/light mode">
+                            <i class="fa fa-moon-o" id="theme-icon"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        
+    </div>
+    
+</nav>
+<script>
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+            $navbar.className = " ";
+            setTimeout(function(){
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+
+
+<style type="text/css">
+    header.intro-header{
+        background-image: url('https://imti.co/img/post/cable-room.jpg')
+    }
+</style>
+<header class="intro-header" >
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="../tags/mcp" title="MCP">
+                        MCP
+                        </a>
+                        
+                        <a class="tag" href="../tags/ai" title="AI">
+                        AI
+                        </a>
+                        
+                        <a class="tag" href="../tags/data" title="Data">
+                        Data
+                        </a>
+                        
+                        <a class="tag" href="../tags/architecture" title="Architecture">
+                        Architecture
+                        </a>
+                        
+                    </div>
+                    <h1>MCP Is Flawed. Build With It Anyway.</h1>
+                    <h2 class="subheading">Context has always been the hard problem. MCP forces you to solve it.</h2>
+                    <span  class="meta">Posted by <a href="https://twitter.com/cjimti">Craig Johnston</a> on Tuesday, January 20, 2026
+                        
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+<article>
+    <div class="container">
+        <div class="row">
+
+            
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <h2 id="tldr">TL;DR</h2>
+<ul>
+<li><strong>MCP has real flaws</strong>: security CVEs, scalability limits, immature OAuth. The critics aren&rsquo;t wrong.</li>
+<li><strong>Most criticism targets implementations and deployment mistakes</strong>, not the protocol itself. SQL injection didn&rsquo;t kill SQL; we learned parameterized queries.</li>
+<li><strong>For internal data platforms, the threat model changes entirely</strong>. You control the server, the network, the access model.</li>
+<li><strong>Context and metadata have always been the hard problem in data</strong>. MCP just makes the cost of bad metadata immediately visible.</li>
+<li><strong>Building MCP servers forces metadata investment that pays off regardless</strong>. If MCP dies tomorrow, you still have documented, well-governed data.</li>
+</ul>
+<hr>
+<p>I&rsquo;ve been experimenting with MCP for about six months now, building custom servers for data platform clients. Recently I started converting POCs and various experiments into legitimate OSS projects: <a href="../mcp-trino/">mcp-trino</a> for data warehouse access, <a href="../mcp-s3/">mcp-s3</a> for object storage, <a href="https://github.com/txn2/mcp-datahub">mcp-datahub</a> for semantic context. The three work together. mcp-datahub provides the metadata layer that makes mcp-trino and mcp-s3 useful. Not because the world needs another generic MCP server. I build them as composable Go libraries, and public repositories put me in a different mindset. With OSS I put more effort into things like keeping documentation up to date.</p>
+<p>MCP has problems. Serious ones. The security model is immature. The context window math doesn&rsquo;t work at scale. The OAuth spec is a mess. I&rsquo;ve read the criticism, and most of it is technically accurate.</p>
+<p>I&rsquo;m building with MCP anyway. Here&rsquo;s why.</p>
+<aside class="toc">
+    <header>
+        <h2>Contents</h2>
+    </header>
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#tldr">TL;DR</a></li>
+    <li><a href="#the-criticism-is-real">The criticism is real</a></li>
+    <li><a href="#is-it-the-technology-or-the-implementation">Is it the technology or the implementation?</a></li>
+    <li><a href="#why-none-of-that-stops-me">Why none of that stops me</a></li>
+    <li><a href="#context-was-always-the-problem">Context was always the problem</a></li>
+    <li><a href="#mcp-as-a-metadata-forcing-function">MCP as a metadata forcing function</a></li>
+    <li><a href="#composable-libraries-over-turn-key-packages">Composable libraries over turn-key packages</a></li>
+    <li><a href="#the-72k-token-problem">The 72K token problem</a></li>
+    <li><a href="#what-if-mcp-dies">What if MCP dies?</a></li>
+    <li><a href="#the-metadata-investment-pays-off-regardless">The metadata investment pays off regardless</a></li>
+    <li><a href="#practical-recommendations">Practical recommendations</a></li>
+    <li><a href="#the-protocol-doesnt-matter-the-context-does">The protocol doesn&rsquo;t matter. The context does.</a></li>
+    <li><a href="#resources">Resources</a></li>
+  </ul>
+</nav>
+</aside>
+<h2 id="the-criticism-is-real">The criticism is real</h2>
+<p>The problems are real. <a href="https://simonwillison.net/">Simon Willison</a>, who created <a href="https://datasette.io/">Datasette</a> and whose technical judgment I trust, has been documenting MCP&rsquo;s prompt injection vulnerabilities since April 2025. He demonstrated an exploit where a malicious GitHub MCP server could access private repositories. The attack vector is fundamental: LLMs can&rsquo;t distinguish between trusted commands and untrusted data.</p>
+<p>The CVE list is ugly. <a href="https://www.tenable.com/blog/how-tenable-research-discovered-a-critical-remote-code-execution-vulnerability-on-anthropic">CVE-2025-49596</a> scored 9.4 (critical) and enables remote code execution through MCP Inspector. <a href="https://nvd.nist.gov/vuln/detail/CVE-2025-6514">CVE-2025-6514</a> allows arbitrary OS command injection. <a href="https://www.bitsight.com/blog/exposed-mcp-servers-reveal-new-ai-vulnerabilities">Security researchers found 1,862 MCP servers</a> exposed to the internet, with 119 allowing tool access without any authentication.</p>
+<p>Context window bloat is the other serious issue. A single GitHub MCP server exposes 90+ tools, burning 50,000+ tokens before the user even asks a question. <a href="https://www.anthropic.com/engineering/code-execution-with-mcp">Anthropic&rsquo;s own engineering blog</a> acknowledges 72K tokens for tool definitions when you connect 50+ MCP tools. On <a href="https://github.com/sierra-research/tau-bench">τ-bench (Tau-Bench)</a> benchmarks, Claude Sonnet 3.7 achieves a 16% success rate on tool-using tasks.</p>
+<p><a href="https://blog.sshh.io/p/everything-wrong-with-mcp">Shrivu Shankar</a>, who describes himself as an &ldquo;MCP-fan&rdquo; and uses it daily, documented tool poisoning attacks and rug pull vulnerabilities. <a href="https://newsletter.victordibia.com/p/no-mcps-have-not-won-yet">Victor Dibia</a>, who contributes to <a href="https://github.com/microsoft/autogen">AutoGen</a> and has built extensively with MCP, wrote about the developer experience problems: 300 lines of code just for basic examples. The criticism comes from practitioners who want MCP to succeed.</p>
+<h2 id="is-it-the-technology-or-the-implementation">Is it the technology or the implementation?</h2>
+<p>Before dismissing MCP, separate protocol design flaws from implementation mistakes and deployment misconfigurations.</p>
+<p><strong>All software can be misused.</strong> SQL injection has existed for decades. We didn&rsquo;t abandon SQL. We learned to use parameterized queries. The CVEs being cited (<a href="https://www.tenable.com/blog/how-tenable-research-discovered-a-critical-remote-code-execution-vulnerability-on-anthropic">CVE-2025-49596</a>, CVE-2025-6514) are implementation bugs in specific tools, not protocol design flaws. The 1,862 exposed servers that <a href="https://www.bitsight.com/blog/exposed-mcp-servers-reveal-new-ai-vulnerabilities">BitSight found</a> represent a deployment misconfiguration, same category as exposing a database port to the internet. We don&rsquo;t blame TCP/IP for that.</p>
+<p><strong>Prompt injection is an LLM limitation, not an MCP limitation.</strong> LLMs fundamentally can&rsquo;t distinguish between trusted commands and untrusted data. This affects all LLM tool use, not just MCP. If you replaced MCP with any other protocol that lets AI interact with external systems, you&rsquo;d face the same problem. Simon Willison&rsquo;s <a href="https://simonwillison.net/2025/Apr/9/mcp-prompt-injection/">demonstration of MCP prompt injection</a> is good security research, but the vulnerability exists in the LLM layer, not the protocol layer. The <a href="https://invariantlabs.ai/blog/mcp-security-notification-tool-poisoning-attacks">tool poisoning attacks</a> documented by Invariant Labs would work with any similar system.</p>
+<p><strong>Security is always a spectrum.</strong> More access means more capability means more risk. This is the same trade-off you face with every API key, database connection, and service account. Organizations choose their position on that spectrum: read-only vs read-write, internal vs external, narrowly scoped vs broadly permissive. MCP gives you the flexibility to implement at any point on that spectrum. The protocol doesn&rsquo;t force you to expose write access. It doesn&rsquo;t force you to skip authentication. Those are choices.</p>
+<p>Tools like <a href="https://github.com/invariantlabs-ai/mcp-scan">MCP-Scan</a> exist to identify these risks before deployment.</p>
+<p><a href="https://x.com/ZackKorman">Zack Korman</a>, CTO at Pistachio, recently <a href="https://x.com/ZackKorman/status/2013509833991823621">demonstrated a persistence attack</a>: a malicious MCP server instructs the AI to write a skill, that skill modifies mcp_config.json, and the evil server gets re-added. Clever attack. But the fix belongs in the harness (Claude Code, Cursor), not the protocol. Block MCP from writing skills, block skills from touching MCP configs. Simple isolation rules.</p>
+<h2 id="why-none-of-that-stops-me">Why none of that stops me</h2>
+<p>The critics often miss something: they&rsquo;re evaluating MCP as a general-purpose tool for connecting AI assistants to arbitrary third-party services. That&rsquo;s one use case, and for that use case, the security concerns are disqualifying. I wouldn&rsquo;t install random MCP servers from the internet any more than I&rsquo;d run random npm packages in production without review.</p>
+<p>But that&rsquo;s not what I&rsquo;m building. I&rsquo;m building custom MCP servers for internal data platforms. The threat model is completely different.</p>
+<p>When I connect <a href="../mcp-trino/">mcp-trino</a> to an internal data warehouse, I control the server implementation. I wrote it. The code goes through the same review process as any other infrastructure component. There&rsquo;s no supply chain risk because there&rsquo;s no third-party supply chain.</p>
+<p>Network exposure? The MCP server runs inside our VPN, behind the same firewalls that protect the data warehouse itself. The 1,862 exposed servers TigerData found represent a configuration mistake I&rsquo;m not going to make.</p>
+<p>OAuth complexity? Internal deployments can use pre-registered clients through existing IAM. No Dynamic Client Registration, no complicated token flows. The server trusts requests that have valid internal credentials. Same pattern we&rsquo;ve used for every internal service for the past decade.</p>
+<p>The prompt injection concern is real even for internal deployments. Malicious content in table descriptions or query results can manipulate AI behavior. But the blast radius is contained. The AI can only do what the MCP server permits, and I control what the MCP server permits. Read-only access to metadata? That&rsquo;s the default in both mcp-trino and mcp-s3. The worst case is the AI misinterprets some data, not that it exfiltrates credentials or runs arbitrary code.</p>
+<h2 id="context-was-always-the-problem">Context was always the problem</h2>
+<p>Most commentary on MCP misses the point entirely. The discussion focuses on whether MCP is the right protocol, whether it&rsquo;ll survive, whether Anthropic will maintain it. Those questions matter for betting on ecosystem tooling. They don&rsquo;t matter for the underlying problem MCP is trying to solve.</p>
+<p>Context is the hard problem in any data platform. It was the hard problem before AI. It&rsquo;ll be the hard problem after MCP gets replaced by whatever comes next.</p>
+<p>Consider what happens when a new analyst joins your company. They have access to a data warehouse with 10,000 tables across 50 schemas. How do they know which tables to query? How do they know that <code>customer_id</code> in the sales schema refers to the same entity as <code>cust_id</code> in the legacy billing system? How do they know that the <code>revenue</code> column is in cents, not dollars, and excludes refunds processed after the 15th of each month?</p>
+<p>The metadata problem. It predates AI by decades. Data catalogs like <a href="https://datahubproject.io/">DataHub</a>, <a href="https://www.alation.com/">Alation</a>, and <a href="https://atlan.com/">Atlan</a> exist because organizations recognized they were drowning in data they couldn&rsquo;t understand. The entire field of data governance is basically &ldquo;how do we make our data self-describing?&rdquo;</p>
+<p>MCP doesn&rsquo;t solve this problem. But it forces you to confront it.</p>
+<h2 id="mcp-as-a-metadata-forcing-function">MCP as a metadata forcing function</h2>
+<p>When you build an MCP server for your data platform, you have to answer questions like:</p>
+<ul>
+<li>What tools should the AI have access to?</li>
+<li>What schemas and tables are relevant for which questions?</li>
+<li>What descriptions and metadata make tables discoverable?</li>
+<li>How should permissions work?</li>
+</ul>
+<p>These are the same questions your data catalog should already be answering for human users. But most organizations have let their catalogs rot. Tables have no descriptions. Columns are named <code>col1</code> through <code>col47</code>. Business definitions exist only in the heads of analysts who quit two years ago.</p>
+<p>Building an MCP server makes the cost of poor metadata immediate and obvious. When the AI can&rsquo;t answer questions because it doesn&rsquo;t know which table contains customer information, you feel it in real time. When it joins the wrong tables because nothing documents the relationships, the query returns garbage and you watch it happen.</p>
+<p>This feedback loop is faster and more visceral than waiting for an analyst to complain about documentation. The AI&rsquo;s confusion shows you exactly where your metadata falls short.</p>
+<p><a href="https://datahub.com/blog/datahub-mcp-server-block-ai-agents-use-case/">Block deployed DataHub&rsquo;s MCP Server</a> in production. Their Senior Software Engineer Sam Osborn said that &ldquo;something that might have taken days turns into a few conversation messages.&rdquo; That speedup requires metadata that actually describes the data. Without it, the MCP server is useless.</p>
+<h2 id="composable-libraries-over-turn-key-packages">Composable libraries over turn-key packages</h2>
+<p>Most MCP servers are npm packages. Turn-key API wrappers with tool descriptions. They don&rsquo;t tell the LLM how those tools relate to your data. They don&rsquo;t say &ldquo;use Trino for that, it&rsquo;s sales data&rdquo; or &ldquo;check S3 for generated reports, they sit in a bucket.&rdquo; If MCP is only about generic capabilities, you might as well <a href="https://intuitionlabs.ai/articles/claude-skills-vs-mcp">use skills instead</a>. The value of MCP is semantic context specific to your data.</p>
+<p>I built <a href="../mcp-trino/">mcp-trino</a> and <a href="../mcp-s3/">mcp-s3</a> differently. They&rsquo;re Go libraries built on <a href="https://github.com/mark3labs/mcp-go">mcp-go</a> that you can import and extend. The binary is just a thin wrapper for people who don&rsquo;t need customization.</p>
+<p>Every organization&rsquo;s data platform is different. You probably need:</p>
+<ul>
+<li>Authentication that integrates with your IAM</li>
+<li>Audit logging that meets your compliance requirements</li>
+<li>Query filtering that enforces your access policies</li>
+<li>Custom tools that reflect your specific domain</li>
+</ul>
+<p>A black-box MCP server can&rsquo;t do any of that without forking. A composable library lets you add middleware:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#75715e">// Add Trino tools with your policy layer</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">trinoTools</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">trino</span>.<span style="color:#a6e22e">NewTools</span>(<span style="color:#a6e22e">trinoConfig</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> <span style="color:#a6e22e">_</span>, <span style="color:#a6e22e">tool</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">trinoTools</span>.<span style="color:#a6e22e">GetTools</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">s</span>.<span style="color:#a6e22e">AddTool</span>(<span style="color:#a6e22e">tool</span>, <span style="color:#a6e22e">withAuth</span>(<span style="color:#a6e22e">withAudit</span>(<span style="color:#a6e22e">withQueryFilter</span>(<span style="color:#a6e22e">trinoTools</span>.<span style="color:#a6e22e">Handler</span>(<span style="color:#a6e22e">tool</span>)))))
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>This is the same pattern that made middleware successful in web frameworks. The core functionality is provided; the policy layer is yours to define.</p>
+<h2 id="the-72k-token-problem">The 72K token problem</h2>
+<p>The scalability issue is real and affects how you should design MCP integrations.</p>
+<p>72K tokens for tool definitions with 50+ MCP tools. The architecture requires it. The AI needs to understand what tools are available before it can decide which ones to use. More tools means more context spent on tool descriptions, leaving less context for actual reasoning.</p>
+<p>The practical implication: don&rsquo;t connect everything to everything. A general-purpose AI assistant with access to GitHub, Slack, email, calendar, 10 databases, 5 data lakes, and your CRM is going to be mediocre at all of those tasks.</p>
+<p>Build focused MCP servers for specific domains. A data platform MCP that connects Trino and S3 for analytics work. A separate development MCP with kubefwd for Kubernetes debugging. The analyst working with sales data doesn&rsquo;t need access to your CI/CD pipelines. The developer debugging pods doesn&rsquo;t need to query the data warehouse.</p>
+<p>Anthropic&rsquo;s November 2025 guidance essentially acknowledges this. They recommend having agents write code to call tools rather than using direct MCP tool calls at scale. Some interpreted this as Anthropic backing away from MCP. I read it as honest guidance about where the technology works today.</p>
+<h2 id="what-if-mcp-dies">What if MCP dies?</h2>
+<p>Maybe MCP gets replaced. The protocol is young. Google and OpenAI could announce competing standards tomorrow. Five years from now, we might be using something completely different.</p>
+<p>I don&rsquo;t think this changes the calculus.</p>
+<p>There&rsquo;s also a practical benefit: having a protocol helps when working with less technical clients. &ldquo;We&rsquo;re building on the Model Context Protocol&rdquo; is easier than explaining a bespoke integration. Standards create shared vocabulary, even imperfect ones.</p>
+<p>The value in building MCP servers comes from the work you do to expose your data in a structured, well-described, permission-controlled way. That work translates to whatever comes next.</p>
+<p>If you build an MCP server that exposes your Trino data warehouse with proper metadata, audit logging, and access controls, you have:</p>
+<ul>
+<li>A clear inventory of what data exists and how it relates</li>
+<li>Documentation that both humans and machines can consume</li>
+<li>An access control model you&rsquo;ve actually thought through</li>
+<li>Audit logging for compliance and debugging</li>
+</ul>
+<p>When the next protocol comes along, you port the server. The hard work was understanding your data and defining the policies around it. The protocol is just wire format.</p>
+<h2 id="the-metadata-investment-pays-off-regardless">The metadata investment pays off regardless</h2>
+<p>I keep coming back to this point because I think it&rsquo;s the most important and the least discussed.</p>
+<p>Organizations have been promising to improve their data documentation for twenty years. The promise never gets fulfilled because the payoff is distant and diffuse. Better metadata means faster analyst onboarding and fewer incorrect reports. None of that is urgent enough to prioritize over shipping features.</p>
+<p>AI changes the incentive structure. Bad metadata means your expensive AI assistant gives wrong answers in front of people who notice immediately. Good metadata means the AI actually works, and people see it work.</p>
+<p>That&rsquo;s the forcing function. Not because MCP is technically superior. Because it puts the cost of bad metadata in your face, in real time, in a way you can&rsquo;t ignore.</p>
+<p>I&rsquo;ve watched this happen on teams. Someone connects an MCP server to a poorly documented database. The AI hallucinates relationships between tables that don&rsquo;t actually join. Everyone sees it fail. Suddenly, documenting the schema becomes a priority that actually gets staffing.</p>
+<h2 id="practical-recommendations">Practical recommendations</h2>
+<p>If you&rsquo;re considering MCP for internal data platform integration, a few suggestions from the past few months of building:</p>
+<p>Start read-only. Both mcp-trino and mcp-s3 default to read-only mode, and that&rsquo;s intentional. Let the AI explore and query before you give it write access. You&rsquo;ll learn a lot about how it interprets your metadata before you trust it to modify anything.</p>
+<p>Version-pin and review MCP servers like any security-sensitive dependency. Even for internal servers you control, treat updates as changes that need review. The code that translates between AI intent and database queries is not the place for surprise changes.</p>
+<p>Build governance before you need it. Centralized logging of every MCP tool call. Usage monitoring. Anomaly detection. These feel like overkill until they&rsquo;re not.</p>
+<p>Assume internal data could be adversarial. Prompt injection from table descriptions is unlikely but possible. If someone can write to a column that the AI reads, they can influence AI behavior. Design accordingly.</p>
+<p>Keep MCP integrations focused. Don&rsquo;t build one server that does everything. Build specialized servers for specific domains. The context window limitations make this necessary, and it&rsquo;s better architecture anyway.</p>
+<p>Invest in metadata first. The MCP server is just a delivery mechanism. If your tables don&rsquo;t have descriptions, your columns aren&rsquo;t documented, your relationships aren&rsquo;t defined, the AI can&rsquo;t help you.</p>
+<h2 id="the-protocol-doesnt-matter-the-context-does">The protocol doesn&rsquo;t matter. The context does.</h2>
+<p>MCP might not be the final answer. The security model needs work. The scalability math is challenging. The spec is evolving faster than documentation can keep up.</p>
+<p>What matters: AI assistants are only as good as the context they have access to. For data platforms, context means metadata. Relationships, descriptions, business definitions, access policies.</p>
+<p>MCP is one way to deliver that context to AI assistants. It&rsquo;s the way that has momentum right now, with adoption from OpenAI, Google, Microsoft, and most major AI tooling vendors. Building for it makes sense given the current state of the ecosystem.</p>
+<p>But even if MCP disappears, the context problem remains. Every data platform will need some way to expose structured metadata to AI systems. The organizations that have their metadata in order will adapt quickly. The ones that don&rsquo;t will struggle with whatever protocol comes next, just like they&rsquo;re struggling now.</p>
+<p>So yes, MCP has flaws. Build with it anyway. The investment in metadata pays off regardless of what happens to the protocol.</p>
+<h2 id="resources">Resources</h2>
+<p>My MCP OSS projects:</p>
+<ul>
+<li><a href="../mcp-trino/">mcp-trino</a> - data warehouse access</li>
+<li><a href="../mcp-s3/">mcp-s3</a> - object storage</li>
+<li><a href="https://github.com/txn2/mcp-datahub">mcp-datahub</a> - semantic context layer</li>
+<li><a href="../kubefwd-mcp/">kubefwd MCP</a> - Kubernetes development</li>
+</ul>
+<p>MCP ecosystem:</p>
+<ul>
+<li><a href="https://modelcontextprotocol.io">Model Context Protocol specification</a></li>
+<li><a href="https://github.com/mark3labs/mcp-go">mcp-go SDK</a></li>
+<li><a href="https://github.com/acryldata/mcp-server-datahub">DataHub MCP Server</a></li>
+<li><a href="https://github.com/invariantlabs-ai/mcp-scan">MCP-Scan</a> - security scanning</li>
+</ul>
+<p>Critical perspectives worth reading:</p>
+<ul>
+<li><a href="https://simonwillison.net/2025/Apr/9/mcp-prompt-injection/">Simon Willison on MCP prompt injection</a></li>
+<li><a href="https://blog.sshh.io/p/everything-wrong-with-mcp">Shrivu Shankar: Everything Wrong with MCP</a></li>
+<li><a href="https://newsletter.victordibia.com/p/no-mcps-have-not-won-yet">Victor Dibia: No, MCPs have NOT won</a></li>
+<li><a href="https://news.ycombinator.com/item?id=43600192">HN: &ldquo;The S in MCP Stands for Security&rdquo;</a></li>
+<li><a href="https://unit42.paloaltonetworks.com/model-context-protocol-attack-vectors/">Palo Alto Unit 42 on MCP attack vectors</a></li>
+</ul>
+<p>Security research:</p>
+<ul>
+<li><a href="https://x.com/ZackKorman/status/2013509833991823621">Zack Korman on MCP/skill persistence attacks</a></li>
+<li><a href="https://github.com/promptfoo/evil-mcp-server">promptfoo/evil-mcp-server</a> - red team testing</li>
+<li><a href="https://www.tenable.com/blog/how-tenable-research-discovered-a-critical-remote-code-execution-vulnerability-on-anthropic">CVE-2025-49596 writeup (Tenable)</a></li>
+<li><a href="https://www.bitsight.com/blog/exposed-mcp-servers-reveal-new-ai-vulnerabilities">BitSight on exposed MCP servers</a></li>
+<li><a href="https://invariantlabs.ai/blog/mcp-security-notification-tool-poisoning-attacks">Invariant Labs on tool poisoning</a></li>
+</ul>
+<p>Data catalogs:</p>
+<ul>
+<li><a href="https://datahubproject.io/">DataHub</a>, <a href="https://www.alation.com/">Alation</a>, <a href="https://atlan.com/">Atlan</a></li>
+</ul>
+
+                <p>
+                   This blog post, titled: "<span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">MCP Is Flawed. Build With It Anyway.: Context has always been the hard problem. MCP forces you to solve it.</span>" by <a xmlns:cc="http://creativecommons.org/ns#" href="https://twitter.com/cjimti" property="cc:attributionName" rel="cc:attributionURL">Craig Johnston</a>, is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+                    <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a>
+                </p>
+
+            </div>
+            
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                
+                <section>
+                    <hr class="hidden-sm hidden-xs">
+                    <h5><a href="../tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                        
+                        
+                        
+                        <a href="../tags/ai" title="ai">
+                        ai
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="../tags/blockchain" title="blockchain">
+                        blockchain
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="../tags/data" title="data">
+                        data
+                        </a>
+                        
+                        
+                        
+                        <a href="../tags/data-science" title="data science">
+                        data science
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="../tags/development" title="development">
+                        development
+                        </a>
+                        
+                        
+                        
+                        <a href="../tags/devops" title="devops">
+                        devops
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="../tags/docker" title="docker">
+                        docker
+                        </a>
+                        
+                        
+                        
+                        <a href="../tags/elasticsearch" title="elasticsearch">
+                        elasticsearch
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="../tags/golang" title="golang">
+                        golang
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="../tags/ingress" title="ingress">
+                        ingress
+                        </a>
+                        
+                        
+                        
+                        <a href="../tags/iot" title="iot">
+                        iot
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="../tags/kubectl" title="kubectl">
+                        kubectl
+                        </a>
+                        
+                        
+                        
+                        <a href="../tags/kubefwd" title="kubefwd">
+                        kubefwd
+                        </a>
+                        
+                        
+                        
+                        <a href="../tags/kubernetes" title="kubernetes">
+                        kubernetes
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="../tags/mcp" title="mcp">
+                        mcp
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="../tags/microservices" title="microservices">
+                        microservices
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="../tags/python" title="python">
+                        python
+                        </a>
+                        
+                        
+                        
+                        <a href="../tags/raspberry-pi" title="raspberry pi">
+                        raspberry pi
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="../tags/security" title="security">
+                        security
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="../tags/utils" title="utils">
+                        utils
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                    </div>
+                </section>
+
+                
+                <hr>
+                <h5>RELATED</h5>
+                <ul class="list-inline">
+                    
+                </ul>
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                   
+                   <li>
+                       <a href="../index.xml" rel="alternate" type="application/rss+xml" title="IMTI" >
+                           <span class="fa-stack fa-lg">
+                               <i class="fa fa-circle fa-stack-2x"></i>
+                               <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+                           </span>
+                       </a>
+                   </li>
+                   
+                    
+                    <li>
+                        <a href="mailto:cjimti@gmail.com">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                    
+                    <li>
+                        <a href="https://twitter.com/cjimti">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/cjimti">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                    
+                    <li>
+                        <a target="_blank" href="https://www.linkedin.com/in/cjimti/">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+<script>
+    if($('#tag_cloud').length !== 0){
+        async("/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-R56SP4WLS2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-R56SP4WLS2');
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+<script>
+  mermaid.initialize({ theme: 'neutral' });
+  mermaid.run();
+</script>
+
+
+<script data-cfasync="false">
+(function() {
+    var themeToggle = document.getElementById('theme-toggle');
+    var themeIcon = document.getElementById('theme-icon');
+
+    function getCurrentTheme() {
+        return document.documentElement.getAttribute('data-theme') || 'light';
+    }
+
+    function updateIcon() {
+        var currentTheme = getCurrentTheme();
+        if (themeIcon) {
+            if (currentTheme === 'dark') {
+                themeIcon.className = 'fa fa-sun-o';
+            } else {
+                themeIcon.className = 'fa fa-moon-o';
+            }
+        }
+    }
+
+    function toggleTheme() {
+        var currentTheme = getCurrentTheme();
+        var newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+
+        if (newTheme === 'dark') {
+            document.documentElement.setAttribute('data-theme', 'dark');
+        } else {
+            document.documentElement.removeAttribute('data-theme');
+        }
+
+        localStorage.setItem('theme', newTheme);
+        updateIcon();
+    }
+
+    updateIcon();
+
+    if (themeToggle) {
+        themeToggle.addEventListener('click', toggleTheme);
+    }
+
+    if (window.matchMedia) {
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e) {
+            if (!localStorage.getItem('theme')) {
+                if (e.matches) {
+                    document.documentElement.setAttribute('data-theme', 'dark');
+                } else {
+                    document.documentElement.removeAttribute('data-theme');
+                }
+                updateIcon();
+            }
+        });
+    }
+})();
+</script>
+
+</body>
+</html>

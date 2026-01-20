@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Linear Algebra on IMTI</title>
+    <link>https://imti.co/tags/linear-algebra/</link>
+    <description>Recent content in Linear Algebra on IMTI</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 08 Dec 2018 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://imti.co/tags/linear-algebra/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Linear Algebra: Matrices 1</title>
+      <link>https://imti.co/linear-algebra-matrices/</link>
+      <pubDate>Sat, 08 Dec 2018 00:00:00 +0000</pubDate>
+      <guid>https://imti.co/linear-algebra-matrices/</guid>
+      <description>&lt;p&gt;This article on &lt;strong&gt;matrices&lt;/strong&gt; is part two of an ongoing crash course on programming with linear algebra, demonstrating concepts and implementations in Python. The following examples will demonstrate some of the various mathematical notations and their corresponding implementations, easily translatable to any programming language with mature math libraries.&lt;/p&gt;&#xA;&lt;p&gt;This series began with &lt;a href=&#34;https://imti.co/linear-algebra-vectors/&#34;&gt;Linear Algebra: Vectors Crash Course for Python Programmers Part 1&lt;/a&gt;. Vectors are the building blocks of matrices, and a good foundational understanding of vectors is essential to understanding matrices.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Linear Algebra: Vectors</title>
+      <link>https://imti.co/linear-algebra-vectors/</link>
+      <pubDate>Thu, 01 Nov 2018 00:00:00 +0000</pubDate>
+      <guid>https://imti.co/linear-algebra-vectors/</guid>
+      <description>&lt;p&gt;This article on &lt;strong&gt;vectors&lt;/strong&gt; is part of an ongoing crash course on linear algebra programming, demonstrating concepts and implementations in Python. The following examples will demonstrate some of the algebraic and geometric interpretations of a vector using Python. A vector is an ordered list of numbers, represented in row or column form.&lt;/p&gt;&#xA;&lt;p&gt;This small series of articles on linear algebra is meant to help you prepare for learning the deeper concepts related to Machine Learning and math that drives the higher level abstractions provided by many of the libraries available today.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

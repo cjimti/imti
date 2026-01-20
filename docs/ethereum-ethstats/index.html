@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head><head>
+    <meta name="msvalidate.01" content="DBC34551F2DD1BA3DC0D62EE46D7448F" />
+    <meta name="google-site-verification" content="DrtKc88u9uc7iptd4LyURAKBmFcOn7Kuk6HcRk_kNmo" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    
+    <script data-cfasync="false">
+        (function() {
+            var savedTheme = localStorage.getItem('theme');
+            var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+            var theme = savedTheme || (prefersDark ? 'dark' : 'light');
+            if (theme === 'dark') {
+                document.documentElement.setAttribute('data-theme', 'dark');
+            }
+        })();
+    </script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <meta name="description" content="Learning the Ethereum Blockchain through its metrics.">
+    
+    <meta name="keyword"  content="Go, Kubernetes, Elasticsearch, Python, Docker, Big Data, Artificial Intelligence, Machine Learning">
+    <link rel="shortcut icon" href="../img/favicon.ico">
+
+    <title>Ethereum Ethstats - IMTI - Craig Johnston</title>
+
+    <link rel="canonical" href="https://imti.co/ethereum-ethstats/">
+
+    
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+
+    
+    <link rel="stylesheet" href="../css/hux-blog.min.css">
+
+    
+    <link rel="stylesheet" href="../css/syntax.css">
+
+    
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    
+    
+    <link rel="stylesheet" href="../css/imti.css">
+
+    
+    <script src="../js/jquery.min.js"></script>
+
+    
+    <script src="../js/bootstrap.min.js"></script>
+
+    
+    <script src="../js/hux-blog.min.js"></script>
+
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({
+            google_ad_client: "ca-pub-5984764595236029",
+            enable_page_level_ads: true
+        });
+    </script>
+
+    <meta name="twitter:site" content="@cjimti">
+<meta name="twitter:creator" content="@cjimti">
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Ethereum Ethstats" />
+<meta name="twitter:description" content="Learning the Ethereum Blockchain through its metrics." />
+<meta name="twitter:image" content="https://imti.co/img/post/ethstats_876_438.jpg" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://imti.co/ethereum-ethstats/" />
+<meta property="og:title" content="Ethereum Ethstats" />
+<meta property="og:description" content="Learning the Ethereum Blockchain through its metrics." />
+<meta property="og:image" content="https://imti.co/img/post/ethstats_876_438.jpg" />
+
+
+    
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https:\/\/imti.co\/ethereum-ethstats\/"
+  },
+  "headline": "Ethereum Ethstats",
+  "image": ["https:\/\/imti.co\/img\/post\/ethstats_876_438.jpg"],
+  "datePublished": "2018-09-22T00:00:00Z",
+  "dateModified": "2018-09-22T00:00:00Z",
+  "author": {
+    "@type": "Person",
+    "name": "Craig Johnston",
+    "url": "https://imti.co/about/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "imti.co",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https:\/\/imti.co\/img\/avatar-cj.jpg"
+    }
+  },
+  "description": "The eth-netstats project provides a great dashboard interface for monitoring the status of an Ethereum Blockchain from the perspective of its nodes. The website …"
+}
+</script>
+
+
+</head>
+</head>
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="../">IMTI</a>
+        </div>
+
+        
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="../">Home</a>
+                    </li>
+                    <li>
+                        <a href="../about/">About</a>
+                    </li>
+                    <li>
+                        <a href="https://twitter.com/cjimti">Follow</a>
+                    </li>
+                    
+
+                    
+                    <li>
+                        <a href="javascript:void(0)" class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode" title="Toggle dark/light mode">
+                            <i class="fa fa-moon-o" id="theme-icon"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        
+    </div>
+    
+</nav>
+<script>
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+            $navbar.className = " ";
+            setTimeout(function(){
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+
+
+<style type="text/css">
+    header.intro-header{
+        background-image: url('https://imti.co/img/post/ethstatsbg.jpg')
+    }
+</style>
+<header class="intro-header" >
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="../tags/ethereum" title="Ethereum">
+                        Ethereum
+                        </a>
+                        
+                        <a class="tag" href="../tags/blockchain" title="Blockchain">
+                        Blockchain
+                        </a>
+                        
+                    </div>
+                    <h1>Ethereum Ethstats</h1>
+                    <h2 class="subheading">Learning the Ethereum Blockchain through its metrics.</h2>
+                    <span  class="meta">Posted by <a href="https://twitter.com/cjimti">Craig Johnston</a> on Saturday, September 22, 2018
+                        
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+<article>
+    <div class="container">
+        <div class="row">
+
+            
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <p>The <a href="https://github.com/cubedro/eth-netstats">eth-netstats</a> project provides a great dashboard interface for monitoring the status of an Ethereum Blockchain from the perspective of its nodes. The website <a href="https://ethstats.net/">https://ethstats.net/</a> reports statistics from an extensive list of Ethereum nodes on the public <a href="https://ethereum.org">Ethereum</a> Blockchain, however, the <a href="https://github.com/cubedro/eth-netstats">eth-netstats</a> software that drives <a href="https://ethstats.net/">https://ethstats.net/</a> can also be used to monitor a <a href="https://imti.co/ethereum-kubernetes/">Private Ethereum Blockchchain</a> as I demonstrate in the previous article <a href="https://imti.co/ethereum-kubernetes/">Deploy a Private Ethereum Blockchain on a Custom Kubernetes Cluster</a>.</p>
+<p>The <a href="https://github.com/cubedro/eth-netstats">eth-netstats</a> service consumes Ethereum statistical metrics provided by individual Ethereum nodes. Check out the documentation on <a href="https://github.com/ethereum/go-ethereum/wiki/geth">Geth</a> if you are interested in running an Ethereum miner or transaction only node and pointing it&rsquo;s statistical output to an <a href="https://github.com/cubedro/eth-netstats">eth-netstats</a> instance.</p>
+<p>In this article, I review each of the metrics displayed by <a href="https://github.com/cubedro/eth-netstats">eth-netstats</a>, as both a means to better understand the <a href="https://github.com/cubedro/eth-netstats">eth-netstats</a> utility as well as Ethereum itself.</p>
+<p><a href="https://ethstats.net/"><img src="../img/post/ethstats.jpg" alt="Ethstats Dashboard"></a></p>
+
+
+<p>See Ethstats in action at <a href="https://ethstats.net/">https://ethstats.net/</a> for a live example of Ethereum Blockchain metrics from miners on the public Ethereum blockchain.</p>
+<p>The following table is a brief overview of the metrics displayed by <a href="https://github.com/cubedro/eth-netstats">eth-netstats</a> starting from the top left, moving from left to right, row by row.</p>
+<table>
+<thead>
+    <tr>
+        <th width="30%">Image</th>
+        <th>Metric</th>
+        <th>Description</th>
+    </tr>
+</thead>
+    <tr>
+        <td><img src="../img/post/ethstats/01_best_block.jpg" alt="best block"/></td>
+        <td><h3>Best Block</h3></td>
+        <td><p>The Best Block is last valid block with the highest amount of accumulated work in it on the main Ethereum Blockchain.</p>
+        <ul>
+            <li><a href="https://www.coindesk.com/information/ethereum-mining-works/">How Ethereum Mining Works</a></li>
+            <li><a href="https://blockgeeks.com/guides/what-is-blockchain-technology/">What is Blockchain Technology? A Step-by-Step Guide For Beginners</a></li>
+        </td>
+    </tr>
+    <tr>
+        <td><img src="../img/post/ethstats/02_uncles.jpg" alt="Ethereum Uncles"/></td>
+        <td><h3>Uncles</h3></td>
+        <td><p>Uncles are orphaned blocks that were mined just after someone else found the correct block header. Ethereum treats orphaned blocks different than other blockchain systems by including them in the blockchain and rewarding miner for them. Ethstats displays the current block's uncle count and uncle count of the last 50 blocks.</p>
+        <ul>
+            <li><a href="https://nulltx.com/what-are-ethereum-uncles/">What are Ethereum Uncles?</a></li>
+            <li><a href="https://medium.com/ibbc-io/ethereum-uncles-how-family-makes-you-stronger-d6e7aaef7b2b">Ethereum & uncles: how family makes you stronger</a></li>
+        </td>
+    </tr>
+    <tr>
+        <td><img src="../img/post/ethstats/03_last_block.jpg" alt="last block"/></td>
+        <td><h3>Last Block</h3></td>
+        <td><p>Ethstats displays the elapsed time since the last block was mined.</p>
+        <ul>
+        <li><a href="https://etherscan.io/chart/blocks">Ethereum Block Count</a></li>
+        <li><a href="https://etherscan.io/chart/blocktime">Ethereum BlockTime History</a></li>
+        </ul>
+        </td>
+    </tr>
+    <tr>
+        <td><img src="../img/post/ethstats/04_avg_block_time.jpg" alt="average block time"/></td>
+        <td><h3>Average Block Time</h3></td>
+        <td><p>The average time between block generation, not including uncles.</p>
+        <ul>
+        <li><a href="https://medium.facilelogin.com/the-mystery-behind-block-time-63351e35603a">The Mystery Behind Block Time</a></li>
+        <li><a href="https://www.etherchain.org/charts/blockTime">Average block time of the (Public) Ethereum Network</a></li>
+        </ul>
+        </td>
+    </tr>
+    <tr>
+        <td><img src="../img/post/ethstats/05_avg_network_hashrate.jpg" alt="Average Network Hashrate"/></td>
+        <td><h3>Average Network Hashrate</h3></td>
+        <td><p>The number of hashes per second processed by miners on the network in order to find a new block. The Network in this case being miners reporting to Ethstats.</p>
+        <ul>
+        <li><a href="https://github.com/ethereum/wiki/wiki/Mining">Mining</a></li>
+        <li><a href="https://www.buybitcoinworldwide.com/mining/hash-rate/">What is Hash Rate?</a></li>
+        <li><a href="https://ethereum.stackexchange.com/questions/18162/how-is-average-network-hashrate-determined">How is average network hashrate determined? - Ethereum Stack Exchange</a></li>
+        <li><a href="https://etherscan.io/chart/hashrate">Ethereum Network HashRate Growth Chart - Etherscan</a></li>
+        </ul>
+        </td>
+    </tr>
+    <tr>
+        <td><img src="../img/post/ethstats/06_difficulty.jpg" alt="Ethereum Difficulty"/></td>
+        <td><h3>Difficulty</h3></td>
+        <td><p>The current difficulty to mine a new block by finding a matching hash.</p>
+        <ul>
+        <li><a href="https://en.bitcoin.it/wiki/Difficulty">Difficulty
+ - Bitcoin Wiki</a></li>
+        <li><a href="https://bitcoin.stackexchange.com/questions/23099/what-does-the-mining-difficulty-number-really-mean">What does the mining difficulty number really mean?
+</a></li>
+        <li><a href="https://www.investopedia.com/news/what-ethereums-difficulty-bomb/">What Is Ethereum's "Difficulty Bomb"?</a></li>
+        <li><a href="https://ethereum.stackexchange.com/questions/1880/how-is-the-mining-difficulty-calculated-on-ethereum">How is the Mining Difficulty calculated on Ethereum?</a></li>
+        </ul>
+        </td>
+    </tr>
+    </tr>
+    <tr>
+        <td><img src="../img/post/ethstats/07_active_nodes.jpg" alt="Active Ethereum nodes"/></td>
+        <td><h3>Active Nodes</h3></td>
+        <td>
+        <p>The number of nodes currently connected to the Ethstats service.</p>
+        <ul>
+        <li><a href="https://ethstats.net/">Public Ethstats</a></li>
+        <li><a href="https://imti.co/ethereum-kubernetes/#ethstats-dashboard">Private Ethstats</a></li>
+        </ul>
+        </td>
+    </tr>
+    <tr>
+        <td><img src="../img/post/ethstats/08_gas_price.jpg" alt="Gas Price"/></td>
+        <td><h3>Gas Price</h3></td>
+        <td>
+        <p>Gas Price is the current price miners will accept for processing a transaction.</p>
+        <ul>
+        <li><a href="https://kb.myetherwallet.com/gas/what-is-gas-ethereum.html">What is Gas?</a></li>
+        <li><a href="https://www.cryptocompare.com/coins/guides/what-is-the-gas-in-ethereum/">What is the “Gas” in Ethereum?</a></li>
+        <li><a href="https://medium.com/gitcoin/a-brief-history-of-gas-prices-on-ethereum-52e278a04306">A Brief History Of Gas Prices on Ethereum</a></li>
+        </ul>
+        </td>
+    </tr>
+    <tr>
+        <td><img src="../img/post/ethstats/09_page_latency.jpg" alt="Ethstats Page Latency"/></td>
+        <td><h3>Page Latency</h3></td>
+        <td>
+        <p>The latency in time between a rendered Etherstats front-end dashboard (in your web browser) and it's backend data service.</p>
+        </td>
+    </tr>
+    <tr>
+        <td><img src="../img/post/ethstats/10_uptime.jpg" alt="Ethstatus Uptime"/></td>
+        <td><h3>Uptime</h3></td>
+        <td>
+        <p>The amount of time Etherstats has been running since started or re-started.</p>
+        </td>
+    </tr>
+    <tr>
+        <td><img src="../img/post/ethstats/11_map.jpg" alt=""/></td>
+        <td><h3>Geo Locations</h3></td>
+        <td>
+        <p>Location of Ethereum nodes reporting to Etherstats.</p>
+        </td>
+    </tr>
+    <tr>
+        <td><img src="../img/post/ethstats/12_blocktime.jpg" alt=""/></td>
+        <td><h3>Blocktime Chart</h3></td>
+        <td>
+        <p>Blocktime averages over time.</p>
+        <ul>
+        <li><a href="https://bitinfocharts.com/comparison/ethereum-confirmationtime.html">Ethereum Block Time historical chart</a></li>
+        </ul>
+        </td>
+    </tr>
+    <tr>
+        <td><img src="../img/post/ethstats/13_difficulty.jpg" alt=""/></td>
+        <td><h3>Difficulty Chart</h3></td>
+        <td>
+        <p>Difficulty over time.</p>
+        <ul>
+        <li><a href="https://dltlabs.com/how-difficulty-adjustment-algorithm-works-in-ethereum/">How Difficulty Adjustment Algorithm Works in Ethereum</a></li>
+        <li><a href="https://etherscan.io/chart/difficulty">Ethereum Block Time historical chart</a></li>
+        </ul>
+        </td>
+    </tr>
+    <tr>
+        <td><img src="../img/post/ethstats/14_block_propagation.jpg" alt=""/></td>
+        <td><h3>Block Propagation</h3></td>
+        <td>
+        <p>Block Propagation tracks the speed in which blocks are shared between nodes connected to Ethstats.</p>
+        <ul>
+        <li><a href="https://ethereum.stackexchange.com/questions/28666/whats-the-transaction-throughput-on-ethereum-how-fast-the-nodes-can-replicate">What's the transaction-throughput on Ethereum (how fast the nodes can replicate transactions, not transactions per second)</a></li>
+        <li><a href="https://medium.com/blockchannel/life-cycle-of-an-ethereum-transaction-e5c66bae0f6e">Life Cycle of an Ethereum Transaction</a></li>
+        </ul>
+        </td>
+    </tr>
+    <tr>
+        <td><img src="../img/post/ethstats/15_last_blocks_miners.jpg" alt="Ethereum Ethstats Last Block Miners"/></td>
+        <td><h3>Last Blocks Miners</h3></td>
+        <td>
+        <p>Nodes that found the most Block, not including Uncles. </p>
+        <ul>
+        <li><a href="https://www.etherchain.org/charts/topMiners">Top Miners over the last 24h</a></li>
+        <li><a href="https://etherscan.io/blocks">Last Public Blocks</a></li>
+        </ul>
+        </td>
+    </tr>
+    <tr>
+        <td><img src="../img/post/ethstats/16_uncle_count.jpg" alt="Ethstats Uncle Count"/></td>
+        <td><h3>Uncle Count</h3></td>
+        <td>
+        <p>Uncle Count displays the number of Uncles generated. Each bar represents 25 blocks.</p>
+        <ul>
+        <li><a href="https://etherscan.io/chart/uncles">Ethereum Uncles Count</a></li>
+        </ul>
+        </td>
+    </tr>
+    <tr>
+        <td><img src="../img/post/ethstats/17_transactions.jpg" alt="Ethstats Ethereum Transactions"/></td>
+        <td><h3>Transactions</h3></td>
+        <td>
+        <p>Displays the number of transactions included in the latest blocks.</p>
+        <ul>
+        <li><a href="https://etherscan.io/txs">Ethereum Transactions</a></li>
+        </ul>
+        </td>
+    </tr>
+    <tr>
+        <td><img src="../img/post/ethstats/18_gas_spending.jpg" alt=""/></td>
+        <td><h3>Gas Spending</h3></td>
+        <td>
+        <p>The amount of Gas spent on transactions in recent blocks.</p>
+        <ul>
+        <li><a href="https://ethgasstation.info/index.php">ETH Gas Station</a></li>
+        </ul>
+        </td>
+    </tr>
+    <tr>
+        <td><img src="../img/post/ethstats/19_node_name.jpg" alt="Ethereum Ethstats Node Name"/></td>
+        <td><h3>Node Name</h3></td>
+        <td>
+        <p></p>
+        <ul>The name of the node reporting to Ethstats.
+        <li><a href="https://github.com/ethereum/go-ethereum/wiki/Command-Line-Options">Geth Documentation</a></li>
+        </ul>
+        </td>
+    </tr>
+    <tr>
+        <td><img src="../img/post/ethstats/20_node_type_arch.jpg" alt=""/></td>
+        <td><h3>Node Type</h3></td>
+        <td>
+        <p>Type and architecture of connected Ethereum nodes. Common node types are Geth, Ethminer and Parity.</p>
+        <ul>
+        <li><a href="https://github.com/ethereum/go-ethereum/wiki/geth">Geth -  is the the command line interface for running a full ethereum node implemented in Go.</a></li>
+        <li><a href="https://github.com/ethereum-mining/ethminer">ethminer - is an Ethash GPU mining worker: with ethminer you can mine every coin which relies on an Ethash Proof of Work thus including Ethereum, Ethereum Classic, Metaverse, Musicoin, Ellaism, Pirl, Expanse and others.</a></li>
+        <li><a href="https://www.parity.io/">https://www.parity.io/ethereum/</a></li>
+        </ul>
+        </td>
+    </tr>
+    <tr>
+        <td><img src="../img/post/ethstats/21_node_latency.jpg" alt=""/></td>
+        <td><h3>Node Latency</h3></td>
+        <td>
+        <p>The latency in time between the reporting node and Ethstats.</p>
+        <ul>
+        <li><a href="https://ethereum.stackexchange.com/questions/18201/does-network-latency-significantly-affect-mining-rewards">Does network latency significantly affect mining rewards?
+</a></li>
+        </ul>
+        </td>
+    </tr>
+    <tr>
+        <td><img src="../img/post/ethstats/22_node_miner_hash_rate.jpg" alt=""/></td>
+        <td><h3>Node Miner Hash Rate</h3></td>
+        <td>
+        <p>The hash rate the node reporting to Ethstats.</p>
+        </td>
+    </tr>
+    <tr>
+        <td><img src="../img/post/ethstats/23_node_peers.jpg" alt=""/></td>
+        <td><h3>Node Peers</h3></td>
+        <td>
+        <p>Number of peers connected to a specific node.</p>
+        <ul>
+        <li><a href="https://github.com/ethereum/go-ethereum/wiki/Connecting-to-the-network">Connecting to the network</a></li>
+        <li><a href="https://www.ethernodes.org/network/1">Ethereum Nodes</a></li>
+        </ul>
+        </td>
+    </tr>
+    <tr>
+        <td><img src="../img/post/ethstats/24_pending_transactions.jpg" alt=""/></td>
+        <td><h3>Pending Transactions</h3></td>
+        <td>
+        <p>Number of transaction pending for a specific node.</p>
+    </tr>
+    <tr>
+        <td><img src="../img/post/ethstats/25_node_last_block.jpg" alt=""/></td>
+        <td><h3>Node Last Block</h3></td>
+        <td>
+        <p>The Last Bock a specific node is aware of.</p>
+        </td>
+    </tr>
+    <tr>
+        <td><img src="../img/post/ethstats/26_block_transactions.jpg" alt=""/></td>
+        <td><h3>Block Transactions</h3></td>
+        <td>
+        <p>Number of transactions a blow is aware of and pending. These transactions will be added to the next block.</p>
+        </td>
+    </tr>
+    <tr>
+        <td><img src="../img/post/ethstats/27_uncles.jpg" alt=""/></td>
+        <td><h3>Node Uncles</h3></td>
+        <td>
+        <p>Number of Uncles a node has reported creating.</p>
+        </td>
+    </tr>
+    <tr>
+        <td><img src="../img/post/ethstats/28_last_block_time.jpg" alt=""/></td>
+        <td><h3>Last Block Time</h3></td>
+        <td>
+        <p>The last time a node was aware of a Block being created.</p>
+        </td>
+    </tr>
+    <tr>
+        <td><img src="../img/post/ethstats/29_propagation_time.jpg" alt=""/></td>
+        <td><h3>Propagation Time</h3></td>
+        <td>
+        <p>How long block takes to propagate to a node over time.</p>
+        </td>
+    </tr>
+    <tr>
+        <td><img src="../img/post/ethstats/30_avg_propagation_time.jpg" alt=""/></td>
+        <td><h3>Average Propagation Time</h3></td>
+        <td>
+        <p>The average time it takes to propagate a block to this node.</p>
+        </td>
+    </tr>
+    <tr>
+        <td><img src="../img/post/ethstats/31_node_uptime.jpg" alt=""/></td>
+        <td><h3>Node Uptime</h3></td>
+        <td>
+        <p>Node Uptime reports the percentage of time a node has reported as running since connected to Ethstats.</p>
+        </td>
+    </tr>
+</table>
+
+
+                <p>
+                   This blog post, titled: "<span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">Ethereum Ethstats: Learning the Ethereum Blockchain through its metrics.</span>" by <a xmlns:cc="http://creativecommons.org/ns#" href="https://twitter.com/cjimti" property="cc:attributionName" rel="cc:attributionURL">Craig Johnston</a>, is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+                    <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a>
+                </p>
+
+            </div>
+            
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                
+                <section>
+                    <hr class="hidden-sm hidden-xs">
+                    <h5><a href="../tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                        
+                        
+                        
+                        <a href="../tags/ai" title="ai">
+                        ai
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="../tags/blockchain" title="blockchain">
+                        blockchain
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="../tags/data" title="data">
+                        data
+                        </a>
+                        
+                        
+                        
+                        <a href="../tags/data-science" title="data science">
+                        data science
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="../tags/development" title="development">
+                        development
+                        </a>
+                        
+                        
+                        
+                        <a href="../tags/devops" title="devops">
+                        devops
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="../tags/docker" title="docker">
+                        docker
+                        </a>
+                        
+                        
+                        
+                        <a href="../tags/elasticsearch" title="elasticsearch">
+                        elasticsearch
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="../tags/golang" title="golang">
+                        golang
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="../tags/ingress" title="ingress">
+                        ingress
+                        </a>
+                        
+                        
+                        
+                        <a href="../tags/iot" title="iot">
+                        iot
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="../tags/kubectl" title="kubectl">
+                        kubectl
+                        </a>
+                        
+                        
+                        
+                        <a href="../tags/kubefwd" title="kubefwd">
+                        kubefwd
+                        </a>
+                        
+                        
+                        
+                        <a href="../tags/kubernetes" title="kubernetes">
+                        kubernetes
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="../tags/mcp" title="mcp">
+                        mcp
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="../tags/microservices" title="microservices">
+                        microservices
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="../tags/python" title="python">
+                        python
+                        </a>
+                        
+                        
+                        
+                        <a href="../tags/raspberry-pi" title="raspberry pi">
+                        raspberry pi
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="../tags/security" title="security">
+                        security
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="../tags/utils" title="utils">
+                        utils
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                    </div>
+                </section>
+
+                
+                <hr>
+                <h5>RELATED</h5>
+                <ul class="list-inline">
+                    
+                </ul>
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                   
+                   <li>
+                       <a href="../index.xml" rel="alternate" type="application/rss+xml" title="IMTI" >
+                           <span class="fa-stack fa-lg">
+                               <i class="fa fa-circle fa-stack-2x"></i>
+                               <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+                           </span>
+                       </a>
+                   </li>
+                   
+                    
+                    <li>
+                        <a href="mailto:cjimti@gmail.com">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                    
+                    <li>
+                        <a href="https://twitter.com/cjimti">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/cjimti">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                    
+                    <li>
+                        <a target="_blank" href="https://www.linkedin.com/in/cjimti/">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+<script>
+    if($('#tag_cloud').length !== 0){
+        async("/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-R56SP4WLS2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-R56SP4WLS2');
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+<script>
+  mermaid.initialize({ theme: 'neutral' });
+  mermaid.run();
+</script>
+
+
+<script data-cfasync="false">
+(function() {
+    var themeToggle = document.getElementById('theme-toggle');
+    var themeIcon = document.getElementById('theme-icon');
+
+    function getCurrentTheme() {
+        return document.documentElement.getAttribute('data-theme') || 'light';
+    }
+
+    function updateIcon() {
+        var currentTheme = getCurrentTheme();
+        if (themeIcon) {
+            if (currentTheme === 'dark') {
+                themeIcon.className = 'fa fa-sun-o';
+            } else {
+                themeIcon.className = 'fa fa-moon-o';
+            }
+        }
+    }
+
+    function toggleTheme() {
+        var currentTheme = getCurrentTheme();
+        var newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+
+        if (newTheme === 'dark') {
+            document.documentElement.setAttribute('data-theme', 'dark');
+        } else {
+            document.documentElement.removeAttribute('data-theme');
+        }
+
+        localStorage.setItem('theme', newTheme);
+        updateIcon();
+    }
+
+    updateIcon();
+
+    if (themeToggle) {
+        themeToggle.addEventListener('click', toggleTheme);
+    }
+
+    if (window.matchMedia) {
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e) {
+            if (!localStorage.getItem('theme')) {
+                if (e.matches) {
+                    document.documentElement.setAttribute('data-theme', 'dark');
+                } else {
+                    document.documentElement.removeAttribute('data-theme');
+                }
+                updateIcon();
+            }
+        });
+    }
+})();
+</script>
+
+</body>
+</html>

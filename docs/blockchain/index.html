@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head><head>
+    <meta name="msvalidate.01" content="DBC34551F2DD1BA3DC0D62EE46D7448F" />
+    <meta name="google-site-verification" content="DrtKc88u9uc7iptd4LyURAKBmFcOn7Kuk6HcRk_kNmo" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    
+    <script data-cfasync="false">
+        (function() {
+            var savedTheme = localStorage.getItem('theme');
+            var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+            var theme = savedTheme || (prefersDark ? 'dark' : 'light');
+            if (theme === 'dark') {
+                document.documentElement.setAttribute('data-theme', 'dark');
+            }
+        })();
+    </script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <meta name="description" content="A Conceptual and Motivational Overview">
+    
+    <meta name="keyword"  content="Go, Kubernetes, Elasticsearch, Python, Docker, Big Data, Artificial Intelligence, Machine Learning">
+    <link rel="shortcut icon" href="../img/favicon.ico">
+
+    <title>Blockchain - IMTI - Craig Johnston</title>
+
+    <link rel="canonical" href="https://imti.co/blockchain/">
+
+    
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+
+    
+    <link rel="stylesheet" href="../css/hux-blog.min.css">
+
+    
+    <link rel="stylesheet" href="../css/syntax.css">
+
+    
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    
+    
+    <link rel="stylesheet" href="../css/imti.css">
+
+    
+    <script src="../js/jquery.min.js"></script>
+
+    
+    <script src="../js/bootstrap.min.js"></script>
+
+    
+    <script src="../js/hux-blog.min.js"></script>
+
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({
+            google_ad_client: "ca-pub-5984764595236029",
+            enable_page_level_ads: true
+        });
+    </script>
+
+    <meta name="twitter:site" content="@cjimti">
+<meta name="twitter:creator" content="@cjimti">
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Blockchain" />
+<meta name="twitter:description" content="A Conceptual and Motivational Overview" />
+<meta name="twitter:image" content="https://imti.co/img/post/blockchainconcept_876_438.jpg" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://imti.co/blockchain/" />
+<meta property="og:title" content="Blockchain" />
+<meta property="og:description" content="A Conceptual and Motivational Overview" />
+<meta property="og:image" content="https://imti.co/img/post/blockchainconcept_876_438.jpg" />
+
+
+    
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https:\/\/imti.co\/blockchain\/"
+  },
+  "headline": "Blockchain",
+  "image": ["https:\/\/imti.co\/img\/post\/blockchainconcept_876_438.jpg"],
+  "datePublished": "2018-09-01T00:00:00Z",
+  "dateModified": "2018-09-01T00:00:00Z",
+  "author": {
+    "@type": "Person",
+    "name": "Craig Johnston",
+    "url": "https://imti.co/about/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "imti.co",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https:\/\/imti.co\/img\/avatar-cj.jpg"
+    }
+  },
+  "description": "The Internet of Transactions Blockchain may be a recent entry to the technology landscape. However, it has quickly become an essential iteration in the …"
+}
+</script>
+
+
+</head>
+</head>
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="../">IMTI</a>
+        </div>
+
+        
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="../">Home</a>
+                    </li>
+                    <li>
+                        <a href="../about/">About</a>
+                    </li>
+                    <li>
+                        <a href="https://twitter.com/cjimti">Follow</a>
+                    </li>
+                    
+
+                    
+                    <li>
+                        <a href="javascript:void(0)" class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode" title="Toggle dark/light mode">
+                            <i class="fa fa-moon-o" id="theme-icon"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        
+    </div>
+    
+</nav>
+<script>
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+            $navbar.className = " ";
+            setTimeout(function(){
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+
+
+<style type="text/css">
+    header.intro-header{
+        background-image: url('https://imti.co/img/post/blockchainconcept.jpg')
+    }
+</style>
+<header class="intro-header" >
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="../tags/blockchain" title="Blockchain">
+                        Blockchain
+                        </a>
+                        
+                    </div>
+                    <h1>Blockchain</h1>
+                    <h2 class="subheading">A Conceptual and Motivational Overview</h2>
+                    <span  class="meta">Posted by <a href="https://twitter.com/cjimti">Craig Johnston</a> on Saturday, September 1, 2018
+                        
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+<article>
+    <div class="container">
+        <div class="row">
+
+            
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <h3 id="the-internet-of-transactions">The Internet of Transactions</h3>
+<p>Blockchain may be a recent entry to the technology landscape. However, it has quickly become an essential iteration in the evolution of peer-to-peer communication and distributed computing. Originally developed as a way to protect digital currency, Blockchain technologies now support any digital asset, from signal data to complex messaging, to the execution of business logic through code. Blockchain technologies are rapidly forming a new decentralized internet of transactions.</p>
+
+
+<h3 id="transactional-integrity-and-security">Transactional Integrity and Security</h3>
+<p>Blockchain provides the ability to ensure the integrity and immutability of data; it&rsquo;s origin, destination, and occurrence, as well as computational logic.  Blockchain delivers mathematically-sound proof, through consensus-based validation of public or privately shared ledgers. Defined protocols allow consensus to replace central trust, rejecting compromised nodes and data that is incompatible with the agreement of the majority.</p>
+<h3 id="decentralization-and-distribution">Decentralization and Distribution</h3>
+<p>Blockchain technologies employ decentralized peer networks, using well-defined algorithms and protocols to distribute transactions and proof of their integrity. Blockchain&rsquo;s decentralization removes the need for any single point of trust and prevents any single point of failure.</p>
+<h3 id="the-cloud">The Cloud</h3>
+<p>The Cloud was once nearly synonymous with select vendors offering a variety of managed services. While many of the services managed by leading vendors were often open source application, readily available to anyone, value was provided through vendor proprietary orchestration and interconnectivity. The recent advances of Cloud Native technologies and standards in containerization and container orchestration have paved the way for new vendor-neutral frameworks to emerge. Blockchain frameworks have been quick to support and extend this new Cloud Native ecosystem making vendor lock-in unnessary for rapidly deploying new implementations.</p>
+<h3 id="aiml">AI/ML</h3>
+<p>Artifical Intelligence has traditionally placed its trust in logic designed and implemented by knowledge engineers. The most radical advancements in recent AI technologies are now in the field of Machine Learning. The new breed of intelligent systems not only make decisions based on data but have likely derived their existing knowledge from it. Blockchain technologies ensure the integrity of transactions containing data and logic destined for AI decisions or reinforcement learning. Blockchain allows AI to advance knowledge and implement decisions rooted in transactional and data integrity.</p>
+<h3 id="learn">Learn</h3>
+<p><a href="https://deasilcognitive.com/">Deasil Cognitive</a> offers a Blockchain workshop for industry leaders interested in this novel technology, where it came from, where it is going, and the types of problems it solves.</p>
+<p><strong>Contact <a href="mailto:info@deasilcognitive.com"><a href="mailto:info@deasilcognitive.com">info@deasilcognitive.com</a></a> for more information on Blockchain or to schedule a Blockchain workshop.</strong></p>
+<h3 id="develop">Develop</h3>
+<p>Read my article on how to &ldquo;<a href="https://imti.co/ethereum-kubernetes/">Deploy a Private Ethereum Blockchain on a Custom Kubernetes Cluster.</a>&rdquo; to get you started in building custom Blockchain solutions.</p>
+<h5 id="selected-reading">Selected Reading</h5>
+<ul>
+<li><a href="https://medium.com/blockchain-review/how-does-the-blockchain-work-for-dummies-explained-simply-9f94d386e093">How does the Blockchain Work? (Part 1)</a> by Collin Thompson</li>
+<li><a href="https://medium.com/s/story/how-does-the-blockchain-work-98c8cd01d2ae">How Does the Blockchain Work?</a> by Michele D&rsquo;Aliessi</li>
+<li><a href="https://blog.ethereum.org/2015/08/07/on-public-and-private-blockchains/">On Public and Private Blockchains</a> by Vitalik Buterin</li>
+<li><a href="https://www.coindesk.com/information/what-is-the-difference-between-open-and-permissioned-blockchains/">What is the Difference Between Public and Permissioned Blockchains?</a> by Nolan Bauerle</li>
+</ul>
+
+
+                <p>
+                   This blog post, titled: "<span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">Blockchain: A Conceptual and Motivational Overview</span>" by <a xmlns:cc="http://creativecommons.org/ns#" href="https://twitter.com/cjimti" property="cc:attributionName" rel="cc:attributionURL">Craig Johnston</a>, is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+                    <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a>
+                </p>
+
+            </div>
+            
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                
+                <section>
+                    <hr class="hidden-sm hidden-xs">
+                    <h5><a href="../tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                        
+                        
+                        
+                        <a href="../tags/ai" title="ai">
+                        ai
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="../tags/blockchain" title="blockchain">
+                        blockchain
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="../tags/data" title="data">
+                        data
+                        </a>
+                        
+                        
+                        
+                        <a href="../tags/data-science" title="data science">
+                        data science
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="../tags/development" title="development">
+                        development
+                        </a>
+                        
+                        
+                        
+                        <a href="../tags/devops" title="devops">
+                        devops
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="../tags/docker" title="docker">
+                        docker
+                        </a>
+                        
+                        
+                        
+                        <a href="../tags/elasticsearch" title="elasticsearch">
+                        elasticsearch
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="../tags/golang" title="golang">
+                        golang
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="../tags/ingress" title="ingress">
+                        ingress
+                        </a>
+                        
+                        
+                        
+                        <a href="../tags/iot" title="iot">
+                        iot
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="../tags/kubectl" title="kubectl">
+                        kubectl
+                        </a>
+                        
+                        
+                        
+                        <a href="../tags/kubefwd" title="kubefwd">
+                        kubefwd
+                        </a>
+                        
+                        
+                        
+                        <a href="../tags/kubernetes" title="kubernetes">
+                        kubernetes
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="../tags/mcp" title="mcp">
+                        mcp
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="../tags/microservices" title="microservices">
+                        microservices
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="../tags/python" title="python">
+                        python
+                        </a>
+                        
+                        
+                        
+                        <a href="../tags/raspberry-pi" title="raspberry pi">
+                        raspberry pi
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="../tags/security" title="security">
+                        security
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="../tags/utils" title="utils">
+                        utils
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                    </div>
+                </section>
+
+                
+                <hr>
+                <h5>RELATED</h5>
+                <ul class="list-inline">
+                    
+                </ul>
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                   
+                   <li>
+                       <a href="../index.xml" rel="alternate" type="application/rss+xml" title="IMTI" >
+                           <span class="fa-stack fa-lg">
+                               <i class="fa fa-circle fa-stack-2x"></i>
+                               <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+                           </span>
+                       </a>
+                   </li>
+                   
+                    
+                    <li>
+                        <a href="mailto:cjimti@gmail.com">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                    
+                    <li>
+                        <a href="https://twitter.com/cjimti">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/cjimti">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                    
+                    <li>
+                        <a target="_blank" href="https://www.linkedin.com/in/cjimti/">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+<script>
+    if($('#tag_cloud').length !== 0){
+        async("/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-R56SP4WLS2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-R56SP4WLS2');
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+<script>
+  mermaid.initialize({ theme: 'neutral' });
+  mermaid.run();
+</script>
+
+
+<script data-cfasync="false">
+(function() {
+    var themeToggle = document.getElementById('theme-toggle');
+    var themeIcon = document.getElementById('theme-icon');
+
+    function getCurrentTheme() {
+        return document.documentElement.getAttribute('data-theme') || 'light';
+    }
+
+    function updateIcon() {
+        var currentTheme = getCurrentTheme();
+        if (themeIcon) {
+            if (currentTheme === 'dark') {
+                themeIcon.className = 'fa fa-sun-o';
+            } else {
+                themeIcon.className = 'fa fa-moon-o';
+            }
+        }
+    }
+
+    function toggleTheme() {
+        var currentTheme = getCurrentTheme();
+        var newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+
+        if (newTheme === 'dark') {
+            document.documentElement.setAttribute('data-theme', 'dark');
+        } else {
+            document.documentElement.removeAttribute('data-theme');
+        }
+
+        localStorage.setItem('theme', newTheme);
+        updateIcon();
+    }
+
+    updateIcon();
+
+    if (themeToggle) {
+        themeToggle.addEventListener('click', toggleTheme);
+    }
+
+    if (window.matchMedia) {
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e) {
+            if (!localStorage.getItem('theme')) {
+                if (e.matches) {
+                    document.documentElement.setAttribute('data-theme', 'dark');
+                } else {
+                    document.documentElement.removeAttribute('data-theme');
+                }
+                updateIcon();
+            }
+        });
+    }
+})();
+</script>
+
+</body>
+</html>

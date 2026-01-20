@@ -1,0 +1,964 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head><head>
+    <meta name="msvalidate.01" content="DBC34551F2DD1BA3DC0D62EE46D7448F" />
+    <meta name="google-site-verification" content="DrtKc88u9uc7iptd4LyURAKBmFcOn7Kuk6HcRk_kNmo" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    
+    <script data-cfasync="false">
+        (function() {
+            var savedTheme = localStorage.getItem('theme');
+            var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+            var theme = savedTheme || (prefersDark ? 'dark' : 'light');
+            if (theme === 'dark') {
+                document.documentElement.setAttribute('data-theme', 'dark');
+            }
+        })();
+    </script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <meta name="description" content="IOT hotspot based configuration API.">
+    
+    <meta name="keyword"  content="Go, Kubernetes, Elasticsearch, Python, Docker, Big Data, Artificial Intelligence, Machine Learning">
+    <link rel="shortcut icon" href="../img/favicon.ico">
+
+    <title>Raspberry Pi 3 - WiFi Station&#43;AP - IMTI - Craig Johnston</title>
+
+    <link rel="canonical" href="https://imti.co/iot-wifi/">
+
+    
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+
+    
+    <link rel="stylesheet" href="../css/hux-blog.min.css">
+
+    
+    <link rel="stylesheet" href="../css/syntax.css">
+
+    
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    
+    
+    <link rel="stylesheet" href="../css/imti.css">
+
+    
+    <script src="../js/jquery.min.js"></script>
+
+    
+    <script src="../js/bootstrap.min.js"></script>
+
+    
+    <script src="../js/hux-blog.min.js"></script>
+
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({
+            google_ad_client: "ca-pub-5984764595236029",
+            enable_page_level_ads: true
+        });
+    </script>
+
+    <meta name="twitter:site" content="@cjimti">
+<meta name="twitter:creator" content="@cjimti">
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Raspberry Pi 3 - WiFi Station&#43;AP" />
+<meta name="twitter:description" content="IOT hotspot based configuration API." />
+<meta name="twitter:image" content="https://imti.co/img/post/pi_876_438.jpg" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://imti.co/iot-wifi/" />
+<meta property="og:title" content="Raspberry Pi 3 - WiFi Station&#43;AP" />
+<meta property="og:description" content="IOT hotspot based configuration API." />
+<meta property="og:image" content="https://imti.co/img/post/pi_876_438.jpg" />
+
+
+    
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https:\/\/imti.co\/iot-wifi\/"
+  },
+  "headline": "Raspberry Pi 3 - WiFi Station\u002bAP",
+  "image": ["https:\/\/imti.co\/img\/post\/pi_876_438.jpg"],
+  "datePublished": "2018-03-15T00:00:00Z",
+  "dateModified": "2018-03-15T00:00:00Z",
+  "author": {
+    "@type": "Person",
+    "name": "Craig Johnston",
+    "url": "https://imti.co/about/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "imti.co",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https:\/\/imti.co\/img\/avatar-cj.jpg"
+    }
+  },
+  "description": "Update: Looking for contributors.\nGolang Size Pulls IOT Wifi is very small\/8MB Docker Container built for the Raspberry Pi 3. IOT Wifi exposes a simple JSON …"
+}
+</script>
+
+
+</head>
+</head>
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="../">IMTI</a>
+        </div>
+
+        
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="../">Home</a>
+                    </li>
+                    <li>
+                        <a href="../about/">About</a>
+                    </li>
+                    <li>
+                        <a href="https://twitter.com/cjimti">Follow</a>
+                    </li>
+                    
+
+                    
+                    <li>
+                        <a href="javascript:void(0)" class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode" title="Toggle dark/light mode">
+                            <i class="fa fa-moon-o" id="theme-icon"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        
+    </div>
+    
+</nav>
+<script>
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+            $navbar.className = " ";
+            setTimeout(function(){
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+
+
+<style type="text/css">
+    header.intro-header{
+        background-image: url('https://imti.co/img/pi.jpg')
+    }
+</style>
+<header class="intro-header" >
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="../tags/development" title="Development">
+                        Development
+                        </a>
+                        
+                        <a class="tag" href="../tags/raspberry-pi" title="Raspberry Pi">
+                        Raspberry Pi
+                        </a>
+                        
+                        <a class="tag" href="../tags/docker" title="Docker">
+                        Docker
+                        </a>
+                        
+                        <a class="tag" href="../tags/iot" title="IOT">
+                        IOT
+                        </a>
+                        
+                        <a class="tag" href="../tags/wifi" title="Wifi">
+                        Wifi
+                        </a>
+                        
+                    </div>
+                    <h1>Raspberry Pi 3 - WiFi Station&#43;AP</h1>
+                    <h2 class="subheading">IOT hotspot based configuration API.</h2>
+                    <span  class="meta">Posted by <a href="https://twitter.com/cjimti">Craig Johnston</a> on Thursday, March 15, 2018
+                        
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+<article>
+    <div class="container">
+        <div class="row">
+
+            
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <p><strong>Update</strong>: Looking for contributors.</p>
+<table>
+  <thead>
+      <tr>
+          <th>Golang</th>
+          <th>Size</th>
+          <th>Pulls</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><a href="https://goreportcard.com/report/github.com/cjimti/iotwifi"><img src="https://goreportcard.com/badge/github.com/cjimti/iotwifi" alt="Go Report Card"></a></td>
+          <td><a href="https://hub.docker.com/r/cjimti/iotwifi/"><img src="https://shields.beevelop.com/docker/image/image-size/cjimti/iotwifi/latest.svg" alt="Docker Container Image Size"></a></td>
+          <td><a href="https://hub.docker.com/r/cjimti/iotwifi/"><img src="https://img.shields.io/docker/pulls/cjimti/iotwifi.svg" alt="Docker Container Pulls"></a></td>
+      </tr>
+  </tbody>
+</table>
+<p>IOT Wifi is very small/8MB <a href="https://www.docker.com/">Docker</a> Container built for the <a href="https://amzn.to/2jfXhCA">Raspberry Pi 3</a>.
+IOT Wifi exposes a simple JSON based REST API for controlling the wireless network interface. This container allows the Raspberry Pi to accept wifi connections as an access point (aka AP) while at the same time connecting to an existing wifi network (station mode).</p>
+<p>Go (Golang) was used to develop the main application code, to produce a minimal <a href="https://www.docker.com/">docker</a> image with great performance. The container runs <a href="https://alpinelinux.org/">Alpine Linux</a> with small, optimized versions of <a href="https://w1.fi/hostapd/">hostapd</a>, <a href="https://w1.fi/wpa_supplicant/">wpa_supplicant</a> and <a href="http://www.thekelleys.org.uk/dnsmasq/doc.html">dnsmasq</a>, controlled by the container&rsquo;s API endpoints.</p>
+<p>If you have a Raspberry Pi 3 and you want to provide wifi based configuration abilities, all you need is Docker installed and a little over 8MB of free drive space.</p>
+<p><a href="https://amzn.to/2jfXhCA"><img src="../img/iot-wifi-assets/pi.jpg" alt="Raspberry Pi AP + Client"></a></p>
+<aside class="toc">
+    <header>
+        <h2>Contents</h2>
+    </header>
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#background">Background</a></li>
+    <li><a href="#iot-wifi-raspberry-pi-ap--client">IOT Wifi (Raspberry Pi AP + Client)</a>
+      <ul>
+        <li><a href="#disable-wpa_supplicant-on-raspberry-pi">Disable wpa_supplicant on Raspberry Pi</a></li>
+        <li><a href="#install-docker-on-raspberry-pi">Install Docker on Raspberry Pi</a></li>
+        <li><a href="#pull-the-iot-wifi-docker-image">Pull the IOT Wifi Docker Image</a></li>
+        <li><a href="#iot-wifi-configuration">IOT Wifi Configuration</a></li>
+        <li><a href="#run-the-iot-wifi-docker-container">Run The IOT Wifi Docker Container</a></li>
+        <li><a href="#connect-to-the-pi-over-wifi">Connect to the Pi over Wifi</a></li>
+        <li><a href="#connect-the-pi-to-a-wifi-network">Connect the Pi to a Wifi Network</a></li>
+        <li><a href="#check-the-network-interface-status">Check the network interface status</a></li>
+        <li><a href="#conclusion">Conclusion</a></li>
+      </ul>
+    </li>
+    <li><a href="#legacy-instructions-the-manual-way">Legacy Instructions (the manual way)</a>
+      <ul>
+        <li><a href="#overview">Overview</a></li>
+        <li><a href="#station-setup">Station Setup</a></li>
+        <li><a href="#ap-setup">AP Setup</a></li>
+        <li><a href="#dns-setup">DNS Setup</a></li>
+        <li><a href="#startup">Startup</a></li>
+        <li><a href="#raspberry-pi-wifi-links">Raspberry Pi Wifi links</a></li>
+        <li><a href="#wifi-and-networking">Wifi and Networking</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+</aside>
+<blockquote>
+<p>TL;DR? If you are not interested in reading all this, you can skip ahead to
+<a href="#getting-started">Getting Started</a>.</p>
+</blockquote>
+<div id="amzn-assoc-ad-1a53548f-c76c-4f75-aa5f-e585e338795f"></div><script async src="//z-na.amazon-adsystem.com/widgets/onejs?MarketPlace=US&adInstanceId=1a53548f-c76c-4f75-aa5f-e585e338795f"></script>
+<p>IOT Wifi is a <a href="https://amzn.to/2jfXhCA">Raspberry Pi</a> wifi management REST service written in <a href="https://golang.org/">Go</a> and
+intended to run in a <a href="https://hub.docker.com/r/cjimti/iotwifi/">Docker container on a Raspberry Pi</a>.</p>
+<p>IOT Wifi sets up network interfaces, runs <a href="https://w1.fi/hostapd/">hostapd</a>, <a href="https://w1.fi/wpa_supplicant/">wpa_supplicant</a> and
+<a href="http://www.thekelleys.org.uk/dnsmasq/doc.html">dnsmasq</a> to run simultaneously,  allowing a user (or another service) to connect to the Raspberry Pi via <a href="https://w1.fi/hostapd/">hostapd</a>/<a href="http://www.thekelleys.org.uk/dnsmasq/doc.html">dnsmasq</a> and issue commands that configure and connect <a href="https://w1.fi/wpa_supplicant/">wpa_supplicant</a> to another <a href="https://en.wikipedia.org/wiki/Wireless_access_point">AP</a>. IOT Wifi then exposes a small web server on the Pi and offers a JSON based REST API to configure Wifi. The IOT Wifi container allows you to build a custom <a href="https://en.wikipedia.org/wiki/Captive_portal">Captive Portal</a> web page or even programmatically connect from another device and use the exposed API to configure the target device.</p>
+<p>Using wifi to configure a wifi connection is often a standard requirement for <a href="https://en.wikipedia.org/wiki/Internet_of_things">IOT</a>. As Raspberry Pis are becoming a popular choice as an <a href="https://en.wikipedia.org/wiki/Internet_of_things">IOT</a> platform, this helps solve the frequent need to manage AP and Station modes.</p>
+<h2 id="background">Background</h2>
+<p>Over a year ago I wrote a blog post called <a href="#legacy-instructions-the-manual-way">RASPBERRY PI 3 - WIFI STATION+AP</a> with my notes on setting up a <strong>Raspberry Pi 3</strong> to run as a <a href="https://en.wikipedia.org/wiki/Wireless_access_point">Wifi Access Point</a> (Hotspot) and a <a href="https://en.wikipedia.org/wiki/Station_(networking)">Wifi Client (aka Wifi Station)</a> simultaneously. This old blog post gets a considerable amount of traffic, so it seems there is quite a bit of interest in this. I have come to realize that some of the steps in my old post have changed since newer versions of <a href="https://www.raspberrypi.org/downloads/raspbian/">Raspian</a> (n00bs build) are released.</p>
+<p>Since writing the post, I have had a few personal and professional projects
+requiring a Raspberry Pi to allow wifi setup <strong>over wifi</strong>. I decided to open
+source this simple project to help others with similar requirements as well
+as gain some feedback on where and how I can improve it. I would welcome
+any contribution and credit any contributors.</p>
+<h2 id="iot-wifi-raspberry-pi-ap--client">IOT Wifi (Raspberry Pi AP + Client)</h2>
+<p>You will need a Raspberry Pi 3, running Raspian Stretch. You
+can use the <a href="https://www.raspberrypi.org/downloads/noobs/">Noobs</a> release to install the latest version of Raspian.</p>
+<h3 id="disable-wpa_supplicant-on-raspberry-pi">Disable wpa_supplicant on Raspberry Pi</h3>
+<p>You do not want the default <strong><a href="https://w1.fi/wpa_supplicant/">wpa_supplicant</a></strong> (the software that communicates
+with the wifi driver and connects to Wifi networks,) running and competing
+with the <strong>IOT Wifi</strong> container.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># prevent wpa_supplicant from starting on boot</span>
+</span></span><span style="display:flex;"><span>$ sudo systemctl mask wpa_supplicant.service
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># rename wpa_supplicant on the host to ensure that it is not</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># used.</span>
+</span></span><span style="display:flex;"><span>sudo mv /sbin/wpa_supplicant /sbin/no_wpa_supplicant
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># kill any running processes named wpa_supplicant</span>
+</span></span><span style="display:flex;"><span>$ sudo pkill wpa_supplicant
+</span></span></code></pre></div><h3 id="install-docker-on-raspberry-pi">Install Docker on Raspberry Pi</h3>
+<p>Ssh into the Pi or use the terminal application from the desktop on the Pi
+to get a Bash shell.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># Docker install script</span>
+</span></span><span style="display:flex;"><span>$ curl -sSL https://get.docker.com | sh
+</span></span></code></pre></div><p><img src="../img/iot-wifi-assets/install_docker.gif" alt="Install Docker"></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># add pi user to Docker user group</span>
+</span></span><span style="display:flex;"><span>$ sudo usermod -aG docker pi
+</span></span></code></pre></div><p><img src="../img/iot-wifi-assets/usermod.gif" alt="Usermod Docker"></p>
+<p>Reboot the Pi and test Docker.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ sudo reboot
+</span></span></code></pre></div><p>After reboot, ensure Docker is installed correctly by running a Hello World
+Docker container.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># run the Docker Hello World container and remove the container</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># when finished (the --rm flag)</span>
+</span></span><span style="display:flex;"><span>$ docker run --rm hello-world
+</span></span></code></pre></div><p><img src="../img/iot-wifi-assets/docker-hello-world.gif" alt="Docker Hello World on Raspberry Pi"></p>
+<h3 id="pull-the-iot-wifi-docker-image">Pull the IOT Wifi Docker Image</h3>
+<p>You can optionally clone and build the entire project, however, to get
+started quickly I&rsquo;ll show you how to use a pre-built Docker Image. At
+only 16MB this little image contains everything you need. The image
+is based on <a href="https://alpinelinux.org/">Alpine Linux</a> and contains <a href="https://w1.fi/hostapd/">hostapd</a>, <a href="https://w1.fi/wpa_supplicant/">wpa_supplicant</a> and
+<a href="http://www.thekelleys.org.uk/dnsmasq/doc.html">dnsmasq</a>, along with a compiled wifi management utility written in go,
+the source is found in this repository: <a href="https://github.com/cjimti/iotwifi">https://github.com/cjimti/iotwifi</a>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># Pull the IOT Wifi Docker Image</span>
+</span></span><span style="display:flex;"><span>$ docker pull cjimti/iotwifi
+</span></span></code></pre></div><p><img src="../img/iot-wifi-assets/docker-pull-image.gif" alt="Docker IOT Wifi Image"></p>
+<h3 id="iot-wifi-configuration">IOT Wifi Configuration</h3>
+<p>You will need a configuration JSON file. You can download a default as
+a template or just it unmodified for testing. You can mount the
+configuration file into the container or specify a location with
+an environment variable.</p>
+<p>Use the default configuration file and location for testing:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># Download the default configuration file</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>$ wget https://raw.githubusercontent.com/cjimti/iotwifi/master/cfg/wificfg.json
+</span></span></code></pre></div><p><img src="../img/iot-wifi-assets/download-config.gif" alt="Download Configuration"></p>
+<p>The default configuration looks like this:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;dnsmasq_cfg&#34;</span>: {
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;address&#34;</span>: <span style="color:#e6db74">&#34;/#/192.168.27.1&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;dhcp_range&#34;</span>: <span style="color:#e6db74">&#34;192.168.27.100,192.168.27.150,1h&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;vendor_class&#34;</span>: <span style="color:#e6db74">&#34;set:device,IoT&#34;</span>
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;host_apd_cfg&#34;</span>: {
+</span></span><span style="display:flex;"><span>       <span style="color:#f92672">&#34;ip&#34;</span>: <span style="color:#e6db74">&#34;192.168.27.1&#34;</span>,
+</span></span><span style="display:flex;"><span>       <span style="color:#f92672">&#34;ssid&#34;</span>: <span style="color:#e6db74">&#34;iot-wifi-cfg-3&#34;</span>,
+</span></span><span style="display:flex;"><span>       <span style="color:#f92672">&#34;wpa_passphrase&#34;</span>:<span style="color:#e6db74">&#34;iotwifipass&#34;</span>,
+</span></span><span style="display:flex;"><span>       <span style="color:#f92672">&#34;channel&#34;</span>: <span style="color:#e6db74">&#34;6&#34;</span>
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;wpa_supplicant_cfg&#34;</span>: {
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;cfg_file&#34;</span>: <span style="color:#e6db74">&#34;/etc/wpa_supplicant/wpa_supplicant.conf&#34;</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>You may want to change the <strong>ssid</strong> (AP/Hotspot Name) and the <strong>wpa_passphrase</strong> to something more appropriate to your needs. However, the defaults are fine for testing.</p>
+
+
+<h3 id="run-the-iot-wifi-docker-container">Run The IOT Wifi Docker Container</h3>
+<p>The following <code>docker run</code> command will create a running Docker container from
+the <strong><a href="https://hub.docker.com/r/cjimti/iotwifi/">cjimti/iotwifi</a></strong> Docker image we pulled in the steps above. The container needs to run in a <strong>privileged mode</strong> and have access to the <strong>host network</strong> (the
+Raspberry Pi device) to configure and manage the network interfaces on
+the Raspberry Pi. We will also need to mount the configuration file.</p>
+<p>We will run it in the foreground to observe the startup process. If you want
+it to run the background, you need to remove the <code>--rm</code> and pass the <code>-d</code> flag. If you want to it restart on reboot or failure, you can pass the flag
+<code>--restart=unless-stopped</code>.</p>
+<p><a href="https://docs.docker.com/engine/reference/run/">Read more on the <code>docker run</code> command.</a></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ docker run --rm --privileged --net host <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>      -v <span style="color:#66d9ef">$(</span>pwd<span style="color:#66d9ef">)</span>/wificfg.json:/cfg/wificfg.json <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>      cjimti/iotwifi
+</span></span></code></pre></div><p>Optionally, you can also provide a <code>wpa_supplicant.conf</code>, like so:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ docker run --rm --privileged --net host <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>      -v <span style="color:#66d9ef">$(</span>pwd<span style="color:#66d9ef">)</span>/wificfg.json:/cfg/wificfg.json <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>      -v &lt;HOST_PATH&gt;/wpa_supplicant.conf:&lt;CONTAINER_PATH&gt;/wpa_supplicant.conf <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>      cjimti/iotwifi
+</span></span></code></pre></div><p>Where <code>&lt;CONTAINER_PATH&gt;</code> is the path to <code>wpa_supplicant.conf</code> specified in <code>wificfg.json</code>.</p>
+<p>The IOT Wifi container outputs logs in the JSON format. While this makes
+them a bit more challenging to read, we can feed them directly (or indirectly)
+into tools like Elastic Search or other databases for alerting or analytics.</p>
+<p>You should see some initial JSON objects with messages like <code>Starting IoT Wifi...</code>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{<span style="color:#f92672">&#34;hostname&#34;</span>:<span style="color:#e6db74">&#34;raspberrypi&#34;</span>,<span style="color:#f92672">&#34;level&#34;</span>:<span style="color:#ae81ff">30</span>,<span style="color:#f92672">&#34;msg&#34;</span>:<span style="color:#e6db74">&#34;Starting IoT Wifi...&#34;</span>,<span style="color:#f92672">&#34;name&#34;</span>:<span style="color:#e6db74">&#34;iotwifi&#34;</span>,<span style="color:#f92672">&#34;pid&#34;</span>:<span style="color:#ae81ff">0</span>,<span style="color:#f92672">&#34;time&#34;</span>:<span style="color:#e6db74">&#34;2018-03-15T20:19:50.374Z&#34;</span>,<span style="color:#f92672">&#34;v&#34;</span>:<span style="color:#ae81ff">0</span>}
+</span></span></code></pre></div><p>Keeping the current terminal open, you can log in to another terminal and
+take a look the network interfaces on the Raspberry Pi.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># use ifconfig to view the network interfaces</span>
+</span></span><span style="display:flex;"><span>$ ifconfig
+</span></span></code></pre></div><p>You should see a new interface called <strong>uap0</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>uap0: flags=4163&lt;UP,BROADCAST,RUNNING,MULTICAST&gt;  mtu 1500
+</span></span><span style="display:flex;"><span>        inet 192.168.27.1  netmask 255.255.255.0  broadcast 192.168.27.255
+</span></span><span style="display:flex;"><span>        inet6 fe80::6e13:d169:b00b:c946  prefixlen 64  scopeid 0x20&lt;link&gt;
+</span></span><span style="display:flex;"><span>        ether b8:27:eb:fe:c8:ab  txqueuelen 1000  (Ethernet)
+</span></span><span style="display:flex;"><span>        RX packets 111  bytes 8932 (8.7 KiB)
+</span></span><span style="display:flex;"><span>        RX errors 0  dropped 0  overruns 0  frame 0
+</span></span><span style="display:flex;"><span>        TX packets 182  bytes 24416 (23.8 KiB)
+</span></span><span style="display:flex;"><span>        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+</span></span></code></pre></div><p>The standard wifi interface <strong>wlan0</strong> should be available, yet unconfigured since we have not yet connected to an external wifi network (access point).</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>wlan0: flags=4099&lt;UP,BROADCAST,MULTICAST&gt;  mtu 1500
+</span></span><span style="display:flex;"><span>        ether b8:27:eb:fe:c8:ab  txqueuelen 1000  (Ethernet)
+</span></span><span style="display:flex;"><span>        RX packets 0  bytes 0 (0.0 B)
+</span></span><span style="display:flex;"><span>        RX errors 0  dropped 0  overruns 0  frame 0
+</span></span><span style="display:flex;"><span>        TX packets 0  bytes 0 (0.0 B)
+</span></span><span style="display:flex;"><span>        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+</span></span></code></pre></div><h3 id="connect-to-the-pi-over-wifi">Connect to the Pi over Wifi</h3>
+<p>On your laptop or phone, you should now see a Wifi Network named <strong>iot-wifi-cfg-3</strong> assuming you did not change it from the default. The default password for this network is <strong>iotwifipass</strong>. Once connected to this network you should get an IP address assigned to the range specified in the config: <code>192.168.27.100,192.168.27.150,1h</code>.</p>
+<p><img src="../img/iot-wifi-assets/phone.jpg" alt="Coeect Phone"></p>
+<p>Once connected open a web browser and go to http://192.168.27.1:8080/status. You can access this API endpoint on the Raspberry Pi device itself from <code>localhost</code>*. On on Pi try the curl command <code>curl http://localhost:8080/status</code>.</p>
+<p>You should receive a JSON message similar to the following:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{<span style="color:#f92672">&#34;status&#34;</span>:<span style="color:#e6db74">&#34;OK&#34;</span>,<span style="color:#f92672">&#34;message&#34;</span>:<span style="color:#e6db74">&#34;status&#34;</span>,<span style="color:#f92672">&#34;payload&#34;</span>:{<span style="color:#f92672">&#34;address&#34;</span>:<span style="color:#e6db74">&#34;b8:27:eb:fe:c8:ab&#34;</span>,<span style="color:#f92672">&#34;uuid&#34;</span>:<span style="color:#e6db74">&#34;a736659a-ae85-5e03-9754-dd808ea0d7f2&#34;</span>,<span style="color:#f92672">&#34;wpa_state&#34;</span>:<span style="color:#e6db74">&#34;INACTIVE&#34;</span>}}
+</span></span></code></pre></div><p>From now on I&rsquo;ll demonstrate API calls to the new container with the <a href="https://en.wikipedia.org/wiki/CURL"><code>curl</code> command</a> on the device. If you were developing a Captive Portal or configuration web page, you could translate these calls into Javascript and control the device Wifi with AJAX.</p>
+<blockquote>
+<p>You can use my simple static web server IOT Web container for hosting a Captive Portal or configuration web page. See <a href="https://github.com/cjimti/iotweb">https://github.com/cjimti/iotweb</a>.</p>
+</blockquote>
+<p>To get a list of Wifi Networks the device can see, issue a call to the <strong>scan</strong> endpoint:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>curl http://localhost:8080/scan
+</span></span></code></pre></div><h3 id="connect-the-pi-to-a-wifi-network">Connect the Pi to a Wifi Network</h3>
+<p>The device can connect to any network it can see. After running a network scan  <code>curl http://localhost:8080/scan</code> you can choose a network and post the login credentials to IOT Web.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># post wifi credentials</span>
+</span></span><span style="display:flex;"><span>$ curl -w <span style="color:#e6db74">&#34;\n&#34;</span> -d <span style="color:#e6db74">&#39;{&#34;ssid&#34;:&#34;home-network&#34;, &#34;psk&#34;:&#34;mystrongpassword&#34;}&#39;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>     -H <span style="color:#e6db74">&#34;Content-Type: application/json&#34;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>     -X POST localhost:8080/connect
+</span></span></code></pre></div><p>You should get a JSON response message after a few seconds. If everything went well you will see something like the following:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{<span style="color:#f92672">&#34;status&#34;</span>:<span style="color:#e6db74">&#34;OK&#34;</span>,<span style="color:#f92672">&#34;message&#34;</span>:<span style="color:#e6db74">&#34;Connection&#34;</span>,<span style="color:#f92672">&#34;payload&#34;</span>:{<span style="color:#f92672">&#34;ssid&#34;</span>:<span style="color:#e6db74">&#34;straylight-g&#34;</span>,<span style="color:#f92672">&#34;state&#34;</span>:<span style="color:#e6db74">&#34;COMPLETED&#34;</span>,<span style="color:#f92672">&#34;ip&#34;</span>:<span style="color:#e6db74">&#34;&#34;</span>,<span style="color:#f92672">&#34;message&#34;</span>:<span style="color:#e6db74">&#34;&#34;</span>}}
+</span></span></code></pre></div><p>You can get the status at any time with the following call to the <strong>status</strong> endpoint. Here is an example:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># get the wifi status</span>
+</span></span><span style="display:flex;"><span>$ curl -w <span style="color:#e6db74">&#34;\n&#34;</span> http://localhost:8080/status
+</span></span></code></pre></div><p>Sample return JSON:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{<span style="color:#f92672">&#34;status&#34;</span>:<span style="color:#e6db74">&#34;OK&#34;</span>,<span style="color:#f92672">&#34;message&#34;</span>:<span style="color:#e6db74">&#34;status&#34;</span>,<span style="color:#f92672">&#34;payload&#34;</span>:{<span style="color:#f92672">&#34;address&#34;</span>:<span style="color:#e6db74">&#34;b7:26:ab:fa:c9:a4&#34;</span>,<span style="color:#f92672">&#34;bssid&#34;</span>:<span style="color:#e6db74">&#34;50:3b:cb:c8:d3:cd&#34;</span>,<span style="color:#f92672">&#34;freq&#34;</span>:<span style="color:#e6db74">&#34;2437&#34;</span>,<span style="color:#f92672">&#34;group_cipher&#34;</span>:<span style="color:#e6db74">&#34;CCMP&#34;</span>,<span style="color:#f92672">&#34;id&#34;</span>:<span style="color:#e6db74">&#34;0&#34;</span>,<span style="color:#f92672">&#34;ip_address&#34;</span>:<span style="color:#e6db74">&#34;192.168.86.116&#34;</span>,<span style="color:#f92672">&#34;key_mgmt&#34;</span>:<span style="color:#e6db74">&#34;WPA2-PSK&#34;</span>,<span style="color:#f92672">&#34;mode&#34;</span>:<span style="color:#e6db74">&#34;station&#34;</span>,<span style="color:#f92672">&#34;p2p_device_address&#34;</span>:<span style="color:#e6db74">&#34;fa:27:eb:fe:c9:ab&#34;</span>,<span style="color:#f92672">&#34;pairwise_cipher&#34;</span>:<span style="color:#e6db74">&#34;CCMP&#34;</span>,<span style="color:#f92672">&#34;ssid&#34;</span>:<span style="color:#e6db74">&#34;straylight-g&#34;</span>,<span style="color:#f92672">&#34;uuid&#34;</span>:<span style="color:#e6db74">&#34;a736659a-ae85-5e03-9754-dd808ea0d7f2&#34;</span>,<span style="color:#f92672">&#34;wpa_state&#34;</span>:<span style="color:#e6db74">&#34;COMPLETED&#34;</span>}}
+</span></span></code></pre></div><h3 id="check-the-network-interface-status">Check the network interface status</h3>
+<p>The <strong>wlan0</strong> is now a client on a wifi network. In this case, it received the IP address 192.168.86.116. We can check the status of <strong>wlan0</strong> with <code>ifconfig</code>*</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># check the status of wlan0 (wireless interface)</span>
+</span></span><span style="display:flex;"><span>$ ifconfig wlan0
+</span></span></code></pre></div><p>Example return.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>wlan0: flags=4163&lt;UP,BROADCAST,RUNNING,MULTICAST&gt;  mtu 1500
+</span></span><span style="display:flex;"><span>        inet 192.168.86.116  netmask 255.255.255.0  broadcast 192.168.86.255
+</span></span><span style="display:flex;"><span>        inet6 fe80::9988:beab:290e:a6af  prefixlen 64  scopeid 0x20&lt;link&gt;
+</span></span><span style="display:flex;"><span>        ether b8:27:eb:fe:c8:ab  txqueuelen 1000  (Ethernet)
+</span></span><span style="display:flex;"><span>        RX packets 547  bytes 68641 (67.0 KiB)
+</span></span><span style="display:flex;"><span>        RX errors 0  dropped 0  overruns 0  frame 0
+</span></span><span style="display:flex;"><span>        TX packets 36  bytes 6025 (5.8 KiB)
+</span></span><span style="display:flex;"><span>        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+</span></span></code></pre></div><p>We can also check the connection by issuing a <strong>ping</strong> command from the
+device and specify the network interface to use:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># ping out from the wlan0 interface</span>
+</span></span><span style="display:flex;"><span>$ ping -I wlan0 8.8.8.8
+</span></span></code></pre></div><p>Hit Control-C to stop the ping and get calculations.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>PING 8.8.8.8 (8.8.8.8) from 192.168.86.116 wlan0: 56(84) bytes of data.
+</span></span><span style="display:flex;"><span>64 bytes from 8.8.8.8: icmp_seq=1 ttl=57 time=20.9 ms
+</span></span><span style="display:flex;"><span>64 bytes from 8.8.8.8: icmp_seq=2 ttl=57 time=23.4 ms
+</span></span><span style="display:flex;"><span>64 bytes from 8.8.8.8: icmp_seq=3 ttl=57 time=16.0 ms
+</span></span><span style="display:flex;"><span>^C
+</span></span><span style="display:flex;"><span>--- 8.8.8.8 ping statistics ---
+</span></span><span style="display:flex;"><span>3 packets transmitted, 3 received, 0% packet loss, time 2002ms
+</span></span><span style="display:flex;"><span>rtt min/avg/max/mdev = 16.075/20.138/23.422/3.049 ms
+</span></span></code></pre></div><h3 id="conclusion">Conclusion</h3>
+<p>Wrapping the all complexity of wifi management into a small Docker
+container, accessible over a web-based REST API reduces the dependencies on the device to only require Docker.</p>
+<p>There are many ways to handle security using middleware or IP tables. A separate container can also manage security.</p>
+<p>Check out the project <a href="https://github.com/cjimti/iotweb">IOT Web</a> to get
+started with tiny a static web container suitable for building user interfaces for wifi management or captive portals.</p>
+<p>Submit a Github issue or pull request if there are features or bug fixes you would like added to the project.</p>
+<h2 id="legacy-instructions-the-manual-way">Legacy Instructions (the manual way)</h2>
+<p>Running the Raspberry Pi 3 as a Wifi client (station) and access point (ap) from the single built-in wifi.</p>
+<h3 id="overview">Overview</h3>
+<p>We will be editing the following files:</p>
+<ul>
+<li><strong>WPA configuration</strong>
+<a href="https://gist.github.com/cjimti/f377348aa739beb08309156c495b030e">/etc/wpa_supplicant/wpa_supplicant.conf</a></li>
+<li><strong>Network interfaces</strong>
+<a href="https://gist.github.com/cjimti/a0d54e8b8904f231927ab88a559ef348">/etc/network/interfaces</a></li>
+<li><strong>Hostapd config</strong>
+<a href="https://gist.github.com/cjimti/6a66a61cc65f26c908e0424e15a37163">/etc/hostapd/hostapd.conf</a></li>
+<li><strong>Hostapd default</strong>
+<a href="https://gist.github.com/cjimti/6a66a61cc65f26c908e0424e15a37163">/etc/default/hostapd</a></li>
+<li><strong>AP startup script</strong>
+<a href="https://gist.github.com/cjimti/af6eb1e41c2ec855136e7ffc3e22296a">/usr/local/bin/hostapdstart</a></li>
+<li><strong>DNS</strong>
+<a href="https://gist.github.com/cjimti/542d9dadaca8c2e1bc0a91bdf0137d4e">/etc/dnsmasq.conf</a></li>
+<li><strong>Startup script</strong>
+<a href="">/etc/rc.local</a></li>
+</ul>
+<h3 id="station-setup">Station Setup</h3>
+<p>The following will configure the Pi to access a wifi network as a client (station).</p>
+<p>Create the wpa_supplicant configuration:</p>
+<pre><code>sudo vi /etc/wpa_supplicant/wpa_supplicant.conf
+</code></pre>
+<p>Add and customize the following:</p>
+<script src="https://gist.github.com/cjimti/f377348aa739beb08309156c495b030e.js"></script>
+<h4 id="network-interfaces">Network Interfaces</h4>
+<p>Edit the interfaces configuration:</p>
+<pre><code>sudo vi /etc/network/interfaces
+</code></pre>
+<p>The entire configuration file should look like the following:</p>
+<script src="https://gist.github.com/cjimti/a0d54e8b8904f231927ab88a559ef348.js"></script>
+<p>The uap0 interface will be used later on for our Access Point (AP).</p>
+<p>Reboot the Pi:</p>
+<pre><code>sudo reboot
+</code></pre>
+<p>After the Pi boots up run the following command to check the status of the the wlan0 interface:</p>
+<pre><code>ifconfig
+</code></pre>
+<p>You should see wlan0 has received an ip address from the network it connected to:</p>
+<p><img src="../img/iot-wifi-assets/ifconfig.png" alt="ifconfig"></p>
+<p>Use <a href="https://wireless.wiki.kernel.org/en/users/documentation/iw">iw</a> to check the wireless status of wlan0.</p>
+<pre><code>iw dev wlan0 link
+</code></pre>
+<p>You see the SSId of the network you are connected to like this:</p>
+<p><img src="../img/iot-wifi-assets/ssid.png" alt="iw dev wlan0 link"></p>
+<h3 id="ap-setup">AP Setup</h3>
+<p>Install <a href="https://w1.fi/hostapd/">hostapd</a> and <a href="http://www.thekelleys.org.uk/dnsmasq/doc.html">dnsmasq</a>:</p>
+<pre><code>sudo apt-get install hostapd dnsmasq
+</code></pre>
+<p>Create a new <a href="https://w1.fi/hostapd/">hostapd</a> configuration:</p>
+<pre><code>sudo vi /etc/hostapd/hostapd.conf
+</code></pre>
+<p>The new configuration should look like this:</p>
+<script src="https://gist.github.com/cjimti/6a66a61cc65f26c908e0424e15a37163.js"></script>
+<p>Of course you will want to customize a few things like the ssid and passphrase (wpa_passphrase). You will also want to determine the best channel by looking at the channel wlan0 is currently using.</p>
+<pre><code>iwlist wlan0 channel
+</code></pre>
+<p>In this example output the Pi is using Channel 11:</p>
+<p><img src="../img/iot-wifi-assets/chan.png" alt="iwlist output"></p>
+<p>Next you will need to modify the hostapd default configuration to use your new configuration file:</p>
+<pre><code>sudo vi /etc/default/hostapd
+</code></pre>
+<p>Add the following line:</p>
+<pre><code>DAEMON_CONF=&quot;/etc/hostapd/hostapd.conf&quot;
+</code></pre>
+<p>Next we need to make a script to set the interface to AP mode, start hostapd and set some iptables configuration.</p>
+<pre><code>sudo vi /usr/local/bin/hostapdstart
+</code></pre>
+<p>Add the following lines to this new script.</p>
+<script src="https://gist.github.com/cjimti/af6eb1e41c2ec855136e7ffc3e22296a.js"></script>
+<p>Update permissions on the new hostap start script.</p>
+<pre><code>chmod 775 /usr/local/bin/hostapdstart
+</code></pre>
+<h3 id="dns-setup">DNS Setup</h3>
+<p>We need the new AP to hand out IP addresses to our clients. Configure <a href="http://www.thekelleys.org.uk/dnsmasq/doc.html">dnsmasq</a> by editing the following.</p>
+<pre><code>sudo vi /etc/dnsmasq.conf
+</code></pre>
+<p>The configration should look like the following.</p>
+<script src="https://gist.github.com/cjimti/542d9dadaca8c2e1bc0a91bdf0137d4e.js"></script>
+<p>Start dnsmasq with the following.</p>
+<pre><code>sudo service dnsmasq start
+</code></pre>
+<h3 id="startup">Startup</h3>
+<p>Edit the rc.local script to run hostapdstart on boot up.</p>
+<pre><code>sudo vi /etc/rc.local
+</code></pre>
+<p>Add the following line.</p>
+<pre><code>/bin/bash /usr/local/bin/hostapdstart
+</code></pre>
+<p>Reboot the the Pi</p>
+<pre><code>sudo reboot
+</code></pre>
+<h3 id="raspberry-pi-wifi-links">Raspberry Pi Wifi links</h3>
+<ul>
+<li>Thanks to the Raspberry Pi forum thread <a href="https://www.raspberrypi.org/forums/viewtopic.php?f=36&amp;t=138730&amp;start=25">&ldquo;Pi 3 as wiireless client and wireless AP?&rdquo;</a></li>
+<li>Adafruit&rsquo;s excelent tutorial on <a href="https://learn.adafruit.com/setting-up-a-raspberry-pi-as-a-wifi-access-point/install-software">&ldquo;Setting up a Raspberry Pi as a WiFi access point&rdquo;</a></li>
+<li><a href="http://weworkweplay.com/play/automatically-connect-a-raspberry-pi-to-a-wifi-network/">Automatically connect a Raspberry Pi to a Wifi network</a></li>
+</ul>
+<h3 id="wifi-and-networking">Wifi and Networking</h3>
+<ul>
+<li><a href="http://linuxcommando.blogspot.com/2013/10/how-to-connect-to-wpawpa2-wifi-network.html">How to connect to a WPA/WPA2 WiFi network using Linux command line</a></li>
+</ul>
+<div id="amzn-assoc-ad-0fe3d6da-b252-4a87-a36c-72a4cc7ee81e"></div><script async src="//z-na.amazon-adsystem.com/widgets/onejs?MarketPlace=US&adInstanceId=0fe3d6da-b252-4a87-a36c-72a4cc7ee81e"></script>
+
+
+                <p>
+                   This blog post, titled: "<span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">Raspberry Pi 3 - WiFi Station&#43;AP: IOT hotspot based configuration API.</span>" by <a xmlns:cc="http://creativecommons.org/ns#" href="https://twitter.com/cjimti" property="cc:attributionName" rel="cc:attributionURL">Craig Johnston</a>, is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+                    <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a>
+                </p>
+
+            </div>
+            
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                
+                <section>
+                    <hr class="hidden-sm hidden-xs">
+                    <h5><a href="../tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                        
+                        
+                        
+                        <a href="../tags/ai" title="ai">
+                        ai
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="../tags/blockchain" title="blockchain">
+                        blockchain
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="../tags/data" title="data">
+                        data
+                        </a>
+                        
+                        
+                        
+                        <a href="../tags/data-science" title="data science">
+                        data science
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="../tags/development" title="development">
+                        development
+                        </a>
+                        
+                        
+                        
+                        <a href="../tags/devops" title="devops">
+                        devops
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="../tags/docker" title="docker">
+                        docker
+                        </a>
+                        
+                        
+                        
+                        <a href="../tags/elasticsearch" title="elasticsearch">
+                        elasticsearch
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="../tags/golang" title="golang">
+                        golang
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="../tags/ingress" title="ingress">
+                        ingress
+                        </a>
+                        
+                        
+                        
+                        <a href="../tags/iot" title="iot">
+                        iot
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="../tags/kubectl" title="kubectl">
+                        kubectl
+                        </a>
+                        
+                        
+                        
+                        <a href="../tags/kubefwd" title="kubefwd">
+                        kubefwd
+                        </a>
+                        
+                        
+                        
+                        <a href="../tags/kubernetes" title="kubernetes">
+                        kubernetes
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="../tags/mcp" title="mcp">
+                        mcp
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="../tags/microservices" title="microservices">
+                        microservices
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="../tags/python" title="python">
+                        python
+                        </a>
+                        
+                        
+                        
+                        <a href="../tags/raspberry-pi" title="raspberry pi">
+                        raspberry pi
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="../tags/security" title="security">
+                        security
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="../tags/utils" title="utils">
+                        utils
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                    </div>
+                </section>
+
+                
+                <hr>
+                <h5>RELATED</h5>
+                <ul class="list-inline">
+                    
+                </ul>
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                   
+                   <li>
+                       <a href="../index.xml" rel="alternate" type="application/rss+xml" title="IMTI" >
+                           <span class="fa-stack fa-lg">
+                               <i class="fa fa-circle fa-stack-2x"></i>
+                               <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+                           </span>
+                       </a>
+                   </li>
+                   
+                    
+                    <li>
+                        <a href="mailto:cjimti@gmail.com">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                    
+                    <li>
+                        <a href="https://twitter.com/cjimti">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/cjimti">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                    
+                    <li>
+                        <a target="_blank" href="https://www.linkedin.com/in/cjimti/">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+<script>
+    if($('#tag_cloud').length !== 0){
+        async("/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-R56SP4WLS2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-R56SP4WLS2');
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+<script>
+  mermaid.initialize({ theme: 'neutral' });
+  mermaid.run();
+</script>
+
+
+<script data-cfasync="false">
+(function() {
+    var themeToggle = document.getElementById('theme-toggle');
+    var themeIcon = document.getElementById('theme-icon');
+
+    function getCurrentTheme() {
+        return document.documentElement.getAttribute('data-theme') || 'light';
+    }
+
+    function updateIcon() {
+        var currentTheme = getCurrentTheme();
+        if (themeIcon) {
+            if (currentTheme === 'dark') {
+                themeIcon.className = 'fa fa-sun-o';
+            } else {
+                themeIcon.className = 'fa fa-moon-o';
+            }
+        }
+    }
+
+    function toggleTheme() {
+        var currentTheme = getCurrentTheme();
+        var newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+
+        if (newTheme === 'dark') {
+            document.documentElement.setAttribute('data-theme', 'dark');
+        } else {
+            document.documentElement.removeAttribute('data-theme');
+        }
+
+        localStorage.setItem('theme', newTheme);
+        updateIcon();
+    }
+
+    updateIcon();
+
+    if (themeToggle) {
+        themeToggle.addEventListener('click', toggleTheme);
+    }
+
+    if (window.matchMedia) {
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e) {
+            if (!localStorage.getItem('theme')) {
+                if (e.matches) {
+                    document.documentElement.setAttribute('data-theme', 'dark');
+                } else {
+                    document.documentElement.removeAttribute('data-theme');
+                }
+                updateIcon();
+            }
+        });
+    }
+})();
+</script>
+
+</body>
+</html>

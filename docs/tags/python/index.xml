@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Python on IMTI</title>
+    <link>https://imti.co/tags/python/</link>
+    <description>Recent content in Python on IMTI</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 08 Dec 2018 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://imti.co/tags/python/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Linear Algebra: Matrices 1</title>
+      <link>https://imti.co/linear-algebra-matrices/</link>
+      <pubDate>Sat, 08 Dec 2018 00:00:00 +0000</pubDate>
+      <guid>https://imti.co/linear-algebra-matrices/</guid>
+      <description>&lt;p&gt;This article on &lt;strong&gt;matrices&lt;/strong&gt; is part two of an ongoing crash course on programming with linear algebra, demonstrating concepts and implementations in Python. The following examples will demonstrate some of the various mathematical notations and their corresponding implementations, easily translatable to any programming language with mature math libraries.&lt;/p&gt;&#xA;&lt;p&gt;This series began with &lt;a href=&#34;https://imti.co/linear-algebra-vectors/&#34;&gt;Linear Algebra: Vectors Crash Course for Python Programmers Part 1&lt;/a&gt;. Vectors are the building blocks of matrices, and a good foundational understanding of vectors is essential to understanding matrices.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Linear Algebra: Vectors</title>
+      <link>https://imti.co/linear-algebra-vectors/</link>
+      <pubDate>Thu, 01 Nov 2018 00:00:00 +0000</pubDate>
+      <guid>https://imti.co/linear-algebra-vectors/</guid>
+      <description>&lt;p&gt;This article on &lt;strong&gt;vectors&lt;/strong&gt; is part of an ongoing crash course on linear algebra programming, demonstrating concepts and implementations in Python. The following examples will demonstrate some of the algebraic and geometric interpretations of a vector using Python. A vector is an ordered list of numbers, represented in row or column form.&lt;/p&gt;&#xA;&lt;p&gt;This small series of articles on linear algebra is meant to help you prepare for learning the deeper concepts related to Machine Learning and math that drives the higher level abstractions provided by many of the libraries available today.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>FaaS on Kubernetes</title>
+      <link>https://imti.co/fass-kubeless-kubernetes/</link>
+      <pubDate>Sat, 28 Jul 2018 00:00:00 +0000</pubDate>
+      <guid>https://imti.co/fass-kubeless-kubernetes/</guid>
+      <description>&lt;p&gt;FaaS or &lt;a href=&#34;https://en.wikipedia.org/wiki/Function_as_a_service&#34;&gt;Function as a Service&lt;/a&gt; also known as &lt;a href=&#34;https://en.wikipedia.org/wiki/Serverless_computing&#34;&gt;Serverless computing&lt;/a&gt; implementations are gaining popularity. Discussed often are the cost savings and each implementations relationship to the physical and network architecture of a specific platform or vendor. While many of the &lt;a href=&#34;https://martinfowler.com/articles/serverless.html#ReducedOperationalCost&#34;&gt;cost and infrastructure&lt;/a&gt; advantages of FaaS are compelling, its only one of many advantages. Below, I hope to demonstrate how easy it is to develop and deploy FaaS components into a custom Kubernetes cluster. The functions I develop are nearly all business logic, and I believe therein lies the advantage, &lt;strong&gt;high-density business logic&lt;/strong&gt;. Functions can have a higher degree of focus directly on business logic and communication with other services. Functions can communicate with other functions, microservices or monoliths. In this article, I demonstrate this with &lt;a href=&#34;../../kubernetes-production-elasticsearch/&#34;&gt;Elasticsearch&lt;/a&gt;.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Python Data Essentials - Matplotlib and Seaborn</title>
+      <link>https://imti.co/python-data-essentials-matplotlib-seaborn/</link>
+      <pubDate>Sun, 08 Jul 2018 00:00:00 +0000</pubDate>
+      <guid>https://imti.co/python-data-essentials-matplotlib-seaborn/</guid>
+      <description>&lt;p&gt;There is an overwhelming number of options for developers needing to provide data visualization. The most popular library for data visualization in Python is &lt;a href=&#34;https://matplotlib.org/&#34;&gt;Matplotlib&lt;/a&gt;, and built directly on top of Matplotlib is &lt;a href=&#34;https://seaborn.pydata.org/&#34;&gt;Seaborn&lt;/a&gt;. The Seaborn library is &amp;ldquo;tightly integrated with the &lt;a href=&#34;https://pydata.org/&#34;&gt;PyData&lt;/a&gt; stack, including support for &lt;a href=&#34;../../python-data-essentials-numpy/&#34;&gt;numpy&lt;/a&gt; and &lt;a href=&#34;../../python-data-essentials-pandas/&#34;&gt;pandas&lt;/a&gt; data structures and statistical routines from &lt;a href=&#34;https://www.scipy.org/&#34;&gt;scipy&lt;/a&gt; and &lt;a href=&#34;https://www.statsmodels.org/stable/index.html&#34;&gt;statsmodels&lt;/a&gt;.&amp;rdquo;&lt;/p&gt;&#xA;&lt;p&gt;This article is only intended to get you started with &lt;a href=&#34;https://matplotlib.org/&#34;&gt;Matplotlib&lt;/a&gt; and &lt;a href=&#34;https://seaborn.pydata.org/&#34;&gt;Seaborn&lt;/a&gt;. Both libraries have extensive and mature documentation.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Python Data Essentials - Pandas</title>
+      <link>https://imti.co/python-data-essentials-pandas/</link>
+      <pubDate>Sun, 17 Jun 2018 00:00:00 +0000</pubDate>
+      <guid>https://imti.co/python-data-essentials-pandas/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://pandas.pydata.org/&#34;&gt;Pandas&lt;/a&gt; bring Python a data type equivalent to super-charged spreadsheets. Pandas add two highly expressive data structures to Python, &lt;a href=&#34;https://pandas.pydata.org/pandas-docs/stable/generated/pandas.Series.html&#34;&gt;Series&lt;/a&gt; and &lt;a href=&#34;https://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.html&#34;&gt;DataFrame&lt;/a&gt;. Pandas &lt;a href=&#34;https://pandas.pydata.org/pandas-docs/stable/generated/pandas.Series.html&#34;&gt;Series&lt;/a&gt; and &lt;a href=&#34;https://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.html&#34;&gt;DataFrame&lt;/a&gt;s provide a performant analysis and manipulation of “relational” or “labeled” data similar to relational database tables like MySQL or the rows and columns of Excel. &lt;a href=&#34;https://pandas.pydata.org/&#34;&gt;Pandas&lt;/a&gt; are great for working with time series data as well as arbitrary matrix data, and unlabeled data.&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://pandas.pydata.org/&#34;&gt;Pandas&lt;/a&gt; leverage &lt;a href=&#34;../../python-data-essentials-numpy/&#34;&gt;NumPy&lt;/a&gt; and if you are not familiar with this fundamental library for working with numbers, then I suggest you take a look at &lt;a href=&#34;../../python-data-essentials-numpy/&#34;&gt;Python Data Essentials - NumPy&lt;/a&gt; to get a decent footing.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Python Data Essentials - Numpy</title>
+      <link>https://imti.co/python-data-essentials-numpy/</link>
+      <pubDate>Sat, 16 Jun 2018 00:00:00 +0000</pubDate>
+      <guid>https://imti.co/python-data-essentials-numpy/</guid>
+      <description>&lt;p&gt;Python is one of &lt;a href=&#34;https://dzone.com/articles/which-are-the-popular-languages-for-data-science&#34;&gt;The Most Popular Languages for Data Science&lt;/a&gt;, and because of this adoption by the &lt;a href=&#34;http://www.scipy-lectures.org/intro/intro.html#why-python&#34;&gt;data science&lt;/a&gt; community, we have libraries like &lt;a href=&#34;http://www.numpy.org/&#34;&gt;NumPy&lt;/a&gt;, &lt;a href=&#34;../../python-data-essentials-pandas/&#34;&gt;Pandas&lt;/a&gt; and &lt;a href=&#34;../../python-data-essentials-matplotlib-seaborn/&#34;&gt;Matplotlib&lt;/a&gt;. &lt;a href=&#34;http://www.numpy.org/&#34;&gt;NumPy&lt;/a&gt; at it&amp;rsquo;s core provides a powerful N-dimensional array objects in which we can perform linear algebra, &lt;a href=&#34;../../python-data-essentials-pandas/&#34;&gt;Pandas&lt;/a&gt; give us data structures and data analysis tools, similar to working with a specialized database or powerful spreadsheets and finally &lt;a href=&#34;../../python-data-essentials-matplotlib-seaborn/&#34;&gt;Matplotlib&lt;/a&gt; to generate plots, histograms, power spectra, bar charts, error charts and scatterplots to name a few.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Essential Python 3</title>
+      <link>https://imti.co/essential-python3/</link>
+      <pubDate>Thu, 31 May 2018 00:00:00 +0000</pubDate>
+      <guid>https://imti.co/essential-python3/</guid>
+      <description>&lt;p&gt;This article is a quick tour of basic &lt;a href=&#34;https://www.python.org/&#34;&gt;Python&lt;/a&gt; 3 syntax, components and structure. I intend to balance a cheat sheet format with hello world style boilerplate. If you are already a software developer and need a quick refresh on &lt;a href=&#34;https://www.python.org/&#34;&gt;Python&lt;/a&gt; then I hope you benefit from my notes below.&lt;/p&gt;&#xA;&lt;p&gt;I am a professional software developer for a software development company, and for that reason, I work with a lot of languages, expert in some, and ok in others.  I context switch often, and sometimes months in between languages. I  often find myself just needing a quick overview to prime the pump so to say, and rather than keep my notes to myself I thought I would clean them up a bit and publish for anyone needing a quick tour, starting with &lt;a href=&#34;https://www.python.org/&#34;&gt;Python&lt;/a&gt; and more languages as time and interest permits.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

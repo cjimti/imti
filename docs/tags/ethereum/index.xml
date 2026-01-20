@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Ethereum on IMTI</title>
+    <link>https://imti.co/tags/ethereum/</link>
+    <description>Recent content in Ethereum on IMTI</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 22 Sep 2018 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://imti.co/tags/ethereum/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Ethereum Ethstats</title>
+      <link>https://imti.co/ethereum-ethstats/</link>
+      <pubDate>Sat, 22 Sep 2018 00:00:00 +0000</pubDate>
+      <guid>https://imti.co/ethereum-ethstats/</guid>
+      <description>&lt;p&gt;The &lt;a href=&#34;https://github.com/cubedro/eth-netstats&#34;&gt;eth-netstats&lt;/a&gt; project provides a great dashboard interface for monitoring the status of an Ethereum Blockchain from the perspective of its nodes. The website &lt;a href=&#34;https://ethstats.net/&#34;&gt;https://ethstats.net/&lt;/a&gt; reports statistics from an extensive list of Ethereum nodes on the public &lt;a href=&#34;https://ethereum.org&#34;&gt;Ethereum&lt;/a&gt; Blockchain, however, the &lt;a href=&#34;https://github.com/cubedro/eth-netstats&#34;&gt;eth-netstats&lt;/a&gt; software that drives &lt;a href=&#34;https://ethstats.net/&#34;&gt;https://ethstats.net/&lt;/a&gt; can also be used to monitor a &lt;a href=&#34;https://imti.co/ethereum-kubernetes/&#34;&gt;Private Ethereum Blockchchain&lt;/a&gt; as I demonstrate in the previous article &lt;a href=&#34;https://imti.co/ethereum-kubernetes/&#34;&gt;Deploy a Private Ethereum Blockchain on a Custom Kubernetes Cluster&lt;/a&gt;.&lt;/p&gt;&#xA;&lt;p&gt;The &lt;a href=&#34;https://github.com/cubedro/eth-netstats&#34;&gt;eth-netstats&lt;/a&gt; service consumes Ethereum statistical metrics provided by individual Ethereum nodes. Check out the documentation on &lt;a href=&#34;https://github.com/ethereum/go-ethereum/wiki/geth&#34;&gt;Geth&lt;/a&gt; if you are interested in running an Ethereum miner or transaction only node and pointing it&amp;rsquo;s statistical output to an &lt;a href=&#34;https://github.com/cubedro/eth-netstats&#34;&gt;eth-netstats&lt;/a&gt; instance.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Ethereum Blockchain on Kubernetes</title>
+      <link>https://imti.co/ethereum-kubernetes/</link>
+      <pubDate>Tue, 04 Sep 2018 00:00:00 +0000</pubDate>
+      <guid>https://imti.co/ethereum-kubernetes/</guid>
+      <description>&lt;p&gt;Blockchain technologies have been made famous by Cryptocurrencies such as Bitcoin and &lt;a href=&#34;https://www.ethereum.org/&#34;&gt;Ethereum&lt;/a&gt;. However, the concepts behind &lt;a href=&#34;http://imti.co/blockchain/&#34;&gt;Blockchain&lt;/a&gt; are far more reaching than their support for cryptocurrency. Blockchain technologies now support any digital asset, from signal data to complex messaging, to the execution of business logic through code. Blockchain technologies are rapidly forming a new decentralized internet of transactions.&lt;/p&gt;&#xA;&#xA;&#xA;&lt;p&gt;&lt;a href=&#34;https://kubernetes.io/&#34;&gt;Kubernetes&lt;/a&gt; is an efficient and productive platform for the configuration, deployment, and management of private blockchains. Blockchain technology is intended to provide a decentralized transaction ledger, making it a perfect fit for the distributed nature of Kubernetes Pod deployments. The Kubernetes network infrastructure provides the necessary elements for security, scalability and fault tolerance needed for private or protected Blockchains.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>
