@@ -417,13 +417,13 @@ Systems of linear equations appear in many real-world applications. Consider a s
 # Network flow example: Water distribution
 # Node balance equations (flow in = flow out)
 #
-#   [1] ----x1----> [2] ----x2----> [4]
-#    |              ^                ^
-#    |              |                |
-#   x4             x3               x5
-#    |              |                |
-#    v              |                |
-#   [3] ----x6----> [5] ----x7----> [6]
+#       x1          x2
+#   [1]---->[2]---->[4]
+#    |       |       |
+#    |x4     |x3     |x5
+#    v       v       v
+#   [3]---->[5]---->[6]
+#       x6      x7
 #
 # Given: Total inflow at [1] = 100, outflow at [4] = 40, outflow at [6] = 60
 # Constraint equations from node balance:
