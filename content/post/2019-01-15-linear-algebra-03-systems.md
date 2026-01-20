@@ -6,8 +6,8 @@ subtitle: "Linear Algebra Crash Course for Programmers Part 3"
 date: 2019-01-15
 author: "Craig Johnston"
 URL: "linear-algebra-systems-equations/"
-image: "/img/post/server-room.jpg"
-twitter_image: "/img/post/server-room_876_438.jpg"
+image: "/img/post/matrix.jpg"
+twitter_image:  "/img/post/matrix_876_438.jpg"
 tags:
 - Linear Algebra
 - Matrices
