@@ -17,6 +17,10 @@ series:
 - AI
 ---
 
+I've been experimenting with MCP for about six months now, building custom servers for data platform clients. Recently I started converting POCs and various experiments into legitimate OSS projects: [mcp-trino](/mcp-trino/) for data warehouse access, [mcp-s3](/mcp-s3/) for object storage, [mcp-datahub](https://github.com/txn2/mcp-datahub) for semantic context. The three work together. mcp-datahub provides the metadata layer that makes mcp-trino and mcp-s3 useful. Not because the world needs another generic MCP server. I build them as composable Go libraries, and public repositories put me in a different mindset. With OSS I put more effort into things like keeping documentation up to date.
+
+<!--more-->
+
 ## TL;DR
 
 - **MCP has real flaws**: security CVEs, scalability limits, immature OAuth. The critics aren't wrong.
@@ -27,13 +31,9 @@ series:
 
 ---
 
-I've been experimenting with MCP for about six months now, building custom servers for data platform clients. Recently I started converting POCs and various experiments into legitimate OSS projects: [mcp-trino](/mcp-trino/) for data warehouse access, [mcp-s3](/mcp-s3/) for object storage, [mcp-datahub](https://github.com/txn2/mcp-datahub) for semantic context. The three work together. mcp-datahub provides the metadata layer that makes mcp-trino and mcp-s3 useful. Not because the world needs another generic MCP server. I build them as composable Go libraries, and public repositories put me in a different mindset. With OSS I put more effort into things like keeping documentation up to date.
-
 MCP has problems. Serious ones. The security model is immature. The context window math doesn't work at scale. The OAuth spec is a mess. I've read the criticism, and most of it is technically accurate.
 
 I'm building with MCP anyway. Here's why.
-
-<!--more-->
 
 {{< toc >}}
 

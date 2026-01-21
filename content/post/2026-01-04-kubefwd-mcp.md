@@ -20,9 +20,9 @@ series:
 
 [kubefwd] is a tool that bulk-forwards Kubernetes services to your local machine, making them accessible by their real hostnames. Instead of juggling `kubectl port-forward` commands, you run `sudo kubefwd svc -n mynamespace` and your app can connect to `postgres:5432` or `api:8080` as if those services were running locally. For full details on kubefwd's features, see [kubefwd in 2026: Interactive TUI and Auto-Reconnect](/kubefwd-2026/).
 
-This article focuses on kubefwd's MCP integration, which lets AI assistants manage port forwarding on your behalf.
-
 <!--more-->
+
+This article focuses on kubefwd's MCP integration, which lets AI assistants manage port forwarding on your behalf.
 
 {{< toc >}}
 

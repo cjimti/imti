@@ -16,9 +16,9 @@ series:
 - Kubernetes
 ---
 
-## The Problem
-
 `kubectl port-forward` works fine for one service. Two services? Three? A microservices app with a dozen dependencies? You end up with a terminal full of port-forward commands, each needing different local ports to avoid conflicts, and connection strings that differ between local and production.
+
+<!--more-->
 
 ## The Solution
 

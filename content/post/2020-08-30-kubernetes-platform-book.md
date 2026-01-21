@@ -21,6 +21,8 @@ series:
 
 I've been distracted for over a year now, writing a (~500 page) end-to-end tutorial on constructing data-centric platforms with Kubernetes. The book is titled "[Advanced Platform Development with Kubernetes: Enabling Data Management, the Internet of Things, Blockchain, and Machine Learning]"
 
+<!--more-->
+
 A little more than a year ago, Apress reached out and asked if I would write a book on Kubernetes for them, mirroring the wide range of projects I develop (and write about) for my clients. I have been building data-centric platforms for almost twenty years, spanning everything from my early days on the aggregation of massive volumes of international log files for Disney to fan-driven location data for Nine Inch Nails. And in the last decade, retailers with point-of-sale, logistics, and inventory systems, marketers leveraging social media metrics, fleet operators with demanding telematics platforms, and manufacturers with advanced IIoT (industrial internet of things) networks.
 
 {{< content-ad >}}
