@@ -6,8 +6,8 @@ subtitle: "Linear Algebra Crash Course for Programmers Part 5"
 date: 2019-05-25
 author: "Craig Johnston"
 URL: "linear-algebra-vector-spaces/"
-image: "/img/post/server-room.jpg"
-twitter_image: "/img/post/server-room_876_438.jpg"
+image: "/img/post/matrix.jpg"
+twitter_image:  "/img/post/matrix_876_438.jpg"
 tags:
 - Linear Algebra
 - Matrices
