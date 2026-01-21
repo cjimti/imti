@@ -536,8 +536,6 @@ In this article, we covered:
 - **Invertibility conditions** and their equivalence
 - **Numerical considerations** for ill-conditioned matrices
 
-In the next article, we'll explore **vector spaces and subspaces**, fundamental concepts that provide the theoretical foundation for understanding linear transformations.
-
 ## Resources
 
 - [Matrix Inverse - Khan Academy](https://www.khanacademy.org/math/algebra-home/alg-matrices/alg-intro-to-matrix-inverses)
