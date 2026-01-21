@@ -237,6 +237,8 @@ print(f"Eigenvalues: {eigenvalues_B}")
 print(f"Eigenvectors:\n{eigenvectors_B}")
 ```
 
+![Geometric Interpretation of Eigenvalues and Eigenvectors](/img/post/linear-algebra/eigenvalues-geometric.png)
+
 ## Eigenspaces
 
 The **eigenspace** corresponding to eigenvalue $\lambda$ is the set of all eigenvectors with that eigenvalue, plus the zero vector:

@@ -291,6 +291,8 @@ print(f"Scaling factor: {magnitude:.4f}")
 print(f"Rotation angle: {angle:.2f} degrees")
 ```
 
+![Complex Eigenvalues: Spiral Pattern](/img/post/linear-algebra/complex-eigenvalues-spiral.png)
+
 ## When is a Matrix Not Diagonalizable?
 
 A matrix may not be diagonalizable if it has **repeated eigenvalues** with insufficient eigenvectors:
@@ -430,6 +432,8 @@ plt.legend()
 plt.grid(True, alpha=0.3)
 plt.show()
 ```
+
+![Differential Equation Solution](/img/post/linear-algebra/diff-eq-solution.png)
 
 ## Summary
 
