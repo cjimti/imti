@@ -82,6 +82,8 @@ plt.axis((-2, 5, -2, 4))
 plt.show()
 ```
 
+![System of Two Linear Equations](/img/post/linear-algebra/system-two-equations.png)
+
 ## Matrix Representation
 
 Any system of linear equations can be written in matrix form as:
@@ -409,6 +411,8 @@ plt.tight_layout()
 plt.show()
 ```
 
+![Solution Types: Unique, No Solution, and Infinite Solutions](/img/post/linear-algebra/solution-types.png)
+
 ## Practical Application: Network Flow
 
 Systems of linear equations appear in many real-world applications. Consider a simple network flow problem where we need to determine flow rates through a network.
@@ -518,6 +522,8 @@ plt.title('Least Squares Line Fitting')
 plt.grid(True, alpha=0.3)
 plt.show()
 ```
+
+![Least Squares Line Fitting](/img/post/linear-algebra/least-squares-fit.png)
 
 ## Summary
 
