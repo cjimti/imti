@@ -16,6 +16,8 @@ series:
 
 I use a few Kubernetes clusters on a daily basis, and I use [kubectl] to access and configure them from my workstation. There are dozens of ways to configure [kubectl] however I find the following method the easiest for me to manage and not make a mess.
 
+<!--more-->
+
 I also set up test clusters from time-to-time, and so keeping my configs organized is, so I don't confuse myself or make a mess.
 
 For this post, I'll talk about four clusters and how I have them organized. The following is a list of the clusters I am managing:

@@ -14,6 +14,8 @@ tags:
 
 A recurring requirement for my [IOT] projects involves keeping a set of files synced with a central server. Many of these projects include media players, kiosk systems, or applications that need frequently updated configuration files, all while entirely unattended, and in most cases unreachable through firewalls. I have one project that alone has 2000+ devices pulling media continuously from an [rsync] server. Many of these devices are on doggy wifi networks.
 
+<!--more-->
+
 The [rsync] utility works excellent on [Raspberry Pi] as well as an assortment of [Armbian] installed devices. However, writing scripts to manage [rsync] when it fails, or restarting it on some interval when it finishes can be a pain. I have a dozen rickety, cobbled-together [bash] hacks that have somewhat worked in the past. I needed something more stable, portable and upgradeable.
 
 

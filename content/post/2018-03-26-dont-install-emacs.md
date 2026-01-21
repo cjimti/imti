@@ -14,6 +14,8 @@ tags:
 
 I grew up on [emacs]. One of my first jobs I sat down at a terminal and was editing some files with [pico], it's what I knew since I used that fantastic email client [pine]. I was quickly told by my the lead developer that I need to use a **real** text editor if I'm going to progress in my career. He told me I need to try [emacs], and after suffering through a few weeks of memorizing multi command-char sequences and [training the muscle memory in my pinky to perform bizarre contortions] of my left hand just to save my file, I became a convert. I found out a few months later that the developer who convinced me to use [emacs] was a [vi] user all along. I think I was a victim of a cruel joke or hazing ritual, but I learned to love [emacs], and when I am not coding in a desktop IDE ([IntelliJ]) then I am using [emacs].
 
+<!--more-->
+
 However most base server installs don't come with [emacs], and [emacs] installs a ton of extra libraries and dependencies. [Emacs] often takes a considerable bit of time to install as packages are downloaded and compiled depending on the platform.
 
 As the world, and my company has been rapidly moving to containerization, I find [Docker] installed on more servers. [Docker] lets me leverage something I have been doing a lot of lately: container-as-command. Like monolithic or microservices, websites, databases, and on and on, containers give us dependency isolation. So with the only requirement being [Docker], I can run any utility that I can slide into a little [Alpine Linux] container.

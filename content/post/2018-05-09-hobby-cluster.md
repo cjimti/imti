@@ -15,6 +15,8 @@ series:
 
 Setting up a production-grade Kubernetes cluster can be done on a hobby budget, and if this is true why mess around with a lesser grade. If you are investing time to learn distributed cloud computing or microservices, is the distance between $0 and **15 dollars a month** worth the time in translating best practices? Kubernetes is designed to host production applications. My personal web applications may only be hobbies, but they might as well be production grade hobbies. 
 
+<!--more-->
+
 [![k8s performance hobby clusters](/images/content/k8s-tshirt-banner.jpg)](https://amzn.to/2IOe8Yu)
 
 {{< toc >}}

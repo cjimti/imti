@@ -16,6 +16,8 @@ tags:
 
 The following is an attempt at explaining the basics of an SQL query, and more importantly how I believe you can best think through them. All queries can be broken down into the basics of this declarative language.
 
+<!--more-->
+
 I recently helped a co-worker read through a large SQL query with a few dozen joins and left joins, alias, and recursions. He is mostly a front-end integrator and although he has been tinkering with SQL for years, he never really understood the basics. I realize that unless you have to write SQL, many front-end developers work from the API layer, where database interaction has been highly abstracted, and with only brief interactions, many do not realize how easy it is to know the fundamentals. I do not address subqueries, stored procedures or vendor-specific syntax. This example is just the foundation, yet everything builds up from it and can be broken down into it.
 
 ###  The Foundation

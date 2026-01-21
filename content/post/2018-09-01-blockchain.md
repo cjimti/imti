@@ -13,8 +13,7 @@ series:
 - Blockchain
 ---
 
-### The Internet of Transactions
-Blockchain may be a recent entry to the technology landscape. However, it has quickly become an essential iteration in the evolution of peer-to-peer communication and distributed computing. Originally developed as a way to protect digital currency, Blockchain technologies now support any digital asset, from signal data to complex messaging, to the execution of business logic through code. Blockchain technologies are rapidly forming a new decentralized internet of transactions.
+Blockchain (The Internet of Transactions) may be a recent entry to the technology landscape. However, it has quickly become an essential iteration in the evolution of peer-to-peer communication and distributed computing. Originally developed as a way to protect digital currency, Blockchain technologies now support any digital asset, from signal data to complex messaging, to the execution of business logic through code. Blockchain technologies are rapidly forming a new decentralized internet of transactions.
 
 <!--more-->
 

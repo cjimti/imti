@@ -14,6 +14,8 @@ tags:
 
 Use your terminal to burn images fast and easy with **[dd]**. I do a lot of professional and hobby development for projects using devices such as [Raspberry Pi], [Orange Pi], [Libre Computer], [Tinker Board], etc. I run across a lot of tutorials with people downloading and using big GUI apps with clunky drag and drop interfaces to burn images.
 
+<!--more-->
+
 It's one command in your terminal. Technically, it's three, but I don't count listing and unmounting as the final act of burning.
 
 ## 1 - List Disks

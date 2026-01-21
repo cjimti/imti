@@ -17,6 +17,8 @@ series:
 
 Getting started with Kubernetes for local development. I develop on a Mac however much of this is easily translated to windows. 
 
+<!--more-->
+
 The following is primarily a getting started guide wrapped around my personal development notes. This set of notes are specifically for my co-workers in helping them get up to speed quickly. If you see an error feel free to make a pull request or just add an issue.
 
 Contents

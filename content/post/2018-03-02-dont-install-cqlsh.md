@@ -20,6 +20,8 @@ series:
 
 We live in a world of process isolation and tools that make utilizing it extremely simple, with apps like [Docker] we can perform dependency management with **dependency isolation**. As I am slowly becoming a fanboy of containerization, I look forward to the day when typing `ps` on my local workstation or remote server is nearly synonymous with commands like `docker ps` or `kubectl get services`.
 
+<!--more-->
+
 Case: **Cassandra development and your local workstation.**
 
 {{< content-ad >}}

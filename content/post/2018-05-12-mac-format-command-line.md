@@ -14,6 +14,8 @@ tags:
 
 I have had this collection of old external drives hanging around for years. There was a time I was having terrible luck with hard drives. It turned out I managed to amass a collection of about eight drives from one terabyte to four terabytes.
 
+<!--more-->
+
 Fortunately, I keep copies of nearly all my files on cloud drives, split between [Amazon](https://amzn.to/2KiZ31d), Google and DropBox. I had a sneaking suspicion that the discs themselves were ok and somehow my Mac was communicating with the RAID controllers in a way that caused them to fail.
 
 This weekend I received a [Cable Matters USB 3.0 SATA HDD/SSD Docking Station](https://amzn.to/2Ge0aNb) I ordered a few days ago. I removed all my drives from their old cases and plugged them directly into my new dock. Out of my eight drives, only two were unusable.
