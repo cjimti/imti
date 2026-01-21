@@ -19,6 +19,9 @@ series:
 
 Getting the unique serial number from a Raspberry Pi.
 
+<!--more-->
+
+
     cat /proc/cpuinfo | grep ^Serial | cut -d":" -f2
 
 Example output:
