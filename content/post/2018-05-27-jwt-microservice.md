@@ -19,6 +19,8 @@ series:
 
 [txToken] is a small high performance [microservice] utility container. [txToken] is used for adding [JSON Web Token][JWT] based security to existing or new API development. [txToken] is specifically for systems that communicate in JSON over HTTP. [txToken] is called from a client with a JSON post body and passes received JSON to a remote endpoint. JSON retrieved from a remote endpoint is used to create a [JWT] token with an [HS256] symmetrically encrypted signature.
 
+<!--more-->
+
 ### Overview
 
 ![txToken Proxy](/images/content/txToken-00.png)

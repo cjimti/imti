@@ -18,6 +18,8 @@ series:
 
 There is an overwhelming number of options for developers needing to provide data visualization. The most popular library for data visualization in Python is [Matplotlib], and built directly on top of Matplotlib is [Seaborn]. The Seaborn library is "tightly integrated with the [PyData] stack, including support for [numpy] and [pandas] data structures and statistical routines from [scipy] and [statsmodels]."
 
+<!--more-->
+
 This article is only intended to get you started with [Matplotlib] and [Seaborn]. Both libraries have extensive and mature documentation.
 
 

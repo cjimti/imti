@@ -17,6 +17,8 @@ series:
 
 There are more than a handful of ways to set up port **80** and **443** web [ingress] on a custom [Kubernetes] cluster. Specifically a bare metal cluster. If you are looking to experiment or learn on a non-production cluster, but something more true to production than [minikube], I suggest you check out my previous article [Production Hobby Cluster], a step-by-step guide for setting up a custom production capable Kubernetes cluster.
 
+<!--more-->
+
 This article builds on the [Production Hobby Cluster] guide. The following closely the official [deploy ingress] Installation Guide with a few adjustments suitable for the [Production Hobby Cluster], specifically the use of a [DaemonSet] rather than a [Deployment] and leveraging **hostNetwork** and **hostPort** for the [Pod]s on our [DaemonSet]. There are quite a few [ingress nginx examples] in the official repository if you are looking for a more specific implementation.
 
 By now you may be managing multiple clusters. [kubectl] is a great tool to use on your local workstation to manage remote clusters, and with little effort you can quickly point it to a new cluster and switch between them all day. Check out my article [kubectl Context Multiple Clusters](/kubectl-remote-context/) for a quick tutorial.

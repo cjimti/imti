@@ -18,6 +18,8 @@ series:
 
 This guide walks through a process for setting up [Kibana] within a [namespace] on a Kubernetes cluster. If you followed along with [Production Grade Elasticsearch on Kubernetes] then aside from personal or corporate preferences, little modifications are necessary for the configurations below.
 
+<!--more-->
+
 {{< toc >}}
 
 {{< content-ad >}}

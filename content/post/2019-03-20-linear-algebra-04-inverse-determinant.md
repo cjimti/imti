@@ -20,6 +20,8 @@ series:
 
 This article on **matrix inverses and determinants** is part four of an ongoing crash course on programming with linear algebra, demonstrating concepts and implementations in Python. The inverse of a matrix and the determinant are fundamental concepts that reveal important properties about matrices and provide alternative methods for solving systems of linear equations.
 
+<!--more-->
+
 This series began with [Linear Algebra: Vectors](https://imti.co/linear-algebra-vectors/), continued with [Linear Algebra: Matrices 1](https://imti.co/linear-algebra-matrices/), and most recently covered [Systems of Linear Equations](https://imti.co/linear-algebra-systems-equations/).
 
 > Python examples in this article make use of the [Numpy] library. Read the article [Python Data Essentials - Numpy] if you want a quick overview of this important Python library.

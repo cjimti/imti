@@ -15,6 +15,8 @@ series:
 
 This article is a quick tour of basic [Python] 3 syntax, components and structure. I intend to balance a cheat sheet format with hello world style boilerplate. If you are already a software developer and need a quick refresh on [Python] then I hope you benefit from my notes below.
 
+<!--more-->
+
 I am a professional software developer for a software development company, and for that reason, I work with a lot of languages, expert in some, and ok in others.  I context switch often, and sometimes months in between languages. I  often find myself just needing a quick overview to prime the pump so to say, and rather than keep my notes to myself I thought I would clean them up a bit and publish for anyone needing a quick tour, starting with [Python] and more languages as time and interest permits.
 
 Each of the following code blocks are executable.

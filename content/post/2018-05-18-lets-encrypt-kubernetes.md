@@ -17,6 +17,8 @@ series:
 
 Use [cert-manager] to get port 443/https running with signed x509 certificates for [Ingress] on your Kubernetes [Production Hobby Cluster]. [cert-manager] is the successor to **kube-lego** and the preferred way to "[automatically obtain browser-trusted certificates, without any human intervention.](https://letsencrypt.org/how-it-works/)" using [Let's Encrypt].
 
+<!--more-->
+
 You need to [install Helm] first if you do not already have it. Otherwise, check out my article [Helm on Custom Kubernetes], especially if you are following along with my [Production Hobby Cluster] guides.
 
 {{< content-ad >}}

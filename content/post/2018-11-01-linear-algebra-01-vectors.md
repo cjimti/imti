@@ -19,6 +19,8 @@ series:
 ---
 This article on **vectors** is part of an ongoing crash course on linear algebra programming, demonstrating concepts and implementations in Python. The following examples will demonstrate some of the algebraic and geometric interpretations of a vector using Python. A vector is an ordered list of numbers, represented in row or column form.
 
+<!--more-->
+
 This small series of articles on linear algebra is meant to help you prepare for learning the deeper concepts related to Machine Learning and math that drives the higher level abstractions provided by many of the libraries available today.
 
 > Python examples in this article make use of the [Numpy] library. Read my article [Python Data Essentials - Numpy] if you want a quick overview on this important Python library. Visualizations are accomplished with the [Matplotlib] Python library. For a beginners guide to [Matplotlib] might try my article [Python Data Essentials - Matplotlib and Seaborn]

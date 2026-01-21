@@ -17,6 +17,8 @@ series:
 
 Using [ingress]-nginx on [Kubernetes] makes adding [CORS] headers painless. Kubernetes [ingress]-nginx uses [annotations] as a quick way to allow you to specify the automatic generation of an extensive list of common [nginx] configuration options.
 
+<!--more-->
+
 Example [ingress] configuration enabling [CORS]:
 
 ```yaml

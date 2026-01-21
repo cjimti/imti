@@ -16,6 +16,8 @@ series:
 
 [Helm] is the de facto package manager for [Kubernetes]. If you are looking to start using [Helm] or want to test its capabilities, I suggest you set up a [Production Hobby Cluster]. This article is a continuation of the [Production Hobby Cluster] configuration but should be entirely useful on its own.
 
+<!--more-->
+
 {{< content-ad >}}
 
 > From https://github.com/kubernetes/helm

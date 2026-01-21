@@ -17,7 +17,7 @@ series:
 
 [Basic Auth] is one of the oldest and easiest ways to secure a web page or API endpoint. [Basic Auth] does not have many features and lacks the sophistication of more modern access controls (see [Ingress Nginx Auth Examples]). However, [Basic Auth] is supported by nearly every major web client, library, and utility. [Basic Auth] is secure, stable and perfect for quick security on Kubernetes projects. [Basic Auth]  can easily we swapped out later as requirements demand or provide a foundation for implementations such as [OAuth 2] and [JWT].
 
-{{< content-ad >}}
+<!--more-->
 
 First, you need an [Ingress] controller on your Kubernetes cluster and at least one ingress rule that we can apply [Basic Auth]. If you are following along with my articles on building a [Production Hobby Cluster] Kubernetes and do not yet have [Ingress] installed, you should read [Ingress on Custom Kubernetes][Ingress] before getting started.
 

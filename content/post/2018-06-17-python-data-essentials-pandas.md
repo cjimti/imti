@@ -17,6 +17,8 @@ series:
 
 [Pandas] bring Python a data type equivalent to super-charged spreadsheets. Pandas add two highly expressive data structures to Python, [Series] and [DataFrame]. Pandas [Series] and [DataFrame]s provide a performant analysis and manipulation of “relational” or “labeled” data similar to relational database tables like MySQL or the rows and columns of Excel. [Pandas] are great for working with time series data as well as arbitrary matrix data, and unlabeled data.
 
+<!--more-->
+
 [Pandas] leverage [NumPy] and if you are not familiar with this fundamental library for working with numbers, then I suggest you take a look at [Python Data Essentials - NumPy][Numpy] to get a decent footing.
 
 [Series]: https://pandas.pydata.org/pandas-docs/stable/generated/pandas.Series.html

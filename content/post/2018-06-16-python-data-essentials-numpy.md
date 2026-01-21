@@ -17,6 +17,8 @@ series:
 
 Python is one of [The Most Popular Languages for Data Science], and because of this adoption by the [data science] community, we have libraries like [NumPy], [Pandas] and [Matplotlib]. [NumPy] at it's core provides a powerful N-dimensional array objects in which we can perform linear algebra, [Pandas] give us data structures and data analysis tools, similar to working with a specialized database or powerful spreadsheets and finally [Matplotlib] to generate plots, histograms, power spectra, bar charts, error charts and scatterplots to name a few.
 
+<!--more-->
+
 {{< toc >}}
 
 {{< content-ad >}}

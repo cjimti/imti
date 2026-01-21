@@ -17,6 +17,8 @@ series:
 
 The [eth-netstats] project provides a great dashboard interface for monitoring the status of an Ethereum Blockchain from the perspective of its nodes. The website https://ethstats.net/ reports statistics from an extensive list of Ethereum nodes on the public [Ethereum] Blockchain, however, the [eth-netstats] software that drives https://ethstats.net/ can also be used to monitor a [Private Ethereum Blockchchain] as I demonstrate in the previous article [Deploy a Private Ethereum Blockchain on a Custom Kubernetes Cluster][Private Ethereum Blockchchain].
 
+<!--more-->
+
 The [eth-netstats] service consumes Ethereum statistical metrics provided by individual Ethereum nodes. Check out the documentation on [Geth] if you are interested in running an Ethereum miner or transaction only node and pointing it's statistical output to an [eth-netstats] instance.
 
 In this article, I review each of the metrics displayed by [eth-netstats], as both a means to better understand the [eth-netstats] utility as well as Ethereum itself.

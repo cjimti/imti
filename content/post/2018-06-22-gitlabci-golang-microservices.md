@@ -16,7 +16,7 @@ tags:
 
 Many of the resources on Cloud Native [Microservices] show you how easy it is to get up and running with AWS or GKE. I think this is great but for the fact that I see a trend (in my clients at least) of associating concepts with particular products or worse, companies. I love Amazon, but it's not THE cloud). In my opinion, to embrace Cloud Native and [Microservices] you should develop some, and host them yourself. The cloud is not Google or Amazon; it's any cluster of virtualized systems, abstracted from their hardware interfaces and centrally managed.
 
-{{< content-ad >}}
+<!--more-->
 
 The following workflow currently manages dozens of projects for me, some of which have been through thousands of builds; I find it highly stable. This workflow is also much more flexible and customizable than a lot of turn-key solutions. It requires a bit of explanation but typically only involves about twenty minutes of setup per microservice application, well worth the investment considering you get a simplified build and deploy script.
 

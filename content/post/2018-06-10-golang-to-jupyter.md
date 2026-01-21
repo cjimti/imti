@@ -16,6 +16,8 @@ series:
 
 [Jupyter Notbooks](http://jupyter.org/) have been a popular technology in the Python data science community for a while now, especially in academics. Jupyter Notebooks are a way to mix inline, executable code with documentation in a presentation format. Best practices in organizing source code are not always the most efficient at communicating it's functionality to a user. 
 
+<!--more-->
+
 While the intention of a programming language is the abstraction of computational complexity into a simplified language humans can read and write, they must always weigh toward the efficiency of the primary interpreter, the computer. Jupyter Notebooks are intended to communicate source code to humans first and computers second. We can use Jupyter Notebooks to communicate to humans not only the source but the interpreted result.
 
 Jupyter can use a growing number of interpreters (called [kernels](https://github.com/jupyter/jupyter/wiki/Jupyter-kernels)) to run and render output, including my favorite, [Golang](https://github.com/gopherdata/gophernotes#examples). 

@@ -19,7 +19,7 @@ series:
 
 Blockchain technologies have been made famous by Cryptocurrencies such as Bitcoin and [Ethereum]. However, the concepts behind [Blockchain] are far more reaching than their support for cryptocurrency. Blockchain technologies now support any digital asset, from signal data to complex messaging, to the execution of business logic through code. Blockchain technologies are rapidly forming a new decentralized internet of transactions.
 
-{{< content-ad >}}
+<!--more-->
 
 [Kubernetes] is an efficient and productive platform for the configuration, deployment, and management of private blockchains. Blockchain technology is intended to provide a decentralized transaction ledger, making it a perfect fit for the distributed nature of Kubernetes Pod deployments. The Kubernetes network infrastructure provides the necessary elements for security, scalability and fault tolerance needed for private or protected Blockchains.
 

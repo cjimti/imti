@@ -17,6 +17,8 @@ series:
 
 Installing production ready, Elasticsearch 6.2 on Kubernetes requires a hand full of simple configurations. The following guide is a high-level overview of an installation process using Elastic's [recommendations for best practices]. The Github project [kubernetes-elasticsearch-cluster] is used for the Elastic Docker container and built to operate Elasticsearch with nodes dedicated as Master, Data, and Client/Ingest.
 
+<!--more-->
+
 The Docker container [docker-elasticsearch], a "Ready to use, lean and highly configurable Elasticsearch container image." by [pires] is sufficient for use in this guide. However, the [txn2/k8s-es] wraps it with a few minor preset environment variables to simplify configuration. I use the docker image [txn2/k8s-es:v6.2.3] in the examples below.
 
 The Github repository [kubernetes-elasticsearch-cluster] contains detailed documentation and configuration for using [docker-elasticsearch] with Kubernetes.

@@ -19,6 +19,8 @@ series:
 
 FaaS or [Function as a Service] also known as [Serverless computing] implementations are gaining popularity. Discussed often are the cost savings and each implementations relationship to the physical and network architecture of a specific platform or vendor. While many of the [cost and infrastructure] advantages of FaaS are compelling, its only one of many advantages. Below, I hope to demonstrate how easy it is to develop and deploy FaaS components into a custom Kubernetes cluster. The functions I develop are nearly all business logic, and I believe therein lies the advantage, **high-density business logic**. Functions can have a higher degree of focus directly on business logic and communication with other services. Functions can communicate with other functions, microservices or monoliths. In this article, I demonstrate this with [Elasticsearch].
 
+<!--more-->
+
 ![](/images/content/faas_architecture.png)
 
 {{< toc >}}

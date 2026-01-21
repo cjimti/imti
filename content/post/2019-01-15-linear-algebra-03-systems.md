@@ -20,6 +20,8 @@ series:
 
 This article on **systems of linear equations** is part three of an ongoing crash course on programming with linear algebra, demonstrating concepts and implementations in Python. We'll explore how matrices provide a powerful framework for solving systems of equations, a fundamental problem that appears throughout science, engineering, and machine learning.
 
+<!--more-->
+
 This series began with [Linear Algebra: Vectors Crash Course for Python Programmers Part 1](https://imti.co/linear-algebra-vectors/) and continued with [Linear Algebra: Matrices 1](https://imti.co/linear-algebra-matrices/). Understanding matrix operations from those articles is essential for this topic.
 
 This small series of articles on linear algebra is meant to help in preparation for learning the more profound concepts related to Machine Learning, AI, and the math that drives the higher level abstractions provided by many of the libraries available today.

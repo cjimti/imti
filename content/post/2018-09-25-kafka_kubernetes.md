@@ -20,6 +20,8 @@ series:
 
 [Kafka] is a fast, horizontally scalable, fault-tolerant, message queue service. [Kafka] is used for building real-time data pipelines and streaming apps.
 
+<!--more-->
+
 There are a few [Helm] based installers out there including the official Kubernetes [incubator/kafka]. However, in this article, I walk through applying a surprisingly small set of Kubernetes configuration files needed to stand up high performance, highly available Kafka. Manually applying Kubernetes configurations gives you a step-by-step understanding of the system you are deploying and limitless opportunities to customize.
 
 If you want a separate Kubernetes cluster to run or experiment with Kafka, I recommend reading my article on setting up a Kubernetes [Production Hobby Cluster] for a quick and inexpensive way to deploy a production capable cluster.

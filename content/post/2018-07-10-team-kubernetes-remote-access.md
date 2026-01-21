@@ -18,6 +18,8 @@ series:
 
 RBAC (Role Based Access Control) allows our Kubernetes clusters to provide the development team better visibility and access into the development, staging and production environments than it has have ever had in the past. Developers using the command line tool **[kubectl]**, can explore the network topology of running [microservices], tail live server logs, proxy local ports directly to services or even execute shells into running pods.
 
+<!--more-->
+
 [Kubernetes and GitlabCI] are the central components of our DevOps toolchain and have increased our productivity by many multiples over the traditional approaches of the past.
 
 If you don't already have a Kubernetes cluster up and running, then I highly suggest you read my article [Production Hobby Cluster] to get you up and running in a custom, vendor-neutral production capable cluster.

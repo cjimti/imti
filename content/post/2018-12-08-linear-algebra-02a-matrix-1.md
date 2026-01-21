@@ -19,6 +19,8 @@ series:
 ---
 This article on **matrices** is part two of an ongoing crash course on programming with linear algebra, demonstrating concepts and implementations in Python. The following examples will demonstrate some of the various mathematical notations and their corresponding implementations, easily translatable to any programming language with mature math libraries.
 
+<!--more-->
+
 This series began with [Linear Algebra: Vectors Crash Course for Python Programmers Part 1](https://imti.co/linear-algebra-vectors/). Vectors are the building blocks of matrices, and a good foundational understanding of vectors is essential to understanding matrices.
 
 This article covers some matrix notation, common matrix types, methods of addition and multiplication and rank.  Future articles will cover additional concepts.

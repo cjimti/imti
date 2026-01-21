@@ -18,6 +18,8 @@ series:
 
 [kubefwd] helps to enable a seamless and efficient way to develop applications and services on a local workstation. Locally develop applications that intend to interact with other services in a Kubernetes cluster. [kubefwd] allows applications with connection strings like http://elasticsearch:9200/ or tcp://db:3306 to communicate into the remote cluster. [kubefwd] can be used to reduce or eliminate the need for local environment specific connection configurations.
 
+<!--more-->
+
 {{< x user="cjimti" id="1059519420064706579" >}}
 
 {{< content-ad >}}

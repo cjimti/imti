@@ -17,7 +17,7 @@ tags:
 
 I create a lot of data visualizations for clients, many of which are internal, portal-style websites that present data in real time, as well as give options for viewing reports from previous time-frames. PDFs are useful for data such as bank statements or any form of time-snapshot progress reporting. It is common for clients to want PDF versions generated on a regular basis for sharing through email or other technologies.
 
-{{< content-ad >}}
+<!--more-->
 
 [![txn2/txpdf](https://raw.githubusercontent.com/txn2/txpdf/master/assets/mast.jpg)](https://github.com/txn2/txpdf)
 

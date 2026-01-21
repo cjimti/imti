@@ -16,6 +16,8 @@ series:
 
 Customize the [Upstream Nameservers] used by [kube-dns] by [Pods] when looking up external hostnames from within a Kubernetes cluster. I found that adding custom [Upstream Nameservers] to my [kube-dns] solved many issues encountered in in the past with external hostname resolution on individual [Pods].
 
+<!--more-->
+
 If you want to experiment on a production-like cluster, I suggest reading my article "[Production Hobby Cluster]" for a guide on setting up a fun, cheap-yet-robust experimental cluster.
 
 The following configuration sets the [Upstream Nameservers] to use Google's [DNS servers] 8.8.8.8 and 8.8.4.4.
