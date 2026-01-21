@@ -179,6 +179,8 @@ plt.tight_layout()
 plt.show()
 ```
 
+![Span Visualization: Independent vs Dependent Vectors](/img/post/linear-algebra/span-visualization.png)
+
 ## Basis
 
 A **basis** for a vector space $V$ is a set of vectors that:
@@ -431,6 +433,8 @@ ax2.legend()
 plt.tight_layout()
 plt.show()
 ```
+
+![Column Space and Null Space in 3D](/img/post/linear-algebra/subspaces-3d.png)
 
 ## Orthogonal Complements
 
