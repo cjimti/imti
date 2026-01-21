@@ -18,6 +18,8 @@ series:
 
 IOT devices, Point-of-Sale systems, application events or any client that sends data destined for indexing in Elasticsearch often need to send and forget, however, unless that data is of low value there needs to be assurance that arrives at its final destination. Back-pressure and database outages can pose a considerable threat to data integrity.
 
+<!--more-->
+
 {{< toc >}}
 
 {{< content-ad >}}

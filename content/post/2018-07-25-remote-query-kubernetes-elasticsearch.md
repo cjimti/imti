@@ -17,6 +17,8 @@ series:
 
 Developing on our local workstations has always been a conceptual challenge for my team when it comes to remote data access.  Local workstation-based development of services that intend to connect to a wide range of remote services that may have no options for external connections poses a challenge. Mirroring the entire development environment is possible in many cases, just not practical.
 
+<!--more-->
+
 In days before Kubernetes, writing code in IDEs on our local workstation meant we had only a few options for developing server-side-API-style services that needed to connect to a database. We could set up a database server on our local workstation manually or use packages like [MAMP]/[WAMP], or run big virtual servers managed with [Vagrant]. Even after we got the database running, we needed a good set of data to work with, and that often meant asking a DBA or Sysadmin for SQL dumps from an environment in which we have no access.
 
 Kubernetes gives us new ways to connect to remote services, some of these services are never intended to be connected to outside the cluster, having no ingress or firewall rules, yet we still need to connect from the outside when developing on a local workstation.
