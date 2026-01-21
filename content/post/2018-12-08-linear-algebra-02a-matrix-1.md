@@ -1,7 +1,7 @@
 ---
 draft: false
 layout:   post
-title:    "Linear Algebra: Matrices 1"
+title:    "Linear Algebra: Matrices"
 subtitle: "Linear Algebra Crash Course for Programmers Part 2a"
 date:     2018-12-08
 author:   "Craig Johnston"
