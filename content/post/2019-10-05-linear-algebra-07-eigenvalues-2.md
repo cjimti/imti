@@ -6,8 +6,8 @@ subtitle: "Linear Algebra Crash Course for Programmers Part 7"
 date: 2019-10-05
 author: "Craig Johnston"
 URL: "linear-algebra-eigenvalues-2/"
-image: "/img/post/server-room.jpg"
-twitter_image: "/img/post/server-room_876_438.jpg"
+image: "/img/post/matrix.jpg"
+twitter_image:  "/img/post/matrix_876_438.jpg"
 tags:
 - Linear Algebra
 - Matrices
