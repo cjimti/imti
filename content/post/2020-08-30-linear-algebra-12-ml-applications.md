@@ -19,7 +19,7 @@ series:
 - Linear Algebra Crash Course
 ---
 
-This article on **practical machine learning applications** is the final part of our linear algebra crash course. We'll see how the concepts we've learned apply to neural networks, gradient computation, and efficient vectorized operations.
+This article covers **practical machine learning applications**, the final part of the series. I'll show how the linear algebra concepts from previous articles apply to neural networks, gradient computation, and efficient vectorized operations.
 
 <!--more-->
 

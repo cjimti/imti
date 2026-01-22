@@ -19,7 +19,7 @@ series:
 - Linear Algebra Crash Course
 ---
 
-This article on **Principal Component Analysis (PCA)** is part eleven of our linear algebra crash course. PCA is one of the most widely used techniques for dimensionality reduction, data visualization, and feature extraction in machine learning.
+This article covers **Principal Component Analysis (PCA)**, part eleven of the series. PCA is one of the most widely used techniques for dimensionality reduction, data visualization, and feature extraction in machine learning.
 
 <!--more-->
 

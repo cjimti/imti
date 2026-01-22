@@ -19,7 +19,7 @@ series:
 - Linear Algebra Crash Course
 ---
 
-This article on **least squares and regression** is part nine of our linear algebra crash course. Least squares is one of the most important applications of linear algebra, forming the foundation of regression analysis used throughout data science and machine learning.
+This article covers **least squares and regression**, part nine of the series. Least squares is one of the most important applications of linear algebra and forms the foundation of regression analysis used throughout data science and machine learning.
 
 <!--more-->
 

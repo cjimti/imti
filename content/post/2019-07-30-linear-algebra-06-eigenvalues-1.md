@@ -160,7 +160,7 @@ def characteristic_polynomial_2x2(A):
 
     return lambda1, lambda2
 
-# Test with our matrix
+# Test with the matrix
 eig1, eig2 = characteristic_polynomial_2x2(A)
 print(f"Eigenvalues from characteristic polynomial: {eig1}, {eig2}")
 print(f"Eigenvalues from NumPy: {eigenvalues}")

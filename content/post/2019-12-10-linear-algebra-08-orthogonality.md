@@ -18,7 +18,7 @@ series:
 - Linear Algebra Crash Course
 ---
 
-This article on **orthogonality and projections** is part eight of our linear algebra crash course. Orthogonality is fundamental to many algorithms including least squares regression, QR decomposition, and machine learning techniques like PCA.
+This article covers **orthogonality and projections**, part eight of the series. Orthogonality is fundamental to many algorithms including least squares regression, QR decomposition, and machine learning techniques like PCA.
 
 <!--more-->
 

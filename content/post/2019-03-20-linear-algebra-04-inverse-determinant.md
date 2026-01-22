@@ -124,7 +124,7 @@ def inverse_2x2(A):
     return np.array([[d, -b],
                      [-c, a]]) / det
 
-# Test our function
+# Test the function
 A_inv_manual = inverse_2x2(A)
 print(f"Manual inverse:\n{A_inv_manual}\n")
 print(f"NumPy inverse:\n{A_inv}\n")

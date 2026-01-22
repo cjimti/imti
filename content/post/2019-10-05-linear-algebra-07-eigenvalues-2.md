@@ -18,7 +18,7 @@ series:
 - Linear Algebra Crash Course
 ---
 
-This article continues our exploration of **eigenvalues and eigenvectors**, focusing on diagonalization, computing matrix powers, and handling complex eigenvalues. This is part seven of our linear algebra crash course.
+This article continues the exploration of **eigenvalues and eigenvectors**, focusing on diagonalization, computing matrix powers, and handling complex eigenvalues. Part seven of the series.
 
 <!--more-->
 

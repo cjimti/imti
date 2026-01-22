@@ -101,7 +101,7 @@ Where:
 - $\vec{x}$ is the **variable vector** (unknowns)
 - $\vec{b}$ is the **constant vector**
 
-For our example:
+For this example:
 
 <p><div>
 $

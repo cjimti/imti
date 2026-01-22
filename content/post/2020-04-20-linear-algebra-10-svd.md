@@ -19,7 +19,7 @@ series:
 - Linear Algebra Crash Course
 ---
 
-This article on **Singular Value Decomposition (SVD)** is part ten of our linear algebra crash course. SVD is arguably the most important matrix decomposition, with applications in image compression, recommender systems, pseudoinverse computation, and dimensionality reduction.
+This article covers **Singular Value Decomposition (SVD)**, part ten of the series. SVD is arguably the most important matrix decomposition, with applications in image compression, recommender systems, pseudoinverse computation, and dimensionality reduction.
 
 <!--more-->
 
