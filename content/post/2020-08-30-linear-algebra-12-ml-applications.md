@@ -10,6 +10,7 @@ image: "/img/post/matrix.jpg"
 twitter_image:  "/img/post/matrix_876_438.jpg"
 tags:
 - Linear Algebra
+- Linear Algebra: Python
 - Matrices
 - Math
 - Python
@@ -22,6 +23,21 @@ series:
 This article covers **practical machine learning applications**, the final part of the series. I'll show how the linear algebra concepts from previous articles apply to neural networks, gradient computation, and efficient vectorized operations.
 
 <!--more-->
+
+> **[Linear Algebra: Python Series](/tags/linear-algebra-python/)** - View all articles in this series.
+
+**Previous articles in this series:**
+1. [Linear Algebra: Vectors](https://imti.co/linear-algebra-vectors/)
+2. [Linear Algebra: Matrices](https://imti.co/linear-algebra-matrices/)
+3. [Linear Algebra: Systems of Linear Equations](https://imti.co/linear-algebra-systems-equations/)
+4. [Linear Algebra: Matrix Inverses and Determinants](https://imti.co/linear-algebra-inverse-determinant/)
+5. [Linear Algebra: Vector Spaces and Subspaces](https://imti.co/linear-algebra-vector-spaces/)
+6. [Linear Algebra: Eigenvalues and Eigenvectors Part 1](https://imti.co/linear-algebra-eigenvalues-1/)
+7. [Linear Algebra: Eigenvalues and Eigenvectors Part 2](https://imti.co/linear-algebra-eigenvalues-2/)
+8. [Linear Algebra: Orthogonality and Projections](https://imti.co/linear-algebra-orthogonality/)
+9. [Linear Algebra: Least Squares and Regression](https://imti.co/linear-algebra-least-squares/)
+10. [Linear Algebra: Singular Value Decomposition](https://imti.co/linear-algebra-svd/)
+11. [Linear Algebra: Principal Component Analysis](https://imti.co/linear-algebra-pca/)
 
 This article builds on all previous articles in the series, particularly [Matrices](https://imti.co/linear-algebra-matrices/), [SVD](https://imti.co/linear-algebra-svd/), and [PCA](https://imti.co/linear-algebra-pca/).
 
@@ -426,3 +442,6 @@ In this final article, we covered practical ML applications:
 - [NumPy for Machine Learning](https://numpy.org/doc/stable/user/absolute_beginners.html)
 - [3Blue1Brown - Linear Algebra Series](https://www.youtube.com/playlist?list=PLZHQObOWTQDPD3MizzM2xVFitgF8hE_ab)
 
+---
+
+> **[Linear Algebra: Python Series](/tags/linear-algebra-python/)** - View all articles in this series.

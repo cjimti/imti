@@ -10,6 +10,7 @@ image: "/img/post/matrix.jpg"
 twitter_image:  "/img/post/matrix_876_438.jpg"
 tags:
 - Linear Algebra
+- Linear Algebra: Python
 - Matrices
 - Math
 - Python
@@ -22,6 +23,19 @@ series:
 This article covers **Singular Value Decomposition (SVD)**, part ten of the series. SVD is arguably the most important matrix decomposition, with applications in image compression, recommender systems, pseudoinverse computation, and dimensionality reduction.
 
 <!--more-->
+
+> **[Linear Algebra: Python Series](/tags/linear-algebra-python/)** - View all articles in this series.
+
+**Previous articles in this series:**
+1. [Linear Algebra: Vectors](https://imti.co/linear-algebra-vectors/)
+2. [Linear Algebra: Matrices](https://imti.co/linear-algebra-matrices/)
+3. [Linear Algebra: Systems of Linear Equations](https://imti.co/linear-algebra-systems-equations/)
+4. [Linear Algebra: Matrix Inverses and Determinants](https://imti.co/linear-algebra-inverse-determinant/)
+5. [Linear Algebra: Vector Spaces and Subspaces](https://imti.co/linear-algebra-vector-spaces/)
+6. [Linear Algebra: Eigenvalues and Eigenvectors Part 1](https://imti.co/linear-algebra-eigenvalues-1/)
+7. [Linear Algebra: Eigenvalues and Eigenvectors Part 2](https://imti.co/linear-algebra-eigenvalues-2/)
+8. [Linear Algebra: Orthogonality and Projections](https://imti.co/linear-algebra-orthogonality/)
+9. [Linear Algebra: Least Squares and Regression](https://imti.co/linear-algebra-least-squares/)
 
 Previous articles covered [Least Squares](https://imti.co/linear-algebra-least-squares/) which SVD can solve more robustly.
 
@@ -375,4 +389,6 @@ In this article, we covered:
 - [NumPy SVD](https://numpy.org/doc/stable/reference/generated/numpy.linalg.svd.html)
 - [3Blue1Brown - SVD](https://www.youtube.com/watch?v=vSczTbgc8Rc)
 
+---
 
+> **[Linear Algebra: Python Series](/tags/linear-algebra-python/)** - View all articles in this series.

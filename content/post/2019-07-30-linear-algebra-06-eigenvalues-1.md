@@ -10,6 +10,7 @@ image: "/img/post/matrix.jpg"
 twitter_image:  "/img/post/matrix_876_438.jpg"
 tags:
 - Linear Algebra
+- Linear Algebra: Python
 - Matrices
 - Math
 - Python
@@ -21,6 +22,15 @@ series:
 This article on **eigenvalues and eigenvectors** is part six of an ongoing crash course on programming with linear algebra. Eigenvalues and eigenvectors are among the most important concepts in linear algebra, with applications ranging from differential equations to machine learning algorithms like PCA.
 
 <!--more-->
+
+> **[Linear Algebra: Python Series](/tags/linear-algebra-python/)** - View all articles in this series.
+
+**Previous articles in this series:**
+1. [Linear Algebra: Vectors](https://imti.co/linear-algebra-vectors/)
+2. [Linear Algebra: Matrices](https://imti.co/linear-algebra-matrices/)
+3. [Linear Algebra: Systems of Linear Equations](https://imti.co/linear-algebra-systems-equations/)
+4. [Linear Algebra: Matrix Inverses and Determinants](https://imti.co/linear-algebra-inverse-determinant/)
+5. [Linear Algebra: Vector Spaces and Subspaces](https://imti.co/linear-algebra-vector-spaces/)
 
 Previous articles covered [Vectors](https://imti.co/linear-algebra-vectors/), [Matrices](https://imti.co/linear-algebra-matrices/), [Systems of Equations](https://imti.co/linear-algebra-systems-equations/), [Inverses and Determinants](https://imti.co/linear-algebra-inverse-determinant/), and [Vector Spaces](https://imti.co/linear-algebra-vector-spaces/).
 
@@ -415,4 +425,8 @@ In this article, we covered:
 - [Eigenvalues - Khan Academy](https://www.khanacademy.org/math/linear-algebra/alternate-bases/eigen-everything)
 - [NumPy Linear Algebra](https://numpy.org/doc/stable/reference/routines.linalg.html)
 - [3Blue1Brown - Eigenvectors](https://www.youtube.com/watch?v=PFDu9oVAE-g)
+
+---
+
+> **[Linear Algebra: Python Series](/tags/linear-algebra-python/)** - View all articles in this series.
 

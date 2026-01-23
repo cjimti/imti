@@ -10,6 +10,7 @@ image: "/img/post/matrix.jpg"
 twitter_image:  "/img/post/matrix_876_438.jpg"
 tags:
 - Linear Algebra
+- Linear Algebra: Python
 - Matrices
 - Math
 - Python
@@ -21,6 +22,14 @@ series:
 This article on **vector spaces and subspaces** is part five of an ongoing crash course on programming with linear algebra, demonstrating concepts and implementations in Python. Vector spaces provide the theoretical framework for understanding linear algebra, while subspaces help us analyze the structure of matrices and linear transformations.
 
 <!--more-->
+
+> **[Linear Algebra: Python Series](/tags/linear-algebra-python/)** - View all articles in this series.
+
+**Previous articles in this series:**
+1. [Linear Algebra: Vectors](https://imti.co/linear-algebra-vectors/)
+2. [Linear Algebra: Matrices](https://imti.co/linear-algebra-matrices/)
+3. [Linear Algebra: Systems of Linear Equations](https://imti.co/linear-algebra-systems-equations/)
+4. [Linear Algebra: Matrix Inverses and Determinants](https://imti.co/linear-algebra-inverse-determinant/)
 
 This series began with [Linear Algebra: Vectors](https://imti.co/linear-algebra-vectors/) and has covered [Matrices](https://imti.co/linear-algebra-matrices/), [Systems of Equations](https://imti.co/linear-algebra-systems-equations/), and [Inverses and Determinants](https://imti.co/linear-algebra-inverse-determinant/).
 
@@ -477,4 +486,8 @@ Understanding these concepts is essential for eigenvalue analysis, which we'll e
 - [Vector Spaces - Khan Academy](https://www.khanacademy.org/math/linear-algebra/vectors-and-spaces)
 - [Linear Algebra - Gilbert Strang (MIT)](https://ocw.mit.edu/courses/mathematics/18-06-linear-algebra-spring-2010/)
 - [SciPy Linear Algebra](https://docs.scipy.org/doc/scipy/reference/linalg.html)
+
+---
+
+> **[Linear Algebra: Python Series](/tags/linear-algebra-python/)** - View all articles in this series.
 

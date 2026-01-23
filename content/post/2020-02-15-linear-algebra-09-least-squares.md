@@ -10,6 +10,7 @@ image: "/img/post/matrix.jpg"
 twitter_image:  "/img/post/matrix_876_438.jpg"
 tags:
 - Linear Algebra
+- Linear Algebra: Python
 - Matrices
 - Math
 - Python
@@ -22,6 +23,18 @@ series:
 This article covers **least squares and regression**, part nine of the series. Least squares is one of the most important applications of linear algebra and forms the foundation of regression analysis used throughout data science and machine learning.
 
 <!--more-->
+
+> **[Linear Algebra: Python Series](/tags/linear-algebra-python/)** - View all articles in this series.
+
+**Previous articles in this series:**
+1. [Linear Algebra: Vectors](https://imti.co/linear-algebra-vectors/)
+2. [Linear Algebra: Matrices](https://imti.co/linear-algebra-matrices/)
+3. [Linear Algebra: Systems of Linear Equations](https://imti.co/linear-algebra-systems-equations/)
+4. [Linear Algebra: Matrix Inverses and Determinants](https://imti.co/linear-algebra-inverse-determinant/)
+5. [Linear Algebra: Vector Spaces and Subspaces](https://imti.co/linear-algebra-vector-spaces/)
+6. [Linear Algebra: Eigenvalues and Eigenvectors Part 1](https://imti.co/linear-algebra-eigenvalues-1/)
+7. [Linear Algebra: Eigenvalues and Eigenvectors Part 2](https://imti.co/linear-algebra-eigenvalues-2/)
+8. [Linear Algebra: Orthogonality and Projections](https://imti.co/linear-algebra-orthogonality/)
 
 Previous articles covered [Orthogonality and Projections](https://imti.co/linear-algebra-orthogonality/) which provide the mathematical foundation for least squares.
 
@@ -343,3 +356,6 @@ In this article, we covered:
 - [NumPy lstsq](https://numpy.org/doc/stable/reference/generated/numpy.linalg.lstsq.html)
 - [Linear Regression - Scikit-learn](https://scikit-learn.org/stable/modules/linear_model.html)
 
+---
+
+> **[Linear Algebra: Python Series](/tags/linear-algebra-python/)** - View all articles in this series.

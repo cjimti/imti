@@ -10,6 +10,7 @@ image:    "/img/post/matrix.jpg"
 twitter_image:  "/img/post/matrix_876_438.jpg"
 tags:
 - Linear Algebra
+- Linear Algebra: Python
 - Matrices
 - Math
 - Python
@@ -17,9 +18,15 @@ tags:
 series:
 - Linear Algebra Crash Course
 ---
+
 This article on **matrices** is part two of an ongoing crash course on programming with linear algebra, demonstrating concepts and implementations in Python. The following examples will demonstrate some of the various mathematical notations and their corresponding implementations, easily translatable to any programming language with mature math libraries.
 
 <!--more-->
+
+> **[Linear Algebra: Python Series](/tags/linear-algebra-python/)** - View all articles in this series.
+
+**Previous articles in this series:**
+1. [Linear Algebra: Vectors](https://imti.co/linear-algebra-vectors/)
 
 This series began with [Linear Algebra: Vectors Crash Course for Python Programmers Part 1](https://imti.co/linear-algebra-vectors/). Vectors are the building blocks of matrices, and a good foundational understanding of vectors is essential to understanding matrices.
 
@@ -2562,5 +2569,9 @@ np.linalg.matrix_rank(c)
 
 
     3
+
+---
+
+> **[Linear Algebra: Python Series](/tags/linear-algebra-python/)** - View all articles in this series.
 
 

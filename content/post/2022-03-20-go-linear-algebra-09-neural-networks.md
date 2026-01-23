@@ -10,6 +10,7 @@ image: "/img/post/matrix.jpg"
 twitter_image:  "/img/post/matrix_876_438.jpg"
 tags:
 - Linear Algebra
+- Linear Algebra: Golang
 - Golang
 - Machine Learning
 - Neural Networks
@@ -20,6 +21,18 @@ series:
 This article implements **neural network foundations** in Go using gonum: a perceptron, forward propagation, and backpropagation from scratch.
 
 <!--more-->
+
+> **[Linear Algebra: Golang Series](/tags/linear-algebra-golang/)** - View all articles in this series.
+
+**Previous articles in this series:**
+1. [Linear Algebra in Go: Vectors and Basic Operations](https://imti.co/go-linear-algebra-vectors/)
+2. [Linear Algebra in Go: Matrix Fundamentals](https://imti.co/go-linear-algebra-matrices/)
+3. [Linear Algebra in Go: Solving Linear Systems](https://imti.co/go-linear-algebra-systems/)
+4. [Linear Algebra in Go: Eigenvalue Problems](https://imti.co/go-linear-algebra-eigenvalues/)
+5. [Linear Algebra in Go: SVD and Decompositions](https://imti.co/go-linear-algebra-svd/)
+6. [Linear Algebra in Go: Statistics and Data Analysis](https://imti.co/go-linear-algebra-statistics/)
+7. [Linear Algebra in Go: Building a Regression Library](https://imti.co/go-linear-algebra-regression/)
+8. [Linear Algebra in Go: PCA Implementation](https://imti.co/go-linear-algebra-pca/)
 
 This continues from [Part 8: PCA Implementation](https://imti.co/go-linear-algebra-pca/).
 
@@ -586,3 +599,6 @@ This article implemented:
 - [Gonum mat Package](https://pkg.go.dev/gonum.org/v1/gonum/mat)
 - [Neural Networks in Python](https://imti.co/linear-algebra-ml-applications/)
 
+---
+
+> **[Linear Algebra: Golang Series](/tags/linear-algebra-golang/)** - View all articles in this series.

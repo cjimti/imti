@@ -10,6 +10,7 @@ image: "/img/post/matrix.jpg"
 twitter_image:  "/img/post/matrix_876_438.jpg"
 tags:
 - Linear Algebra
+- Linear Algebra: Golang
 - Golang
 - Data Science
 - Math
@@ -20,6 +21,11 @@ series:
 This article covers **matrix fundamentals** in Go using the gonum library: matrix creation, basic arithmetic operations, and common matrix manipulations.
 
 <!--more-->
+
+> **[Linear Algebra: Golang Series](/tags/linear-algebra-golang/)** - View all articles in this series.
+
+**Previous articles in this series:**
+1. [Linear Algebra in Go: Vectors and Basic Operations](https://imti.co/go-linear-algebra-vectors/)
 
 This continues from [Part 1: Vectors and Basic Operations](https://imti.co/go-linear-algebra-vectors/).
 
@@ -479,3 +485,6 @@ This article covered:
 - [Gonum mat Package](https://pkg.go.dev/gonum.org/v1/gonum/mat)
 - [Matrix Operations in Python](https://imti.co/linear-algebra-matrices/)
 
+---
+
+> **[Linear Algebra: Golang Series](/tags/linear-algebra-golang/)** - View all articles in this series.

@@ -10,6 +10,7 @@ image: "/img/post/matrix.jpg"
 twitter_image:  "/img/post/matrix_876_438.jpg"
 tags:
 - Linear Algebra
+- Linear Algebra: Python
 - Matrices
 - Math
 - Python
@@ -22,6 +23,20 @@ series:
 This article covers **Principal Component Analysis (PCA)**, part eleven of the series. PCA is one of the most widely used techniques for dimensionality reduction, data visualization, and feature extraction in machine learning.
 
 <!--more-->
+
+> **[Linear Algebra: Python Series](/tags/linear-algebra-python/)** - View all articles in this series.
+
+**Previous articles in this series:**
+1. [Linear Algebra: Vectors](https://imti.co/linear-algebra-vectors/)
+2. [Linear Algebra: Matrices](https://imti.co/linear-algebra-matrices/)
+3. [Linear Algebra: Systems of Linear Equations](https://imti.co/linear-algebra-systems-equations/)
+4. [Linear Algebra: Matrix Inverses and Determinants](https://imti.co/linear-algebra-inverse-determinant/)
+5. [Linear Algebra: Vector Spaces and Subspaces](https://imti.co/linear-algebra-vector-spaces/)
+6. [Linear Algebra: Eigenvalues and Eigenvectors Part 1](https://imti.co/linear-algebra-eigenvalues-1/)
+7. [Linear Algebra: Eigenvalues and Eigenvectors Part 2](https://imti.co/linear-algebra-eigenvalues-2/)
+8. [Linear Algebra: Orthogonality and Projections](https://imti.co/linear-algebra-orthogonality/)
+9. [Linear Algebra: Least Squares and Regression](https://imti.co/linear-algebra-least-squares/)
+10. [Linear Algebra: Singular Value Decomposition](https://imti.co/linear-algebra-svd/)
 
 Previous articles covered [SVD](https://imti.co/linear-algebra-svd/) which provides one method for computing PCA.
 
@@ -367,3 +382,7 @@ In this article, we covered:
 - [PCA - Wikipedia](https://en.wikipedia.org/wiki/Principal_component_analysis)
 - [Scikit-learn PCA](https://scikit-learn.org/stable/modules/decomposition.html#pca)
 - [A Tutorial on PCA](https://arxiv.org/abs/1404.1100)
+
+---
+
+> **[Linear Algebra: Python Series](/tags/linear-algebra-python/)** - View all articles in this series.

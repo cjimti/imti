@@ -10,6 +10,7 @@ image: "/img/post/matrix.jpg"
 twitter_image:  "/img/post/matrix_876_438.jpg"
 tags:
 - Linear Algebra
+- Linear Algebra: Golang
 - Golang
 - Data Science
 - Statistics
@@ -20,6 +21,15 @@ series:
 This article covers **statistics and data analysis** in Go using gonum/stat and gonum/mat: descriptive statistics, covariance matrices, and correlation analysis.
 
 <!--more-->
+
+> **[Linear Algebra: Golang Series](/tags/linear-algebra-golang/)** - View all articles in this series.
+
+**Previous articles in this series:**
+1. [Linear Algebra in Go: Vectors and Basic Operations](https://imti.co/go-linear-algebra-vectors/)
+2. [Linear Algebra in Go: Matrix Fundamentals](https://imti.co/go-linear-algebra-matrices/)
+3. [Linear Algebra in Go: Solving Linear Systems](https://imti.co/go-linear-algebra-systems/)
+4. [Linear Algebra in Go: Eigenvalue Problems](https://imti.co/go-linear-algebra-eigenvalues/)
+5. [Linear Algebra in Go: SVD and Decompositions](https://imti.co/go-linear-algebra-svd/)
 
 This continues from [Part 5: SVD and Decompositions](https://imti.co/go-linear-algebra-svd/).
 
@@ -272,3 +282,7 @@ This article covered:
 ## Resources
 
 - [Gonum stat Package](https://pkg.go.dev/gonum.org/v1/gonum/stat)
+
+---
+
+> **[Linear Algebra: Golang Series](/tags/linear-algebra-golang/)** - View all articles in this series.

@@ -10,6 +10,7 @@ image: "/img/post/matrix.jpg"
 twitter_image:  "/img/post/matrix_876_438.jpg"
 tags:
 - Linear Algebra
+- Linear Algebra: Golang
 - Golang
 - Data Science
 - Math
@@ -20,6 +21,14 @@ series:
 This article covers **Singular Value Decomposition (SVD)** and related matrix decompositions in Go. SVD is fundamental to many applications including dimensionality reduction, pseudoinverse computation, and low-rank approximation.
 
 <!--more-->
+
+> **[Linear Algebra: Golang Series](/tags/linear-algebra-golang/)** - View all articles in this series.
+
+**Previous articles in this series:**
+1. [Linear Algebra in Go: Vectors and Basic Operations](https://imti.co/go-linear-algebra-vectors/)
+2. [Linear Algebra in Go: Matrix Fundamentals](https://imti.co/go-linear-algebra-matrices/)
+3. [Linear Algebra in Go: Solving Linear Systems](https://imti.co/go-linear-algebra-systems/)
+4. [Linear Algebra in Go: Eigenvalue Problems](https://imti.co/go-linear-algebra-eigenvalues/)
 
 This continues from [Part 4: Eigenvalue Problems](https://imti.co/go-linear-algebra-eigenvalues/).
 
@@ -304,3 +313,6 @@ This article covered:
 - [Gonum mat.SVD](https://pkg.go.dev/gonum.org/v1/gonum/mat#SVD)
 - [SVD in Python](https://imti.co/linear-algebra-svd/)
 
+---
+
+> **[Linear Algebra: Golang Series](/tags/linear-algebra-golang/)** - View all articles in this series.

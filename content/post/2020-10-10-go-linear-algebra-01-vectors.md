@@ -10,6 +10,7 @@ image: "/img/post/matrix.jpg"
 twitter_image:  "/img/post/matrix_876_438.jpg"
 tags:
 - Linear Algebra
+- Linear Algebra: Golang
 - Golang
 - Data Science
 - Math
@@ -20,6 +21,8 @@ series:
 This article begins a new series on **linear algebra in Go**, demonstrating how to perform numerical computations using the [gonum](https://www.gonum.org/) library. If you've followed the [Linear Algebra Crash Course in Python](https://imti.co/linear-algebra-vectors/), this series provides a parallel implementation in Go with performance comparisons.
 
 <!--more-->
+
+> **[Linear Algebra: Golang Series](/tags/linear-algebra-golang/)** - View all articles in this series.
 
 Go offers advantages for linear algebra workloads: strong concurrency support, compile-time type checking, and excellent performance. The gonum ecosystem provides production-ready linear algebra, statistics, and plotting capabilities.
 
@@ -440,3 +443,6 @@ This article covered:
 - [Gonum floats Package](https://pkg.go.dev/gonum.org/v1/gonum/floats)
 - [Linear Algebra in Python](https://imti.co/linear-algebra-vectors/) - Python series
 
+---
+
+> **[Linear Algebra: Golang Series](/tags/linear-algebra-golang/)** - View all articles in this series.

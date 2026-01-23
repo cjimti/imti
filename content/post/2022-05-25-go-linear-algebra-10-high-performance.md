@@ -10,6 +10,7 @@ image: "/img/post/matrix.jpg"
 twitter_image:  "/img/post/matrix_876_438.jpg"
 tags:
 - Linear Algebra
+- Linear Algebra: Golang
 - Golang
 - High Performance
 - Data Science
@@ -20,6 +21,19 @@ series:
 This final article in the series covers **high-performance computing** techniques for linear algebra in Go: BLAS/LAPACK integration, parallel operations, memory optimization, and benchmarking.
 
 <!--more-->
+
+> **[Linear Algebra: Golang Series](/tags/linear-algebra-golang/)** - View all articles in this series.
+
+**Previous articles in this series:**
+1. [Linear Algebra in Go: Vectors and Basic Operations](https://imti.co/go-linear-algebra-vectors/)
+2. [Linear Algebra in Go: Matrix Fundamentals](https://imti.co/go-linear-algebra-matrices/)
+3. [Linear Algebra in Go: Solving Linear Systems](https://imti.co/go-linear-algebra-systems/)
+4. [Linear Algebra in Go: Eigenvalue Problems](https://imti.co/go-linear-algebra-eigenvalues/)
+5. [Linear Algebra in Go: SVD and Decompositions](https://imti.co/go-linear-algebra-svd/)
+6. [Linear Algebra in Go: Statistics and Data Analysis](https://imti.co/go-linear-algebra-statistics/)
+7. [Linear Algebra in Go: Building a Regression Library](https://imti.co/go-linear-algebra-regression/)
+8. [Linear Algebra in Go: PCA Implementation](https://imti.co/go-linear-algebra-pca/)
+9. [Linear Algebra in Go: Neural Network Foundations](https://imti.co/go-linear-algebra-neural-networks/)
 
 This continues from [Part 9: Neural Network Foundations](https://imti.co/go-linear-algebra-neural-networks/).
 
@@ -666,3 +680,6 @@ Go with gonum provides a capable platform for numerical computing. For productio
 - [OpenBLAS](https://www.openblas.net/)
 - [Go Runtime Profiling](https://go.dev/blog/pprof)
 
+---
+
+> **[Linear Algebra: Golang Series](/tags/linear-algebra-golang/)** - View all articles in this series.

@@ -10,6 +10,7 @@ image: "/img/post/matrix.jpg"
 twitter_image:  "/img/post/matrix_876_438.jpg"
 tags:
 - Linear Algebra
+- Linear Algebra: Python
 - Matrices
 - Math
 - Python
@@ -21,6 +22,13 @@ series:
 This article on **matrix inverses and determinants** is part four of an ongoing crash course on programming with linear algebra, demonstrating concepts and implementations in Python. The inverse of a matrix and the determinant are fundamental concepts that reveal important properties about matrices and provide alternative methods for solving systems of linear equations.
 
 <!--more-->
+
+> **[Linear Algebra: Python Series](/tags/linear-algebra-python/)** - View all articles in this series.
+
+**Previous articles in this series:**
+1. [Linear Algebra: Vectors](https://imti.co/linear-algebra-vectors/)
+2. [Linear Algebra: Matrices](https://imti.co/linear-algebra-matrices/)
+3. [Linear Algebra: Systems of Linear Equations](https://imti.co/linear-algebra-systems-equations/)
 
 This series began with [Linear Algebra: Vectors](https://imti.co/linear-algebra-vectors/), continued with [Linear Algebra: Matrices 1](https://imti.co/linear-algebra-matrices/), and most recently covered [Systems of Linear Equations](https://imti.co/linear-algebra-systems-equations/).
 
@@ -548,3 +556,7 @@ In this article, we covered:
 ## Next: Vector Spaces and Subspaces
 
 Check out the next article in this series, [Linear Algebra: Vector Spaces and Subspaces](https://imti.co/linear-algebra-vector-spaces/).
+
+---
+
+> **[Linear Algebra: Python Series](/tags/linear-algebra-python/)** - View all articles in this series.

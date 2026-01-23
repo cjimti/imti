@@ -10,6 +10,7 @@ image: "/img/post/matrix.jpg"
 twitter_image:  "/img/post/matrix_876_438.jpg"
 tags:
 - Linear Algebra
+- Linear Algebra: Golang
 - Golang
 - Data Science
 - Math
@@ -20,6 +21,13 @@ series:
 This article covers **eigenvalue problems** in Go using the gonum library. Eigenvalues and eigenvectors are fundamental to many algorithms including PCA, spectral clustering, and dynamical systems analysis.
 
 <!--more-->
+
+> **[Linear Algebra: Golang Series](/tags/linear-algebra-golang/)** - View all articles in this series.
+
+**Previous articles in this series:**
+1. [Linear Algebra in Go: Vectors and Basic Operations](https://imti.co/go-linear-algebra-vectors/)
+2. [Linear Algebra in Go: Matrix Fundamentals](https://imti.co/go-linear-algebra-matrices/)
+3. [Linear Algebra in Go: Solving Linear Systems](https://imti.co/go-linear-algebra-systems/)
 
 This continues from [Part 3: Solving Linear Systems](https://imti.co/go-linear-algebra-systems/).
 
@@ -326,4 +334,6 @@ This article covered:
 - [Gonum mat.Eigen](https://pkg.go.dev/gonum.org/v1/gonum/mat#Eigen)
 - [Eigenvalues in Python](https://imti.co/linear-algebra-eigenvalues-1/)
 
+---
 
+> **[Linear Algebra: Golang Series](/tags/linear-algebra-golang/)** - View all articles in this series.

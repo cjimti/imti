@@ -10,6 +10,7 @@ image: "/img/post/matrix.jpg"
 twitter_image:  "/img/post/matrix_876_438.jpg"
 tags:
 - Linear Algebra
+- Linear Algebra: Golang
 - Golang
 - Data Science
 - Math
@@ -20,6 +21,12 @@ series:
 This article covers **solving linear systems** in Go using the gonum library, including direct methods with `mat.Solve`, LU decomposition, and Cholesky decomposition for positive-definite matrices.
 
 <!--more-->
+
+> **[Linear Algebra: Golang Series](/tags/linear-algebra-golang/)** - View all articles in this series.
+
+**Previous articles in this series:**
+1. [Linear Algebra in Go: Vectors and Basic Operations](https://imti.co/go-linear-algebra-vectors/)
+2. [Linear Algebra in Go: Matrix Fundamentals](https://imti.co/go-linear-algebra-matrices/)
 
 This continues from [Part 2: Matrix Fundamentals](https://imti.co/go-linear-algebra-matrices/).
 
@@ -351,3 +358,7 @@ The next article covers **eigenvalue problems** in Go.
 ## Next: Eigenvalue Problems
 
 Check out the next article in this series, [Linear Algebra in Go: Eigenvalue Problems](https://imti.co/go-linear-algebra-eigenvalues/).
+
+---
+
+> **[Linear Algebra: Golang Series](/tags/linear-algebra-golang/)** - View all articles in this series.

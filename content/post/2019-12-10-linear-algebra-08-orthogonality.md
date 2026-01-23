@@ -10,6 +10,7 @@ image: "/img/post/matrix.jpg"
 twitter_image:  "/img/post/matrix_876_438.jpg"
 tags:
 - Linear Algebra
+- Linear Algebra: Python
 - Matrices
 - Math
 - Python
@@ -21,6 +22,17 @@ series:
 This article covers **orthogonality and projections**, part eight of the series. Orthogonality is fundamental to many algorithms including least squares regression, QR decomposition, and machine learning techniques like PCA.
 
 <!--more-->
+
+> **[Linear Algebra: Python Series](/tags/linear-algebra-python/)** - View all articles in this series.
+
+**Previous articles in this series:**
+1. [Linear Algebra: Vectors](https://imti.co/linear-algebra-vectors/)
+2. [Linear Algebra: Matrices](https://imti.co/linear-algebra-matrices/)
+3. [Linear Algebra: Systems of Linear Equations](https://imti.co/linear-algebra-systems-equations/)
+4. [Linear Algebra: Matrix Inverses and Determinants](https://imti.co/linear-algebra-inverse-determinant/)
+5. [Linear Algebra: Vector Spaces and Subspaces](https://imti.co/linear-algebra-vector-spaces/)
+6. [Linear Algebra: Eigenvalues and Eigenvectors Part 1](https://imti.co/linear-algebra-eigenvalues-1/)
+7. [Linear Algebra: Eigenvalues and Eigenvectors Part 2](https://imti.co/linear-algebra-eigenvalues-2/)
 
 Previous articles covered [Vectors](https://imti.co/linear-algebra-vectors/), [Matrices](https://imti.co/linear-algebra-matrices/), [Systems](https://imti.co/linear-algebra-systems-equations/), [Inverses](https://imti.co/linear-algebra-inverse-determinant/), [Vector Spaces](https://imti.co/linear-algebra-vector-spaces/), and [Eigenvalues](https://imti.co/linear-algebra-eigenvalues-1/).
 
@@ -384,5 +396,9 @@ In this article, we covered:
 - [Orthogonality - Khan Academy](https://www.khanacademy.org/math/linear-algebra/alternate-bases/orthonormal-basis)
 - [Gram-Schmidt - Wikipedia](https://en.wikipedia.org/wiki/Gram%E2%80%93Schmidt_process)
 - [NumPy QR](https://numpy.org/doc/stable/reference/generated/numpy.linalg.qr.html)
+
+---
+
+> **[Linear Algebra: Python Series](/tags/linear-algebra-python/)** - View all articles in this series.
 
 

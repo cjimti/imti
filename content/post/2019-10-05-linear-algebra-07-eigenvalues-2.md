@@ -10,6 +10,7 @@ image: "/img/post/matrix.jpg"
 twitter_image:  "/img/post/matrix_876_438.jpg"
 tags:
 - Linear Algebra
+- Linear Algebra: Python
 - Matrices
 - Math
 - Python
@@ -21,6 +22,16 @@ series:
 This article continues the exploration of **eigenvalues and eigenvectors**, focusing on diagonalization, computing matrix powers, and handling complex eigenvalues. Part seven of the series.
 
 <!--more-->
+
+> **[Linear Algebra: Python Series](/tags/linear-algebra-python/)** - View all articles in this series.
+
+**Previous articles in this series:**
+1. [Linear Algebra: Vectors](https://imti.co/linear-algebra-vectors/)
+2. [Linear Algebra: Matrices](https://imti.co/linear-algebra-matrices/)
+3. [Linear Algebra: Systems of Linear Equations](https://imti.co/linear-algebra-systems-equations/)
+4. [Linear Algebra: Matrix Inverses and Determinants](https://imti.co/linear-algebra-inverse-determinant/)
+5. [Linear Algebra: Vector Spaces and Subspaces](https://imti.co/linear-algebra-vector-spaces/)
+6. [Linear Algebra: Eigenvalues and Eigenvectors Part 1](https://imti.co/linear-algebra-eigenvalues-1/)
 
 See [Part 1](https://imti.co/linear-algebra-eigenvalues-1/) for the fundamentals of eigenvalues and eigenvectors.
 
@@ -451,4 +462,8 @@ In this article, we covered:
 - [Diagonalization - Khan Academy](https://www.khanacademy.org/math/linear-algebra/alternate-bases)
 - [Matrix Exponential - Wikipedia](https://en.wikipedia.org/wiki/Matrix_exponential)
 - [SciPy Linear Algebra](https://docs.scipy.org/doc/scipy/reference/linalg.html)
+
+---
+
+> **[Linear Algebra: Python Series](/tags/linear-algebra-python/)** - View all articles in this series.
 

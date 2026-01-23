@@ -10,6 +10,7 @@ image: "/img/post/matrix.jpg"
 twitter_image:  "/img/post/matrix_876_438.jpg"
 tags:
 - Linear Algebra
+- Linear Algebra: Python
 - Matrices
 - Math
 - Python
@@ -21,6 +22,12 @@ series:
 This article on **systems of linear equations** is part three of an ongoing crash course on programming with linear algebra, demonstrating concepts and implementations in Python. We'll explore how matrices provide a powerful framework for solving systems of equations, a fundamental problem that appears throughout science, engineering, and machine learning.
 
 <!--more-->
+
+> **[Linear Algebra: Python Series](/tags/linear-algebra-python/)** - View all articles in this series.
+
+**Previous articles in this series:**
+1. [Linear Algebra: Vectors](https://imti.co/linear-algebra-vectors/)
+2. [Linear Algebra: Matrices](https://imti.co/linear-algebra-matrices/)
 
 This series began with [Linear Algebra: Vectors Crash Course for Python Programmers Part 1](https://imti.co/linear-algebra-vectors/) and continued with [Linear Algebra: Matrices 1](https://imti.co/linear-algebra-matrices/). Understanding matrix operations from those articles is essential for this topic.
 
@@ -546,4 +553,8 @@ In the next article, we'll explore **matrix inverses and determinants**, which p
 - [Gaussian Elimination - Wikipedia](https://en.wikipedia.org/wiki/Gaussian_elimination)
 - [NumPy Linear Algebra Documentation](https://numpy.org/doc/stable/reference/routines.linalg.html)
 - [Least Squares - Wikipedia](https://en.wikipedia.org/wiki/Least_squares)
+
+---
+
+> **[Linear Algebra: Python Series](/tags/linear-algebra-python/)** - View all articles in this series.
 

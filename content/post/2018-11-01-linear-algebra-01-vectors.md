@@ -10,6 +10,7 @@ image:    "/img/post/paper-vector.jpg"
 twitter_image:  "/img/post/paper-vector_876_438.jpg"
 tags:
 - Linear Algebra
+- Linear Algebra: Python
 - Math
 - Python
 - Numpy
@@ -17,9 +18,12 @@ tags:
 series:
 - Linear Algebra Crash Course
 ---
+
 This article on **vectors** is part of an ongoing crash course on linear algebra programming, demonstrating concepts and implementations in Python. The following examples will demonstrate some of the algebraic and geometric interpretations of a vector using Python. A vector is an ordered list of numbers, represented in row or column form.
 
 <!--more-->
+
+> **[Linear Algebra: Python Series](/tags/linear-algebra-python/)** - View all articles in this series.
 
 This small series of articles on linear algebra is meant to help you prepare for learning the deeper concepts related to Machine Learning and math that drives the higher level abstractions provided by many of the libraries available today.
 
@@ -442,3 +446,7 @@ rs
 ## Next: Matrices
 
 Check out the next article in this series, [Linear Algebra: Matrices 1: Linear Algebra Crash Course for Programmers Part 2a](https://imti.co/linear-algebra-matrices/).
+
+---
+
+> **[Linear Algebra: Python Series](/tags/linear-algebra-python/)** - View all articles in this series.
