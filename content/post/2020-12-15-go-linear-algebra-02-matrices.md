@@ -17,7 +17,7 @@ series:
 - Linear Algebra in Go
 ---
 
-This article covers **matrix fundamentals** in Go using the gonum library. We'll explore matrix creation, basic arithmetic operations, and common matrix manipulations.
+This article covers **matrix fundamentals** in Go using the gonum library: matrix creation, basic arithmetic operations, and common matrix manipulations.
 
 <!--more-->
 
@@ -220,7 +220,7 @@ func elementWiseOperations() {
 
 ## Visualizing Matrix Transformations
 
-Matrices represent linear transformations. Let's visualize how a matrix transforms the unit square:
+Matrices represent linear transformations. Here's how a matrix transforms the unit square:
 
 ```go
 package main
@@ -464,7 +464,7 @@ func main() {
 
 ## Summary
 
-In this article, we covered:
+This article covered:
 
 - **Creating matrices** with `mat.Dense`
 - **Special matrices**: identity, zero, diagonal

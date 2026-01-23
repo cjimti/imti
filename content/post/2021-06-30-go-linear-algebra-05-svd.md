@@ -291,7 +291,7 @@ func conditionExample() {
 
 ## Summary
 
-In this article, we covered:
+This article covered:
 
 - **SVD decomposition**: $\boldsymbol{A} = \boldsymbol{U}\boldsymbol{\Sigma}\boldsymbol{V}^T$
 - **Low-rank approximation** using truncated SVD

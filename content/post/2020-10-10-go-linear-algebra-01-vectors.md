@@ -422,7 +422,7 @@ func rawData(v *mat.VecDense) []float64 {
 
 ## Summary
 
-In this article, we covered:
+This article covered:
 
 - **Setting up gonum** for linear algebra in Go
 - **Creating vectors** with `mat.VecDense`

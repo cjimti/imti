@@ -17,7 +17,7 @@ series:
 - Linear Algebra in Go
 ---
 
-This article covers **statistics and data analysis** in Go using gonum/stat and gonum/mat. We'll explore descriptive statistics, covariance matrices, and correlation analysis.
+This article covers **statistics and data analysis** in Go using gonum/stat and gonum/mat: descriptive statistics, covariance matrices, and correlation analysis.
 
 <!--more-->
 
@@ -261,7 +261,7 @@ func linearRegressionStats() {
 
 ## Summary
 
-In this article, we covered:
+This article covered:
 
 - **Basic statistics**: mean, variance, standard deviation
 - **Covariance matrix** computation

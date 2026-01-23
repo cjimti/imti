@@ -17,7 +17,7 @@ series:
 - Linear Algebra in Go
 ---
 
-This article demonstrates building a **regression library** in Go from scratch using gonum. We'll implement ordinary least squares, ridge regression, and cross-validation.
+This article demonstrates building a **regression library** in Go from scratch using gonum: ordinary least squares, ridge regression, and cross-validation.
 
 <!--more-->
 
@@ -124,7 +124,7 @@ func (lr *LinearRegression) Predict(X *mat.Dense) *mat.VecDense {
 
 ## Visualizing Regression
 
-Let's visualize a linear regression fit:
+Here's a visualization of a linear regression fit:
 
 ```go
 package main
@@ -343,7 +343,7 @@ func main() {
 
 ## Summary
 
-In this article, we built:
+This article built:
 
 - **LinearRegression** using normal equations
 - **RidgeRegression** with L2 regularization

@@ -17,7 +17,7 @@ series:
 - Linear Algebra in Go
 ---
 
-This article implements **neural network foundations** in Go using gonum. We'll build a perceptron, implement forward propagation, and derive backpropagation from scratch.
+This article implements **neural network foundations** in Go using gonum: a perceptron, forward propagation, and backpropagation from scratch.
 
 <!--more-->
 
@@ -572,7 +572,7 @@ func gradientCheck() {
 
 ## Summary
 
-In this article, we implemented:
+This article implemented:
 
 - **Perceptron** single-layer classifier
 - **Activation functions** with derivatives

@@ -17,7 +17,7 @@ series:
 - Linear Algebra in Go
 ---
 
-This article implements **Principal Component Analysis (PCA)** from scratch in Go using gonum. We'll cover both the covariance matrix and SVD approaches.
+This article implements **Principal Component Analysis (PCA)** from scratch in Go using gonum, covering both the covariance matrix and SVD approaches.
 
 <!--more-->
 
@@ -323,7 +323,7 @@ func main() {
 
 ## Summary
 
-In this article, we implemented:
+This article implemented:
 
 - **PCA via SVD** decomposition
 - **Transform** to project data

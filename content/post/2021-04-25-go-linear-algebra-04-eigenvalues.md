@@ -113,7 +113,7 @@ func symmetricEigen() {
 
 ## Geometric Interpretation
 
-Eigenvectors are special directions that remain unchanged (except for scaling) under the linear transformation. Let's visualize this using gonum/plot:
+Eigenvectors are special directions that remain unchanged (except for scaling) under the linear transformation. Here's a visualization using gonum/plot:
 
 ```go
 package main
@@ -313,7 +313,7 @@ func benchmarkEigen() {
 
 ## Summary
 
-In this article, we covered:
+This article covered:
 
 - **General eigendecomposition** with `mat.Eigen`
 - **Symmetric eigendecomposition** with `mat.EigenSym`

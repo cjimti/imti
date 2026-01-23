@@ -17,7 +17,7 @@ series:
 - Linear Algebra in Go
 ---
 
-This article covers **solving linear systems** in Go using the gonum library. We'll explore direct methods including `mat.Solve`, LU decomposition, and Cholesky decomposition for positive-definite matrices.
+This article covers **solving linear systems** in Go using the gonum library, including direct methods with `mat.Solve`, LU decomposition, and Cholesky decomposition for positive-definite matrices.
 
 <!--more-->
 
@@ -29,7 +29,7 @@ This continues from [Part 2: Matrix Fundamentals](https://imti.co/go-linear-alge
 
 ## The Linear System Problem
 
-We want to solve $\boldsymbol{A}\vec{x} = \vec{b}$ for $\vec{x}$, where $\boldsymbol{A}$ is an $n \times n$ matrix.
+The goal is to solve $\boldsymbol{A}\vec{x} = \vec{b}$ for $\vec{x}$, where $\boldsymbol{A}$ is an $n \times n$ matrix.
 
 ## Using mat.Solve
 
@@ -332,7 +332,7 @@ func conditionNumber() {
 
 ## Summary
 
-In this article, we covered:
+This article covered:
 
 - **Direct solving** with `mat.Solve`
 - **LU decomposition** for general square matrices
@@ -341,7 +341,7 @@ In this article, we covered:
 - **Performance benchmarking**
 - **Condition number** for numerical stability
 
-In the next article, we'll explore **eigenvalue problems** in Go.
+The next article covers **eigenvalue problems** in Go.
 
 ## Resources
 
