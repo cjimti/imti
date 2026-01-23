@@ -438,5 +438,5 @@ In this article, we covered:
 - [Gonum Documentation](https://pkg.go.dev/gonum.org/v1/gonum)
 - [Gonum mat Package](https://pkg.go.dev/gonum.org/v1/gonum/mat)
 - [Gonum floats Package](https://pkg.go.dev/gonum.org/v1/gonum/floats)
-- [Linear Algebra in Python](https://imti.co/linear-algebra-vectors/) - Our Python series
+- [Linear Algebra in Python](https://imti.co/linear-algebra-vectors/) - Python series
 
