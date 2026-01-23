@@ -10,7 +10,7 @@ image: "/img/post/matrix.jpg"
 twitter_image:  "/img/post/matrix_876_438.jpg"
 tags:
 - Linear Algebra
-- Linear Algebra: Golang
+- "Linear Algebra: Golang"
 - Golang
 - Data Science
 - Math

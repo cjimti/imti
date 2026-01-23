@@ -10,7 +10,7 @@ image:    "/img/post/paper-vector.jpg"
 twitter_image:  "/img/post/paper-vector_876_438.jpg"
 tags:
 - Linear Algebra
-- Linear Algebra: Python
+- "Linear Algebra: Python"
 - Math
 - Python
 - Numpy
