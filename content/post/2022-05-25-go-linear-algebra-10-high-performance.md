@@ -17,7 +17,7 @@ series:
 - Linear Algebra in Go
 ---
 
-This final article in the series covers **high-performance computing** techniques for linear algebra in Go. We'll explore BLAS/LAPACK integration, parallel operations, memory optimization, and benchmarking.
+This final article in the series covers **high-performance computing** techniques for linear algebra in Go: BLAS/LAPACK integration, parallel operations, memory optimization, and benchmarking.
 
 <!--more-->
 
