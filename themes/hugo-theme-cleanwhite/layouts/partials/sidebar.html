@@ -141,26 +141,34 @@
         {{ end }}
     </ul>
 
-    <hr>
-    <h5>REDDIT</h5>
-    <ul class="bookmarks">
-        {{ range .Site.Params.reddit_link }}
-        <li><a target="_blank" href="{{.href}}">{{.title}}</a></li>
-        {{ end }}
-    </ul>
+<!--    <hr>-->
+<!--    <h5>REDDIT</h5>-->
+<!--    <ul class="bookmarks">-->
+<!--        {{ range .Site.Params.reddit_link }}-->
+<!--        <li><a target="_blank" href="{{.href}}">{{.title}}</a></li>-->
+<!--        {{ end }}-->
+<!--    </ul>-->
+
+<!--    <hr>-->
+<!--    <h5>AWESOME</h5>-->
+<!--    <ul class="bookmarks">-->
+<!--        {{ range .Site.Params.awesome_link }}-->
+<!--        <li><a target="_blank" href="{{.href}}">{{.title}}</a></li>-->
+<!--        {{ end }}-->
+<!--    </ul>-->
+
+<!--    <hr>-->
+<!--    <h5>DOCKER CONTAINERS</h5>-->
+<!--    <ul class="bookmarks">-->
+<!--        {{ range .Site.Params.docker_link }}-->
+<!--        <li><a target="_blank" href="{{.href}}">{{.title}}</a></li>-->
+<!--        {{ end }}-->
+<!--    </ul>-->
 
     <hr>
-    <h5>AWESOME</h5>
+    <h5>GitHub</h5>
     <ul class="bookmarks">
-        {{ range .Site.Params.awesome_link }}
-        <li><a target="_blank" href="{{.href}}">{{.title}}</a></li>
-        {{ end }}
-    </ul>
-
-    <hr>
-    <h5>DOCKER CONTAINERS</h5>
-    <ul class="bookmarks">
-        {{ range .Site.Params.docker_link }}
+        {{ range .Site.Params.git_hub }}
         <li><a target="_blank" href="{{.href}}">{{.title}}</a></li>
         {{ end }}
     </ul>
