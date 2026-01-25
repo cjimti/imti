@@ -172,4 +172,13 @@
         <li><a target="_blank" href="{{.href}}">{{.title}}</a></li>
         {{ end }}
     </ul>
+
+    <hr>
+    <h5>STACK</h5>
+    <ul class="bookmarks">
+        {{ range .Site.Params.stack_link }}
+        <li><a target="_blank" href="{{.href}}">{{.title}}</a></li>
+        {{ end }}
+    </ul>
+
 </div>

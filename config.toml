@@ -107,6 +107,63 @@ home = ["HTML", "RSS"]
   title = "txn2/mcp-s3"
   href =  "https://github.com/txn2/mcp-s3/"
 
+  [[params.stack_link]]
+  title = "Kubernetes"
+  href =  "https://kubernetes.io"
+
+  [[params.stack_link]]
+  title = "K3s"
+  href =  "https://k3s.io"
+
+  [[params.stack_link]]
+  title = "Apache NiFi"
+  href =  "https://nifi.apache.org"
+
+  [[params.stack_link]]
+  title = "Apache Superset"
+  href =  "https://superset.apache.org"
+
+  [[params.stack_link]]
+  title = "Apache Cassandra"
+  href =  "https://cassandra.apache.org"
+
+  [[params.stack_link]]
+  title = "Apache Spark"
+  href =  "https://spark.apache.org"
+
+  [[params.stack_link]]
+  title = "SeaweedFS"
+  href =  "https://github.com/seaweedfs/seaweedfs"
+
+  [[params.stack_link]]
+  title = "DataHub"
+  href =  "https://datahub.com"
+
+  [[params.stack_link]]
+  title = "PostgreSQL"
+  href =  "https://www.postgresql.org"
+
+  [[params.stack_link]]
+  title = "pgAdmin"
+  href =  "https://www.pgadmin.org"
+
+  [[params.stack_link]]
+  title = "JupyterHub"
+  href =  "https://jupyter.org/hub"
+
+  [[params.stack_link]]
+  title = "Trino"
+  href =  "https://trino.io"
+
+  [[params.stack_link]]
+  title = "OpenSearch"
+  href =  "https://opensearch.org"
+
+  [[params.stack_link]]
+  title = "Keycloak"
+  href =  "https://www.keycloak.org"
+
+
 #  [[params.bookmark_link]]
 #  title = "Hacker News"
 #  href =  "https://news.ycombinator.com/"
