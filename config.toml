@@ -18,11 +18,7 @@ displayMath = [['$','$'], ['$$','$$'], ['\\[','\\]']]
 unsafe= true
 
 [markup.highlight]
-codeFences = true
-guessSyntax = true
-lineNos = false
-noClasses = false
-style = "github"
+codeFences = false
 tabWidth = 4
 
 [outputs]

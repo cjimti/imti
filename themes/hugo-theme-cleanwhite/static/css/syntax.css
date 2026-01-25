@@ -1,25 +1,37 @@
-/* to make lines scroll instead of wrap */
-/* from http://stackoverflow.com/a/23393920 */
-
-.highlight pre code * {
-  white-space: nowrap;    /* this sets all children inside to nowrap */
+/* Code block formatting - override theme defaults */
+.highlight pre,
+.post-container pre,
+article pre,
+pre {
+  overflow-x: auto;
+  white-space: pre !important;
+  word-wrap: normal !important;
+  word-break: normal !important;
 }
 
-.highlight pre {
-  overflow-x: auto;       /* this sets the scrolling in x */
+.highlight pre code,
+.post-container pre code,
+article pre code,
+pre code {
+  white-space: pre !important;
+  word-wrap: normal !important;
+  word-break: normal !important;
+  display: block;
 }
-
-.highlight pre code {
-  white-space: pre;       /* forces <code> to respect <pre> formatting */
-}
-
 
 /*
- * GitHub style for Pygments syntax highlighter, for use with Jekyll
- * Courtesy of GitHub.com
+ * GitHub style for Pygments/Chroma syntax highlighter
  */
 
-.highlight pre, pre, .highlight .hll { background-color: #f8f8f8; border: 1px solid #ccc; padding: 6px 10px; border-radius: 3px; }
+.highlight pre,
+.post-container pre,
+pre,
+.highlight .hll {
+  background-color: #f8f8f8;
+  border: 1px solid #ccc;
+  padding: 6px 10px;
+  border-radius: 3px;
+}
 .highlight .c { color: #999988; font-style: italic; }
 .highlight .err { color: #a61717; background-color: #e3d2d2; }
 .highlight .k { font-weight: bold; }

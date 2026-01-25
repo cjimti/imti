@@ -121,23 +121,10 @@
     }
 </script>
 
-<!-- 
-     Because of the native support for backtick-style fenced code blocks 
-     right within the Markdown is landed in Github Pages, 
-     From V1.6, There is no need for Highlight.js, 
-     so Huxblog drops it officially.
-
-     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
-     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
--->
-<!--
-    <script>
-        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
-            hljs.initHighlightingOnLoad();
-        })
-    </script>
-    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
--->
+<!-- Prism.js Syntax Highlighting -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js" integrity="sha512-9khQRAUBYEJDCDVP2ez6U0IKUwUm0o5i8j2NNm3AWbBZS/9OpEfq6j1j8fR5LjVG7W2jcpZAb2pT5IqnUpFuQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js" integrity="sha512-SkmBfuA2hqjzEVpmnMt/LINrjop3GKWqsuLSSB3e7iBmYK7JuWw4ldmmxwD9mdm2IRTTi0OxSAfEGvgEi0i2Kw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js" integrity="sha512-BttltKXFyWnGZQcRWj6osIg7lLizboKkfgOEK5nWD4FyUq5GMNXFQ1qLtkNxqVFHKDOphvBJnR0QcWNNJjPYEQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 
 <!-- jquery.tagcloud.js -->
