@@ -43,9 +43,9 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                {{ partial "post-note.html" . }}
+                    {{ .Content }}
 
-                {{ .Content }}
+                {{ partial "post-note.html" . }}
 
                 <p>
                    This blog post, titled: "<span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">{{ .Title }}: {{ .Params.subtitle }}</span>" by <a xmlns:cc="http://creativecommons.org/ns#" href="https://twitter.com/cjimti" property="cc:attributionName" rel="cc:attributionURL">Craig Johnston</a>, is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.

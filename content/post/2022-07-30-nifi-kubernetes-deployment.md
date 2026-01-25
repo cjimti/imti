@@ -6,8 +6,8 @@ subtitle: "Apache NiFi Part 1"
 date: 2022-07-30
 author: "Craig Johnston"
 URL: "nifi-kubernetes-deployment/"
-image: "/img/post/server-room.jpg"
-twitter_image: "/img/post/server-room_876_438.jpg"
+image: "/img/post/nifi.jpg"
+twitter_image: "/img/post/nifi_876_438.jpg"
 tags:
 - Apache NiFi
 - Kubernetes
@@ -436,46 +436,6 @@ spec:
 
 Session affinity is important because NiFi UI maintains state on specific cluster nodes.
 
-## Horizontal Pod Autoscaler
-
-Optional autoscaling based on CPU usage:
-
-```yaml
-# nifi/60-hpa.yml
-apiVersion: autoscaling/v2
-kind: HorizontalPodAutoscaler
-metadata:
-  name: nifi-hpa
-  namespace: nifi
-spec:
-  scaleTargetRef:
-    apiVersion: apps/v1
-    kind: StatefulSet
-    name: nifi
-  minReplicas: 3
-  maxReplicas: 10
-  metrics:
-  - type: Resource
-    resource:
-      name: cpu
-      target:
-        type: Utilization
-        averageUtilization: 70
-  behavior:
-    scaleDown:
-      stabilizationWindowSeconds: 300
-      policies:
-      - type: Pods
-        value: 1
-        periodSeconds: 300
-    scaleUp:
-      stabilizationWindowSeconds: 60
-      policies:
-      - type: Pods
-        value: 2
-        periodSeconds: 60
-```
-
 ## Pod Disruption Budget
 
 Maintain availability during updates:
@@ -522,8 +482,7 @@ kubectl -n nifi rollout status statefulset/nifi
 # Configure ingress
 kubectl apply -f nifi/50-ingress.yml
 
-# Optional: HPA and PDB
-kubectl apply -f nifi/60-hpa.yml
+# Optional: PDB for availability during updates
 kubectl apply -f nifi/70-pdb.yml
 ```
 
@@ -580,7 +539,7 @@ This article deployed:
 - **ZooKeeper ensemble** for cluster coordination
 - **NiFi StatefulSet** with persistent storage
 - **Ingress** with session affinity
-- **HPA** and **PDB** for resilience
+- **PDB** for resilience during updates
 
 The next article covers **securing NiFi deployments** with authentication and TLS.
 
