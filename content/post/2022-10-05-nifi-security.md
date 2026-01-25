@@ -19,9 +19,9 @@ series:
 
 This article covers **securing Apache NiFi** deployments with TLS encryption, authentication providers, and role-based access control, including LDAP, OIDC, and certificate-based authentication.
 
-This continues from [Part 1: Production Kubernetes Deployment](https://imti.co/nifi-kubernetes-deployment/).
-
 <!--more-->
+
+This continues from [Part 1: Production Kubernetes Deployment](https://imti.co/nifi-kubernetes-deployment/).
 
 {{< toc >}}
 {{< content-ad >}}

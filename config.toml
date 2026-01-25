@@ -17,6 +17,14 @@ displayMath = [['$','$'], ['$$','$$'], ['\\[','\\]']]
 [markup.goldmark.renderer]
 unsafe= true
 
+[markup.highlight]
+codeFences = true
+guessSyntax = true
+lineNos = false
+noClasses = false
+style = "github"
+tabWidth = 4
+
 [outputs]
 home = ["HTML", "RSS"]
 
