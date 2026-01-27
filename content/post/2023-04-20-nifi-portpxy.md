@@ -17,473 +17,324 @@ series:
 - Apache NiFi
 ---
 
-This article demonstrates using **portpxy** to enable dynamic HTTP listeners in NiFi on Kubernetes, configuring HandleHttpRequest processors with path-based routing through a Go-based reverse proxy sidecar.
+I wrote **[portpxy]** to solve an annoying problem: NiFi lets you spin up HTTP listeners at runtime, but Kubernetes makes you update manifests every time you want to expose a new port. This article shows how portpxy fixes that.
 
 <!--more-->
-
-This continues from [Part 4: JOLT Transformations Part 2](https://imti.co/nifi-jolt-2/).
 
 {{< toc >}}
 {{< content-ad >}}
 
-## The Challenge
+## NiFi's HandleHttpRequest processor
 
-NiFi's `HandleHttpRequest` processor binds to a specific port. On Kubernetes, exposing multiple ports requires Service modifications and Ingress rules for each endpoint. This becomes unwieldy when you need dozens of webhook endpoints.
+NiFi's `HandleHttpRequest` processor starts a Jetty server on whatever port you specify. Pair it with `HandleHttpResponse` and you've got a web service. Each request becomes a FlowFile that flows through your pipeline.
 
-**portpxy** solves this by:
-- Running as a sidecar container
-- Routing requests by path to different NiFi ports
-- Enabling dynamic endpoint creation without infrastructure changes
+### Setting up a webhook listener
 
-For background on Go reverse proxies, see [Golang Reverse Proxy](https://imti.co/golang-reverse-proxy/).
+1. Drag `HandleHttpRequest` onto the canvas
+2. Set the listening port (e.g., `10001`)
+3. Create a `StandardHttpContextMap` controller service - this links requests to responses
+4. Build your processing flow
+5. End with `HandleHttpResponse` using the same context map
 
-## portpxy Configuration
+<pre class="mermaid">
+flowchart TD
+    A[HandleHttpRequest<br/>port 10001] --> B[EvaluateJsonPath<br/>extract fields]
+    B --> C[RouteOnAttribute<br/>route by event type]
+    C --> D[JoltTransformJSON<br/>normalize payload]
+    D --> E[PublishKafka<br/>send to topic]
+    E --> F[HandleHttpResponse<br/>200 OK]
+</pre>
 
-### ConfigMap for Routes
+On a standalone NiFi server, webhooks hit `http://nifi-server:10001/` directly. Simple.
 
-Define path-to-port mappings:
+## The Kubernetes problem
 
-```yaml
-# portpxy-config.yaml
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: portpxy-config
-  namespace: nifi
-data:
-  config.yaml: |
-    listen: ":8888"
-    routes:
-      - path: "/webhooks/github"
-        target: "http://localhost:9001"
-        methods: ["POST"]
-      - path: "/webhooks/stripe"
-        target: "http://localhost:9002"
-        methods: ["POST"]
-      - path: "/webhooks/slack"
-        target: "http://localhost:9003"
-        methods: ["POST"]
-      - path: "/api/ingest"
-        target: "http://localhost:9004"
-        methods: ["POST", "PUT"]
-      - path: "/health"
-        target: "http://localhost:9005"
-        methods: ["GET"]
-    healthCheck:
-      enabled: true
-      path: "/healthz"
-    logging:
-      level: "info"
-      format: "json"
+On Kubernetes, pods aren't directly accessible. To expose port 10001 you need to:
+
+1. Add port 10001 to the Service spec
+2. Add Ingress rules for that port
+3. Run `kubectl apply` and wait
+
+Now imagine 20 webhook endpoints for different integrations. That's 20 Service ports, 20 Ingress rules, and a deploy cycle every time someone creates a new listener in NiFi.
+
+This is annoying. NiFi's whole point is that you can build and change data flows at runtime without deployments. Kubernetes undoes that.
+
+## portpxy
+
+**[portpxy]** encodes the target port in the URL path itself.
+
+Instead of:
+```
+https://nifi.example.com:10001/webhook  ← requires exposing port 10001
 ```
 
-### Sidecar Deployment
+You use:
+```
+https://nifi.example.com/10001/webhook  ← port is in the path
+```
 
-Add portpxy as a sidecar to your NiFi pods:
+portpxy extracts `10001` from the URL, checks it's in the allowed range, and proxies to `nifi:10001/webhook`.
+
+The workflow:
+
+1. Create `HandleHttpRequest` on port 10005 in NiFi
+2. Tell the external service to send webhooks to `https://nifi.example.com/10005/`
+3. That's it
+
+<pre class="mermaid">
+sequenceDiagram
+    participant Client as External Client
+    participant portpxy
+    participant NiFi as NiFi (HandleHttpRequest)
+
+    Client->>portpxy: POST /10005/github/webhook
+    Note over portpxy: Extract port 10005 from path
+    Note over portpxy: Validate: 10000 ≤ 10005 ≤ 20000
+    Note over portpxy: Rewrite path: /github/webhook
+    portpxy->>NiFi: POST nifi:10005/github/webhook
+    NiFi-->>portpxy: 200 OK
+    portpxy-->>Client: 200 OK
+</pre>
+
+## Kubernetes deployment
+
+Deploy these three manifests once. You won't need to touch them again.
+
+### Deployment
 
 ```yaml
-# nifi-with-portpxy.yaml
 apiVersion: apps/v1
-kind: StatefulSet
+kind: Deployment
 metadata:
-  name: nifi
+  name: nifi-port-proxy
   namespace: nifi
+  labels:
+    app: nifi-port-proxy
 spec:
-  serviceName: nifi-headless
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
-      app: nifi
+      app: nifi-port-proxy
   template:
     metadata:
       labels:
-        app: nifi
+        app: nifi-port-proxy
     spec:
       containers:
-      - name: nifi
-        image: apache/nifi:1.20.0
-        ports:
-        - containerPort: 8080
-          name: http
-        - containerPort: 9001
-          name: webhook-github
-        - containerPort: 9002
-          name: webhook-stripe
-        - containerPort: 9003
-          name: webhook-slack
-        - containerPort: 9004
-          name: api-ingest
-        - containerPort: 9005
-          name: health
-        # ... rest of NiFi config
-      - name: portpxy
-        image: ghcr.io/txn2/portpxy:latest
-        ports:
-        - containerPort: 8888
-          name: proxy
-        args:
-        - "--config=/config/config.yaml"
-        volumeMounts:
-        - name: portpxy-config
-          mountPath: /config
-        resources:
-          requests:
-            memory: "64Mi"
-            cpu: "50m"
-          limits:
-            memory: "128Mi"
-            cpu: "100m"
-        livenessProbe:
-          httpGet:
-            path: /healthz
-            port: 8888
-          initialDelaySeconds: 5
-          periodSeconds: 10
-        readinessProbe:
-          httpGet:
-            path: /healthz
-            port: 8888
-          initialDelaySeconds: 5
-          periodSeconds: 5
-      volumes:
-      - name: portpxy-config
-        configMap:
-          name: portpxy-config
+        - name: portpxy
+          image: txn2/portpxy:v0.0.5
+          env:
+            - name: IP
+              value: "0.0.0.0"
+            - name: PORT
+              value: "8080"
+            - name: BACKEND_HOST
+              value: "nifi"
+            - name: BACKEND_PROTO
+              value: "http"
+            - name: ALLOW_PORT_BEGIN
+              value: "10000"
+            - name: ALLOW_PORT_END
+              value: "20000"
+          ports:
+            - containerPort: 8080
+              name: http
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "50m"
+            limits:
+              memory: "128Mi"
+              cpu: "100m"
 ```
 
-### Service Configuration
+Environment variables:
 
-Expose only the proxy port:
+| Variable | Description |
+|----------|-------------|
+| `BACKEND_HOST` | NiFi service name (`nifi` or `nifi-headless`) |
+| `BACKEND_PROTO` | `http` or `https` |
+| `ALLOW_PORT_BEGIN` | Lowest allowed port |
+| `ALLOW_PORT_END` | Highest allowed port |
+| `PORT` | Port portpxy listens on |
+
+### Service
 
 ```yaml
-# nifi-webhook-service.yaml
 apiVersion: v1
 kind: Service
 metadata:
-  name: nifi-webhooks
+  name: nifi-port-proxy
   namespace: nifi
 spec:
-  type: ClusterIP
   ports:
-  - port: 80
-    targetPort: 8888
-    name: webhooks
+    - port: 8080
+      name: http
+      targetPort: 8080
   selector:
-    app: nifi
+    app: nifi-port-proxy
 ```
 
-### Ingress for Webhooks
-
-Route external traffic to the proxy:
+### Ingress
 
 ```yaml
-# nifi-webhook-ingress.yaml
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: nifi-webhooks
+  name: nifi-port-proxy
   namespace: nifi
   annotations:
-    nginx.ingress.kubernetes.io/proxy-body-size: "50m"
-    nginx.ingress.kubernetes.io/proxy-read-timeout: "60"
-    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+    kubernetes.io/ingress.class: nginx
+    cert-manager.io/cluster-issuer: letsencrypt-production
 spec:
-  ingressClassName: nginx
-  tls:
-  - hosts:
-    - webhooks.example.com
-    secretName: webhooks-tls
   rules:
-  - host: webhooks.example.com
-    http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: nifi-webhooks
-            port:
-              number: 80
+    - host: nifi.example.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: nifi-port-proxy
+                port:
+                  number: 8080
+  tls:
+    - hosts:
+       - nifi.example.com
+      secretName: nifi-webhooks-tls
 ```
 
-## NiFi Flow Configuration
+## Example: GitHub webhooks
 
-### HandleHttpRequest Processor
+### 1. Create the NiFi flow
 
-Configure a processor for each webhook endpoint:
+1. Drag `HandleHttpRequest` to canvas, set listening port to `10001`
+2. Create a `StandardHttpContextMap` controller service
+3. Add `EvaluateJsonPath` to extract `$.action` and `$.repository.full_name`
+4. Add `RouteOnAttribute` to route by event type
+5. Add `JoltTransformJSON` to normalize the payload
+6. End with `HandleHttpResponse`, status code `200`
 
-**GitHub Webhook (Port 9001):**
+### 2. Configure GitHub
 
-1. Add `HandleHttpRequest` processor
-2. Configure properties:
-   - Listening Port: `9001`
-   - Base Path: `/`
-   - HTTP Context Map: Create new `StandardHttpContextMap`
+In your repo settings, go to Webhooks and add:
 
-3. Connect to `HandleHttpResponse` for acknowledgment
+- Payload URL: `https://nifi.example.com/10001/`
+- Content type: `application/json`
+- Secret: your HMAC secret
+- Events: whatever you need
 
-### Basic Webhook Flow
+GitHub sends webhooks, portpxy routes them to port 10001, NiFi processes them.
+
+### 3. Adding Stripe webhooks
+
+Need Stripe too?
+
+1. Add another `HandleHttpRequest` on port `10002`
+2. Build the processing flow
+3. Configure Stripe to send to `https://nifi.example.com/10002/`
+
+No Kubernetes changes required.
+
+## Path passthrough
+
+The path after the port passes through to NiFi:
 
 ```
-HandleHttpRequest (9001)
-    ↓
-EvaluateJsonPath (extract event type)
-    ↓
-RouteOnAttribute (route by event)
-    ↓ (push event)
-JoltTransformJSON (normalize payload)
-    ↓
-PublishKafka (send to topic)
-    ↓
-HandleHttpResponse (200 OK)
+https://nifi.example.com/10001/github/push   → nifi:10001/github/push
+https://nifi.example.com/10001/github/pr     → nifi:10001/github/pr
+https://nifi.example.com/10001/github/issues → nifi:10001/github/issues
 ```
 
-### Flow Template
+Use NiFi's "Allowed Paths" property on `HandleHttpRequest` to filter requests, or route based on `${http.request.uri}` in your flow.
 
-Export this flow as a template for reuse:
+## Port range conventions
 
-```xml
-<?xml version="1.0" encoding="UTF-8"?>
-<template>
-  <name>Webhook Handler Template</name>
-  <processors>
-    <processor>
-      <name>HandleHttpRequest</name>
-      <type>org.apache.nifi.processors.standard.HandleHttpRequest</type>
-      <properties>
-        <property name="Listening Port">${webhook.port}</property>
-        <property name="HTTP Context Map">http-context-map</property>
-      </properties>
-    </processor>
-    <processor>
-      <name>EvaluateJsonPath</name>
-      <type>org.apache.nifi.processors.standard.EvaluateJsonPath</type>
-      <properties>
-        <property name="Destination">flowfile-attribute</property>
-        <property name="event.type">$.event</property>
-        <property name="event.id">$.id</property>
-      </properties>
-    </processor>
-    <processor>
-      <name>HandleHttpResponse</name>
-      <type>org.apache.nifi.processors.standard.HandleHttpResponse</type>
-      <properties>
-        <property name="HTTP Status Code">200</property>
-        <property name="HTTP Context Map">http-context-map</property>
-      </properties>
-    </processor>
-  </processors>
-</template>
+With ports 10000-20000, you have 10,000 endpoints. Pick a convention:
+
+| Range | Purpose |
+|-------|---------|
+| 10000-10099 | GitHub |
+| 10100-10199 | Payment providers |
+| 10200-10299 | Slack/Teams |
+| 10300-10399 | Internal services |
+| 10400+ | Ad-hoc |
+
+NiFi is the source of truth. If nothing's listening on a port, the request fails.
+
+## Adding JWT authentication
+
+For endpoints that need JWT auth, chain [jwtpxy] in front of portpxy:
+
+```yaml
+containers:
+  - name: portpxy
+    image: txn2/portpxy:v0.0.5
+    env:
+      - name: PORT
+        value: "8070"
+      - name: BACKEND_HOST
+        value: "nifi"
+      - name: ALLOW_PORT_BEGIN
+        value: "10000"
+      - name: ALLOW_PORT_END
+        value: "20000"
+
+  - name: jwtpxy
+    image: txn2/jwtpxy:v0.2.5
+    env:
+      - name: PORT
+        value: "8080"
+      - name: BACKEND
+        value: "http://127.0.0.1:8070"
+      - name: KEYCLOAK
+        value: "https://auth.example.com/realms/myapp"
+      - name: REQUIRE_TOKEN
+        value: "false"
+      - name: ALLOW_COOKIE_TOKEN
+        value: "true"
+    ports:
+      - containerPort: 8080
+        name: http
 ```
 
-## portpxy Implementation
+jwtpxy validates tokens and passes user info to NiFi via headers.
 
-Here's a simplified Go implementation showing the core routing logic:
-
-```go
-package main
-
-import (
-    "log"
-    "net/http"
-    "net/http/httputil"
-    "net/url"
-    "strings"
-
-    "gopkg.in/yaml.v3"
-)
-
-type Route struct {
-    Path    string   `yaml:"path"`
-    Target  string   `yaml:"target"`
-    Methods []string `yaml:"methods"`
-}
-
-type Config struct {
-    Listen string  `yaml:"listen"`
-    Routes []Route `yaml:"routes"`
-}
-
-func main() {
-    config := loadConfig("config.yaml")
-
-    mux := http.NewServeMux()
-
-    for _, route := range config.Routes {
-        target, _ := url.Parse(route.Target)
-        proxy := httputil.NewSingleHostReverseProxy(target)
-
-        methods := make(map[string]bool)
-        for _, m := range route.Methods {
-            methods[m] = true
-        }
-
-        path := route.Path
-        mux.HandleFunc(path, func(w http.ResponseWriter, r *http.Request) {
-            if len(methods) > 0 && !methods[r.Method] {
-                http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
-                return
-            }
-
-            // Strip the matched prefix for the backend
-            r.URL.Path = strings.TrimPrefix(r.URL.Path, path)
-            if r.URL.Path == "" {
-                r.URL.Path = "/"
-            }
-
-            log.Printf("Proxying %s %s -> %s", r.Method, path, target)
-            proxy.ServeHTTP(w, r)
-        })
-    }
-
-    // Health check
-    mux.HandleFunc("/healthz", func(w http.ResponseWriter, r *http.Request) {
-        w.WriteHeader(http.StatusOK)
-        w.Write([]byte("ok"))
-    })
-
-    log.Printf("Starting portpxy on %s", config.Listen)
-    log.Fatal(http.ListenAndServe(config.Listen, mux))
-}
-
-func loadConfig(path string) *Config {
-    // Load and parse YAML config
-    // ... implementation
-    return &Config{}
-}
-```
-
-## Request Validation
-
-Add validation before routing to NiFi:
-
-```go
-func validateWebhook(next http.Handler, secretHeader string) http.Handler {
-    return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-        // Verify signature for GitHub webhooks
-        if secretHeader != "" {
-            signature := r.Header.Get("X-Hub-Signature-256")
-            if !verifySignature(r, signature) {
-                http.Error(w, "Invalid signature", http.StatusUnauthorized)
-                return
-            }
-        }
-        next.ServeHTTP(w, r)
-    })
-}
-
-func verifySignature(r *http.Request, signature string) bool {
-    // Read body and compute HMAC
-    // Compare with provided signature
-    return true // Simplified
-}
-```
-
-## Dynamic Route Updates
-
-Reload routes without restarting:
-
-```go
-import "github.com/fsnotify/fsnotify"
-
-func watchConfig(configPath string, reloadCh chan<- *Config) {
-    watcher, _ := fsnotify.NewWatcher()
-    defer watcher.Close()
-
-    watcher.Add(configPath)
-
-    for {
-        select {
-        case event := <-watcher.Events:
-            if event.Op&fsnotify.Write == fsnotify.Write {
-                config := loadConfig(configPath)
-                reloadCh <- config
-                log.Println("Config reloaded")
-            }
-        case err := <-watcher.Errors:
-            log.Println("Watcher error:", err)
-        }
-    }
-}
-```
-
-Update the ConfigMap and the sidecar picks up changes:
+## Testing
 
 ```bash
-kubectl -n nifi edit configmap portpxy-config
-```
+# Test a webhook endpoint
+curl -X POST https://nifi.example.com/10001/ \
+  -H "Content-Type: application/json" \
+  -d '{"event": "test", "data": {}}'
 
-## Metrics and Observability
-
-Add Prometheus metrics to portpxy:
-
-```go
-import "github.com/prometheus/client_golang/prometheus"
-
-var (
-    requestsTotal = prometheus.NewCounterVec(
-        prometheus.CounterOpts{
-            Name: "portpxy_requests_total",
-            Help: "Total requests by route and status",
-        },
-        []string{"route", "method", "status"},
-    )
-
-    requestDuration = prometheus.NewHistogramVec(
-        prometheus.HistogramOpts{
-            Name:    "portpxy_request_duration_seconds",
-            Help:    "Request duration by route",
-            Buckets: prometheus.DefBuckets,
-        },
-        []string{"route"},
-    )
-)
-
-func init() {
-    prometheus.MustRegister(requestsTotal, requestDuration)
-}
-```
-
-Expose metrics endpoint:
-
-```go
-mux.Handle("/metrics", promhttp.Handler())
-```
-
-## Testing Webhooks
-
-Test your webhook endpoints:
-
-```bash
-# GitHub webhook simulation
-curl -X POST https://webhooks.example.com/webhooks/github \
+# Test with path
+curl -X POST https://nifi.example.com/10001/github/push \
   -H "Content-Type: application/json" \
   -H "X-GitHub-Event: push" \
-  -d '{"ref": "refs/heads/main", "commits": []}'
+  -d '{"ref": "refs/heads/main"}'
 
-# Stripe webhook simulation
-curl -X POST https://webhooks.example.com/webhooks/stripe \
-  -H "Content-Type: application/json" \
-  -H "Stripe-Signature: t=123,v1=abc" \
-  -d '{"type": "payment_intent.succeeded", "data": {}}'
-
-# Check health
-curl https://webhooks.example.com/healthz
+# Port out of range (should fail)
+curl https://nifi.example.com/9999/test
 ```
 
 ## Summary
 
-This article configured:
+| Without portpxy | With portpxy |
+|-----------------|--------------|
+| Edit Service YAML for each port | Configure NiFi only |
+| Edit Ingress for each endpoint | Configure NiFi only |
+| kubectl apply, wait for rollout | Immediate |
+| DevOps bottleneck | Self-service |
 
-- **portpxy sidecar** for path-based routing
-- **Multiple HandleHttpRequest** processors on different ports
-- **Single Ingress** for all webhook endpoints
-- **Dynamic configuration** via ConfigMap
-- **Metrics** for observability
+Deploy portpxy once, then create webhook endpoints through NiFi's UI whenever you need them.
 
 ## Resources
 
-- [portpxy GitHub](https://github.com/txn2/portpxy)
-- [Golang Reverse Proxy](https://imti.co/golang-reverse-proxy/)
-- [NiFi HandleHttpRequest](https://nifi.apache.org/docs/nifi-docs/components/org.apache.nifi/nifi-standard-nar/1.20.0/org.apache.nifi.processors.standard.HandleHttpRequest/)
+- [portpxy GitHub][portpxy]
+- [jwtpxy GitHub][jwtpxy]
+- [HandleHttpRequest documentation](https://nifi.apache.org/components/org.apache.nifi.processors.standard.HandleHttpRequest/)
+- [HTTP communication with Apache NiFi](https://ddewaele.github.io/http-communication-with-apache-nifi/)
 
+[portpxy]: https://github.com/txn2/portpxy
+[jwtpxy]: https://github.com/txn2/jwtpxy
